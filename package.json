@@ -1,0 +1,35 @@
+{
+  "name": "root",
+  "version": "1.0.0",
+  "packageManager": "pnpm@10.11.0",
+  "scripts": {
+    "setup": "pnpm install && pnpm run build:core",
+    "@ui": "pnpm --filter @apps/ui",
+    "@web": "pnpm --filter @apps/web",
+    "@wp": "pnpm --filter @apps/wordpress",
+    "@core": "pnpm --filter @core"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "1.9.4",
+    "@types/browser-sync": "^2.29.0",
+    "browser-sync": "^3.0.4",
+    "cross-env": "^7.0.3",
+    "pug-lint": "^2.7.0",
+    "ts-loader": "^9.5.2",
+    "ts-node": "^10.9.2",
+    "ts-node-dev": "^2.0.0",
+    "turbo": "^2.5.3",
+    "typescript": "^5.8.3",
+    "webpack": "^5.99.8"
+  },
+  "dependencies": {
+    "gsap": "^3.13.0",
+    "simple-parallax-js": "^6.2.1",
+    "swiper": "^11.2.6"
+  },
+  "engines": {
+    "npm": "use pnpm please!",
+    "yarn": "use pnpm please!",
+    "pnpm": ">=10.1.0"
+  }
+}

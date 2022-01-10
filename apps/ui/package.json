@@ -1,0 +1,32 @@
+{
+  "name": "@apps/ui",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "cross-env NODE_ENV=local ts-node index.ts",
+    "build": "rm -rf ./production && cross-env NODE_ENV=production ts-node index.ts",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build",
+    "lint:template": "pug-lint -c .pug-lint.json .",
+    "lint:style": "stylelint --ignore-path .stylelintignore \"**/*.scss\"",
+    "lint:style:fix": "stylelint --fix --ignore-path .stylelintignore \"**/*.scss\"",
+    "lint:script": "npx @biomejs/biome check --diagnostic-level=warn .",
+    "lint:script:fix": "npx @biomejs/biome check --diagnostic-level=warn --write ."
+  },
+  "packageManager": "pnpm@10.11.0",
+  "dependencies": {
+    "@core": "workspace:*"
+  },
+  "devDependencies": {
+    "@storybook/addon-designs": "^8.2.1",
+    "@storybook/addon-essentials": "^8.6.14",
+    "@storybook/addon-interactions": "^8.6.14",
+    "@storybook/addon-webpack5-compiler-swc": "^3.0.0",
+    "@storybook/blocks": "^8.6.14",
+    "@storybook/html": "^8.6.14",
+    "@storybook/html-webpack5": "^8.6.14",
+    "@storybook/test": "^8.6.14",
+    "raw-loader": "^4.0.2",
+    "storybook": "^8.6.14",
+    "storybook-addon-run-script": "^0.1.4"
+  }
+}
