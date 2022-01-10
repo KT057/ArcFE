@@ -1,0 +1,8 @@
+{
+  "eslint.validate": ["javascript", "typescript"],
+  "eslint.useFlatConfig": true,
+  "eslint.useESLintClass": true,
+  "editor.formatOnSave": true, //VSCodeの自動フォーマットを無効化
+  "stylelint.stylelintPath": "node_modules/stylelint", //stylelintのパス
+  "stylelint.validate": ["scss"] //バリデートするファイルの種類
+}

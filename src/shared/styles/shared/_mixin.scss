@@ -1,0 +1,24 @@
+@use 'variable';
+
+/* 画像サイズによってフォントサイズを変える */
+@function getVw($size: 10, $viewport: variable.$X_LARGE_SCREEN_WIDTH) {
+  @return $size / $viewport * 100vw;
+}
+
+/* 画像サイズによってフォントサイズを変える */
+@mixin fontVw($fontSize: 10, $viewport: $X_LARGE_SCREEN_WIDTH) {
+  font-size: $fontSize * 1px;
+  font-size: $fontSize / $viewport * 100vw;
+}
+
+@function rem($size: 10) {
+  @return $size / variable.$REM_SIZE * 1rem;
+}
+
+@function lineHeight($designSize, $fontSize) {
+  @return $designSize / $fontSize;
+}
+
+@function spacing($designSpace) {
+  @return $designSpace / 1000 * 1em;
+}
