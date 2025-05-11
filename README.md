@@ -69,7 +69,7 @@ yarn debug
 
 ---
 
-### **Lint and Format Fix**
+### **How to Lint and Format Fix**
 
 Automatically fix lint and formatting issues:
 
