@@ -18,6 +18,9 @@
   "editor.codeActionsOnSave": {
     // ファイル保存時にフォーマッタを実行
     "quickfix.biome": "explicit",
-    "source.organizeImports.biome": "explicit"
-  }
+    "source.organizeImports.biome": "explicit",
+    "source.fixAll.stylelint": "always"
+  },
+  "stylelint.stylelintPath": "node_modules/stylelint",
+  "stylelint.validate": ["scss"]
 }
