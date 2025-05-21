@@ -91,7 +91,7 @@ const getPath = (dir: string) => {
 };
 
 // 複数のPugをレンダリング
-export const renderPugs = async ({
+export const renderPugFiles = async ({
   entry,
   data,
   option
@@ -138,7 +138,7 @@ export const renderPugs = async ({
 };
 
 // 指定したパスのPugをレンダリング
-export const renderPug = async ({
+export const renderPugFile = async ({
   entry,
   data
 }: HtmlOption): Promise<TResultPromise<string, Error>> => {
@@ -170,7 +170,7 @@ export const renderPug = async ({
 };
 
 // 変更を監視
-export const watchPug = async (args: HtmlOption) => {
+export const watchPugFiles = async (args: HtmlOption) => {
   const { entry, option, noSharedItems } = args;
 
   const { resolve, reject } = await getDirsSync(entry, option);
@@ -202,7 +202,7 @@ export const watchPug = async (args: HtmlOption) => {
   chokidar.watcher({
     change: async (path: string) => {
       log('success', `Detected change in template: ${path}`);
-      await renderPugs({
+      await renderPugFiles({
         ...args,
         entry: `${path.split(DIR.TEMPLATE)[0]}/${DIR.TEMPLATE}/**/*${EXTENSION.PUG}`
       });
@@ -216,7 +216,7 @@ export const watchPug = async (args: HtmlOption) => {
           'success',
           `Detected change in shared templates. Re-rendering all templates.`
         );
-        await renderPugs(args);
+        await renderPugFiles(args);
       }
     });
   }

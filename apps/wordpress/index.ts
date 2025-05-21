@@ -12,7 +12,7 @@ const env = process.env.NODE_ENV || 'local';
 const buildRuns: RenderOption['runs'] = {
   php: true,
   scss: true,
-  ts: true,
+  typescript: true,
   image: true,
   css: true,
   json: true
@@ -21,6 +21,7 @@ const buildRuns: RenderOption['runs'] = {
 const watchRuns: WatchOption['runs'] = {
   php: true,
   scss: true,
+  typescript: true,
   image: true,
   css: true,
   json: true
@@ -31,7 +32,6 @@ void (async () => {
     case 'local': {
       if (!checkDir('./dist')) {
         const { reject } = await renders({
-          pugData: {},
           runs: buildRuns
         });
 
@@ -41,7 +41,6 @@ void (async () => {
         }
 
         await watch({
-          pugData: {},
           runs: watchRuns
         });
 
@@ -50,11 +49,9 @@ void (async () => {
 
       await Promise.all([
         renders({
-          pugData: {},
           runs: buildRuns
         }),
         watch({
-          pugData: {},
           runs: watchRuns
         })
       ]);
@@ -64,7 +61,6 @@ void (async () => {
 
     default: {
       const { reject } = await renders({
-        pugData: {},
         runs: buildRuns
       });
 

@@ -11,12 +11,12 @@ const getPath = (dir: string) => {
   return { outputPath };
 };
 
-const jsonRender = (dir: string) => {
+const copyJsonFile = (dir: string) => {
   const { outputPath } = getPath(dir);
   return copyFile(dir, outputPath);
 };
 
-export const jsonRenders = async ({ entry, option }: JsOption) => {
+export const copyJsonFiles = async ({ entry, option }: JsOption) => {
   const { resolve, reject } = await getDirsSync(entry, option);
 
   if (reject || !resolve) {
@@ -27,7 +27,7 @@ export const jsonRenders = async ({ entry, option }: JsOption) => {
     return err(reject);
   }
 
-  const promises = resolve.map((dir) => jsonRender(dir));
+  const promises = resolve.map((dir) => copyJsonFile(dir));
 
   const results = await Promise.all(promises);
   const errs = results.filter((r) => r.err);
@@ -42,7 +42,7 @@ export const jsonRenders = async ({ entry, option }: JsOption) => {
   return ok('Successfully copied JSON');
 };
 
-export const watchJson = async ({ entry, option }: JsOption) => {
+export const watchJsonFiles = async ({ entry, option }: JsOption) => {
   const { resolve, reject } = await getDirsSync(entry, option);
 
   if (reject || !resolve) {
@@ -59,7 +59,7 @@ export const watchJson = async ({ entry, option }: JsOption) => {
     change: async (path: string) => {
       log('success', `Starting JSON watch in: ${path}`);
 
-      await jsonRender(path);
+      await copyJsonFile(path);
     }
   });
 };

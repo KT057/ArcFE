@@ -62,7 +62,7 @@ const renderPostCss = (
 };
 
 // scssのレンダリング処理
-const renderSass = (entry: string) => {
+const renderScss = (entry: string) => {
   return new Promise<TResultPromise<string, Error>>((resolve) => {
     const result = sass.compile(entry);
 
@@ -102,7 +102,7 @@ const render = async (
     return err(styleLintResult.reject);
   }
 
-  const sassRenderResult = await renderSass(entry);
+  const sassRenderResult = await renderScss(entry);
 
   if (!sassRenderResult.resolve) {
     log('error', `scss render Error ${entry}`);
@@ -156,7 +156,7 @@ const getPath = (dir: string) => {
 };
 
 // 複数のcssをレンダリング
-export const renderStyles = async ({
+export const renderScssFiles = async ({
   entry,
   option
 }: CssOption): Promise<TResultPromise<string, Error>> => {
@@ -188,7 +188,7 @@ export const renderStyles = async ({
 };
 
 // 指定したパスのcssをレンダリング
-export const renderStyle = async ({
+export const renderScssFile = async ({
   entry
 }: CssOption): Promise<TResultPromise<string, Error>> => {
   const { outPutFile, outputPath } = getPath(entry);
@@ -202,7 +202,7 @@ export const renderStyle = async ({
 };
 
 // 変更を監視
-export const watchStyle = async ({
+export const watchScssFiles = async ({
   entry,
   option,
   noSharedItems
@@ -237,7 +237,7 @@ export const watchStyle = async ({
       log('success', `Starting SCSS watch in: ${path}`);
       console.log(path.split(DIR.STYLE));
 
-      await renderStyles({
+      await renderScssFiles({
         entry: `${path.split(DIR.STYLE)[0]}/${DIR.STYLE}/**/*${EXTENSION.SCSS}`,
         option: {
           ignore: [
@@ -254,7 +254,7 @@ export const watchStyle = async ({
     chokidarShared.watcher({
       change: async () => {
         log('success', `entry style all`);
-        await renderStyles({
+        await renderScssFiles({
           entry,
           option: {
             ...option,

@@ -1,57 +1,59 @@
 export { checkDir, log } from './helper/utils';
 import { browser } from './browser';
 import { DIR, EXTENSION } from './constants';
-import { cssRenders, watchCss } from './css';
+import { copyCssFiles, watchCssFiles } from './css';
 import { err, log, ok } from './helper/utils';
-import { renderPugs, watchPug } from './html';
 import { optimizeImages, watchOptimizeImage } from './image';
-import { jsRenders, watchJs } from './js';
-import { jsonRenders, watchJson } from './json';
-import { phpRenders, watchPhp } from './php';
-import { renderStyles, watchStyle } from './scss';
-import { tsRenders, watchTs } from './ts';
+import { copyJavascriptFiles, watchJavascriptFiles } from './javascript';
+import { copyJsonFiles, watchJsonFiles } from './json';
+import { copyPhpFiles, watchPhpFiles } from './php';
+import { renderPugFiles, watchPugFiles } from './pug';
+import { renderScssFiles, watchScssFiles } from './scss';
+import { renderMultipleTypescript, watchTypescriptFiles } from './typescript';
+
 export type RenderOption = {
-  pugData: { [key: string]: any };
+  pugData?: { [key: string]: any };
   noSharedItems?: boolean;
   runs: {
-    js?: boolean;
-    ts?: boolean;
+    javascript?: boolean;
+    typescript?: boolean;
     css?: boolean;
     scss?: boolean;
     image?: boolean;
-    html?: boolean;
+    pug?: boolean;
     php?: boolean;
     json?: boolean;
   };
 };
 
 export type WatchOption = {
-  pugData: { [key: string]: any };
+  pugData?: { [key: string]: any };
   noSharedItems?: boolean;
   runs: {
-    js?: boolean;
+    javascript?: boolean;
     scss?: boolean;
-    html?: boolean;
+    pug?: boolean;
     css?: boolean;
     browser?: boolean;
     image?: boolean;
     php?: boolean;
     json?: boolean;
+    typescript?: boolean;
   };
 };
 
 export const renders = async ({
   pugData,
   noSharedItems,
-  runs: { ts, scss, image, html, js, css, php, json }
+  runs: { typescript, scss, image, pug, javascript, css, php, json }
 }: RenderOption) => {
   const renderPromises = [];
 
-  if (html) {
+  if (pug) {
     renderPromises.push(
-      renderPugs({
+      renderPugFiles({
         entry: `${DIR.SRC}/**/*${EXTENSION.PUG}`,
-        data: pugData,
+        data: pugData ?? {},
         noSharedItems,
         option: {
           ignore: [`${DIR.SRC}/**/_*${EXTENSION.PUG}`]
@@ -62,7 +64,7 @@ export const renders = async ({
 
   if (scss) {
     renderPromises.push(
-      renderStyles({
+      renderScssFiles({
         entry: `${DIR.SRC}/**/*${EXTENSION.SCSS}`,
         noSharedItems,
         option: {
@@ -74,7 +76,7 @@ export const renders = async ({
 
   if (css) {
     renderPromises.push(
-      cssRenders({
+      copyCssFiles({
         entry: `${DIR.SRC}/**/*${EXTENSION.CSS}`,
         option: {
           ignore: [`${DIR.SRC}/**/_*${EXTENSION.CSS}`]
@@ -85,20 +87,20 @@ export const renders = async ({
 
   if (php) {
     renderPromises.push(
-      phpRenders({
+      copyPhpFiles({
         entry: `${DIR.SRC}/**/*${EXTENSION.PHP}`,
         option: {}
       })
     );
   }
 
-  if (ts) {
-    renderPromises.push(tsRenders({ noSharedItems }));
+  if (typescript) {
+    renderPromises.push(renderMultipleTypescript({ noSharedItems }));
   }
 
-  if (js) {
+  if (javascript) {
     renderPromises.push(
-      jsRenders({
+      copyJavascriptFiles({
         entry: `${DIR.SRC}/**/*${EXTENSION.JS}`,
         option: {
           ignore: [`${DIR.SRC}/**/_*${EXTENSION.JS}`]
@@ -109,7 +111,7 @@ export const renders = async ({
 
   if (json) {
     renderPromises.push(
-      jsonRenders({
+      copyJsonFiles({
         entry: `${DIR.SRC}/**/*${EXTENSION.JSON}`,
         option: {}
       })
@@ -135,19 +137,29 @@ export const renders = async ({
 export const watch = async ({
   pugData,
   noSharedItems,
-  runs: { browser: openBrowser, scss, html, js, image, css, php, json }
+  runs: {
+    browser: openBrowser,
+    scss,
+    pug,
+    javascript,
+    image,
+    css,
+    php,
+    json,
+    typescript
+  }
 }: WatchOption) => {
-  if (html) {
-    await watchPug({
+  if (pug) {
+    await watchPugFiles({
       entry: `${DIR.SRC}/**/*${EXTENSION.PUG}`,
-      data: pugData,
+      data: pugData ?? {},
       option: {},
       noSharedItems
     });
   }
 
   if (scss) {
-    await watchStyle({
+    await watchScssFiles({
       entry: `${DIR.SRC}/**/*${EXTENSION.SCSS}`,
       noSharedItems,
       option: {}
@@ -155,28 +167,28 @@ export const watch = async ({
   }
 
   if (css) {
-    await watchCss({
+    await watchCssFiles({
       entry: `${DIR.SRC}/**/*${EXTENSION.CSS}`,
       option: {}
     });
   }
 
   if (php) {
-    await watchPhp({
+    await watchPhpFiles({
       entry: `${DIR.SRC}/**/*${EXTENSION.PHP}`,
       option: {}
     });
   }
 
-  if (js) {
-    await watchJs({
+  if (javascript) {
+    await watchJavascriptFiles({
       entry: `${DIR.SRC}/**/*${EXTENSION.JS}`,
       option: {}
     });
   }
 
   if (json) {
-    await watchJson({
+    await watchJsonFiles({
       entry: `${DIR.SRC}/**/*${EXTENSION.JSON}`,
       option: {}
     });
@@ -187,9 +199,12 @@ export const watch = async ({
   }
 
   if (openBrowser) {
-    browser({ noSharedItems });
-  } else {
-    await watchTs({
+    browser({
+      noSharedItems: noSharedItems ?? false,
+      typescript: typescript ?? false
+    });
+  } else if (!openBrowser && typescript) {
+    await watchTypescriptFiles({
       entry: `${DIR.SRC}/**/*${EXTENSION.TS}`,
       option: {},
       noSharedItems

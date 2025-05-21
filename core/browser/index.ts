@@ -3,7 +3,7 @@ import webpack from 'webpack';
 import webpackDevMiddleware from 'webpack-dev-middleware';
 
 import { DIR } from '../constants';
-import { webpackConf } from '../ts/webpack';
+import { webpackConf } from '../typescript/webpack';
 
 import { conf } from '../config';
 
@@ -23,7 +23,10 @@ const defaultStatsOptions = {
   errorDetails: true
 };
 
-export const browser = ({ noSharedItems }: { noSharedItems?: boolean }) => {
+export const browser = ({
+  noSharedItems,
+  typescript
+}: { noSharedItems: boolean; typescript: boolean }) => {
   const bundle = webpack(webpackConf({ noSharedItems }));
 
   const { port } = conf;
@@ -40,12 +43,14 @@ export const browser = ({ noSharedItems }: { noSharedItems?: boolean }) => {
     },
     server: {
       baseDir: [DIR.SRC, DIR.DIST],
-      middleware: [
-        webpackDevMiddleware(bundle, {
-          publicPath: '/',
-          stats: defaultStatsOptions
-        })
-      ]
+      middleware: typescript
+        ? [
+            webpackDevMiddleware(bundle, {
+              publicPath: '/',
+              stats: defaultStatsOptions
+            })
+          ]
+        : []
     }
   });
 };

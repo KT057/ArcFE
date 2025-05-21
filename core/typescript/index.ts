@@ -10,7 +10,9 @@ import {
 import { Chokidar } from '../helper/watch';
 import { webpackConf } from './webpack';
 
-export const tsRenders = ({ noSharedItems }: { noSharedItems?: boolean }) => {
+export const renderMultipleTypescript = ({
+  noSharedItems
+}: { noSharedItems?: boolean }) => {
   return new Promise<TResultPromise<string, Error>>((resolve) => {
     webpack(webpackConf({ noSharedItems })).run((_, stats) => {
       if (!stats) return resolve(ok('Successfully built script'));
@@ -35,7 +37,11 @@ export const tsRenders = ({ noSharedItems }: { noSharedItems?: boolean }) => {
   });
 };
 
-export const watchTs = async ({ entry, option, noSharedItems }: tsOption) => {
+export const watchTypescriptFiles = async ({
+  entry,
+  option,
+  noSharedItems
+}: tsOption) => {
   const { resolve, reject } = await getDirsSync(entry, option);
 
   if (reject || !resolve) {
@@ -52,7 +58,7 @@ export const watchTs = async ({ entry, option, noSharedItems }: tsOption) => {
     change: async (path: string) => {
       log('success', `Starting TS watch in: ${path}`);
 
-      await tsRenders({ noSharedItems });
+      await renderMultipleTypescript({ noSharedItems });
     }
   });
 };

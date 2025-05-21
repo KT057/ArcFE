@@ -11,12 +11,12 @@ const getPath = (dir: string) => {
   return { outputPath };
 };
 
-const phpRender = (dir: string) => {
+const copyPhpFile = (dir: string) => {
   const { outputPath } = getPath(dir);
   return copyFile(dir, outputPath);
 };
 
-export const phpRenders = async ({ entry, option }: JsOption) => {
+export const copyPhpFiles = async ({ entry, option }: JsOption) => {
   const { resolve, reject } = await getDirsSync(entry, option);
 
   if (reject || !resolve) {
@@ -27,13 +27,13 @@ export const phpRenders = async ({ entry, option }: JsOption) => {
     return err(reject);
   }
 
-  const promises = resolve.map((dir) => phpRender(dir));
+  const promises = resolve.map((dir) => copyPhpFile(dir));
 
   const results = await Promise.all(promises);
   const errs = results.filter((r) => r.err);
 
   if (errs.length > 0) {
-    log('error', `Rendering errors occurred for PHP`);
+    log('error', `Copy errors occurred for PHP`);
     return err(errs[0].reject);
   }
 
@@ -42,7 +42,7 @@ export const phpRenders = async ({ entry, option }: JsOption) => {
   return ok('Successfully copied script');
 };
 
-export const watchPhp = async ({ entry, option }: JsOption) => {
+export const watchPhpFiles = async ({ entry, option }: JsOption) => {
   const { resolve, reject } = await getDirsSync(entry, option);
 
   if (reject || !resolve) {
@@ -59,7 +59,7 @@ export const watchPhp = async ({ entry, option }: JsOption) => {
     change: async (path: string) => {
       log('success', `Starting PHP watch in: ${path}`);
 
-      await phpRender(path);
+      await copyPhpFile(path);
     }
   });
 };

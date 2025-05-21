@@ -11,12 +11,12 @@ const getPath = (dir: string) => {
   return { outputPath };
 };
 
-const cssRender = (dir: string) => {
+const copyCssFile = (dir: string) => {
   const { outputPath } = getPath(dir);
   return copyFile(dir, outputPath);
 };
 
-export const cssRenders = async ({ entry, option }: JsOption) => {
+export const copyCssFiles = async ({ entry, option }: JsOption) => {
   const { resolve, reject } = await getDirsSync(entry, option);
 
   if (reject || !resolve) {
@@ -27,7 +27,7 @@ export const cssRenders = async ({ entry, option }: JsOption) => {
     return err(reject);
   }
 
-  const promises = resolve.map((dir) => cssRender(dir));
+  const promises = resolve.map((dir) => copyCssFile(dir));
 
   const results = await Promise.all(promises);
   const errs = results.filter((r) => r.err);
@@ -42,7 +42,7 @@ export const cssRenders = async ({ entry, option }: JsOption) => {
   return ok('Successfully copied script');
 };
 
-export const watchCss = async ({ entry, option }: JsOption) => {
+export const watchCssFiles = async ({ entry, option }: JsOption) => {
   const { resolve, reject } = await getDirsSync(entry, option);
 
   if (reject || !resolve) {
@@ -59,7 +59,7 @@ export const watchCss = async ({ entry, option }: JsOption) => {
     change: async (path: string) => {
       log('success', `Starting CSS watch in: ${path}`);
 
-      await cssRender(path);
+      await copyCssFile(path);
     }
   });
 };

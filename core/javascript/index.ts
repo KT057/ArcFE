@@ -1,5 +1,5 @@
 import path from 'node:path';
-import { DEFAULT_FILE, DIR, EXTENSION, OUTPUT_DIR } from '../constants';
+import { DIR, OUTPUT_DIR } from '../constants';
 import { copyFile, err, getDirsSync, log, ok } from '../helper/utils';
 import { Chokidar } from '../helper/watch';
 import { JsOption } from '../types';
@@ -11,12 +11,12 @@ const getPath = (dir: string) => {
   return { outputPath };
 };
 
-const jsRender = (dir: string) => {
+const copyJavascriptFile = (dir: string) => {
   const { outputPath } = getPath(dir);
   return copyFile(dir, outputPath);
 };
 
-export const jsRenders = async ({ entry, option }: JsOption) => {
+export const copyJavascriptFiles = async ({ entry, option }: JsOption) => {
   const { resolve, reject } = await getDirsSync(entry, option);
 
   if (reject || !resolve) {
@@ -27,7 +27,7 @@ export const jsRenders = async ({ entry, option }: JsOption) => {
     return err(reject);
   }
 
-  const promises = resolve.map((dir) => jsRender(dir));
+  const promises = resolve.map((dir) => copyJavascriptFile(dir));
 
   const results = await Promise.all(promises);
   const errs = results.filter((r) => r.err);
@@ -42,7 +42,7 @@ export const jsRenders = async ({ entry, option }: JsOption) => {
   return ok('Successfully copied script');
 };
 
-export const watchJs = async ({ entry, option }: JsOption) => {
+export const watchJavascriptFiles = async ({ entry, option }: JsOption) => {
   const { resolve, reject } = await getDirsSync(entry, option);
 
   if (reject || !resolve) {
@@ -59,7 +59,7 @@ export const watchJs = async ({ entry, option }: JsOption) => {
     change: async (path: string) => {
       log('success', `Starting JS watch in: ${path}`);
 
-      await jsRender(path);
+      await copyJavascriptFile(path);
     }
   });
 };

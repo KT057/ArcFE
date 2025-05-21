@@ -10,17 +10,18 @@ import {
 const env = process.env.NODE_ENV || 'local';
 
 const buildRuns: RenderOption['runs'] = {
-  html: true,
+  pug: true,
   scss: true,
-  js: true,
-  ts: true,
+  javascript: true,
+  typescript: true,
   image: true
 };
 
 const watchRuns: WatchOption['runs'] = {
-  html: true,
+  pug: true,
   scss: true,
-  js: true,
+  javascript: true,
+  typescript: true,
   image: true
 };
 
@@ -31,7 +32,6 @@ void (async () => {
     case 'local': {
       if (!checkDir('./dist')) {
         const { reject } = await renders({
-          pugData: {},
           runs: buildRuns,
           noSharedItems
         });
@@ -42,7 +42,6 @@ void (async () => {
         }
 
         await watch({
-          pugData: {},
           runs: watchRuns,
           noSharedItems
         });
@@ -51,13 +50,11 @@ void (async () => {
       }
 
       await renders({
-        pugData: {},
         runs: buildRuns,
         noSharedItems
       });
 
       await watch({
-        pugData: {},
         runs: watchRuns,
         noSharedItems
       });
@@ -67,7 +64,6 @@ void (async () => {
 
     default: {
       const { reject } = await renders({
-        pugData: {},
         runs: buildRuns,
         noSharedItems
       });

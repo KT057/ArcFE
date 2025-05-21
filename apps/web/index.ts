@@ -7,21 +7,22 @@ import {
   watch
 } from '@core';
 
-import { data } from './src/data';
+import { data } from './data';
 
 const env = process.env.NODE_ENV || 'local';
 
 const buildRuns: RenderOption['runs'] = {
-  html: true,
+  pug: true,
   scss: true,
-  ts: true,
+  typescript: true,
   image: true
 };
 
 const watchRuns: WatchOption['runs'] = {
-  html: true,
+  pug: true,
   scss: true,
   browser: true,
+  typescript: true,
   image: true
 };
 
