@@ -4,7 +4,8 @@
     {
       "matchPackagePatterns": ["*"],
       "groupName": "All Dependencies",
-      "schedule": ["before 5am on monday"]
+      "automerge": true,
+      "automergeSchedule": ["every day"]
     }
   ]
 }
