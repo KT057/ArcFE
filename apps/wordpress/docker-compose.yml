@@ -2,7 +2,7 @@ version: "3.6"
 
 services:
   db:
-    image: mysql:5.7
+    image: mysql:9.3
     container_name: mysql57
     volumes:
       - ./db/volume:/var/lib/mysql
