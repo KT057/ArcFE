@@ -1,11 +1,15 @@
 {
   "extends": ["config:base"],
+  "enabledManagers": ["npm"],
+  "timezone": "Asia/Tokyo",
   "packageRules": [
     {
-      "matchPackagePatterns": ["*"],
-      "groupName": "All Dependencies",
-      "automerge": true,
-      "automergeSchedule": ["every day"]
+      "matchUpdateTypes": ["major"],
+      "automerge": false
+    },
+    {
+      "matchUpdateTypes": ["minor", "patch"],
+      "automerge": true
     }
   ]
 }
