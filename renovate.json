@@ -2,6 +2,8 @@
   "extends": ["config:base"],
   "enabledManagers": ["npm"],
   "timezone": "Asia/Tokyo",
+  "schedule": ["every 1 hour after 00:00 and before 23:59 every day"],
+  "automergeSchedule": ["every 1 hour after 00:00 and before 23:59 every day"],
   "packageRules": [
     {
       "matchUpdateTypes": ["major"],
