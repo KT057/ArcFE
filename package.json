@@ -27,7 +27,7 @@
   "dependencies": {
     "gsap": "^3.13.0",
     "simple-parallax-js": "^6.2.1",
-    "swiper": "^11.2.6"
+    "swiper": "^11.2.8"
   },
   "engines": {
     "npm": "use pnpm please!",

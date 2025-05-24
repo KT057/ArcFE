@@ -6,10 +6,10 @@
   "author": "kota <k.ichikawa@attivita.co.jp>",
   "license": "MIT",
   "scripts": {
-    "start": "pnpm run local",
+    "dev": "pnpm run local",
     "local": "cross-env NODE_ENV=local ts-node index.ts",
     "build": "rm -rf  ./production && cross-env NODE_ENV=production ts-node index.ts",
-    "debug": "browser-sync start -s 'production'",
+    "start": "browser-sync start -s 'production'",
     "tsc": "tsc --noEmit",
     "lint:template": "pug-lint -c .pug-lint.json .",
     "lint:style": "stylelint --ignore-path .stylelintignore \"**/*.scss\"",
