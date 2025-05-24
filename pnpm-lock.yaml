@@ -16,7 +16,7 @@ importers:
         version: 6.2.1(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       swiper:
         specifier: ^11.2.6
-        version: 11.2.7
+        version: 11.2.8
     devDependencies:
       '@biomejs/biome':
         specifier: 1.9.4
@@ -3666,8 +3666,8 @@ packages:
       '@swc/core': ^1.2.147
       webpack: '>=2'
 
-  swiper@11.2.7:
-    resolution: {integrity: sha512-oPJCwdcjFMw3SoBM7AdB1RJzjT7JaE4Mg7TWceTmJ/i2OtF8L01Ct+5eOf48nG3trgR0wXFekWdfnTdl0eg6Pg==}
+  swiper@11.2.8:
+    resolution: {integrity: sha512-S5FVf6zWynPWooi7pJ7lZhSUe2snTzqLuUzbd5h5PHUOhzgvW0bLKBd2wv0ixn6/5o9vwc/IkQT74CRcLJQzeg==}
     engines: {node: '>= 4.7.0'}
 
   table@6.9.0:
@@ -7706,7 +7706,7 @@ snapshots:
       '@swc/counter': 0.1.3
       webpack: 5.99.9(@swc/core@1.11.24)(esbuild@0.25.4)
 
-  swiper@11.2.7: {}
+  swiper@11.2.8: {}
 
   table@6.9.0:
     dependencies:
