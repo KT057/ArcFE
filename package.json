@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "packageManager": "pnpm@10.11.0",
   "scripts": {
-    "setup": "pnpm install && pnpm run build:core",
+    "setup": "pnpm install && pnpm @core build",
     "@ui": "pnpm --filter @apps/ui",
     "@web": "pnpm --filter @apps/web",
     "@wp": "pnpm --filter @apps/wordpress",
