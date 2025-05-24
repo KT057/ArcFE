@@ -5,7 +5,9 @@
   "enabledManagers": ["npm"],
   "timezone": "Asia/Tokyo",
   "rebaseWhen": "never",
-  "prConcurrentLimit": 1,
+  "prConcurrentLimit": 1,,
+  "schedule": ["*/5 * * * *"],
+  "automergeSchedule": ["*/5 * * * *"],
   "packageRules": [
     {
       "matchUpdateTypes": ["major"],
