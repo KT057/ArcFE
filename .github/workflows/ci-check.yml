@@ -87,3 +87,18 @@ jobs:
 
       - name: Run Setup
         run: pnpm @ui lint:script
+
+  notify:
+    runs-on: ubuntu-latest
+    needs: [core_biome_check, core_tsc_check, ui_biome_check]
+    if: ${{ failure() }}
+    steps:
+      - name: Send GitHub Action trigger data to Slack workflow
+        uses: slackapi/slack-github-action@v2.1.0
+        with:
+          webhook: ${{ secrets.SLACK_WORKFLOW_WEBHOOK_URL }}
+          webhook-type: incoming-webhook
+          payload: |
+            {
+              "text": "GitHub Actions failed! 🚨\n${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+            }
