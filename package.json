@@ -22,7 +22,7 @@
     "ts-node-dev": "^2.0.0",
     "turbo": "^2.5.3",
     "typescript": "^5.8.3",
-    "webpack": "^5.99.8"
+    "webpack": "^5.99.9"
   },
   "dependencies": {
     "gsap": "^3.13.0",

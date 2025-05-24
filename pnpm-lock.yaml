@@ -55,7 +55,7 @@ importers:
         specifier: ^5.8.3
         version: 5.8.3
       webpack:
-        specifier: ^5.99.8
+        specifier: ^5.99.9
         version: 5.99.9(@swc/core@1.11.29)
 
   apps/ui:
