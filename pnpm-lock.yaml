@@ -188,7 +188,7 @@ importers:
         specifier: ^1.87.0
         version: 1.89.0
       sharp:
-        specifier: ^0.34.1
+        specifier: ^0.34.2
         version: 0.34.2
       stylelint-scss:
         specifier: ^6.12.0
