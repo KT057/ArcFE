@@ -12,22 +12,24 @@
 .pd001__open{
   display: flex;
   flex-direction: column;
-  gap: 0.8rem;
+  gap: mixin.rem(10);
 }
 
 .pd001__open-line{
-  width: 3.5rem;
-  height: 0.4rem;
+  width: mixin.rem(42);
+  height: mixin.rem(6);
   background-color: #000;
 }
 
 .pd001__close{
-  display: block;
-  margin-top: 5rem;
+  margin-top: mixin.rem(20);
+  display: flex;
+  flex-direction: column;
+  gap: mixin.rem(10);
 }
 
 .pd001__close-line{
-  width: 3.5rem;
-  height: 0.4rem;
+  width: mixin.rem(42);
+  height: mixin.rem(6);
   background-color: #000;
 }
