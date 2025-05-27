@@ -5,16 +5,29 @@
 @use "../../../../shared/styles/shared/setting";
 @use "../../../../shared/styles/shared/site-wide";
 
-.button-normal {
-  width: 100%;
-  color: #fff;
-  background-color: #000;
-  padding: mixin.rem(10) mixin.rem(20);
-  cursor: pointer;
-  border-radius: mixin.rem(10);
+.pd001{
+  display: block;
+}
 
-  @include media.spSizeLess {
-    width: mixin.rem(300);
-    color: #fff;
-  }
+.pd001__open{
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.pd001__open-line{
+  width: 3.5rem;
+  height: 0.4rem;
+  background-color: #000;
+}
+
+.pd001__close{
+  display: block;
+  margin-top: 5rem;
+}
+
+.pd001__close-line{
+  width: 3.5rem;
+  height: 0.4rem;
+  background-color: #000;
 }
