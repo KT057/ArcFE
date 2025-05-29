@@ -1,9 +1,9 @@
-@use "../../../../shared/styles/shared/media";
-@use "../../../../shared/styles/shared/reset";
-@use "../../../../shared/styles/shared/mixin";
-@use "../../../../shared/styles/shared/animation";
-@use "../../../../shared/styles/shared/setting";
-@use "../../../../shared/styles/shared/site-wide";
+@use "../../../../../shared/styles/shared/media";
+@use "../../../../../shared/styles/shared/reset";
+@use "../../../../../shared/styles/shared/mixin";
+@use "../../../../../shared/styles/shared/animation";
+@use "../../../../../shared/styles/shared/setting";
+@use "../../../../../shared/styles/shared/site-wide";
 
 .pd001{
   display: block;
@@ -15,11 +15,6 @@
   width: mixin.rem(80);
   height: mixin.rem(80);
   cursor: pointer;
-  display: none;
-
-  &.showed{
-    display: block;
-  }
 
   &::before {
     content: "";
@@ -78,50 +73,4 @@
   width: 100%;
   height: mixin.rem(4);
   background-color: #000;
-}
-
-.pd001__close-wrapper{
-  width: mixin.rem(80);
-  height: mixin.rem(80);
-  display: none;
-  cursor: pointer;
-
-  &.showed{
-    display: block;
-  }
-}
-
-.pd001__close{
-  width: 100%;
-  height: 100%;
-  position: relative;
-}
-
-.pd001__close-inner{
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-
-.pd001__close-line-wrapper{
-  position: relative;
-}
-
-.pd001__close-line{
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  display: block;
-  width: mixin.rem(28);
-  height: mixin.rem(4);
-  background-color: #000;
-
-  &:nth-child(1){
-    transform: translate(-50%, -50%) rotate(-45deg);
-  }
-
-  &:nth-child(2){
-    transform: translate(-50%, -50%) rotate(45deg);
-  }
 }

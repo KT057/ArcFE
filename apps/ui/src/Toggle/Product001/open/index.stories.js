@@ -5,14 +5,14 @@ import image from './images/image.png';
 import Html from './index.html';
 
 export default {
-  title: 'Toggle',
+  title: 'Toggle/Product001',
   render: () => {
     return Html;
   },
   decorators: [withRunScript(runScript)]
 };
 
-export const Product001 = {
+export const Open = {
   parameters: {
     design: [
       {
