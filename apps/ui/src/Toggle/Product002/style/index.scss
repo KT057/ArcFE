@@ -8,3 +8,50 @@
 .pd002{
   display: block;
 }
+
+.pd002__open{
+  display: flex;
+  flex-direction: column;
+  gap: mixin.rem(5);
+  cursor:pointer;
+  transition: opacity .2s ease;
+
+  &:hover {
+    opacity: .5;
+  }
+}
+
+.pd002__open-line{
+  width: mixin.rem(42);
+  height: mixin.rem(3);
+  background-color: #000;
+}
+
+.pd002__close{
+  position: relative;
+  margin-top: mixin.rem(40);
+  display: flex;
+  flex-direction: column;
+  margin-left: mixin.rem(20);
+  transition: opacity .2s ease;
+
+  &:hover {
+    opacity: .5;
+  }
+}
+
+.pd002__close-line{
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translate(-50%, -50%) rotate(-45deg);
+  width: mixin.rem(42);
+  height: mixin.rem(3);
+  cursor:pointer;
+  background-color: #000;
+}
+
+.pd002__close-line--fix{
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
