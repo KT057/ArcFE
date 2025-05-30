@@ -5,16 +5,7 @@
 @use "../../../../shared/styles/shared/setting";
 @use "../../../../shared/styles/shared/site-wide";
 
-.button-normal {
-  width: 100%;
-  color: #fff;
-  background-color: #000;
-  padding: mixin.rem(10) mixin.rem(20);
-  cursor: pointer;
-  border-radius: mixin.rem(10);
-
-  @include media.spSizeLess {
-    width: mixin.rem(300);
-    color: #fff;
-  }
+.pd001{
+  display: block;
+  position: relative;
 }

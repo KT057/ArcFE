@@ -12,7 +12,7 @@ export default {
   decorators: [withRunScript(runScript)]
 };
 
-export const Normal = {
+export const Product001 = {
   parameters: {
     design: [
       {
@@ -22,7 +22,7 @@ export const Normal = {
       },
       {
         type: 'link',
-        url: 'https://www.figma.com/design/R5hHBrcHw8igUeJYOKzrPn/omatomekun?node-id=44-212&t=pCCcFP5DRf26Vvuo-4'
+        url: 'https://www.figma.com/design/YUbTzje2jUbb0Yh5ycNx2P/ui-catalog?node-id=2034-10&t=LmM30CRzDWShsWXt-4'
       }
     ]
   }
