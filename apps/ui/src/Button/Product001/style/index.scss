@@ -9,3 +9,9 @@
   display: block;
   position: relative;
 }
+
+.pd001__default-wrap{
+  display: flex;
+  padding: mixin.rem(23);
+  justify-content: center;  
+}
