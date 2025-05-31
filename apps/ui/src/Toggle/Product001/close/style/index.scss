@@ -5,47 +5,47 @@
 @use "../../../../../shared/styles/shared/setting";
 @use "../../../../../shared/styles/shared/site-wide";
 
-.pd001{
+.cm-toggle-pd001{
   display: block;
   position: relative;
 }
 
-.pd001__close-wrapper{
+.cm-toggle-pd001__close-wrapper{
   width: mixin.rem(80);
   height: mixin.rem(80);
   cursor: pointer;
 }
 
-.pd001__close{
+.cm-toggle-pd001__close{
   width: 100%;
   height: 100%;
   position: relative;
 
   &:hover{
-    .pd001__close-line-wrapper{
+    .cm-toggle-pd001__close-line-wrapper{
       transform: scale(1.2);
     }
 
-    .pd001__close-line::after {
+    .cm-toggle-pd001__close-line::after {
       transform: scale(1);
     }
   }
 }
 
-.pd001__close-inner {
+.cm-toggle-pd001__close-inner {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
 
-.pd001__close-line-wrapper {
+.cm-toggle-pd001__close-line-wrapper {
   position: relative;
   transition: transform .6s cubic-bezier(.645,.045,.355,1);
   cursor: pointer;
 }
 
-.pd001__close-line {
+.cm-toggle-pd001__close-line {
   position: absolute;
   top: 50%;
   left: 50%;

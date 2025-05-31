@@ -5,12 +5,12 @@
 @use "../../../../shared/styles/shared/setting";
 @use "../../../../shared/styles/shared/site-wide";
 
-.pd001{
+.cm-toggle-pd001{
   display: block;
   position: relative;
 }
 
-.pd001__default-wrap{
+.cm-toggle-pd001__default-wrap{
   display: flex;
   padding: mixin.rem(23);
   justify-content: center;  
