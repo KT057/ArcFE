@@ -7,7 +7,11 @@ import Html from './index.html';
 export default {
   title: 'Toggle/Product001',
   render: () => {
-    return Html;
+    return `
+      <div class="site-wide__w300">
+        ${Html}
+      </div>
+    `;
   },
   decorators: [withRunScript(runScript)]
 };

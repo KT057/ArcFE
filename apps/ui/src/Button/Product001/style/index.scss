@@ -4,14 +4,20 @@
 @use "../../../../shared/styles/shared/animation";
 @use "../../../../shared/styles/shared/setting";
 @use "../../../../shared/styles/shared/site-wide";
+@use "../../../../shared/styles/shared/variable";
 
-.cm-toggle-001{
-  display: block;
-  position: relative;
+
+.test{
+  @include mixin.baseFontSizeForEm;
 }
 
-.cm-toggle-001__default-wrap{
-  display: flex;
-  padding: mixin.rem(23);
-  justify-content: center;  
+.test__inner {
+  color: red;
+  padding: mixin.em(40);
+  margin: mixin.rem(40);
+  justify-content: center;
+}
+
+.test__text {
+  font-size: mixin.em(32);
 }

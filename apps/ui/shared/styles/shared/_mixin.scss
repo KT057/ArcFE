@@ -1,25 +1,55 @@
 @use "sass:math";
 @use "variable";
+@use "media";
 
-/* 画像サイズによってフォントサイズを変える */
-@function getVw($size: 10, $viewport: variable.$X_LARGE_SCREEN_WIDTH) {
-  @return $size / $viewport * 100vw;
+
+@mixin baseFontSizeForRem {
+  font-size: calc(
+    #{variable.$PC_SIZE}px * #{variable.$REM_SIZE} / #{variable.$PC_SIZE}
+  );
+
+  @include media.pcSize {
+    font-size: calc(100vw * #{variable.$REM_SIZE} / #{variable.$PC_SIZE});
+  }
+
+  @include media.tabletSize {
+    font-size: calc(100vw * #{variable.$REM_SIZE} / #{variable.$PC_SIZE});
+    // font-size: calc(100vw * #{variable.$REM_SIZE} / #{variable.$TABLET_SIZE});
+
+    // TBサイズの間はPCサイズの最小の固定値になる
+    // font-size: calc(
+    //   #{variable.$TABLET_SIZE}px * #{variable.$REM_SIZE} / #{variable.$PC_SIZE}
+    // );
+  }
+
+  @include media.spSizeLess {
+    font-size: calc(100vw * #{variable.$REM_SIZE} / #{variable.$SP_SIZE});
+  }
 }
 
-/* 画像サイズによってフォントサイズを変える */
-@mixin fontVw($fontSize: 10, $viewport: $X_LARGE_SCREEN_WIDTH) {
-  font-size: $fontSize * 1px;
-  font-size: $fontSize / $viewport * 100vw;
+/* htmlのフォントサイズを指定できない場合 */
+@mixin baseFontSizeForEm {
+  font-size: calc(
+    #{variable.$PC_SIZE}px * 10 / #{variable.$PC_SIZE}
+  );
+
+  @include media.pcSize {
+    font-size: calc(100vw * 10 / #{variable.$PC_SIZE});
+  }
+
+  @include media.tabletSize {
+    font-size: calc(100vw * 10 / #{variable.$PC_SIZE});
+  }
+
+  @include media.spSizeLess {
+    font-size: calc(100vw * 10 / #{variable.$SP_SIZE});
+  }
 }
 
 @function rem($size: 10) {
   @return math.div($size, variable.$REM_SIZE) * 1rem;
 }
 
-@function lineHeight($designSize, $fontSize) {
-  @return math.div($designSize, $fontSize);
-}
-
-@function spacing($designSpace) {
-  @return math.div($designSpace, 1000) * 1em;
+@function em($size: 10) {
+  @return $size * 0.1em;
 }
