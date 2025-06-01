@@ -7,11 +7,35 @@
 
 .pd001{
   display: block;
-  position: relative;
 }
 
 .pd001__default-wrap{
+  width: mixin.rem(300);
+  padding: mixin.rem(23) 0;
   display: flex;
-  padding: mixin.rem(23);
-  justify-content: center;  
+  justify-content: center;
+  border: 1px solid #000;
+  border-radius: mixin.rem(40);
+  background-color: #fff;
+  color: #000;
+  transition: .4s;
+
+  &:hover {
+    background-color: #000;
+    color: #fff;
+  }
+}
+
+.pd001__default-inner{
+  display: flex;
+  gap: mixin.rem(10);
+  justify-content: center;
+}
+
+.pd001__default-direction{
+  font-size: mixin.rem(18);
+}
+
+.pd001__default-arrow-wrap{
+  display: block;
 }
