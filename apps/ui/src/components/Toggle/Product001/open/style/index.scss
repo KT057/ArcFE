@@ -1,9 +1,6 @@
-@use "../../../../../shared/styles/shared/media";
-@use "../../../../../shared/styles/shared/reset";
-@use "../../../../../shared/styles/shared/mixin";
-@use "../../../../../shared/styles/shared/animation";
-@use "../../../../../shared/styles/shared/setting";
-@use "../../../../../shared/styles/shared/site-wide";
+@use "../../../../../styles/media";
+@use "../../../../../styles/mixin";
+@use "../../../../../styles/animation";
 
 .cm-toggle-001{
   display: block;
