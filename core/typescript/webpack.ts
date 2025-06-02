@@ -29,7 +29,7 @@ const entries = async () => {
 
   const ignore = isProduction
     ? [`${DIR.SRC}/**/_*${EXTENSION.TS}`, `${DIR.SRC}/${DIR.SHARED}/**`]
-    : [`${DIR.SRC}/**/_*${EXTENSION.TS}`];
+    : [`${DIR.SRC}/**/_*${EXTENSION.TS}`, `${DIR.SRC}/${DIR.SHARED}/common/**`];
 
   const entryPath = isProduction
     ? `${DIR.SRC}/**/${DIR.SCRIPT}/${DEFAULT_FILE}${EXTENSION.TS}`

@@ -1,6 +1,5 @@
-import gsap from 'gsap';
+import { componentScripts } from '../shared/common/scripts/component';
 
 (() => {
-  console.log('test');
-  console.log(gsap);
+  componentScripts();
 })();

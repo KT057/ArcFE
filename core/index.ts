@@ -60,7 +60,10 @@ export const renders = async ({
         data: pugData ?? {},
         noSharedItems,
         option: {
-          ignore: [`${DIR.SRC}/**/_*${EXTENSION.PUG}`]
+          ignore: [
+            `${DIR.SRC}/**/_*${EXTENSION.PUG}`,
+            `${DIR.SRC}/${DIR.SHARED}/common/**/*${EXTENSION.PUG}`
+          ]
         }
       })
     );
@@ -72,7 +75,10 @@ export const renders = async ({
         entry: `${DIR.SRC}/**/*${EXTENSION.SCSS}`,
         noSharedItems,
         option: {
-          ignore: [`${DIR.SRC}/**/_*${EXTENSION.SCSS}`]
+          ignore: [
+            `${DIR.SRC}/**/_*${EXTENSION.SCSS}`,
+            `${DIR.SRC}/${DIR.SHARED}/common/**/*${EXTENSION.SCSS}`
+          ]
         }
       })
     );
