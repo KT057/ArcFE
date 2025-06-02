@@ -53,8 +53,6 @@ export const optimizeImages: () => Promise<TResultPromise<string, Error>> =
     try {
       const imagePaths = glob.sync(`${DIR.SRC}/**/*${EXTENSION.IMAGE}`);
 
-      console.log(imagePaths);
-
       const promises: Promise<TResultPromise<string, Error>>[] = imagePaths.map(
         async (imagePath) => {
           return optimizeImage(imagePath);

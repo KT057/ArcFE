@@ -205,7 +205,8 @@ export const renderScssFile = async ({
 export const watchScssFiles = async ({
   entry,
   option,
-  noSharedItems
+  noSharedItems,
+  renderOption
 }: WatchingScssOption) => {
   const { resolve, reject } = await getDirsSync(entry, option);
 
@@ -235,11 +236,12 @@ export const watchScssFiles = async ({
   chokidar.watcher({
     change: async (path: string) => {
       log('success', `Starting SCSS watch in: ${path}`);
-      console.log(path.split(DIR.STYLE));
 
       await renderScssFiles({
-        entry: `${path.split(DIR.STYLE)[0]}/${DIR.STYLE}/**/*${EXTENSION.SCSS}`,
-        option: {
+        entry:
+          renderOption?.entry ??
+          `${path.split(DIR.STYLE)[0]}/${DIR.STYLE}/**/*${EXTENSION.SCSS}`,
+        option: renderOption?.option ?? {
           ignore: [
             `${path.split(DIR.STYLE)[0]}/${DIR.STYLE}/**/_*${EXTENSION.SCSS}`
           ]
