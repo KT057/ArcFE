@@ -1,7 +1,6 @@
 import '../../../../shared/styles/common.css';
-import runScript from '!!raw-loader!./script/index.js';
+import runScript from '!!raw-loader!../../../../shared/scripts/common.js';
 import { withRunScript } from 'storybook-addon-run-script/html';
-import image from './images/image.png';
 import Html from './index.html';
 
 export default {

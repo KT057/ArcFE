@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', () => {
+export const toggleProduct002 = () => {
   const boxes = document.querySelectorAll<HTMLElement>('.js-pd002');
 
   for (const box of Array.from(boxes)) {
@@ -26,4 +26,4 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   }
-});
+};
