@@ -44,6 +44,7 @@ const render = ({ entry, outDir, outPath, data }: RenderOption) => {
     Pug.render(
       html,
       {
+        filename: entry,
         pretty: true,
         cache: false,
         basedir: path.join(DIR.SRC),
@@ -66,7 +67,7 @@ const render = ({ entry, outDir, outPath, data }: RenderOption) => {
           return;
         }
 
-        log('success', `Template successfully built: ${distFile}`);
+        log('success', `Pug successfully built: ${distFile}`);
         resolve(ok(distFile));
       }
     );

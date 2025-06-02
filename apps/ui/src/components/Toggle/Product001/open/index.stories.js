@@ -5,19 +5,23 @@ import Html from './index.html';
 
 export default {
   title: 'Toggle/Product001',
-  render: () => {
-    return `
-      <div class="site-wide">
-        <div class="site-wide__w300">
-          ${Html}
-        </div>
-      </div>
-    `;
-  },
   decorators: [withRunScript(runScript)]
 };
 
+const Template = (component) => {
+  return `
+    <div class="site-wide">
+      <div class="site-wide__w300">
+        ${component}
+      </div>
+    </div>
+  `;
+};
+
 export const Open = {
+  render: () => {
+    return Template(Html);
+  },
   parameters: {
     design: [
       {
