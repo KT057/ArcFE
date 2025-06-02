@@ -91,9 +91,10 @@ jobs:
   notify:
     runs-on: ubuntu-latest
     needs: [core_biome_check, core_tsc_check, ui_biome_check]
-    if: ${{ failure() }}
+    if: always()
     steps:
-      - name: Send GitHub Action trigger data to Slack workflow
+      - name: Send Slack notification on failure
+        if: ${{ failure() }}
         uses: slackapi/slack-github-action@v2.1.0
         with:
           webhook: ${{ secrets.SLACK_WORKFLOW_WEBHOOK_URL }}
