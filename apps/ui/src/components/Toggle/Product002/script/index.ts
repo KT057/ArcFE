@@ -1,10 +1,8 @@
 export const toggleProduct002 = () => {
-  const boxes = document.querySelectorAll<HTMLElement>('.js-pd002');
+  const boxes = document.querySelectorAll<HTMLElement>('.js-cm-toggle-002');
 
   for (const box of Array.from(boxes)) {
     box.addEventListener('click', () => {
-      console.log(box.classList);
-
       if (
         !box.classList.contains('is-open') &&
         !box.classList.contains('is-close')
