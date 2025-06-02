@@ -4,6 +4,7 @@
   "packageManager": "pnpm@10.11.0",
   "scripts": {
     "setup": "pnpm install && pnpm @core build",
+    "ui:gen": "rm -rf apps/web/src/shared/common && rm -rf apps/wordpress/src/shared/common && pnpm @ui gen",
     "@ui": "pnpm --filter @apps/ui",
     "@web": "pnpm --filter @apps/web",
     "@wp": "pnpm --filter @apps/wordpress",

@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "scripts": {
     "dev": "rm -rf ./dist && cross-env NODE_ENV=local ts-node index.ts",
-    "build": "rm -rf ./production && cross-env NODE_ENV=production ts-node index.ts",
+    "gen": "ts-node generate.ts",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "lint:template": "pug-lint -c .pug-lint.json .",

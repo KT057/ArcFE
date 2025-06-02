@@ -6,7 +6,7 @@
   "author": "kota <k.ichikawa@attivita.co.jp>",
   "license": "MIT",
   "scripts": {
-    "dev": "pnpm run local",
+    "dev": "rm -rf ./dist && pnpm run local",
     "check:dist": "bash scripts/check-dist.sh",
     "wp:start": "pnpm run check:dist && make start",
     "wp:stop": "make kill",

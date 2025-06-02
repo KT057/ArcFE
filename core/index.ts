@@ -1,5 +1,7 @@
 export { checkDir, log } from './helper/utils';
-import { ScssOption, WatchingScssOption } from 'types';
+export { generateUIToAllPackages } from './generateUIToAllPackages';
+
+import { WatchingScssOption } from 'types';
 import { browser } from './browser';
 import { DIR, EXTENSION } from './constants';
 import { copyCssFiles, watchCssFiles } from './css';

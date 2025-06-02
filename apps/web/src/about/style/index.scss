@@ -1,4 +1,8 @@
-@use '../../shared/styles/import';
+@use '../../shared/common/styles/media';
+@use '../../shared/common/styles/mixin';
+
+@use '../../shared/common/styles/reset' as *;
+@use '../../shared/common/styles/import' as *;
 
 body {
   margin: 0;
