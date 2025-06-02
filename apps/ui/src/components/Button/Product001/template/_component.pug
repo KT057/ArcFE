@@ -1,2 +1,14 @@
-mixin Button001()
+mixin Button001(type = '001')
   .cm-button-001
+    case type
+      when '001'
+        button.cm-button-001__001
+
+      when '002'
+        button.cm-button-001__002
+
+      when '003'
+        button.cm-button-001__003
+
+      when '004'
+        button.cm-button-001__004
