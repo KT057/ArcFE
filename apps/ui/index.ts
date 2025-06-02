@@ -43,7 +43,13 @@ void (async () => {
 
         await watch({
           runs: watchRuns,
-          noSharedItems
+          noSharedItems,
+          scssOption: {
+            renderOption: {
+              entry: 'src/shared/styles/**/*.scss',
+              option: {}
+            }
+          }
         });
 
         return;
@@ -56,7 +62,13 @@ void (async () => {
 
       await watch({
         runs: watchRuns,
-        noSharedItems
+        noSharedItems,
+        scssOption: {
+          renderOption: {
+            entry: 'src/shared/styles/**/*.scss',
+            option: {}
+          }
+        }
       });
 
       break;

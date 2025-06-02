@@ -53,7 +53,7 @@ export const log = (type: TLogType, text: string) => {
   }
 };
 
-export const getDirsSync = (path: string, option: GlobOptions) => {
+export const getDirsSync = (path: string | string[], option: GlobOptions) => {
   return new Promise<TResultPromise<string[], Error>>((resolve) => {
     const dirs = glob.sync(path, option);
 

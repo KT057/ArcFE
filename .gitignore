@@ -44,6 +44,10 @@ public/icon-font
 .eslintcache
 *storybook.log
 
+# UI
+apps/web/src/shared/common
+apps/wordpress/src/shared/common
+
 # Wordpress
 dist
 wp
