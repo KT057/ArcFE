@@ -1,0 +1,75 @@
+@use "../../../../../styles/media";
+@use "../../../../../styles/mixin";
+@use "../../../../../styles/animation";
+
+.cm-toggle-001{
+  display: block;
+  position: relative;
+
+  @include mixin.baseFontSizeForEm();
+}
+
+.cm-toggle-001__close-wrapper{
+  width: mixin.em(80);
+  height: mixin.em(80);
+  cursor: pointer;
+}
+
+.cm-toggle-001__close{
+  width: 100%;
+  height: 100%;
+  position: relative;
+
+  &:hover{
+    .cm-toggle-001__close-line-wrapper{
+      transform: scale(1.2);
+    }
+
+    .cm-toggle-001__close-line::after {
+      transform: scale(1);
+    }
+  }
+}
+
+.cm-toggle-001__close-inner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.cm-toggle-001__close-line-wrapper {
+  position: relative;
+  transition: transform .6s cubic-bezier(.645,.045,.355,1);
+  cursor: pointer;
+}
+
+.cm-toggle-001__close-line {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: block;
+  width: mixin.em(28);
+  height: mixin.em(4);
+  background-color: #000;
+
+  &:nth-child(1) {
+    transform: translate(-50%, -50%) rotate(-45deg);
+  }
+
+  &:nth-child(2){
+    transform: translate(-50%, -50%) rotate(45deg);
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #ccc;
+    transform: scale(0);
+    transition: transform .6s cubic-bezier(.215,.61,.355,1);
+  }
+}

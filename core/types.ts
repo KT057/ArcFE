@@ -7,10 +7,17 @@ export type HtmlOption = {
   option: GlobOptions;
 };
 
-export type CssOption = {
+export type ScssOption = {
   entry: string;
   noSharedItems?: boolean;
   option: GlobOptions;
+};
+
+export type WatchingScssOption = ScssOption & {
+  renderOption?: {
+    entry?: string;
+    option?: GlobOptions;
+  };
 };
 
 export type tsOption = {

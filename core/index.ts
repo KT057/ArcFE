@@ -1,4 +1,5 @@
 export { checkDir, log } from './helper/utils';
+import { ScssOption, WatchingScssOption } from 'types';
 import { browser } from './browser';
 import { DIR, EXTENSION } from './constants';
 import { copyCssFiles, watchCssFiles } from './css';
@@ -29,6 +30,7 @@ export type RenderOption = {
 export type WatchOption = {
   pugData?: { [key: string]: any };
   noSharedItems?: boolean;
+  scssOption?: Partial<WatchingScssOption>;
   runs: {
     javascript?: boolean;
     scss?: boolean;
@@ -136,6 +138,7 @@ export const renders = async ({
 // 監視の処理
 export const watch = async ({
   pugData,
+  scssOption,
   noSharedItems,
   runs: {
     browser: openBrowser,
@@ -160,9 +163,10 @@ export const watch = async ({
 
   if (scss) {
     await watchScssFiles({
-      entry: `${DIR.SRC}/**/*${EXTENSION.SCSS}`,
+      entry: scssOption?.entry ?? `${DIR.SRC}/**/*${EXTENSION.SCSS}`,
       noSharedItems,
-      option: {}
+      option: scssOption?.option ?? {},
+      renderOption: scssOption?.renderOption ?? {}
     });
   }
 

@@ -18,7 +18,7 @@ import {
   writeFile
 } from '../helper/utils';
 import { Chokidar } from '../helper/watch';
-import { CssOption } from '../types';
+import { ScssOption, WatchingScssOption } from '../types';
 
 const styleLintPlugin: AcceptedPlugin[] = [
   require('stylelint')({
@@ -159,7 +159,7 @@ const getPath = (dir: string) => {
 export const renderScssFiles = async ({
   entry,
   option
-}: CssOption): Promise<TResultPromise<string, Error>> => {
+}: ScssOption): Promise<TResultPromise<string, Error>> => {
   const { resolve, reject } = await getDirsSync(entry, option);
 
   if (reject || !resolve) {
@@ -190,7 +190,7 @@ export const renderScssFiles = async ({
 // 指定したパスのcssをレンダリング
 export const renderScssFile = async ({
   entry
-}: CssOption): Promise<TResultPromise<string, Error>> => {
+}: ScssOption): Promise<TResultPromise<string, Error>> => {
   const { outPutFile, outputPath } = getPath(entry);
 
   const renderResult = await render(entry, outputPath, outPutFile);
@@ -206,7 +206,7 @@ export const watchScssFiles = async ({
   entry,
   option,
   noSharedItems
-}: CssOption) => {
+}: WatchingScssOption) => {
   const { resolve, reject } = await getDirsSync(entry, option);
 
   if (reject || !resolve) {
