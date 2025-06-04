@@ -60,11 +60,6 @@
     vertical-align: inherit;
   }
 
-  * {
-    padding: 0; /* Reset `padding` and `margin` of all elements */
-    margin: 0;
-  }
-
   /* # =================================================================
     # General elements
     # ================================================================= */
@@ -200,16 +195,6 @@
     text-transform: none; /* Firefox 40+, Internet Explorer 11- */
   }
 
-  /* Apply cursor pointer to button elements */
-  button,
-  [type='button'],
-  [type='reset'],
-  [type='submit'],
-  [role='button'] {
-    cursor: pointer;
-    color: inherit;
-  }
-
   /* Remove inner padding and border in Firefox 4+ */
   button::-moz-focus-inner,
   [type='button']::-moz-focus-inner,
@@ -232,15 +217,6 @@
   [type='reset'],
   [type='submit'] {
     appearance: auto; /* Correct the inability to style clickable types in iOS */
-  }
-
-  /* Remove the default button styling in all browsers */
-  button,
-  input,
-  select,
-  textarea {
-    background-color: transparent;
-    border-style: none;
   }
 
   a:focus,

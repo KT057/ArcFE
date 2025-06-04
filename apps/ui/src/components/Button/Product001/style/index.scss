@@ -2,6 +2,41 @@
 @use "../../../../styles/mixin";
 @use "../../../../styles/animation";
 
-.cm-button-001{
+$color-border: #000;
+$color-text: #000;
+$color-background: #fff;
+
+$font-weight: 700;
+
+.cm-button-001__wrapper {
   @include mixin.baseFontSizeForEm();
+}
+
+.cm-button-001 {
+  width: 100%;
+  text-align: center;
+  border-radius: mixin.em(30);
+  border: 1px solid $color-border;
+  cursor: pointer;
+  display: block;
+  background-color: $color-background;
+}
+
+.cm-button-001--medium {
+  padding: mixin.em(15) 0;
+}
+
+.cm-button-001--small {
+  padding: mixin.em(7) 0;
+}
+
+.cm-button-001--large {
+  padding: mixin.em(25) 0;
+}
+
+.cm-button-001__text {
+  display: block;
+  font-size: mixin.em(16);
+  font-weight: $font-weight;
+  color: $color-text;
 }
