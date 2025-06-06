@@ -2,9 +2,12 @@
 @use "../../../../styles/mixin";
 @use "../../../../styles/animation";
 
+// mixinにしてキーのクラスでユニークの値を設定して独自のスタイルを設定できるようにする
+
 $color-border: #000;
 $color-text: #000;
 $color-background: #fff;
+$color-animation-background: #ccc;
 
 $font-weight: 700;
 
@@ -28,65 +31,22 @@ $font-weight: 700;
 
 // Type
 
-.cm-button-001--001,
-.cm-button-001--004,
-.cm-button-001--007,
-.cm-button-001--010 {
+.cm-button-001--001 {
   border-radius: mixin.em(30);
 }
 
-.cm-button-001--002,
-.cm-button-001--005,
-.cm-button-001--008 {
+.cm-button-001--002 {
   border-radius: mixin.em(8);
 }
 
-.cm-button-001--003,
-.cm-button-001--006,
-.cm-button-001--009 {
+.cm-button-001--003 {
   border-radius: 0;
-}
-
-.cm-button-001--004,
-.cm-button-001--005,
-.cm-button-001--006 {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: mixin.em(8);
-}
-
-.cm-button-001--007,
-.cm-button-001--008,
-.cm-button-001--009 {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.cm-button-001--010 {
-  text-align: center;
-
-  .cm-button-001__text {
-    padding: 0 mixin.em(14);
-  }
-
-  .cm-button-001__icon {
-    position: absolute;
-    top: 50%;
-    right: mixin.em(24);
-    transform: translateY(-50%);
-  }
 }
 
 // Size
 
 .cm-button-001--small {
   padding: mixin.em(7) mixin.em(13);
-
-  .cm-button-001__icon {
-    width: mixin.em(18);
-  }
 
   .cm-button-001__text {
     font-size: mixin.em(12);
@@ -96,10 +56,6 @@ $font-weight: 700;
 .cm-button-001--medium {
   padding: mixin.em(15) mixin.em(28);
 
-  .cm-button-001__icon {
-    width: mixin.em(20);
-  }
-
   .cm-button-001__text {
     font-size: mixin.em(16);
   }
@@ -107,10 +63,6 @@ $font-weight: 700;
 
 .cm-button-001--large {
   padding: mixin.em(25) mixin.em(45);
-
-  .cm-button-001__icon {
-    width: mixin.em(24);
-  }
 
   .cm-button-001__text {
     font-size: mixin.em(18);
@@ -121,4 +73,14 @@ $font-weight: 700;
   display: block;
   font-weight: $font-weight;
   color: $color-text;
+}
+
+// Animation
+
+.cm-button-001--animation_001 {
+  transition: background-color 0.25s ease-in-out;
+
+  &:hover {
+    background-color: $color-animation-background;
+  }
 }

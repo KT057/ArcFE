@@ -1,0 +1,125 @@
+@use "../../../../styles/media";
+@use "../../../../styles/mixin";
+@use "../../../../styles/animation";
+
+$color-border: #000;
+$color-text: #000;
+$color-background: #fff;
+
+$font-weight: 700;
+
+.cm-button-002__wrapper {
+  @include mixin.baseFontSizeForEm();
+}
+
+.cm-button-002 {
+  width: 100%;
+  text-align: center;
+  border: 1px solid $color-border;
+  cursor: pointer;
+  display: block;
+  background-color: $color-background;
+  position: relative;
+}
+
+.cm-button-002__icon {
+  display: block;
+}
+
+// Type
+
+.cm-button-002--001,
+.cm-button-002--004,
+.cm-button-002--007 {
+  border-radius: mixin.em(30);
+}
+
+.cm-button-002--002,
+.cm-button-002--005,
+.cm-button-002--008 {
+  border-radius: mixin.em(8);
+}
+
+.cm-button-002--003,
+.cm-button-002--006,
+.cm-button-002--009 {
+  border-radius: 0;
+}
+
+.cm-button-002--001,
+.cm-button-002--002,
+.cm-button-002--003 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: mixin.em(8);
+}
+
+.cm-button-002--004,
+.cm-button-002--005,
+.cm-button-002--006 {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.cm-button-002--007,
+.cm-button-002--008,
+.cm-button-002--009 {
+  text-align: center;
+
+  .cm-button-002__text {
+    padding: 0 mixin.em(14);
+  }
+
+  .cm-button-002__icon {
+    position: absolute;
+    top: 50%;
+    right: mixin.em(24);
+    transform: translateY(-50%);
+  }
+}
+
+// Size
+
+.cm-button-002--small {
+  padding: mixin.em(7) mixin.em(13);
+
+  .cm-button-002__icon {
+    width: mixin.em(18);
+  }
+
+  .cm-button-002__text {
+    font-size: mixin.em(12);
+  }
+}
+
+.cm-button-002--medium {
+  padding: mixin.em(15) mixin.em(28);
+
+  .cm-button-002__icon {
+    width: mixin.em(20);
+  }
+
+  .cm-button-002__text {
+    font-size: mixin.em(16);
+  }
+}
+
+.cm-button-002--large {
+  padding: mixin.em(25) mixin.em(45);
+
+  .cm-button-002__icon {
+    width: mixin.em(24);
+  }
+
+  .cm-button-002__text {
+    font-size: mixin.em(18);
+  }
+}
+
+.cm-button-002__text {
+  display: block;
+  font-weight: $font-weight;
+  color: $color-text;
+}
