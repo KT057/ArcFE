@@ -19,6 +19,7 @@ $font-weight: 700;
   cursor: pointer;
   display: block;
   background-color: $color-background;
+  position: relative;
 }
 
 .cm-button-001__icon {
@@ -28,30 +29,54 @@ $font-weight: 700;
 // Type
 
 .cm-button-001--001,
-.cm-button-001--004 {
+.cm-button-001--004,
+.cm-button-001--007,
+.cm-button-001--010 {
   border-radius: mixin.em(30);
 }
 
 .cm-button-001--002,
-.cm-button-001--005 {
+.cm-button-001--005,
+.cm-button-001--008 {
   border-radius: mixin.em(8);
 }
 
-.cm-button-001--003 {
+.cm-button-001--003,
+.cm-button-001--006,
+.cm-button-001--009 {
   border-radius: 0;
 }
 
-.cm-button-001--004 {
+.cm-button-001--004,
+.cm-button-001--005,
+.cm-button-001--006 {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: mixin.em(8);
 }
 
-.cm-button-001--005 {
+.cm-button-001--007,
+.cm-button-001--008,
+.cm-button-001--009 {
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+
+.cm-button-001--010 {
+  text-align: center;
+
+  .cm-button-001__text {
+    padding: 0 mixin.em(14);
+  }
+
+  .cm-button-001__icon {
+    position: absolute;
+    top: 50%;
+    right: mixin.em(24);
+    transform: translateY(-50%);
+  }
 }
 
 // Size
