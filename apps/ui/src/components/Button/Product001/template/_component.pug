@@ -1,5 +1,11 @@
-mixin Button001({ type = '001', size = 'medium' })
+include ../../../Icon/template/_component
+
+mixin Button001({ type = '001', size = 'medium', text = 'Button', icon })
   .cm-button-001__wrapper
     button.cm-button-001(class=`cm-button-001--${type} cm-button-001--${size}`)
       span.cm-button-001__text
         block
+
+      if icon
+        span.cm-button-001__icon
+          +Icon({ type: icon.type, fill: icon.fill, stroke: icon.stroke })

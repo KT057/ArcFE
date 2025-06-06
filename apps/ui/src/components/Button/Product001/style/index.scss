@@ -15,28 +15,85 @@ $font-weight: 700;
 .cm-button-001 {
   width: 100%;
   text-align: center;
-  border-radius: mixin.em(30);
   border: 1px solid $color-border;
   cursor: pointer;
   display: block;
   background-color: $color-background;
 }
 
-.cm-button-001--medium {
-  padding: mixin.em(15) 0;
+.cm-button-001__icon {
+  display: block;
 }
 
+// Type
+
+.cm-button-001--001,
+.cm-button-001--004 {
+  border-radius: mixin.em(30);
+}
+
+.cm-button-001--002,
+.cm-button-001--005 {
+  border-radius: mixin.em(8);
+}
+
+.cm-button-001--003 {
+  border-radius: 0;
+}
+
+.cm-button-001--004 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: mixin.em(8);
+}
+
+.cm-button-001--005 {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+// Size
+
 .cm-button-001--small {
-  padding: mixin.em(7) 0;
+  padding: mixin.em(7) mixin.em(13);
+
+  .cm-button-001__icon {
+    width: mixin.em(18);
+  }
+
+  .cm-button-001__text {
+    font-size: mixin.em(12);
+  }
+}
+
+.cm-button-001--medium {
+  padding: mixin.em(15) mixin.em(28);
+
+  .cm-button-001__icon {
+    width: mixin.em(20);
+  }
+
+  .cm-button-001__text {
+    font-size: mixin.em(16);
+  }
 }
 
 .cm-button-001--large {
-  padding: mixin.em(25) 0;
+  padding: mixin.em(25) mixin.em(45);
+
+  .cm-button-001__icon {
+    width: mixin.em(24);
+  }
+
+  .cm-button-001__text {
+    font-size: mixin.em(18);
+  }
 }
 
 .cm-button-001__text {
   display: block;
-  font-size: mixin.em(16);
   font-weight: $font-weight;
   color: $color-text;
 }

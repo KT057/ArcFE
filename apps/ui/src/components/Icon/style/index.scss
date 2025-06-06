@@ -2,6 +2,14 @@
 @use "../../../styles/mixin";
 @use "../../../styles/animation";
 
+.cm-icon__wrapper {
+  width: 100%;
+  height: 100%;
+  display: block;
+  line-height: 0;
+}
+
 .cm-icon {
-  line-height: 1;
+  width: 100%;
+  height: 100%;
 }
