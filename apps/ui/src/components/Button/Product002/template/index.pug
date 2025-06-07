@@ -1,4 +1,8 @@
+include ../../../Icon/template/_component
 include ./_component.pug
 
-+Button002({type: '001', size: 'medium', icon: { type: '001', fill: '#000' }}) 
-  | Button
++Button002({key: 'default', type: '001', size: 'medium'}) 
+  mixin text
+    | Button
+  mixin icon
+    +Icon({ type: '001', stroke: '#000' })

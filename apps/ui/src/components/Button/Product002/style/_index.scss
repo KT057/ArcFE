@@ -1,0 +1,136 @@
+@use 'sass:map';
+
+@use "../../../../styles/import" as *;
+
+@mixin button002 ($options) {
+  $defaults: (
+    key: 'default',
+    color: #000,
+    background-color: #fff,
+    border-color: #000,
+    font-weight: 700,
+    animation: (
+      background-color: #ccc,
+    ),
+  );
+
+  $settings: map.merge($defaults, $options);
+
+  .cm-button-002__wrapper {
+    @include baseFontSizeForEm();
+  }
+
+  .cm-button-002__wrapper--#{map.get($settings, 'key')} {
+    .cm-button-002 {
+      width: 100%;
+      text-align: center;
+      border: 1px solid map.get($settings, 'border-color');
+      cursor: pointer;
+      display: block;
+      background-color: map.get($settings, 'background-color');
+      position: relative;
+    }
+    
+    .cm-button-002__icon {
+      display: block;
+    }
+    
+    // Type
+    
+    .cm-button-002--001,
+    .cm-button-002--004,
+    .cm-button-002--007 {
+      border-radius: em(30);
+    }
+    
+    .cm-button-002--002,
+    .cm-button-002--005,
+    .cm-button-002--008 {
+      border-radius: em(8);
+    }
+    
+    .cm-button-002--003,
+    .cm-button-002--006,
+    .cm-button-002--009 {
+      border-radius: 0;
+    }
+    
+    .cm-button-002--001,
+    .cm-button-002--002,
+    .cm-button-002--003 {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: em(8);
+    }
+    
+    .cm-button-002--004,
+    .cm-button-002--005,
+    .cm-button-002--006 {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    
+    .cm-button-002--007,
+    .cm-button-002--008,
+    .cm-button-002--009 {
+      text-align: center;
+    
+      .cm-button-002__text {
+        padding: 0 em(14);
+      }
+    
+      .cm-button-002__icon {
+        position: absolute;
+        top: 50%;
+        right: em(24);
+        transform: translateY(-50%);
+      }
+    }
+    
+    // Size
+    
+    .cm-button-002--small {
+      padding: em(7) em(13);
+    
+      .cm-button-002__icon {
+        width: em(18);
+      }
+    
+      .cm-button-002__text {
+        font-size: em(12);
+      }
+    }
+    
+    .cm-button-002--medium {
+      padding: em(15) em(28);
+    
+      .cm-button-002__icon {
+        width: em(20);
+      }
+    
+      .cm-button-002__text {
+        font-size: em(16);
+      }
+    }
+    
+    .cm-button-002--large {
+      padding: em(25) em(45);
+    
+      .cm-button-002__icon {
+        width: em(24);
+      }
+    
+      .cm-button-002__text {
+        font-size: em(18);
+      }
+    }
+    
+    .cm-button-002__text {
+      display: block;
+      font-weight: map.get($settings, 'font-weight');
+      color: map.get($settings, 'color');
+    }
+  }
+}
