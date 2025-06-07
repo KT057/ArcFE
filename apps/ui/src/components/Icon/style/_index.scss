@@ -8,7 +8,7 @@
     fill: #000,
   );
 
-  $settings: map.merge($defaults, $options);
+  $settings: map.deep-merge($defaults, $options);
 
   .cm-icon__wrapper {
     width: 100%;

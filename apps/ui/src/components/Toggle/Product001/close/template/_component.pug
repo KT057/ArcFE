@@ -1,8 +1,8 @@
-mixin toggle001Close()
-  .cm-toggle-001
-    .cm-toggle-001__close-wrapper
-      .cm-toggle-001__close
-        .cm-toggle-001__close-inner
-          .cm-toggle-001__close-line-wrapper
-            span.cm-toggle-001__close-line
-            span.cm-toggle-001__close-line
+mixin toggle001Close({ key = 'default' })
+  .cm-toggle-001-close__wrapper(class=`cm-toggle-001-close__wrapper--${key}`)
+    .cm-toggle-001-close
+      .cm-toggle-001-close__inner
+        .cm-toggle-001-close__container
+          .cm-toggle-001-close__line-wrapper
+            span.cm-toggle-001-close__line
+            span.cm-toggle-001-close__line

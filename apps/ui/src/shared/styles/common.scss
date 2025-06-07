@@ -11,6 +11,12 @@
 @include icon((
   key: 'default',
 ));
+@include toggle001Close((
+  key: 'default',
+));
+@include toggle001Open((
+  key: 'default',
+));
 
 .site-wide {
   @include reset;

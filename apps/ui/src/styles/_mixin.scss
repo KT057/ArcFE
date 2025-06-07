@@ -1,6 +1,23 @@
 @use "sass:math";
+@use "sass:meta";
+@use "sass:map";
+
 @use "variable";
 @use "media";
+
+@function deep-merge($map1, $map2) {
+  $result: $map1;
+
+  @each $key, $val in $map2 {
+    $result: if (
+      map.has-key($result, $key) and meta.type-of(map.get($result, $key)) == 'map' and meta.type-of($val) == 'map',
+      map.set($result, $key, deep-merge(map.get($result, $key), $val)),
+      map.set($result, $key, $val)
+    );
+  }
+
+  @return $result;
+}
 
 
 @mixin baseFontSizeForRem {

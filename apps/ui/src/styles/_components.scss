@@ -1,7 +1,6 @@
 @forward '../components/Button/Product001/style/index';
 @forward '../components/Button/Product002/style/index';
 @forward '../components/Icon/style/index';
-
-@use '../components/Toggle/Product001/close/style' as *;
-@use '../components/Toggle/Product001/open/style' as *;
+@forward '../components/Toggle/Product001/close/style/index';
+@forward '../components/Toggle/Product001/open/style/index';
 @use '../components/Toggle/Product002/style' as *;
