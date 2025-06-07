@@ -1,0 +1,9 @@
+include ../../../Icon/template/_component
+
+//- keyでユニークの値を設定して独自のスタイルを設定できるようにする
+
+mixin Button001({ key = 'default', type = '001', size = 'medium', text = 'Button', animation = '001' })
+  .cm-button-001__wrapper(class=`cm-button-001__wrapper--${key}`)
+    button.cm-button-001(class=`cm-button-001--${type} cm-button-001--${size} cm-button-001--animation_${animation}`)
+      span.cm-button-001__text
+        block

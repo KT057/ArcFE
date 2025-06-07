@@ -3,7 +3,7 @@ import { generateUIToAllPackages } from '@core';
 (async () => {
   await generateUIToAllPackages({
     entries: ['src/**/*.ts', 'src/**/*.pug', 'src/**/*.scss'],
-    ignore: ['src/shared/**/*'],
+    ignore: ['src/shared/**/*', 'src/**/index.pug'],
     dist: {
       type: 'web',
       dir: 'src/shared/common'
@@ -12,7 +12,7 @@ import { generateUIToAllPackages } from '@core';
 
   await generateUIToAllPackages({
     entries: ['src/**/*.ts', 'src/**/*.scss'],
-    ignore: ['src/shared/**/*'],
+    ignore: ['src/shared/**/*', 'src/**/index.pug'],
     dist: {
       type: 'wordpress',
       dir: 'src/shared/common'

@@ -2,25 +2,6 @@
 @use "../../styles/import" as *;
 @use "../../styles/components" as *;
 
-@include button001((
-  key: 'default',
-));
-@include button002((
-  key: 'default',
-));
-@include icon((
-  key: 'default',
-));
-@include toggle001Close((
-  key: 'default',
-));
-@include toggle001Open((
-  key: 'default',
-));
-@include toggle002((
-  key: 'default',
-));
-
 .site-wide {
   @include reset;
 }

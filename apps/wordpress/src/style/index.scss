@@ -1,8 +1,6 @@
-@use "../shared/common/styles/media";
-@use "../shared/common/styles/mixin";
-
 @use "../shared/common/styles/reset" as *;
 @use "../shared/common/styles/import" as *;
+@use "../shared/common/styles/components" as *;
 
 .test-wrap {
   width: 100%;

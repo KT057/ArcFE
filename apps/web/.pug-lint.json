@@ -12,7 +12,7 @@
   "requireClassLiteralsBeforeIdLiterals": true,
   "requireIdLiteralsBeforeAttributes": true,
   "requireLineFeedAtFileEnd": null,
-  "requireLowerCaseAttributes": true,
+  "requireLowerCaseAttributes": null,
   "requireLowerCaseTags": true,
   "disallowClassLiteralsBeforeAttributes": null,
   "requireSpaceAfterCodeOperator": true,

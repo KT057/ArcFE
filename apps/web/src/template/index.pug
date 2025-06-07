@@ -1,5 +1,7 @@
 extends /shared/templates/layout/_default
 
+include /shared/common/components/Button/Product001/template/_component.pug
+
 block vars
   -
     var title = 'document'
@@ -11,5 +13,5 @@ block main
   .test-wrap
     p site wide #{data.page.top.title}
 
-    //- uiパッケージからコンポーネントを読み込む場合はこちらを参考にしてください
-    //- include /shared/common/components/Toggle/Product002/template/index.pug
+    +Button001({ key: 'default', type: '001', size: 'medium' })
+      | ボタン
