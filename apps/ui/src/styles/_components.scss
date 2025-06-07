@@ -15,7 +15,9 @@
   border-color: #000,
   font-weight: 700,
   animation: (
-    background-color: #ccc,
+    text-color: #fff,
+    background-color: #000,
+    duration: 0.25s,
   ),
 ));
 @include button002((
