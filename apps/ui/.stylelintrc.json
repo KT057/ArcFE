@@ -24,7 +24,8 @@
           "content",
           "return",
           "extend",
-          "use"
+          "use",
+          "forward"
         ]
       }
     ]
