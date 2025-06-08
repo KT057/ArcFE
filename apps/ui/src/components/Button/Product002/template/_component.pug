@@ -1,7 +1,7 @@
-mixin Button002({ key = 'default', type = '001', size = 'medium', text = 'Button' })
+mixin Button002({ key = 'default', type = '001', size = 'medium', iconDirection = 'right' })
   block
   .cm-button-002__wrapper(class=`cm-button-002__wrapper--${key}`)
-    button.cm-button-002(class=`cm-button-002--${type} cm-button-002--${size}`)
+    button.cm-button-002(class=`cm-button-002--${type} cm-button-002--${size} cm-button-002--icon-direction_${iconDirection}`)
       span.cm-button-002__text
         +text
       span.cm-button-002__icon

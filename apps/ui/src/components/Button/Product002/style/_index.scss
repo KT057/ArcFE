@@ -34,6 +34,12 @@
     .cm-button-002__icon {
       display: block;
     }
+
+    .cm-button-002__text {
+      display: block;
+      font-weight: map.get($settings, 'font-weight');
+      color: map.get($settings, 'color');
+    }
     
     // Type
     
@@ -84,8 +90,27 @@
       .cm-button-002__icon {
         position: absolute;
         top: 50%;
-        right: em(24);
         transform: translateY(-50%);
+      }
+    }
+
+    // Icon Direction
+
+    .cm-button-002--icon-direction_left {
+      flex-direction: row-reverse;
+
+      .cm-button-002__icon {
+        right: auto;
+        left: em(24);
+      }
+    }
+
+    .cm-button-002--icon-direction_right {
+      flex-direction: row;
+
+      .cm-button-002__icon {
+        right: em(24);
+        left: auto;
       }
     }
     
@@ -125,12 +150,6 @@
       .cm-button-002__text {
         font-size: em(18);
       }
-    }
-    
-    .cm-button-002__text {
-      display: block;
-      font-weight: map.get($settings, 'font-weight');
-      color: map.get($settings, 'color');
     }
   }
 }
