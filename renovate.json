@@ -4,10 +4,7 @@
   "rangeStrategy": "bump",
   "enabledManagers": ["npm"],
   "timezone": "Asia/Tokyo",
-  "rebaseWhen": "never",
   "prConcurrentLimit": 1,
-  "schedule": ["* 0-3 * * *"],
-  "automergeSchedule": ["* 4-6 * * *"],
   "packageRules": [
     {
       "matchUpdateTypes": ["major"],
