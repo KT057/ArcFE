@@ -4,5 +4,8 @@ mixin Button002({ key = 'default', type = '001', size = 'medium', iconDirection 
     button.cm-button-002(class=`cm-button-002--${type} cm-button-002--${size} cm-button-002--icon-direction_${iconDirection} cm-button-002--animation_${animation}`)
       span.cm-button-002__text
         +text
-      span.cm-button-002__icon
-        +icon
+      span.cm-button-002__icon-wrapper
+        span.cm-button-002__icon
+          +icon
+        span.cm-button-002__icon
+          +icon
