@@ -10,7 +10,7 @@
     "lint:fix": "npx @biomejs/biome check --diagnostic-level=warn --write .",
     "tsc": "tsc --noEmit"
   },
-  "packageManager": "pnpm@10.11.0",
+  "packageManager": "pnpm@10.12.1",
   "devDependencies": {
     "@types/css-declaration-sorter": "^6.0.4",
     "@types/cssnano": "^5.1.3",
