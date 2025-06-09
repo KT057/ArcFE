@@ -1,7 +1,7 @@
 {
   "name": "root",
   "version": "1.0.0",
-  "packageManager": "pnpm@10.11.0",
+  "packageManager": "pnpm@10.12.1",
   "scripts": {
     "setup": "pnpm install && pnpm @core build",
     "ui:gen": "rm -rf apps/web/src/shared/common && rm -rf apps/wordpress/src/shared/common && pnpm @ui gen",
@@ -16,12 +16,12 @@
     "browser-sync": "^3.0.4",
     "cross-env": "^7.0.3",
     "pug-lint": "^2.7.0",
-    "stylelint": "^16.19.1",
+    "stylelint": "^16.20.0",
     "stylelint-config-recommended-scss": "^15.0.1",
     "ts-loader": "^9.5.2",
     "ts-node": "^10.9.2",
     "ts-node-dev": "^2.0.0",
-    "turbo": "^2.5.3",
+    "turbo": "^2.5.4",
     "typescript": "^5.8.3",
     "webpack": "^5.99.9"
   },
