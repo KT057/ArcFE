@@ -1,6 +1,20 @@
 @use 'sass:map';
 @use "../../../styles/import" as *;
 
+
+@mixin iconTransition ($options) {
+  $defaults: (
+    transitionStroke: stroke 0.3s $easeInOutCubic,
+    transitionFill: fill 0.3s $easeInOutCubic,
+  );
+
+  $settings: map.deep-merge($defaults, $options);
+
+  .cm-icon__path {
+    transition: map.get($settings, 'transitionStroke'), map.get($settings, 'transitionFill');
+  }
+}
+
 @mixin iconPath ($options) {
   $defaults: (
     stroke: #000,
@@ -136,6 +150,8 @@
     key: 'default',
     stroke: #000,
     fill: #000,
+    transitionStroke: stroke 0.3s $easeInOutCubic,
+    transitionFill: fill 0.3s $easeInOutCubic,
   );
 
   $settings: map.deep-merge($defaults, $options);
@@ -156,6 +172,11 @@
     @include iconPath((
       stroke: map.get($settings, 'stroke'),
       fill: map.get($settings, 'fill'),
+    ));
+
+    @include iconTransition((
+      transitionStroke: map.get($settings, 'transitionStroke'),
+      transitionFill: map.get($settings, 'transitionFill'),
     ));
   }
 }

@@ -6,6 +6,7 @@
 @use '../components/Toggle/Product001/close/style/index' as *;
 @use '../components/Toggle/Product001/open/style/index' as *;
 @use '../components/Toggle/Product002/style/index' as *;
+@use '../components/TextIcon/Product001/style/index' as *;
 
 
 @include button001((
@@ -20,6 +21,7 @@
     duration: 0.25s,
   ),
 ));
+
 @include button002((
   key: 'default',
   color: #000,
@@ -40,11 +42,26 @@
     )
   ),
 ));
+
+@include textIcon001((
+  key: 'default',
+  font-size: 24,
+  color: #000,
+  icon: (
+    size: 24,
+    stroke: #000,
+    fill: #000,
+  ),
+));
+
 @include icon((
   key: 'default',
   stroke: #000,
   fill: #000,
+  transitionStroke: stroke 0.3s $easeInOutCubic,
+  transitionFill: fill 0.3s $easeInOutCubic,
 ));
+
 @include toggle001Close((
   key: 'default',
   line-color: #000,
@@ -52,6 +69,7 @@
     background-color-line: #ccc,
   ),
 ));
+
 @include toggle001Open((
   key: 'default',
   line-color: #000,
@@ -60,6 +78,7 @@
     background-color-after: #fff,
   ),
 ));
+
 @include toggle002((
   key: 'default',
   line-color: #000,
