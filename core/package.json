@@ -38,7 +38,7 @@
     "puglint-stylish": "^1.1.0",
     "sass": "^1.89.2",
     "sharp": "^0.34.2",
-    "stylelint-scss": "^6.12.0",
+    "stylelint-scss": "^6.12.1",
     "svgo": "^3.3.2",
     "terser-webpack-plugin": "^5.3.14",
     "webpack-dev-middleware": "^7.4.2",
