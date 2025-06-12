@@ -1,0 +1,10 @@
+include ../../../Icon/template/_component
+
+mixin ItemList001({ key = 'default', number = '01', href = '#', animation = '001' })
+  .cm-item-list-001__wrapper(class=`cm-item-list-001__wrapper--${key}`)
+    .cm-item-list-001(class=`cm-item-list-001--animation_${animation}`)
+      .cm-item-list-001__number
+        span.cm-item-list-001__number-text
+          | #{number}
+      a.cm-item-list-001__text(href=href)
+        block
