@@ -1,0 +1,4 @@
+mixin Input001({ key = 'default',type = '001', size = 'medium', name = 'input-001' })
+  .cm-input-001__wrapper(class=`cm-input-001__wrapper--${key}`)
+    .js-input-001.cm-input-001(class=`cm-input-001--${type} cm-input-001--size_${size}`)
+      input(name=name, type='text')

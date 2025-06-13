@@ -1,0 +1,25 @@
+@use "sass:map";
+@use "../../../../styles/import" as *;
+
+
+@mixin input001 ($options) {
+  $defaults: (
+    key: 'default',
+  );
+
+  $settings: map.deep-merge($defaults, $options);
+
+  .cm-input-001__wrapper {
+    @include baseFontSizeForEm();
+  }
+
+  .cm-input-001__wrapper--#{map.get($settings, 'key')} {
+    .cm-input-001 {
+      position: relative;
+      width: 100%;
+    }
+  }
+} 
+
+
+
