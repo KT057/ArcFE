@@ -176,6 +176,10 @@
   ),
 ));
 
-@include input001((
+@include Input001((
   key: 'default',
+  font-size: 18,
+  color: #000,
+  border-color: #000,
+  placeholder-color: #909090,
 ));
