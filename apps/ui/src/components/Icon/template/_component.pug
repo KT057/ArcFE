@@ -1,6 +1,6 @@
-mixin Icon({ key = 'default', type = '001' })
+mixin Icon({ key = 'default', type = '001', size = "large" })
   span.cm-icon__wrapper(class=`cm-icon__wrapper--${key}`)
-    svg.cm-icon(width='24', height='24', viewBox='0 0 24 24', fill='none')
+    svg.cm-icon(width='24', height='24', viewBox='0 0 24 24', fill='none', class=`cm-icon--size_${size}`)
       case type
         when '001'
           path.cm-icon__path.cm-icon__path--001(d='M19 12L5 12M19 12L13 18M19 12L13 6', stroke-linecap='round', stroke-linejoin='round')

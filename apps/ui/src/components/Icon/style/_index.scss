@@ -2,6 +2,10 @@
 @use "../../../styles/import" as *;
 
 
+$ICON_SIZE_LARGE: 24;
+$ICON_SIZE_MEDIUM: 20;
+$ICON_SIZE_SMALL: 18;
+
 @mixin iconTransition ($options) {
   $defaults: (
     transitionStroke: stroke 0.3s $easeInOutCubic,
@@ -15,7 +19,7 @@
   }
 }
 
-@mixin iconPath ($options) {
+@mixin iconColor ($options) {
   $defaults: (
     stroke: #000,
     fill: #000,
@@ -157,19 +161,14 @@
   $settings: map.deep-merge($defaults, $options);
 
   .cm-icon__wrapper {
-    width: 100%;
-    height: 100%;
     display: block;
     line-height: 0;
-  }
 
-  .cm-icon {
-    width: 100%;
-    height: 100%;
+    @include baseFontSizeForEm();
   }
 
   .cm-icon__wrapper--#{map.get($settings, 'key')} {
-    @include iconPath((
+    @include iconColor((
       stroke: map.get($settings, 'stroke'),
       fill: map.get($settings, 'fill'),
     ));
@@ -178,5 +177,20 @@
       transitionStroke: map.get($settings, 'transitionStroke'),
       transitionFill: map.get($settings, 'transitionFill'),
     ));
+
+    .cm-icon--size_large {
+      width: em($ICON_SIZE_LARGE);
+      height: em($ICON_SIZE_LARGE);
+    }
+
+    .cm-icon--size_medium {
+      width: em($ICON_SIZE_MEDIUM);
+      height: em($ICON_SIZE_MEDIUM);
+    }
+
+    .cm-icon--size_small {
+      width: em($ICON_SIZE_SMALL);
+      height: em($ICON_SIZE_SMALL);
+    }
   }
 }
