@@ -11,6 +11,12 @@
       "enabled": false
     },
     {
+      "matchPackageNames": ["pnpm"],
+      "matchManagers": ["npm"],
+      "matchDepTypes": ["engines"],
+      "enabled": false
+    },
+    {
       "matchUpdateTypes": ["major"],
       "automerge": true
     },
