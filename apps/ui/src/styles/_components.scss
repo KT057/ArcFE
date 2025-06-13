@@ -8,6 +8,7 @@
 @use '../components/Toggle/Product002/style/index' as *;
 @use '../components/TextIcon/Product001/style/index' as *;
 @use '../components/ListItem/Product001/style/index' as *;
+@use '../components/ListItem/Product002/style/index' as *;
 
 
 @include button001((
@@ -94,5 +95,21 @@
   number: (
     font-size: 24,
     color: #000,
+  ),
+));
+
+@include listItem002((
+  key: 'default',
+  font-size: 24,
+  line-height: 1.25,
+  color: #000,
+  gap: 24,
+  point: (
+    size: 8,
+    color: #000,
+  ),
+  animation: (
+    duration: 0.25s,
+    ease: $easeInOutCubic,
   ),
 ));
