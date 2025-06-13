@@ -12,6 +12,7 @@
 @use '../components/ListItem/Product003/style/index' as *;
 @use '../components/ListItem/Product004/style/index' as *;
 @use '../components/ListItem/Product005/style/index' as *;
+@use '../components/FrameIcon/Product001/style/index' as *;
 
 
 @include button001((
@@ -163,4 +164,13 @@
     duration: 0.25s,
     ease: $easeInOutCubic,
   )
+));
+
+@include frameIcon001((
+  key: 'default',
+  background: #e7e7e7,
+  icon: (
+    fill: #000,
+    stroke: #000,
+  ),
 ));
