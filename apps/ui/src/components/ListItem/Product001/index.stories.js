@@ -4,7 +4,7 @@ import { withRunScript } from 'storybook-addon-run-script/html';
 import Html from './index.html';
 
 export default {
-  title: 'ItemList',
+  title: 'ListItem',
   decorators: [withRunScript(runScript)]
 };
 

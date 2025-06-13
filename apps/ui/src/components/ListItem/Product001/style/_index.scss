@@ -2,7 +2,7 @@
 @use "../../../../styles/import" as *;
 
 
-@mixin itemList001 ($options) {
+@mixin listItem001 ($options) {
   $defaults: (
     key: 'default',
     font-size: 24,
@@ -21,23 +21,23 @@
 
   $settings: map.deep-merge($defaults, $options);
 
-  .cm-item-list-001__wrapper {
+  .cm-list-item-001__wrapper {
     @include baseFontSizeForEm();
   }
 
-  .cm-item-list-001__wrapper--#{map.get($settings, 'key')} {
-    .cm-item-list-001 {
+  .cm-list-item-001__wrapper--#{map.get($settings, 'key')} {
+    .cm-list-item-001 {
       cursor: pointer;
       display: flex;
       justify-content: left;
     }
 
-    .cm-item-list-001__text-wrapper {
+    .cm-list-item-001__text-wrapper {
       width: 100%;
       padding-left: em(map.get($settings, 'gap'));
     }
 
-    .cm-item-list-001__text {
+    .cm-list-item-001__text {
       display: block;
       color: map.get($settings, 'color');
       font-size: em(map.get($settings, 'font-size'));
@@ -45,12 +45,12 @@
       line-height: map.get($settings, 'line-height');
     }
 
-    .cm-item-list-001__number {
+    .cm-list-item-001__number {
       height: calc(em(map.get($settings, 'font-size')) * map.get($settings, 'line-height'));
       position: relative;
     }
 
-    .cm-item-list-001__number-text {
+    .cm-list-item-001__number-text {
       position: absolute;
       top: 50%;
       left: 0;
@@ -60,7 +60,7 @@
       line-height: 1;
     }
 
-    .cm-item-list-001--animation_001 {
+    .cm-list-item-001--animation_001 {
       transition: opacity map.get(map.get($settings, 'animation'), 'duration') map.get(map.get($settings, 'animation'), 'ease');
   
       &:hover {

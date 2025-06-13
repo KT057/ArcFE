@@ -7,7 +7,7 @@
 @use '../components/Toggle/Product001/open/style/index' as *;
 @use '../components/Toggle/Product002/style/index' as *;
 @use '../components/TextIcon/Product001/style/index' as *;
-@use '../components/ItemList/Product001/style/index' as *;
+@use '../components/ListItem/Product001/style/index' as *;
 
 
 @include button001((
@@ -85,7 +85,7 @@
   line-color: #000,
 ));
 
-@include itemList001((
+@include listItem001((
   key: 'default',
   font-size: 24,
   color: #000,
