@@ -11,6 +11,7 @@
 @use '../components/ListItem/Product002/style/index' as *;
 @use '../components/ListItem/Product003/style/index' as *;
 @use '../components/ListItem/Product004/style/index' as *;
+@use '../components/ListItem/Product005/style/index' as *;
 
 
 @include button001((
@@ -146,4 +147,20 @@
     duration: 0.25s,
     ease: $easeInOutCubic,
   ),
+));
+
+@include listItem005((
+  key: 'default',
+  font-size: 24,
+  line-height: 1.25,
+  color: #000,
+  gap: 24,
+  point: (
+    size: 8,
+    color: #000,
+  ),
+  animation: (
+    duration: 0.25s,
+    ease: $easeInOutCubic,
+  )
 ));
