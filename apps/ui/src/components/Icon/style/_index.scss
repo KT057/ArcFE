@@ -3,7 +3,7 @@
 
 
 $ICON_SIZE_LARGE: 24;
-$ICON_SIZE_MEDIUM: 20;
+$ICON_SIZE_MIDDLE: 20;
 $ICON_SIZE_SMALL: 18;
 
 @mixin iconTransition ($options) {
@@ -203,9 +203,9 @@ $ICON_SIZE_SMALL: 18;
       height: em($ICON_SIZE_LARGE);
     }
 
-    .cm-icon--size_medium {
-      width: em($ICON_SIZE_MEDIUM);
-      height: em($ICON_SIZE_MEDIUM);
+    .cm-icon--size_middle {
+      width: em($ICON_SIZE_MIDDLE);
+      height: em($ICON_SIZE_MIDDLE);
     }
 
     .cm-icon--size_small {

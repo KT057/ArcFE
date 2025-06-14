@@ -18,6 +18,7 @@
 @use '../components/Input/Product003/style/index' as *;
 @use '../components/Input/Product004/style/index' as *;
 @use '../components/Input/Product005/style/index' as *;
+@use '../components/Input/Product006/style/index' as *;
 
 
 @include button001((
@@ -244,5 +245,18 @@
     fontSize: 16,
     color: #f00,
     backgroundColor: #fdd,
+  )
+));
+
+@include Input006((
+  key: 'default',
+  fontSize: 18,
+  color: #000,
+  borderColor: #000,
+  placeholderColor: #909090,
+  error: (
+    fontSize: 16,
+    color: #f00,
+    borderColor: #f00,
   )
 ));
