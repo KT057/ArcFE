@@ -1,10 +1,10 @@
-//- cm-input-001にerrorクラスを付与するとエラー表示が出る
+//- .js-inputにerrorクラスを付与するとエラー表示が出る
 
-mixin Input006({ key = 'default', type = '001', size = 'small', name = 'input-004', placeholder = '入力してください' })
+mixin Input006({ key = 'default', type = '001', size = 'small', name = 'input-004', placeholder = '入力してください', iconPosition = 'right' })
   block
   .cm-input-006__wrapper(class=`cm-input-006__wrapper--${key}`)
     .js-input.cm-input-006(class=`cm-input-006--${type} cm-input-006--size_${size}`)
-      .cm-input-006__input-wrapper
+      .cm-input-006__input-wrapper(class=`cm-input-006__input-wrapper--icon_position_${iconPosition}`)
         input.cm-input-006__input(name=name, type='text', placeholder=placeholder)
         .cm-input-006__icon
           +icon
