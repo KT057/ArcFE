@@ -14,6 +14,7 @@
 @use '../components/ListItem/Product005/style/index' as *;
 @use '../components/FrameIcon/Product001/style/index' as *;
 @use '../components/Input/Product001/style/index' as *;
+@use '../components/Input/Product002/style/index' as *;
 
 
 @include button001((
@@ -177,6 +178,14 @@
 ));
 
 @include Input001((
+  key: 'default',
+  font-size: 18,
+  color: #000,
+  border-color: #000,
+  placeholder-color: #909090,
+));
+
+@include Input002((
   key: 'default',
   font-size: 18,
   color: #000,
