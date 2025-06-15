@@ -23,6 +23,7 @@
 @use '../components/TextField/Product002/style/index' as *;
 @use '../components/TextField/Product003/style/index' as *;
 @use '../components/TextField/Product004/style/index' as *;
+@use '../components/TextField/Product005/style/index' as *;
 
 
 @include button001((
@@ -314,6 +315,21 @@
   lineHeight: 1.5,
   color: #000,
   backgroundColor: #eee,
+  placeholderColor: #909090,
+  error: (
+    fontSize: 16,
+    color: #f00,
+    backgroundColor: #fdd,
+  )
+));
+
+@include TextField005((
+  key: 'default',
+  fontSize: 18,
+  lineHeight: 1.5,
+  color: #000,
+  backgroundColor: #eee,
+  borderColor: #000,
   placeholderColor: #909090,
   error: (
     fontSize: 16,
