@@ -1,0 +1,16 @@
+include ../../../Icon/template/_component
+include ./_component.pug
+
++Select002({key: 'default', name: 'select-002'}) 
+  mixin options
+    option(value='') 選択してください
+    option(value='001') 001
+    option(value='002') 002
+    option(value='003') 003
+    option(value='004') 004
+    option(value='005') 005
+    option(value='006') 006
+  mixin icon
+    +Icon({ key: 'default', type: '034' })
+  mixin errorText
+    | ※ 必須項目を選択してください。

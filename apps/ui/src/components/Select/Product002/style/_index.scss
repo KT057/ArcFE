@@ -5,7 +5,7 @@
 @use "../../../../styles/common-components" as *;
 
 
-@mixin Select001 ($options) {
+@mixin Select002 ($options) {
   $defaults: (
     key: 'default',
     color: #000,
@@ -25,27 +25,27 @@
 
   $settings: map.deep-merge($defaults, $options);
 
-  .cm-select-001__wrapper {
+  .cm-select-002__wrapper {
     @include baseFontSizeForEm();
   }
 
-  .cm-select-001__wrapper--#{map.get($settings, 'key')} {
-    .cm-select-001 {
+  .cm-select-002__wrapper--#{map.get($settings, 'key')} {
+    .cm-select-002 {
       position: relative;
       width: 100%;
 
       &.error {
-        .cm-select-001__error {
+        .cm-select-002__error {
           display: block;
         }
 
-        .cm-select-001__inner {
+        .cm-select-002__inner {
           border-color: map.get(map.get($settings, 'error'), 'borderColor');
         }
       }
     }
 
-    .cm-select-001__error {
+    .cm-select-002__error {
       display: none;
       color: map.get(map.get($settings, 'error'), 'color');
       font-size: em(map.get(map.get($settings, 'error'), 'fontSize'));
@@ -53,9 +53,12 @@
       line-height: 1;
     }
     
-    .cm-select-001__inner {
+    .cm-select-002__inner {
       width: 100%;
-      border: 1px solid map.get($settings, 'borderColor');
+      border-top: 0;
+      border-left: 0;
+      border-right: 0;
+      border-bottom: 1px solid map.get($settings, 'borderColor');
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -71,7 +74,7 @@
     $paddingLeft: math.div(10, map.get($settings, 'fontSize')) * 10;
     $paddingRight: math.div(20, map.get($settings, 'fontSize')) * 10;
 
-    .cm-select-001__select {
+    .cm-select-002__select {
       width: 100%;
       cursor: pointer;
       border: none;
@@ -85,7 +88,7 @@
       }
     }
     
-    .cm-select-001__icon {
+    .cm-select-002__icon {
       @include iconColor((
         stroke: map.get(map.get($settings, 'icon'), 'stroke'),
         fill: map.get(map.get($settings, 'icon'), 'fill'),
@@ -94,11 +97,11 @@
     
     // Type
     
-    .cm-select-001--001 {
+    .cm-select-002--001 {
       border-radius: 0;
     }
     
-    .cm-select-001--002 {
+    .cm-select-002--002 {
       border-radius: em(5);
     }
   }
