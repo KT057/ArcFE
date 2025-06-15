@@ -24,6 +24,7 @@
 @use '../components/TextField/Product003/style/index' as *;
 @use '../components/TextField/Product004/style/index' as *;
 @use '../components/TextField/Product005/style/index' as *;
+@use '../components/Select/Product001/style/index' as *;
 
 
 @include button001((
@@ -335,5 +336,17 @@
     fontSize: 16,
     color: #f00,
     backgroundColor: #fdd,
+  )
+));
+
+@include Select001((
+  key: 'default',
+  color: #000,
+  fontSize: 24,
+  borderColor: #000,
+  placeholder: #909090,
+  icon: (
+    stroke: #000,
+    fill: #000,
   )
 ));
