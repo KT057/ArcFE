@@ -3,14 +3,17 @@
 @use "../../../../styles/common-components" as *;
 
 
-@mixin NestedListItem001 ($options) {
+@mixin NestedListItem002 ($options) {
   $defaults: (
     key: 'default',
     fontSize: 24,
     lineHeight: 1.25,
     color: #000,
-    gap: 34,
-    icon: (
+    leftIcon: (
+      fill: #000,
+      stroke: #000,
+    ),
+    rightIcon: (
       fill: #000,
       stroke: #000,
     )
@@ -18,23 +21,23 @@
 
   $settings: map.deep-merge($defaults, $options);
 
-  .cm-nested-list-item-001__wrapper {
+  .cm-nested-list-item-002__wrapper {
     @include baseFontSizeForEm();
   }
 
-  .cm-nested-list-item-001__wrapper--#{map.get($settings, 'key')} {
-    .cm-nested-list-item-001 {
+  .cm-nested-list-item-002__wrapper--#{map.get($settings, 'key')} {
+    .cm-nested-list-item-002 {
       cursor: pointer;
       display: flex;
       justify-content: left;
     }
 
-    .cm-nested-list-item-001__text-wrapper {
+    .cm-nested-list-item-002__text-wrapper {
       width: 100%;
-      padding-left: em(map.get($settings, 'gap'));
+      padding: 0 em(24) 0 em(34);
     }
 
-    .cm-nested-list-item-001__text {
+    .cm-nested-list-item-002__text {
       display: block;
       color: map.get($settings, 'color');
       font-size: em(map.get($settings, 'fontSize'));
@@ -42,15 +45,14 @@
       line-height: map.get($settings, 'lineHeight');
     }
 
-    .cm-nested-list-item-001__icon-wrapper {
+    .cm-nested-list-item-002__icon-wrapper {
       height: calc(em(map.get($settings, 'fontSize')) * map.get($settings, 'lineHeight'));
       position: relative;
     }
 
-    .cm-nested-list-item-001__icon {
+    .cm-nested-list-item-002__icon {
       position: absolute;
       top: 50%;
-      left: 0;
       transform: translateY(-50%) rotate(0deg);
 
       &.open {
@@ -58,9 +60,17 @@
       }
 
       @include iconColor((
-        stroke: map.get(map.get($settings, 'icon'), 'stroke'),
-        fill: map.get(map.get($settings, 'icon'), 'fill'),
+        stroke: map.get(map.get($settings, 'leftIcon'), 'stroke'),
+        fill: map.get(map.get($settings, 'leftIcon'), 'fill'),
       ));
+    }
+
+    .cm-nested-list-item-002__icon--left {
+      left: 0;
+    }
+
+    .cm-nested-list-item-002__icon--right {
+      right: 0;
     }
   }
 } 

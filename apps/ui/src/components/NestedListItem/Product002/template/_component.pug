@@ -1,0 +1,15 @@
+//- js-nested-list-item-toggleにopenクラスを追加するとアイコンが回転する
+
+mixin NestedListItem002({ key = 'default' })
+  block
+  .cm-nested-list-item-002__wrapper(class=`cm-nested-list-item-002__wrapper--${key}`)
+    .js-nested-list-item.cm-nested-list-item-002
+      .cm-nested-list-item-002__icon-wrapper
+        .cm-nested-list-item-002__icon.cm-nested-list-item-002__icon--left
+          +leftIcon
+      .cm-nested-list-item-002__text-wrapper
+        .cm-nested-list-item-002__text
+          +text
+      .cm-nested-list-item-002__icon-wrapper
+        .js-nested-list-item-toggle.cm-nested-list-item-002__icon.cm-nested-list-item-002__icon--right
+          +rightIcon
