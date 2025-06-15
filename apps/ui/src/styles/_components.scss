@@ -32,6 +32,7 @@
 @use '../components/Select/Product004/style/index' as *;
 @use '../components/Select/Product005/style/index' as *;
 @use '../components/Label/Product001/style/index' as *;
+@use '../components/Label/Product002/style/index' as *;
 
 
 @include button001((
@@ -463,6 +464,14 @@
 @include Label001((
   key: 'default',
   fontSize: 12,
-  backgroundColor: #ccc,
+  backgroundColor: #eee,
   color: #000,
+));
+
+@include Label002((
+  key: 'default',
+  fontSize: 12,
+  backgroundColor: #eee,
+  color: #000,
+  borderColor: #c6c6c6,
 ));
