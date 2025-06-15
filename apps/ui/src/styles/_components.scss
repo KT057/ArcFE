@@ -12,6 +12,7 @@
 @use '../components/ListItem/Product003/style/index' as *;
 @use '../components/ListItem/Product004/style/index' as *;
 @use '../components/ListItem/Product005/style/index' as *;
+@use '../components/NestedListItem/Product001/style/index' as *;
 @use '../components/FrameIcon/Product001/style/index' as *;
 @use '../components/Input/Product001/style/index' as *;
 @use '../components/Input/Product002/style/index' as *;
@@ -179,6 +180,18 @@
   animation: (
     duration: 0.25s,
     ease: $easeInOutCubic,
+  )
+));
+
+@include NestedListItem001((
+  key: 'default',
+  font-size: 24,
+  line-height: 1.25,
+  color: #000,
+  gap: 34,
+  icon: (
+    fill: #000,
+    stroke: #000,
   )
 ));
 
