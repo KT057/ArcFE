@@ -1,0 +1,13 @@
+//- .js-selectにerrorクラスを付与するとエラー表示が出る
+
+mixin Select003({ key = 'default', name = 'select-003' })
+  block
+  .cm-select-003__wrapper(class=`cm-select-003__wrapper--${key}`)
+    .js-select.cm-select-003
+      .cm-select-003__inner
+        select.cm-select-003__select(name=name)
+          +options
+        span.cm-select-003__icon
+          +icon
+      p.cm-select-003__error 
+        +errorText
