@@ -27,6 +27,7 @@
 @use '../components/Select/Product001/style/index' as *;
 @use '../components/Select/Product002/style/index' as *;
 @use '../components/Select/Product003/style/index' as *;
+@use '../components/Select/Product004/style/index' as *;
 
 
 @include button001((
@@ -380,6 +381,23 @@
   color: #000,
   fontSize: 24,
   borderColor: #000,
+  placeholder: #909090,
+  backgroundColor: #eee,
+  icon: (
+    stroke: #000,
+    fill: #000,
+  ),
+  error: (
+    fontSize: 16,
+    color: #f00,
+    backgroundColor: #fdd,
+  )
+));
+
+@include Select004((
+  key: 'default',
+  color: #000,
+  fontSize: 24,
   placeholder: #909090,
   backgroundColor: #eee,
   icon: (

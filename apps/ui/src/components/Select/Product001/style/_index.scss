@@ -94,12 +94,16 @@
     
     // Type
     
-    .cm-select-001--001 {
-      border-radius: 0;
+    .cm-select-004--001 {
+      .cm-select-004__inner {
+        border-radius: 0;
+      }
     }
     
-    .cm-select-001--002 {
-      border-radius: em(5);
+    .cm-select-004--002 {
+      .cm-select-004__inner {
+        border-radius: em(5);
+      }
     }
   }
 }
