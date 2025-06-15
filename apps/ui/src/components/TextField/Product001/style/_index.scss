@@ -41,6 +41,9 @@
       }
     }
 
+    $paddingTop: math.div(10, map.get($settings, 'fontSize')) * 10;
+    $paddingBottom: math.div(10, map.get($settings, 'fontSize')) * 10;
+
     .cm-text-field-001__input {
       width: 100%;
       display: block;
@@ -51,6 +54,11 @@
       color: map.get($settings, 'color');
       box-sizing: border-box;
       line-height: em(map.get($settings, 'fontSize'));
+      height: calc((map.get($settings, 'lineHeight') * 5em) + em($paddingTop) + em($paddingBottom));
+      min-height: calc((map.get($settings, 'lineHeight') * 3em) + em($paddingTop) + em($paddingBottom));
+      max-height: calc((map.get($settings, 'lineHeight') * 15em) + em($paddingTop) + em($paddingBottom));
+      padding-top: em($paddingTop);
+      padding-bottom: em($paddingBottom);
 
       &::placeholder {
         color: map.get($settings, 'placeholderColor');
@@ -76,34 +84,6 @@
     .cm-text-field-001--002 {
       .cm-text-field-001__input {
         border-radius: em(4);
-      }
-    }
-
-    // size
-
-    .cm-text-field-001--size_small {
-      $paddingTop: math.div(5, map.get($settings, 'fontSize')) * 10;
-      $paddingBottom: math.div(5, map.get($settings, 'fontSize')) * 10;
-
-      .cm-text-field-001__input {
-        height: calc((map.get($settings, 'lineHeight') * 5em) + em($paddingTop) + em($paddingBottom));
-        min-height: calc((map.get($settings, 'lineHeight') * 3em) + em($paddingTop) + em($paddingBottom));
-        max-height: calc((map.get($settings, 'lineHeight') * 15em) + em($paddingTop) + em($paddingBottom));
-        padding-top: em($paddingTop);
-        padding-bottom: em($paddingBottom);
-      }
-    }
-
-    .cm-text-field-001--size_middle {
-      $paddingTop: math.div(10, map.get($settings, 'fontSize')) * 10;
-      $paddingBottom: math.div(10, map.get($settings, 'fontSize')) * 10;
-
-      .cm-text-field-001__input {
-        height: calc((map.get($settings, 'lineHeight') * 5em) + em($paddingTop) + em($paddingBottom));
-        min-height: calc((map.get($settings, 'lineHeight') * 3em) + em($paddingTop) + em($paddingBottom));
-        max-height: calc((map.get($settings, 'lineHeight') * 15em) + em($paddingTop) + em($paddingBottom));
-        padding-top: em($paddingTop);
-        padding-bottom: em($paddingBottom);
       }
     }
   }
