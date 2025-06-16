@@ -30,7 +30,6 @@
 @use '../components/Select/Product002/style/index' as *;
 @use '../components/Select/Product003/style/index' as *;
 @use '../components/Select/Product004/style/index' as *;
-@use '../components/Select/Product005/style/index' as *;
 @use '../components/Label/Product001/style/index' as *;
 @use '../components/Label/Product002/style/index' as *;
 @use '../components/Label/Product003/style/index' as *;
@@ -434,6 +433,7 @@
   fontSize: 24,
   placeholder: #909090,
   backgroundColor: #eee,
+  borderColor: #eee,
   icon: (
     stroke: #000,
     fill: #000,
@@ -442,24 +442,7 @@
     fontSize: 16,
     color: #f00,
     backgroundColor: #fdd,
-  )
-));
-
-@include Select005((
-  key: 'default',
-  color: #000,
-  fontSize: 24,
-  placeholder: #909090,
-  borderColor: #000,
-  backgroundColor: #eee,
-  icon: (
-    stroke: #000,
-    fill: #000,
-  ),
-  error: (
-    fontSize: 16,
-    color: #f00,
-    backgroundColor: #fdd,
+    borderColor: #fdd,
   )
 ));
 
