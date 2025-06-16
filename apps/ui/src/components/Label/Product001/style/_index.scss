@@ -25,6 +25,7 @@
       font-size: em(map.get($settings, 'fontSize'));
       display: inline-block;
       white-space: nowrap;
+      line-height: 1;
     }
 
     // type

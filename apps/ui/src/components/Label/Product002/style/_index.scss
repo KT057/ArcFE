@@ -26,6 +26,7 @@
       font-size: em(map.get($settings, 'fontSize'));
       display: inline-block;
       white-space: nowrap;
+      line-height: 1;
       border: 1px solid map.get($settings, 'borderColor');
     }
 

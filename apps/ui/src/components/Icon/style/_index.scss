@@ -150,10 +150,12 @@ $ICON_SIZE_SMALL: 18;
 
   .cm-icon__path--031 {
     stroke: map.get($settings, 'stroke');
+    stroke-width: 2;
   }
 
   .cm-icon__path--032 {
     stroke: map.get($settings, 'stroke');
+    stroke-width: 2;
   }
 
   .cm-icon__path--033 {

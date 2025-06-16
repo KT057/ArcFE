@@ -1,0 +1,8 @@
+mixin Label003({ key = 'default', type = '001', size = 'middle', iconPosition = 'left' })
+  block
+  .cm-label-003__wrapper(class=`cm-label-003__wrapper--${key}`)
+    .cm-label-003(class=`cm-label-003--${type} cm-label-003--size_${size} cm-label-003--icon-position_${iconPosition}`) 
+      .cm-label-003__icon
+        +icon
+      .cm-label-003__text
+        +text
