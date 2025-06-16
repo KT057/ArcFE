@@ -9,6 +9,7 @@
     fontSize: 18,
     color: #000,
     borderColor: #000,
+    backgroundColor: #fff,
     placeholderColor: #909090,
     error: (
       fontSize: 16,
@@ -42,6 +43,7 @@
     .cm-input-006__input-wrapper {
       position: relative;
       border: 1px solid map.get($settings, 'borderColor');
+      background-color: map.get($settings, 'backgroundColor');
     }
 
     .cm-input-006__input {
@@ -52,6 +54,7 @@
       color: map.get($settings, 'color');
       box-sizing: border-box;
       line-height: 1;
+      background-color: map.get($settings, 'backgroundColor');
 
       &::placeholder {
         color: map.get($settings, 'placeholderColor');
