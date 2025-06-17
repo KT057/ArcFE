@@ -122,6 +122,10 @@
     outline-width: 0; /* Remove the outline when hovering in all browsers */
   }
 
+  input[type="checkbox"] {
+    border-radius: 0;
+  }
+
   code,
   kbd,
   pre,
