@@ -27,7 +27,6 @@
       width: rem(30);
       height: rem(30);
       position: relative;
-      overflow: hidden;
     }
 
     .cm-checkbox-001__background {
@@ -37,7 +36,9 @@
       top: 0;
       left: 0;
       background-color: map.get($settings, 'backgroundColor');
+      border: 1px solid map.get($settings, 'borderColor');
       z-index: 0;
+      box-sizing: border-box;
     }
 
     .cm-checkbox-001__input {
