@@ -32,7 +32,6 @@
 @use '../components/Select/Product004/style/index' as *;
 @use '../components/Label/Product001/style/index' as *;
 @use '../components/Label/Product002/style/index' as *;
-@use '../components/Label/Product003/style/index' as *;
 @use '../components/CheckBox/Product001/style/index' as *;
 @use '../components/CheckBox/Product002/style/index' as *;
 @use '../components/Radio/Product001/style/index' as *;
@@ -454,6 +453,7 @@
   fontSize: 12,
   backgroundColor: #eee,
   color: #000,
+  borderColor: #eee,
 ));
 
 @include Label002((
@@ -461,14 +461,7 @@
   fontSize: 12,
   backgroundColor: #eee,
   color: #000,
-  borderColor: #c6c6c6,
-));
-
-@include Label003((
-  key: 'default',
-  fontSize: 12,
-  backgroundColor: #eee,
-  color: #000,
+  borderColor: #eee,
   icon: (
     fill: #000,
     stroke: #000,

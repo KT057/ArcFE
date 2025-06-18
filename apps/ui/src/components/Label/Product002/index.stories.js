@@ -26,7 +26,7 @@ export const Product002 = {
     design: [
       {
         type: 'link',
-        url: 'https://www.figma.com/design/YUbTzje2jUbb0Yh5ycNx2P/ui-catalog?node-id=2278-390&t=iK0yVV2DJGHxbgPw-4'
+        url: 'https://www.figma.com/design/YUbTzje2jUbb0Yh5ycNx2P/ui-catalog?node-id=2278-439&t=6oaopDgnsJt0Wa4d-4'
       }
     ]
   }

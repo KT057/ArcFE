@@ -8,6 +8,7 @@
     fontSize: 12,
     backgroundColor: #000,
     color: #fff,
+    borderColor: #000,
   );
 
   $settings: map.deep-merge($defaults, $options);
@@ -26,6 +27,7 @@
       display: inline-block;
       white-space: nowrap;
       line-height: 1;
+      border: 1px solid map.get($settings, 'borderColor');
     }
 
     // type

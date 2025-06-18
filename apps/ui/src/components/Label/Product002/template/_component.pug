@@ -1,4 +1,8 @@
-mixin Label002({ key = 'default', type = '002', size = 'middle' })
-  .cm-label-002__wrapper(class=`cm-label-002__wrapper--${key}`)
-    .cm-label-002(class=`cm-label-002--${type} cm-label-002--size_${size}`)
-      block
+mixin Label003({ key = 'default', type = '001', size = 'middle', iconPosition = 'left' })
+  block
+  .cm-label-003__wrapper(class=`cm-label-003__wrapper--${key}`)
+    .cm-label-003(class=`cm-label-003--${type} cm-label-003--size_${size} cm-label-003--icon-position_${iconPosition}`) 
+      .cm-label-003__icon
+        +icon
+      .cm-label-003__text
+        +text
