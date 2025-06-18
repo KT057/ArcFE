@@ -1,7 +1,7 @@
 mixin Button002({ key = 'default', type = '001', size = 'middle', iconDirection = 'right', animation = '001' })
   block
-  .cm-button-002__wrapper(class=`cm-button-002__wrapper--${key}`)
-    button.cm-button-002(class=`cm-button-002--${type} cm-button-002--${size} cm-button-002--icon-direction_${iconDirection} cm-button-002--animation_${animation}`)
+  span.cm-button-002__wrapper(class=`cm-button-002__wrapper--${key}`)
+    span.cm-button-002(class=`cm-button-002--${type} cm-button-002--${size} cm-button-002--icon-direction_${iconDirection} cm-button-002--animation_${animation}`)
       span.cm-button-002__text
         +text
       span.cm-button-002__icon-wrapper

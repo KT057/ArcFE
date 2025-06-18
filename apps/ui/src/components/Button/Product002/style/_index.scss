@@ -47,6 +47,9 @@
   $settings: map.deep-merge($defaults, $options);
 
   .cm-button-002__wrapper {
+    display: block;
+    width: 100%;
+
     @include baseFontSizeForEm();
   }
 

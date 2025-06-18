@@ -68,6 +68,7 @@
   ::before,
   ::after {
     background-repeat: no-repeat; /* Set `background-repeat: no-repeat` to all elements and pseudo elements */
+    box-sizing: border-box;
   }
 
   ::before,
@@ -89,6 +90,16 @@
   details,
   main {
     display: block; /* Render the `main` element consistently in IE. */
+  }
+
+  button {
+    padding: 0;
+    width: 100%;
+    display: block;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    overflow: visible; /* Address `overflow` set to `hidden` in IE 8/9/10/11 */
   }
 
   summary {
@@ -206,10 +217,6 @@
 
   optgroup {
     font-weight: bold; /* Restore the font weight unset by the previous rule */
-  }
-
-  button {
-    overflow: visible; /* Address `overflow` set to `hidden` in IE 8/9/10/11 */
   }
 
   button,
