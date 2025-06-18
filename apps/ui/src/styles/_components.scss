@@ -34,6 +34,7 @@
 @use '../components/Label/Product002/style/index' as *;
 @use '../components/Label/Product003/style/index' as *;
 @use '../components/CheckBox/Product001/style/index' as *;
+@use '../components/CheckBox/Product002/style/index' as *;
 
 
 @include button001((
@@ -477,9 +478,20 @@
   key: 'default',
   backgroundColor: #eee,
   borderColor: #eee,
-  iconColor: #fff,
   checked: (
+    markColor: #fff,
     backgroundColor: #000,
     borderColor: #000,
+  )
+));
+
+@include CheckBox002((
+  key: 'default',
+  backgroundColor: #eee,
+  borderColor: #eee,
+  checked: (
+    markColor: #000,
+    backgroundColor: #eee,
+    borderColor: #eee,
   )
 ));
