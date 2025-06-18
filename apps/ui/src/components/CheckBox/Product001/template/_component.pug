@@ -1,9 +1,9 @@
 include ../../../Icon/template/_component
 
-mixin CheckBox001({ key = 'default', type = '001', name = 'checkbox-001', checked = false })
+mixin CheckBox001({ key = 'default', type = '001', name = 'checkbox-001', size = 'middle', checked = false })
   .cm-checkbox-001__wrapper(class=`cm-checkbox-001__wrapper--${key}`)
-    .cm-checkbox-001(class=`cm-checkbox-001--${type}`)
+    .cm-checkbox-001(class=`cm-checkbox-001--${type} cm-checkbox-001--size_${size}`)
       input.cm-checkbox-001__input(type='checkbox', name=name, id=name, checked=checked)
       span.cm-checkbox-001__background
       span.cm-checkbox-001__checkmark
-        +Icon({ key: 'default', type: '031', size: 'middle' })
+        +Icon({ key: 'default', type: '031', size: size })

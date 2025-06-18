@@ -24,8 +24,6 @@
 
   .cm-checkbox-001__wrapper--#{map.get($settings, 'key')} {
     .cm-checkbox-001 {
-      width: rem(30);
-      height: rem(30);
       position: relative;
     }
 
@@ -93,6 +91,18 @@
       .cm-checkbox-001__background {
         border-radius: 50%;
       }
+    }
+
+    // size
+
+    .cm-checkbox-001--size_small {
+      width: rem(18);
+      height: rem(18);
+    }
+
+    .cm-checkbox-001--size_middle {
+      width: rem(30);
+      height: rem(30);
     }
   }
 }
