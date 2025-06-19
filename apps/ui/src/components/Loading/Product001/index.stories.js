@@ -16,7 +16,7 @@ const Template = (component) => {
   `;
 };
 
-export const Default = {
+export const Product001 = {
   render: () => {
     return Template(Html);
   },
