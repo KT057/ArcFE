@@ -37,6 +37,7 @@
 @use '../components/Radio/Product001/style/index' as *;
 @use '../components/Balloon/Product001/style/index' as *;
 @use '../components/Balloon/Product002/style/index' as *;
+@use '../components/Loading/Product001/style/index' as *;
 
 
 @include button001((
@@ -512,4 +513,9 @@
   borderColor: #000,
   borderWidth: 2,
   fontSize: 14,
+));
+
+@include Loading001((
+  key: 'default',
+  color: #000,
 ));
