@@ -16,7 +16,7 @@ const Template = (component) => {
   `;
 };
 
-export const Product001 = {
+export const Product002 = {
   render: () => {
     return Template(Html);
   },
@@ -24,7 +24,7 @@ export const Product001 = {
     design: [
       {
         type: 'link',
-        url: 'https://www.figma.com/design/YUbTzje2jUbb0Yh5ycNx2P/ui-catalog?node-id=2380-403&t=XelstliegjgV8J7Y-4'
+        url: 'https://www.figma.com/design/YUbTzje2jUbb0Yh5ycNx2P/ui-catalog?node-id=2379-463&t=XelstliegjgV8J7Y-4'
       }
     ]
   }

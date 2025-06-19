@@ -36,6 +36,7 @@
 @use '../components/CheckBox/Product002/style/index' as *;
 @use '../components/Radio/Product001/style/index' as *;
 @use '../components/Balloon/Product001/style/index' as *;
+@use '../components/Balloon/Product002/style/index' as *;
 
 
 @include button001((
@@ -501,5 +502,14 @@
   key: 'default',
   color: #000,
   backgroundColor: #eee,
+  fontSize: 14,
+));
+
+@include Balloon002((
+  key: 'default',
+  color: #000,
+  backgroundColor: #fff,
+  borderColor: #000,
+  borderWidth: 2,
   fontSize: 14,
 ));
