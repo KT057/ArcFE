@@ -28,8 +28,8 @@ jobs:
 
       - name: Set up biome
         run: |
-          chmod +x ./node_modules/.pnpm/@biomejs+biome@*/node_modules/@biomejs/biome/bin/biome
-          chmod +x ./node_modules/.pnpm/@biomejs+cli-darwin-arm64@*/node_modules/@biomejs/cli-darwin-arm64/biome
+          find node_modules/.pnpm -type f -path "*/@biomejs/biome/bin/biome" -exec chmod +x {} \;
+          find node_modules/.pnpm -type f -path "*/@biomejs/cli-darwin-arm64/biome" -exec chmod +x {} \;
 
       - name: Run Setup
         run: pnpm @core lint
