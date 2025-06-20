@@ -1,10 +1,9 @@
-@use 'sass:map';
-
+@use "sass:map";
 @use "../../../../styles/import" as *;
 
-@mixin Balloon001 ($options) {
+@mixin Balloon001($options) {
   $defaults: (
-    key: 'default',
+    key: "default",
     color: #000,
     backgroundColor: #eee,
     fontSize: 14,
@@ -16,19 +15,19 @@
     @include baseFontSizeForEm();
   }
 
-  .cm-balloon-001__wrapper--#{map.get($settings, 'key')} {
+  .cm-balloon-001__wrapper--#{map.get($settings, "key")} {
     .cm-balloon-001 {
       width: 100%;
       position: relative;
       display: block;
-      background-color: map.get($settings, 'backgroundColor');
+      background-color: map.get($settings, "backgroundColor");
       padding: em(8);
     }
 
     .cm-balloon-001__content {
       display: block;
-      font-size: em(map.get($settings, 'fontSize'));
-      color: map.get($settings, 'color');
+      font-size: em(map.get($settings, "fontSize"));
+      color: map.get($settings, "color");
     }
 
     .cm-balloon-001__arrow {
@@ -45,8 +44,8 @@
         top: 100%;
         left: 50%;
         transform: translateX(-50%);
-        border-width: em(8) em(8) 0 em(8);
-        border-color: map.get($settings, 'backgroundColor') transparent transparent transparent;
+        border-width: em(8) em(8) 0;
+        border-color: map.get($settings, "backgroundColor") transparent transparent transparent;
       }
     }
 
@@ -55,30 +54,28 @@
         bottom: 100%;
         left: 50%;
         transform: translateX(-50%);
-        border-width: 0 em(8) em(8) em(8);
-        border-color: transparent transparent map.get($settings, 'backgroundColor') transparent;
+        border-width: 0 em(8) em(8);
+        border-color: transparent transparent map.get($settings, "backgroundColor");
       }
     }
 
     .cm-balloon-001--arrow-right {
-     
       .cm-balloon-001__arrow {
         left: 100%;
         top: 50%;
         transform: translateY(-50%);
         border-width: em(8) 0 em(8) em(8);
-        border-color: transparent transparent transparent map.get($settings, 'backgroundColor');
+        border-color: transparent transparent transparent map.get($settings, "backgroundColor");
       }
     }
 
     .cm-balloon-001--arrow-left {
-     
       .cm-balloon-001__arrow {
         right: 100%;
         top: 50%;
         transform: translateY(-50%);
         border-width: em(8) em(8) em(8) 0;
-        border-color: transparent map.get($settings, 'backgroundColor') transparent transparent;
+        border-color: transparent map.get($settings, "backgroundColor") transparent transparent;
       }
     }
 

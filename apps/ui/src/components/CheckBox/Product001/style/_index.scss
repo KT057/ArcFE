@@ -3,17 +3,16 @@
 @use "../../../../styles/import" as *;
 @use "../../../../styles/common-components" as *;
 
-
-@mixin CheckBox001 ($options) {
+@mixin CheckBox001($options) {
   $defaults: (
-    key: 'default',
+    key: "default",
     backgroundColor: #eee,
     borderColor: #eee,
     checked: (
       markColor: #fff,
       backgroundColor: #000,
       borderColor: #000,
-    )
+    ),
   );
 
   $settings: map.deep-merge($defaults, $options);
@@ -22,7 +21,7 @@
     @include baseFontSizeForEm();
   }
 
-  .cm-checkbox-001__wrapper--#{map.get($settings, 'key')} {
+  .cm-checkbox-001__wrapper--#{map.get($settings, "key")} {
     .cm-checkbox-001 {
       position: relative;
     }
@@ -33,8 +32,8 @@
       position: absolute;
       top: 0;
       left: 0;
-      background-color: map.get($settings, 'backgroundColor');
-      border: 1px solid map.get($settings, 'borderColor');
+      background-color: map.get($settings, "backgroundColor");
+      border: 1px solid map.get($settings, "borderColor");
       z-index: 0;
       box-sizing: border-box;
     }
@@ -51,7 +50,7 @@
       margin: 0;
 
       &[type="checkbox"]:checked ~ .cm-checkbox-001__background {
-        background-color: map.get(map.get($settings, 'checked'), 'backgroundColor');
+        background-color: map.get(map.get($settings, "checked"), "backgroundColor");
       }
 
       &[type="checkbox"]:checked ~ .cm-checkbox-001__checkmark {
@@ -67,10 +66,12 @@
       z-index: 1;
       display: none;
 
-      @include iconColor((
-        stroke: map.get(map.get($settings, 'checked'), 'markColor'),
-        fill: map.get(map.get($settings, 'checked'), 'markColor'),
-      ));
+      @include iconColor(
+        (
+          stroke: map.get(map.get($settings, "checked"), "markColor"),
+          fill: map.get(map.get($settings, "checked"), "markColor"),
+        )
+      );
     }
 
     // type

@@ -11,6 +11,11 @@
     "scss/at-extend-no-missing-placeholder": null,
     "alpha-value-notation": null,
     "color-function-notation": null,
+    "keyframes-name-pattern": null,
+    "media-query-no-invalid": null,
+    "declaration-property-value-no-unknown": null,
+    "scss/operator-no-newline-after": null,
+    "prettier/prettier": [true, { "printWidth": 200 }],
     "at-rule-no-unknown": [
       true,
       {
@@ -30,6 +35,9 @@
       }
     ]
   },
-  "plugin": ["stylelint-scss"],
-  "extends": ["stylelint-config-recommended-scss"]
+  "extends": [
+    "stylelint-config-recommended-scss",
+    "stylelint-config-standard",
+    "stylelint-prettier/recommended"
+  ]
 }

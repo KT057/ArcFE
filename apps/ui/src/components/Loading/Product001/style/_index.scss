@@ -1,13 +1,13 @@
-@use 'sass:map';
+@use "sass:map";
 @use "../../../../styles/import" as *;
 
 $LOADING_SIZE_LARGE: 52;
 $LOADING_SIZE_MIDDLE: 44;
 $LOADING_SIZE_SMALL: 37;
 
-@mixin Loading001 ($options) {
+@mixin Loading001($options) {
   $defaults: (
-    key: 'default',
+    key: "default",
     color: #000,
   );
 
@@ -20,9 +20,9 @@ $LOADING_SIZE_SMALL: 37;
     @include baseFontSizeForEm();
   }
 
-  .cm-loading-001__wrapper--#{map.get($settings, 'key')} {
+  .cm-loading-001__wrapper--#{map.get($settings, "key")} {
     .cm-loading-001 {
-      fill: map.get($settings, 'color');
+      fill: map.get($settings, "color");
     }
 
     .cm-loading-001--size_large {
