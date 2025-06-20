@@ -1,24 +1,24 @@
-import path from 'node:path';
-import Pug from 'pug';
+import path from "node:path";
+import Pug from "pug";
 import {
   COMMAND,
   DEFAULT_FILE,
   DIR,
   EXTENSION,
   OUTPUT_DIR
-} from '../constants';
+} from "../constants";
 import {
-  type TResultPromise,
   err,
   exec,
   getDirsSync,
   log,
   ok,
   readFile,
+  type TResultPromise,
   writeFile
-} from '../helper/utils';
-import { Chokidar } from '../helper/watch';
-import { HtmlOption } from '../types';
+} from "../helper/utils";
+import { Chokidar } from "../helper/watch";
+import type { HtmlOption } from "../types";
 
 type RenderOption = {
   entry: string;
@@ -33,7 +33,7 @@ const render = ({ entry, outDir, outPath, data }: RenderOption) => {
     const readFileResult = await readFile(entry);
 
     if (readFileResult.reject || !readFileResult.resolve) {
-      log('error', `Failed to read Pug file: ${entry}`);
+      log("error", `Failed to read Pug file: ${entry}`);
       resolve(err(readFileResult.reject));
       return;
     }
@@ -52,8 +52,8 @@ const render = ({ entry, outDir, outPath, data }: RenderOption) => {
       },
       async (error, data) => {
         if (error) {
-          log('error', `Pug rendering error for ${entry}`);
-          log('error', error.message);
+          log("error", `Pug rendering error for ${entry}`);
+          log("error", error.message);
           resolve(err(error));
           return;
         }
@@ -61,13 +61,13 @@ const render = ({ entry, outDir, outPath, data }: RenderOption) => {
         const writeFileResult = await writeFile(distFile, data);
 
         if (writeFileResult.reject && writeFileResult.err) {
-          log('error', `Error writing rendered HTML: ${distFile}`);
-          log('error', writeFileResult.reject.message);
+          log("error", `Error writing rendered HTML: ${distFile}`);
+          log("error", writeFileResult.reject.message);
           resolve(err(writeFileResult.reject));
           return;
         }
 
-        log('success', `Pug successfully built: ${distFile}`);
+        log("success", `Pug successfully built: ${distFile}`);
         resolve(ok(distFile));
       }
     );
@@ -76,12 +76,12 @@ const render = ({ entry, outDir, outPath, data }: RenderOption) => {
 
 // レンダリングに必要なパスを生成
 const getPath = (dir: string) => {
-  const fileName = dir.split('/').pop() || `${DEFAULT_FILE}${EXTENSION.PUG}`;
+  const fileName = dir.split("/").pop() || `${DEFAULT_FILE}${EXTENSION.PUG}`;
   const outputPath =
     dir
-      .replace(new RegExp(`${DIR.SRC}/`), '')
-      .replace(new RegExp(`${DIR.TEMPLATE}/`), '')
-      .replace(new RegExp(`${fileName}`), '') || '/';
+      .replace(new RegExp(`${DIR.SRC}/`), "")
+      .replace(new RegExp(`${DIR.TEMPLATE}/`), "")
+      .replace(new RegExp(`${fileName}`), "") || "/";
 
   const outPutFile = fileName.replace(
     new RegExp(EXTENSION.PUG),
@@ -101,18 +101,18 @@ export const renderPugFiles = async ({
 
   if (reject || !resolve) {
     log(
-      'error',
-      `Error retrieving Pug directories: ${reject ? reject.message : ''}`
+      "error",
+      `Error retrieving Pug directories: ${reject ? reject.message : ""}`
     );
     return err(reject);
   }
 
-  log('success', `Validating Pug templates...`);
+  log("success", "Validating Pug templates...");
   const execResult = await exec(COMMAND.PUG_LINT);
 
   if (execResult.reject && execResult.err) {
-    log('error', `Pug validation error`);
-    log('error', execResult.reject.message);
+    log("error", "Pug validation error");
+    log("error", execResult.reject.message);
     return err(execResult.reject);
   }
 
@@ -130,12 +130,12 @@ export const renderPugFiles = async ({
   const errs = results.filter((r) => r.err);
 
   if (errs.length > 0) {
-    log('error', `Rendering errors occurred for PUG`);
+    log("error", "Rendering errors occurred for PUG");
     return err(errs[0].reject);
   }
 
-  log('success', `All Pug templates successfully rendered.`);
-  return ok('All Pug templates rendered successfully.');
+  log("success", "All Pug templates successfully rendered.");
+  return ok("All Pug templates rendered successfully.");
 };
 
 // 指定したパスのPugをレンダリング
@@ -143,13 +143,13 @@ export const renderPugFile = async ({
   entry,
   data
 }: HtmlOption): Promise<TResultPromise<string, Error>> => {
-  log('success', `Starting Pug rendering for: ${entry}`);
+  log("success", `Starting Pug rendering for: ${entry}`);
 
   const execResult = await exec(COMMAND.PUG_LINT);
 
   if (execResult.reject && execResult.err) {
-    log('error', `Pug validation error`);
-    log('error', execResult.reject.message);
+    log("error", "Pug validation error");
+    log("error", execResult.reject.message);
     return err(execResult.reject);
   }
 
@@ -162,12 +162,12 @@ export const renderPugFile = async ({
   });
 
   if (renderResult.err && renderResult.reject) {
-    log('error', `Rendering error for: ${entry}`);
+    log("error", `Rendering error for: ${entry}`);
     return err(renderResult.reject);
   }
 
-  log('success', `Successfully rendered: ${entry}`);
-  return ok('Pug template rendered successfully.');
+  log("success", `Successfully rendered: ${entry}`);
+  return ok("Pug template rendered successfully.");
 };
 
 // 変更を監視
@@ -178,8 +178,8 @@ export const watchPugFiles = async (args: HtmlOption) => {
 
   if (reject || !resolve) {
     log(
-      'error',
-      `Error retrieving watch directories: ${reject ? reject.message : ''}`
+      "error",
+      `Error retrieving watch directories: ${reject ? reject.message : ""}`
     );
     return err(reject);
   }
@@ -191,8 +191,8 @@ export const watchPugFiles = async (args: HtmlOption) => {
 
   if (sharedDir.reject || !sharedDir.resolve) {
     log(
-      'error',
-      `Error retrieving shared directories: ${sharedDir.reject ? sharedDir.reject.message : ''}`
+      "error",
+      `Error retrieving shared directories: ${sharedDir.reject ? sharedDir.reject.message : ""}`
     );
     return err(reject);
   }
@@ -202,7 +202,7 @@ export const watchPugFiles = async (args: HtmlOption) => {
 
   chokidar.watcher({
     change: async (path: string) => {
-      log('success', `Detected change in template: ${path}`);
+      log("success", `Detected change in template: ${path}`);
       await renderPugFiles({
         ...args,
         entry: `${path.split(DIR.TEMPLATE)[0]}/${DIR.TEMPLATE}/**/*${EXTENSION.PUG}`
@@ -214,13 +214,13 @@ export const watchPugFiles = async (args: HtmlOption) => {
     chokidarShared.watcher({
       change: async () => {
         log(
-          'success',
-          `Detected change in shared templates. Re-rendering all templates.`
+          "success",
+          "Detected change in shared templates. Re-rendering all templates."
         );
         await renderPugFiles(args);
       }
     });
   }
 
-  log('success', `Watching templates for changes...`);
+  log("success", "Watching templates for changes...");
 };

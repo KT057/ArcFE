@@ -1,11 +1,11 @@
-import path from 'node:path';
-import { DIR, OUTPUT_DIR } from '../constants';
-import { copyFile, err, getDirsSync, log, ok } from '../helper/utils';
-import { Chokidar } from '../helper/watch';
-import { JsOption } from '../types';
+import path from "node:path";
+import { DIR, OUTPUT_DIR } from "../constants";
+import { copyFile, err, getDirsSync, log, ok } from "../helper/utils";
+import { Chokidar } from "../helper/watch";
+import type { JsOption } from "../types";
 
 const getPath = (dir: string) => {
-  const replacePath = dir.replace(new RegExp(`${DIR.SRC}/`), '');
+  const replacePath = dir.replace(new RegExp(`${DIR.SRC}/`), "");
   const outputPath = path.join(OUTPUT_DIR, replacePath);
 
   return { outputPath };
@@ -21,8 +21,8 @@ export const copyPhpFiles = async ({ entry, option }: JsOption) => {
 
   if (reject || !resolve) {
     log(
-      'error',
-      `Error retrieving PHP directories: ${reject ? reject.message : ''}`
+      "error",
+      `Error retrieving PHP directories: ${reject ? reject.message : ""}`
     );
     return err(reject);
   }
@@ -33,13 +33,13 @@ export const copyPhpFiles = async ({ entry, option }: JsOption) => {
   const errs = results.filter((r) => r.err);
 
   if (errs.length > 0) {
-    log('error', `Copy errors occurred for PHP`);
+    log("error", "Copy errors occurred for PHP");
     return err(errs[0].reject);
   }
 
-  log('success', `All PHP files successfully copied.`);
+  log("success", "All PHP files successfully copied.");
 
-  return ok('Successfully copied script');
+  return ok("Successfully copied script");
 };
 
 export const watchPhpFiles = async ({ entry, option }: JsOption) => {
@@ -47,8 +47,8 @@ export const watchPhpFiles = async ({ entry, option }: JsOption) => {
 
   if (reject || !resolve) {
     log(
-      'error',
-      `Errors occurred during PHP rendering. ${reject ? reject.message : ''}`
+      "error",
+      `Errors occurred during PHP rendering. ${reject ? reject.message : ""}`
     );
     return err(reject);
   }
@@ -57,7 +57,7 @@ export const watchPhpFiles = async ({ entry, option }: JsOption) => {
 
   chokidar.watcher({
     change: async (path: string) => {
-      log('success', `Starting PHP watch in: ${path}`);
+      log("success", `Starting PHP watch in: ${path}`);
 
       await copyPhpFile(path);
     }

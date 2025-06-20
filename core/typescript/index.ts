@@ -1,38 +1,40 @@
-import { tsOption } from 'types';
-import webpack from 'webpack';
+import type { tsOption } from "types";
+import webpack from "webpack";
 import {
-  type TResultPromise,
   err,
   getDirsSync,
   log,
-  ok
-} from '../helper/utils';
-import { Chokidar } from '../helper/watch';
-import { webpackConf } from './webpack';
+  ok,
+  type TResultPromise
+} from "../helper/utils";
+import { Chokidar } from "../helper/watch";
+import { webpackConf } from "./webpack";
 
 export const renderMultipleTypescript = ({
   noSharedItems
-}: { noSharedItems?: boolean }) => {
+}: {
+  noSharedItems?: boolean;
+}) => {
   return new Promise<TResultPromise<string, Error>>((resolve) => {
     webpack(webpackConf({ noSharedItems })).run((_, stats) => {
-      if (!stats) return resolve(ok('Successfully built script'));
+      if (!stats) return resolve(ok("Successfully built script"));
 
       if (stats.hasErrors()) {
         const errors = stats.toJson().errors;
 
         if (errors) {
           for (const error of errors) {
-            log('error', error.message);
+            log("error", error.message);
           }
         }
 
-        resolve(err(new Error('Failed to build script')));
+        resolve(err(new Error("Failed to build script")));
         return;
       }
 
-      log('success', 'Successfully built script');
+      log("success", "Successfully built script");
 
-      resolve(ok('Successfully built script'));
+      resolve(ok("Successfully built script"));
     });
   });
 };
@@ -46,8 +48,8 @@ export const watchTypescriptFiles = async ({
 
   if (reject || !resolve) {
     log(
-      'error',
-      `Errors occurred during TS rendering. ${reject ? reject.message : ''}`
+      "error",
+      `Errors occurred during TS rendering. ${reject ? reject.message : ""}`
     );
     return err(reject);
   }
@@ -56,7 +58,7 @@ export const watchTypescriptFiles = async ({
 
   chokidar.watcher({
     change: async (path: string) => {
-      log('success', `Starting TS watch in: ${path}`);
+      log("success", `Starting TS watch in: ${path}`);
 
       await renderMultipleTypescript({ noSharedItems });
     }

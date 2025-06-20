@@ -1,6 +1,8 @@
 {
-  "root": false,
   "extends": ["../biome.json"],
+  "files": {
+    "includes": ["**", "!dist/**"]
+  },
   "linter": {
     "rules": {
       "style": {

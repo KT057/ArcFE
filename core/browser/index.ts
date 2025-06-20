@@ -1,11 +1,9 @@
-import browserSync from 'browser-sync';
-import webpack from 'webpack';
-import webpackDevMiddleware from 'webpack-dev-middleware';
-
-import { DIR } from '../constants';
-import { webpackConf } from '../typescript/webpack';
-
-import { conf } from '../config';
+import browserSync from "browser-sync";
+import webpack from "webpack";
+import webpackDevMiddleware from "webpack-dev-middleware";
+import { conf } from "../config";
+import { DIR } from "../constants";
+import { webpackConf } from "../typescript/webpack";
 
 const defaultStatsOptions = {
   colors: true,
@@ -26,7 +24,10 @@ const defaultStatsOptions = {
 export const browser = ({
   noSharedItems,
   typescript
-}: { noSharedItems: boolean; typescript: boolean }) => {
+}: {
+  noSharedItems: boolean;
+  typescript: boolean;
+}) => {
   const bundle = webpack(webpackConf({ noSharedItems }));
 
   const { port } = conf;
@@ -46,7 +47,7 @@ export const browser = ({
       middleware: typescript
         ? [
             webpackDevMiddleware(bundle, {
-              publicPath: '/',
+              publicPath: "/",
               stats: defaultStatsOptions
             })
           ]
