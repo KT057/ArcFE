@@ -1,9 +1,9 @@
 import {
-  RenderOption,
-  WatchOption,
   checkDir,
   log,
+  RenderOption,
   renders,
+  WatchOption,
   watch
 } from '@core';
 
