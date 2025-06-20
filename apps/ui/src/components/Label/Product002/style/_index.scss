@@ -2,11 +2,9 @@
 @use "../../../../styles/import" as *;
 @use "../../../../styles/common-components" as *;
 
-
-
-@mixin Label002 ($options) {
+@mixin Label002($options) {
   $defaults: (
-    key: 'default',
+    key: "default",
     fontSize: 12,
     backgroundColor: #eee,
     borderColor: #eee,
@@ -14,7 +12,7 @@
     icon: (
       fill: #fff,
       stroke: #fff,
-    )
+    ),
   );
 
   $settings: map.deep-merge($defaults, $options);
@@ -23,12 +21,12 @@
     @include baseFontSizeForEm();
   }
 
-  .cm-label-003__wrapper--#{map.get($settings, 'key')} {
+  .cm-label-003__wrapper--#{map.get($settings, "key")} {
     .cm-label-003 {
       padding-left: em(12);
       padding-right: em(12);
-      background-color: map.get($settings, 'backgroundColor');
-      border: 1px solid map.get($settings, 'borderColor');
+      background-color: map.get($settings, "backgroundColor");
+      border: 1px solid map.get($settings, "borderColor");
       white-space: nowrap;
       display: inline-flex;
       align-items: center;
@@ -36,16 +34,18 @@
     }
 
     .cm-label-003__text {
-      color: map.get($settings, 'color');
-      font-size: em(map.get($settings, 'fontSize'));
+      color: map.get($settings, "color");
+      font-size: em(map.get($settings, "fontSize"));
       line-height: 1;
     }
 
     .cm-label-003__icon {
-      @include iconColor((
-        stroke: map.get(map.get($settings, 'icon'), 'stroke'),
-        fill: map.get(map.get($settings, 'icon'), 'fill'),
-      ));
+      @include iconColor(
+        (
+          stroke: map.get(map.get($settings, "icon"), "stroke"),
+          fill: map.get(map.get($settings, "icon"), "fill"),
+        )
+      );
     }
 
     .cm-label-003--icon-position_left {
@@ -94,7 +94,4 @@
       padding-bottom: em(10);
     }
   }
-} 
-
-
-
+}

@@ -1,13 +1,12 @@
-@use 'sass:map';
-
+@use "sass:map";
 @use "../../../../styles/import" as *;
 @use "../../../../styles/common-components" as *;
-
 
 @keyframes button001Animation002ArrowHide {
   from {
     transform: translateX(0);
   }
+
   to {
     transform: translateX(100%);
   }
@@ -17,14 +16,15 @@
   from {
     transform: translateX(-100%);
   }
+
   to {
     transform: translateX(0);
   }
 }
 
-@mixin button002 ($options) {
+@mixin button002($options) {
   $defaults: (
-    key: 'default',
+    key: "default",
     color: #000,
     background-color: #fff,
     border-color: #000,
@@ -40,7 +40,7 @@
       icon: (
         stroke: #fff,
         fill: #fff,
-      )
+      ),
     ),
   );
 
@@ -53,25 +53,25 @@
     @include baseFontSizeForEm();
   }
 
-  .cm-button-002__wrapper--#{map.get($settings, 'key')} {
+  .cm-button-002__wrapper--#{map.get($settings, "key")} {
     .cm-button-002 {
       width: 100%;
       text-align: center;
-      border: 1px solid map.get($settings, 'border-color');
+      border: 1px solid map.get($settings, "border-color");
       cursor: pointer;
       display: block;
-      background-color: map.get($settings, 'background-color');
+      background-color: map.get($settings, "background-color");
       position: relative;
       overflow: hidden;
 
       &::after {
-        content: '';
+        content: "";
         position: absolute;
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
-        background-color: map.get($settings, 'background-color');
+        background-color: map.get($settings, "background-color");
         z-index: 0;
       }
     }
@@ -81,7 +81,7 @@
       z-index: 1;
       overflow: hidden;
     }
-    
+
     .cm-button-002__icon {
       display: block;
       position: absolute;
@@ -90,10 +90,12 @@
       width: 100%;
       height: 100%;
 
-      @include iconColor((
-        stroke: map.get(map.get($settings, 'icon'), 'stroke'),
-        fill: map.get(map.get($settings, 'icon'), 'fill'),
-      ));
+      @include iconColor(
+        (
+          stroke: map.get(map.get($settings, "icon"), "stroke"),
+          fill: map.get(map.get($settings, "icon"), "fill"),
+        )
+      );
     }
 
     .cm-button-002__icon:nth-child(1) {
@@ -106,32 +108,32 @@
 
     .cm-button-002__text {
       display: block;
-      font-weight: map.get($settings, 'font-weight');
-      color: map.get($settings, 'color');
+      font-weight: map.get($settings, "font-weight");
+      color: map.get($settings, "color");
       position: relative;
       z-index: 1;
     }
-    
+
     // Type
-    
+
     .cm-button-002--001,
     .cm-button-002--004,
     .cm-button-002--007 {
       border-radius: em(30);
     }
-    
+
     .cm-button-002--002,
     .cm-button-002--005,
     .cm-button-002--008 {
       border-radius: em(8);
     }
-    
+
     .cm-button-002--003,
     .cm-button-002--006,
     .cm-button-002--009 {
       border-radius: 0;
     }
-    
+
     .cm-button-002--001,
     .cm-button-002--002,
     .cm-button-002--003 {
@@ -140,7 +142,7 @@
       justify-content: center;
       gap: em(8);
     }
-    
+
     .cm-button-002--004,
     .cm-button-002--005,
     .cm-button-002--006 {
@@ -148,22 +150,22 @@
       align-items: center;
       justify-content: space-between;
     }
-    
+
     .cm-button-002--007,
     .cm-button-002--008,
     .cm-button-002--009 {
       text-align: center;
-    
+
       .cm-button-002__text {
         padding: 0 em(14);
       }
-    
+
       .cm-button-002__icon {
         position: absolute;
         top: 50%;
         transform: translateY(-50%);
       }
-      
+
       &.cm-button-002--icon-direction_left {
         .cm-button-002__icon {
           right: auto;
@@ -188,43 +190,43 @@
     .cm-button-002--icon-direction_right {
       flex-direction: row;
     }
-    
+
     // Size
-    
+
     .cm-button-002--small {
       padding: em(7) em(13);
-    
+
       .cm-button-002__icon-wrapper {
         width: em($ICON_SIZE_SMALL);
         height: em($ICON_SIZE_SMALL);
       }
-    
+
       .cm-button-002__text {
         font-size: em(12);
       }
     }
-    
+
     .cm-button-002--middle {
       padding: em(15) em(28);
-    
+
       .cm-button-002__icon-wrapper {
         width: em($ICON_SIZE_MIDDLE);
         height: em($ICON_SIZE_MIDDLE);
       }
-    
+
       .cm-button-002__text {
         font-size: em(16);
       }
     }
-    
+
     .cm-button-002--large {
       padding: em(25) em(45);
-    
+
       .cm-button-002__icon-wrapper {
         width: em($ICON_SIZE_LARGE);
         height: em($ICON_SIZE_LARGE);
       }
-    
+
       .cm-button-002__text {
         font-size: em(18);
       }
@@ -236,30 +238,34 @@
     .cm-button-002--animation_002,
     .cm-button-002--animation_003 {
       &::after {
-        transition: background-color map.get(map.get($settings, 'animation'), 'duration') $easeInOutCubic;
+        transition: background-color map.get(map.get($settings, "animation"), "duration") $easeInOutCubic;
       }
 
       .cm-button-002__text {
-        transition: color map.get(map.get($settings, 'animation'), 'duration') $easeInOutCubic;
+        transition: color map.get(map.get($settings, "animation"), "duration") $easeInOutCubic;
       }
 
-      @include iconTransition((
-        transitionStroke: stroke map.get(map.get($settings, 'animation'), 'duration') $easeInOutCubic,
-        transitionFill: fill map.get(map.get($settings, 'animation'), 'duration') $easeInOutCubic,
-      ));
-  
+      @include iconTransition(
+        (
+          transitionStroke: stroke map.get(map.get($settings, "animation"), "duration") $easeInOutCubic,
+          transitionFill: fill map.get(map.get($settings, "animation"), "duration") $easeInOutCubic,
+        )
+      );
+
       &:hover {
         .cm-button-002__text {
-          color: map.get(map.get($settings, 'animation'), 'text-color');
+          color: map.get(map.get($settings, "animation"), "text-color");
         }
 
-        @include iconColor((
-          stroke: map.get(map.get($settings, 'animation'), 'icon', 'stroke'),
-          fill: map.get(map.get($settings, 'animation'), 'icon', 'fill'),
-        ));
+        @include iconColor(
+          (
+            stroke: map.get(map.get($settings, "animation"), "icon", "stroke"),
+            fill: map.get(map.get($settings, "animation"), "icon", "fill"),
+          )
+        );
 
         &::after {
-          background-color: map.get(map.get($settings, 'animation'), 'background-color');
+          background-color: map.get(map.get($settings, "animation"), "background-color");
         }
       }
     }
@@ -267,22 +273,22 @@
     .cm-button-002--animation_002 {
       .cm-button-002__icon:nth-child(1) {
         &.is-hover {
-          animation: button001Animation002ArrowHide map.get(map.get($settings, 'animation'), 'duration') $easeOutCubic forwards;
+          animation: button001Animation002ArrowHide map.get(map.get($settings, "animation"), "duration") $easeOutCubic forwards;
         }
 
         &.is-leave {
           transform: translateX(-100%);
-          animation: button001Animation002ArrowShow map.get(map.get($settings, 'animation'), 'duration') map.get(map.get($settings, 'animation'), 'duration') $easeOutCubic forwards;
+          animation: button001Animation002ArrowShow map.get(map.get($settings, "animation"), "duration") map.get(map.get($settings, "animation"), "duration") $easeOutCubic forwards;
         }
       }
 
       .cm-button-002__icon:nth-child(2) {
         &.is-hover {
-          animation: button001Animation002ArrowShow map.get(map.get($settings, 'animation'), 'duration') map.get(map.get($settings, 'animation'), 'duration') $easeOutCubic forwards;
+          animation: button001Animation002ArrowShow map.get(map.get($settings, "animation"), "duration") map.get(map.get($settings, "animation"), "duration") $easeOutCubic forwards;
         }
 
         &.is-leave {
-          animation: button001Animation002ArrowHide map.get(map.get($settings, 'animation'), 'duration') $easeOutCubic forwards;
+          animation: button001Animation002ArrowHide map.get(map.get($settings, "animation"), "duration") $easeOutCubic forwards;
         }
       }
     }
@@ -290,12 +296,12 @@
     .cm-button-002--animation_003 {
       .cm-button-002__icon:nth-child(1) {
         transform: translateX(-100%);
-        transition: transform map.get(map.get($settings, 'animation'), 'duration') $easeOutCubic;
+        transition: transform map.get(map.get($settings, "animation"), "duration") $easeOutCubic;
       }
-  
+
       .cm-button-002__icon:nth-child(2) {
         transform: translateX(0);
-        transition: transform map.get(map.get($settings, 'animation'), 'duration') $easeOutCubic;
+        transition: transform map.get(map.get($settings, "animation"), "duration") $easeOutCubic;
       }
 
       &:hover {
@@ -311,30 +317,34 @@
 
     .cm-button-002--animation_004 {
       &::after {
-        transition: transform map.get(map.get($settings, 'animation'), 'duration') $easeInOutCubic;
+        transition: transform map.get(map.get($settings, "animation"), "duration") $easeInOutCubic;
         transform: scaleX(0);
         transform-origin: right bottom;
-        background-color: map.get(map.get($settings, 'animation'), 'background-color');
+        background-color: map.get(map.get($settings, "animation"), "background-color");
       }
 
-      @include iconTransition((
-        transitionStroke: stroke map.get(map.get($settings, 'animation'), 'duration') $easeInOutCubic,
-        transitionFill: fill map.get(map.get($settings, 'animation'), 'duration') $easeInOutCubic,
-      ));
+      @include iconTransition(
+        (
+          transitionStroke: stroke map.get(map.get($settings, "animation"), "duration") $easeInOutCubic,
+          transitionFill: fill map.get(map.get($settings, "animation"), "duration") $easeInOutCubic,
+        )
+      );
 
       .cm-button-002__text {
-        transition: color map.get(map.get($settings, 'animation'), 'duration') $easeInOutCubic;
+        transition: color map.get(map.get($settings, "animation"), "duration") $easeInOutCubic;
       }
 
       &:hover {
         .cm-button-002__text {
-          color: map.get(map.get($settings, 'animation'), 'text-color');
+          color: map.get(map.get($settings, "animation"), "text-color");
         }
 
-        @include iconColor((
-          stroke: map.get(map.get($settings, 'animation'), 'icon', 'stroke'),
-          fill: map.get(map.get($settings, 'animation'), 'icon', 'fill'),
-        ));
+        @include iconColor(
+          (
+            stroke: map.get(map.get($settings, "animation"), "icon", "stroke"),
+            fill: map.get(map.get($settings, "animation"), "icon", "fill"),
+          )
+        );
 
         &::after {
           transform: scaleX(1);

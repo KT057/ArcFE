@@ -2,10 +2,9 @@
 @use "../../../../styles/import" as *;
 @use "../../../../styles/common-components" as *;
 
-
-@mixin NestedListItem002 ($options) {
+@mixin NestedListItem002($options) {
   $defaults: (
-    key: 'default',
+    key: "default",
     fontSize: 24,
     lineHeight: 1.25,
     color: #000,
@@ -16,7 +15,7 @@
     rightIcon: (
       fill: #000,
       stroke: #000,
-    )
+    ),
   );
 
   $settings: map.deep-merge($defaults, $options);
@@ -25,7 +24,7 @@
     @include baseFontSizeForEm();
   }
 
-  .cm-nested-list-item-002__wrapper--#{map.get($settings, 'key')} {
+  .cm-nested-list-item-002__wrapper--#{map.get($settings, "key")} {
     .cm-nested-list-item-002 {
       cursor: pointer;
       display: flex;
@@ -39,14 +38,14 @@
 
     .cm-nested-list-item-002__text {
       display: block;
-      color: map.get($settings, 'color');
-      font-size: em(map.get($settings, 'fontSize'));
+      color: map.get($settings, "color");
+      font-size: em(map.get($settings, "fontSize"));
       overflow-wrap: break-word;
-      line-height: map.get($settings, 'lineHeight');
+      line-height: map.get($settings, "lineHeight");
     }
 
     .cm-nested-list-item-002__icon-wrapper {
-      height: calc(em(map.get($settings, 'fontSize')) * map.get($settings, 'lineHeight'));
+      height: calc(em(map.get($settings, "fontSize")) * map.get($settings, "lineHeight"));
       position: relative;
     }
 
@@ -59,10 +58,12 @@
         transform: translateY(-50%) rotate(180deg);
       }
 
-      @include iconColor((
-        stroke: map.get(map.get($settings, 'leftIcon'), 'stroke'),
-        fill: map.get(map.get($settings, 'leftIcon'), 'fill'),
-      ));
+      @include iconColor(
+        (
+          stroke: map.get(map.get($settings, "leftIcon"), "stroke"),
+          fill: map.get(map.get($settings, "leftIcon"), "fill"),
+        )
+      );
     }
 
     .cm-nested-list-item-002__icon--left {
@@ -73,7 +74,4 @@
       right: 0;
     }
   }
-} 
-
-
-
+}

@@ -18,6 +18,7 @@
     "pug-lint": "^2.7.0",
     "stylelint": "^16.20.0",
     "stylelint-config-recommended-scss": "^15.0.1",
+    "stylelint-config-standard": "^38.0.0",
     "ts-loader": "^9.5.2",
     "ts-node": "^10.9.2",
     "ts-node-dev": "^2.0.0",
@@ -27,7 +28,9 @@
   },
   "dependencies": {
     "gsap": "^3.13.0",
+    "prettier": "^3.5.3",
     "simple-parallax-js": "^6.2.1",
+    "stylelint-prettier": "^5.0.3",
     "swiper": "^11.2.8"
   },
   "engines": {

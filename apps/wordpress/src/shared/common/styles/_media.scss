@@ -1,5 +1,5 @@
 // メディアクエリの設定
-@use 'variable';
+@use "variable";
 
 @mixin pcSizeOver() {
   @media (min-width: (#{variable.$PC_SIZE}px)) {

@@ -1,7 +1,6 @@
 @use "sass:math";
 @use "sass:meta";
 @use "sass:map";
-
 @use "variable";
 @use "media";
 
@@ -9,21 +8,19 @@
   $result: $map1;
 
   @each $key, $val in $map2 {
-    $result: if (
-      map.has-key($result, $key) and meta.type-of(map.get($result, $key)) == 'map' and meta.type-of($val) == 'map',
-      map.set($result, $key, deep-merge(map.get($result, $key), $val)),
-      map.set($result, $key, $val)
-    );
+    $result: if
+      (
+        map.has-key($result, $key) and meta.type-of(map.get($result, $key)) == "map" and meta.type-of($val) == "map",
+        map.set($result, $key, deep-merge(map.get($result, $key), $val)),
+        map.set($result, $key, $val)
+      );
   }
 
   @return $result;
 }
 
-
 @mixin baseFontSizeForRem {
-  font-size: calc(
-    #{variable.$PC_SIZE}px * #{variable.$REM_SIZE} / #{variable.$PC_SIZE}
-  );
+  font-size: calc(#{variable.$PC_SIZE}px * #{variable.$REM_SIZE} / #{variable.$PC_SIZE});
 
   @include media.pcSize {
     font-size: calc(100vw * #{variable.$REM_SIZE} / #{variable.$PC_SIZE});
@@ -46,9 +43,7 @@
 
 /* htmlのフォントサイズを指定できない場合 */
 @mixin baseFontSizeForEm {
-  font-size: calc(
-    #{variable.$PC_SIZE}px * 10 / #{variable.$PC_SIZE}
-  );
+  font-size: calc(#{variable.$PC_SIZE}px * 10 / #{variable.$PC_SIZE});
 
   @include media.pcSize {
     font-size: calc(100vw * 10 / #{variable.$PC_SIZE});
@@ -188,17 +183,17 @@
     cursor: default;
   }
 
-  [type='number']::-webkit-inner-spin-button,
-  [type='number']::-webkit-outer-spin-button {
+  [type="number"]::-webkit-inner-spin-button,
+  [type="number"]::-webkit-outer-spin-button {
     height: auto; /* Correct the cursor style of increment and decrement buttons in Chrome */
   }
 
-  [type='search'] {
+  [type="search"] {
     appearance: textfield; /* Correct the odd appearance in Chrome and Safari */
     outline-offset: -2px; /* Correct the outline style in Safari */
   }
 
-  [type='search']::-webkit-search-decoration {
+  [type="search"]::-webkit-search-decoration {
     appearance: none; /* Remove the inner padding in Chrome and Safari on macOS */
   }
 
@@ -226,18 +221,18 @@
 
   /* Remove inner padding and border in Firefox 4+ */
   button::-moz-focus-inner,
-  [type='button']::-moz-focus-inner,
-  [type='reset']::-moz-focus-inner,
-  [type='submit']::-moz-focus-inner {
+  [type="button"]::-moz-focus-inner,
+  [type="reset"]::-moz-focus-inner,
+  [type="submit"]::-moz-focus-inner {
     border-style: none;
     padding: 0;
   }
 
   /* Replace focus style removed in the border reset above */
   button:-moz-focusring,
-  [type='button']::-moz-focus-inner,
-  [type='reset']::-moz-focus-inner,
-  [type='submit']::-moz-focus-inner {
+  [type="button"]::-moz-focus-inner,
+  [type="reset"]::-moz-focus-inner,
+  [type="submit"]::-moz-focus-inner {
     outline: 1px dotted ButtonText;
   }
 
@@ -266,7 +261,7 @@
   }
 
   select::-ms-value {
-    color: currentColor; /* Internet Explorer 11+ */
+    color: currentcolor; /* Internet Explorer 11+ */
   }
 
   legend {
@@ -302,7 +297,7 @@
     # ================================================================= */
 
   /* Specify the progress cursor of updating elements */
-  [aria-busy='true'] {
+  [aria-busy="true"] {
     cursor: progress;
   }
 
@@ -312,7 +307,7 @@
   }
 
   /* Specify the unstyled cursor of disabled, not-editable, or otherwise inoperable elements */
-  [aria-disabled='true'] {
+  [aria-disabled="true"] {
     cursor: default;
   }
 }

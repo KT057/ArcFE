@@ -1,10 +1,9 @@
 @use "sass:map";
 @use "../../../../styles/import" as *;
 
-
-@mixin listItem001 ($options) {
+@mixin listItem001($options) {
   $defaults: (
-    key: 'default',
+    key: "default",
     font-size: 24,
     line-height: 1.25,
     color: #000,
@@ -25,7 +24,7 @@
     @include baseFontSizeForEm();
   }
 
-  .cm-list-item-001__wrapper--#{map.get($settings, 'key')} {
+  .cm-list-item-001__wrapper--#{map.get($settings, "key")} {
     .cm-list-item-001 {
       cursor: pointer;
       display: flex;
@@ -34,19 +33,19 @@
 
     .cm-list-item-001__text-wrapper {
       width: 100%;
-      padding-left: em(map.get($settings, 'gap'));
+      padding-left: em(map.get($settings, "gap"));
     }
 
     .cm-list-item-001__text {
       display: block;
-      color: map.get($settings, 'color');
-      font-size: em(map.get($settings, 'font-size'));
+      color: map.get($settings, "color");
+      font-size: em(map.get($settings, "font-size"));
       overflow-wrap: break-word;
-      line-height: map.get($settings, 'line-height');
+      line-height: map.get($settings, "line-height");
     }
 
     .cm-list-item-001__number {
-      height: calc(em(map.get($settings, 'font-size')) * map.get($settings, 'line-height'));
+      height: calc(em(map.get($settings, "font-size")) * map.get($settings, "line-height"));
       position: relative;
     }
 
@@ -55,20 +54,17 @@
       top: 50%;
       left: 0;
       transform: translateY(-50%);
-      color: map.get(map.get($settings, 'number'), 'color');
-      font-size: em(map.get(map.get($settings, 'number'), 'font-size'));
+      color: map.get(map.get($settings, "number"), "color");
+      font-size: em(map.get(map.get($settings, "number"), "font-size"));
       line-height: 1;
     }
 
     .cm-list-item-001--animation_001 {
-      transition: opacity map.get(map.get($settings, 'animation'), 'duration') map.get(map.get($settings, 'animation'), 'ease');
-  
+      transition: opacity map.get(map.get($settings, "animation"), "duration") map.get(map.get($settings, "animation"), "ease");
+
       &:hover {
         opacity: 0.5;
       }
     }
   }
-} 
-
-
-
+}

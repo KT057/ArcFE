@@ -2,10 +2,9 @@
 @use "../../../../styles/import" as *;
 @use "../../../../styles/common-components" as *;
 
-
-@mixin textIcon001 ($options) {
+@mixin textIcon001($options) {
   $defaults: (
-    key: 'default',
+    key: "default",
     font-size: 24,
     color: #000,
     icon: (
@@ -20,7 +19,7 @@
     @include baseFontSizeForEm();
   }
 
-  .cm-text-icon-001__wrapper--#{map.get($settings, 'key')} {
+  .cm-text-icon-001__wrapper--#{map.get($settings, "key")} {
     .cm-text-icon-001 {
       display: flex;
       align-items: center;
@@ -38,19 +37,18 @@
 
     .cm-text-icon-001__text {
       display: block;
-      color: map.get($settings, 'color');
-      font-size: em(map.get($settings, 'font-size'));
+      color: map.get($settings, "color");
+      font-size: em(map.get($settings, "font-size"));
       line-height: 1;
     }
 
     .cm-text-icon-001__icon {
-      @include iconColor((
-        stroke: map.get(map.get($settings, 'icon'), 'stroke'),
-        fill: map.get(map.get($settings, 'icon'), 'fill'),
-      ));
+      @include iconColor(
+        (
+          stroke: map.get(map.get($settings, "icon"), "stroke"),
+          fill: map.get(map.get($settings, "icon"), "fill"),
+        )
+      );
     }
   }
-} 
-
-
-
+}

@@ -1,54 +1,64 @@
-@use './import' as *;
+@use "./import" as *;
+@use "../components/Button/Product001/style/index" as *;
+@use "../components/Button/Product002/style/index" as *;
+@use "../components/Icon/style/index" as *;
+@use "../components/Toggle/Product001/close/style/index" as *;
+@use "../components/Toggle/Product001/open/style/index" as *;
+@use "../components/Toggle/Product002/style/index" as *;
 
-@use '../components/Button/Product001/style/index' as *;
-@use '../components/Button/Product002/style/index' as *;
-@use '../components/Icon/style/index' as *;
-@use '../components/Toggle/Product001/close/style/index' as *;
-@use '../components/Toggle/Product001/open/style/index' as *;
-@use '../components/Toggle/Product002/style/index' as *;
-
-
-@include button001((
-  key: 'default',
-  color: #000,
-  background-color: #fff,
-  border-color: #000,
-  font-weight: 700,
-  animation: (
-    background-color: #ccc,
-  ),
-));
-@include button002((
-  key: 'default',
-  color: #000,
-  background-color: #fff,
-  border-color: #000,
-  font-weight: 700,
-  animation: (
-    background-color: #ccc,
-  ),
-));
-@include icon((
-  key: 'default',
-  stroke: #000,
-  fill: #000,
-));
-@include toggle001Close((
-  key: 'default',
-  line-color: #000,
-  animation: (
-    background-color-line: #ccc,
-  ),
-));
-@include toggle001Open((
-  key: 'default',
-  line-color: #000,
-  animation: (
-    background-color-before: #d9d9d9,
-    background-color-after: #fff,
-  ),
-));
-@include toggle002((
-  key: 'default',
-  line-color: #000,
-));
+@include button001(
+  (
+    key: "default",
+    color: #000,
+    background-color: #fff,
+    border-color: #000,
+    font-weight: 700,
+    animation: (
+      background-color: #ccc,
+    ),
+  )
+);
+@include button002(
+  (
+    key: "default",
+    color: #000,
+    background-color: #fff,
+    border-color: #000,
+    font-weight: 700,
+    animation: (
+      background-color: #ccc,
+    ),
+  )
+);
+@include icon(
+  (
+    key: "default",
+    stroke: #000,
+    fill: #000,
+  )
+);
+@include toggle001Close(
+  (
+    key: "default",
+    line-color: #000,
+    animation: (
+      background-color-line: #ccc,
+    ),
+  )
+);
+@include toggle001Open(
+  (
+    key: "default",
+    line-color: #000,
+    animation: (
+      background-color-before: #d9d9d9,
+      background-color-after: #fff,
+    ),
+  )
+);
+@include toggle002(
+  (
+    key: "default",
+    line-color: #000,
+  )
+);

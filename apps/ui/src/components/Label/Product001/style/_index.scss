@@ -1,10 +1,9 @@
 @use "sass:map";
 @use "../../../../styles/import" as *;
 
-
-@mixin Label001 ($options) {
+@mixin Label001($options) {
   $defaults: (
-    key: 'default',
+    key: "default",
     fontSize: 12,
     backgroundColor: #000,
     color: #fff,
@@ -17,17 +16,17 @@
     @include baseFontSizeForEm();
   }
 
-  .cm-label-001__wrapper--#{map.get($settings, 'key')} {
+  .cm-label-001__wrapper--#{map.get($settings, "key")} {
     .cm-label-001 {
       padding-left: em(12);
       padding-right: em(12);
-      background-color: map.get($settings, 'backgroundColor');
-      color: map.get($settings, 'color');
-      font-size: em(map.get($settings, 'fontSize'));
+      background-color: map.get($settings, "backgroundColor");
+      color: map.get($settings, "color");
+      font-size: em(map.get($settings, "fontSize"));
       display: inline-block;
       white-space: nowrap;
       line-height: 1;
-      border: 1px solid map.get($settings, 'borderColor');
+      border: 1px solid map.get($settings, "borderColor");
     }
 
     // type
@@ -56,7 +55,4 @@
       padding-bottom: em(10);
     }
   }
-} 
-
-
-
+}

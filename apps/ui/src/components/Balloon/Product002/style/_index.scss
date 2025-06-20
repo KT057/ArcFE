@@ -1,10 +1,9 @@
-@use 'sass:map';
-
+@use "sass:map";
 @use "../../../../styles/import" as *;
 
-@mixin Balloon002 ($options) {
+@mixin Balloon002($options) {
   $defaults: (
-    key: 'default',
+    key: "default",
     color: #000,
     backgroundColor: #fff,
     borderColor: #000,
@@ -18,36 +17,36 @@
     @include baseFontSizeForEm();
   }
 
-  .cm-balloon-002__wrapper--#{map.get($settings, 'key')} {
+  .cm-balloon-002__wrapper--#{map.get($settings, "key")} {
     .cm-balloon-002 {
       width: 100%;
       position: relative;
       display: block;
-      background-color: map.get($settings, 'backgroundColor');
-      border: em(map.get($settings, 'borderWidth')) solid map.get($settings, 'borderColor');
+      background-color: map.get($settings, "backgroundColor");
+      border: em(map.get($settings, "borderWidth")) solid map.get($settings, "borderColor");
       padding: em(12) em(8);
 
       &::before,
       &::after {
-        content: '';
+        content: "";
         position: absolute;
       }
 
       &::before {
-        background-color: map.get($settings, 'backgroundColor');
+        background-color: map.get($settings, "backgroundColor");
         z-index: 1;
       }
 
       &::after {
-        background-color: map.get($settings, 'borderColor');
+        background-color: map.get($settings, "borderColor");
         z-index: 0;
       }
     }
 
     .cm-balloon-002__content {
       display: block;
-      font-size: em(map.get($settings, 'fontSize'));
-      color: map.get($settings, 'color');
+      font-size: em(map.get($settings, "fontSize"));
+      color: map.get($settings, "color");
     }
 
     .cm-balloon-002__arrow {
@@ -71,7 +70,7 @@
       }
 
       &::before {
-        bottom: em(-15 + map.get($settings, 'borderWidth'));
+        bottom: em(-15 + map.get($settings, "borderWidth"));
       }
     }
 
@@ -87,7 +86,7 @@
       }
 
       &::before {
-        top: em(-15 + map.get($settings, 'borderWidth'));
+        top: em(-15 + map.get($settings, "borderWidth"));
       }
     }
 
@@ -103,7 +102,7 @@
       }
 
       &::before {
-        right: em(-15 + map.get($settings, 'borderWidth'));
+        right: em(-15 + map.get($settings, "borderWidth"));
       }
     }
 
@@ -119,7 +118,7 @@
       }
 
       &::before {
-        left: em(-15 + map.get($settings, 'borderWidth'));
+        left: em(-15 + map.get($settings, "borderWidth"));
       }
     }
 
