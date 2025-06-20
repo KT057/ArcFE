@@ -1,12 +1,12 @@
-import fs from 'node:fs';
-import path from 'node:path';
-import { mkdirp } from 'mkdirp';
+import fs from "node:fs";
+import path from "node:path";
+import chalk from "chalk";
 
-import { exec as execProcess } from 'child_process';
-import chalk from 'chalk';
-import { type GlobOptions, glob } from 'glob';
+import { exec as execProcess } from "child_process";
+import { type GlobOptions, glob } from "glob";
+import { mkdirp } from "mkdirp";
 
-type TLogType = 'success' | 'error' | 'warning';
+type TLogType = "success" | "error" | "warning";
 
 export type TResult<T = null, K = null> = {
   ok: boolean;
@@ -39,15 +39,15 @@ export const err: <T = Error>(value: T) => TResult<null, T> = <T = Error>(
 
 export const log = (type: TLogType, text: string) => {
   switch (type) {
-    case 'success':
+    case "success":
       console.log(chalk.greenBright(`✔︎ ${text}`));
       break;
 
-    case 'error':
+    case "error":
       console.error(chalk.red(`✖︎ ${text}`));
       break;
 
-    case 'warning':
+    case "warning":
       console.warn(chalk.yellow(`▲ ${text}`));
       break;
   }
@@ -64,9 +64,9 @@ export const getDirsSync = (path: string | string[], option: GlobOptions) => {
 export const createDir = async (file: string) => {
   try {
     const made = await mkdirp(path.dirname(file));
-    return ok(made || 'create');
+    return ok(made || "create");
   } catch (e) {
-    return err(new Error('fail to mkdirp'));
+    return err(new Error("fail to mkdirp"));
   }
 };
 
@@ -98,7 +98,7 @@ export const readFile = (entry: string) => {
   return new Promise<TResultPromise<string, Error>>((resolve) => {
     fs.readFile(
       entry,
-      'utf-8',
+      "utf-8",
       (error: NodeJS.ErrnoException | null, html: string) => {
         if (error) {
           resolve(err(error));
@@ -132,7 +132,7 @@ export const copyFile = (entry: string, outPath: string) => {
 
     fs.copyFile(entry, outPath, (error) => {
       if (error) {
-        console.log('error', error);
+        console.log("error", error);
         resolve(err(error));
         return;
       }

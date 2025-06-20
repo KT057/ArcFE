@@ -1,18 +1,18 @@
-export { checkDir, log } from './helper/utils';
-export { generateUIToAllPackages } from './generateUIToAllPackages';
+export { generateUIToAllPackages } from "./generateUIToAllPackages";
+export { checkDir, log } from "./helper/utils";
 
-import { WatchingScssOption } from 'types';
-import { browser } from './browser';
-import { DIR, EXTENSION } from './constants';
-import { copyCssFiles, watchCssFiles } from './css';
-import { err, log, ok } from './helper/utils';
-import { optimizeImages, watchOptimizeImage } from './image';
-import { copyJavascriptFiles, watchJavascriptFiles } from './javascript';
-import { copyJsonFiles, watchJsonFiles } from './json';
-import { copyPhpFiles, watchPhpFiles } from './php';
-import { renderPugFiles, watchPugFiles } from './pug';
-import { renderScssFiles, watchScssFiles } from './scss';
-import { renderMultipleTypescript, watchTypescriptFiles } from './typescript';
+import type { WatchingScssOption } from "types";
+import { browser } from "./browser";
+import { DIR, EXTENSION } from "./constants";
+import { copyCssFiles, watchCssFiles } from "./css";
+import { err, log, ok } from "./helper/utils";
+import { optimizeImages, watchOptimizeImage } from "./image";
+import { copyJavascriptFiles, watchJavascriptFiles } from "./javascript";
+import { copyJsonFiles, watchJsonFiles } from "./json";
+import { copyPhpFiles, watchPhpFiles } from "./php";
+import { renderPugFiles, watchPugFiles } from "./pug";
+import { renderScssFiles, watchScssFiles } from "./scss";
+import { renderMultipleTypescript, watchTypescriptFiles } from "./typescript";
 
 export type RenderOption = {
   pugData?: { [key: string]: any };
@@ -135,12 +135,12 @@ export const renders = async ({
   const promises = await Promise.all(renderPromises);
 
   if (promises.some((r) => r.err)) {
-    return err(new Error('✖︎ Failed to render all files'));
+    return err(new Error("✖︎ Failed to render all files"));
   }
 
-  log('success', `Successfully rendered all files`);
+  log("success", "Successfully rendered all files");
 
-  return ok('Successfully rendered all files');
+  return ok("Successfully rendered all files");
 };
 
 // 監視の処理

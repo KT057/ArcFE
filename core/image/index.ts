@@ -1,19 +1,19 @@
-import fs from 'node:fs';
-import path from 'node:path';
-import { glob } from 'glob';
-import sharp from 'sharp';
-import { optimize } from 'svgo';
-import { conf } from '../config';
-import { DIR, EXTENSION, OUTPUT_DIR } from '../constants';
+import fs from "node:fs";
+import path from "node:path";
+import { glob } from "glob";
+import sharp from "sharp";
+import { optimize } from "svgo";
+import { conf } from "../config";
+import { DIR, EXTENSION, OUTPUT_DIR } from "../constants";
 import {
-  type TResultPromise,
   err,
   getDirsSync,
   log,
   ok,
+  type TResultPromise,
   writeFile
-} from '../helper/utils';
-import { Chokidar } from '../helper/watch';
+} from "../helper/utils";
+import { Chokidar } from "../helper/watch";
 
 const optimizeImage = async (imagePath: string) => {
   const outputPath = imagePath.replace(
@@ -26,9 +26,9 @@ const optimizeImage = async (imagePath: string) => {
   const ext = path.extname(imagePath).toLowerCase();
 
   try {
-    if (ext === '.svg') {
+    if (ext === ".svg") {
       // SVGの場合は SVGO で最適化
-      const svgData = fs.readFileSync(imagePath, 'utf-8');
+      const svgData = fs.readFileSync(imagePath, "utf-8");
       const result = await optimize(svgData, { path: imagePath });
       await writeFile(outputPath, result.data);
     } else {
@@ -43,7 +43,7 @@ const optimizeImage = async (imagePath: string) => {
     return ok(outputPath);
   } catch (e: unknown) {
     const error = e as Error;
-    log('error', `Error processing image ${imagePath}: ${error.message}`);
+    log("error", `Error processing image ${imagePath}: ${error.message}`);
     return err(new Error(`Error processing image ${imagePath}`));
   }
 };
@@ -61,12 +61,12 @@ export const optimizeImages: () => Promise<TResultPromise<string, Error>> =
 
       await Promise.all(promises);
 
-      log('success', 'Images successfully optimized using Sharp and SVGO');
-      return ok('success min images');
+      log("success", "Images successfully optimized using Sharp and SVGO");
+      return ok("success min images");
     } catch (e: unknown) {
       const error = e as Error;
-      log('error', `Error processing images: ${error.message}`);
-      return err(new Error('Error processing images'));
+      log("error", `Error processing images: ${error.message}`);
+      return err(new Error("Error processing images"));
     }
   };
 
@@ -75,8 +75,8 @@ export const watchOptimizeImage = async (imagePath: string) => {
 
   if (reject || !resolve) {
     log(
-      'error',
-      `Error scanning directories:  ${reject ? reject.message : ''}`
+      "error",
+      `Error scanning directories:  ${reject ? reject.message : ""}`
     );
     return err(reject);
   }
@@ -85,11 +85,11 @@ export const watchOptimizeImage = async (imagePath: string) => {
 
   chokidar.watcher({
     change: async (path: string) => {
-      log('success', `Starting Image watch in: ${path}`);
+      log("success", `Starting Image watch in: ${path}`);
 
       await optimizeImage(path);
     }
   });
 
-  log('success', `Watching for Image changes`);
+  log("success", "Watching for Image changes");
 };

@@ -1,4 +1,4 @@
-type TEnv = 'local' | 'production';
+type TEnv = "local" | "production";
 
 export const conf = {
   port: 8080,

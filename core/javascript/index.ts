@@ -1,11 +1,11 @@
-import path from 'node:path';
-import { DIR, OUTPUT_DIR } from '../constants';
-import { copyFile, err, getDirsSync, log, ok } from '../helper/utils';
-import { Chokidar } from '../helper/watch';
-import { JsOption } from '../types';
+import path from "node:path";
+import { DIR, OUTPUT_DIR } from "../constants";
+import { copyFile, err, getDirsSync, log, ok } from "../helper/utils";
+import { Chokidar } from "../helper/watch";
+import type { JsOption } from "../types";
 
 const getPath = (dir: string) => {
-  const replacePath = dir.replace(new RegExp(`${DIR.SRC}/`), '');
+  const replacePath = dir.replace(new RegExp(`${DIR.SRC}/`), "");
   const outputPath = path.join(OUTPUT_DIR, replacePath);
 
   return { outputPath };
@@ -21,8 +21,8 @@ export const copyJavascriptFiles = async ({ entry, option }: JsOption) => {
 
   if (reject || !resolve) {
     log(
-      'error',
-      `Error retrieving JS directories: ${reject ? reject.message : ''}`
+      "error",
+      `Error retrieving JS directories: ${reject ? reject.message : ""}`
     );
     return err(reject);
   }
@@ -33,13 +33,13 @@ export const copyJavascriptFiles = async ({ entry, option }: JsOption) => {
   const errs = results.filter((r) => r.err);
 
   if (errs.length > 0) {
-    log('error', `Rendering errors occurred for JS`);
+    log("error", "Rendering errors occurred for JS");
     return err(errs[0].reject);
   }
 
-  log('success', `All JS files successfully copied.`);
+  log("success", "All JS files successfully copied.");
 
-  return ok('Successfully copied script');
+  return ok("Successfully copied script");
 };
 
 export const watchJavascriptFiles = async ({ entry, option }: JsOption) => {
@@ -47,8 +47,8 @@ export const watchJavascriptFiles = async ({ entry, option }: JsOption) => {
 
   if (reject || !resolve) {
     log(
-      'error',
-      `Errors occurred during JS rendering. ${reject ? reject.message : ''}`
+      "error",
+      `Errors occurred during JS rendering. ${reject ? reject.message : ""}`
     );
     return err(reject);
   }
@@ -57,7 +57,7 @@ export const watchJavascriptFiles = async ({ entry, option }: JsOption) => {
 
   chokidar.watcher({
     change: async (path: string) => {
-      log('success', `Starting JS watch in: ${path}`);
+      log("success", `Starting JS watch in: ${path}`);
 
       await copyJavascriptFile(path);
     }

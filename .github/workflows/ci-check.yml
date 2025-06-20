@@ -26,8 +26,10 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-node-
 
-      - name: Install dependencies
-        run: pnpm install
+      - name: Set up biome
+        run: |
+          chmod +x node_modules/.pnpm/@biomejs+biome@*/node_modules/@biomejs/biome/bin/biome
+          chmod +x node_modules/.pnpm/@biomejs+cli-darwin-arm64@*/node_modules/@biomejs/cli-darwin-arm64/biome
 
       - name: Run Setup
         run: pnpm @core lint

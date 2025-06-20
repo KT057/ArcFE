@@ -1,4 +1,4 @@
-import { GlobOptions } from 'glob';
+import type { GlobOptions } from "glob";
 
 export type HtmlOption = {
   entry: string;

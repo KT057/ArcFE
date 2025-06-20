@@ -1,4 +1,4 @@
-import { copyFile, getDirsSync } from '../helper/utils';
+import { copyFile, getDirsSync } from "../helper/utils";
 
 export const generateUIToAllPackages = async ({
   entries,
@@ -7,7 +7,7 @@ export const generateUIToAllPackages = async ({
 }: {
   entries: string[];
   dist: {
-    type: 'web' | 'wordpress';
+    type: "web" | "wordpress";
     dir: string;
   };
   ignore: string[];
@@ -16,13 +16,13 @@ export const generateUIToAllPackages = async ({
     ignore
   });
 
-  const targetPackageDir = `${process.cwd().split('/apps/')[0]}/apps/${dist.type}`;
+  const targetPackageDir = `${process.cwd().split("/apps/")[0]}/apps/${dist.type}`;
   const distDir = `${targetPackageDir}/${dist.dir}`;
 
   const promises = [];
 
   for (const originalPath of originalPaths.resolve || []) {
-    const path = originalPath.replace('src/', '');
+    const path = originalPath.replace("src/", "");
     const distPath = `${distDir}/${path}`;
 
     promises.push(copyFile(originalPath, distPath));
