@@ -26,10 +26,11 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-node-
 
-      - name: Set up biome
+      - name: chmod +x biome
         run: |
           find node_modules/.pnpm -type f -path "*/@biomejs/biome/bin/biome" -exec chmod +x {} \;
           find node_modules/.pnpm -type f -path "*/@biomejs/cli-darwin-arm64/biome" -exec chmod +x {} \;
+          find node_modules/.pnpm -type f -path "*/@biomejs/cli-linux-x64/biome" -exec chmod +x {} \;
 
       - name: Run Setup
         run: pnpm @core lint
@@ -86,6 +87,12 @@ jobs:
 
       - name: Install dependencies
         run: pnpm install
+
+      - name: chmod +x biome
+        run: |
+          find node_modules/.pnpm -type f -path "*/@biomejs/biome/bin/biome" -exec chmod +x {} \;
+          find node_modules/.pnpm -type f -path "*/@biomejs/cli-darwin-arm64/biome" -exec chmod +x {} \;
+          find node_modules/.pnpm -type f -path "*/@biomejs/cli-linux-x64/biome" -exec chmod +x {} \;
 
       - name: Run Setup
         run: pnpm @ui lint:script
