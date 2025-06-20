@@ -122,7 +122,7 @@ jobs:
     if: always()
     steps:
       - name: Send Slack notification on failure
-        if: ${{ needs.core_biome_check.result == 'failure' || needs.core_tsc_check.result == 'failure' || needs.ui_biome_check.result == 'failure' }}
+        if: ${{ needs.core_biome_check.result == 'failure' || needs.core_tsc_check.result == 'failure' || needs.ui_biome_check.result == 'failure' || needs.ui_stylelint_check.result == 'failure' }}
         uses: slackapi/slack-github-action@v2.1.0
         with:
           webhook: ${{ secrets.SLACK_WORKFLOW_WEBHOOK_URL }}
