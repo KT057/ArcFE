@@ -26,6 +26,9 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-node-
 
+      - name: Install dependencies
+        run: pnpm install
+      
       - name: chmod +x biome
         run: |
           find node_modules/.pnpm -type f -path "*/@biomejs/biome/bin/biome" -exec chmod +x {} \;
@@ -161,11 +164,11 @@ jobs:
         
   notify:
     runs-on: ubuntu-latest
-    needs: [core_biome_check, core_tsc_check, ui_biome_check]
+    needs: [core_biome_check, core_tsc_check, ui_biome_check, ui_stylelint_check, ui_storybook_build_check]
     if: always()
     steps:
       - name: Send Slack notification on failure
-        if: ${{ needs.core_biome_check.result == 'failure' || needs.core_tsc_check.result == 'failure' || needs.ui_biome_check.result == 'failure' || needs.ui_stylelint_check.result == 'failure' }}
+        if: ${{ needs.core_biome_check.result == 'failure' || needs.core_tsc_check.result == 'failure' || needs.ui_biome_check.result == 'failure' || needs.ui_stylelint_check.result == 'failure' || needs.ui_storybook_build_check.result == 'failure' }}
         uses: slackapi/slack-github-action@v2.1.0
         with:
           webhook: ${{ secrets.SLACK_WORKFLOW_WEBHOOK_URL }}
