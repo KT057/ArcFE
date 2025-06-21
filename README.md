@@ -2,31 +2,6 @@
 
 A boilerplate setup for front-end development with automated directory generation and essential commands.
 
----
-
-## 🚀 **Cursor**
-
-### Directory Auto-Generation
-
-1. **Select the context:**
-
-   - Choose `create-page-structure.mdc` as the context file.
-
-2. **Run the command:**
-
-   - To generate a directory structure, enter:
-
-     ```
-     Create {pageName}
-     ```
-
-   **Examples:**
-
-   - `Create news` – Generates a `news` folder.
-   - `Create news/post` – Generates a `post` folder inside `news`.
-
----
-
 ## 🛠️ **Commands**
 
 ### **Start Development Server**
