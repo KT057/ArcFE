@@ -3,7 +3,7 @@
   "vcs": { "enabled": false, "clientKind": "git", "useIgnoreFile": false },
   "files": {
     "ignoreUnknown": false,
-    "includes": ["apps/**", "core/**", "!**/production", "!**/dist"]
+    "includes": ["apps/**", "core/**", "!**/production", "!**/development", "!**/dist"]
   },
   "formatter": {
     "enabled": true,
@@ -24,7 +24,7 @@
     }
   },
   "linter": {
-    "enabled": false,
+    "enabled": true,
     "rules": {
       "recommended": false,
       "suspicious": { "noAsyncPromiseExecutor": "off" },
@@ -36,15 +36,24 @@
         "noBannedTypes": "info"
       },
       "correctness": {
-        "useExhaustiveDependencies": "info",
-        "noUnusedImports": "error"
+        "useExhaustiveDependencies": "error",
+        "noUnusedImports": {
+          "level": "error",
+          "fix": "safe"
+        }
       },
       "style": {
         "noUselessElse": "info",
         "noNonNullAssertion": "info",
         "noParameterAssign": "info",
-        "useImportType": "error",
-        "useNodejsImportProtocol": "error"
+        "useImportType": {
+          "level": "error",
+          "fix": "safe"
+        },
+        "useNodejsImportProtocol": {
+          "level": "error",
+          "fix": "safe"
+        }
       }
     }
   },

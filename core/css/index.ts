@@ -1,5 +1,5 @@
 import path from "node:path";
-import { DEFAULT_FILE, DIR, EXTENSION, OUTPUT_DIR } from "../constants";
+import { DIR, OUTPUT_DIR } from "../constants";
 import { copyFile, err, getDirsSync, log, ok } from "../helper/utils";
 import { Chokidar } from "../helper/watch";
 import type { JsOption } from "../types";
