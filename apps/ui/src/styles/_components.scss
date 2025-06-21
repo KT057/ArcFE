@@ -38,6 +38,7 @@
 @use "../components/Balloon/Product002/style/index" as *;
 @use "../components/Loading/Product001/style/index" as *;
 @use "../components/Loading/Product002/style/index" as *;
+@use "../components/Accordion/Product001/style/index" as *;
 
 @include button001(
   (
@@ -562,5 +563,24 @@
     key: "default",
     indicatorColor: #fff,
     backgroundColor: #000,
+  )
+);
+@include Accordion001(
+  (
+    key: "default",
+    borderColor: #eee,
+    icon: (
+      color: #000,
+      animation: (
+        duration: 0.3s,
+        easing: $easeInOutCubic,
+      ),
+    ),
+    header: (
+      color: #000,
+    ),
+    content: (
+      color: #000,
+    ),
   )
 );

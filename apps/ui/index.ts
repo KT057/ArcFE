@@ -1,9 +1,9 @@
 import {
   checkDir,
   log,
-  RenderOption,
+  type RenderOption,
   renders,
-  WatchOption,
+  type WatchOption,
   watch
 } from "@core";
 
@@ -46,7 +46,7 @@ void (async () => {
           noSharedItems,
           scssOption: {
             renderOption: {
-              entry: "src/shared/styles/**/*.scss",
+              entry: "src/common/styles/**/*.scss",
               option: {}
             }
           }
@@ -65,7 +65,7 @@ void (async () => {
         noSharedItems,
         scssOption: {
           renderOption: {
-            entry: "src/shared/styles/**/*.scss",
+            entry: "src/common/styles/**/*.scss",
             option: {}
           }
         }
