@@ -22,7 +22,7 @@ const defaultStatsOptions = {
   errorDetails: true
 };
 
-const isProduction = env !== "local";
+const isProduction = env === "production";
 
 const entries = async () => {
   const entries: { [key: string]: string } = {};

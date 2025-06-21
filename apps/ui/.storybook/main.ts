@@ -13,7 +13,11 @@ function getAbsolutePath(value) {
 
 /** @type { import('@storybook/html-webpack5').StorybookConfig } */
 const config = {
-  stories: ["../dist/**/*.stories.js"],
+  stories: [
+    process.env.NODE_ENV === "development"
+      ? "../development/**/*.stories.js"
+      : "../dist/**/*.stories.js"
+  ],
   addons: [
     getAbsolutePath("@storybook/addon-webpack5-compiler-swc"),
     // getAbsolutePath("@storybook/addon-essentials"),

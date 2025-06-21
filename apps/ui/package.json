@@ -3,9 +3,10 @@
   "version": "1.0.0",
   "scripts": {
     "dev": "rm -rf ./dist && cross-env NODE_ENV=local ts-node index.ts",
+    "build": "rm -rf ./development && cross-env NODE_ENV=development ts-node index.ts",
     "gen": "ts-node generate.ts",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build",
+    "build-storybook": "cross-env NODE_ENV=development storybook build",
     "lint:template": "pug-lint -c .pug-lint.json .",
     "lint:style": "stylelint --ignore-path .stylelintignore \"**/*.scss\"",
     "lint:style:fix": "stylelint --fix --ignore-path .stylelintignore \"**/*.scss\"",
