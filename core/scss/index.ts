@@ -21,9 +21,6 @@ import { Chokidar } from "../helper/watch";
 import type { ScssOption, WatchingScssOption } from "../types";
 
 const styleLintPlugin: AcceptedPlugin[] = [
-  require("stylelint")({
-    configFile: path.join(process.cwd(), ".stylelintrc.json")
-  }),
   postcssReporter({ clearReportedMessages: true })
 ];
 

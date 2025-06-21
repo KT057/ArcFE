@@ -5,11 +5,11 @@ import {
   renders,
   WatchOption,
   watch
-} from '@core';
+} from "@core";
 
-const env = process.env.NODE_ENV || 'local';
+const env = process.env.NODE_ENV || "local";
 
-const buildRuns: RenderOption['runs'] = {
+const buildRuns: RenderOption["runs"] = {
   pug: true,
   scss: true,
   javascript: true,
@@ -17,7 +17,7 @@ const buildRuns: RenderOption['runs'] = {
   image: true
 };
 
-const watchRuns: WatchOption['runs'] = {
+const watchRuns: WatchOption["runs"] = {
   pug: true,
   scss: true,
   javascript: true,
@@ -29,15 +29,15 @@ const noSharedItems = true;
 
 void (async () => {
   switch (env) {
-    case 'local': {
-      if (!checkDir('./dist')) {
+    case "local": {
+      if (!checkDir("./dist")) {
         const { reject } = await renders({
           runs: buildRuns,
           noSharedItems
         });
 
         if (reject) {
-          log('error', `Failed to render all files ${reject.message})`);
+          log("error", `Failed to render all files ${reject.message})`);
           return;
         }
 
@@ -46,7 +46,7 @@ void (async () => {
           noSharedItems,
           scssOption: {
             renderOption: {
-              entry: 'src/shared/styles/**/*.scss',
+              entry: "src/shared/styles/**/*.scss",
               option: {}
             }
           }
@@ -65,7 +65,7 @@ void (async () => {
         noSharedItems,
         scssOption: {
           renderOption: {
-            entry: 'src/shared/styles/**/*.scss',
+            entry: "src/shared/styles/**/*.scss",
             option: {}
           }
         }
@@ -81,7 +81,7 @@ void (async () => {
       });
 
       if (reject) {
-        log('error', `Failed to render all files ${reject.message})`);
+        log("error", `Failed to render all files ${reject.message})`);
         return;
       }
     }

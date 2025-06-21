@@ -1,10 +1,10 @@
-import '../../../../shared/styles/common.css';
-import runScript from '!!raw-loader!../../../../shared/scripts/common.js';
-import { withRunScript } from 'storybook-addon-run-script/html';
-import Html from './index.html';
+import "../../../../common/styles/common.css";
+import runScript from "!!raw-loader!../../../../common/scripts/common.js";
+import { withRunScript } from "storybook-addon-run-script/html";
+import Html from "./index.html";
 
 export default {
-  title: 'Toggle/Product001',
+  title: "Toggle/Product001",
   decorators: [withRunScript(runScript)]
 };
 
@@ -25,8 +25,8 @@ export const Close = {
   parameters: {
     design: [
       {
-        type: 'link',
-        url: 'https://www.figma.com/design/YUbTzje2jUbb0Yh5ycNx2P/ui-catalog?node-id=2034-10&t=LmM30CRzDWShsWXt-4'
+        type: "link",
+        url: "https://www.figma.com/design/YUbTzje2jUbb0Yh5ycNx2P/ui-catalog?node-id=2034-10&t=LmM30CRzDWShsWXt-4"
       }
     ]
   }

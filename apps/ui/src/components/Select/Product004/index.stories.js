@@ -1,10 +1,10 @@
-import '../../../shared/styles/common.css';
-import runScript from '!!raw-loader!../../../shared/scripts/common.js';
-import { withRunScript } from 'storybook-addon-run-script/html';
-import Html from './index.html';
+import "../../../common/styles/common.css";
+import runScript from "!!raw-loader!../../../common/scripts/common.js";
+import { withRunScript } from "storybook-addon-run-script/html";
+import Html from "./index.html";
 
 export default {
-  title: 'Select',
+  title: "Select",
   decorators: [withRunScript(runScript)]
 };
 
@@ -23,8 +23,8 @@ export const Product004 = {
   parameters: {
     design: [
       {
-        type: 'link',
-        url: 'https://www.figma.com/design/YUbTzje2jUbb0Yh5ycNx2P/ui-catalog?node-id=2320-405&t=CG3Uz8S42iBVKtUK-4'
+        type: "link",
+        url: "https://www.figma.com/design/YUbTzje2jUbb0Yh5ycNx2P/ui-catalog?node-id=2320-405&t=CG3Uz8S42iBVKtUK-4"
       }
     ]
   }

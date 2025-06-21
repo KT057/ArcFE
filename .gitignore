@@ -6,6 +6,7 @@ node_modules
 .pnp.js
 dist
 production
+development
 
 # misc
 .DS_Store
@@ -43,6 +44,9 @@ public/icon-font
 
 .eslintcache
 *storybook.log
+
+# ui
+storybook-static
 
 # Wordpress
 dist

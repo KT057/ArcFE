@@ -97,6 +97,40 @@ jobs:
       - name: Run Setup
         run: pnpm @ui lint:script
   
+  ui_storybook_build_check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Cache node_modules
+        uses: actions/cache@v4
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Build code
+        run: pnpm @core build
+
+      - name: Build code
+        run: pnpm @ui build
+
+      - name: Run Setup
+        run: pnpm @ui build-storybook
+
   ui_stylelint_check:
     runs-on: ubuntu-latest
     steps:
