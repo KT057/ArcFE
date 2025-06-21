@@ -3,7 +3,6 @@ import path from "node:path";
 import { glob } from "glob";
 import sharp from "sharp";
 import { optimize } from "svgo";
-import { conf } from "../config";
 import { DIR, EXTENSION, OUTPUT_DIR } from "../constants";
 import {
   err,
