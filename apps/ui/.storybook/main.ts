@@ -24,10 +24,7 @@ const config = {
     getAbsolutePath("@storybook/addon-designs"),
     getAbsolutePath("@storybook/addon-interactions")
   ],
-  framework: {
-    name: getAbsolutePath("@storybook/html-webpack5"),
-    options: {}
-  },
+  framework: "@storybook/html-vite",
   core: {
     builder: {
       name: "@storybook/builder-webpack5",
@@ -36,6 +33,14 @@ const config = {
         lazyCompilation: false
       }
     }
+  },
+  webpackFinal: async (config) => {
+    config.module.rules.push({
+      test: /\.html$/,
+      use: "html-loader",
+      exclude: /node_modules/
+    });
+    return config;
   }
 };
 
