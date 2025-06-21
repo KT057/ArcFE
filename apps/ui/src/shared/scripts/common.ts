@@ -1,5 +1,5 @@
-import { componentScripts } from '../../scripts/component';
+import { componentScripts } from "../../scripts/component";
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener("DOMContentLoaded", () => {
   componentScripts();
 });
