@@ -123,6 +123,9 @@ jobs:
         run: pnpm install
 
       - name: Build code
+        run: pnpm @core build
+
+      - name: Build code
         run: pnpm @ui build
 
       - name: Run Setup
