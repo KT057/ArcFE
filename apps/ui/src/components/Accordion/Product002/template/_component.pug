@@ -1,0 +1,15 @@
+mixin Accordion002({ key = 'default', type = '001' })
+  block
+  .cm-accordion-002__wrapper(class=`cm-accordion-002__wrapper--${key}`)
+    .cm-accordion-002(class=`cm-accordion-002--${type}`)
+      .js-accordion-002-header.cm-accordion-002__header
+        .cm-accordion-002__header-inner
+          .cm-accordion-002__title-wrapper
+            .cm-accordion-002__title
+              +header
+          .js-accordion-002-icon.cm-accordion-002__icon
+            +icon
+      .js-accordion-002-content.cm-accordion-002__content-wrapper
+        .js-accordion-002-content-inner.cm-accordion-002__content
+          .cm-accordion-002__content-text
+            +content
