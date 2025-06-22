@@ -41,6 +41,7 @@
 @use "../components/Accordion/Product001/style/index" as *;
 @use "../components/Accordion/Product002/style/index" as *;
 @use "../components/Accordion/Product003/style/index" as *;
+@use "../components/Accordion/Product004/style/index" as *;
 
 @include button001(
   (
@@ -606,6 +607,19 @@
     content: (
       color: #000,
       backgroundColor: #fff,
+    ),
+  )
+);
+@include Accordion004(
+  (
+    key: "default",
+    borderColor: #eee,
+    iconColor: #000,
+    header: (
+      color: #000,
+    ),
+    content: (
+      color: #000,
     ),
   )
 );
