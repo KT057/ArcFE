@@ -1,8 +1,8 @@
-mixin ListItem005({ key = 'default', href = '#', animation = '001' })
-  .cm-list-item-005__wrapper(class=`cm-list-item-005__wrapper--${key}`)
-    a.cm-list-item-005(href=href, class=`cm-list-item-005--animation_${animation}`)
-      .cm-list-item-005__point-wrapper
-        .cm-list-item-005__point
-      .cm-list-item-005__text-wrapper
-        .cm-list-item-005__text
+mixin ListItem005({ key = 'default', animation = '001' })
+  span.cm-list-item-005__wrapper(class=`cm-list-item-005__wrapper--${key}`)
+    span.cm-list-item-005(class=`cm-list-item-005--animation_${animation}`)
+      span.cm-list-item-005__point-wrapper
+        span.cm-list-item-005__point
+      span.cm-list-item-005__text-wrapper
+        span.cm-list-item-005__text
           block
