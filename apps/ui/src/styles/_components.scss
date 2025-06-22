@@ -569,13 +569,7 @@
   (
     key: "default",
     borderColor: #eee,
-    icon: (
-      color: #000,
-      animation: (
-        duration: 0.3s,
-        easing: $easeInOutCubic,
-      ),
-    ),
+    iconColor: #000,
     header: (
       color: #000,
     ),

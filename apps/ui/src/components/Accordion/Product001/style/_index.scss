@@ -7,13 +7,7 @@
   $defaults: (
     key: "default",
     borderColor: #eee,
-    icon: (
-      color: #000,
-      animation: (
-        duration: 0.3s,
-        easing: $easeInOutCubic,
-      ),
-    ),
+    iconColor: #000,
     header: (
       color: #000,
     ),
@@ -56,20 +50,15 @@
     .cm-accordion-001__icon {
       @include iconColor(
         (
-          stroke: map.get(map.get($settings, "icon"), "color"),
-          fill: map.get(map.get($settings, "icon"), "color"),
+          stroke: map.get($settings, "iconColor"),
+          fill: map.get($settings, "iconColor"),
         )
       );
 
       position: absolute;
       right: 0;
       top: 50%;
-      transform: translateY(-50%) rotate(0deg);
-      transition: transform map.get(map.get(map.get($settings, "icon"), "animation"), "duration") map.get(map.get(map.get($settings, "icon"), "animation"), "easing");
-
-      &.open {
-        transform: translateY(-50%) rotate(180deg);
-      }
+      transform: translateY(-50%);
     }
 
     .cm-accordion-001__content-wrapper {
