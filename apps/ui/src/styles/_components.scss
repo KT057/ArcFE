@@ -14,6 +14,7 @@
 @use "../components/NestedListItem/Product001/style/index" as *;
 @use "../components/NestedListItem/Product002/style/index" as *;
 @use "../components/FrameIcon/Product001/style/index" as *;
+@use "../components/FrameNumber/Product001/style/index" as *;
 @use "../components/Input/Product001/style/index" as *;
 @use "../components/Input/Product002/style/index" as *;
 @use "../components/Input/Product003/style/index" as *;
@@ -236,14 +237,20 @@
     ),
   )
 );
-@include frameIcon001(
+@include FrameIcon001(
   (
     key: "default",
     background: #e7e7e7,
-    icon: (
-      fill: #000,
-      stroke: #000,
-    ),
+    borderColor: #000,
+    iconColor: #000,
+  )
+);
+@include FrameNumber001(
+  (
+    key: "default",
+    background: #e7e7e7,
+    borderColor: #000,
+    numberColor: #000,
   )
 );
 @include Input001(

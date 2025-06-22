@@ -2,26 +2,26 @@
 @use "../../../../styles/import" as *;
 @use "../../../../styles/common-components" as *;
 
-@mixin FrameIcon001($options) {
+@mixin FrameNumber001($options) {
   $defaults: (
     key: "default",
     background: #e7e7e7,
     borderColor: #000,
-    iconColor: #000,
+    numberColor: #000,
   );
 
   $settings: map.deep-merge($defaults, $options);
 
-  .cm-frame-icon-001__wrapper {
+  .cm-frame-number-001__wrapper {
     @include baseFontSizeForEm();
   }
 
-  .cm-frame-icon-001__wrapper--#{map.get($settings, "key")} {
-    .cm-frame-icon-001 {
+  .cm-frame-number-001__wrapper--#{map.get($settings, "key")} {
+    .cm-frame-number-001 {
       position: relative;
     }
 
-    .cm-frame-icon-001__background {
+    .cm-frame-number-001__background {
       position: absolute;
       top: 0;
       left: 0;
@@ -32,7 +32,7 @@
       z-index: 0;
     }
 
-    .cm-frame-icon-001__inner {
+    .cm-frame-number-001__inner {
       width: 100%;
       height: 100%;
       display: flex;
@@ -40,50 +40,61 @@
       justify-content: center;
       position: relative;
       z-index: 1;
+    }
 
-      @include iconColor(
-        (
-          stroke: map.get($settings, "iconColor"),
-          fill: map.get($settings, "iconColor"),
-        )
-      );
+    .cm-frame-number-001__number {
+      font-weight: 700;
+      line-height: 1;
+      color: map.get($settings, "numberColor");
     }
 
     // type
 
-    .cm-frame-icon-001--001 {
-      .cm-frame-icon-001__background {
+    .cm-frame-number-001--001 {
+      .cm-frame-number-001__background {
         border-radius: 50%;
       }
     }
 
-    .cm-frame-icon-001--002 {
-      .cm-frame-icon-001__background {
+    .cm-frame-number-001--002 {
+      .cm-frame-number-001__background {
         border-radius: 0;
       }
     }
 
-    .cm-frame-icon-001--003 {
-      .cm-frame-icon-001__background {
+    .cm-frame-number-001--003 {
+      .cm-frame-number-001__background {
         border-radius: rem(4);
       }
     }
 
     // size
 
-    .cm-frame-icon-001--size_large {
+    .cm-frame-number-001--size_large {
       width: em(40);
       height: em(40);
+
+      .cm-frame-number-001__number {
+        font-size: em(24);
+      }
     }
 
-    .cm-frame-icon-001--size_middle {
+    .cm-frame-number-001--size_middle {
       width: em(35);
       height: em(35);
+
+      .cm-frame-number-001__number {
+        font-size: em(18);
+      }
     }
 
-    .cm-frame-icon-001--size_small {
+    .cm-frame-number-001--size_small {
       width: em(30);
       height: em(30);
+
+      .cm-frame-number-001__number {
+        font-size: em(14);
+      }
     }
   }
 }
