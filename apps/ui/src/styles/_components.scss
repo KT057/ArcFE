@@ -44,6 +44,7 @@
 @use "../components/Accordion/Product003/style/index" as *;
 @use "../components/Accordion/Product004/style/index" as *;
 @use "../components/Accordion/Product005/style/index" as *;
+@use "../components/TextButton/Product001/style/index" as *;
 
 @include button001(
   (
@@ -644,6 +645,18 @@
     content: (
       titleColor: #f00,
       textColor: #000,
+    ),
+  )
+);
+@include TextButton001(
+  (
+    key: "default",
+    color: #000,
+    fontSize: 12,
+    hover: (
+      color: #ccc,
+      duration: 0.3s,
+      ease: $easeInOutCubic,
     ),
   )
 );
