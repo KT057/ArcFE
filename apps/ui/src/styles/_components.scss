@@ -11,6 +11,7 @@
 @use "../components/ListItem/Product003/style/index" as *;
 @use "../components/ListItem/Product004/style/index" as *;
 @use "../components/ListItem/Product005/style/index" as *;
+@use "../components/ListItem/Product006/style/index" as *;
 @use "../components/NestedListItem/Product001/style/index" as *;
 @use "../components/NestedListItem/Product002/style/index" as *;
 @use "../components/FrameIcon/Product001/style/index" as *;
@@ -212,6 +213,20 @@
       ease: $easeInOutCubic,
       color: #ccc,
       pointColor: #ccc,
+    ),
+  )
+);
+@include ListItem006(
+  (
+    key: "default",
+    font-size: 24,
+    color: #000,
+    gap: 44,
+    iconColor: #000,
+    animation: (
+      duration: 0.25s,
+      ease: $easeInOutCubic,
+      opacity: 0.5,
     ),
   )
 );
