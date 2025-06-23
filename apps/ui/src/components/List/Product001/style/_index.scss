@@ -35,7 +35,7 @@
     }
 
     .cm-list-001--003 {
-      gap: em(40);
+      gap: em(map.get($settings, "gap"));
     }
   }
 }
