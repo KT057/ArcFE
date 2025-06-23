@@ -1,0 +1,9 @@
+include ./_component.pug
+include ../../../FrameNumber/Product001/template/_component
+
++ListItem006({ key: 'default' })
+  mixin text
+    | ListItem
+  mixin frameNumber
+    +FrameNumber001({ key: 'default', type: '001', size: 'small' })
+      | 1

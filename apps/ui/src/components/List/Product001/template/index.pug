@@ -1,0 +1,18 @@
+include ./_component.pug
+include ../../../ListItem/Product002/template/_component.pug
+include ../../../Icon/template/_component
+
++List001({ key: 'default', type: '001' })
+  mixin listItems({ className })
+    li(class=className)
+      a(href='#')
+        +ListItem002({ key: 'default' })
+          | ListItem01
+    li(class=className)
+      a(href='#')
+        +ListItem002({ key: 'default' })
+          | ListItem02
+    li(class=className)
+      a(href='#')
+        +ListItem002({ key: 'default' })
+          | ListItem03

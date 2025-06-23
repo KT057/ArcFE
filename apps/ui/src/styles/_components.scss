@@ -11,6 +11,7 @@
 @use "../components/ListItem/Product003/style/index" as *;
 @use "../components/ListItem/Product004/style/index" as *;
 @use "../components/ListItem/Product005/style/index" as *;
+@use "../components/ListItem/Product006/style/index" as *;
 @use "../components/NestedListItem/Product001/style/index" as *;
 @use "../components/NestedListItem/Product002/style/index" as *;
 @use "../components/FrameIcon/Product001/style/index" as *;
@@ -44,6 +45,8 @@
 @use "../components/Accordion/Product003/style/index" as *;
 @use "../components/Accordion/Product004/style/index" as *;
 @use "../components/Accordion/Product005/style/index" as *;
+@use "../components/TextButton/Product001/style/index" as *;
+@use "../components/List/Product001/style/index" as *;
 
 @include button001(
   (
@@ -127,24 +130,27 @@
     line-color: #000,
   )
 );
-@include listItem001(
+@include ListItem001(
   (
     key: "default",
     font-size: 24,
     color: #000,
     gap: 48,
-    line-height: 1.5,
     number: (
       font-size: 24,
       color: #000,
     ),
+    animation: (
+      color: #ccc,
+      duration: 0.25s,
+      ease: $easeInOutCubic,
+    ),
   )
 );
-@include listItem002(
+@include ListItem002(
   (
     key: "default",
     font-size: 24,
-    line-height: 1.25,
     color: #000,
     gap: 24,
     point: (
@@ -154,14 +160,15 @@
     animation: (
       duration: 0.25s,
       ease: $easeInOutCubic,
+      color: #ccc,
+      pointColor: #ccc,
     ),
   )
 );
-@include listItem003(
+@include ListItem003(
   (
     key: "default",
     font-size: 24,
-    line-height: 1.25,
     color: #000,
     gap: 24,
     point: (
@@ -171,31 +178,30 @@
     animation: (
       duration: 0.25s,
       ease: $easeInOutCubic,
+      color: #ccc,
+      pointColor: #ccc,
     ),
   )
 );
-@include listItem004(
+@include ListItem004(
   (
     key: "default",
     font-size: 24,
-    line-height: 1.25,
     color: #000,
     gap: 32,
-    icon: (
-      fill: #000,
-      stroke: #000,
-    ),
+    iconColor: #000,
     animation: (
       duration: 0.25s,
       ease: $easeInOutCubic,
+      color: #ccc,
+      iconColor: #ccc,
     ),
   )
 );
-@include listItem005(
+@include ListItem005(
   (
     key: "default",
     font-size: 24,
-    line-height: 1.25,
     color: #000,
     gap: 24,
     point: (
@@ -205,6 +211,22 @@
     animation: (
       duration: 0.25s,
       ease: $easeInOutCubic,
+      color: #ccc,
+      pointColor: #ccc,
+    ),
+  )
+);
+@include ListItem006(
+  (
+    key: "default",
+    font-size: 24,
+    color: #000,
+    gap: 44,
+    iconColor: #000,
+    animation: (
+      duration: 0.25s,
+      ease: $easeInOutCubic,
+      opacity: 0.5,
     ),
   )
 );
@@ -645,5 +667,23 @@
       titleColor: #f00,
       textColor: #000,
     ),
+  )
+);
+@include TextButton001(
+  (
+    key: "default",
+    color: #000,
+    fontSize: 12,
+    hover: (
+      color: #ccc,
+      duration: 0.3s,
+      ease: $easeInOutCubic,
+    ),
+  )
+);
+@include List001(
+  (
+    key: "default",
+    gap: 10,
   )
 );

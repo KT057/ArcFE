@@ -1,10 +1,10 @@
-mixin ListItem004({ key = 'default', href = '#', animation = '001' })
+mixin ListItem004({ key = 'default' })
   block
-  .cm-list-item-004__wrapper(class=`cm-list-item-004__wrapper--${key}`)
-    a.cm-list-item-004(href=href, class=`cm-list-item-004--animation_${animation}`)
-      .cm-list-item-004__icon-wrapper
-        .cm-list-item-004__icon
+  span.cm-list-item-004__wrapper(class=`cm-list-item-004__wrapper--${key}`)
+    span.cm-list-item-004
+      span.cm-list-item-004__icon-wrapper
+        span.cm-list-item-004__icon
           +icon
-      .cm-list-item-004__text-wrapper
-        .cm-list-item-004__text
+      span.cm-list-item-004__text-wrapper
+        span.cm-list-item-004__text
           +text
