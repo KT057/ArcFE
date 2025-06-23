@@ -684,6 +684,7 @@
 @include List001(
   (
     key: "default",
-    gap: 10,
+    columnGap: 10,
+    rowGap: 40,
   )
 );
