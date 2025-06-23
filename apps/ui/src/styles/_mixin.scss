@@ -98,6 +98,12 @@
     overflow: visible; /* Address `overflow` set to `hidden` in IE 8/9/10/11 */
   }
 
+  ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+
   summary {
     display: list-item; /* Add the correct display in all browsers */
   }
