@@ -4,7 +4,8 @@
 @mixin List001($options) {
   $defaults: (
     key: "default",
-    gap: 10,
+    columngap: 10,
+    rowgap: 40,
   );
 
   $settings: map.deep-merge($defaults, $options);
@@ -21,7 +22,7 @@
     .cm-list-001--001,
     .cm-list-001--002 {
       flex-direction: column;
-      gap: em(map.get($settings, "gap"));
+      gap: em(map.get($settings, "columnGap"));
     }
 
     .cm-list-001--002 {
@@ -35,7 +36,7 @@
     }
 
     .cm-list-001--003 {
-      gap: em(map.get($settings, "gap"));
+      gap: em(map.get($settings, "rowGap"));
     }
   }
 }
