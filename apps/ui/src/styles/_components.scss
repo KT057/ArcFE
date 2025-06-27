@@ -1,6 +1,5 @@
 @use "./import" as *;
-@use "../components/Button/Product001/style/index" as *;
-@use "../components/Button/Product002/style/index" as *;
+@use "./components/basic/button" as *;
 @use "../components/Icon/style/index" as *;
 @use "../components/Toggle/Product001/close/style/index" as *;
 @use "../components/Toggle/Product001/open/style/index" as *;
@@ -48,42 +47,6 @@
 @use "../components/TextButton/Product001/style/index" as *;
 @use "../components/List/Product001/style/index" as *;
 
-@include button001(
-  (
-    key: "default",
-    color: #000,
-    background-color: #fff,
-    border-color: #000,
-    font-weight: 700,
-    animation: (
-      text-color: #fff,
-      background-color: #000,
-      duration: 0.25s,
-    ),
-  )
-);
-@include button002(
-  (
-    key: "default",
-    color: #000,
-    background-color: #fff,
-    border-color: #000,
-    font-weight: 700,
-    icon: (
-      stroke: #000,
-      fill: #000,
-    ),
-    animation: (
-      background-color: #000,
-      text-color: #fff,
-      duration: 0.4s,
-      icon: (
-        stroke: #fff,
-        fill: #fff,
-      ),
-    ),
-  )
-);
 @include textIcon001(
   (
     key: "default",
