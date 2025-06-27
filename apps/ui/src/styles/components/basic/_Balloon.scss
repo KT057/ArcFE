@@ -1,6 +1,6 @@
 @use "../../import" as *;
-@use "../../../components/Balloon/Product001/style/index" as *;
-@use "../../../components/Balloon/Product002/style/index" as *;
+@use "../../../components/Basic/Balloon/Product001/style/index" as *;
+@use "../../../components/Basic/Balloon/Product002/style/index" as *;
 
 @include Balloon001(
   (

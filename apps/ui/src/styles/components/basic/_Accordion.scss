@@ -1,9 +1,9 @@
 @use "../../import" as *;
-@use "../../../components/Accordion/Product001/style/index" as *;
-@use "../../../components/Accordion/Product002/style/index" as *;
-@use "../../../components/Accordion/Product003/style/index" as *;
-@use "../../../components/Accordion/Product004/style/index" as *;
-@use "../../../components/Accordion/Product005/style/index" as *;
+@use "../../../components/Basic/Accordion/Product001/style/index" as *;
+@use "../../../components/Basic/Accordion/Product002/style/index" as *;
+@use "../../../components/Basic/Accordion/Product003/style/index" as *;
+@use "../../../components/Basic/Accordion/Product004/style/index" as *;
+@use "../../../components/Basic/Accordion/Product005/style/index" as *;
 
 @include Accordion001(
   (
