@@ -1,6 +1,6 @@
 @use "sass:map";
-@use "../../../../styles/import" as *;
-@use "../../../../styles/common-components" as *;
+@use "../../../../../styles/import" as *;
+@use "../../../../../styles/common-components" as *;
 
 @mixin FrameIcon001($options) {
   $defaults: (
