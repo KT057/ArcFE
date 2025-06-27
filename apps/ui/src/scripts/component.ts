@@ -3,7 +3,7 @@ import { accordionProduct002 } from "../components/Basic/Accordion/Product002/sc
 import { accordionProduct003 } from "../components/Basic/Accordion/Product003/script";
 import { accordionProduct004 } from "../components/Basic/Accordion/Product004/script";
 import { accordionProduct005 } from "../components/Basic/Accordion/Product005/script";
-import { buttonProduct002 } from "../components/Button/Product002/script";
+import { buttonProduct002 } from "../components/Basic/Button/Product002/script";
 import { toggleProduct002 } from "../components/Toggle/Product002/script";
 
 export const componentScripts = () => {

@@ -1,10 +1,10 @@
-import "../../../common/styles/common.css";
-import runScript from "!!raw-loader!../../../common/scripts/common.js";
+import "../../../../common/styles/common.css";
+import runScript from "!!raw-loader!../../../../common/scripts/common.js";
 import { withRunScript } from "storybook-addon-run-script/html";
 import Html from "./index.html";
 
 export default {
-  title: "Button",
+  title: "Basic/Button",
   decorators: [withRunScript(runScript)]
 };
 
@@ -16,7 +16,7 @@ const Template = (component) => {
   `;
 };
 
-export const Product002 = {
+export const Product001 = {
   render: () => {
     return Template(Html);
   },
@@ -24,7 +24,7 @@ export const Product002 = {
     design: [
       {
         type: "link",
-        url: "https://www.figma.com/design/YUbTzje2jUbb0Yh5ycNx2P/ui-catalog?node-id=2202-225&t=P6e7zlNuzHtdSf0m-4"
+        url: "https://www.figma.com/design/YUbTzje2jUbb0Yh5ycNx2P/ui-catalog?node-id=2070-27&t=jUNm67aQFTuwU0rk-4"
       }
     ]
   }
