@@ -1,9 +1,9 @@
 @use "../../import" as *;
-@use "../../../components/TextField/Product001/style/index" as *;
-@use "../../../components/TextField/Product002/style/index" as *;
-@use "../../../components/TextField/Product003/style/index" as *;
-@use "../../../components/TextField/Product004/style/index" as *;
-@use "../../../components/TextField/Product005/style/index" as *;
+@use "../../../components/Basic/TextField/Product001/style/index" as *;
+@use "../../../components/Basic/TextField/Product002/style/index" as *;
+@use "../../../components/Basic/TextField/Product003/style/index" as *;
+@use "../../../components/Basic/TextField/Product004/style/index" as *;
+@use "../../../components/Basic/TextField/Product005/style/index" as *;
 
 @include TextField001(
   (

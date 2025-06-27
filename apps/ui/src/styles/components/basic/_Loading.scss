@@ -1,6 +1,6 @@
 @use "../../import" as *;
-@use "../../../components/Loading/Product001/style/index" as *;
-@use "../../../components/Loading/Product002/style/index" as *;
+@use "../../../components/Basic/Loading/Product001/style/index" as *;
+@use "../../../components/Basic/Loading/Product002/style/index" as *;
 
 @include Loading001(
   (

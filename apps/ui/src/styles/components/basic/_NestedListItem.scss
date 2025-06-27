@@ -1,6 +1,6 @@
 @use "../../import" as *;
-@use "../../../components/NestedListItem/Product001/style/index" as *;
-@use "../../../components/NestedListItem/Product002/style/index" as *;
+@use "../../../components/Basic/NestedListItem/Product001/style/index" as *;
+@use "../../../components/Basic/NestedListItem/Product002/style/index" as *;
 
 @include NestedListItem001(
   (

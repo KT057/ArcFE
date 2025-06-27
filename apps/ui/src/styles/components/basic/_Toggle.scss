@@ -1,7 +1,7 @@
 @use "../../import" as *;
-@use "../../../components/Toggle/Product001/close/style/index" as *;
-@use "../../../components/Toggle/Product001/open/style/index" as *;
-@use "../../../components/Toggle/Product002/style/index" as *;
+@use "../../../components/Basic/Toggle/Product001/close/style/index" as *;
+@use "../../../components/Basic/Toggle/Product001/open/style/index" as *;
+@use "../../../components/Basic/Toggle/Product002/style/index" as *;
 
 @include toggle001Close(
   (
