@@ -1,6 +1,6 @@
 @use "../../import" as *;
-@use "../../../components/CheckBox/Product001/style/index" as *;
-@use "../../../components/CheckBox/Product002/style/index" as *;
+@use "../../../components/Basic/CheckBox/Product001/style/index" as *;
+@use "../../../components/Basic/CheckBox/Product002/style/index" as *;
 
 @include CheckBox001(
   (

@@ -1,10 +1,10 @@
 @use "../../import" as *;
-@use "../../../components/Input/Product001/style/index" as *;
-@use "../../../components/Input/Product002/style/index" as *;
-@use "../../../components/Input/Product003/style/index" as *;
-@use "../../../components/Input/Product004/style/index" as *;
-@use "../../../components/Input/Product005/style/index" as *;
-@use "../../../components/Input/Product006/style/index" as *;
+@use "../../../components/Basic/Input/Product001/style/index" as *;
+@use "../../../components/Basic/Input/Product002/style/index" as *;
+@use "../../../components/Basic/Input/Product003/style/index" as *;
+@use "../../../components/Basic/Input/Product004/style/index" as *;
+@use "../../../components/Basic/Input/Product005/style/index" as *;
+@use "../../../components/Basic/Input/Product006/style/index" as *;
 
 @include Input001(
   (

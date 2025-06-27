@@ -1,6 +1,6 @@
 @use "../../import" as *;
-@use "../../../components/Label/Product001/style/index" as *;
-@use "../../../components/Label/Product002/style/index" as *;
+@use "../../../components/Basic/Label/Product001/style/index" as *;
+@use "../../../components/Basic/Label/Product002/style/index" as *;
 
 @include Label001(
   (

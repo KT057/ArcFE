@@ -1,0 +1,8 @@
+include ./_component.pug
+include ../../../../Icon/template/_component
+
++Input006({ key: 'default', name: 'input-006', type: '001', size: 'middle', placeholder: '入力してください', iconPosition: 'right' })
+  mixin icon
+    +Icon({ key: 'default', type: '027', size: 'large' })
+  mixin errorText 
+    | ※ 必須項目に入力してください。

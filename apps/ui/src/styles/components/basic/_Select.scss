@@ -1,8 +1,8 @@
 @use "../../import" as *;
-@use "../../../components/Select/Product001/style/index" as *;
-@use "../../../components/Select/Product002/style/index" as *;
-@use "../../../components/Select/Product003/style/index" as *;
-@use "../../../components/Select/Product004/style/index" as *;
+@use "../../../components/Basic/Select/Product001/style/index" as *;
+@use "../../../components/Basic/Select/Product002/style/index" as *;
+@use "../../../components/Basic/Select/Product003/style/index" as *;
+@use "../../../components/Basic/Select/Product004/style/index" as *;
 
 @include Select001(
   (
