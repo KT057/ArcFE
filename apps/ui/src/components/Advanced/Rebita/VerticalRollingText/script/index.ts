@@ -1,38 +1,26 @@
-import { gsap } from "gsap";
+import gsap from "gsap";
 
-export const accordionProduct001 = () => {
-  const accordionHeaders = document.querySelectorAll<HTMLElement>(
-    ".js-accordion-001-header"
+export const verticalRollingText = () => {
+  const items = document.querySelectorAll<HTMLElement>(
+    ".js-vertical-rolling-text-wrapper"
   );
 
-  for (const accordionHeader of Array.from(accordionHeaders)) {
-    accordionHeader.addEventListener("click", (e) => {
-      const target = e.currentTarget as HTMLElement;
-
-      const isOpen = target.classList.contains("open");
-
-      target.classList.toggle("open");
-
-      const nextElement = target.nextElementSibling as HTMLElement;
-      const icon = target.querySelector<HTMLElement>(".js-accordion-001-icon");
-
-      if (!nextElement) return;
-
-      const contentInner = nextElement.querySelector<HTMLElement>(
-        ".js-accordion-001-content-inner"
+  // Todo: 連続ホバーした時の挙動
+  for (const item of Array.from(items)) {
+    item.addEventListener("mouseenter", () => {
+      const contents = item.querySelector<HTMLElement>(
+        ".js-vertical-rolling-text-contents"
       );
 
-      if (!contentInner) return;
+      if (!contents) return;
 
-      gsap.to(nextElement, {
-        height: isOpen ? 0 : "auto",
-        duration: 0.3,
-        ease: "power2.inOut"
+      gsap.set(contents, {
+        transform: "translateY(0)"
       });
 
-      gsap.to(icon, {
-        rotate: isOpen ? 0 : 180,
-        duration: 0.1,
+      gsap.to(contents, {
+        duration: 0.4,
+        transform: "translateY(-50%)",
         ease: "power2.inOut"
       });
     });

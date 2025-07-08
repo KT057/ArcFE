@@ -1,3 +1,4 @@
+import { verticalRollingText } from "../components/Advanced/Rebita/VerticalRollingText/script";
 import { accordionProduct001 } from "../components/Basic/Accordion/Product001/script";
 import { accordionProduct002 } from "../components/Basic/Accordion/Product002/script";
 import { accordionProduct003 } from "../components/Basic/Accordion/Product003/script";
@@ -14,4 +15,5 @@ export const componentScripts = () => {
   accordionProduct003();
   accordionProduct004();
   accordionProduct005();
+  verticalRollingText();
 };
