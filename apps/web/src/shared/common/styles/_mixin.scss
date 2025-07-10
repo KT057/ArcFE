@@ -63,6 +63,7 @@
   ::before,
   ::after {
     background-repeat: no-repeat; /* Set `background-repeat: no-repeat` to all elements and pseudo elements */
+    box-sizing: border-box;
   }
 
   ::before,
@@ -86,6 +87,23 @@
     display: block; /* Render the `main` element consistently in IE. */
   }
 
+  button {
+    padding: 0;
+    width: 100%;
+    display: block;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    text-align: left;
+    overflow: visible; /* Address `overflow` set to `hidden` in IE 8/9/10/11 */
+  }
+
+  ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+
   summary {
     display: list-item; /* Add the correct display in all browsers */
   }
@@ -107,12 +125,18 @@
   }
 
   a {
+    display: block;
+    text-decoration: none;
     background-color: transparent; /* Remove the gray background on active links in IE 10 */
   }
 
   a:active,
   a:hover {
     outline-width: 0; /* Remove the outline when hovering in all browsers */
+  }
+
+  input[type="checkbox"] {
+    border-radius: 0;
   }
 
   code,
@@ -195,10 +219,6 @@
 
   optgroup {
     font-weight: bold; /* Restore the font weight unset by the previous rule */
-  }
-
-  button {
-    overflow: visible; /* Address `overflow` set to `hidden` in IE 8/9/10/11 */
   }
 
   button,

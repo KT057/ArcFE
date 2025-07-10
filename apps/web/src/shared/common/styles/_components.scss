@@ -1,64 +1,22 @@
-@use "./import" as *;
-@use "../components/Button/Product001/style/index" as *;
-@use "../components/Button/Product002/style/index" as *;
-@use "../components/Icon/style/index" as *;
-@use "../components/Toggle/Product001/close/style/index" as *;
-@use "../components/Toggle/Product001/open/style/index" as *;
-@use "../components/Toggle/Product002/style/index" as *;
-
-@include button001(
-  (
-    key: "default",
-    color: #000,
-    background-color: #fff,
-    border-color: #000,
-    font-weight: 700,
-    animation: (
-      background-color: #ccc,
-    ),
-  )
-);
-@include button002(
-  (
-    key: "default",
-    color: #000,
-    background-color: #fff,
-    border-color: #000,
-    font-weight: 700,
-    animation: (
-      background-color: #ccc,
-    ),
-  )
-);
-@include icon(
-  (
-    key: "default",
-    stroke: #000,
-    fill: #000,
-  )
-);
-@include toggle001Close(
-  (
-    key: "default",
-    line-color: #000,
-    animation: (
-      background-color-line: #ccc,
-    ),
-  )
-);
-@include toggle001Open(
-  (
-    key: "default",
-    line-color: #000,
-    animation: (
-      background-color-before: #d9d9d9,
-      background-color-after: #fff,
-    ),
-  )
-);
-@include toggle002(
-  (
-    key: "default",
-    line-color: #000,
-  )
-);
+@use "./components/basic/Button" as *;
+@use "./components/basic/TextIcon" as *;
+@use "./components/basic/Icon" as *;
+@use "./components/basic/Toggle" as *;
+@use "./components/basic/ListItem" as *;
+@use "./components/basic/NestedListItem" as *;
+@use "./components/basic/FrameIcon" as *;
+@use "./components/basic/FrameNumber" as *;
+@use "./components/basic/Input" as *;
+@use "./components/basic/TextField" as *;
+@use "./components/basic/Select" as *;
+@use "./components/basic/Label" as *;
+@use "./components/basic/CheckBox" as *;
+@use "./components/basic/Radio" as *;
+@use "./components/basic/Balloon" as *;
+@use "./components/basic/Loading" as *;
+@use "./components/basic/Accordion" as *;
+@use "./components/basic/TextButton" as *;
+@use "./components/basic/List" as *;
+@use "./components/advanced/Rebita/VerticalRollingText" as *;
+@use "./components/advanced/Rebita/RebitaToggle" as *;
+@use "./components/advanced/Rebita/RebitaButton" as *;

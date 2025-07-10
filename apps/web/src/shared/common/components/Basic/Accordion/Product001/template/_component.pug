@@ -1,0 +1,15 @@
+mixin Accordion001({ key = 'default' })
+  block
+  .cm-accordion-001__wrapper(class=`cm-accordion-001__wrapper--${key}`)
+    .cm-accordion-001
+      .js-accordion-001-header.cm-accordion-001__header
+        .cm-accordion-001__header-inner
+          .cm-accordion-001__title-wrapper
+            .cm-accordion-001__title
+              +header
+          .js-accordion-001-icon.cm-accordion-001__icon
+            +icon
+      .js-accordion-001-content.cm-accordion-001__content-wrapper
+        .js-accordion-001-content-inner.cm-accordion-001__content
+          .cm-accordion-001__content-text
+            +content

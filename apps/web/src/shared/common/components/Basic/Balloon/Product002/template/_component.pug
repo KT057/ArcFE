@@ -1,0 +1,5 @@
+mixin Balloon002({ key = 'default', type = '001', arrowPosition = 'bottom' })
+  .cm-balloon-002__wrapper(class=`cm-balloon-002__wrapper--${key}`)
+    .cm-balloon-002(class=`cm-balloon-002--${type} cm-balloon-002--arrow-${arrowPosition}`)
+      span.cm-balloon-002__content
+        block
