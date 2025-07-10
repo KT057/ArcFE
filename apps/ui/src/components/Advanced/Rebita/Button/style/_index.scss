@@ -6,6 +6,9 @@
   $defaults: (
     key: "default",
     backgroundColor: #000,
+    textColor: #fff,
+    borderColor: #000,
+    iconColor: #fff,
   );
 
   $settings: map.deep-merge($defaults, $options);
@@ -16,7 +19,10 @@
 
   .cm-rebita-button__wrapper--#{map.get($settings, "key")} {
     .cm-rebita-button__inner {
-      display: block;
+      display: flex;
+      align-items: center;
+      border-radius: em(4);
+      background-color: map.get($settings, "backgroundColor");
     }
   }
 }

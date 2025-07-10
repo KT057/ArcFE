@@ -5,8 +5,11 @@ export const verticalRollingText = () => {
     ".js-vertical-rolling-text-wrapper"
   );
 
-  // Todo: 連続ホバーした時の挙動
-  for (const item of Array.from(items)) {
+  const sharedItems = document.querySelectorAll<HTMLElement>(
+    ".js-rebita-rolling-text"
+  );
+
+  for (const item of Array.from([...items, ...sharedItems])) {
     item.addEventListener("mouseenter", () => {
       const contents = item.querySelector<HTMLElement>(
         ".js-vertical-rolling-text-contents"

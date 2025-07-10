@@ -1,3 +1,8 @@
 mixin RebitaButton({ key = 'default', size = 'middle' })
-  .cm-rebita-button__wrapper(class=`cm-rebita-button__wrapper--${key}`)
-    | ボタン
+  block
+  span.cm-rebita-button__wrapper(class=`cm-rebita-button__wrapper--${key}`)
+    span.cm-rebita-button__inner
+      span.cm-rebita-button__left
+        +text
+      span.cm-rebita-button__right
+        +icon

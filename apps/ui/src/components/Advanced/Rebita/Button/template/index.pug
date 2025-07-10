@@ -1,3 +1,8 @@
 include ./_component.pug
+include ../../../../Basic/Icon/template/_component
 
 +RebitaButton({ key: 'default', size: 'middle' })
+  mixin text
+    | ボタン
+  mixin icon
+    +Icon({ key: 'default', type: '007', size: 'small' })
