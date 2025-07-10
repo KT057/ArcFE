@@ -1,0 +1,22 @@
+@use "sass:map";
+@use "sass:math";
+@use "../../../../../styles/import" as *;
+
+@mixin RebitaButton($options) {
+  $defaults: (
+    key: "default",
+    backgroundColor: #000,
+  );
+
+  $settings: map.deep-merge($defaults, $options);
+
+  .cm-rebita-button__wrapper {
+    @include baseFontSizeForEm();
+  }
+
+  .cm-rebita-button__wrapper--#{map.get($settings, "key")} {
+    .cm-rebita-button__inner {
+      display: block;
+    }
+  }
+}
