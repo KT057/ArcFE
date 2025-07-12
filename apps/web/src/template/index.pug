@@ -1,6 +1,6 @@
 extends /shared/templates/layout/_default
 
-include /shared/common/components/Button/Product001/template/_component.pug
+include /shared/common/components/template/_components.pug
 
 block vars
   -
@@ -13,5 +13,18 @@ block main
   .test-wrap
     p site wide #{data.page.top.title}
 
-    +Button001({ key: 'default', type: '001', size: 'middle' })
-      | ボタン
+    button
+      +Button001({key: 'default', type: '001', size: 'middle', animation: '001'}) 
+        +Text()
+          p.test-text テキスト
+
+    +Media()
+      mixin pc
+        p(style='font-size: 16em;')
+          | PC
+      mixin tb
+        p(style='font-size: 16em;')
+          | タブレット
+      mixin sp
+        p(style='font-size: 16em;')
+          | SP

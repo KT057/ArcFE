@@ -15,7 +15,11 @@ export const verticalRollingText = () => {
         ".js-vertical-rolling-text-contents"
       );
 
-      if (!contents) return;
+      const text = item.querySelector<HTMLElement>(".js-vertical-rolling-text");
+
+      if (!contents || !text) return;
+
+      const textHeight = text.offsetHeight;
 
       gsap.set(contents, {
         transform: "translateY(0)"
@@ -23,7 +27,7 @@ export const verticalRollingText = () => {
 
       gsap.to(contents, {
         duration: 0.4,
-        transform: "translateY(-50%)",
+        transform: `translateY(-${textHeight}px)`,
         ease: "power2.inOut"
       });
     });
