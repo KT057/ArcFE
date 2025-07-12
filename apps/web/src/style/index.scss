@@ -2,16 +2,25 @@
 @use "../shared/common/styles/import" as *;
 @use "../shared/common/styles/components" as *;
 
+html {
+  @include baseFontSizeForRem();
+}
+
 .test-wrap {
   width: 100%;
   height: 100%;
   color: #fff;
 
-  @media (width <= 1280px) {
+  @include spSizeLess() {
     width: 100%;
     height: 100%;
-    color: #fff;
+    color: #000;
   }
+}
+
+.test-rem {
+  font-size: rem(32);
+  color: #000;
 }
 
 .test {
@@ -19,9 +28,18 @@
   height: 100%;
   color: #fff;
 
-  @media (width <= 1280px) {
+  @include spSizeLess() {
     width: 100%;
     height: 100%;
-    color: #fff;
+    color: #000;
+  }
+}
+
+.test-text {
+  font-size: em(22);
+  margin: 0;
+
+  @include spSizeLess() {
+    font-size: em(12);
   }
 }

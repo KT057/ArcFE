@@ -22,7 +22,7 @@
       width: 100%;
       white-space: nowrap;
       display: block;
-      height: 1em;
+      height: 1.5em;
       font-size: em(map.get($settings, "fontSize"));
       color: map.get($settings, "color");
     }
@@ -33,7 +33,7 @@
 
     .cm-vertical-rolling-text {
       display: block;
-      line-height: 1;
+      line-height: 1.5;
     }
   }
 }

@@ -33,14 +33,18 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: em(3);
     }
 
     .cm-rebita-toggle__dot {
-      width: em(4);
-      height: em(4);
+      width: 4px;
+      height: 4px;
       border-radius: 50%;
+      display: block;
       background-color: map.get($settings, "dotColor");
+
+      &:nth-child(2) {
+        margin: 0 em(2);
+      }
     }
 
     .cm-rebita-toggle__close-wrapper {

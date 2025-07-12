@@ -22,14 +22,30 @@
   }
 
   .cm-text-button-001__wrapper--#{map.get($settings, "key")} {
+    $hover-duration: map.get(map.get($settings, "hover"), "duration");
+    $hover-ease: map.get(map.get($settings, "hover"), "ease");
+
     .cm-text-button-001 {
       display: block;
       color: map.get($settings, "color");
       font-size: em(map.get($settings, "fontSize"));
-      transition: color map.get(map.get($settings, "hover"), "duration") map.get(map.get($settings, "hover"), "ease");
+      transition: color $hover-duration $hover-ease;
 
       &:hover {
         color: map.get(map.get($settings, "hover"), "color");
+      }
+    }
+
+    .cm-text-button-001--002 {
+      display: inline-block;
+      border-bottom: 1px solid map.get($settings, "color");
+      transition:
+        border-color $hover-duration $hover-ease,
+        color $hover-duration $hover-ease;
+
+      &:hover {
+        color: map.get(map.get($settings, "hover"), "color");
+        border-color: map.get(map.get($settings, "hover"), "color");
       }
     }
   }
