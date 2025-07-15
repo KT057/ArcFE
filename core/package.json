@@ -25,7 +25,7 @@
     "child_process": "^1.0.2",
     "chokidar": "^4.0.3",
     "css-declaration-sorter": "^7.2.0",
-    "cssnano": "^7.0.7",
+    "cssnano": "^7.1.0",
     "formatter": "^0.4.2",
     "glob": "^11.0.3",
     "mkdirp": "^3.0.1",
