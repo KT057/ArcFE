@@ -16,7 +16,7 @@
     "browser-sync": "^3.0.4",
     "cross-env": "^7.0.3",
     "pug-lint": "^2.7.0",
-    "stylelint": "^16.21.1",
+    "stylelint": "^16.22.0",
     "stylelint-config-recommended-scss": "^15.0.1",
     "stylelint-config-standard": "^38.0.0",
     "ts-loader": "^9.5.2",
