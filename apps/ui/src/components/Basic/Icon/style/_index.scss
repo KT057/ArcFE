@@ -184,6 +184,14 @@ $ICON_SIZE_SMALL: 18;
   .cm-icon__path--039 {
     stroke: map.get($settings, "stroke");
   }
+
+  .cm-icon__path--040 {
+    fill: map.get($settings, "fill");
+  }
+
+  .cm-icon__path--041 {
+    fill: map.get($settings, "fill");
+  }
 }
 
 @mixin icon($options) {
