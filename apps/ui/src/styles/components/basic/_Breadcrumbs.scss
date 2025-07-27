@@ -1,0 +1,16 @@
+@use "../../import" as *;
+@use "../../../components/Basic/Breadcrumbs/style/index" as *;
+
+@include Breadcrumbs(
+  (
+    key: "default",
+    textColor: #000,
+    iconColor: #000,
+    textSize: 14,
+    animation: (
+      duration: 0.3s,
+      timingFunction: $easeOutCubic,
+      textColor: #ccc,
+    ),
+  )
+);
