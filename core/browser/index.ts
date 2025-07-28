@@ -44,14 +44,15 @@ export const browser = ({
     },
     server: {
       baseDir: [DIR.SRC, DIR.DIST],
-      middleware: typescript
-        ? [
-            webpackDevMiddleware(bundle, {
-              publicPath: "/",
-              stats: defaultStatsOptions
-            })
-          ]
-        : []
+      middleware:
+        typescript && bundle
+          ? [
+              webpackDevMiddleware(bundle, {
+                publicPath: "/",
+                stats: defaultStatsOptions
+              })
+            ]
+          : []
     }
   });
 };

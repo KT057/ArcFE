@@ -87,7 +87,7 @@ jobs:
 
       - name: Run Setup
         run: pnpm @ui lint:script
-  
+
   ui_storybook_build_check:
     runs-on: ubuntu-latest
     steps:
@@ -149,7 +149,7 @@ jobs:
 
       - name: Run Setup
         run: pnpm @ui lint:style
-        
+
   notify:
     runs-on: ubuntu-latest
     needs: [core_biome_check, core_tsc_check, ui_biome_check, ui_stylelint_check, ui_storybook_build_check]

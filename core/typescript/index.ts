@@ -16,7 +16,11 @@ export const renderMultipleTypescript = ({
   noSharedItems?: boolean;
 }) => {
   return new Promise<TResultPromise<string, Error>>((resolve) => {
-    webpack(webpackConf({ noSharedItems })).run((_, stats) => {
+    const bundle = webpack(webpackConf({ noSharedItems }));
+
+    if (!bundle) return resolve(err(new Error("Failed to build script")));
+
+    bundle.run((_, stats) => {
       if (!stats) return resolve(ok("Successfully built script"));
 
       if (stats.hasErrors()) {
