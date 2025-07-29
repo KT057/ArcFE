@@ -1,0 +1,54 @@
+@use "sass:map";
+@use "sass:math";
+@use "../../../../../styles/import" as *;
+@use "../../../../../styles/common-components" as *;
+
+@keyframes boxbuttonArrowHover {
+  0% {
+    transform: translate(0.6rem);
+  }
+
+  75% {
+    transform: translate(0);
+  }
+
+  100% {
+    transform: translate(0);
+  }
+}
+
+@mixin RebitaTextButtonWithIcon($options) {
+  $defaults: (
+    key: "default",
+  );
+
+  $settings: map.deep-merge($defaults, $options);
+
+  .cm-rebita-text-button-with-icon__wrapper {
+    @include baseFontSizeForEm();
+  }
+
+  .cm-rebita-text-button-with-icon__wrapper--#{map.get($settings, "key")} {
+    .cm-rebita-text-button-with-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      gap: em(8);
+
+      &:hover {
+        .cm-rebita-text-button-with-icon__icon {
+          animation: boxbuttonArrowHover 0.8s $easeOutCubic forwards infinite;
+        }
+      }
+    }
+
+    .cm-rebita-text-button-with-icon__inner {
+      display: block;
+    }
+
+    .cm-rebita-text-button-with-icon__icon {
+      display: block;
+    }
+  }
+}
