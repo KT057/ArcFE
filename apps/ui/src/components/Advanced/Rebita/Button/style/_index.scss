@@ -39,7 +39,6 @@
       display: flex;
       align-items: center;
       border-radius: em(4);
-      height: em(47);
       background-color: map.get($settings, "backgroundColor");
       border: 1px solid map.get($settings, "borderColor");
       cursor: pointer;
@@ -52,32 +51,29 @@
     }
 
     .cm-rebita-button__inner--large {
-      height: em(56);
-
       .cm-rebita-button__right {
-        width: em(56);
+        min-width: em(56);
+        max-width: em(56);
       }
     }
 
     .cm-rebita-button__inner--middle {
-      height: em(47);
-
       .cm-rebita-button__right {
-        width: em(47);
+        min-width: em(47);
+        max-width: em(47);
       }
     }
 
     .cm-rebita-button__inner--small {
-      height: em(37);
-
       .cm-rebita-button__right {
-        width: em(37);
+        min-width: em(37);
+        max-width: em(37);
       }
     }
 
     .cm-rebita-button__left {
       color: map.get($settings, "textColor");
-      padding: 0 em(20);
+      padding: em(10) em(20);
       height: 100%;
       flex: 1;
       border-right: 1px solid map.get($settings, "leftContentBorderColor");

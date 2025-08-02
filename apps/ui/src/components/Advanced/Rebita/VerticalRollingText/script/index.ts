@@ -5,9 +5,32 @@ export const verticalRollingText = () => {
     ".js-vertical-rolling-text-wrapper"
   );
 
-  const sharedItems = document.querySelectorAll<HTMLElement>(
-    ".js-rebita-rolling-text"
-  );
+  const sharedItems =
+    document.querySelectorAll<HTMLElement>(".js-rebita-rolling");
+
+  const setHeight = (item: HTMLElement) => {
+    const text = item.querySelector<HTMLElement>(".js-vertical-rolling-text");
+
+    if (!text) return;
+
+    const textHeight = text.clientHeight;
+
+    item.style.height = `${textHeight}px`;
+  };
+
+  window.addEventListener("resize", () => {
+    for (const item of Array.from(items)) {
+      const text = item.querySelector<HTMLElement>(".js-vertical-rolling-text");
+
+      if (!text) return;
+
+      setHeight(item);
+    }
+  });
+
+  for (const item of Array.from(items)) {
+    setHeight(item);
+  }
 
   for (const item of Array.from([...items, ...sharedItems])) {
     item.addEventListener("mouseenter", () => {
@@ -19,7 +42,7 @@ export const verticalRollingText = () => {
 
       if (!contents || !text) return;
 
-      const textHeight = text.offsetHeight;
+      const textHeight = text.clientHeight;
 
       gsap.set(contents, {
         transform: "translateY(0)"

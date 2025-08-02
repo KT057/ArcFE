@@ -3,7 +3,7 @@ include ../../VerticalRollingText/template/_component
 mixin RebitaTextButtonWithIcon({ key = 'default' })
   block
   .cm-rebita-text-button-with-icon__wrapper(class=`cm-rebita-text-button-with-icon__wrapper--${key}`)
-    .js-rebita-rolling-text.cm-rebita-text-button-with-icon
+    .js-rebita-rolling.cm-rebita-text-button-with-icon
       span.cm-rebita-text-button-with-icon__inner
         +VerticalRollingText({ key: 'default' })
           +text
