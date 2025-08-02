@@ -1,0 +1,9 @@
+include ./_component.pug
+include ../../CircleToggle/template/_component.pug
+
+button(style='display: inline-block; width: auto;')
+  +JmcButton({ key: 'default' })
+    mixin text
+      | ボタン
+    mixin circleToggle
+      +JmcCircleToggle({ key: 'JmcButton' })

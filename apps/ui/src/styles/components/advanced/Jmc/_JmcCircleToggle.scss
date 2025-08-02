@@ -1,0 +1,17 @@
+@use "../../../import" as *;
+@use "../../../../components/Advanced/Jmc/CircleToggle/style/index" as *;
+
+@include JmcCircleToggle(
+  (
+    key: "default",
+    color: #000,
+    dotColor: #000,
+  )
+);
+@include JmcCircleToggle(
+  (
+    key: "JmcButton",
+    color: #fff,
+    dotColor: #fff,
+  )
+);
