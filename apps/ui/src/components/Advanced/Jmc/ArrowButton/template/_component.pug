@@ -1,0 +1,16 @@
+include ../../../../Basic/Icon/template/_component
+
+mixin JmcArrowButton({ key = 'default', size = 'middle' })
+  span.cm-jmc-arrow-button__wrapper(class=`cm-jmc-arrow-button__wrapper--${key}`)
+    span.cm-jmc-arrow-button(class=`cm-jmc-arrow-button--${size}`)
+      span.cm-jmc-arrow-button__icon-container
+        span.cm-jmc-arrow-button__icon-wrapper
+          span.cm-jmc-arrow-button__icon-inner
+            span.cm-jmc-arrow-button__icon
+              +Icon({ key: 'default', type: '043', size: size })
+            span.cm-jmc-arrow-button__icon
+              +Icon({ key: 'default', type: '043', size: size })
+            span.cm-jmc-arrow-button__icon
+              +Icon({ key: 'default', type: '043', size: size })
+            span.cm-jmc-arrow-button__icon
+              +Icon({ key: 'default', type: '043', size: size })

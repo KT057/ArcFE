@@ -1,6 +1,24 @@
+-
+  function getIconSize(type) {
+    switch (type) {
+      case '043':
+        return {
+          width: 38,
+          height: 38,
+          viewBox: '0 0 38 38'
+        };
+      default:
+        return {
+          width: 24,
+          height: 24,
+          viewBox: '0 0 24 24'
+        };
+    }
+  }
+
 mixin Icon({ key = 'default', type = '001', size = "large" })
   span.cm-icon__wrapper(class=`cm-icon__wrapper--${key}`)
-    svg.cm-icon(width='24', height='24', viewBox='0 0 24 24', fill='none', class=`cm-icon--size_${size}`)
+    svg.cm-icon(width=getIconSize(type).width, height=getIconSize(type).height, viewBox=getIconSize(type).viewBox, fill='none', class=`cm-icon--size_${size} cm-icon--size_${size}_${type}`)
       case type
         when '001'
           path.cm-icon__path.cm-icon__path--001(d='M19 12H5m14 0-6 6m6-6-6-6', stroke-linecap='round', stroke-linejoin='round')
@@ -103,3 +121,10 @@ mixin Icon({ key = 'default', type = '001', size = "large" })
             d='M15.974 14.62 20 18.656 18.659 20l-4.023-4.03a6.632 6.632 0 0 1-9-.942 6.662 6.662 0 0 1 .293-9.062 6.635 6.635 0 0 1 9.041-.357 6.664 6.664 0 0 1 1.003 9.011Zm-.59-3.965c0-1.26-.5-2.47-1.39-3.361a4.739 4.739 0 0 0-6.708 0 4.758 4.758 0 0 0 0 6.722 4.739 4.739 0 0 0 6.708 0c.89-.892 1.39-2.1 1.39-3.361Z',
             clip-rule='evenodd'
           )
+        when '042'
+          path.cm-icon__path.cm-icon__path--042(d='M4 18.545 18.545 4l1.454 1.454L5.454 20z')
+          path.cm-icon__path.cm-icon__path--042(d='M5.455 4 20 18.545 18.546 20 4 5.455z')
+        when '043'
+          path.cm-icon__path.cm-icon__path--043(d='M0-.5h12.398', transform='scale(1.04854 .94898) rotate(45 -2.497 33.547)')
+          path.cm-icon__path.cm-icon__path--043(d='M0-.5h12.398', transform='matrix(.74143 -.67103 .74143 .67103 24.808 27)')
+          path.cm-icon__path.cm-icon__path--043(d='M4 18.5h24')
