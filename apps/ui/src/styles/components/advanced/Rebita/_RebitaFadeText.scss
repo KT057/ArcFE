@@ -1,0 +1,10 @@
+@use "../../../import" as *;
+@use "../../../../components/Advanced/Rebita/FadeText/style/index" as *;
+
+@include RebitaFadeText(
+  (
+    key: "default",
+    color: #3b82f6,
+    fontSize: 16,
+  )
+);

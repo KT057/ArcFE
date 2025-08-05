@@ -1,9 +1,9 @@
 include ../../VerticalRollingText/template/_component
 
-mixin RebitaButton({ key = 'default', size = 'middle' })
+mixin RebitaButton({ key = 'default', size = 'middle', direction = 'right' })
   block
   span.cm-rebita-button__wrapper(class=`cm-rebita-button__wrapper--${key}`)
-    span.js-rebita-rolling.cm-rebita-button__inner(class=`cm-rebita-button__inner--${size}`)
+    span.js-rebita-rolling.cm-rebita-button__inner(class=`cm-rebita-button__inner--${size} cm-rebita-button__inner--${direction}`)
       span.cm-rebita-button__left
         span.cm-rebita-button__left-inner
           +VerticalRollingText({ key: 'RebitaButtonText' })

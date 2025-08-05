@@ -3,20 +3,6 @@
 @use "../../../../../styles/import" as *;
 @use "../../../../../styles/common-components" as *;
 
-@keyframes boxbuttonArrowHover {
-  0% {
-    transform: translate(0.6rem);
-  }
-
-  75% {
-    transform: translate(0);
-  }
-
-  100% {
-    transform: translate(0);
-  }
-}
-
 @mixin RebitaButton($options) {
   $defaults: (
     key: "default",
@@ -42,12 +28,6 @@
       background-color: map.get($settings, "backgroundColor");
       border: 1px solid map.get($settings, "borderColor");
       cursor: pointer;
-
-      &:hover {
-        .cm-rebita-button__right-inner {
-          animation: boxbuttonArrowHover 0.8s $easeOutCubic forwards infinite;
-        }
-      }
     }
 
     .cm-rebita-button__inner--large {
@@ -68,6 +48,15 @@
       .cm-rebita-button__right {
         min-width: em(37);
         max-width: em(37);
+      }
+    }
+
+    .cm-rebita-button__inner--left {
+      flex-direction: row-reverse;
+
+      .cm-rebita-button__left {
+        border-right: 0;
+        border-left: 1px solid map.get($settings, "leftContentBorderColor");
       }
     }
 

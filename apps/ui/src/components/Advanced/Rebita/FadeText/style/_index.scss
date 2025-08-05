@@ -1,0 +1,46 @@
+@use "sass:map";
+@use "sass:math";
+@use "../../../../../styles/import" as *;
+
+@mixin RebitaFadeText($options) {
+  $defaults: (
+    key: "default",
+    color: #3b82f6,
+    fontSize: 16,
+  );
+
+  $settings: map.deep-merge($defaults, $options);
+
+  .cm-rebita-fade-text__wrapper {
+    @include baseFontSizeForEm();
+  }
+
+  .cm-rebita-fade-text__wrapper--#{map.get($settings, "key")} {
+    .cm-rebita-fade-text__container {
+      font-size: em(map.get($settings, "fontSize"));
+      line-height: 1.5;
+      height: 1.5em;
+      width: 100%;
+      position: relative;
+      display: block;
+    }
+
+    .cm-rebita-fade-text__text {
+      color: map.get($settings, "color");
+      position: absolute;
+      top: 0;
+      left: 0;
+
+      &:nth-child(1) {
+        color: map.get($settings, "color");
+        clip-path: inset(0 100% 0 0);
+        opacity: 1;
+      }
+
+      &:nth-child(2) {
+        color: map.get($settings, "color");
+        opacity: 0.2;
+      }
+    }
+  }
+}
