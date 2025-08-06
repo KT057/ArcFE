@@ -1,3 +1,4 @@
+import { fadeInAndZoomImages } from "../components/Advanced/common/FadeInAndZoomImags/script";
 import { verticalRollingText } from "../components/Advanced/Rebita/VerticalRollingText/script";
 import { accordionProduct001 } from "../components/Basic/Accordion/Product001/script";
 import { accordionProduct002 } from "../components/Basic/Accordion/Product002/script";
@@ -16,4 +17,5 @@ export const componentScripts = () => {
   accordionProduct004();
   accordionProduct005();
   verticalRollingText();
+  fadeInAndZoomImages();
 };

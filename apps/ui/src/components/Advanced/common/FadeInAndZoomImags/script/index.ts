@@ -1,59 +1,56 @@
 import gsap from "gsap";
 
-export const videoAnimation = () => {
-  const videos = document.querySelectorAll<HTMLVideoElement>(
-    ".js-rebita-video-animation"
-  );
-
-  const observerOptions = {
-    threshold: 0.5,
-    rootMargin: "0px 0px -10% 0px"
-  };
-
-  const observer = new IntersectionObserver((entries) => {
-    for (const entry of entries) {
-      const video = entry.target as HTMLVideoElement;
-      const wrapper = video.closest(".cm-rebita-video-animation__wrapper");
-
-      if (entry.isIntersecting) {
-        video.play().catch((error) => {
-          console.warn("Video autoplay failed:", error);
-        });
-
-        if (wrapper) {
-          gsap.fromTo(
-            video,
-            {
-              scale: 0.8,
-              opacity: 0
-            },
-            {
-              scale: 1,
-              opacity: 1,
-              duration: 0.8,
-              ease: "power2.out"
-            }
-          );
+const fadeInAndZoomImagesAnimation = ({nextIndex, images, image}: {nextIndex: () => number, images: HTMLDivElement[], image: HTMLDivElement}) => {
+  gsap.fromTo(image, {
+    scale: 1,
+    opacity: 1,
+    zIndex: 0
+  }, {
+    scale: 1.4,
+    opacity: 1,
+    duration: 1.6,
+    ease: "power2.out",
+    onComplete: () => {
+      const index = nextIndex();
+      const nextImage = images[index];
+      image.style.zIndex = "1";
+      gsap.to(image, {
+        opacity: 0,
+        duration: 1.2,
+        ease: "power2.out",
+        onComplete: () => {
+          image.style.zIndex = "0"
         }
-      } else {
-        video.pause();
-      }
+      });
+      fadeInAndZoomImagesAnimation({nextIndex, images, image: nextImage});
     }
-  }, observerOptions);
+  });
+}
 
-  for (const video of videos) {
-    observer.observe(video);
+export const fadeInAndZoomImages = () => {
+  let currentIndex = 0;
+  const imageWrappers = document.querySelectorAll<HTMLDivElement>(".js-fade-in-and-zoom-images-wrapper");
 
-    video.addEventListener("loadeddata", () => {
-      video.muted = true;
-    });
+  for (const imageWrapper of Array.from(imageWrappers)) {
+    const images = Array.from(imageWrapper.querySelectorAll<HTMLDivElement>(".cm-fade-in-and-zoom-images__content"));
 
-    video.addEventListener("error", (e) => {
-      console.error("Video loading error:", e);
-    });
+    const maxIndexes = images.length - 1;
+
+    const nextIndex = () => {
+      if (currentIndex >= maxIndexes) { 
+        currentIndex = 0;
+      } else {
+        currentIndex++;
+      }
+  
+      return currentIndex;
+    }
+
+    if (images) {
+      const firstImage = images[0]
+      if (!firstImage) return;
+      console
+      fadeInAndZoomImagesAnimation({nextIndex, images, image: firstImage});
+    }
   }
-
-  return () => {
-    observer.disconnect();
-  };
 };

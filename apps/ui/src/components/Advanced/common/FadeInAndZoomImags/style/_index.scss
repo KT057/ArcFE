@@ -23,6 +23,7 @@
     .cm-fade-in-and-zoom-images__image-inner {
       position: relative;
       width: 100%;
+      overflow: hidden;
 
       &::before {
         content: "";
@@ -38,6 +39,12 @@
       position: absolute;
       top: 0;
       left: 0;
+      overflow: hidden;
+      z-index: 0;
+
+      &::nth-child(1) {
+        z-index: 1;
+      }
     }
 
     .cm-fade-in-and-zoom-images__image {
