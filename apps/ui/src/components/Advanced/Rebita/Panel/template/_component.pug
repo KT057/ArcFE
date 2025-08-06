@@ -1,0 +1,22 @@
+include ../../../../Basic/Label/Product001/template/_component
+
+mixin RebitaPanel({ key = 'default' })
+  .cm-rebita-panel__wrapper(class=`cm-rebita-panel__wrapper--${key}`)
+    .cm-rebita-panel
+      .cm-rebita-panel__image-wrapper
+        .cm-rebita-panel__image-content
+          img.cm-rebita-panel__image-image(src='./images/img-01.jpg', alt='')
+        p.cm-rebita-panel__image-text 工業地域に建つ元企業社宅を地域に開いたシェアスペース付き分譲マンションとして再生
+      .cm-rebita-panel__content
+        h2.cm-rebita-panel__content-title リノア北赤羽
+        p.cm-rebita-panel__content-text 工業地域に建つ元企業社宅を地域に開いたシェアスペース付き分譲マンションとして再生
+      .cm-rebita-panel__label-wrapper
+        .cm-rebita-panel__label
+          +Label001({ key: 'default', type: '003', size: 'small' })
+            | 集合住宅
+        .cm-rebita-panel__label
+          +Label001({ key: 'default', type: '003', size: 'small' })
+            | 既存建物活用
+        .cm-rebita-panel__label
+          +Label001({ key: 'default', type: '003', size: 'small' })
+            | 多世代交流
