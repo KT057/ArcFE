@@ -14,17 +14,17 @@ function getAbsolutePath(value) {
 /** @type { import('@storybook/html-webpack5').StorybookConfig } */
 const config = {
   stories: [
-    "../components/**/*.stories.@(js|jsx|ts|tsx)",
     process.env.NODE_ENV === "development"
-      ? "../development/**/*.stories.js"
-      : "../dist/**/*.stories.js"
+      ? "../../development/**/*.stories.js"
+      : "../../dist/**/*.stories.js"
   ],
   addons: [
     getAbsolutePath("@storybook/addon-webpack5-compiler-swc"),
+    // getAbsolutePath("@storybook/addon-essentials"),
     getAbsolutePath("@storybook/addon-designs"),
     getAbsolutePath("@storybook/addon-interactions")
   ],
-  framework: "@storybook/react-vite",
+  framework: "@storybook/html-vite",
   core: {
     builder: {
       name: "@storybook/builder-webpack5",
@@ -40,27 +40,6 @@ const config = {
       use: "html-loader",
       exclude: /node_modules/
     });
-    config.module.rules.push({
-      test: /\.(ts|tsx)$/,
-      use: {
-        loader: require.resolve('swc-loader'),
-        options: {
-          jsc: {
-            parser: {
-              syntax: 'typescript',
-              tsx: true
-            },
-            transform: {
-              react: {
-                runtime: 'automatic'
-              }
-            }
-          }
-        }
-      },
-      exclude: /node_modules/
-    });
-    config.resolve.extensions.push(".ts", ".tsx");
     return config;
   }
 };
