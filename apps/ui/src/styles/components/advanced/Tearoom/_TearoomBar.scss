@@ -1,0 +1,7 @@
+@use "../../../../components/Advanced/Tearoom/Bar/style/index" as *;
+
+@include TearoomBar(
+  (
+    key: "default",
+  )
+);

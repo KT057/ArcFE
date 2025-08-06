@@ -1,0 +1,7 @@
+@use "../../../../components/Advanced/Tearoom/TableOfContents/style/index" as *;
+
+@include TearoomTableOfContents(
+  (
+    key: "default",
+  )
+);

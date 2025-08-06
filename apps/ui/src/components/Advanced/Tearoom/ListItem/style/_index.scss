@@ -1,0 +1,24 @@
+@use "sass:map";
+@use "sass:math";
+@use "../../../../../styles/import" as *;
+
+@mixin TearoomListItem($options) {
+  $defaults: (
+    key: "default",
+  );
+
+  $settings: map.deep-merge($defaults, $options);
+
+  .cm-tearoom-list-item__wrapper {
+    @include baseFontSizeForEm();
+  }
+
+  .cm-tearoom-list-item__wrapper--#{map.get($settings, "key")} {
+    .cm-tearoom-list-item {
+      display: flex;
+      align-items: center;
+      font-size: em(10);
+      cursor: pointer;
+    }
+  }
+}
