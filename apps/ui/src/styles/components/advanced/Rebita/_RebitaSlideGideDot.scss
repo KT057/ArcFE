@@ -1,0 +1,15 @@
+@use "../../../import" as *;
+@use "../../../../components/Advanced/Rebita/SlideGideDot/style/index" as *;
+
+@include RebitaSlideGideDot(
+  (
+    key: "default",
+    primaryColor: #3b82f6,
+    trackColor: #e5e7eb,
+    textColor: #1f2937,
+    fontSize: 16,
+    size: 16,
+    strokeWidth: 1,
+    animationDuration: 2s,
+  )
+);
