@@ -1,0 +1,30 @@
+@use "sass:map";
+@use "sass:math";
+@use "../../../../../styles/import" as *;
+
+@mixin RebitaFadeSlideImage($options) {
+  $defaults: (
+    key: "default",
+  );
+
+  $settings: map.deep-merge($defaults, $options);
+
+  .cm-rebita-button__wrapper {
+    @include baseFontSizeForEm();
+  }
+
+  .cm-rebita-fade-slide-image__wrapper--#{map.get($settings, "key")} {
+    .cm-rebita-fade-slide-image__container {
+      margin-bottom: em(14);
+      overflow: hidden;
+      border-radius: em(5);
+    }
+
+    .cm-rebita-fade-slide-image__gide-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: em(4);
+    }
+  }
+}

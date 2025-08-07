@@ -1,0 +1,9 @@
+@use "../../../import" as *;
+@use "../../../../components/Advanced/Jmc/Button/style/index" as *;
+
+@include JmcButton(
+  (
+    key: "default",
+    fontSize: 14,
+  )
+);

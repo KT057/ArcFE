@@ -11,20 +11,20 @@
     "@core": "pnpm --filter @core"
   },
   "devDependencies": {
-    "@biomejs/biome": "2.1.1",
+    "@biomejs/biome": "2.1.2",
     "@types/browser-sync": "^2.29.0",
     "browser-sync": "^3.0.4",
-    "cross-env": "^7.0.3",
+    "cross-env": "^10.0.0",
     "pug-lint": "^2.7.0",
-    "stylelint": "^16.21.1",
+    "stylelint": "^16.22.0",
     "stylelint-config-recommended-scss": "^15.0.1",
     "stylelint-config-standard": "^38.0.0",
     "ts-loader": "^9.5.2",
     "ts-node": "^10.9.2",
     "ts-node-dev": "^2.0.0",
-    "turbo": "^2.5.4",
+    "turbo": "^2.5.5",
     "typescript": "^5.8.3",
-    "webpack": "^5.100.1"
+    "webpack": "^5.101.0"
   },
   "dependencies": {
     "gsap": "^3.13.0",

@@ -5,6 +5,10 @@ $ICON_SIZE_LARGE: 24;
 $ICON_SIZE_MIDDLE: 20;
 $ICON_SIZE_SMALL: 18;
 
+$ICON_SIZE_LARGE_043: 38;
+$ICON_SIZE_MIDDLE_043: 29;
+$ICON_SIZE_SMALL_043: 22;
+
 @mixin iconTransition($options) {
   $defaults: (
     transitionstroke: stroke 0.3s $easeInOutCubic,
@@ -184,6 +188,22 @@ $ICON_SIZE_SMALL: 18;
   .cm-icon__path--039 {
     stroke: map.get($settings, "stroke");
   }
+
+  .cm-icon__path--040 {
+    fill: map.get($settings, "fill");
+  }
+
+  .cm-icon__path--041 {
+    fill: map.get($settings, "fill");
+  }
+
+  .cm-icon__path--042 {
+    fill: map.get($settings, "fill");
+  }
+
+  .cm-icon__path--043 {
+    stroke: map.get($settings, "stroke");
+  }
 }
 
 @mixin icon($options) {
@@ -223,14 +243,29 @@ $ICON_SIZE_SMALL: 18;
       height: em($ICON_SIZE_LARGE);
     }
 
+    .cm-icon--size_large_043 {
+      width: em($ICON_SIZE_LARGE_043);
+      height: em($ICON_SIZE_LARGE_043);
+    }
+
     .cm-icon--size_middle {
       width: em($ICON_SIZE_MIDDLE);
       height: em($ICON_SIZE_MIDDLE);
     }
 
+    .cm-icon--size_middle_043 {
+      width: em($ICON_SIZE_MIDDLE_043);
+      height: em($ICON_SIZE_MIDDLE_043);
+    }
+
     .cm-icon--size_small {
       width: em($ICON_SIZE_SMALL);
       height: em($ICON_SIZE_SMALL);
+    }
+
+    .cm-icon--size_small_043 {
+      width: em($ICON_SIZE_SMALL_043);
+      height: em($ICON_SIZE_SMALL_043);
     }
   }
 }

@@ -1,0 +1,7 @@
+@use "../../../../components/Advanced/Tearoom/ListItem/style/index" as *;
+
+@include TearoomListItem(
+  (
+    key: "default",
+  )
+);

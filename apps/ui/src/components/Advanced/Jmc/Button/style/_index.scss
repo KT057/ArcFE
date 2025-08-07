@@ -1,0 +1,43 @@
+@use "sass:map";
+@use "sass:math";
+@use "../../../../../styles/import" as *;
+@use "../../CircleToggle/style/index" as *;
+
+@mixin JmcButton($options) {
+  $defaults: (
+    key: "default",
+    fontSize: 14,
+    backgroundColor: #909090,
+    color: #fff,
+  );
+
+  $settings: map.deep-merge($defaults, $options);
+
+  .cm-jmc-button__wrapper {
+    @include baseFontSizeForEm();
+  }
+
+  .cm-jmc-button__wrapper--#{map.get($settings, "key")} {
+    .cm-jmc-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: em(8) em(10) em(8) em(16);
+      border-radius: em(30);
+      background-color: map.get($settings, "backgroundColor");
+      gap: em(25);
+
+      @include JmcCircleToggleHover(
+        (
+          color: map.get($settings, "color"),
+        )
+      );
+    }
+
+    .cm-jmc-button__left {
+      font-size: em(14);
+      display: block;
+      color: map.get($settings, "color");
+    }
+  }
+}

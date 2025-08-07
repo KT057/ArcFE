@@ -1,0 +1,11 @@
+include ../../VerticalRollingText/template/_component
+
+mixin RebitaCircleProgress({ key = 'default' })
+  .cm-rebita-circle-progress__wrapper(class=`cm-rebita-circle-progress__wrapper--${key}`)
+    .cm-rebita-circle-progress__container
+      svg.cm-rebita-circle-progress__svg
+        circle.cm-rebita-circle-progress__track
+        circle.cm-rebita-circle-progress__progress
+      .cm-rebita-circle-progress__content
+        span.cm-rebita-circle-progress__percentage
+          block

@@ -1,0 +1,16 @@
+@use "../../../import" as *;
+@use "../../../../components/Advanced/Jmc/ArrowButton/style/index" as *;
+
+@include JmcArrowButton(
+  (
+    key: "default",
+    iconColor: #000,
+    borderColor: #000,
+    backgroundColor: #fff,
+    hover: (
+      iconColor: #fff,
+      borderColor: #909090,
+      backgroundColor: #909090,
+    ),
+  )
+);

@@ -1,0 +1,8 @@
+@use "../../../import" as *;
+@use "../../../../components/Advanced/common/FadeInAndZoomImags/style/index" as *;
+
+@include FadeInAndZoomImages(
+  (
+    key: "default",
+  )
+);

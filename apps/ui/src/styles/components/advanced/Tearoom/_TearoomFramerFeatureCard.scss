@@ -1,0 +1,7 @@
+@use "../../../../components/Advanced/Tearoom/FramerFeatureCard/style/index" as *;
+
+@include TearoomFramerFeatureCard(
+  (
+    key: "default",
+  )
+);

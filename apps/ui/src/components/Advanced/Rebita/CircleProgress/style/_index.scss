@@ -1,0 +1,90 @@
+@use "sass:map";
+@use "sass:math";
+@use "../../../../../styles/import" as *;
+@use "../../../../../styles/common-components" as *;
+
+@mixin RebitaCircleProgress($options) {
+  $defaults: (
+    key: "default",
+    primaryColor: #3b82f6,
+    trackColor: #e5e7eb,
+    textColor: #1f2937,
+    fontSize: 16,
+    size: 100,
+    strokeWidth: 3,
+    animationDuration: 2s,
+  );
+
+  $settings: map.deep-merge($defaults, $options);
+
+  $radius: math.div(map.get($settings, "size") - map.get($settings, "strokeWidth"), 2);
+  $circumference: 2 * 3.1416 * $radius;
+
+  // @keyframes circleProgressAnimation {
+  //   0% {
+  //     stroke-dashoffset: em($circumference);
+  //   }
+
+  //   100% {
+  //     stroke-dashoffset: calc(em($circumference) - em($circumference) * 0.5);
+  //   }
+  // }
+
+  .cm-rebita-circle-progress__wrapper {
+    @include baseFontSizeForEm();
+  }
+
+  .cm-rebita-circle-progress__wrapper--#{map.get($settings, "key")} {
+    .cm-rebita-circle-progress__container {
+      width: em(map.get($settings, "size"));
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .cm-rebita-circle-progress__svg {
+      width: em(map.get($settings, "size"));
+      height: em(map.get($settings, "size"));
+      transform: rotate(-90deg);
+      overflow: visible;
+    }
+
+    .cm-rebita-circle-progress__track {
+      cx: em(math.div(map.get($settings, "size"), 2));
+      cy: em(math.div(map.get($settings, "size"), 2));
+      r: em(math.div(map.get($settings, "size") - 1, 2));
+      stroke-width: 1;
+      fill: none;
+      stroke: map.get($settings, "trackColor");
+      stroke-linecap: round;
+    }
+
+    .cm-rebita-circle-progress__progress {
+      cx: em(math.div(map.get($settings, "size"), 2));
+      cy: em(math.div(map.get($settings, "size"), 2));
+      r: em($radius);
+      stroke-width: map.get($settings, "strokeWidth");
+      fill: none;
+      stroke: map.get($settings, "primaryColor");
+      stroke-linecap: round;
+      stroke-dasharray: em($circumference);
+      // 0.5の部分を動かすとアニメーションする
+      stroke-dashoffset: calc(em($circumference) - em($circumference) * 0.5);
+      animation: circleProgressAnimation map.get($settings, "animationDuration") ease-in-out forwards;
+    }
+
+    .cm-rebita-circle-progress__content {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+    }
+
+    .cm-rebita-circle-progress__percentage {
+      font-size: em(map.get($settings, "fontSize"));
+      color: map.get($settings, "textColor");
+    }
+  }
+}
