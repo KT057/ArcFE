@@ -1,5 +1,4 @@
-import { FadeInAndZoomImages } from "@apps/ui/components/Advanced/common/FadeInAndZoomImages";
-import { Button001 } from "@apps/ui/components/Basic/Button/Product001";
+import { Button001, FadeInAndZoomImages } from "@apps/ui/components";
 import { GlobalStyles } from "@apps/ui/styles/global-style";
 import { themes } from "@apps/ui/styles/themes";
 import styled, { ThemeProvider } from "styled-components";
@@ -9,6 +8,7 @@ const StyledPage = styled.div`
   padding: 40px;
   border-radius: 10px;
 `;
+
 export const Page = () => {
   return (
     <ThemeProvider theme={themes}>
