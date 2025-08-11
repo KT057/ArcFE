@@ -122,7 +122,7 @@ export const FadeInAndZoomImages = ({
       <StyledFadeInAndZoomImagesImageInner ref={wrapperRef}>
         {images.map((image, index) => (
           <StyledFadeInAndZoomImagesContent
-            key={index}
+            key={image.src}
             className="fade-in-zoom-content"
             style={{
               zIndex: index === 0 ? 1 : 0,
