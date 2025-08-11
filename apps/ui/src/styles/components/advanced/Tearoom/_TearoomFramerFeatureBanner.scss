@@ -1,7 +1,0 @@
-@use "../../../../components/Advanced/Tearoom/FramerFeatureBanner/style/index" as *;
-
-@include TearoomFramerFeatureBanner(
-  (
-    key: "default",
-  )
-);

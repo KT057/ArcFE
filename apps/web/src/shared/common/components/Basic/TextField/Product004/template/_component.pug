@@ -1,9 +1,0 @@
-//- .js-text-fieldにerrorクラスを付与するとエラー表示が出る
-
-mixin TextField004({ key = 'default', type = '001', name = 'text-field-004', placeholder = '入力してください' })
-  block
-  .cm-text-field-004__wrapper(class=`cm-text-field-004__wrapper--${key}`)
-    .js-text-field.cm-text-field-004(class=`cm-text-field-004--${type}`)
-      textarea.cm-text-field-004__input(name=name, type='text', placeholder=placeholder)
-      p.cm-text-field-004__error 
-        +errorText

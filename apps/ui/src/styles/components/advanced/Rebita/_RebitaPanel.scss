@@ -1,8 +1,0 @@
-@use "../../../import" as *;
-@use "../../../../components/Advanced/Rebita/Panel/style/index" as *;
-
-@include RebitaPanel(
-  (
-    key: "default",
-  )
-);

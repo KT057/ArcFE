@@ -1,9 +1,0 @@
-mixin RebitaSlideGideDot({ key = 'default', type = 'default' })
-  .cm-rebita-slide-gide-dot__wrapper(class=`cm-rebita-slide-gide-dot__wrapper--${key}`)
-    .cm-rebita-slide-gide-dot__container
-      if type === 'default'
-        span.cm-rebita-slide-gide-dot__item
-      else if type === 'progress'
-        svg.cm-rebita-slide-gide-dot__svg
-          circle.cm-rebita-slide-gide-dot__track
-          circle.cm-rebita-slide-gide-dot__progress

@@ -6,10 +6,10 @@
   "author": "kota <k.ichikawa@attivita.co.jp>",
   "license": "MIT",
   "scripts": {
-    "dev": "pnpm run local",
+    "dev": "vite",
     "local": "cross-env NODE_ENV=local ts-node index.ts",
-    "build": "rm -rf  ./production && cross-env NODE_ENV=production ts-node index.ts",
-    "start": "browser-sync start -s 'production'",
+    "build": "vite build",
+    "start": "browser-sync start -s 'dist'",
     "tsc": "tsc --noEmit",
     "lint:template": "pug-lint -c .pug-lint.json .",
     "lint:style": "stylelint --ignore-path .stylelintignore \"**/*.scss\"",
@@ -18,6 +18,15 @@
     "lint:script:fix": "pnpm biome check --diagnostic-level=warn --write ."
   },
   "dependencies": {
-    "@core": "workspace:*"
+    "@apps/ui": "workspace:*",
+    "@core": "workspace:*",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.23",
+    "@types/react-dom": "^18.3.7",
+    "@vitejs/plugin-react": "^5.0.0",
+    "vite": "^7.1.1"
   }
 }

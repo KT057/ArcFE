@@ -1,9 +1,0 @@
-//- .js-inputにerrorクラスを付与するとエラー表示が出る
-
-mixin Input001({ key = 'default', type = '001', size = 'small', name = 'input-001', placeholder = '入力してください' })
-  block
-  .cm-input-001__wrapper(class=`cm-input-001__wrapper--${key}`)
-    .js-input.cm-input-001(class=`cm-input-001--${type} cm-input-001--size_${size}`)
-      input.cm-input-001__input(name=name, type='text', placeholder=placeholder)
-      p.cm-input-001__error 
-        +errorText

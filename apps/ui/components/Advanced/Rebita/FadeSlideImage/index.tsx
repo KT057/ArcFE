@@ -1,0 +1,54 @@
+import { useState } from "react";
+import {
+  FadeInAndZoomImages,
+  type FadeInAndZoomImagesImageItem
+} from "../../common/FadeInAndZoomImages";
+import { RebitaSlideGuideDot } from "../SlideGideDot";
+import {
+  StyledFadeSlideImageContainer,
+  StyledFadeSlideImageGuideItem,
+  StyledFadeSlideImageGuideWrapper,
+  StyledFadeSlideImageWrapper
+} from "./styles";
+
+interface FadeSlideImageProps {
+  images: FadeInAndZoomImagesImageItem[];
+  interval?: number;
+}
+
+export const RebitaFadeSlideImage = ({ images }: FadeSlideImageProps) => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [progress, setProgress] = useState(0);
+
+  const handleSlideChange = (index: number) => {
+    setCurrentIndex(index);
+  };
+
+  return (
+    <StyledFadeSlideImageWrapper>
+      <StyledFadeSlideImageContainer>
+        <FadeInAndZoomImages
+          images={images}
+          onImageChange={handleSlideChange}
+          onProgress={(progress) => {
+            setProgress(progress);
+          }}
+        />
+      </StyledFadeSlideImageContainer>
+
+      <StyledFadeSlideImageGuideWrapper>
+        {images.map((_, index) => (
+          <StyledFadeSlideImageGuideItem key={index}>
+            <RebitaSlideGuideDot
+              type={index === currentIndex ? "progress" : "default"}
+              progress={index === currentIndex ? progress : 0}
+              onClick={() => {
+                handleSlideChange(index);
+              }}
+            />
+          </StyledFadeSlideImageGuideItem>
+        ))}
+      </StyledFadeSlideImageGuideWrapper>
+    </StyledFadeSlideImageWrapper>
+  );
+};

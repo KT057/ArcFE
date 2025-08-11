@@ -1,66 +1,32 @@
-import { createRequire } from "node:module";
-import { dirname, join } from "node:path";
+import type { StorybookConfig } from "@storybook/react-vite";
 
-const require = createRequire(import.meta.url);
-
-/**
- * This function is used to resolve the absolute path of a package.
- * It is needed in projects that use Yarn PnP or are set up within a monorepo.
- */
-function getAbsolutePath(value) {
-  return dirname(require.resolve(join(value, "package.json")));
-}
-
-/** @type { import('@storybook/html-webpack5').StorybookConfig } */
-const config = {
+/** @type { import('@storybook/react-vite').StorybookConfig } */
+const config: StorybookConfig = {
+  staticDirs: ["../public"],
   stories: [
-    "../components/**/*.stories.@(js|jsx|ts|tsx)",
-    process.env.NODE_ENV === "development"
-      ? "../development/**/*.stories.js"
-      : "../dist/**/*.stories.js"
+    "../src/stories/**/*.stories.@(js|jsx|ts|tsx)",
+    "../components/**/*.stories.@(js|jsx|ts|tsx)"
   ],
   addons: [
-    getAbsolutePath("@storybook/addon-webpack5-compiler-swc"),
-    getAbsolutePath("@storybook/addon-designs"),
-    getAbsolutePath("@storybook/addon-interactions")
+    "@storybook/addon-essentials",
+    "@storybook/addon-interactions",
+    "@storybook/addon-docs",
+    "@storybook/addon-themes"
   ],
-  framework: "@storybook/react-vite",
-  core: {
-    builder: {
-      name: "@storybook/builder-webpack5",
-      options: {
-        fsCache: false,
-        lazyCompilation: false
-      }
-    }
+  framework: {
+    name: "@storybook/react-vite",
+    options: {}
   },
-  webpackFinal: async (config) => {
-    config.module.rules.push({
-      test: /\.html$/,
-      use: "html-loader",
-      exclude: /node_modules/
-    });
-    config.module.rules.push({
-      test: /\.(ts|tsx)$/,
-      use: {
-        loader: require.resolve('swc-loader'),
-        options: {
-          jsc: {
-            parser: {
-              syntax: 'typescript',
-              tsx: true
-            },
-            transform: {
-              react: {
-                runtime: 'automatic'
-              }
-            }
-          }
-        }
-      },
-      exclude: /node_modules/
-    });
-    config.resolve.extensions.push(".ts", ".tsx");
+  typescript: {
+    reactDocgen: "react-docgen-typescript"
+  },
+  viteFinal: async (config) => {
+    // styled-componentsの設定
+    config.define = {
+      ...config.define,
+      SC_DISABLE_SPEEDY: true
+    };
+
     return config;
   }
 };
