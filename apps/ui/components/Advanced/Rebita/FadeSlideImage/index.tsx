@@ -20,16 +20,15 @@ export const RebitaFadeSlideImage = ({ images }: FadeSlideImageProps) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [progress, setProgress] = useState(0);
 
-  const handleSlideChange = (index: number) => {
-    setCurrentIndex(index);
-  };
-
   return (
     <StyledFadeSlideImageWrapper>
       <StyledFadeSlideImageContainer>
         <FadeInAndZoomImages
           images={images}
-          onImageChange={handleSlideChange}
+          state={{
+            currentIndex,
+            setCurrentIndex
+          }}
           onProgress={(progress) => {
             setProgress(progress);
           }}
@@ -43,7 +42,7 @@ export const RebitaFadeSlideImage = ({ images }: FadeSlideImageProps) => {
               type={index === currentIndex ? "progress" : "default"}
               progress={index === currentIndex ? progress : 0}
               onClick={() => {
-                handleSlideChange(index);
+                setCurrentIndex(index);
               }}
             />
           </StyledFadeSlideImageGuideItem>

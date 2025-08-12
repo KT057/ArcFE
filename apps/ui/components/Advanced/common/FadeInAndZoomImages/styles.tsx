@@ -27,11 +27,6 @@ export const StyledFadeInAndZoomImagesContent = styled.div`
   overflow: hidden;
   z-index: 0;
   opacity: 0;
-
-  &:nth-child(1) {
-    z-index: 1;
-    opacity: 1;
-  }
 `;
 
 export const StyledFadeInAndZoomImagesImage = styled.img`

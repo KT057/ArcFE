@@ -1,11 +1,9 @@
 import type { ReactNode } from "react";
+import { CircleProgress } from "../../common/CircleProgress";
 import {
   StyledCircleProgressContainer,
   StyledCircleProgressContent,
   StyledCircleProgressPercentage,
-  StyledCircleProgressProgress,
-  StyledCircleProgressSvg,
-  StyledCircleProgressTrack,
   StyledCircleProgressWrapper
 } from "./styles";
 
@@ -34,19 +32,16 @@ export const RebitaCircleProgress = ({
   return (
     <StyledCircleProgressWrapper>
       <StyledCircleProgressContainer size={size}>
-        <StyledCircleProgressSvg size={size}>
-          <StyledCircleProgressTrack
-            trackColor={style?.trackColor}
-            size={size}
-          />
-          <StyledCircleProgressProgress
-            primaryColor={style?.primaryColor}
-            size={size}
-            strokeWidth={strokeWidth}
-            animationDuration={style?.animationDuration}
-            progress={progress}
-          />
-        </StyledCircleProgressSvg>
+        <CircleProgress
+          progress={progress}
+          size={size}
+          style={{
+            primaryColor: style?.primaryColor,
+            trackColor: style?.trackColor,
+            strokeWidth: strokeWidth,
+            animationDuration: style?.animationDuration
+          }}
+        />
         <StyledCircleProgressContent>
           <StyledCircleProgressPercentage
             fontSize={style?.fontSize}

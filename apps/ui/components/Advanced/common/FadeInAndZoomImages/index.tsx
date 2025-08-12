@@ -1,5 +1,5 @@
 import gsap from "gsap";
-import { useEffect, useRef } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
   StyledFadeInAndZoomImagesContent,
   StyledFadeInAndZoomImagesImage,
@@ -17,8 +17,13 @@ interface FadeInAndZoomImagesProps {
   duration?: number;
   fadeDuration?: number;
   scaleTo?: number;
+  state?: {
+    currentIndex: number;
+    setCurrentIndex: (index: number) => void;
+  };
   onImageChange?: (currentIndex: number) => void;
   onProgress?: (progress: number) => void;
+  onCurrentIndexChange?: () => void;
 }
 
 export const FadeInAndZoomImages = ({
@@ -26,60 +31,16 @@ export const FadeInAndZoomImages = ({
   duration = 4,
   fadeDuration = 2,
   scaleTo = 1.2,
+  state,
   onImageChange,
   onProgress
 }: FadeInAndZoomImagesProps) => {
   const wrapperRef = useRef<HTMLDivElement>(null);
-  const currentIndexRef = useRef(0);
+  const [isFirstAnimation, setIsFirstAnimation] = useState(false);
+  const [currentIndex, setCurrentIndex] = useState(state?.currentIndex ?? 0);
 
-  const fadeInAndZoomImagesAnimation = ({
-    nextIndex,
-    imageElements,
-    imageElement
-  }: {
-    nextIndex: () => number;
-    imageElements: HTMLDivElement[];
-    imageElement: HTMLDivElement;
-  }) => {
-    gsap.set(imageElement, {
-      scale: 1,
-      opacity: 1
-    });
-
-    const tween = gsap.to(imageElement, {
-      scale: scaleTo,
-      opacity: 1,
-      duration: duration,
-      ease: "power2.out",
-      onComplete: () => {
-        const index = nextIndex();
-        const nextImage = imageElements[index];
-        imageElement.style.zIndex = "1";
-        gsap.to(imageElement, {
-          opacity: 0,
-          duration: fadeDuration,
-          ease: "power2.out",
-          onComplete: () => {
-            imageElement.style.zIndex = "0";
-          }
-        });
-        onImageChange?.(index);
-        fadeInAndZoomImagesAnimation({
-          nextIndex,
-          imageElements,
-          imageElement: nextImage
-        });
-      },
-      onUpdate: () => {
-        const progress = Math.floor(tween.progress() * 100);
-        onProgress?.(progress);
-      }
-    });
-  };
-
-  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
-  useEffect(() => {
-    if (!wrapperRef.current || images.length <= 1) return;
+  const getImageElements = useCallback(() => {
+    if (!wrapperRef.current) return [];
 
     const imageElements = Array.from(
       wrapperRef.current.querySelectorAll<HTMLDivElement>(
@@ -87,33 +48,137 @@ export const FadeInAndZoomImages = ({
       )
     );
 
-    const maxIndexes = imageElements.length - 1;
+    return imageElements;
+  }, []);
 
-    const nextIndex = () => {
-      if (currentIndexRef.current >= maxIndexes) {
-        currentIndexRef.current = 0;
-      } else {
-        currentIndexRef.current++;
-      }
-      return currentIndexRef.current;
-    };
+  const currentIndexData = useMemo(() => {
+    return state?.currentIndex ?? currentIndex;
+  }, [state?.currentIndex, currentIndex]);
 
-    if (imageElements.length > 0) {
-      const firstImage = imageElements[0];
-      if (firstImage) {
-        firstImage.style.zIndex = "1";
-        fadeInAndZoomImagesAnimation({
-          nextIndex,
-          imageElements,
-          imageElement: firstImage
+  const onChangeCurrentIndex = useCallback(
+    (index: number) => {
+      setCurrentIndex(index);
+      state?.setCurrentIndex?.(index);
+    },
+    [state]
+  );
+
+  const onNextIndex = useCallback(() => {
+    let nextIndex = currentIndexData;
+    const maxIndexes = images.length - 1;
+    if (nextIndex >= maxIndexes) {
+      nextIndex = 0;
+      onChangeCurrentIndex(nextIndex);
+    } else {
+      nextIndex++;
+      onChangeCurrentIndex(nextIndex);
+    }
+    return nextIndex;
+  }, [currentIndexData, images.length, onChangeCurrentIndex]);
+
+  const completeAnimation = useCallback(
+    ({ imageElement }: { imageElement: HTMLDivElement }) => {
+      imageElement.style.zIndex = "1";
+      gsap.to(imageElement, {
+        opacity: 0,
+        duration: fadeDuration,
+        ease: "power2.out",
+        onComplete: () => {
+          onImageChange?.(currentIndexData);
+          imageElement.style.zIndex = "0";
+        }
+      });
+    },
+    [currentIndexData, fadeDuration, onImageChange]
+  );
+
+  const fadeInAndZoomImagesAnimation = useCallback(
+    ({ imageElement }: { imageElement: HTMLDivElement }) => {
+      console.log("imageElement", imageElement);
+
+      gsap.set(imageElement, {
+        scale: 1,
+        opacity: 1
+      });
+
+      const tween = gsap.to(imageElement, {
+        scale: scaleTo,
+        opacity: 1,
+        duration: duration,
+        ease: "power2.out",
+        onComplete: () => {
+          onImageChange?.(currentIndexData);
+          onNextIndex();
+        },
+        onUpdate: () => {
+          const progress = Math.floor(tween.progress() * 100);
+          onProgress?.(progress);
+        }
+      });
+    },
+    [
+      currentIndexData,
+      duration,
+      onImageChange,
+      onNextIndex,
+      onProgress,
+      scaleTo
+    ]
+  );
+
+  const switchToIndex = useCallback(
+    (index: number) => {
+      if (!wrapperRef.current || images.length <= 1) return;
+
+      const imageElements = getImageElements();
+      gsap.killTweensOf(imageElements);
+      const otherImageElements = imageElements.filter(
+        (_, elementIndex) => elementIndex !== index
+      );
+
+      for (const imageElement of otherImageElements) {
+        completeAnimation({
+          imageElement
         });
       }
-    }
+
+      if (imageElements.length > 0) {
+        const imageElement = imageElements[index];
+        if (imageElement) {
+          if (!isFirstAnimation) {
+            setIsFirstAnimation(true);
+            imageElement.style.zIndex = "1";
+            imageElement.style.opacity = "1";
+          } else {
+            imageElement.style.zIndex = "0";
+          }
+
+          fadeInAndZoomImagesAnimation({
+            imageElement
+          });
+        }
+      }
+    },
+    [
+      completeAnimation,
+      fadeInAndZoomImagesAnimation,
+      getImageElements,
+      images.length,
+      isFirstAnimation
+    ]
+  );
+
+  console.log("currentIndexData", currentIndexData);
+
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
+  useEffect(() => {
+    switchToIndex(currentIndexData);
 
     return () => {
+      const imageElements = getImageElements();
       gsap.killTweensOf(imageElements);
     };
-  }, [images, duration, fadeDuration, scaleTo]);
+  }, [currentIndexData]);
 
   if (!images || images.length === 0) return null;
 
@@ -124,10 +189,6 @@ export const FadeInAndZoomImages = ({
           <StyledFadeInAndZoomImagesContent
             key={image.src}
             className="fade-in-zoom-content"
-            style={{
-              zIndex: index === 0 ? 1 : 0,
-              opacity: index === 0 ? 1 : 0
-            }}
           >
             <StyledFadeInAndZoomImagesImage
               src={image.src}

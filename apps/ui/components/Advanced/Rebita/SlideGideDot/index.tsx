@@ -1,10 +1,8 @@
+import { CircleProgress } from "../../common/CircleProgress";
 import type { SlideGuideDotType } from "./styles";
 import {
   StyledSlideGuideDotContainer,
   StyledSlideGuideDotItem,
-  StyledSlideGuideDotProgress,
-  StyledSlideGuideDotSvg,
-  StyledSlideGuideDotTrack,
   StyledSlideGuideDotWrapper
 } from "./styles";
 
@@ -36,19 +34,16 @@ export const RebitaSlideGuideDot = ({
         {type === "default" ? (
           <StyledSlideGuideDotItem onClick={onClick} />
         ) : (
-          <StyledSlideGuideDotSvg size={size}>
-            <StyledSlideGuideDotTrack
-              trackColor={style?.trackColor}
-              size={size}
-            />
-            <StyledSlideGuideDotProgress
-              primaryColor={style?.primaryColor}
-              size={size}
-              strokeWidth={strokeWidth}
-              animationDuration={style?.animationDuration}
-              progress={progress}
-            />
-          </StyledSlideGuideDotSvg>
+          <CircleProgress
+            progress={progress}
+            size={size}
+            style={{
+              primaryColor: style?.primaryColor,
+              trackColor: style?.trackColor,
+              strokeWidth: strokeWidth,
+              animationDuration: style?.animationDuration
+            }}
+          />
         )}
       </StyledSlideGuideDotContainer>
     </StyledSlideGuideDotWrapper>

@@ -23,26 +23,34 @@ const sampleImages = [
 
 export const Default = Template.bind({});
 Default.args = {
-  images: sampleImages
+  images: sampleImages,
+  onProgress: () => null,
+  onImageChange: () => null
 };
 
 export const FastTransition = Template.bind({});
 FastTransition.args = {
   images: sampleImages,
   duration: 2,
-  fadeDuration: 1
+  fadeDuration: 1,
+  onProgress: () => null,
+  onImageChange: () => null
 };
 
 export const SlowTransition = Template.bind({});
 SlowTransition.args = {
   images: sampleImages,
   duration: 6,
-  fadeDuration: 3
+  fadeDuration: 3,
+  onProgress: () => null,
+  onImageChange: () => null
 };
 
 export const CustomScale = Template.bind({});
 CustomScale.args = {
   images: sampleImages,
   scaleTo: 1.5,
-  duration: 4
+  duration: 4,
+  onProgress: () => null,
+  onImageChange: () => null
 };
