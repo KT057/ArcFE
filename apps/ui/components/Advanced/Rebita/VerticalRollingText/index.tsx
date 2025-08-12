@@ -56,12 +56,10 @@ export const VerticalRollingText = ({
 
     const setHeight = () => {
       const textHeight = textElement.clientHeight;
-      console.log("textHeight", textHeight);
       wrapperElement.style.height = `${textHeight}px`;
     };
 
     const handleResize = () => {
-      console.log("handleResize");
       setHeight();
     };
 
