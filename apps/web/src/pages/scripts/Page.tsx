@@ -1,7 +1,9 @@
 import { Button001, FadeInAndZoomImages } from "@apps/ui/components";
 import { GlobalStyles } from "@apps/ui/styles/global-style";
 import { themes } from "@apps/ui/styles/themes";
+import { useEffect } from "react";
 import styled, { ThemeProvider } from "styled-components";
+import { getWpPosts } from "../../shared/wordpress/api/post";
 
 const StyledPage = styled.div`
   background-color: ${({ theme }) => theme.color.secondary};
@@ -10,6 +12,21 @@ const StyledPage = styled.div`
 `;
 
 export const Page = () => {
+  const getData = async () => {
+    const posts = await getWpPosts({
+      pagination: {
+        page: 3,
+        perPage: 1
+      }
+    });
+    console.log(posts);
+  };
+
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
+  useEffect(() => {
+    getData();
+  }, []);
+
   return (
     <ThemeProvider theme={themes}>
       <GlobalStyles />

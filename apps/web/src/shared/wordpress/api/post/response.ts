@@ -37,73 +37,36 @@ export type WPPostResponse = {
   };
   categories: number[];
   tags: number[];
-  _links: {
-    self: Array<{
-      href: string;
-      targetHints?: {
-        allow: string[];
+  _embedded: {
+    author: {
+      avatar_urls: {
+        24: string;
+        48: string;
+        96: string;
       };
-    }>;
-    collection: Array<{
-      href: string;
-    }>;
-    about: Array<{
-      href: string;
-    }>;
-    author: Array<{
-      embeddable: boolean;
-      href: string;
-    }>;
-    replies: Array<{
-      embeddable: boolean;
-      href: string;
-    }>;
-    "version-history": Array<{
-      count: number;
-      href: string;
-    }>;
-    "predecessor-version"?: Array<{
       id: number;
-      href: string;
-    }>;
-    "wp:featuredmedia"?: Array<{
+      name: string;
+      description: string;
+      slug: string;
+      url: string;
+    }[];
+    "wp:featuredmedia": {
       id: number;
       slug: string;
       title: { rendered: string };
       media_type: "image" | "video" | "audio" | "file";
       mime_type: string;
+      source_url: string;
       media_details: {
         width: number;
         height: number;
-        sizes: {
-          medium?: {
-            source_url: string;
-          };
-          large?: {
-            source_url: string;
-          };
-          thumbnail?: {
-            source_url: string;
-          };
-          full: {
-            source_url: string;
-          };
-        };
       };
-      source_url: string;
-    }>;
-    "wp:attachment": Array<{
-      href: string;
-    }>;
-    "wp:term": Array<{
-      taxonomy: "category" | "post_tag" | string;
-      embeddable: boolean;
-      href: string;
-    }>;
-    curies: Array<{
+    }[];
+    "wp:term": {
+      id: number;
+      taxonomy: "category" | "post_tag";
+      slug: string;
       name: string;
-      href: string;
-      templated: boolean;
-    }>;
+    }[][];
   };
 };

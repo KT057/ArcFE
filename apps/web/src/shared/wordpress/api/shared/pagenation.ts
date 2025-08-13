@@ -7,5 +7,5 @@ export const getPaginationQuery = (pagination?: Pagination) => {
   if (!pagination) {
     return "";
   }
-  return `page=${pagination.page}&per_page=${pagination.perPage}`;
+  return `&page=${pagination.page}&per_page=${pagination.perPage}`;
 };
