@@ -7,6 +7,9 @@ const root = resolve(__dirname, "src/pages");
 export default defineConfig({
   root,
   plugins: [react()],
+  define: {
+    'process.env.ENV': JSON.stringify(process.env.ENV)
+  },
   build: {
     emptyOutDir: true,
     rollupOptions: {

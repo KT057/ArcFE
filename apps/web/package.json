@@ -6,8 +6,8 @@
   "author": "kota <k.ichikawa@attivita.co.jp>",
   "license": "MIT",
   "scripts": {
-    "dev": "vite",
-    "local": "cross-env NODE_ENV=local ts-node index.ts",
+    "dev": "cross-env ENV=local vite",
+    "local": "cross-env ENV=local vite",
     "build": "vite build",
     "start": "browser-sync start -s 'dist'",
     "tsc": "tsc --noEmit",
@@ -27,6 +27,7 @@
     "@types/react": "^18.3.23",
     "@types/react-dom": "^18.3.7",
     "@vitejs/plugin-react": "^5.0.0",
+    "cross-env": "^7.0.3",
     "vite": "^7.1.1"
   }
 }
