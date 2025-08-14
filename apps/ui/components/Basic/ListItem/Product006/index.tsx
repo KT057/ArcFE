@@ -38,15 +38,10 @@ export const ListItem006 = ({
         animationEase={style?.animationEase}
       >
         <StyledListItemFrameNumberWrapper fontSize={style?.fontSize}>
-          <StyledListItemFrameNumber>
-            {frameNumber}
-          </StyledListItemFrameNumber>
+          <StyledListItemFrameNumber>{frameNumber}</StyledListItemFrameNumber>
         </StyledListItemFrameNumberWrapper>
         <StyledListItemTextWrapper gap={style?.gap}>
-          <StyledListItemText
-            fontSize={style?.fontSize}
-            color={style?.color}
-          >
+          <StyledListItemText fontSize={style?.fontSize} color={style?.color}>
             {children}
           </StyledListItemText>
         </StyledListItemTextWrapper>

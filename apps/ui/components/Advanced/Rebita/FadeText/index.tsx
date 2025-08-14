@@ -27,18 +27,11 @@ export const RebitaFadeText = ({
     >
       <StyledFadeTextContainer fontSize={style?.fontSize}>
         {/* 表示される部分（clip-pathで制御） */}
-        <StyledFadeText
-          color={style?.color}
-          isFirst={true}
-          progress={progress}
-        >
+        <StyledFadeText color={style?.color} isFirst={true} progress={progress}>
           {children}
         </StyledFadeText>
         {/* 背景の薄いテキスト */}
-        <StyledFadeText
-          color={style?.color}
-          isFirst={false}
-        >
+        <StyledFadeText color={style?.color} isFirst={false}>
           {children}
         </StyledFadeText>
       </StyledFadeTextContainer>

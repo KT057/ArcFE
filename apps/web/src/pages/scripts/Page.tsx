@@ -1,7 +1,9 @@
 import { Button001, FadeInAndZoomImages } from "@apps/ui/components";
 import { GlobalStyles } from "@apps/ui/styles/global-style";
 import { themes } from "@apps/ui/styles/themes";
+import { useEffect } from "react";
 import styled, { ThemeProvider } from "styled-components";
+import { postWpContact7Feedback } from "../../shared/wordpress/api/contact7/feedback";
 
 const StyledPage = styled.div`
   background-color: ${({ theme }) => theme.color.secondary};
@@ -10,6 +12,17 @@ const StyledPage = styled.div`
 `;
 
 export const Page = () => {
+  const getData = async () => {
+    const posts = await postWpContact7Feedback({ id: "63" });
+    console.log(posts);
+  };
+
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
+  useEffect(() => {
+    console.log(process.env.WP_PREVIEW_BASE64);
+    getData();
+  }, []);
+
   return (
     <ThemeProvider theme={themes}>
       <GlobalStyles />

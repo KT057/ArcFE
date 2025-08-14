@@ -19,7 +19,8 @@ export const Default = Template.bind({});
 Default.args = {
   leftIcon: <Svg030Icon />,
   rightIcon: <Svg036Icon />,
-  children: "左右にアイコンがあるネストリストアイテムです。右のアイコンをクリックすると回転します。"
+  children:
+    "左右にアイコンがあるネストリストアイテムです。右のアイコンをクリックすると回転します。"
 };
 
 export const Controlled = Template.bind({});

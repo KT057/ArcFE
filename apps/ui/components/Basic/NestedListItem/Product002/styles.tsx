@@ -29,10 +29,8 @@ export const StyledNestedListItemIconWrapper = styled.div.withConfig({
 `;
 
 export const StyledNestedListItemIcon = styled.div.withConfig({
-  shouldForwardProp: (prop) => 
-    prop !== "position" && 
-    prop !== "isOpen" && 
-    prop !== "iconColor"
+  shouldForwardProp: (prop) =>
+    prop !== "position" && prop !== "isOpen" && prop !== "iconColor"
 })<NestedListItemIconProps>`
   position: absolute;
   top: 50%;
@@ -50,10 +48,8 @@ export const StyledNestedListItemTextWrapper = styled.div`
 `;
 
 export const StyledNestedListItemText = styled.div.withConfig({
-  shouldForwardProp: (prop) => 
-    prop !== "fontSize" && 
-    prop !== "lineHeight" && 
-    prop !== "color"
+  shouldForwardProp: (prop) =>
+    prop !== "fontSize" && prop !== "lineHeight" && prop !== "color"
 })<NestedListItemTextProps>`
   display: block;
   color: ${({ color }) => color ?? "#000"};

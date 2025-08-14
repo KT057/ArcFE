@@ -1,9 +1,6 @@
 import type React from "react";
 import type { Size } from "../../../../styles/size";
-import {
-  StyledLabel,
-  StyledLabelWrapper
-} from "./styles";
+import { StyledLabel, StyledLabelWrapper } from "./styles";
 
 export type Type = "001" | "002" | "003";
 

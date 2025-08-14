@@ -22,12 +22,16 @@
   <link rel="canonical" href="<?php echo $information['canonical']; ?>">
   <link rel="icon" href="<?php echo get_image_url('favicon.ico'); ?>">
 
+  <!-- ビルドしたJSを読み込む -->
+  <script type="module" crossorigin src="<?php echo get_script_url('main-DjoWYJ_G.js'); ?>"></script>
+
   <title><?php echo $information['title']; ?></title>
   <?php wp_head(); ?>
 </head>
 
 <body>
-  <h1>test</h1>
+  <!-- Reactのルート要素 -->
+  <div id="root"></div>
   <?php wp_footer(); ?>
 </body>
 

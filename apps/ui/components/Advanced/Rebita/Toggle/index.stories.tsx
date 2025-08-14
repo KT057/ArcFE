@@ -10,7 +10,14 @@ const meta: Meta<typeof RebitaToggle> = {
 export default meta;
 
 const Template: StoryFn<typeof RebitaToggle> = (args) => (
-  <div style={{ padding: "50px", display: "flex", alignItems: "center", justifyContent: "center" }}>
+  <div
+    style={{
+      padding: "50px",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center"
+    }}
+  >
     <RebitaToggle {...args} />
   </div>
 );
@@ -85,7 +92,14 @@ const MultipleTogglesTemplate: StoryFn<typeof RebitaToggle> = () => {
   return (
     <div style={{ padding: "50px" }}>
       <h3>Multiple Toggles</h3>
-      <div style={{ display: "flex", gap: "20px", justifyContent: "center", marginTop: "20px" }}>
+      <div
+        style={{
+          display: "flex",
+          gap: "20px",
+          justifyContent: "center",
+          marginTop: "20px"
+        }}
+      >
         {toggles.map((isOpen, index) => (
           <div key={index} style={{ textAlign: "center" }}>
             <RebitaToggle

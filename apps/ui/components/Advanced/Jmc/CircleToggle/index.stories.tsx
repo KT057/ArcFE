@@ -9,7 +9,15 @@ const meta: Meta<typeof JmcCircleToggle> = {
 export default meta;
 
 const Template: StoryFn<typeof JmcCircleToggle> = (args) => (
-  <div style={{ padding: "50px", backgroundColor: "#333", display: "flex", alignItems: "center", justifyContent: "center" }}>
+  <div
+    style={{
+      padding: "50px",
+      backgroundColor: "#333",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center"
+    }}
+  >
     <JmcCircleToggle {...args} />
   </div>
 );

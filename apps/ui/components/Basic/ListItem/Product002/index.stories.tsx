@@ -16,5 +16,6 @@ const Template: StoryFn<typeof ListItem002> = (args) => (
 
 export const Default = Template.bind({});
 Default.args = {
-  children: "これはポイント付きのリストアイテムです。長いテキストでも改行されて表示されます。"
+  children:
+    "これはポイント付きのリストアイテムです。長いテキストでも改行されて表示されます。"
 };

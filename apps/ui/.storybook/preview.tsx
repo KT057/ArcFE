@@ -1,4 +1,4 @@
-/** biome-ignore-all lint/correctness/noUnusedImports: <explanation> */
+/** biome-ignore-all lint/correctness/noUnusedImports: lint/suppressions/incorrect */
 
 import type { Preview } from "@storybook/react";
 import React from "react";

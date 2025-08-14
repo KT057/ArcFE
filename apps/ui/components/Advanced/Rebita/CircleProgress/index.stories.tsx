@@ -9,7 +9,14 @@ const meta: Meta<typeof RebitaCircleProgress> = {
 export default meta;
 
 const Template: StoryFn<typeof RebitaCircleProgress> = (args) => (
-  <div style={{ padding: "50px", display: "flex", alignItems: "center", justifyContent: "center" }}>
+  <div
+    style={{
+      padding: "50px",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center"
+    }}
+  >
     <RebitaCircleProgress {...args} />
   </div>
 );

@@ -18,7 +18,8 @@ const Template: StoryFn<typeof NestedListItem001> = (args) => (
 export const Default = Template.bind({});
 Default.args = {
   icon: <Svg036Icon />,
-  children: "ネストリストアイテムのテキストです。クリックするとアイコンが回転します。"
+  children:
+    "ネストリストアイテムのテキストです。クリックするとアイコンが回転します。"
 };
 
 export const Controlled = Template.bind({});

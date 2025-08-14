@@ -14,6 +14,10 @@ function get_image_url($url){
   return get_bloginfo('template_directory').'/images/'.$url;
 }
 
+function get_script_url($url){
+  return get_bloginfo('template_directory').'/script/'.$url;
+}
+
 function get_json_data($relative_path) {
   $json_path = get_template_directory() . '/' . ltrim($relative_path, '/');
 

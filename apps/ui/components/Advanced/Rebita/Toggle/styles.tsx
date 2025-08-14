@@ -13,7 +13,8 @@ interface ToggleInnerProps {
 }
 
 export const StyledToggleWrapper = styled.div.withConfig({
-  shouldForwardProp: (prop) => !["backgroundColor", "dotColor", "lineColor", "isOpen"].includes(prop)
+  shouldForwardProp: (prop) =>
+    !["backgroundColor", "dotColor", "lineColor", "isOpen"].includes(prop)
 })<ToggleProps>`
   ${({ theme }) => theme.font.baseSize.em()}
 `;
@@ -35,7 +36,7 @@ export const StyledToggleInner = styled.div.withConfig({
 export const StyledToggleDotWrapper = styled.div.withConfig({
   shouldForwardProp: (prop) => !["isOpen"].includes(prop)
 })<{ isOpen?: boolean }>`
-  display: ${({ isOpen }) => isOpen ? "none" : "flex"};
+  display: ${({ isOpen }) => (isOpen ? "none" : "flex")};
   align-items: center;
   justify-content: center;
 `;
@@ -57,7 +58,7 @@ export const StyledToggleDot = styled.span.withConfig({
 export const StyledToggleCloseWrapper = styled.div.withConfig({
   shouldForwardProp: (prop) => !["isOpen"].includes(prop)
 })<{ isOpen?: boolean }>`
-  display: ${({ isOpen }) => isOpen ? "block" : "none"};
+  display: ${({ isOpen }) => (isOpen ? "block" : "none")};
   position: absolute;
   top: 50%;
   left: 50%;

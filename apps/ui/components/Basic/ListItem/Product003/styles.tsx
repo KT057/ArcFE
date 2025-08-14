@@ -83,7 +83,8 @@ export const StyledListItemText = styled.span.withConfig({
 `;
 
 export const StyledListItem = styled.span.withConfig({
-  shouldForwardProp: (prop) => prop !== "animationColor" && prop !== "animationPointColor"
+  shouldForwardProp: (prop) =>
+    prop !== "animationColor" && prop !== "animationPointColor"
 })<ListItemProps>`
   cursor: pointer;
   display: flex;

@@ -17,7 +17,8 @@ const Template: StoryFn<typeof RebitaFadeText> = (args) => (
 
 export const Default = Template.bind({});
 Default.args = {
-  children: "街に行き交う人々の居場所となり、コミュニティがさらなる価値を生み出す",
+  children:
+    "街に行き交う人々の居場所となり、コミュニティがさらなる価値を生み出す",
   progress: 50
 };
 
@@ -76,7 +77,8 @@ export const Interactive = InteractiveTemplate.bind({});
 
 export const LongText = Template.bind({});
 LongText.args = {
-  children: "これは非常に長いテキストの例です。clip-pathによってテキストが徐々に表示される効果を確認することができます。",
+  children:
+    "これは非常に長いテキストの例です。clip-pathによってテキストが徐々に表示される効果を確認することができます。",
   progress: 60,
   style: {
     fontSize: 18

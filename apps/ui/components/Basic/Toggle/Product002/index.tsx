@@ -26,7 +26,8 @@ export const Toggle002 = ({
   style
 }: ToggleProps) => {
   const [internalIsOpen, setInternalIsOpen] = useState(false);
-  const isOpen = controlledIsOpen !== undefined ? controlledIsOpen : internalIsOpen;
+  const isOpen =
+    controlledIsOpen !== undefined ? controlledIsOpen : internalIsOpen;
 
   const handleClick = () => {
     const newState = !isOpen;

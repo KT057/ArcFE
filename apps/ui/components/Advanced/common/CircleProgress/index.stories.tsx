@@ -82,6 +82,7 @@ const MultiDotsTemplate: StoryFn<typeof CircleProgress> = () => {
   return (
     <div style={{ padding: "50px" }}>
       <div style={{ marginBottom: "20px", textAlign: "center" }}>
+        {/** biome-ignore lint/a11y/useButtonType: lint/suppressions/incorrect */}
         <button
           onClick={() =>
             setActiveIndex((prev) => (prev > 0 ? prev - 1 : totalDots - 1))
@@ -90,6 +91,7 @@ const MultiDotsTemplate: StoryFn<typeof CircleProgress> = () => {
         >
           Previous
         </button>
+        {/** biome-ignore lint/a11y/useButtonType: lint/suppressions/incorrect */}
         <button
           onClick={() =>
             setActiveIndex((prev) => (prev < totalDots - 1 ? prev + 1 : 0))
@@ -101,6 +103,7 @@ const MultiDotsTemplate: StoryFn<typeof CircleProgress> = () => {
       <div style={{ display: "flex", gap: "10px", justifyContent: "center" }}>
         {Array.from({ length: totalDots }, (_, index) => (
           <CircleProgress
+            // biome-ignore lint/suspicious/noArrayIndexKey: lint/suppressions/incorrect
             key={index}
             size={17}
             progress={index === activeIndex ? 100 : 0}
@@ -122,6 +125,7 @@ const InteractiveTemplate: StoryFn<typeof CircleProgress> = () => {
   return (
     <div style={{ padding: "50px", maxWidth: "400px" }}>
       <div style={{ marginBottom: "20px" }}>
+        {/** biome-ignore lint/a11y/noLabelWithoutControl: lint/suppressions/incorrect */}
         <label>Progress: {progress}%</label>
         <input
           type="range"

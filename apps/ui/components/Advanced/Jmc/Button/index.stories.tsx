@@ -9,7 +9,14 @@ const meta: Meta<typeof JmcButton> = {
 export default meta;
 
 const Template: StoryFn<typeof JmcButton> = (args) => (
-  <div style={{ padding: "50px", display: "flex", alignItems: "center", justifyContent: "center" }}>
+  <div
+    style={{
+      padding: "50px",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center"
+    }}
+  >
     <JmcButton {...args} />
   </div>
 );

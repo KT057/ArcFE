@@ -15,7 +15,8 @@ export const StyledJmcButtonWrapper = styled.span`
 `;
 
 export const StyledJmcButton = styled.span.withConfig({
-  shouldForwardProp: (prop) => prop !== "backgroundColor" && prop !== "textColor"
+  shouldForwardProp: (prop) =>
+    prop !== "backgroundColor" && prop !== "textColor"
 })<ButtonProps>`
   display: inline-flex;
   align-items: center;

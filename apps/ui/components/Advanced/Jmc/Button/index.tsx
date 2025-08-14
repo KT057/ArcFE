@@ -35,7 +35,8 @@ export const JmcButton = ({
   style
 }: ButtonProps) => {
   const [internalIsHovered, setInternalIsHovered] = useState(false);
-  const isHovered = controlledIsHovered !== undefined ? controlledIsHovered : internalIsHovered;
+  const isHovered =
+    controlledIsHovered !== undefined ? controlledIsHovered : internalIsHovered;
 
   const handleMouseEnter = () => {
     if (controlledIsHovered === undefined) {
@@ -66,10 +67,7 @@ export const JmcButton = ({
         onMouseLeave={handleMouseLeave}
         {...buttonProps}
       >
-        <StyledJmcButtonLeft
-          fontSize={style?.fontSize}
-          color={style?.color}
-        >
+        <StyledJmcButtonLeft fontSize={style?.fontSize} color={style?.color}>
           {children}
         </StyledJmcButtonLeft>
         <JmcCircleToggle

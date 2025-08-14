@@ -21,9 +21,7 @@ export const StyledLoadingWrapper = styled.span`
 
 export const StyledLoading = styled.svg.withConfig({
   shouldForwardProp: (prop) =>
-    prop !== "size" && 
-    prop !== "indicatorColor" && 
-    prop !== "backgroundColor"
+    prop !== "size" && prop !== "indicatorColor" && prop !== "backgroundColor"
 })<LoadingProps>`
   width: ${({ theme, size }) => theme.size.em(LOADING_SIZE[size])};
   height: ${({ theme, size }) => theme.size.em(LOADING_SIZE[size])};

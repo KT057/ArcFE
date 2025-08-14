@@ -1,9 +1,6 @@
 import type React from "react";
 import type { EasingKey } from "../../../../styles/easing";
-import {
-  StyledTextButton,
-  StyledTextButtonWrapper
-} from "./styles";
+import { StyledTextButton, StyledTextButtonWrapper } from "./styles";
 
 export type TextButtonType = "001" | "002";
 

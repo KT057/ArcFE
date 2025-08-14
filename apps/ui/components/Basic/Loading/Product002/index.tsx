@@ -1,8 +1,5 @@
 import type { Size } from "../../../../styles/size";
-import {
-  StyledLoading,
-  StyledLoadingWrapper
-} from "./styles";
+import { StyledLoading, StyledLoadingWrapper } from "./styles";
 
 interface LoadingProps {
   size?: Size;
@@ -12,10 +9,7 @@ interface LoadingProps {
   };
 }
 
-export const Loading002 = ({
-  size = "large",
-  style
-}: LoadingProps) => {
+export const Loading002 = ({ size = "large", style }: LoadingProps) => {
   return (
     <StyledLoadingWrapper>
       <StyledLoading

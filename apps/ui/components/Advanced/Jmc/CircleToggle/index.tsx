@@ -26,7 +26,8 @@ export const JmcCircleToggle = ({
   style
 }: CircleToggleProps) => {
   const [internalIsHovered, setInternalIsHovered] = useState(false);
-  const isHovered = controlledIsHovered !== undefined ? controlledIsHovered : internalIsHovered;
+  const isHovered =
+    controlledIsHovered !== undefined ? controlledIsHovered : internalIsHovered;
 
   const handleMouseEnter = () => {
     if (controlledIsHovered === undefined) {

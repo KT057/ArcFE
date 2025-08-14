@@ -7,7 +7,6 @@
   "license": "MIT",
   "scripts": {
     "dev": "cross-env ENV=local vite",
-    "local": "cross-env ENV=local vite",
     "build": "vite build",
     "start": "browser-sync start -s 'dist'",
     "tsc": "tsc --noEmit",
@@ -19,7 +18,7 @@
   },
   "dependencies": {
     "@apps/ui": "workspace:*",
-    "@core": "workspace:*",
+    "dotenv": "^17.2.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
   },
@@ -28,6 +27,8 @@
     "@types/react-dom": "^18.3.7",
     "@vitejs/plugin-react": "^5.0.0",
     "cross-env": "^7.0.3",
-    "vite": "^7.1.1"
+    "sharp": "^0.34.3",
+    "vite": "^7.1.1",
+    "vite-plugin-image-optimizer": "^2.0.2"
   }
 }

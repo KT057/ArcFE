@@ -1,13 +1,19 @@
 import { WP_API_BASE_URL } from "../base";
-import { type Category, getCategoryQuery } from "../shared/category";
-import { getPaginationQuery, type Pagination } from "../shared/pagenation";
-import { getTagQuery, type Tag } from "../shared/tags";
+import {
+  getPaginationQuery,
+  type PaginationQueryArgs
+} from "../shared/pagination/query/pagination";
+import {
+  type CategoryQueryArgs,
+  getCategoryQuery
+} from "../shared/taxonomy/query/category";
+import { getTagQuery, type TagQueryArgs } from "../shared/taxonomy/query/tags";
 import type { WPPostResponse } from "./response";
 
 type Args = {
-  pagination?: Pagination;
-  category?: Category;
-  tag?: Tag;
+  pagination?: PaginationQueryArgs;
+  category?: CategoryQueryArgs;
+  tag?: TagQueryArgs;
 };
 
 export const getWpPosts = async ({ pagination, category, tag }: Args = {}) => {

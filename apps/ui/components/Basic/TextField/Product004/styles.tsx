@@ -32,7 +32,7 @@ export const StyledTextField = styled.div.withConfig({
 `;
 
 export const StyledTextFieldInput = styled.textarea.withConfig({
-  shouldForwardProp: (prop) => 
+  shouldForwardProp: (prop) =>
     prop !== "fontSize" &&
     prop !== "lineHeight" &&
     prop !== "color" &&

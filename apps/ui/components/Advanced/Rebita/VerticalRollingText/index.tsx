@@ -73,7 +73,7 @@ export const VerticalRollingText = ({
     };
   }, []);
 
-  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
+  // biome-ignore lint/correctness/useExhaustiveDependencies: lint/suppressions/incorrect
   useEffect(() => {
     if (enableHover !== undefined) {
       onRollingText(enableHover);

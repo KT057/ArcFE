@@ -46,9 +46,7 @@ export const StyledListItemTextWrapper = styled.span.withConfig({
 `;
 
 export const StyledListItemText = styled.span.withConfig({
-  shouldForwardProp: (prop) =>
-    prop !== "fontSize" &&
-    prop !== "color"
+  shouldForwardProp: (prop) => prop !== "fontSize" && prop !== "color"
 })<ListItemTextProps>`
   display: block;
   color: ${({ color }) => color ?? "#000"};
@@ -58,9 +56,9 @@ export const StyledListItemText = styled.span.withConfig({
 `;
 
 export const StyledListItem = styled.span.withConfig({
-  shouldForwardProp: (prop) => 
-    prop !== "animationOpacity" && 
-    prop !== "animationDuration" && 
+  shouldForwardProp: (prop) =>
+    prop !== "animationOpacity" &&
+    prop !== "animationDuration" &&
     prop !== "animationEase"
 })<ListItemProps>`
   cursor: pointer;

@@ -1,8 +1,5 @@
 import type { Size } from "../../../../styles/size";
-import {
-  StyledLoading,
-  StyledLoadingWrapper
-} from "./styles";
+import { StyledLoading, StyledLoadingWrapper } from "./styles";
 
 export type Type = "001";
 

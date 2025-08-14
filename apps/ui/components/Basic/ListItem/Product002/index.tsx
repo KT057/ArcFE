@@ -25,11 +25,7 @@ interface ListItemProps {
   };
 }
 
-export const ListItem002 = ({
-  children,
-  onClick,
-  style
-}: ListItemProps) => {
+export const ListItem002 = ({ children, onClick, style }: ListItemProps) => {
   return (
     <StyledListItemWrapper>
       <StyledListItem
