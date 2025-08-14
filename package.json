@@ -17,7 +17,7 @@
     "cross-env": "^10.0.0",
     "turbo": "^2.5.5",
     "typescript": "^5.8.3",
-    "webpack": "^5.101.1"
+    "webpack": "^5.101.2"
   },
   "dependencies": {
     "gsap": "^3.13.0",
