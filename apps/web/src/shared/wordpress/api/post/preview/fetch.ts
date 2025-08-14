@@ -1,0 +1,26 @@
+import { WP_API_BASE_URL } from "../../base";
+
+import type { WPPostResponse } from "../response";
+
+type Args = {
+  id: number;
+};
+
+export const getWpPreviewPost = async ({ id }: Args) => {
+  const previewBase64 = process.env.WP_PREVIEW_BASE64;
+
+  const response = await fetch(
+    `${WP_API_BASE_URL}/posts/${id}?_embed&status=draft`,
+    {
+      method: "GET",
+      headers: {
+        Authorization: `Basic ${previewBase64}`
+      }
+    }
+  );
+  if (!response.ok) {
+    throw new Error(`HTTP error! status: ${response.status}`);
+  }
+  const data: WPPostResponse = await response.json();
+  return data;
+};

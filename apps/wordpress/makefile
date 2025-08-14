@@ -4,6 +4,12 @@ start:
 	docker-compose up -d 
 
 # コンテナを起動 (コンソールにデバックを表示させる)
+.PHONY: restart
+restart:
+	docker-compose down
+	docker-compose up -d
+
+# コンテナを起動 (コンソールにデバックを表示させる)
 .PHONY: start-build
 start-build:
 	docker-compose up -d --build

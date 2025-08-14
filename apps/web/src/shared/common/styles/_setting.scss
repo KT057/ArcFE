@@ -1,7 +1,0 @@
-@use "variable";
-@use "mixin";
-@use "media";
-
-html {
-  @include mixin.baseFontSizeForRem;
-}

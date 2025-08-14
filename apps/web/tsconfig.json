@@ -1,17 +1,31 @@
 {
   "compilerOptions": {
-    "target": "ES2024" /* Specify ECMAScript target version: 'ES3' (default), 'ES5', 'ES2015', 'ES2016', 'ES2017', 'ES2018', 'ES2019', 'ES2020', or 'ESNEXT'. */,
-    "module": "commonjs" /* Specify module code generation: 'none', 'commonjs', 'amd', 'system', 'umd', 'es2015', 'es2020', or 'ESNext'. */,
-    "sourceMap": true,
-    "outDir": "./dist",
-    /* Strict Type-Checking Options */
-    "strict": true /* Enable all strict type-checking options. */,
-    "esModuleInterop": true /* Enables emit interoperability between CommonJS and ES Modules via creation of namespace objects for all imports. Implies 'allowSyntheticDefaultImports'. */,
-    "skipLibCheck": true /* Skip type checking of declaration files. */,
-    "forceConsistentCasingInFileNames": true /* Disallow inconsistently-cased references to the same file. */
+    // モダンブラウザ & Vite 前提
+    "target": "ES2020",
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    // TS 5 以上なら Bundler 推奨（Vite 向け）
+    "moduleResolution": "Bundler",
+
+    // React 17+ の自動 JSX 変換
+    "jsx": "react-jsx",
+
+    // 品質・互換
+    "strict": true,
+    "skipLibCheck": true,
+    "isolatedModules": true, // Viteのトランスパイルと相性◎
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "noEmit": true,
+
+    // Vite の import.meta/env 型
+    "types": ["vite/client"],
+
+    // 任意：エイリアス（@/xxx → src/xxx）
+    "baseUrl": ".",
+    "paths": {
+      "@apps/ui": ["../ui/*"]
+    }
   },
-  "include": ["./src/**/*", "data"],
-  "paths": {
-    "*": ["@types/*"]
-  }
+  "include": ["./src/**/*", "vite.config.ts", "./@types/**/*"]
 }

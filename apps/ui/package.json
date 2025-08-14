@@ -6,31 +6,29 @@
     "build": "rm -rf ./development && cross-env NODE_ENV=development ts-node index.ts",
     "gen": "ts-node generate.ts",
     "gen:styles": "ts-node extract-text-styles.ts",
-    "storybook": "cross-env NODE_ENV=local storybook dev -p 6006",
+    "gen:icons": "npx @svgr/cli -d ./components/Basic/Icons ./svgr/icons --replace-attr-values '#000=currentColor' && ts-node svgr/scripts/generateIconComponentForStorybook.ts && pnpm lint:script:fix",
+    "storybook": "storybook dev -p 6006",
     "watch": "pnpm run build && cross-env NODE_ENV=development storybook dev -p 6006",
-    "build-storybook": "cross-env NODE_ENV=development storybook build",
-    "lint:template": "pug-lint -c .pug-lint.json .",
-    "lint:style": "stylelint --ignore-path .stylelintignore \"**/*.scss\"",
-    "lint:style:fix": "stylelint --fix --ignore-path .stylelintignore \"**/*.scss\"",
+    "build-storybook": "storybook build",
     "lint:script": "pnpm biome check --diagnostic-level=warn .",
     "lint:script:fix": "pnpm biome check --diagnostic-level=warn --write ."
   },
   "packageManager": "pnpm@10.12.1",
-  "dependencies": {
-    "@core": "workspace:*"
-  },
   "devDependencies": {
-    "@storybook/addon-designs": "^10.0.2",
+    "@storybook/addon-docs": "^8.6.14",
+    "@storybook/addon-essentials": "^8.6.14",
     "@storybook/addon-interactions": "^8.6.14",
-    "@storybook/addon-webpack5-compiler-swc": "^3.0.0",
+    "@storybook/addon-onboarding": "^8.6.14",
+    "@storybook/addon-themes": "^8.6.14",
     "@storybook/blocks": "^8.6.14",
-    "@storybook/builder-webpack5": "^9.1.1",
-    "@storybook/html": "^9.1.1",
-    "@storybook/html-vite": "^9.1.1",
+    "@storybook/react": "^8.6.14",
+    "@storybook/react-vite": "^8.6.14",
     "@storybook/test": "^8.6.14",
-    "html-loader": "^5.1.0",
-    "raw-loader": "^4.0.2",
-    "storybook": "^9.1.1",
-    "storybook-addon-run-script": "^0.1.4"
+    "@svgr/webpack": "^8.1.0",
+    "@types/react": "^18.0.0",
+    "@types/react-dom": "^18.0.0",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "storybook": "^8.6.14"
   }
 }
