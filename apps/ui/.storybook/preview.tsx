@@ -1,5 +1,4 @@
 /** biome-ignore-all lint/correctness/noUnusedImports: lint/suppressions/incorrect */
-
 import type { Preview } from "@storybook/react";
 import React from "react";
 import { ThemeProvider } from "styled-components";
@@ -15,6 +14,9 @@ const preview: Preview = {
         color: /(background|color)$/i,
         date: /Date$/
       }
+    },
+    docs: {
+      autodocs: "tag"
     }
   },
   decorators: [

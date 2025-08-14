@@ -3,7 +3,8 @@ import { TextField001 } from "./index";
 
 const meta: Meta<typeof TextField001> = {
   title: "Basic/TextField/Product001",
-  component: TextField001
+  component: TextField001,
+  tags: ["autodocs"]
 };
 
 export default meta;

@@ -4,7 +4,8 @@ import { RebitaToggle } from "./index";
 
 const meta: Meta<typeof RebitaToggle> = {
   title: "Advanced/Rebita/Toggle",
-  component: RebitaToggle
+  component: RebitaToggle,
+  tags: ["autodocs"]
 };
 
 export default meta;

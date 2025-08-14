@@ -3,7 +3,8 @@ import { StorybookComponent } from "./StorybookComponent";
 
 export default {
   title: "Basic/Icons",
-  component: StorybookComponent
+  component: StorybookComponent,
+  tags: ["autodocs"]
 } as Meta<typeof StorybookComponent>;
 
 const Template: StoryFn<typeof StorybookComponent> = () => (

@@ -4,7 +4,8 @@ import { FrameIcon001 } from "./index";
 
 export default {
   title: "Basic/FrameIcon/Product001",
-  component: FrameIcon001
+  component: FrameIcon001,
+  tags: ["autodocs"]
 } as Meta<typeof FrameIcon001>;
 
 const Template: StoryFn<typeof FrameIcon001> = (args) => (

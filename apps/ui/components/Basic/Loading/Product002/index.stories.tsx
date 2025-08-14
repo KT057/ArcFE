@@ -3,7 +3,8 @@ import { Loading002 } from "./index";
 
 const meta: Meta<typeof Loading002> = {
   title: "Basic/Loading/Product002",
-  component: Loading002
+  component: Loading002,
+  tags: ["autodocs"]
 };
 
 export default meta;

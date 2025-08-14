@@ -3,7 +3,8 @@ import { Toggle002 } from "./index";
 
 const meta: Meta<typeof Toggle002> = {
   title: "Basic/Toggle/Product002",
-  component: Toggle002
+  component: Toggle002,
+  tags: ["autodocs"]
 };
 
 export default meta;

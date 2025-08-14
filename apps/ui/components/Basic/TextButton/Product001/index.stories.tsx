@@ -3,7 +3,8 @@ import { TextButton001 } from "./index";
 
 const meta: Meta<typeof TextButton001> = {
   title: "Basic/TextButton/Product001",
-  component: TextButton001
+  component: TextButton001,
+  tags: ["autodocs"]
 };
 
 export default meta;

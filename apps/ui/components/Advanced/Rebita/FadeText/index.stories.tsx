@@ -4,7 +4,8 @@ import { RebitaFadeText } from "./index";
 
 const meta: Meta<typeof RebitaFadeText> = {
   title: "Advanced/Rebita/FadeText",
-  component: RebitaFadeText
+  component: RebitaFadeText,
+  tags: ["autodocs"]
 };
 
 export default meta;

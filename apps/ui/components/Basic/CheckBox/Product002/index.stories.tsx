@@ -3,7 +3,8 @@ import { CheckBox002 } from "./index";
 
 export default {
   title: "Basic/CheckBox/Product002",
-  component: CheckBox002
+  component: CheckBox002,
+  tags: ["autodocs"]
 } as Meta<typeof CheckBox002>;
 
 const Template: StoryFn<typeof CheckBox002> = (args) => (

@@ -3,7 +3,8 @@ import { Radio001 } from "./index";
 
 const meta: Meta<typeof Radio001> = {
   title: "Basic/Radio/Product001",
-  component: Radio001
+  component: Radio001,
+  tags: ["autodocs"]
 };
 
 export default meta;

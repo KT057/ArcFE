@@ -3,7 +3,8 @@ import { VerticalRollingText } from "./index";
 
 const meta: Meta<typeof VerticalRollingText> = {
   title: "Advanced/Rebita/VerticalRollingText",
-  component: VerticalRollingText
+  component: VerticalRollingText,
+  tags: ["autodocs"]
 };
 
 export default meta;

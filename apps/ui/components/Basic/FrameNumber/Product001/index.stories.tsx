@@ -3,7 +3,8 @@ import { FrameNumber001 } from "./index";
 
 export default {
   title: "Basic/FrameNumber/Product001",
-  component: FrameNumber001
+  component: FrameNumber001,
+  tags: ["autodocs"]
 } as Meta<typeof FrameNumber001>;
 
 const Template: StoryFn<typeof FrameNumber001> = (args) => (

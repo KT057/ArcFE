@@ -4,7 +4,8 @@ import { TextIcon001 } from "./index";
 
 const meta: Meta<typeof TextIcon001> = {
   title: "Basic/TextIcon/Product001",
-  component: TextIcon001
+  component: TextIcon001,
+  tags: ["autodocs"]
 };
 
 export default meta;

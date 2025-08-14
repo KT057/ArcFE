@@ -3,7 +3,8 @@ import { Breadcrumbs } from "./index";
 
 export default {
   title: "Basic/Breadcrumbs",
-  component: Breadcrumbs
+  component: Breadcrumbs,
+  tags: ["autodocs"]
 } as Meta<typeof Breadcrumbs>;
 
 const Template: StoryFn<typeof Breadcrumbs> = (args) => (

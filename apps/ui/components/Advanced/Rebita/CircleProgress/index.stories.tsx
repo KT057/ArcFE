@@ -3,7 +3,8 @@ import { RebitaCircleProgress } from "./index";
 
 const meta: Meta<typeof RebitaCircleProgress> = {
   title: "Advanced/Rebita/CircleProgress",
-  component: RebitaCircleProgress
+  component: RebitaCircleProgress,
+  tags: ["autodocs"]
 };
 
 export default meta;

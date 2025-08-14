@@ -4,7 +4,8 @@ import { CircleProgress } from "./index";
 
 const meta: Meta<typeof CircleProgress> = {
   title: "Advanced/common/CircleProgress",
-  component: CircleProgress
+  component: CircleProgress,
+  tags: ["autodocs"]
 };
 
 export default meta;

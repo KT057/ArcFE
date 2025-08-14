@@ -4,7 +4,8 @@ import { NestedListItem001 } from "./index";
 
 const meta: Meta<typeof NestedListItem001> = {
   title: "Basic/NestedListItem/Product001",
-  component: NestedListItem001
+  component: NestedListItem001,
+  tags: ["autodocs"]
 };
 
 export default meta;

@@ -3,7 +3,8 @@ import { Button001 } from "./index";
 
 export default {
   title: "Basic/Button/Product001",
-  component: Button001
+  component: Button001,
+  tags: ["autodocs"]
 } as Meta<typeof Button001>;
 
 const Template: StoryFn<typeof Button001> = (args) => (
