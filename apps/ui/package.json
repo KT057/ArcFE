@@ -2,12 +2,9 @@
   "name": "@apps/ui",
   "version": "1.0.0",
   "scripts": {
-    "dev": "rm -rf ./dist && cross-env NODE_ENV=local ts-node index.ts",
-    "build": "rm -rf ./development && cross-env NODE_ENV=development ts-node index.ts",
-    "gen": "ts-node generate.ts",
-    "gen:styles": "ts-node extract-text-styles.ts",
     "gen:icons": "npx @svgr/cli -d ./components/Basic/Icons ./svgr/icons --replace-attr-values '#000=currentColor' && ts-node svgr/scripts/generateIconComponentForStorybook.ts && pnpm lint:script:fix",
     "storybook": "storybook dev -p 6006",
+    "debug": "browser-sync start -s 'storybook-static'",
     "build-storybook": "storybook build",
     "lint:script": "pnpm biome check --diagnostic-level=warn .",
     "lint:script:fix": "pnpm biome check --diagnostic-level=warn --write ."

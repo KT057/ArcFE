@@ -9,7 +9,6 @@ import {
 } from "./styles";
 
 interface ButtonProps {
-  as?: "button" | "a";
   href?: string;
   type?: Type;
   size?: Size;
@@ -25,7 +24,6 @@ interface ButtonProps {
 }
 
 export const Button001 = ({
-  as = "button",
   type = "001",
   size = "middle",
   animation,
@@ -37,8 +35,8 @@ export const Button001 = ({
   return (
     <StyledButtonWrapper>
       <StyledButton
-        as={as}
-        href={as === "a" ? href : undefined}
+        as={href ? "a" : "button"}
+        href={href}
         type={type}
         size={size}
         onClick={onClick}
