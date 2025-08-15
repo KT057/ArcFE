@@ -21,6 +21,7 @@
   },
   "dependencies": {
     "gsap": "^3.13.0",
+    "keen-slider": "^6.8.6",
     "simple-parallax-js": "^6.2.1",
     "styled-components": "^6.1.19",
     "swiper": "^11.2.10"

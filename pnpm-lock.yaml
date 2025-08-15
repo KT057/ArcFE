@@ -11,6 +11,9 @@ importers:
       gsap:
         specifier: ^3.13.0
         version: 3.13.0
+      keen-slider:
+        specifier: ^6.8.6
+        version: 6.8.6
       simple-parallax-js:
         specifier: ^6.2.1
         version: 6.2.1(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
@@ -2557,6 +2560,9 @@ packages:
 
   jsonfile@3.0.1:
     resolution: {integrity: sha512-oBko6ZHlubVB5mRFkur5vgYR1UyqX+S6Y/oCfLhqNdcc2fYFlDpIoNc7AfKS1KOGcnNAkvsr0grLck9ANM815w==}
+
+  keen-slider@6.8.6:
+    resolution: {integrity: sha512-dcEQ7GDBpCjUQA8XZeWh3oBBLLmyn8aoeIQFGL/NTVkoEOsmlnXqA4QykUm/SncolAZYGsEk/PfUhLZ7mwMM2w==}
 
   limiter@1.1.5:
     resolution: {integrity: sha512-FWWMIEOxz3GwUI4Ts/IvgVy6LPvoMPgjMdQ185nN6psJyBJ4yOpzqm695/h5umdLJg2vW3GR5iG11MAkR2AzJA==}
@@ -6021,6 +6027,8 @@ snapshots:
   jsonfile@3.0.1:
     optionalDependencies:
       graceful-fs: 4.2.11
+
+  keen-slider@6.8.6: {}
 
   limiter@1.1.5: {}
 
