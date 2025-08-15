@@ -11,7 +11,10 @@ export const StyledArrow = styled.div.withConfig({
     prop !== "direction" &&
     prop !== "disabled" &&
     prop !== "size" &&
-    prop !== "position"
+    prop !== "position" &&
+    prop !== "color" &&
+    prop !== "hoverColor" &&
+    prop !== "disableOpacity"
 })<{
   direction: "left" | "right";
   disabled: boolean;

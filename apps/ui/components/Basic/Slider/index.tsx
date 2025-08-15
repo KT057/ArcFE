@@ -82,7 +82,7 @@ export const Slider = ({
   const [sliderRefOfComponent, instanceRefOfComponent] = useKeenSlider({
     ...(options || {}),
     slideChanged: (slider) => {
-      setCurrentIndex(slider.track.details.rel);
+      setCurrentIndex(slider.track.details.abs);
       options?.slideChanged?.(slider);
     }
   });
@@ -129,9 +129,7 @@ export const Slider = ({
           color={controller.right.style?.color}
           hoverColor={controller.right.style?.hoverColor}
           disableOpacity={controller.right.style?.disableOpacity}
-          disabled={
-            currentIndex === instanceRef.current.track.details.slides.length - 1
-          }
+          disabled={currentIndex === instanceRef.current.track.details.maxIdx}
           onClick={(e) => {
             e.stopPropagation();
             instanceRef.current?.next();
@@ -145,24 +143,24 @@ export const Slider = ({
           gap={dots.style?.gap}
           marginTop={dots.style?.marginTop}
         >
-          {[
-            ...Array(instanceRef.current.track.details.slides.length).keys()
-          ].map((idx) => {
-            return (
-              <StyledDot
-                key={idx}
-                size={dots.style?.size}
-                backgroundColor={dots.style?.backgroundColor}
-                borderColor={dots.style?.borderColor}
-                activeBackgroundColor={dots.style?.activeBackgroundColor}
-                activeBorderColor={dots.style?.activeBorderColor}
-                active={idx === currentIndex}
-                onClick={() => {
-                  instanceRef.current?.moveToIdx(idx);
-                }}
-              />
-            );
-          })}
+          {[...Array(instanceRef.current.track.details.maxIdx + 1).keys()].map(
+            (idx) => {
+              return (
+                <StyledDot
+                  key={idx}
+                  size={dots.style?.size}
+                  backgroundColor={dots.style?.backgroundColor}
+                  borderColor={dots.style?.borderColor}
+                  activeBackgroundColor={dots.style?.activeBackgroundColor}
+                  activeBorderColor={dots.style?.activeBorderColor}
+                  active={idx === currentIndex}
+                  onClick={() => {
+                    instanceRef.current?.moveToIdx(idx);
+                  }}
+                />
+              );
+            }
+          )}
         </StyledDotsWrapper>
       )}
     </StyledSliderWrapper>
