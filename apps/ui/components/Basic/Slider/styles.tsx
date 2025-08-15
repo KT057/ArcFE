@@ -1,124 +1,98 @@
 import styled, { css } from "styled-components";
-import type { Size } from "../../../../styles/size";
-import type { Type } from "./index";
 
-type InputProps = {
-  type: Type;
-  size: Size;
-  error: boolean;
-};
+export const StyledSliderWrapper = styled.div`
+  ${({ theme }) => theme.font.baseSize.em()};
 
-type InputFieldProps = {
-  size: Size;
-  fontSize?: number;
-  color?: string;
-  borderColor?: string;
-  placeholderColor?: string;
-};
-
-type InputErrorProps = {
-  errorColor: string;
-  errorFontSize: number;
-};
-
-export const StyledInputWrapper = styled.div`
-  ${({ theme }) => theme.font.baseSize.em()}
+  position: relative;
 `;
 
-const defaultFontSize = (size: number | undefined) => size ?? 18;
+export const StyledArrow = styled.div.withConfig({
+  shouldForwardProp: (prop) =>
+    prop !== "direction" &&
+    prop !== "disabled" &&
+    prop !== "size" &&
+    prop !== "position"
+})<{
+  direction: "left" | "right";
+  disabled: boolean;
+  size: number | undefined;
+  position: number | undefined;
+  color: string | undefined;
+  hoverColor: string | undefined;
+  disableOpacity: number | undefined;
+}>`
+  position: relative;
+  width: ${({ theme, size }) => theme.size.em(size ?? 40)};
+  height: ${({ theme, size }) => theme.size.em(size ?? 40)};
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  color: ${({ color }) => color ?? "#fff"};
+  cursor: pointer;
+  transition: color 0.3s ${({ theme }) => theme.animation.easing.easeInCubic};
+  ${({ direction, position }) =>
+    direction === "left"
+      ? css`
+          left: ${({ theme }) => theme.size.em(position ?? 0)};
+        `
+      : css`
+          right: ${({ theme }) => theme.size.em(position ?? 0)};
+        `}
 
-export const StyledInputField = styled.input.withConfig({
-  shouldForwardProp: (prop) => prop !== "size" && prop !== "style"
-})<InputFieldProps>`
-  width: 100%;
-  display: block;
-  border: 1px solid ${({ borderColor }) => borderColor ?? "#000"};
-  font-size: ${({ theme, fontSize }) => theme.size.em(defaultFontSize(fontSize))};
-  padding-left: ${({ theme, fontSize }) => theme.size.customEm(10, defaultFontSize(fontSize))};
-  padding-right: ${({ theme, fontSize }) => theme.size.customEm(10, defaultFontSize(fontSize))};
-  color: ${({ style }) => style?.color || "#000"};
-  box-sizing: border-box;
-  line-height: 1;
-
-  &::placeholder {
-    color: ${({ placeholderColor }) => placeholderColor ?? "#909090"};
+  &:hover {
+    color: ${({ hoverColor }) => hoverColor ?? "#000"};
   }
 
-  ${({ size, theme, fontSize }) => {
-    switch (size) {
-      case "small":
-        return css`
-          padding-top: ${theme.size.customEm(5, defaultFontSize(fontSize))};
-          padding-bottom: ${theme.size.customEm(5, defaultFontSize(fontSize))};
-        `;
-      case "middle":
-        return css`
-          padding-top: ${theme.size.customEm(10, defaultFontSize(fontSize))};
-          padding-bottom: ${theme.size.customEm(10, defaultFontSize(fontSize))};
-        `;
-      case "large":
-        return css`
-          padding-top: ${theme.size.customEm(15, defaultFontSize(fontSize))};
-          padding-bottom: ${theme.size.customEm(15, defaultFontSize(fontSize))};
-        `;
-      default:
-        return css`
-          padding-top: ${theme.size.em(5)};
-          padding-bottom: ${theme.size.em(5)};
-        `;
-    }
-  }}
-`;
-
-export const StyledInput = styled.div.withConfig({
-  shouldForwardProp: (prop) =>
-    prop !== "type" && prop !== "size" && prop !== "error"
-})<InputProps>`
-  position: relative;
-  width: 100%;
-
-  ${({ error }) =>
-    error &&
+  ${({ disabled, disableOpacity = 0.5 }) =>
+    disabled &&
     css`
-    ${StyledInputField} {
-      border-color: #f00;
-    }
-
-    ${StyledInputError} {
-      display: block;
-    }
-  `}
-
-  ${({ type, theme }) => {
-    switch (type) {
-      case "001":
-        return css`
-          ${StyledInputField} {
-            border-radius: 0;
-          }
-        `;
-      case "002":
-        return css`
-          ${StyledInputField} {
-            border-radius: ${theme.size.em(4)};
-          }
-        `;
-      default:
-        return css`
-          ${StyledInputField} {
-            border-radius: 0;
-          }
-        `;
-    }
-  }}
+      cursor: not-allowed;
+      opacity: ${disableOpacity};
+      pointer-events: none;
+    `}
 `;
 
-export const StyledInputError = styled.p.withConfig({
-  shouldForwardProp: (prop) => prop !== "errorColor" && prop !== "errorFontSize"
-})<InputErrorProps>`
-  display: none;
-  color: ${({ errorColor }) => errorColor ?? "#f00"};
-  font-size: ${({ theme, errorFontSize }) => theme.size.em(errorFontSize ?? 16)};
-  margin: ${({ theme }) => theme.size.em(5)} 0 0;
-  line-height: 1;
+export const StyledDotsWrapper = styled.div.withConfig({
+  shouldForwardProp: (prop) => prop !== "gap"
+})<{
+  gap: number | undefined;
+  marginTop: number | undefined;
+}>`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: ${({ theme, gap }) => theme.size.em(gap ?? 10)};
+  margin-top: ${({ theme, marginTop }) => theme.size.em(marginTop ?? 20)};
+`;
+
+export const StyledDot = styled.div.withConfig({
+  shouldForwardProp: (prop) =>
+    prop !== "active" &&
+    prop !== "size" &&
+    prop !== "backgroundColor" &&
+    prop !== "borderColor" &&
+    prop !== "activeBackgroundColor" &&
+    prop !== "activeBorderColor"
+})<{
+  active: boolean;
+  size: number | undefined;
+  backgroundColor: string | undefined;
+  borderColor: string | undefined;
+  activeBackgroundColor: string | undefined;
+  activeBorderColor: string | undefined;
+}>`
+  width: ${({ theme, size }) => theme.size.em(size ?? 10)};
+  height: ${({ theme, size }) => theme.size.em(size ?? 10)};
+  background-color: ${({ backgroundColor }) => backgroundColor ?? "#fff"};
+  border: 1px solid ${({ borderColor }) => borderColor ?? "#000"};
+  cursor: pointer;
+  border-radius: 50%;
+
+  ${({ active, activeBackgroundColor, activeBorderColor }) =>
+    active &&
+    css`
+      background-color: ${activeBackgroundColor ?? "#000"};
+      border-color: ${activeBorderColor ?? "#000"};
+    `}
 `;

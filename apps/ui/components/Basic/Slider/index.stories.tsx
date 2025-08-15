@@ -1,4 +1,6 @@
-import type { Meta, StoryFn } from "@storybook/react";
+import type { Meta, StoryFn, StoryObj } from "@storybook/react";
+import { useState } from "react";
+import { Svg004Icon } from "../Icons";
 import { Slider } from "./index";
 
 // Reference: https://keen-slider.io/examples
@@ -16,90 +18,193 @@ const Template: StoryFn<typeof Slider> = (args) => <Slider {...args} />;
 export const Default = Template.bind({});
 Default.args = {
   options: {
-    loop: true,
     slides: {
-      perView: 2,
+      perView: 1,
       spacing: 10
     }
   },
   items: [
-    <div
-      key="1"
-      style={{
-        backgroundColor: "red",
-        height: "100px",
-        textAlign: "center",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center"
-      }}
-    >
-      1
-    </div>,
-    <div
-      key="2"
-      style={{
-        backgroundColor: "blue",
-        height: "100px",
-        textAlign: "center",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center"
-      }}
-    >
-      2
-    </div>,
-    <div
-      key="3"
-      style={{
-        backgroundColor: "green",
-        height: "100px",
-        textAlign: "center",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center"
-      }}
-    >
-      3
-    </div>,
-    <div
-      key="4"
-      style={{
-        backgroundColor: "green",
-        height: "100px",
-        textAlign: "center",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center"
-      }}
-    >
-      4
-    </div>,
-    <div
-      key="5"
-      style={{
-        backgroundColor: "yellow",
-        height: "100px",
-        textAlign: "center",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center"
-      }}
-    >
-      5
-    </div>,
-    <div
-      key="6"
-      style={{
-        backgroundColor: "purple",
-        height: "100px",
-        textAlign: "center",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center"
-      }}
-    >
-      6
-    </div>
+    {
+      key: "1",
+      children: (
+        <div style={{ backgroundColor: "red", width: "100%", height: "300px" }}>
+          1
+        </div>
+      )
+    },
+    {
+      key: "2",
+      children: (
+        <div
+          style={{ backgroundColor: "blue", width: "100%", height: "300px" }}
+        >
+          2
+        </div>
+      )
+    },
+    {
+      key: "3",
+      children: (
+        <div
+          style={{ backgroundColor: "green", width: "100%", height: "300px" }}
+        >
+          3
+        </div>
+      )
+    },
+    {
+      key: "4",
+      children: (
+        <div
+          style={{ backgroundColor: "yellow", width: "100%", height: "300px" }}
+        >
+          4
+        </div>
+      )
+    },
+    {
+      key: "5",
+      children: (
+        <div
+          style={{ backgroundColor: "purple", width: "100%", height: "300px" }}
+        >
+          5
+        </div>
+      )
+    },
+    {
+      key: "6",
+      children: (
+        <div
+          style={{ backgroundColor: "orange", width: "100%", height: "300px" }}
+        >
+          6
+        </div>
+      )
+    }
   ]
+};
+
+export const Navigation: StoryObj<typeof Slider> = {
+  render: (args) => {
+    const [loading, setLoading] = useState(true);
+
+    return (
+      <Slider
+        {...args}
+        loading={loading}
+        options={{
+          slides: { perView: 3, spacing: 10 },
+          created: () => {
+            setLoading(false);
+          }
+        }}
+      />
+    );
+  },
+  args: {
+    controller: {
+      left: {
+        children: (
+          <div style={{ transform: "rotate(180deg)" }}>
+            <Svg004Icon />
+          </div>
+        ),
+        style: {
+          size: 60,
+          position: -50,
+          color: "#000",
+          hoverColor: "#ccc",
+          disableOpacity: 0.5
+        }
+      },
+      right: {
+        children: <Svg004Icon />,
+        style: {
+          size: 60,
+          position: -50,
+          color: "#000",
+          hoverColor: "#ccc",
+          disableOpacity: 0.5
+        }
+      }
+    },
+    dots: {
+      show: true
+    },
+    items: [
+      {
+        key: "1",
+        children: (
+          <div
+            style={{ backgroundColor: "red", width: "100%", height: "300px" }}
+          >
+            1
+          </div>
+        )
+      },
+      {
+        key: "2",
+        children: (
+          <div
+            style={{ backgroundColor: "blue", width: "100%", height: "300px" }}
+          >
+            2
+          </div>
+        )
+      },
+      {
+        key: "3",
+        children: (
+          <div
+            style={{ backgroundColor: "green", width: "100%", height: "300px" }}
+          >
+            3
+          </div>
+        )
+      },
+      {
+        key: "4",
+        children: (
+          <div
+            style={{
+              backgroundColor: "yellow",
+              width: "100%",
+              height: "300px"
+            }}
+          >
+            4
+          </div>
+        )
+      },
+      {
+        key: "5",
+        children: (
+          <div
+            style={{
+              backgroundColor: "purple",
+              width: "100%",
+              height: "300px"
+            }}
+          >
+            5
+          </div>
+        )
+      },
+      {
+        key: "6",
+        children: (
+          <div
+            style={{
+              backgroundColor: "orange",
+              width: "100%",
+              height: "300px"
+            }}
+          >
+            6
+          </div>
+        )
+      }
+    ]
+  }
 };
