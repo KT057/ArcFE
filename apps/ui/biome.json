@@ -2,6 +2,6 @@
   "extends": ["../../biome.json"],
   "files": {
     "ignoreUnknown": false,
-    "includes": ["src/**", "components/**"]
+    "includes": ["src/**", "components/**", "styles/**"]
   }
 }

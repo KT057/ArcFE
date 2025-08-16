@@ -1,6 +1,7 @@
 import { css } from "styled-components";
 import { color } from "./color";
 import { easing } from "./easing";
+import { font } from "./figma-fonts";
 import { baseFontSizeForEm, baseFontSizeForRem, em, rem } from "./font";
 import { media } from "./media";
 import type { Size } from "./size";
@@ -14,6 +15,7 @@ export const themes = {
     customEm: (px: number, base: number) => `${px / base}em`
   },
   font: {
+    ...font,
     baseSize: {
       em: () => baseFontSizeForEm,
       rem: () => baseFontSizeForRem
