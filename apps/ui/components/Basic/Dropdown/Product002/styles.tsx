@@ -18,9 +18,9 @@ export const StyledDetailWrapper = styled.div`
 `;
 
 export const StyledDetail = styled.div.withConfig({
-	shouldForwardProp: (prop) => prop !== "nowrap",
+  shouldForwardProp: (prop) => prop !== "nowrap"
 })<{
-	nowrap: boolean | undefined;
+  nowrap: boolean | undefined;
 }>`
   transition: transform 0.3s ${({ theme }) => theme.animation.easing.easeInCubic};
   transform: translateY(${({ theme }) => theme.size.em(5)});

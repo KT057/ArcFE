@@ -14,6 +14,7 @@ interface ListProps {
   style?: {
     columnGap?: number;
     rowGap?: number;
+    borderColor?: string;
   };
 }
 
@@ -27,7 +28,11 @@ export const List001 = ({ type = "001", items, style }: ListProps) => {
         rowGap={style?.rowGap}
       >
         {items.map((item) => (
-          <StyledListItem key={item.id} type={type}>
+          <StyledListItem
+            key={item.id}
+            type={type}
+            borderColor={style?.borderColor}
+          >
             {item.content}
           </StyledListItem>
         ))}

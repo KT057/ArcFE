@@ -18,13 +18,13 @@ export const StyledDetailWrapper = styled.div`
 `;
 
 export const StyledDetail = styled.div.withConfig({
-	shouldForwardProp: (prop) =>
-		prop !== "borderColor" && prop !== "backgroundColor",
+  shouldForwardProp: (prop) =>
+    prop !== "borderColor" && prop !== "backgroundColor"
 })<{
-	borderColor: string | undefined;
-	backgroundColor: string | undefined;
-	borderRadius: number | undefined;
-	nowrap: boolean | undefined;
+  borderColor: string | undefined;
+  backgroundColor: string | undefined;
+  borderRadius: number | undefined;
+  nowrap: boolean | undefined;
 }>`
   background-color: ${({ backgroundColor }) => backgroundColor ?? "#fff"};
   border: 1px solid ${({ borderColor }) => borderColor ?? "#000"};
