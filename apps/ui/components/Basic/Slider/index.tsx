@@ -44,6 +44,11 @@ interface SliderProps {
       style?: ArrowStyle;
     };
   };
+  autoPlay?: {
+    active: boolean;
+    interval?: number;
+    onProgress?: (progress: number) => void;
+  };
   dots?: {
     show: boolean;
     style?: {
@@ -65,7 +70,8 @@ export const Slider = ({
   loading = false,
   controller,
   state,
-  dots
+  dots,
+  autoPlay
 }: SliderProps) => {
   const [currentIndexOfComponent, setCurrentIndexOfComponent] = useState(
     state?.currentIndex || 0
@@ -79,13 +85,92 @@ export const Slider = ({
     return state?.setCurrentIndex || setCurrentIndexOfComponent;
   }, [state?.setCurrentIndex]);
 
-  const [sliderRefOfComponent, instanceRefOfComponent] = useKeenSlider({
-    ...(options || {}),
-    slideChanged: (slider) => {
-      setCurrentIndex(slider.track.details.abs);
-      options?.slideChanged?.(slider);
-    }
-  });
+  const [sliderRefOfComponent, instanceRefOfComponent] = useKeenSlider(
+    {
+      ...(options || {}),
+      slideChanged: (slider) => {
+        setCurrentIndex(slider.track.details.abs);
+        options?.slideChanged?.(slider);
+      }
+    },
+    autoPlay
+      ? [
+          (slider) => {
+            if (!autoPlay?.active) return;
+
+            const interval = autoPlay.interval || 2000;
+            let timeout: ReturnType<typeof setTimeout>;
+            let raf = 0;
+            let mouseOver = false;
+            let start = 0;
+            let running = false;
+
+            const setProgress = (p: number) => {
+              const clamped = Math.floor(Math.max(0, Math.min(100, p)));
+              autoPlay.onProgress?.(clamped);
+            };
+
+            const clearNextTimeout = () => clearTimeout(timeout);
+
+            const tick = (now: number) => {
+              if (!running) return;
+              if (!mouseOver && !slider.options.disabled) {
+                const elapsed = now - start;
+                const percent = (elapsed / interval) * 100;
+                setProgress(percent);
+                if (elapsed >= interval) {
+                  setProgress(100);
+                  if (
+                    slider.track.details.abs === slider.track.details.maxIdx &&
+                    !options?.loop
+                  ) {
+                    slider.moveToIdx(0);
+                  } else {
+                    slider.next();
+                  }
+                  start = now;
+                  setProgress(0);
+                }
+              }
+              raf = requestAnimationFrame(tick);
+            };
+
+            const startLoop = () => {
+              running = true;
+              start = performance.now();
+              setProgress(0);
+              cancelAnimationFrame(raf);
+              raf = requestAnimationFrame(tick);
+              clearNextTimeout();
+              timeout = setTimeout(() => slider.next(), interval); // 保険
+            };
+
+            const stopLoop = () => {
+              running = false;
+              cancelAnimationFrame(raf);
+              clearNextTimeout();
+            };
+
+            slider.on("created", () => {
+              slider.container.addEventListener("mouseover", () => {
+                mouseOver = true;
+                stopLoop();
+              });
+              slider.container.addEventListener("mouseout", () => {
+                mouseOver = false;
+                startLoop();
+              });
+              startLoop();
+            });
+
+            slider.on("dragStarted", () => stopLoop());
+            slider.on("animationEnded", () => startLoop());
+            slider.on("updated", () => startLoop());
+            slider.on("destroyed", () => stopLoop());
+          }
+        ]
+      : []
+  );
 
   const sliderRef = useMemo(() => {
     return state?.slideRef || sliderRefOfComponent;
