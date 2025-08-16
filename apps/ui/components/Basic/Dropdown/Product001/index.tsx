@@ -18,7 +18,7 @@ interface DropdownMenuProps {
 	};
 }
 
-export const DropdownMenu001 = ({
+export const Dropdown001 = ({
 	style,
 	detail,
 	contents,
