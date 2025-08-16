@@ -1,7 +1,8 @@
-import { type KeenSliderOptions, useKeenSlider } from "keen-slider/react";
+import type { KeenSliderOptions } from "keen-slider/react";
 import "keen-slider/keen-slider.min.css";
 import type { KeenSliderHooks, KeenSliderInstance } from "keen-slider";
-import { useMemo, useState } from "react";
+import { useAutoSlide } from "./hooks/useAutoSlide";
+import { useBase } from "./hooks/useBase";
 import {
   StyledArrow,
   StyledDot,
@@ -17,6 +18,27 @@ interface ArrowStyle {
   disableOpacity?: number;
 }
 
+export interface AutoPlay {
+  active: boolean;
+  interval?: number;
+  onProgress?: (progress: number) => void;
+}
+
+export type InstanceRef = React.MutableRefObject<KeenSliderInstance<
+  {},
+  {},
+  KeenSliderHooks
+> | null>;
+
+export interface State {
+  currentIndex?: number;
+  loading?: boolean;
+  slideRef?: (node: HTMLElement | null) => void;
+  instanceRef?: InstanceRef;
+  setCurrentIndex?: (index: number) => void;
+  setLoading?: (loading: boolean) => void;
+}
+
 interface SliderProps {
   options?: KeenSliderOptions;
   loading?: boolean;
@@ -24,16 +46,7 @@ interface SliderProps {
     key: string;
     children: React.ReactNode;
   }[];
-  state?: {
-    currentIndex?: number;
-    slideRef?: (node: HTMLElement | null) => void;
-    instanceRef?: React.MutableRefObject<KeenSliderInstance<
-      {},
-      {},
-      KeenSliderHooks
-    > | null>;
-    setCurrentIndex?: (index: number) => void;
-  };
+  state?: State;
   controller?: {
     left?: {
       children: React.ReactNode;
@@ -44,11 +57,7 @@ interface SliderProps {
       style?: ArrowStyle;
     };
   };
-  autoPlay?: {
-    active: boolean;
-    interval?: number;
-    onProgress?: (progress: number) => void;
-  };
+  autoPlay?: AutoPlay;
   dots?: {
     show: boolean;
     style?: {
@@ -67,118 +76,17 @@ interface SliderProps {
 export const Slider = ({
   options,
   items,
-  loading = false,
   controller,
   state,
   dots,
   autoPlay
 }: SliderProps) => {
-  const [currentIndexOfComponent, setCurrentIndexOfComponent] = useState(
-    state?.currentIndex || 0
-  );
+  const { sliderRef, instanceRef, loading, currentIndex } = useBase({
+    state,
+    options
+  });
 
-  const currentIndex = useMemo(() => {
-    return state?.currentIndex || currentIndexOfComponent;
-  }, [state?.currentIndex, currentIndexOfComponent]);
-
-  const setCurrentIndex = useMemo(() => {
-    return state?.setCurrentIndex || setCurrentIndexOfComponent;
-  }, [state?.setCurrentIndex]);
-
-  const [sliderRefOfComponent, instanceRefOfComponent] = useKeenSlider(
-    {
-      ...(options || {}),
-      slideChanged: (slider) => {
-        setCurrentIndex(slider.track.details.abs);
-        options?.slideChanged?.(slider);
-      }
-    },
-    autoPlay
-      ? [
-          (slider) => {
-            if (!autoPlay?.active) return;
-
-            const interval = autoPlay.interval || 2000;
-            let timeout: ReturnType<typeof setTimeout>;
-            let raf = 0;
-            let mouseOver = false;
-            let start = 0;
-            let running = false;
-
-            const setProgress = (p: number) => {
-              const clamped = Math.floor(Math.max(0, Math.min(100, p)));
-              autoPlay.onProgress?.(clamped);
-            };
-
-            const clearNextTimeout = () => clearTimeout(timeout);
-
-            const tick = (now: number) => {
-              if (!running) return;
-              if (!mouseOver && !slider.options.disabled) {
-                const elapsed = now - start;
-                const percent = (elapsed / interval) * 100;
-                setProgress(percent);
-                if (elapsed >= interval) {
-                  setProgress(100);
-                  if (
-                    slider.track.details.abs === slider.track.details.maxIdx &&
-                    !options?.loop
-                  ) {
-                    slider.moveToIdx(0);
-                  } else {
-                    slider.next();
-                  }
-                  start = now;
-                  setProgress(0);
-                }
-              }
-              raf = requestAnimationFrame(tick);
-            };
-
-            const startLoop = () => {
-              running = true;
-              start = performance.now();
-              setProgress(0);
-              cancelAnimationFrame(raf);
-              raf = requestAnimationFrame(tick);
-              clearNextTimeout();
-              timeout = setTimeout(() => slider.next(), interval); // 保険
-            };
-
-            const stopLoop = () => {
-              running = false;
-              cancelAnimationFrame(raf);
-              clearNextTimeout();
-            };
-
-            slider.on("created", () => {
-              slider.container.addEventListener("mouseover", () => {
-                mouseOver = true;
-                stopLoop();
-              });
-              slider.container.addEventListener("mouseout", () => {
-                mouseOver = false;
-                startLoop();
-              });
-              startLoop();
-            });
-
-            slider.on("dragStarted", () => stopLoop());
-            slider.on("animationEnded", () => startLoop());
-            slider.on("updated", () => startLoop());
-            slider.on("destroyed", () => stopLoop());
-          }
-        ]
-      : []
-  );
-
-  const sliderRef = useMemo(() => {
-    return state?.slideRef || sliderRefOfComponent;
-  }, [state?.slideRef, sliderRefOfComponent]);
-
-  const instanceRef = useMemo(() => {
-    return state?.instanceRef || instanceRefOfComponent;
-  }, [state?.instanceRef, instanceRefOfComponent]);
+  useAutoSlide({ autoPlay, instanceRef, options });
 
   return (
     <StyledSliderWrapper>
