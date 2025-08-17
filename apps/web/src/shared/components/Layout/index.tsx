@@ -1,3 +1,4 @@
+import { MediaProvider } from "@apps/ui/context";
 import { GlobalStyles, themes } from "@apps/ui/styles";
 import { ThemeProvider } from "styled-components";
 
@@ -7,9 +8,11 @@ type Props = {
 
 export const Layout = ({ children }: Props) => {
   return (
-    <ThemeProvider theme={themes}>
-      <GlobalStyles />
-      {children}
-    </ThemeProvider>
+    <MediaProvider>
+      <ThemeProvider theme={themes}>
+        <GlobalStyles />
+        {children}
+      </ThemeProvider>
+    </MediaProvider>
   );
 };

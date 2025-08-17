@@ -2,6 +2,7 @@
 import type { Preview } from "@storybook/react";
 import React from "react";
 import { ThemeProvider } from "styled-components";
+import { MediaProvider } from "../context/MediaContext";
 import { GlobalStyles } from "../styles/global-style";
 import { themes } from "../styles/themes";
 
@@ -21,12 +22,14 @@ const preview: Preview = {
   },
   decorators: [
     (Story) => (
-      <ThemeProvider theme={themes}>
-        <GlobalStyles />
-        <div style={{ width: "100%", padding: "40px" }}>
-          <Story />
-        </div>
-      </ThemeProvider>
+      <MediaProvider>
+        <ThemeProvider theme={themes}>
+          <GlobalStyles />
+          <div style={{ width: "100%", padding: "40px" }}>
+            <Story />
+          </div>
+        </ThemeProvider>
+      </MediaProvider>
     )
   ]
 };
