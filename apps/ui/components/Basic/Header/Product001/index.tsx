@@ -1,3 +1,4 @@
+import type { EasingKey } from "../../../../styles/easing";
 import {
   StyledHeader,
   StyledHeaderInner,
@@ -22,6 +23,11 @@ interface Header001Props {
     header?: {
       height?: number;
       backgroundColor?: string;
+      animation?: {
+        backgroundColor?: string;
+        duration?: string;
+        easing?: EasingKey;
+      };
     };
   };
 }
@@ -40,6 +46,10 @@ export const Header001 = ({
       <StyledHeader
         height={style?.header?.height ?? HEIGHT}
         backgroundColor={style?.header?.backgroundColor}
+        animationBackgroundColor={style?.header?.animation?.backgroundColor}
+        easing={style?.header?.animation?.easing}
+        duration={style?.header?.animation?.duration}
+        showModal={showModal}
       >
         <StyledHeaderInner>
           <StyledLeftWrapper gap={style?.leftGap}>
@@ -54,7 +64,6 @@ export const Header001 = ({
       </StyledHeader>
       <StyledModalWrapper
         height={style?.header?.height ?? HEIGHT}
-        backgroundColor={style?.header?.backgroundColor}
         showModal={showModal}
       >
         {modalContent}

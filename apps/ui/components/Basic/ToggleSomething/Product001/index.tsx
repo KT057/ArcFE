@@ -8,7 +8,7 @@ type ToggleProps = {
   easing?: EasingKey;
 } & React.HTMLAttributes<HTMLDivElement>;
 
-export const ToggleContent001 = ({
+export const ToggleSomething001 = ({
   isOpen,
   children,
   duration,
