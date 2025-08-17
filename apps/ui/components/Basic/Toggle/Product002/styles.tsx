@@ -1,7 +1,7 @@
 import styled, { css, keyframes } from "styled-components";
 
 type ToggleInnerProps = {
-  isOpen: boolean;
+  isOpen: boolean | undefined;
 };
 
 type ToggleLineProps = {
@@ -68,7 +68,7 @@ export const StyledToggleInner = styled.div.withConfig({
     `}
 
   ${({ isOpen }) =>
-    !isOpen &&
+    isOpen === false &&
     css`
       ${StyledToggleCloseLine}::after {
         animation: ${scaleOut} 0.15s ease forwards;
