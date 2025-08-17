@@ -3,14 +3,13 @@ import { StyledText, StyledTextContent } from "./styles";
 
 interface TextProps {
   children: React.ReactNode;
-  as?: keyof JSX.IntrinsicElements;
   fontSize: number;
   color?: string;
 }
 
-export const Text = ({ children, as = "p", fontSize, color }: TextProps) => {
+export const Text = ({ children, fontSize, color }: TextProps) => {
   return (
-    <StyledText as={as}>
+    <StyledText>
       <StyledTextContent fontSize={fontSize} color={color}>
         {children}
       </StyledTextContent>
