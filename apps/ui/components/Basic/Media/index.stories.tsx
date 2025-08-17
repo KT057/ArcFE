@@ -18,6 +18,6 @@ const Template: StoryFn<typeof Media> = (args) => (
 export const Default = Template.bind({});
 Default.args = {
   pc: <div>pc</div>,
-  tablet: <div>pc</div>,
+  tablet: <div>tablet</div>,
   sp: <div>sp</div>
 };
