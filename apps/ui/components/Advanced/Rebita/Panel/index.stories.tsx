@@ -3,7 +3,8 @@ import { RebitaPanel } from "./index";
 
 const meta: Meta<typeof RebitaPanel> = {
   title: "Advanced/Rebita/Panel",
-  component: RebitaPanel
+  component: RebitaPanel,
+  tags: ["autodocs"]
 };
 
 export default meta;

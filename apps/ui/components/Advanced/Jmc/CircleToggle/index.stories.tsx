@@ -3,7 +3,8 @@ import { JmcCircleToggle } from "./index";
 
 const meta: Meta<typeof JmcCircleToggle> = {
   title: "Advanced/Jmc/CircleToggle",
-  component: JmcCircleToggle
+  component: JmcCircleToggle,
+  tags: ["autodocs"]
 };
 
 export default meta;

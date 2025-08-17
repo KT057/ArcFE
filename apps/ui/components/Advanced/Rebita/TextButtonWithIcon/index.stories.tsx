@@ -4,7 +4,8 @@ import { RebitaTextButtonWithIcon } from "./index";
 
 const meta: Meta<typeof RebitaTextButtonWithIcon> = {
   title: "Advanced/Rebita/TextButtonWithIcon",
-  component: RebitaTextButtonWithIcon
+  component: RebitaTextButtonWithIcon,
+  tags: ["autodocs"]
 };
 
 export default meta;

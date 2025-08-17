@@ -3,7 +3,8 @@ import { JmcArrowButton } from "./index";
 
 const meta: Meta<typeof JmcArrowButton> = {
   title: "Advanced/Jmc/ArrowButton",
-  component: JmcArrowButton
+  component: JmcArrowButton,
+  tags: ["autodocs"]
 };
 
 export default meta;

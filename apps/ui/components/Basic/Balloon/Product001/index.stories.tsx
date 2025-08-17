@@ -3,7 +3,8 @@ import { Balloon001 } from "./index";
 
 export default {
   title: "Basic/Balloon/Product001",
-  component: Balloon001
+  component: Balloon001,
+  tags: ["autodocs"]
 } as Meta<typeof Balloon001>;
 
 const Template: StoryFn<typeof Balloon001> = (args) => (

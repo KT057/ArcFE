@@ -5,8 +5,10 @@ type TextProps = {
   color?: string;
 };
 
-export const StyledText = styled.div`
+export const StyledText = styled.span`
   ${({ theme }) => theme.font.baseSize.em()}
+
+  display: block;
 `;
 
 export const StyledTextContent = styled.span.withConfig({

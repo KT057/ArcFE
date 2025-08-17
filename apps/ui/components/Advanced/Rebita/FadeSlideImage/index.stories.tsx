@@ -3,7 +3,8 @@ import { RebitaFadeSlideImage } from "./index";
 
 const meta: Meta<typeof RebitaFadeSlideImage> = {
   title: "Advanced/Rebita/FadeSlideImage",
-  component: RebitaFadeSlideImage
+  component: RebitaFadeSlideImage,
+  tags: ["autodocs"]
 };
 
 export default meta;

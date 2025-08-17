@@ -25,18 +25,18 @@ export const baseFontSizeForRem = css`
 
    ${(props) =>
      props.theme.media.pcSize(css`
-    font-size: calc(100vw * ${REM_SIZE} / ${PC_SIZE});
-   `)}
+      font-size: calc(100vw * ${REM_SIZE} / ${PC_SIZE});
+    `)}
 
    ${(props) =>
      props.theme.media.tabletSize(css`
-    font-size: calc(100vw * ${REM_SIZE} / ${PC_SIZE});
-   `)}
+      font-size: calc(100vw * ${REM_SIZE} / ${PC_SIZE});
+    `)}
 
    ${(props) =>
      props.theme.media.spSizeLess(css`
-    font-size: calc(100vw * ${REM_SIZE} / ${SP_SIZE});
-   `)}
+      font-size: calc(100vw * ${REM_SIZE} / ${SP_SIZE});
+    `)}
 `;
 
 export const em = (px: number) => `${px * 0.1}em`;

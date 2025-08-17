@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import {
   StyledToggle,
   StyledToggleClose,
@@ -25,15 +25,18 @@ export const Toggle002 = ({
   onClick,
   style
 }: ToggleProps) => {
-  const [internalIsOpen, setInternalIsOpen] = useState(false);
-  const isOpen =
-    controlledIsOpen !== undefined ? controlledIsOpen : internalIsOpen;
+  const [internalIsOpen, setInternalIsOpen] = useState<boolean | undefined>(
+    undefined
+  );
+  const isOpen = useMemo(() => {
+    if (internalIsOpen === undefined) return undefined;
+
+    return controlledIsOpen !== undefined ? controlledIsOpen : internalIsOpen;
+  }, [controlledIsOpen, internalIsOpen]);
 
   const handleClick = () => {
     const newState = !isOpen;
-    if (controlledIsOpen === undefined) {
-      setInternalIsOpen(newState);
-    }
+    setInternalIsOpen(newState);
     onChange?.(newState);
     onClick?.();
   };

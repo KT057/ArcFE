@@ -9,6 +9,7 @@ type ListProps = {
 
 type ListItemProps = {
   type: Type;
+  borderColor: string | undefined;
 };
 
 export const StyledListWrapper = styled.div`
@@ -46,12 +47,12 @@ export const StyledList = styled.div.withConfig({
 `;
 
 export const StyledListItem = styled.li.withConfig({
-  shouldForwardProp: (prop) => prop !== "type"
+  shouldForwardProp: (prop) => prop !== "type" && prop !== "borderColor"
 })<ListItemProps>`
-  ${({ type }) =>
+  ${({ type, borderColor }) =>
     type === "002" &&
     css`
-      border-bottom: 1px solid #000;
+      border-bottom: 1px solid ${borderColor ?? "#000"};
       padding-bottom: ${({ theme }) => theme.size.em(8)};
 
       &:last-child {

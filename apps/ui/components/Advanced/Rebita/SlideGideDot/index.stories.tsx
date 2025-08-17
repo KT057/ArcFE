@@ -4,7 +4,8 @@ import { RebitaSlideGuideDot } from "./index";
 
 const meta: Meta<typeof RebitaSlideGuideDot> = {
   title: "Advanced/Rebita/SlideGuideDot",
-  component: RebitaSlideGuideDot
+  component: RebitaSlideGuideDot,
+  tags: ["autodocs"]
 };
 
 export default meta;

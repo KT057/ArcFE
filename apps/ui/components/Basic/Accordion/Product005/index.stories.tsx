@@ -4,7 +4,8 @@ import { Accordion005 } from "./index";
 
 export default {
   title: "Basic/Accordion/Product005",
-  component: Accordion005
+  component: Accordion005,
+  tags: ["autodocs"]
 } as Meta<typeof Accordion005>;
 
 const Template: StoryFn<typeof Accordion005> = (args) => (
