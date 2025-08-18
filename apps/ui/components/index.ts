@@ -8,6 +8,7 @@ export * from "./Basic/Button";
 export * from "./Basic/CheckBox";
 export * from "./Basic/FrameIcon";
 export * from "./Basic/FrameNumber";
+export * from "./Basic/Header";
 export * from "./Basic/Icons";
 export * from "./Basic/Input";
 export * from "./Basic/Label";
