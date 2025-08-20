@@ -17,6 +17,7 @@ interface FadeInAndZoomImagesProps {
   duration?: number;
   fadeDuration?: number;
   scaleTo?: number;
+  height?: number;
   state?: {
     currentIndex: number;
     setCurrentIndex: (index: number) => void;
@@ -32,6 +33,7 @@ export const FadeInAndZoomImages = ({
   fadeDuration = 2,
   scaleTo = 1.2,
   state,
+  height,
   onImageChange,
   onProgress
 }: FadeInAndZoomImagesProps) => {
@@ -180,7 +182,7 @@ export const FadeInAndZoomImages = ({
 
   return (
     <StyledFadeInAndZoomImagesWrapper>
-      <StyledFadeInAndZoomImagesImageInner ref={wrapperRef}>
+      <StyledFadeInAndZoomImagesImageInner ref={wrapperRef} height={height}>
         {images.map((image, index) => (
           <StyledFadeInAndZoomImagesContent
             key={image.src}
