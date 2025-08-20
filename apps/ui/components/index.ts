@@ -16,6 +16,7 @@ export * from "./Basic/List";
 export * from "./Basic/ListItem";
 export * from "./Basic/Loading";
 export * from "./Basic/NestedListItem";
+export * from "./Basic/Pagination";
 export * from "./Basic/Radio";
 export * from "./Basic/Select";
 export * from "./Basic/Text";
