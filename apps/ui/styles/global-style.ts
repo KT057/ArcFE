@@ -1,6 +1,14 @@
 import { createGlobalStyle } from "styled-components";
 
 export const GlobalStyles = createGlobalStyle`
+  html {
+    ${({ theme }) => theme.font.baseSize.rem()}
+  }
+
+  body {
+    margin: 0;
+  }
+
   *,
   ::before,
   ::after {
