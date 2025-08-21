@@ -3,12 +3,9 @@
   "version": "1.0.0",
   "packageManager": "pnpm@10.12.1",
   "scripts": {
-    "setup": "pnpm install && pnpm @core build",
-    "ui:gen": "rm -rf apps/web/src/shared/common && rm -rf apps/wordpress/src/shared/common && pnpm @ui gen",
     "@ui": "pnpm --filter @apps/ui",
     "@web": "pnpm --filter @apps/web",
-    "@wp": "pnpm --filter @apps/wordpress",
-    "@core": "pnpm --filter @core"
+    "@wp": "pnpm --filter @apps/wordpress"
   },
   "devDependencies": {
     "@biomejs/biome": "2.2.0",
