@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Button001 } from "../../Button";
 import { List001 } from "../../List";
 import { Toggle002 } from "../../Toggle";
-import { ToggleContent001 } from "../../ToggleContent/Product001";
+import { ToggleSomething001 } from "../../ToggleSomething/Product001";
 import { Header001 } from "./index";
 
 export default {
@@ -139,9 +139,9 @@ export const Modal: StoryFn<typeof Header001> = () => {
     <Header001
       showModal={showModal}
       left={
-        <ToggleContent001 isOpen={!showModal}>
+        <ToggleSomething001 isOpen={!showModal}>
           <div style={{ color: "#fff", fontSize: "16px" }}>LOGO</div>
-        </ToggleContent001>
+        </ToggleSomething001>
       }
       right={
         <Toggle002
@@ -155,7 +155,7 @@ export const Modal: StoryFn<typeof Header001> = () => {
         />
       }
       modalContent={
-        <ToggleContent001
+        <ToggleSomething001
           isOpen={showModal}
           style={{
             width: "100%",
@@ -172,11 +172,14 @@ export const Modal: StoryFn<typeof Header001> = () => {
           >
             Modal
           </div>
-        </ToggleContent001>
+        </ToggleSomething001>
       }
       style={{
         header: {
-          backgroundColor: "#000"
+          backgroundColor: "#000",
+          animation: {
+            backgroundColor: "#000"
+          }
         }
       }}
     />

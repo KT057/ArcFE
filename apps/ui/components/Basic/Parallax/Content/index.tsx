@@ -9,7 +9,13 @@ export const ParallaxContent = ({
   children,
   parallaxProps
 }: ParallaxImageProps) => {
-  const parallax = useParallax(parallaxProps);
+  const parallax = useParallax({
+    ...parallaxProps,
+    onProgressChange: (progress) => {
+      const clamped = Math.floor(Math.max(0, Math.min(100, progress * 100)));
+      parallaxProps.onProgressChange?.(clamped);
+    }
+  });
 
   return (
     <div

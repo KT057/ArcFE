@@ -1,23 +1,44 @@
 import styled, { css } from "styled-components";
+import type { EasingKey } from "../../../../styles/easing";
 
 export const StyledWrapper = styled.div`
   ${({ theme }) => theme.font.baseSize.em()}
 `;
 
 export const StyledHeader = styled.header.withConfig({
-  shouldForwardProp: (prop) => prop !== "height" && prop !== "backgroundColor"
-})<{ height: number; backgroundColor: string | undefined }>`
+  shouldForwardProp: (prop) =>
+    prop !== "height" &&
+    prop !== "backgroundColor" &&
+    prop !== "animationBackgroundColor" &&
+    prop !== "showModal" &&
+    prop !== "easing" &&
+    prop !== "duration"
+})<{
+  height: number;
+  backgroundColor: string | undefined;
+  animationBackgroundColor: string | undefined;
+  showModal: boolean | undefined;
+  easing: EasingKey | undefined;
+  duration: string | undefined;
+}>`
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   height: ${({ height, theme }) => theme.size.em(height)};
-  background-color: ${({ backgroundColor }) => backgroundColor ?? "#fff"};
+  background-color: ${({ backgroundColor }) => backgroundColor ?? "transparent"};
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0 ${({ theme }) => theme.size.em(20)};
   z-index: 100;
+  transition: background-color ${({ duration }) => duration ?? "0.3s"} ${({ theme, easing }) => theme.animation.easing[easing ?? "easeInCubic"]};
+
+  ${({ showModal, animationBackgroundColor }) =>
+    showModal &&
+    css`
+      background-color: ${animationBackgroundColor ?? "transparent"};
+    `}
 `;
 
 export const StyledHeaderInner = styled.div`
@@ -51,10 +72,9 @@ export const StyledRightWrapper = styled.div.withConfig({
 `;
 
 export const StyledModalWrapper = styled.div.withConfig({
-  shouldForwardProp: (prop) => prop !== "height" && prop !== "backgroundColor"
+  shouldForwardProp: (prop) => prop !== "height"
 })<{
   height: number;
-  backgroundColor: string | undefined;
   showModal: boolean | undefined;
 }>`
   position: fixed;

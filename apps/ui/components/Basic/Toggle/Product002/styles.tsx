@@ -99,6 +99,7 @@ export const StyledToggleOpenLine = styled.span.withConfig({
   height: ${({ theme }) => theme.size.em(2)};
   background-color: ${({ lineColor }) => lineColor ?? "#000"};
   transform-origin: left;
+  transition: transform 0.2s ${({ theme }) => theme.animation.easing.easeInSine};
 `;
 
 export const StyledToggleCloseWrapper = styled.div`
@@ -137,6 +138,7 @@ export const StyledToggleCloseLine = styled.span.withConfig({
     height: 100%;
     background-color: ${({ lineColor }) => lineColor ?? "#000"};
     transform: scale(0);
+    transition: transform 0.2s ${({ theme }) => theme.animation.easing.easeInSine};
   }
 
   &:nth-child(1) {

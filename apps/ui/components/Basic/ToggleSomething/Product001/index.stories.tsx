@@ -1,24 +1,24 @@
 import type { Meta, StoryFn } from "@storybook/react";
 import { useState } from "react";
-import { ToggleContent001 } from "./index";
+import { ToggleSomething001 } from "./index";
 
-const meta: Meta<typeof ToggleContent001> = {
-  title: "Basic/ToggleContent/Product001",
-  component: ToggleContent001,
+const meta: Meta<typeof ToggleSomething001> = {
+  title: "Basic/ToggleSomething/Product001",
+  component: ToggleSomething001,
   tags: ["autodocs"]
 };
 
 export default meta;
 
-const Template: StoryFn<typeof ToggleContent001> = (args) => {
+const Template: StoryFn<typeof ToggleSomething001> = (args) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
     <div>
       <button onClick={() => setIsOpen(!isOpen)}>Toggle</button>
-      <ToggleContent001 {...args} isOpen={isOpen}>
+      <ToggleSomething001 {...args} isOpen={isOpen}>
         <div>Content</div>
-      </ToggleContent001>
+      </ToggleSomething001>
     </div>
   );
 };

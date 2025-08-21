@@ -4,7 +4,11 @@ export const StyledFadeInAndZoomImagesWrapper = styled.div`
   ${({ theme }) => theme.font.baseSize.em()}
 `;
 
-export const StyledFadeInAndZoomImagesImageInner = styled.div`
+export const StyledFadeInAndZoomImagesImageInner = styled.div.withConfig({
+  shouldForwardProp: (prop) => prop !== "height"
+})<{
+  height: number | undefined;
+}>`
   width: 100%;
   position: relative;
   display: block;
@@ -14,7 +18,7 @@ export const StyledFadeInAndZoomImagesImageInner = styled.div`
     content: "";
     width: 100%;
     display: block;
-    padding-top: 50%;
+    padding-top: ${({ height, theme }) => theme.size.em(height ?? 200)};
   }
 `;
 
