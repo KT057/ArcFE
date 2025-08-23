@@ -30,12 +30,24 @@ CustomImages.args = {
     { src: "/images/img-01.jpg", alt: "Image+1" },
     { src: "/images/img-02.jpg", alt: "Image+2" },
     { src: "/images/img-03.jpg", alt: "Image+3" }
-  ]
+  ],
+  slideGuideDotProps: {
+    style: {
+      circleSize: 15,
+      dotSize: 20,
+      primaryColor: "#22c55e",
+      trackColor: "#f3f4f6",
+      strokeWidth: 2,
+      animationDuration: "5s"
+    }
+  },
+  style: {
+    guideGap: 10
+  }
 };
 
 export const SlowTransition = Template.bind({});
 SlowTransition.args = {
-  interval: 5000,
   images: [
     { src: "/images/img-01.jpg", alt: "Slow+1" },
     { src: "/images/img-02.jpg", alt: "Slow+2" },
@@ -45,7 +57,10 @@ SlowTransition.args = {
 
 export const FastTransition = Template.bind({});
 FastTransition.args = {
-  interval: 1500,
+  fadeInAndZoomImagesProps: {
+    duration: 1,
+    fadeDuration: 1
+  },
   images: [
     { src: "/images/img-01.jpg", alt: "Fast+1" },
     { src: "/images/img-02.jpg", alt: "Fast+2" },
@@ -69,7 +84,10 @@ FiveImages.args = {
     { src: "/images/img-03.jpg", alt: "Image+3" },
     { src: "/images/img-04.jpg", alt: "Image+4" }
   ],
-  interval: 2500
+  fadeInAndZoomImagesProps: {
+    duration: 1,
+    fadeDuration: 1
+  }
 };
 
 export const NoAutoPlay = Template.bind({});
