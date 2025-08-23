@@ -34,7 +34,7 @@ CustomImages.args = {
   slideGuideDotProps: {
     style: {
       circleSize: 15,
-      dotSize: 20,
+      dotSize: 15,
       primaryColor: "#22c55e",
       trackColor: "#f3f4f6",
       strokeWidth: 2,
