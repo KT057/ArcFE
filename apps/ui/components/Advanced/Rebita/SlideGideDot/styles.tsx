@@ -18,8 +18,8 @@ export const StyledSlideGuideDotContainer = styled.div.withConfig({
 `;
 
 export const StyledSlideGuideDotItem = styled.span`
-  width: ${({ theme }) => theme.size.em(10)};
-  height: ${({ theme }) => theme.size.em(10)};
+  width: 100%;
+  height: 100%;
   display: block;
   background-color: #ccc;
   border-radius: 50%;

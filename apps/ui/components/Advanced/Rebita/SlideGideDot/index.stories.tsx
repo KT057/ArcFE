@@ -53,7 +53,8 @@ CustomColors.args = {
   style: {
     primaryColor: "#22c55e",
     trackColor: "#f3f4f6",
-    size: 20
+    circleSize: 10,
+    dotSize: 10
   }
 };
 
@@ -62,7 +63,8 @@ LargeSize.args = {
   type: "progress",
   progress: 60,
   style: {
-    size: 30,
+    circleSize: 30,
+    dotSize: 30,
     strokeWidth: 3
   }
 };

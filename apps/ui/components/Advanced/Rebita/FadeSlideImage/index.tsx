@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { type ComponentProps, useState } from "react";
 import {
   FadeInAndZoomImages,
   type FadeInAndZoomImagesImageItem
@@ -13,10 +13,21 @@ import {
 
 interface FadeSlideImageProps {
   images: FadeInAndZoomImagesImageItem[];
-  interval?: number;
+  fadeInAndZoomImagesProps?: Partial<
+    ComponentProps<typeof FadeInAndZoomImages>
+  >;
+  slideGuideDotProps?: Partial<ComponentProps<typeof RebitaSlideGuideDot>>;
+  style?: {
+    guideGap?: number;
+  };
 }
 
-export const RebitaFadeSlideImage = ({ images }: FadeSlideImageProps) => {
+export const RebitaFadeSlideImage = ({
+  images,
+  fadeInAndZoomImagesProps,
+  slideGuideDotProps,
+  style
+}: FadeSlideImageProps) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [progress, setProgress] = useState(0);
 
@@ -32,10 +43,11 @@ export const RebitaFadeSlideImage = ({ images }: FadeSlideImageProps) => {
           onProgress={(progress) => {
             setProgress(progress);
           }}
+          {...fadeInAndZoomImagesProps}
         />
       </StyledFadeSlideImageContainer>
 
-      <StyledFadeSlideImageGuideWrapper>
+      <StyledFadeSlideImageGuideWrapper gap={style?.guideGap}>
         {images.map((_, index) => (
           <StyledFadeSlideImageGuideItem key={index}>
             <RebitaSlideGuideDot
@@ -44,6 +56,7 @@ export const RebitaFadeSlideImage = ({ images }: FadeSlideImageProps) => {
               onClick={() => {
                 setCurrentIndex(index);
               }}
+              {...slideGuideDotProps}
             />
           </StyledFadeSlideImageGuideItem>
         ))}
