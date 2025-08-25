@@ -7,8 +7,8 @@
     "debug": "browser-sync start -s 'storybook-static'",
     "build-storybook": "storybook build",
     "tsc": "tsc --noEmit --project tsconfig.json",
-    "lint:script": "pnpm biome check --diagnostic-level=warn .",
-    "lint:script:fix": "pnpm biome check --diagnostic-level=warn --write ."
+    "lint": "pnpm biome check --diagnostic-level=warn .",
+    "lint:fix": "pnpm biome check --diagnostic-level=warn --write ."
   },
   "packageManager": "pnpm@10.12.1",
   "devDependencies": {

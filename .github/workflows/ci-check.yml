@@ -30,7 +30,7 @@ jobs:
         run: pnpm install
 
       - name: Run Setup
-        run: pnpm @ui lint:script
+        run: pnpm @ui lint
 
   ui_storybook_build_check:
     runs-on: ubuntu-latest
