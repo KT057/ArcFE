@@ -24,4 +24,4 @@ export * from "./TextButton";
 export * from "./TextField";
 export * from "./TextIcon";
 export * from "./Toggle";
-export * from "./ToggleContent";
+export * from "./ToggleSomething";

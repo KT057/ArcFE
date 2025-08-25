@@ -23,7 +23,6 @@ Default.args = {
 
 export const Paragraph = Template.bind({});
 Paragraph.args = {
-  as: "p",
   children: "これは段落テキストです。",
   fontSize: 14,
   color: "#333"
@@ -31,7 +30,6 @@ Paragraph.args = {
 
 export const Heading = Template.bind({});
 Heading.args = {
-  as: "h2",
   children: "見出しテキスト",
   fontSize: 24,
   color: "#2196f3"
@@ -39,7 +37,6 @@ Heading.args = {
 
 export const Span = Template.bind({});
 Span.args = {
-  as: "span",
   children: "インラインテキスト",
   fontSize: 14,
   color: "#333"
