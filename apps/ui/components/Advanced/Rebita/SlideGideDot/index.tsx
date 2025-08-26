@@ -13,7 +13,8 @@ interface SlideGuideDotProps {
   style?: {
     primaryColor?: string;
     trackColor?: string;
-    size?: number;
+    circleSize?: number;
+    dotSize?: number;
     strokeWidth?: number;
     animationDuration?: string;
   };
@@ -25,22 +26,19 @@ export const RebitaSlideGuideDot = ({
   style,
   onClick
 }: SlideGuideDotProps) => {
-  const size = style?.size || 17;
-  const strokeWidth = style?.strokeWidth || 2;
-
   return (
     <StyledSlideGuideDotWrapper>
-      <StyledSlideGuideDotContainer size={size}>
+      <StyledSlideGuideDotContainer size={style?.dotSize || 17}>
         {type === "default" ? (
           <StyledSlideGuideDotItem onClick={onClick} />
         ) : (
           <CircleProgress
             progress={progress}
-            size={size}
+            size={style?.circleSize || 17}
             style={{
               primaryColor: style?.primaryColor,
               trackColor: style?.trackColor,
-              strokeWidth: strokeWidth,
+              strokeWidth: style?.strokeWidth || 2,
               animationDuration: style?.animationDuration
             }}
           />

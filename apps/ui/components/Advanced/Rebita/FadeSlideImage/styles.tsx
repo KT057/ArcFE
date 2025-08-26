@@ -10,11 +10,13 @@ export const StyledFadeSlideImageContainer = styled.div`
   border-radius: ${({ theme }) => theme.size.em(5)};
 `;
 
-export const StyledFadeSlideImageGuideWrapper = styled.div`
+export const StyledFadeSlideImageGuideWrapper = styled.div.withConfig({
+  shouldForwardProp: (prop) => !["gap"].includes(prop)
+})<{ gap: number | undefined }>`
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: ${({ theme }) => theme.size.em(4)};
+  gap: ${({ theme, gap }) => theme.size.em(gap || 4)};
 `;
 
 export const StyledFadeSlideImageGuideItem = styled.div`
