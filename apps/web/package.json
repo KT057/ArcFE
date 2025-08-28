@@ -10,11 +10,8 @@
     "build": "vite build",
     "start": "browser-sync start -s 'dist'",
     "tsc": "tsc --noEmit",
-    "lint:template": "pug-lint -c .pug-lint.json .",
-    "lint:style": "stylelint --ignore-path .stylelintignore \"**/*.scss\"",
-    "lint:style:fix": "stylelint --fix --ignore-path .stylelintignore \"**/*.scss\"",
-    "lint:script": "pnpm biome check --diagnostic-level=warn .",
-    "lint:script:fix": "pnpm biome check --diagnostic-level=warn --write ."
+    "lint": "pnpm biome check --diagnostic-level=warn .",
+    "lint:fix": "pnpm biome check --diagnostic-level=warn --write ."
   },
   "dependencies": {
     "@apps/ui": "workspace:*",
