@@ -46,7 +46,7 @@ export const StyledList = styled.div.withConfig({
   }}
 `;
 
-export const StyledListItem = styled.li.withConfig({
+export const StyledListItem = styled.div.withConfig({
   shouldForwardProp: (prop) => prop !== "type" && prop !== "borderColor"
 })<ListItemProps>`
   ${({ type, borderColor }) =>
