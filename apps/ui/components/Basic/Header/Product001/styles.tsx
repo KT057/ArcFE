@@ -72,7 +72,7 @@ export const StyledRightWrapper = styled.div.withConfig({
 `;
 
 export const StyledModalWrapper = styled.div.withConfig({
-  shouldForwardProp: (prop) => prop !== "height"
+  shouldForwardProp: (prop) => prop !== "height" && prop !== "showModal"
 })<{
   height: number;
   showModal: boolean | undefined;
