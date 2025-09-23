@@ -33,8 +33,8 @@ importers:
         specifier: ^6.1.19
         version: 6.1.19(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       swiper:
-        specifier: ^11.2.10
-        version: 11.2.10
+        specifier: ^12.0.2
+        version: 12.0.2
     devDependencies:
       '@biomejs/biome':
         specifier: 2.2.4
@@ -3252,8 +3252,8 @@ packages:
     engines: {node: '>=16'}
     hasBin: true
 
-  swiper@11.2.10:
-    resolution: {integrity: sha512-RMeVUUjTQH+6N3ckimK93oxz6Sn5la4aDlgPzB+rBrG/smPdCTicXyhxa+woIpopz+jewEloiEE3lKo1h9w2YQ==}
+  swiper@12.0.2:
+    resolution: {integrity: sha512-y8F6fDGXmTVVgwqJj6I00l4FdGuhpFJn0U/9Ucn1MwWOw3NdLV8aH88pZOjyhBgU/6PyBlUx+JuAQ5KMWz906Q==}
     engines: {node: '>= 4.7.0'}
 
   tapable@2.2.2:
@@ -6934,7 +6934,7 @@ snapshots:
       sax: 1.4.1
     optional: true
 
-  swiper@11.2.10: {}
+  swiper@12.0.2: {}
 
   tapable@2.2.2: {}
 
