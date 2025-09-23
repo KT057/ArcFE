@@ -25,7 +25,7 @@
     "react-scroll-parallax": "^3.4.5",
     "simple-parallax-js": "^6.3.3",
     "styled-components": "^6.1.19",
-    "swiper": "^11.2.10"
+    "swiper": "^12.0.2"
   },
   "engines": {
     "npm": "use pnpm please!",
