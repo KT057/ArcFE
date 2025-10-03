@@ -14,7 +14,7 @@ interface TextButtonWithIconProps {
   text?: ReactNode;
   icon?: ReactNode;
   onClick?: () => void;
-  as?: keyof JSX.IntrinsicElements;
+  as?: "button" | "a" | "div";
   href?: string;
   iconDirection?: Direction;
   style?: {
@@ -67,7 +67,7 @@ export const RebitaTextButtonWithIcon = ({
           iconSize={style?.iconSize}
           color={style?.color}
         >
-          {icon}
+          <>{icon}</>
         </StyledTextButtonWithIconIcon>
       </StyledTextButtonWithIcon>
     </StyledTextButtonWithIconWrapper>
