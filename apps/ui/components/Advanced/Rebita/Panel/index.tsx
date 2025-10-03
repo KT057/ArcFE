@@ -53,7 +53,9 @@ export const RebitaPanel = ({
 
         <StyledPanelLabelWrapper>
           {labels.map((label, index) => (
-            <StyledPanelLabel key={index}>{label}</StyledPanelLabel>
+            <StyledPanelLabel key={index}>
+              <>{label}</>
+            </StyledPanelLabel>
           ))}
         </StyledPanelLabelWrapper>
       </StyledPanel>
