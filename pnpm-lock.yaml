@@ -23,6 +23,12 @@ importers:
       keen-slider:
         specifier: ^6.8.6
         version: 6.8.6
+      react:
+        specifier: ^19.2.0
+        version: 19.2.0
+      react-dom:
+        specifier: ^19.2.0
+        version: 19.2.0(react@19.2.0)
       react-scroll-parallax:
         specifier: ^3.4.5
         version: 3.4.5(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
@@ -42,6 +48,12 @@ importers:
       '@types/browser-sync':
         specifier: ^2.29.0
         version: 2.29.0
+      '@types/react':
+        specifier: ^19.2.0
+        version: 19.2.0
+      '@types/react-dom':
+        specifier: ^19.2.0
+        version: 19.2.0(@types/react@19.2.0)
       browser-sync:
         specifier: ^3.0.4
         version: 3.0.4
@@ -94,15 +106,6 @@ importers:
       '@svgr/webpack':
         specifier: ^8.1.0
         version: 8.1.0(typescript@5.9.2)
-      '@types/react':
-        specifier: ^19.2.0
-        version: 19.2.0
-      '@types/react-dom':
-        specifier: ^19.2.0
-        version: 19.2.0(@types/react@19.2.0)
-      react:
-        specifier: ^19.2.0
-        version: 19.2.0
       react-dom:
         specifier: ^19.2.0
         version: 19.2.0(react@19.2.0)
@@ -124,19 +127,7 @@ importers:
       dotenv:
         specifier: ^17.2.2
         version: 17.2.2
-      react:
-        specifier: ^19.2.0
-        version: 19.2.0
-      react-dom:
-        specifier: ^19.2.0
-        version: 19.2.0(react@19.2.0)
     devDependencies:
-      '@types/react':
-        specifier: ^19.2.0
-        version: 19.2.0
-      '@types/react-dom':
-        specifier: ^19.2.0
-        version: 19.2.0(@types/react@19.2.0)
       '@vitejs/plugin-react':
         specifier: ^5.0.3
         version: 5.0.3(vite@7.1.7(@types/node@22.16.5)(sass@1.89.2)(terser@5.43.1))
