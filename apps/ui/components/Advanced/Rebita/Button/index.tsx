@@ -17,7 +17,7 @@ interface RebitaButtonProps {
   text?: ReactNode;
   icon?: ReactNode;
   onClick?: () => void;
-  as?: keyof JSX.IntrinsicElements;
+  as?: "button" | "a" | "div";
   href?: string;
   style?: {
     fontSize?: number;
@@ -35,7 +35,7 @@ export const RebitaButton = ({
   text = "ボタン",
   icon,
   onClick,
-  as = "div",
+  as = "a",
   href,
   style
 }: RebitaButtonProps) => {
@@ -83,7 +83,7 @@ export const RebitaButton = ({
             iconSize={size}
             iconColor={style?.iconColor}
           >
-            {icon}
+            <>{icon}</>
           </StyledRebitaButtonRightInner>
         </StyledRebitaButtonRight>
       </StyledRebitaButtonInner>
