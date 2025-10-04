@@ -32,6 +32,12 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
+      - name: Install Playwright Browsers
+        run: |
+          cd apps/ui
+          npx playwright install --with-deps
+          cd ../..
+
       - name: workaround for detached HEAD
         run: |
           pnpm @ui test:storybook
