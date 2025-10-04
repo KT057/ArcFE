@@ -30,8 +30,8 @@ importers:
         specifier: ^19.2.0
         version: 19.2.0(react@19.2.0)
       react-scroll-parallax:
-        specifier: ^3.4.5
-        version: 3.4.5(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
+        specifier: ^3.5.0
+        version: 3.5.0(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       simple-parallax-js:
         specifier: ^6.3.3
         version: 6.3.3(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
@@ -3320,12 +3320,12 @@ packages:
     resolution: {integrity: sha512-z6F7K9bV85EfseRCp2bzrpyQ0Gkw1uLoCel9XBVWPg/TjRj94SkJzUTGfOa4bs7iJvBWtQG0Wq7wnI0syw3EBQ==}
     engines: {node: '>=0.10.0'}
 
-  react-scroll-parallax@3.4.5:
-    resolution: {integrity: sha512-4NLZQ8cZEUyxoA95DfrXWneOOUSFrFmpM0dZNzMErmuJ0LzY+CCw8Xw0hqB6xxHWxNknfs46AozyIPSWkZeucA==}
+  react-scroll-parallax@3.5.0:
+    resolution: {integrity: sha512-cUyBTFfTMA/4jweZB4j06LQnUQdZlGgVKX2hmZ5a/BuHZsnp85MEo6ygD2otCQH734VJ9xXPVZ3WfiAiF2TesQ==}
     engines: {node: '>=10'}
     peerDependencies:
-      react: ^16.8.0-0 || >=17.0.1 || ^18.0.0
-      react-dom: ^16.8.0-0 || >=17.0.1 || ^18.0.0
+      react: ^16.8.0-0 || >=17.0.1 || ^18.0.0 || ^19.0.0
+      react-dom: ^16.8.0-0 || >=17.0.1 || ^18.0.0 || ^19.0.0
 
   react@19.2.0:
     resolution: {integrity: sha512-tmbWg6W31tQLeB5cdIBOicJDJRR2KzXsV7uSK9iNfLWQ5bIZfxuPEHp7M8wiHyHnn0DD1i7w3Zmin0FtkrwoCQ==}
@@ -7386,7 +7386,7 @@ snapshots:
 
   react-refresh@0.17.0: {}
 
-  react-scroll-parallax@3.4.5(react-dom@19.2.0(react@19.2.0))(react@19.2.0):
+  react-scroll-parallax@3.5.0(react-dom@19.2.0(react@19.2.0))(react@19.2.0):
     dependencies:
       parallax-controller: 1.7.1
       react: 19.2.0
