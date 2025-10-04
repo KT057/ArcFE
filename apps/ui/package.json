@@ -9,7 +9,8 @@
     "build-storybook": "storybook build",
     "tsc": "tsc --noEmit --project tsconfig.json",
     "lint": "pnpm biome check --diagnostic-level=warn .",
-    "lint:fix": "pnpm biome check --diagnostic-level=warn --write ."
+    "lint:fix": "pnpm biome check --diagnostic-level=warn --write .",
+    "test:storybook": "vitest --project=storybook"
   },
   "packageManager": "pnpm@10.12.1",
   "devDependencies": {
@@ -19,7 +20,7 @@
     "@storybook/addon-vitest": "^9.1.10",
     "@storybook/react": "^9.1.10",
     "@storybook/react-vite": "^9.1.10",
-    "@storycap-testrun/node": "^2.0.0",
+    "@storycap-testrun/browser": "^2.0.0",
     "@svgr/webpack": "^8.1.0",
     "@vitejs/plugin-react": "^5.0.4",
     "@vitest/browser": "3.2.4",

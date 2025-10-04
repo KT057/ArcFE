@@ -4,7 +4,12 @@ import { FadeInAndZoomImages } from "./index";
 const meta: Meta<typeof FadeInAndZoomImages> = {
   title: "Advanced/common/FadeInAndZoomImages",
   component: FadeInAndZoomImages,
-  tags: ["autodocs"]
+  tags: ["autodocs"],
+  parameters: {
+    screenshot: {
+      skip: true
+    }
+  }
 };
 
 export default meta;

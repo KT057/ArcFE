@@ -7,7 +7,12 @@ import { Slider } from "./index";
 const meta: Meta<typeof Slider> = {
   title: "Basic/Slider",
   component: Slider,
-  tags: ["autodocs"]
+  tags: ["autodocs"],
+  parameters: {
+    screenshot: {
+      skip: true
+    }
+  }
 };
 
 export default meta;

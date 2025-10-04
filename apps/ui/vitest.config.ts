@@ -1,6 +1,7 @@
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { storybookTest } from "@storybook/addon-vitest/vitest-plugin";
+import storycap from "@storycap-testrun/browser/vitest-plugin";
 import { defineConfig, defineProject } from "vitest/config";
 
 // ESM で __dirname を再現
@@ -15,6 +16,15 @@ export default defineConfig({
           storybookTest({
             configDir: path.join(__dirname, ".storybook"),
             storybookScript: "pnpm storybook --ci"
+          }),
+          storycap({
+            output: {
+              file: (context) =>
+                path.join(
+                  context.file.replace(".stories.tsx", ""),
+                  `${context.name}.png`
+                )
+            }
           })
         ],
         test: {
