@@ -12,6 +12,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          ref: master
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
@@ -35,16 +37,12 @@ jobs:
       - name: Install Playwright Browsers
         run: |
           cd apps/ui
-          npx playwright install --with-deps
+          npx playwright install --with-deps chromium
           cd ../..
 
       - name: workaround for detached HEAD
         run: |
           pnpm @ui test:storybook
-
-      - name: workaround for detached HEAD
-        run: |
-          git checkout ${GITHUB_REF#refs/heads/} || git checkout -b ${GITHUB_REF#refs/heads/} && git pull
 
       - name: Publish Reg Suit
         run: pnpm @ui reg:publish
