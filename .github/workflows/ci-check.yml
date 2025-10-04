@@ -15,10 +15,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Fetch unshallow
-        run: |
-          git fetch --prune --unshallow
-
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
@@ -40,6 +36,7 @@ jobs:
 
       - name: workaround for detached HEAD
         run: |
+          git fetch --prune --unshallow
           git checkout ${GITHUB_REF#refs/heads/} || git checkout -b ${GITHUB_REF#refs/heads/} && git pull
 
       - name: Cache Playwright browsers
