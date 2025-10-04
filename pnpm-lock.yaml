@@ -29,8 +29,8 @@ importers:
         specifier: ^19.2.0
         version: 19.2.0(react@19.2.0)
       react-scroll-parallax:
-        specifier: ^3.4.5
-        version: 3.4.5(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
+        specifier: ^3.5.0
+        version: 3.5.0(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       simple-parallax-js:
         specifier: ^6.3.3
         version: 6.3.3(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
@@ -6595,15 +6595,15 @@ packages:
       }
     engines: { node: ">=0.10.0" }
 
-  react-scroll-parallax@3.4.5:
+  react-scroll-parallax@3.5.0:
     resolution:
       {
-        integrity: sha512-4NLZQ8cZEUyxoA95DfrXWneOOUSFrFmpM0dZNzMErmuJ0LzY+CCw8Xw0hqB6xxHWxNknfs46AozyIPSWkZeucA==,
+        integrity: sha512-cUyBTFfTMA/4jweZB4j06LQnUQdZlGgVKX2hmZ5a/BuHZsnp85MEo6ygD2otCQH734VJ9xXPVZ3WfiAiF2TesQ==,
       }
     engines: { node: ">=10" }
     peerDependencies:
-      react: ^16.8.0-0 || >=17.0.1 || ^18.0.0
-      react-dom: ^16.8.0-0 || >=17.0.1 || ^18.0.0
+      react: ^16.8.0-0 || >=17.0.1 || ^18.0.0 || ^19.0.0
+      react-dom: ^16.8.0-0 || >=17.0.1 || ^18.0.0 || ^19.0.0
 
   react@19.2.0:
     resolution:
@@ -7425,8 +7425,11 @@ packages:
     engines: { node: ">= 4.7.0" }
 
   tapable@2.3.0:
-    resolution: {integrity: sha512-g9ljZiwki/LfxmQADO3dEY1CbpmXT5Hm2fJ+QaGKwSXUylMybePR7/67YW7jOrrvjEgL1Fmz5kzyAjWVWLlucg==}
-    engines: {node: '>=6'}
+    resolution:
+      {
+        integrity: sha512-g9ljZiwki/LfxmQADO3dEY1CbpmXT5Hm2fJ+QaGKwSXUylMybePR7/67YW7jOrrvjEgL1Fmz5kzyAjWVWLlucg==,
+      }
+    engines: { node: ">=6" }
 
   terser-webpack-plugin@5.3.14:
     resolution:
@@ -7973,8 +7976,11 @@ packages:
       }
 
   webpack@5.102.0:
-    resolution: {integrity: sha512-hUtqAR3ZLVEYDEABdBioQCIqSoguHbFn1K7WlPPWSuXmx0031BD73PSE35jKyftdSh4YLDoQNgK4pqBt5Q82MA==}
-    engines: {node: '>=10.13.0'}
+    resolution:
+      {
+        integrity: sha512-hUtqAR3ZLVEYDEABdBioQCIqSoguHbFn1K7WlPPWSuXmx0031BD73PSE35jKyftdSh4YLDoQNgK4pqBt5Q82MA==,
+      }
+    engines: { node: ">=10.13.0" }
     hasBin: true
     peerDependencies:
       webpack-cli: "*"
@@ -9732,8 +9738,8 @@ snapshots:
 
   "@jridgewell/source-map@0.3.10":
     dependencies:
-      '@jridgewell/gen-mapping': 0.3.12
-      '@jridgewell/trace-mapping': 0.3.31
+      "@jridgewell/gen-mapping": 0.3.12
+      "@jridgewell/trace-mapping": 0.3.31
 
   "@jridgewell/sourcemap-codec@1.5.4": {}
 
@@ -12610,7 +12616,7 @@ snapshots:
 
   react-refresh@0.17.0: {}
 
-  react-scroll-parallax@3.4.5(react-dom@19.2.0(react@19.2.0))(react@19.2.0):
+  react-scroll-parallax@3.5.0(react-dom@19.2.0(react@19.2.0))(react@19.2.0):
     dependencies:
       parallax-controller: 1.7.1
       react: 19.2.0
@@ -13303,7 +13309,7 @@ snapshots:
 
   terser-webpack-plugin@5.3.14(webpack@5.102.0):
     dependencies:
-      '@jridgewell/trace-mapping': 0.3.31
+      "@jridgewell/trace-mapping": 0.3.31
       jest-worker: 27.5.1
       schema-utils: 4.3.2
       serialize-javascript: 6.0.2
