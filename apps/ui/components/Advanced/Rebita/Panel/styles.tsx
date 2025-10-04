@@ -28,7 +28,9 @@ export const StyledPanel = styled.div`
   }
 `;
 
-export const StyledPanelImageWrapper = styled.div`
+export const StyledPanelImageWrapper = styled.div.withConfig({
+  shouldForwardProp: (prop) => prop !== "imageHeight"
+})<{ imageHeight: number | undefined }>`
   width: 100%;
   background-color: #ccc;
   border-radius: ${({ theme }) => theme.size.em(5)};
@@ -38,7 +40,8 @@ export const StyledPanelImageWrapper = styled.div`
   &::before {
     content: "";
     display: block;
-    padding-top: 123%;
+    width: 100%;
+    height: ${({ imageHeight, theme }) => `${theme.size.em(imageHeight ?? 360)}`};
     opacity: 1;
   }
 `;

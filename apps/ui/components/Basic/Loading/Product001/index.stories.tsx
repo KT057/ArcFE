@@ -4,7 +4,12 @@ import { Loading001 } from "./index";
 const meta: Meta<typeof Loading001> = {
   title: "Basic/Loading/Product001",
   component: Loading001,
-  tags: ["autodocs"]
+  tags: ["autodocs"],
+  parameters: {
+    screenshot: {
+      skip: true
+    }
+  }
 };
 
 export default meta;

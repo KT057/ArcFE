@@ -4,7 +4,12 @@ import { RebitaFadeSlideImage } from "./index";
 const meta: Meta<typeof RebitaFadeSlideImage> = {
   title: "Advanced/Rebita/FadeSlideImage",
   component: RebitaFadeSlideImage,
-  tags: ["autodocs"]
+  tags: ["autodocs"],
+  parameters: {
+    screenshot: {
+      skip: true
+    }
+  }
 };
 
 export default meta;
