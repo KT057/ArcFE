@@ -12,10 +12,11 @@ jobs:
       pull-requests: write
 
     steps:
-      - name: Checkout
+      - name: Checkout PR HEAD (not merge)
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          ref: refs/pull/${{ github.event.pull_request.number }}/head
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
@@ -36,6 +37,12 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
+      - name: Name the branch (no hash change)
+        run: |
+          BRANCH="${GITHUB_HEAD_REF:-${GITHUB_REF_NAME}}"
+          git switch -C "$BRANCH"
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
+
       - name: Cache Playwright browsers
         uses: actions/cache@v4
         with:
@@ -51,16 +58,6 @@ jobs:
       - name: workaround for detached HEAD
         run: |
           pnpm @ui test:storybook
-
-      - name: Fix detached HEAD for reg-suit
-        run: |
-          # 可能なら浅い履歴を解消（既にfullならOK）
-          git fetch --prune --unshallow || true
-          # PRなら GITHUB_HEAD_REF、push等なら GITHUB_REF_NAME を使ってローカルブランチを作成
-          BRANCH="${GITHUB_HEAD_REF:-$GITHUB_REF_NAME}"
-          git switch -C "$BRANCH" || git checkout -B "$BRANCH"
-          # 念のため安全ディレクトリ指定
-          git config --global --add safe.directory "$GITHUB_WORKSPACE"
 
       - name: Publish Reg Suit
         env:
