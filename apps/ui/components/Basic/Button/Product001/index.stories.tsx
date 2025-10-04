@@ -159,7 +159,7 @@ WithoutAnimation.args = {
 
 export const LongText = Template.bind({});
 LongText.args = {
-  children: "This is a very long button text",
+  children: "This is a very long button",
   type: "001",
   size: "middle",
   style: {
