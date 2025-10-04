@@ -61,8 +61,7 @@ jobs:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         run: |
-          cd apps/ui
-          pnpm reg
+          pnpm @ui reg-suit
 
   ui_biome_check:
     runs-on: ubuntu-latest
