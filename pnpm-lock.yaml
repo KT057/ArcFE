@@ -66,8 +66,8 @@ importers:
         specifier: ^5.9.3
         version: 5.9.3
       webpack:
-        specifier: ^5.101.3
-        version: 5.101.3
+        specifier: ^5.102.0
+        version: 5.102.0
 
   apps/ui:
     dependencies:
@@ -7424,12 +7424,9 @@ packages:
       }
     engines: { node: ">= 4.7.0" }
 
-  tapable@2.2.2:
-    resolution:
-      {
-        integrity: sha512-Re10+NauLTMCudc7T5WLFLAwDhQ0JWdrMK+9B2M8zR5hRExKmsRDCBA7/aV/pNJFltmBFO5BAMlQFi/vq3nKOg==,
-      }
-    engines: { node: ">=6" }
+  tapable@2.3.0:
+    resolution: {integrity: sha512-g9ljZiwki/LfxmQADO3dEY1CbpmXT5Hm2fJ+QaGKwSXUylMybePR7/67YW7jOrrvjEgL1Fmz5kzyAjWVWLlucg==}
+    engines: {node: '>=6'}
 
   terser-webpack-plugin@5.3.14:
     resolution:
@@ -7975,12 +7972,9 @@ packages:
         integrity: sha512-66/V2i5hQanC51vBQKPH4aI8NMAcBW59FVBs+rC7eGHupMyfn34q7rZIE+ETlJ+XTevqfUhVVBgSUNSW2flEUQ==,
       }
 
-  webpack@5.101.3:
-    resolution:
-      {
-        integrity: sha512-7b0dTKR3Ed//AD/6kkx/o7duS8H3f1a4w3BYpIriX4BzIhjkn4teo05cptsxvLesHFKK5KObnadmCHBwGc+51A==,
-      }
-    engines: { node: ">=10.13.0" }
+  webpack@5.102.0:
+    resolution: {integrity: sha512-hUtqAR3ZLVEYDEABdBioQCIqSoguHbFn1K7WlPPWSuXmx0031BD73PSE35jKyftdSh4YLDoQNgK4pqBt5Q82MA==}
+    engines: {node: '>=10.13.0'}
     hasBin: true
     peerDependencies:
       webpack-cli: "*"
@@ -9738,8 +9732,8 @@ snapshots:
 
   "@jridgewell/source-map@0.3.10":
     dependencies:
-      "@jridgewell/gen-mapping": 0.3.12
-      "@jridgewell/trace-mapping": 0.3.29
+      '@jridgewell/gen-mapping': 0.3.12
+      '@jridgewell/trace-mapping': 0.3.31
 
   "@jridgewell/sourcemap-codec@1.5.4": {}
 
@@ -11516,7 +11510,7 @@ snapshots:
   enhanced-resolve@5.18.1:
     dependencies:
       graceful-fs: 4.2.11
-      tapable: 2.2.2
+      tapable: 2.3.0
 
   entities@4.5.0: {}
 
@@ -13305,16 +13299,16 @@ snapshots:
 
   swiper@12.0.2: {}
 
-  tapable@2.2.2: {}
+  tapable@2.3.0: {}
 
-  terser-webpack-plugin@5.3.14(webpack@5.101.3):
+  terser-webpack-plugin@5.3.14(webpack@5.102.0):
     dependencies:
-      "@jridgewell/trace-mapping": 0.3.29
+      '@jridgewell/trace-mapping': 0.3.31
       jest-worker: 27.5.1
       schema-utils: 4.3.2
       serialize-javascript: 6.0.2
       terser: 5.43.1
-      webpack: 5.101.3
+      webpack: 5.102.0
 
   terser@5.43.1:
     dependencies:
@@ -13637,7 +13631,7 @@ snapshots:
 
   webpack-virtual-modules@0.6.2: {}
 
-  webpack@5.101.3:
+  webpack@5.102.0:
     dependencies:
       "@types/eslint-scope": 3.7.7
       "@types/estree": 1.0.8
@@ -13660,8 +13654,8 @@ snapshots:
       mime-types: 2.1.35
       neo-async: 2.6.2
       schema-utils: 4.3.2
-      tapable: 2.2.2
-      terser-webpack-plugin: 5.3.14(webpack@5.101.3)
+      tapable: 2.3.0
+      terser-webpack-plugin: 5.3.14(webpack@5.102.0)
       watchpack: 2.4.4
       webpack-sources: 3.3.3
     transitivePeerDependencies:
