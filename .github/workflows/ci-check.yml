@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       id-token: write
-      contents: read
+      pull-requests: write
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -32,7 +32,15 @@ jobs:
             ${{ runner.os }}-node-
 
       - name: Install dependencies
-        run: pnpm install
+        run: pnpm install --frozen-lockfile
+
+      - name: Cache Playwright browsers
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml') }}
+          restore-keys: |
+            playwright-${{ runner.os }}-
 
       - name: Install Playwright Browsers
         run: |
@@ -45,9 +53,6 @@ jobs:
           pnpm @ui test:storybook
 
       - name: Publish Reg Suit
-        run: |
-          cd apps/ui
-          pnpm reg
         env:
           REG_NOTICE_CLIENT_ID: ${{ secrets.REG_NOTICE_CLIENT_ID }}
           S3_BUCKET_NAME: ${{ secrets.S3_BUCKET_NAME }}
@@ -55,6 +60,9 @@ jobs:
           REGION: ${{ secrets.REGION }}
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        run: |
+          cd apps/ui
+          pnpm reg
 
   ui_biome_check:
     runs-on: ubuntu-latest
