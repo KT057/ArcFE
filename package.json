@@ -5,7 +5,8 @@
   "scripts": {
     "@ui": "pnpm --filter @apps/ui",
     "@web": "pnpm --filter @apps/web",
-    "@wp": "pnpm --filter @apps/wordpress"
+    "@wp": "pnpm --filter @apps/wordpress",
+    "install:playwright": "npx playwright install --with-deps chromium"
   },
   "devDependencies": {
     "@biomejs/biome": "2.2.5",
