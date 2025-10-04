@@ -158,11 +158,12 @@ jobs:
 
   notify:
     runs-on: ubuntu-latest
-    needs: [ui_biome_check, ui_storybook_build_check, ui_tsc_check]
+    needs:
+      [ui_biome_check, ui_storybook_build_check, ui_tsc_check, ui_reg_check]
     if: always()
     steps:
       - name: Send Slack notification on failure
-        if: ${{ needs.ui_biome_check.result == 'failure' || needs.ui_storybook_build_check.result == 'failure' || needs.ui_tsc_check.result == 'failure' }}
+        if: ${{ needs.ui_biome_check.result == 'failure' || needs.ui_storybook_build_check.result == 'failure' || needs.ui_tsc_check.result == 'failure' || needs.ui_reg_check.result == 'failure' }}
         uses: slackapi/slack-github-action@v2.1.0
         with:
           webhook: ${{ secrets.SLACK_WORKFLOW_WEBHOOK_URL }}
