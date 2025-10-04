@@ -11,7 +11,7 @@
     "lint": "pnpm biome check --diagnostic-level=warn .",
     "lint:fix": "pnpm biome check --diagnostic-level=warn --write .",
     "test:storybook": "vitest --project=storybook",
-    "reg": "reg-suit run"
+    "reg-suit": "reg-suit run"
   },
   "packageManager": "pnpm@10.12.1",
   "devDependencies": {
