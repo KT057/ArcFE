@@ -45,7 +45,7 @@ jobs:
           pnpm @ui test:storybook
 
       - name: Publish Reg Suit
-        run: pnpm @ui reg:publish
+        run: pnpm @ui reg
         env:
           REG_NOTICE_CLIENT_ID: ${{ secrets.REG_NOTICE_CLIENT_ID }}
           S3_BUCKET_NAME: ${{ secrets.S3_BUCKET_NAME }}
