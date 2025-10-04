@@ -46,7 +46,7 @@ jobs:
         run: |
           cd apps/ui
           npx playwright install --with-deps chromium
-          cd ../..
+          cd ../../
 
       - name: workaround for detached HEAD
         run: |
