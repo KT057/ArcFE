@@ -15,7 +15,7 @@
   },
   "dependencies": {
     "@apps/ui": "workspace:*",
-    "dotenv": "^17.2.2"
+    "dotenv": "^17.2.3"
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^5.0.4",
