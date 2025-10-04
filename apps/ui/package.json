@@ -11,7 +11,8 @@
     "lint": "pnpm biome check --diagnostic-level=warn .",
     "lint:fix": "pnpm biome check --diagnostic-level=warn --write .",
     "test:storybook": "vitest --project=storybook",
-    "reg-suit": "reg-suit run"
+    "reg-suit": "reg-suit run",
+    "install:playwright": "npx playwright install --with-deps chromium"
   },
   "packageManager": "pnpm@10.12.1",
   "devDependencies": {
