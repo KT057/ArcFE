@@ -34,6 +34,10 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
+      - name: Install Playwright Browsers
+        run: |
+          npx playwright install --with-deps chromium
+
       - name: Cache Playwright browsers
         uses: actions/cache@v4
         with:
@@ -41,10 +45,6 @@ jobs:
           key: playwright-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml') }}
           restore-keys: |
             playwright-${{ runner.os }}-
-
-      - name: Install Playwright Browsers
-        run: |
-          npx playwright install --with-deps chromium
 
       - name: workaround for detached HEAD
         run: |
