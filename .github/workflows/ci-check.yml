@@ -12,8 +12,11 @@ jobs:
       pull-requests: write
 
     steps:
-      - name: Checkout
+      - name: Checkout PR HEAD (not merge)
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: refs/pull/${{ github.event.pull_request.number }}/head
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
@@ -34,10 +37,11 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: workaround for detached HEAD
+      - name: Name the branch (no hash change)
         run: |
-          git fetch --prune --unshallow
-          git checkout ${GITHUB_REF#refs/heads/} || git checkout -b ${GITHUB_REF#refs/heads/} && git pull
+          BRANCH="${GITHUB_HEAD_REF:-${GITHUB_REF_NAME}}"
+          git switch -C "$BRANCH"
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
 
       - name: Cache Playwright browsers
         uses: actions/cache@v4
