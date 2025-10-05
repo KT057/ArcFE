@@ -49,9 +49,7 @@ jobs:
 
       - name: Test Storybook
         run: |
-          pnpm @ui npx vitest --run --project=storybook \
-            --shard ${{ matrix.index }}/${{ matrix.total }} \
-            --reporter=dot
+          pnpm --filter @apps/ui exec vitest --run --project=storybook --shard ${{ matrix.index }}/${{ matrix.total }} --reporter=dot
 
       - name: Upload screenshots from this shard
         uses: actions/upload-artifact@v4
