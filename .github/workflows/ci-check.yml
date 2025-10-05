@@ -3,6 +3,10 @@ name: Code Check
 on:
   pull_request:
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   ui_biome_check:
     runs-on: ubuntu-latest
