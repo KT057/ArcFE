@@ -12,7 +12,56 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  setup:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        total: [3]
+        index: [1, 2, 3]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Cache node_modules
+        uses: actions/cache@v4
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Install Playwright (Chromium only if not cached)
+        run: |
+          pnpm @ui install:playwright:browser
+
+      - name: Test Storybook
+        run: |
+          pnpm @ui npx vitest --run --project=storybook \
+            --shard ${{ matrix.index }}/${{ matrix.total }} \
+            --reporter=dot
+
+      - name: Upload screenshots from this shard
+        uses: actions/upload-artifact@v4
+        with:
+          name: screenshots-${{ matrix.index }}
+          path: |
+            apps/ui/__screenshots__/**
+
   vrt_publish:
+    needs: setup
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -55,21 +104,12 @@ jobs:
         run: |
           git checkout ${GITHUB_REF#refs/heads/} || git checkout -b ${GITHUB_REF#refs/heads/} && git pull
 
-      - name: Cache Playwright browsers
-        uses: actions/cache@v4
+      - name: Download all screenshots
+        uses: actions/download-artifact@v4
         with:
-          path: ~/.cache/ms-playwright
-          key: playwright-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml') }}
-          restore-keys: |
-            playwright-${{ runner.os }}-
-
-      - name: Install Playwright Browsers
-        run: |
-          pnpm @ui install:playwright:browser
-
-      - name: Test Storybook
-        run: |
-          pnpm @ui test:storybook
+          pattern: screenshots-*
+          merge-multiple: true
+          path: .
 
       - name: Publish Reg Suit
         env:
