@@ -67,7 +67,7 @@ jobs:
         run: |
           pnpm @ui install:playwright:browser
 
-      - name: workaround for detached HEAD
+      - name: Test Storybook
         run: |
           pnpm @ui test:storybook
 
