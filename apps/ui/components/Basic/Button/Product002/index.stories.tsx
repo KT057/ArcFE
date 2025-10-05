@@ -16,7 +16,7 @@ const Template: StoryFn<typeof Button002> = (args) => (
 
 export const Default = Template.bind({});
 Default.args = {
-  children: "Button",
+  children: "Button ssss",
   icon: <Svg002Icon />,
   animation: {
     type: "001",
