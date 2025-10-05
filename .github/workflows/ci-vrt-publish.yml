@@ -17,8 +17,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        total: [2]
-        index: [1, 2]
+        total: [3]
+        index: [1, 2, 3]
 
     steps:
       - name: Checkout
@@ -53,6 +53,7 @@ jobs:
             --pool=threads \
             --poolOptions.threads.minThreads=1 \
             --poolOptions.threads.maxThreads=$(nproc) \
+            --shard ${{ matrix.index }}/${{ matrix.total }} \
             --project=storybook \
             --reporter=dot
 
