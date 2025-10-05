@@ -15,7 +15,7 @@ const Template: StoryFn<typeof Button001> = (args) => (
 
 export const Default = Template.bind({});
 Default.args = {
-  children: "Button ssss",
+  children: "Button",
   animation: {
     type: "001",
     duration: 0.25,
