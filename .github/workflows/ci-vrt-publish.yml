@@ -107,7 +107,7 @@ jobs:
         with:
           pattern: screenshots-*
           merge-multiple: true
-          path: .
+          path: apps/ui/__screenshots__/
 
       - name: Publish Reg Suit
         env:
