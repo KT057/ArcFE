@@ -49,12 +49,11 @@ jobs:
 
       - name: Test Storybook
         run: |
-          pnpm exec vitest --run \
+          pnpm --filter @apps/ui exec vitest --run \
             --pool=threads \
             --poolOptions.threads.minThreads=1 \
             --poolOptions.threads.maxThreads=$(nproc) \
             --project=storybook \
-            --shard ${{ matrix.index }}/${{ matrix.total }} \
             --reporter=dot
 
       - name: Upload screenshots from this shard
