@@ -121,7 +121,7 @@ Animation003.args = {
 
 export const Animation004 = Template.bind({});
 Animation004.args = {
-  children: "Button",
+  children: "Button diff",
   icon: <Svg002Icon />,
   animation: {
     type: "004",
