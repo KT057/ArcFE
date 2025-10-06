@@ -49,11 +49,11 @@ importers:
         specifier: ^2.29.0
         version: 2.29.0
       '@types/react':
-        specifier: ^19.2.0
-        version: 19.2.0
+        specifier: ^19.2.1
+        version: 19.2.1
       '@types/react-dom':
         specifier: ^19.2.0
-        version: 19.2.0(@types/react@19.2.0)
+        version: 19.2.0(@types/react@19.2.1)
       browser-sync:
         specifier: ^3.0.4
         version: 3.0.4
@@ -78,7 +78,7 @@ importers:
     devDependencies:
       '@storybook/addon-docs':
         specifier: ^9.1.10
-        version: 9.1.10(@types/react@19.2.0)(storybook@9.1.10(@testing-library/dom@10.4.0)(prettier@3.6.2)(vite@7.1.9(@types/node@22.16.5)(sass@1.89.2)(terser@5.43.1)))
+        version: 9.1.10(@types/react@19.2.1)(storybook@9.1.10(@testing-library/dom@10.4.0)(prettier@3.6.2)(vite@7.1.9(@types/node@22.16.5)(sass@1.89.2)(terser@5.43.1)))
       '@storybook/addon-onboarding':
         specifier: ^9.1.10
         version: 9.1.10(storybook@9.1.10(@testing-library/dom@10.4.0)(prettier@3.6.2)(vite@7.1.9(@types/node@22.16.5)(sass@1.89.2)(terser@5.43.1)))
@@ -2167,8 +2167,8 @@ packages:
     peerDependencies:
       '@types/react': ^19.2.0
 
-  '@types/react@19.2.0':
-    resolution: {integrity: sha512-1LOH8xovvsKsCBq1wnT4ntDUdCJKmnEakhsuoUSy6ExlHCkGP2hqnatagYTgFk6oeL0VU31u7SNjunPN+GchtA==}
+  '@types/react@19.2.1':
+    resolution: {integrity: sha512-1U5NQWh/GylZQ50ZMnnPjkYHEaGhg6t5i/KI0LDDh3t4E3h3T3vzm+GLY2BRzMfIjSBwzm6tginoZl5z0O/qsA==}
 
   '@types/resolve@1.20.6':
     resolution: {integrity: sha512-A4STmOXPhMUtHH+S6ymgE2GiBSMqf4oTvcQZMcHzokuTLVYzXTB8ttjcgxOVaAp2lGwEdzZ0J+cRbbeevQj1UQ==}
@@ -6494,10 +6494,10 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.4
 
-  '@mdx-js/react@3.1.0(@types/react@19.2.0)(react@19.2.0)':
+  '@mdx-js/react@3.1.0(@types/react@19.2.1)(react@19.2.0)':
     dependencies:
       '@types/mdx': 2.0.13
-      '@types/react': 19.2.0
+      '@types/react': 19.2.1
       react: 19.2.0
 
   '@nodelib/fs.scandir@2.1.5':
@@ -7005,9 +7005,9 @@ snapshots:
 
   '@socket.io/component-emitter@3.1.2': {}
 
-  '@storybook/addon-docs@9.1.10(@types/react@19.2.0)(storybook@9.1.10(@testing-library/dom@10.4.0)(prettier@3.6.2)(vite@7.1.9(@types/node@22.16.5)(sass@1.89.2)(terser@5.43.1)))':
+  '@storybook/addon-docs@9.1.10(@types/react@19.2.1)(storybook@9.1.10(@testing-library/dom@10.4.0)(prettier@3.6.2)(vite@7.1.9(@types/node@22.16.5)(sass@1.89.2)(terser@5.43.1)))':
     dependencies:
-      '@mdx-js/react': 3.1.0(@types/react@19.2.0)(react@19.2.0)
+      '@mdx-js/react': 3.1.0(@types/react@19.2.1)(react@19.2.0)
       '@storybook/csf-plugin': 9.1.10(storybook@9.1.10(@testing-library/dom@10.4.0)(prettier@3.6.2)(vite@7.1.9(@types/node@22.16.5)(sass@1.89.2)(terser@5.43.1)))
       '@storybook/icons': 1.4.0(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       '@storybook/react-dom-shim': 9.1.10(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(storybook@9.1.10(@testing-library/dom@10.4.0)(prettier@3.6.2)(vite@7.1.9(@types/node@22.16.5)(sass@1.89.2)(terser@5.43.1)))
@@ -7385,11 +7385,11 @@ snapshots:
 
   '@types/parse-glob@3.0.32': {}
 
-  '@types/react-dom@19.2.0(@types/react@19.2.0)':
+  '@types/react-dom@19.2.0(@types/react@19.2.1)':
     dependencies:
-      '@types/react': 19.2.0
+      '@types/react': 19.2.1
 
-  '@types/react@19.2.0':
+  '@types/react@19.2.1':
     dependencies:
       csstype: 3.1.3
 
