@@ -16,7 +16,7 @@
     "cross-env": "^10.1.0",
     "turbo": "^2.5.8",
     "typescript": "^5.9.3",
-    "webpack": "^5.102.0"
+    "webpack": "^5.102.1"
   },
   "dependencies": {
     "@dnd-kit/core": "^6.3.1",
