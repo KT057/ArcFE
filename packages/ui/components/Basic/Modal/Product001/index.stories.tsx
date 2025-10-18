@@ -6,12 +6,7 @@ import { Modal001 } from "./index";
 const meta: Meta<typeof Modal001> = {
   title: "Basic/Modal/Product001",
   component: Modal001,
-  tags: ["autodocs"],
-  parameters: {
-    screenshot: {
-      skip: true
-    }
-  }
+  tags: ["autodocs"]
 };
 
 export default meta;
