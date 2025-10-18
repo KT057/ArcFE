@@ -14,7 +14,10 @@
     "lint:fix": "pnpm biome check --diagnostic-level=warn --write ."
   },
   "dependencies": {
-    "@apps/ui": "workspace:*",
+    "@packages/ui": "workspace:*",
+    "@packages/hooks": "workspace:*",
+    "@packages/context": "workspace:*",
+    "@packages/utils": "workspace:*",
     "dotenv": "^17.2.3"
   },
   "devDependencies": {

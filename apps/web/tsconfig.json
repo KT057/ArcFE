@@ -22,10 +22,7 @@
     "types": ["vite/client"],
 
     // 任意：エイリアス（@/xxx → src/xxx）
-    "baseUrl": ".",
-    "paths": {
-      "@apps/ui": ["../ui/*"]
-    }
+    "baseUrl": "."
   },
   "include": ["./src/**/*", "vite.config.ts", "./@types/**/*"]
 }

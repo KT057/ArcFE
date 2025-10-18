@@ -3,12 +3,11 @@
   "version": "1.0.0",
   "packageManager": "pnpm@10.12.1",
   "scripts": {
-    "@ui": "pnpm --filter @apps/ui",
+    "@ui": "pnpm --filter @packages/ui",
     "@web": "pnpm --filter @apps/web",
     "@wp": "pnpm --filter @apps/wordpress",
     "test": "vitest --run",
-    "tsc": "pnpm --filter @packages/tests tsc && pnpm --filter @packages/hooks tsc && pnpm --filter @packages/context tsc && pnpm --filter @packages/utils tsc",
-    "build": "pnpm --filter @packages/tests prepublishOnly && pnpm --filter @packages/context prepublishOnly && pnpm --filter @packages/utils prepublishOnly && pnpm --filter @packages/hooks prepublishOnly"
+    "tsc": "pnpm --filter @packages/tests tsc && pnpm --filter @packages/hooks tsc && pnpm --filter @packages/context tsc && pnpm --filter @packages/utils tsc"
   },
   "devDependencies": {
     "@biomejs/biome": "2.2.6",

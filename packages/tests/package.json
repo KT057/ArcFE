@@ -3,16 +3,7 @@
   "version": "1.0.0",
   "description": "Tests for the application",
   "author": "Kota Ichikawa",
-  "exports": {
-    ".": {
-      "types": "./dist/types/index.d.ts",
-      "import": "./dist/index.mjs"
-    }
-  },
-  "types": "./dist/types/index.d.ts",
-  "files": [
-    "dist"
-  ],
+  "main": "src/index.ts",
   "scripts": {
     "build": "tsup src/index.ts --format esm --dts --out-dir dist",
     "types": "tsc -p tsconfig.build.json",

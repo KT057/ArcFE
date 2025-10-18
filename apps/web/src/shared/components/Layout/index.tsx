@@ -1,5 +1,6 @@
-import { MediaProvider } from "@apps/ui/context";
-import { GlobalStyles, themes } from "@apps/ui/styles";
+import { AxiosProvider } from "@packages/context";
+import { MediaProvider } from "@packages/ui/context";
+import { GlobalStyles, themes } from "@packages/ui/styles";
 import { ParallaxProvider } from "react-scroll-parallax";
 import { ThemeProvider } from "styled-components";
 
@@ -11,10 +12,12 @@ export const Layout = ({ children }: Props) => {
   return (
     <ParallaxProvider>
       <MediaProvider>
-        <ThemeProvider theme={themes}>
-          <GlobalStyles />
-          {children}
-        </ThemeProvider>
+        <AxiosProvider initialConfig={{ baseURL: "http://localhost:3000" }}>
+          <ThemeProvider theme={themes}>
+            <GlobalStyles />
+            {children}
+          </ThemeProvider>
+        </AxiosProvider>
       </MediaProvider>
     </ParallaxProvider>
   );
