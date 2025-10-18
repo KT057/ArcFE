@@ -8,7 +8,7 @@
     "@wp": "pnpm --filter @apps/wordpress",
     "test": "vitest --run",
     "tsc": "pnpm --filter @packages/tests tsc && pnpm --filter @packages/hooks tsc && pnpm --filter @packages/context tsc && pnpm --filter @packages/utils tsc",
-    "build": "pnpm --filter @packages/tests prepublishOnly && pnpm --filter @packages/hooks prepublishOnly && pnpm --filter @packages/context prepublishOnly && pnpm --filter @packages/utils prepublishOnly"
+    "build": "pnpm --filter @packages/tests prepublishOnly && pnpm --filter @packages/context prepublishOnly && pnpm --filter @packages/utils prepublishOnly && pnpm --filter @packages/hooks prepublishOnly"
   },
   "devDependencies": {
     "@biomejs/biome": "2.2.6",
