@@ -1,28 +1,28 @@
+import { useAxiosContext } from "@packages/context";
+import { expandPath } from "@packages/utils";
+import type { AxiosError } from "axios";
 import { useCallback, useState } from "react";
 import {
   type DefaultRequestHeaders,
   type DefaultResponseHeadersForMutation,
+  isAxiosError,
   type MutationArgs,
   type MutationOptions,
-  type MutationResult,
-  isAxiosError,
+  type MutationResult
 } from "./types";
-import { AxiosError } from "axios";
-import { expandPath } from "@packages/utils";
-import { useAxiosContext } from "@packages/context";
 
 export function useAxiosMutation<
   TBody,
   TResponse,
   TRequestHeaders = DefaultRequestHeaders,
-  TResponseHeaders = DefaultResponseHeadersForMutation,
+  TResponseHeaders = DefaultResponseHeadersForMutation
 >({
   url,
   pathParams,
   method,
   headers,
   onSuccess,
-  onError,
+  onError
 }: MutationOptions<TResponse, TRequestHeaders>): MutationResult<
   TBody,
   TResponse,
@@ -31,16 +31,15 @@ export function useAxiosMutation<
 > {
   const [error, setError] = useState<AxiosError | null>(null);
   const [loading, setLoading] = useState(false);
+  const { client } = useAxiosContext();
 
   const mutate = useCallback(
     async ({
       body,
-      headers: overrideHeaders,
+      headers: overrideHeaders
     }: MutationArgs<TBody, TRequestHeaders>) => {
       setLoading(true);
       setError(null);
-
-      const { client } = useAxiosContext();
 
       try {
         const newUrl = expandPath(url, pathParams);
@@ -56,14 +55,14 @@ export function useAxiosMutation<
           method,
           url: newUrl,
           data: body,
-          headers: newHeaders ? newHeaders : undefined,
+          headers: newHeaders ? newHeaders : undefined
         });
 
         onSuccess?.(res.data);
         return {
           isError: false as const,
           data: res.data,
-          headers: res.headers,
+          headers: res.headers
         };
       } catch (e) {
         if (isAxiosError(e)) {
@@ -72,7 +71,7 @@ export function useAxiosMutation<
 
           return {
             isError: true as const,
-            error: e,
+            error: e
           };
         }
         const error: AxiosError = {
@@ -80,7 +79,7 @@ export function useAxiosMutation<
           name: "AxiosError",
           isAxiosError: true,
           status: 500,
-          toJSON: () => ({}),
+          toJSON: () => ({})
         };
 
         setError(error);
@@ -88,13 +87,13 @@ export function useAxiosMutation<
 
         return {
           isError: true as const,
-          error,
+          error
         };
       } finally {
         setLoading(false);
       }
     },
-    [url, pathParams, headers, method, onSuccess, onError],
+    [client, url, pathParams, headers, method, onSuccess, onError]
   );
 
   return { mutate, error, loading };

@@ -4,18 +4,18 @@ export function expandPath(
 ) {
   // テンプレートに{}パラメータがあるかチェック
   const paramMatches = path.match(/\{([^}]+)\}/g);
-  
+
   // パスにパラメータがない場合はそのまま返す
   if (!paramMatches) {
     return path;
   }
-  
+
   // パラメータがある場合、paramsが提供されているかチェック
   if (!params) {
-    const missingKeys = paramMatches.map(match => match.slice(1, -1)); // {key} -> key
-    throw new Error(`Missing path param: ${missingKeys.join(', ')}`);
+    const missingKeys = paramMatches.map((match) => match.slice(1, -1)); // {key} -> key
+    throw new Error(`Missing path param: ${missingKeys.join(", ")}`);
   }
-  
+
   return path.replace(/\{([^}]+)\}/g, (_, key) => {
     const v = params[key];
     if (v === undefined || v === null) {

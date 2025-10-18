@@ -1,4 +1,4 @@
-import { describe, it, expect } from "vitest";
+import { describe, expect, it } from "vitest";
 import { expandPath } from "./expandPath";
 
 describe("expandPath", () => {
@@ -11,7 +11,10 @@ describe("expandPath", () => {
   });
 
   it("複数のパスパラメータを展開する", () => {
-    const url = expandPath("/test/users/{id}/posts/{postId}", { id: 1, postId: 99 });
+    const url = expandPath("/test/users/{id}/posts/{postId}", {
+      id: 1,
+      postId: 99
+    });
     expect(url).toBe("/test/users/1/posts/99");
   });
 

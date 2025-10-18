@@ -1,27 +1,27 @@
-import { AxiosError } from "axios";
+import { useAxiosContext } from "@packages/context";
+import { expandPath } from "@packages/utils";
+import type { AxiosError } from "axios";
 import { useCallback, useEffect, useState } from "react";
 import {
   type DefaultQueryParams,
   type DefaultRequestHeaders,
   type DefaultResponseHeadersForQuery,
+  isAxiosError,
   type OverrideQueryOptions,
   type QueryOptions,
-  type QueryResult,
-  isAxiosError,
+  type QueryResult
 } from "./types";
-import { expandPath } from "@packages/utils";
-import { useAxiosContext } from "@packages/context";
 
 export type {
-  DefaultResponseHeadersForQuery,
   DefaultQueryParams,
+  DefaultResponseHeadersForQuery
 } from "./types";
 
 export function useAxiosQuery<
   TResponse,
   TQueryParams = DefaultQueryParams,
   TRequestHeaders = DefaultRequestHeaders,
-  TResponseHeaders = DefaultResponseHeadersForQuery,
+  TResponseHeaders = DefaultResponseHeadersForQuery
 >({
   url,
   pathParams,
@@ -29,7 +29,7 @@ export function useAxiosQuery<
   skip,
   headers,
   onSuccess,
-  onError,
+  onError
 }: QueryOptions<TResponse, TQueryParams, TRequestHeaders>): QueryResult<
   TResponse,
   TQueryParams,
@@ -46,7 +46,7 @@ export function useAxiosQuery<
 
   const run = useCallback(
     async (
-      override?: OverrideQueryOptions<TResponse, TQueryParams, TRequestHeaders>,
+      override?: OverrideQueryOptions<TResponse, TQueryParams, TRequestHeaders>
     ) => {
       setLoading(true);
       setError(null);
@@ -66,7 +66,7 @@ export function useAxiosQuery<
           method: "GET", // 取得系なのでGETを固定
           url: newUrl,
           params: newQuery,
-          headers: newHeaders ? newHeaders : undefined,
+          headers: newHeaders ? newHeaders : undefined
         });
 
         setData(res.data);
@@ -75,7 +75,7 @@ export function useAxiosQuery<
         return {
           isError: false as const,
           data: res.data,
-          headers: res.headers,
+          headers: res.headers
         };
       } catch (e) {
         if (isAxiosError(e)) {
@@ -84,7 +84,7 @@ export function useAxiosQuery<
 
           return {
             isError: true as const,
-            error: e,
+            error: e
           };
         }
         const error: AxiosError = {
@@ -92,7 +92,7 @@ export function useAxiosQuery<
           name: "AxiosError",
           isAxiosError: true,
           status: 500,
-          toJSON: () => ({}),
+          toJSON: () => ({})
         };
 
         setError(error);
@@ -100,13 +100,13 @@ export function useAxiosQuery<
 
         return {
           isError: true as const,
-          error,
+          error
         };
       } finally {
         setLoading(false);
       }
     },
-    [url, pathParams, query, headers, onSuccess, onError],
+    [url, pathParams, query, headers, onSuccess, onError, client]
   );
 
   // 発火に依存して欲しいのはskipのみなので、biomeのルールを無効化

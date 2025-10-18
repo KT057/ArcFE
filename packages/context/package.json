@@ -16,6 +16,7 @@
   "scripts": {
     "build": "tsup src/index.ts --format esm --dts --out-dir dist",
     "types": "tsc -p tsconfig.build.json",
+    "tsc": "tsc --noEmit --project tsconfig.json",
     "prepublishOnly": "pnpm run build && pnpm run types"
   },
   "license": "MIT",

@@ -1,13 +1,20 @@
-import React, {
+import axios, {
+  type AxiosError,
+  type AxiosInstance,
+  type AxiosRequestConfig,
+  type AxiosResponse,
+  type InternalAxiosRequestConfig
+} from "axios";
+import type React from "react";
+import {
   createContext,
+  type ReactNode,
+  useCallback,
   useContext,
   useEffect,
   useMemo,
-  useState,
-  useCallback,
-  ReactNode,
+  useState
 } from "react";
-import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse, InternalAxiosRequestConfig } from "axios";
 
 type AxiosContextValue = {
   client: AxiosInstance;
@@ -27,7 +34,9 @@ export const AxiosProvider: React.FC<{
   children: ReactNode;
   initialConfig?: AxiosRequestConfig;
   interceptors?: {
-    request?: <T = any>(config: InternalAxiosRequestConfig<T>) => InternalAxiosRequestConfig<T>;
+    request?: <T = any>(
+      config: InternalAxiosRequestConfig<T>
+    ) => InternalAxiosRequestConfig<T>;
     response?: {
       onFulfilled?: <T = any>(response: AxiosResponse<T>) => AxiosResponse<T>;
       onRejected?: <T = any>(error: AxiosError<T>) => AxiosError<T>;
@@ -45,18 +54,18 @@ export const AxiosProvider: React.FC<{
    * API送信前の共通処理を登録する
    */
   useEffect(() => {
-    const interceptorRequest = client.interceptors.request.use(
-      async (req) => {
-        return interceptors?.request?.(req) ?? req;
-      },
-    );
+    const interceptorRequest = client.interceptors.request.use(async (req) => {
+      return interceptors?.request?.(req) ?? req;
+    });
 
     const interceptorResponse = client.interceptors.response.use(
       async (response) => {
         return interceptors?.response?.onFulfilled?.(response) ?? response;
       },
       (error) => {
-        return interceptors?.response?.onRejected?.(error) ?? Promise.reject(error);
+        return (
+          interceptors?.response?.onRejected?.(error) ?? Promise.reject(error)
+        );
       }
     );
 
@@ -76,7 +85,9 @@ export const AxiosProvider: React.FC<{
     [client, config, handleSetConfig]
   );
 
-  return <AxiosContext.Provider value={value}>{children}</AxiosContext.Provider>;
+  return (
+    <AxiosContext.Provider value={value}>{children}</AxiosContext.Provider>
+  );
 };
 
 /**
@@ -84,6 +95,7 @@ export const AxiosProvider: React.FC<{
  */
 export const useAxiosContext = () => {
   const ctx = useContext(AxiosContext);
-  if (!ctx) throw new Error("useAxiosContext must be used within AxiosProvider");
+  if (!ctx)
+    throw new Error("useAxiosContext must be used within AxiosProvider");
   return ctx;
 };

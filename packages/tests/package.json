@@ -1,7 +1,7 @@
 {
-  "name": "@packages/hooks",
+  "name": "@packages/tests",
   "version": "1.0.0",
-  "description": "Utils for the application",
+  "description": "Tests for the application",
   "author": "Kota Ichikawa",
   "exports": {
     ".": {
@@ -20,13 +20,5 @@
     "prepublishOnly": "pnpm run build && pnpm run types"
   },
   "license": "MIT",
-  "packageManager": "pnpm@10.12.1",
-  "dependencies": {
-    "@packages/context": "workspace:*",
-    "@packages/tests": "workspace:*",
-    "@packages/utils": "workspace:*"
-  },
-  "devDependencies": {
-    "undici": "^7.16.0"
-  }
+  "packageManager": "pnpm@10.12.1"
 }
