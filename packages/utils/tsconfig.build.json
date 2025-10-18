@@ -1,0 +1,12 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "noEmit": false,
+    "emitDeclarationOnly": true,
+    "declaration": true,
+    "outDir": "dist/types",
+    "types": [] // vite/client などアプリ用型は外す
+  },
+  "include": ["src/**/*"],
+  "exclude": ["**/*.test.*"]
+}
