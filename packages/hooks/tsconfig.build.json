@@ -1,0 +1,14 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "noEmit": false, // ← 出力を有効化
+    "emitDeclarationOnly": true, // ← JSを出さず .d.ts のみ出力（型配布ライブラリ向け）
+    "declaration": true,
+    "declarationMap": false,
+    "outDir": "dist/types", // ← 出力先
+    "jsx": "react-jsx", // ← TSXファイルがある場合は必要
+    "types": [] // ← vite/client などアプリ用型を除外
+  },
+  "include": ["src/**/*"],
+  "exclude": ["**/*.test.*", "**/*.stories.*"]
+}

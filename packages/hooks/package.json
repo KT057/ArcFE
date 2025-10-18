@@ -1,0 +1,32 @@
+{
+  "name": "@packages/hooks",
+  "version": "1.0.0",
+  "description": "Utils for the application",
+  "author": "Kota Ichikawa",
+  "exports": {
+    ".": {
+      "types": "./dist/types/index.d.ts",
+      "import": "./dist/index.mjs"
+    }
+  },
+  "types": "./dist/types/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup src/index.ts --format esm --dts --out-dir dist",
+    "types": "tsc -p tsconfig.build.json",
+    "tsc": "tsc --noEmit --project tsconfig.json",
+    "prepublishOnly": "pnpm run build && pnpm run types"
+  },
+  "license": "MIT",
+  "packageManager": "pnpm@10.12.1",
+  "dependencies": {
+    "@packages/context": "workspace:*",
+    "@packages/tests": "workspace:*",
+    "@packages/utils": "workspace:*"
+  },
+  "devDependencies": {
+    "undici": "^7.16.0"
+  }
+}
