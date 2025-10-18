@@ -1,5 +1,5 @@
 import "styled-components";
-import type { themes } from "@apps/ui/styles";
+import type { themes } from "../../../packages/ui/styles";
 
 type Theme = typeof themes;
 

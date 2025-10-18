@@ -1,5 +1,5 @@
 {
-  "name": "@apps/ui",
+  "name": "@packages/ui",
   "version": "1.0.0",
   "scripts": {
     "gen:icons": "npx @svgr/cli -d ./components/Basic/Icons ./svgr/icons --replace-attr-values '#000=currentColor' && ts-node svgr/scripts/generateIconComponentForStorybook.ts && pnpm lint:script:fix",
