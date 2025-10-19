@@ -19,10 +19,7 @@ export const onRenderClient: OnRenderClientAsync = async (
   }
 
   const PageElement = (
-    <StyleSheetManager
-      enableVendorPrefixes
-      shouldForwardProp={() => true}
-    >
+    <StyleSheetManager enableVendorPrefixes shouldForwardProp={() => true}>
       {React.createElement(Page as React.ComponentType)}
     </StyleSheetManager>
   );
