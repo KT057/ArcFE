@@ -213,12 +213,14 @@ jobs:
         ui_storybook_build_check,
         ui_tsc_check,
         packages_tsc_check,
+        web_build_check,
+        web_type_check,
         test,
       ]
     if: always()
     steps:
       - name: Send Slack notification on failure
-        if: ${{ needs.ui_biome_check.result == 'failure' || needs.ui_storybook_build_check.result == 'failure' || needs.ui_tsc_check.result == 'failure' || needs.packages_tsc_check.result == 'failure' || needs.test.result == 'failure' }}
+        if: ${{ needs.ui_biome_check.result == 'failure' || needs.ui_storybook_build_check.result == 'failure' || needs.ui_tsc_check.result == 'failure' || needs.packages_tsc_check.result == 'failure' || needs.web_build_check.result == 'failure' || needs.web_type_check.result == 'failure' || needs.test.result == 'failure' }}
         uses: slackapi/slack-github-action@v2.1.0
         with:
           webhook: ${{ secrets.SLACK_WORKFLOW_WEBHOOK_URL }}
