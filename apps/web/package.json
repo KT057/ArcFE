@@ -8,22 +8,25 @@
   "scripts": {
     "dev": "cross-env ENV=local vite",
     "build": "vite build",
-    "start": "browser-sync start -s 'dist'",
+    "start": "browser-sync start -s 'dist/client'",
     "tsc": "tsc --noEmit",
     "lint": "pnpm biome check --diagnostic-level=warn .",
     "lint:fix": "pnpm biome check --diagnostic-level=warn --write ."
   },
   "dependencies": {
-    "@packages/ui": "workspace:*",
-    "@packages/hooks": "workspace:*",
     "@packages/context": "workspace:*",
-    "@packages/utils": "workspace:*",
-    "dotenv": "^17.2.3"
+    "@packages/hooks": "workspace:*",
+    "@packages/ui": "workspace:*",
+    "@packages/utils": "workspace:*"
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^5.0.4",
+    "babel-plugin-styled-components": "^2.1.4",
     "cross-env": "^10.1.0",
+    "dotenv": "^17.2.3",
     "sharp": "^0.34.4",
+    "vike": "^0.4.242",
+    "vike-react": "^0.6.9",
     "vite": "^7.1.10",
     "vite-plugin-image-optimizer": "^2.0.2"
   }

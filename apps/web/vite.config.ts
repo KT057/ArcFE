@@ -1,17 +1,34 @@
 import { resolve } from "node:path";
 import react from "@vitejs/plugin-react";
 import dotenv from "dotenv";
+import vike from "vike/plugin";
 import { defineConfig } from "vite";
 import { ViteImageOptimizer } from "vite-plugin-image-optimizer";
 
 dotenv.config();
 
-const root = resolve(__dirname, "src/pages");
-
 export default defineConfig({
-  root,
+  publicDir: resolve(__dirname, "src/pages/public"),
   plugins: [
-    react(),
+    vike({
+      prerender: true,
+      redirects: {},
+      includeAssetsImportedByServer: true
+    }),
+    react({
+      babel: {
+        plugins: [
+          [
+            "babel-plugin-styled-components",
+            {
+              ssr: true,
+              displayName: true,
+              fileName: true
+            }
+          ]
+        ]
+      }
+    }),
     ViteImageOptimizer({
       png: { quality: 80 },
       jpeg: { quality: 80, mozjpeg: true },
@@ -28,16 +45,18 @@ export default defineConfig({
     )
   },
   build: {
-    emptyOutDir: true,
-    rollupOptions: {
-      input: {
-        main: resolve(root, "index.html")
-        // about: resolve(__dirname, "src/pages/about/index.html")
-      }
-    },
     outDir: resolve(__dirname, "dist")
   },
   resolve: {
     dedupe: ["react", "react-dom", "styled-components"]
+  },
+  ssr: {
+    noExternal: [
+      "styled-components",
+      "@packages/ui",
+      "@packages/context",
+      "@packages/hooks",
+      "@packages/utils"
+    ]
   }
 });

@@ -1,4 +1,7 @@
 import { createRoot } from "react-dom/client";
 import { Page } from "./Page";
 
-createRoot(document.getElementById("root")!).render(<Page />);
+const app = document.getElementById("app");
+if (app) {
+  createRoot(app).render(<Page />);
+}
