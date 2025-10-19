@@ -18,9 +18,7 @@ export const onRenderHtml: OnRenderHtmlAsync = async (
   try {
     const PageElement = React.createElement(Page as React.ComponentType);
     const pageHtml = ReactDOMServer.renderToString(
-      sheet.collectStyles(
-        <React.StrictMode>{PageElement}</React.StrictMode>
-      )
+      sheet.collectStyles(<React.StrictMode>{PageElement}</React.StrictMode>)
     );
     const styleTags = sheet.getStyleTags();
 
