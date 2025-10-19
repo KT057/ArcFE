@@ -45,7 +45,19 @@ export default defineConfig({
     )
   },
   build: {
-    outDir: resolve(__dirname, "dist")
+    outDir: resolve(__dirname, "dist"),
+    rollupOptions: {
+      output: {
+        entryFileNames: (chunkInfo) => {
+          // Vikeのサーバーエントリーは元の場所に配置
+          if (chunkInfo.name === "entry") {
+            return "[name].js";
+          }
+          return "assets/[name].js";
+        },
+        chunkFileNames: "assets/[name].js"
+      }
+    }
   },
   resolve: {
     dedupe: ["react", "react-dom", "styled-components"]
