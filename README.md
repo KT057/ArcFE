@@ -2,6 +2,10 @@
 
 A modern front-end development boilerplate with monorepo architecture using pnpm workspaces, featuring React applications, a comprehensive UI component library with Storybook, and WordPress integration.
 
+## This is Storybook Page
+
+https://kichikawa57.github.io/front-end-boilerplate
+
 ## Architecture
 
 This project uses a monorepo structure with the following packages:
