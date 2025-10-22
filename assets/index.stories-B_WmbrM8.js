@@ -1,5 +1,0 @@
-import{r as n,M as p,j as a}from"./iframe-H3qRDz1v.js";import"./preload-helper-PPVm8Dsz.js";const r=({pc:e,tablet:s,sp:i})=>{const d=n.useContext(p);return d==="tablet"?s||e:d==="sp"?i:e};try{r.displayName="Media",r.__docgenInfo={description:"",displayName:"Media",props:{pc:{defaultValue:null,description:"",name:"pc",required:!0,type:{name:"ReactNode"}},tablet:{defaultValue:null,description:"",name:"tablet",required:!1,type:{name:"ReactNode"}},sp:{defaultValue:null,description:"",name:"sp",required:!0,type:{name:"ReactNode"}}}}}catch{}const u={title:"Basic/Media",component:r,tags:["autodocs"]},c=e=>a.jsx("div",{style:{padding:"20px"},children:a.jsx(r,{...e})}),t=c.bind({});t.args={pc:a.jsx("div",{children:"pc"}),tablet:a.jsx("div",{children:"tablet"}),sp:a.jsx("div",{children:"sp"})};t.parameters={...t.parameters,docs:{...t.parameters?.docs,source:{originalSource:`args => <div style={{
-  padding: "20px"
-}}>
-    <Media {...args} />
-  </div>`,...t.parameters?.docs?.source}}};const m=["Default"];export{t as Default,m as __namedExportsOrder,u as default};
