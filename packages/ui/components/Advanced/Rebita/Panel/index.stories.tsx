@@ -1,4 +1,5 @@
 import type { Meta, StoryFn } from "@storybook/react";
+import { getPublicPath } from "@utils/get-public-path";
 import { RebitaPanel } from "./index";
 
 const meta: Meta<typeof RebitaPanel> = {
@@ -43,7 +44,7 @@ Default.args = {};
 
 export const CustomContent = Template.bind({});
 CustomContent.args = {
-  imageSrc: "/images/img-01.jpg",
+  imageSrc: getPublicPath("/images/img-01.jpg"),
   imageText: "カスタム画像のオーバーレイテキスト",
   title: "カスタムタイトル",
   description:
@@ -62,7 +63,7 @@ CustomContent.args = {
 export const WithManyLabels = Template.bind({});
 WithManyLabels.args = {
   title: "多くのラベルがあるパネル",
-  imageSrc: "/images/img-01.jpg",
+  imageSrc: getPublicPath("/images/img-01.jpg"),
   description: "このパネルには多くのラベルが付いています",
   imageText: "カスタム画像のオーバーレイテキスト",
   onClick: () => alert("パネルがクリックされました!"),
@@ -84,7 +85,7 @@ WithManyLabels.args = {
 
 export const Clickable = Template.bind({});
 Clickable.args = {
-  imageSrc: "/images/img-01.jpg",
+  imageSrc: getPublicPath("/images/img-01.jpg"),
   title: "クリック可能なパネル",
   description: "このパネルをクリックしてみてください",
   imageText: "カスタム画像のオーバーレイテキスト",
@@ -95,7 +96,7 @@ Clickable.args = {
 export const NoLabels = Template.bind({});
 NoLabels.args = {
   imageText: "カスタム画像のオーバーレイテキスト",
-  imageSrc: "/images/img-01.jpg",
+  imageSrc: getPublicPath("/images/img-01.jpg"),
   title: "ラベルなしパネル",
   description: "このパネルにはラベルがありません",
   labels: []
@@ -103,7 +104,7 @@ NoLabels.args = {
 
 export const LongText = Template.bind({});
 LongText.args = {
-  imageSrc: "/images/img-01.jpg",
+  imageSrc: getPublicPath("/images/img-01.jpg"),
   imageText:
     "これは非常に長い画像オーバーレイテキストの例です。長いテキストがどのように表示されるかを確認できます。",
   title: "非常に長いタイトルの例：工業地域における持続可能な住環境の創造",

@@ -1,4 +1,5 @@
 import type { Meta, StoryFn } from "@storybook/react";
+import { getPublicPath } from "@utils/get-public-path";
 import { RebitaFadeSlideImage } from "./index";
 
 const meta: Meta<typeof RebitaFadeSlideImage> = {
@@ -23,18 +24,18 @@ const Template: StoryFn<typeof RebitaFadeSlideImage> = (args) => (
 export const Default = Template.bind({});
 Default.args = {
   images: [
-    { src: "/images/img-01.jpg", alt: "Image+1" },
-    { src: "/images/img-02.jpg", alt: "Image+2" },
-    { src: "/images/img-03.jpg", alt: "Image+3" }
+    { src: getPublicPath("/images/img-01.jpg"), alt: "Image+1" },
+    { src: getPublicPath("/images/img-02.jpg"), alt: "Image+2" },
+    { src: getPublicPath("/images/img-03.jpg"), alt: "Image+3" }
   ]
 };
 
 export const CustomImages = Template.bind({});
 CustomImages.args = {
   images: [
-    { src: "/images/img-01.jpg", alt: "Image+1" },
-    { src: "/images/img-02.jpg", alt: "Image+2" },
-    { src: "/images/img-03.jpg", alt: "Image+3" }
+    { src: getPublicPath("/images/img-01.jpg"), alt: "Image+1" },
+    { src: getPublicPath("/images/img-02.jpg"), alt: "Image+2" },
+    { src: getPublicPath("/images/img-03.jpg"), alt: "Image+3" }
   ],
   slideGuideDotProps: {
     style: {
@@ -54,8 +55,8 @@ CustomImages.args = {
 export const SlowTransition = Template.bind({});
 SlowTransition.args = {
   images: [
-    { src: "/images/img-01.jpg", alt: "Slow+1" },
-    { src: "/images/img-02.jpg", alt: "Slow+2" },
+    { src: getPublicPath("/images/img-01.jpg"), alt: "Slow+1" },
+    { src: getPublicPath("/images/img-02.jpg"), alt: "Slow+2" },
     { src: "/images/img-03.jpg", alt: "Slow+3" }
   ]
 };
@@ -67,8 +68,8 @@ FastTransition.args = {
     fadeDuration: 1
   },
   images: [
-    { src: "/images/img-01.jpg", alt: "Fast+1" },
-    { src: "/images/img-02.jpg", alt: "Fast+2" },
+    { src: getPublicPath("/images/img-01.jpg"), alt: "Fast+1" },
+    { src: getPublicPath("/images/img-02.jpg"), alt: "Fast+2" },
     { src: "/images/img-03.jpg", alt: "Fast+3" }
   ]
 };
@@ -76,18 +77,18 @@ FastTransition.args = {
 export const TwoImages = Template.bind({});
 TwoImages.args = {
   images: [
-    { src: "/images/img-01.jpg", alt: "First" },
-    { src: "/images/img-02.jpg", alt: "Second" }
+    { src: getPublicPath("/images/img-01.jpg"), alt: "First" },
+    { src: getPublicPath("/images/img-02.jpg"), alt: "Second" }
   ]
 };
 
 export const FiveImages = Template.bind({});
 FiveImages.args = {
   images: [
-    { src: "/images/img-01.jpg", alt: "Image+1" },
-    { src: "/images/img-02.jpg", alt: "Image+2" },
-    { src: "/images/img-03.jpg", alt: "Image+3" },
-    { src: "/images/img-04.jpg", alt: "Image+4" }
+    { src: getPublicPath("/images/img-01.jpg"), alt: "Image+1" },
+    { src: getPublicPath("/images/img-02.jpg"), alt: "Image+2" },
+    { src: getPublicPath("/images/img-03.jpg"), alt: "Image+3" },
+    { src: getPublicPath("/images/img-04.jpg"), alt: "Image+4" }
   ],
   fadeInAndZoomImagesProps: {
     duration: 1,
@@ -98,13 +99,13 @@ FiveImages.args = {
 export const NoAutoPlay = Template.bind({});
 NoAutoPlay.args = {
   images: [
-    { src: "/images/img-01.jpg", alt: "Static+1" },
-    { src: "/images/img-02.jpg", alt: "Static+2" },
-    { src: "/images/img-03.jpg", alt: "Static+3" }
+    { src: getPublicPath("/images/img-01.jpg"), alt: "Static+1" },
+    { src: getPublicPath("/images/img-02.jpg"), alt: "Static+2" },
+    { src: getPublicPath("/images/img-03.jpg"), alt: "Static+3" }
   ]
 };
 
 export const SingleImage = Template.bind({});
 SingleImage.args = {
-  images: [{ src: "/images/img-01.jpg", alt: "Single+Image" }]
+  images: [{ src: getPublicPath("/images/img-01.jpg"), alt: "Single+Image" }]
 };

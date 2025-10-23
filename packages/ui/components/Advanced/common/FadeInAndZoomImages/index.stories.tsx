@@ -1,4 +1,5 @@
 import type { Meta, StoryFn } from "@storybook/react";
+import { getPublicPath } from "@utils/get-public-path";
 import { FadeInAndZoomImages } from "./index";
 
 const meta: Meta<typeof FadeInAndZoomImages> = {
@@ -21,10 +22,10 @@ const Template: StoryFn<typeof FadeInAndZoomImages> = (args) => (
 );
 
 const sampleImages = [
-  { src: "/images/img-01.jpg", alt: "Sample Image 1" },
-  { src: "/images/img-02.jpg", alt: "Sample Image 2" },
-  { src: "/images/img-03.jpg", alt: "Sample Image 3" },
-  { src: "/images/img-04.jpg", alt: "Sample Image 4" }
+  { src: getPublicPath("/images/img-01.jpg"), alt: "Sample Image 1" },
+  { src: getPublicPath("/images/img-02.jpg"), alt: "Sample Image 2" },
+  { src: getPublicPath("/images/img-03.jpg"), alt: "Sample Image 3" },
+  { src: getPublicPath("/images/img-04.jpg"), alt: "Sample Image 4" }
 ];
 
 export const Default = Template.bind({});

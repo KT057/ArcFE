@@ -1,3 +1,4 @@
+import { fileURLToPath } from "node:url";
 import type { StorybookConfig } from "@storybook/react-vite";
 
 /** @type { import('@storybook/react-vite').StorybookConfig } */
@@ -20,12 +21,20 @@ const config: StorybookConfig = {
     reactDocgen: "react-docgen-typescript"
   },
   viteFinal: async (config) => {
-    config.base = process.env.STORYBOOK_BASE ?? "/";
-
     // styled-componentsの設定
     config.define = {
       ...config.define,
+      "process.env": "{}",
+      "process.env.STORYBOOK_BASE": JSON.stringify(process.env.STORYBOOK_BASE),
       SC_DISABLE_SPEEDY: true
+    };
+
+    config.resolve = {
+      ...(config.resolve ?? {}),
+      alias: {
+        ...(config.resolve?.alias ?? {}),
+        "@utils": fileURLToPath(new URL("../utils", import.meta.url))
+      }
     };
 
     return config;

@@ -1,4 +1,5 @@
 import type { Meta, StoryFn } from "@storybook/react";
+import { getPublicPath } from "@utils/get-public-path";
 import { ParallaxImage } from "./index";
 
 const meta: Meta<typeof ParallaxImage> = {
@@ -19,6 +20,6 @@ const Template: StoryFn<typeof ParallaxImage> = (args) => (
 
 export const Default = Template.bind({});
 Default.args = {
-  layer: { image: "/images/img-01.jpg", speed: -15 },
+  layer: { image: getPublicPath("/images/img-01.jpg"), speed: -15 },
   height: 400
 };

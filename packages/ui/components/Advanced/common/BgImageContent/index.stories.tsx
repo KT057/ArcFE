@@ -1,4 +1,5 @@
 import type { Meta, StoryFn } from "@storybook/react";
+import { getPublicPath } from "@utils/get-public-path";
 import { rem } from "../../../../styles";
 import { BgImageContent } from "./index";
 
@@ -39,7 +40,7 @@ Default.args = {
       Hello
     </div>
   ),
-  imageUrl: "/images/img-01.jpg",
+  imageUrl: getPublicPath("/images/img-01.jpg"),
   height: 400
 };
 
@@ -61,7 +62,7 @@ AnimationType002.args = {
       Hello
     </div>
   ),
-  imageUrl: "/images/img-01.jpg",
+  imageUrl: getPublicPath("/images/img-01.jpg"),
   height: 400,
   animationType: "002"
 };
