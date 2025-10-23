@@ -57,7 +57,7 @@ SlowTransition.args = {
   images: [
     { src: getPublicPath("/images/img-01.jpg"), alt: "Slow+1" },
     { src: getPublicPath("/images/img-02.jpg"), alt: "Slow+2" },
-    { src: "/images/img-03.jpg", alt: "Slow+3" }
+    { src: getPublicPath("/images/img-03.jpg"), alt: "Slow+3" }
   ]
 };
 
