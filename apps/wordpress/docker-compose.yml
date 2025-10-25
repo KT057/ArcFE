@@ -1,8 +1,7 @@
-version: "3.6"
-
 services:
   db:
     image: mysql:5.7
+    platform: linux/amd64
     container_name: mysql57
     volumes:
       - db-data:/var/lib/mysql
