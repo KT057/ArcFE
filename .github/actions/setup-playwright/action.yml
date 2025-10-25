@@ -8,7 +8,7 @@ runs:
   using: composite
   steps:
     # Playwrightのバージョンを取得する
-    - run: echo "PLAYWRIGHT_VERSION=$(node -e 'console.log(require("playwright/package.json").version)')" >> "${GITHUB_ENV}"
+    - run: echo "PLAYWRIGHT_VERSION=$(node -e 'console.log(require("./packages/ui/node_modules/playwright/package.json").version)')" >> "${GITHUB_ENV}"
       shell: bash
 
     # Playwrightのブラウザバイナリをキャッシュする
