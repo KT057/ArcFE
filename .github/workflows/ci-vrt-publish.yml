@@ -51,8 +51,7 @@ jobs:
         run: |
           pnpm --filter @packages/ui exec vitest --run \
             --pool=threads \
-            --poolOptions.threads.minThreads=1 \
-            --poolOptions.threads.maxThreads=$(nproc) \
+            --maxWorkers=$(nproc) \
             --shard ${{ matrix.index }}/${{ matrix.total }} \
             --project=storybook \
             --reporter=dot
