@@ -14,6 +14,11 @@ runs:
     - run: echo "PLAYWRIGHT_VERSION=$(node -e 'console.log(require("./packages/ui/node_modules/playwright/package.json").version)')" >> "${GITHUB_ENV}"
       shell: bash
 
+    - name: Install fonts
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y fonts-noto fonts-noto-cjk fonts-noto-color-emoji
+
     - uses: actions/cache@v4
       id: cache-playwright-browsers
       with:
