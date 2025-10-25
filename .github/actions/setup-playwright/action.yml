@@ -18,9 +18,9 @@ runs:
       id: cache-playwright-browsers
       with:
         path: ${{ inputs.playwright-browsers-path }}
-        key: ${{ runner.os }}-${{ inputs.node-version }}-playwright-${{ env.PLAYWRIGHT_VERSION }}-${{ hashFiles('pnpm-lock.yaml') }}
+        key: ${{ runner.os }}-${{ inputs.node-version }}-playwright-test-runner-${{ env.PLAYWRIGHT_VERSION }}-${{ hashFiles('pnpm-lock.yaml') }}
         restore-keys: |
-          ${{ runner.os }}-${{ inputs.node-version }}-playwright-${{ env.PLAYWRIGHT_VERSION }}-
+          ${{ runner.os }}-${{ inputs.node-version }}-playwright-test-runner-${{ env.PLAYWRIGHT_VERSION }}-
 
     # キャッシュがない場合、Playwrightのブラウザバイナリをインストールする
     - run: pnpm @ui install:playwright:browser
