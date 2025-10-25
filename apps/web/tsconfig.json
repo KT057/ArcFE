@@ -29,7 +29,6 @@
     "vite.config.common.ts",
     "vite.config.csr.ts",
     "vite.config.ts",
-    "vite.config.ts",
     "./@types/**/*"
   ]
 }
