@@ -6,6 +6,16 @@ import { ViteImageOptimizer } from "vite-plugin-image-optimizer";
 
 dotenv.config();
 
+export const DIR_FOLDER_NAME = "dist";
+
+export const SSR_NO_EXTERNAL = [
+  "styled-components",
+  "@packages/ui",
+  "@packages/context",
+  "@packages/hooks",
+  "@packages/utils"
+] as const;
+
 // 共通のReactプラグイン設定
 export const reactPlugin = (ssr = false) =>
   react({
@@ -47,8 +57,7 @@ export const commonResolve = {
     "@packages/context": resolve(__dirname, "../../packages/context"),
     "@packages/hooks": resolve(__dirname, "../../packages/hooks"),
     "@packages/utils": resolve(__dirname, "../../packages/utils")
-  },
-  dedupe: ["react", "react-dom", "styled-components"]
+  }
 };
 
 // 共通の設定

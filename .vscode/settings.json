@@ -20,5 +20,7 @@
     "quickfix.biome": "explicit",
     "source.organizeImports.biome": "explicit",
     "source.fixAll.biome": "explicit"
-  }
+  },
+  "vitest.configSearchPatternExclude": "{apps/web/**,**/node_modules/**}",
+  "vitest.workspaceConfig": "./vitest.config.ts"
 }
