@@ -110,7 +110,7 @@ importers:
         version: link:../../packages/utils
     devDependencies:
       '@vitejs/plugin-react':
-        specifier: ^5.0.4
+        specifier: ^5.1.0
         version: 5.1.0(vite@7.1.12(@types/node@24.9.1)(terser@5.44.0))
       babel-plugin-styled-components:
         specifier: ^2.1.4
@@ -190,7 +190,7 @@ importers:
         specifier: ^8.1.0
         version: 8.1.0(typescript@5.9.3)
       '@vitejs/plugin-react':
-        specifier: ^5.0.4
+        specifier: ^5.1.0
         version: 5.1.0(vite@7.1.12(@types/node@24.9.1)(terser@5.44.0))
       '@vitest/browser':
         specifier: 4.0.3
