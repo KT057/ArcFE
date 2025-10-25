@@ -37,10 +37,14 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
+      # Playwrightのブラウザバイナリを配置するディレクトリを環境変数に設定
+      - run: echo "PLAYWRIGHT_BROWSERS_PATH=${HOME}/pw-browsers" >> "${GITHUB_ENV}"
+
       - name: Setup Playwright
         uses: ./.github/actions/setup-playwright
         with:
           node-version: 22
+          playwright-browsers-path: ${{ env.PLAYWRIGHT_BROWSERS_PATH }}
 
   setup:
     needs: setup-playwright
