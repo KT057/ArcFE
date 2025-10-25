@@ -3,7 +3,7 @@ import { About } from "./components/About";
 import { Footer } from "./components/Footer";
 import { Header } from "./components/Header";
 
-export default function Page() {
+export const AboutPage = () => {
   return (
     <Layout>
       <Header />
@@ -11,4 +11,4 @@ export default function Page() {
       <Footer />
     </Layout>
   );
-}
+};

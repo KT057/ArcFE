@@ -6,9 +6,13 @@
   "author": "kota <k.ichikawa@attivita.co.jp>",
   "license": "MIT",
   "scripts": {
+    "rm-dist": "rm -rf dist",
     "dev": "cross-env ENV=local vite",
-    "build": "vite build",
+    "dev:csr": "vite --config vite.config.csr.ts",
+    "build": "pnpm rm-dist && vite build",
+    "build:csr": "pnpm rm-dist && vite build --config vite.config.csr.ts",
     "start": "browser-sync start -s 'dist/client'",
+    "start:csr": "browser-sync start -s 'dist/csr'",
     "tsc": "tsc --noEmit",
     "lint": "pnpm biome check --diagnostic-level=warn .",
     "lint:fix": "pnpm biome check --diagnostic-level=warn --write ."
