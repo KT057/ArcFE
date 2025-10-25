@@ -12,7 +12,38 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  setup-playwright:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Cache node_modules
+        uses: actions/cache@v4
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Setup Playwright
+        uses: ./.github/actions/setup-playwright
+        with:
+          node-version: 22
+
   setup:
+    needs: setup-playwright
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -43,9 +74,10 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Install Playwright (Chromium only if not cached)
-        run: |
-          pnpm @ui install:playwright:browser
+      - name: Setup Playwright
+        uses: ./.github/actions/setup-playwright
+        with:
+          node-version: 22
 
       - name: Test Storybook
         run: |

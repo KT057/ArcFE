@@ -13,7 +13,7 @@
     "test:storybook": "vitest --run --project=storybook",
     "reg-suit:run": "reg-suit run",
     "reg-suit:publish": "reg-suit publish",
-    "install:playwright:browser": "npx playwright install --with-deps chromium"
+    "install:playwright:browser": "npx playwright install --with-deps"
   },
   "packageManager": "pnpm@10.12.1",
   "devDependencies": {
