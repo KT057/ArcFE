@@ -12,7 +12,42 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  setup-playwright:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Cache node_modules
+        uses: actions/cache@v4
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      # Playwrightのブラウザバイナリを配置するディレクトリを環境変数に設定
+      - run: echo "PLAYWRIGHT_BROWSERS_PATH=${HOME}/pw-browsers" >> "${GITHUB_ENV}"
+
+      - name: Setup Playwright
+        uses: ./.github/actions/setup-playwright
+        with:
+          node-version: 22
+          playwright-browsers-path: ${{ env.PLAYWRIGHT_BROWSERS_PATH }}
+
   setup:
+    needs: setup-playwright
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -43,16 +78,20 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Install Playwright (Chromium only if not cached)
-        run: |
-          pnpm @ui install:playwright:browser
+      # Playwrightのブラウザバイナリを配置するディレクトリを環境変数に設定
+      - run: echo "PLAYWRIGHT_BROWSERS_PATH=${HOME}/pw-browsers" >> "${GITHUB_ENV}"
+
+      - name: Setup Playwright
+        uses: ./.github/actions/setup-playwright
+        with:
+          node-version: 22
+          playwright-browsers-path: ${{ env.PLAYWRIGHT_BROWSERS_PATH }}
 
       - name: Test Storybook
         run: |
           pnpm --filter @packages/ui exec vitest --run \
             --pool=threads \
-            --poolOptions.threads.minThreads=1 \
-            --poolOptions.threads.maxThreads=$(nproc) \
+            --maxWorkers=$(nproc) \
             --shard ${{ matrix.index }}/${{ matrix.total }} \
             --project=storybook \
             --reporter=dot
