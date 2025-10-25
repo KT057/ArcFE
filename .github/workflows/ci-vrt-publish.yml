@@ -82,6 +82,7 @@ jobs:
         uses: ./.github/actions/setup-playwright
         with:
           node-version: 22
+          playwright-browsers-path: ${{ env.PLAYWRIGHT_BROWSERS_PATH }}
 
       - name: Test Storybook
         run: |
