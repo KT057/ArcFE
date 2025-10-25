@@ -2,6 +2,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { storybookTest } from "@storybook/addon-vitest/vitest-plugin";
 import storycap from "@storycap-testrun/browser/vitest-plugin";
+import { playwright } from "@vitest/browser-playwright";
 import { defineConfig, defineProject } from "vitest/config";
 
 // ESM で __dirname を再現
@@ -15,7 +16,7 @@ export default defineConfig({
         plugins: [
           storybookTest({
             configDir: path.join(__dirname, ".storybook"),
-            storybookScript: "pnpm storybook --ci"
+            storybookUrl: "http://localhost:6006"
           }),
           storycap({
             output: {
@@ -31,7 +32,7 @@ export default defineConfig({
           name: "storybook",
           browser: {
             enabled: true,
-            provider: "playwright",
+            provider: playwright(),
             headless: true,
             instances: [{ browser: "chromium" }]
           },
