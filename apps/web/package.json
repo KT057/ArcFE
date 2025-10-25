@@ -6,9 +6,15 @@
   "author": "kota <k.ichikawa@attivita.co.jp>",
   "license": "MIT",
   "scripts": {
+    "rm-dist": "rm -rf dist",
     "dev": "cross-env ENV=local vite",
-    "build": "vite build",
+    "dev:wp": "vite --config vite.config.csr.ts",
+    "build:prerender": "vite build",
+    "build": "pnpm rm-dist && pnpm build:prerender",
+    "build:csr": "vite build --config vite.config.csr.ts",
+    "build:wp": "pnpm rm-dist && pnpm build:csr && BUILD_TYPE=wp pnpm build:prerender",
     "start": "browser-sync start -s 'dist/client'",
+    "start:csr": "browser-sync start -s 'dist/csr'",
     "tsc": "tsc --noEmit",
     "lint": "pnpm biome check --diagnostic-level=warn .",
     "lint:fix": "pnpm biome check --diagnostic-level=warn --write ."

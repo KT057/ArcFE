@@ -15,7 +15,7 @@ function get_image_url($url){
 }
 
 function get_script_url($url){
-  return get_bloginfo('template_directory').'/script/'.$url;
+  return get_bloginfo('template_directory').'/assets/'.$url;
 }
 
 function get_json_data($relative_path) {

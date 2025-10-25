@@ -24,5 +24,12 @@
     // 任意：エイリアス（@/xxx → src/xxx）
     "baseUrl": "."
   },
-  "include": ["./src/**/*", "vite.config.ts", "./@types/**/*"]
+  "include": [
+    "./src/**/*",
+    "vite.config.common.ts",
+    "vite.config.csr.ts",
+    "vite.config.ts",
+    "vite.config.ts",
+    "./@types/**/*"
+  ]
 }
