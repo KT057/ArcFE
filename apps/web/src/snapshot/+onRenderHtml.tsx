@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOMServer from "react-dom/server";
 import { dangerouslySkipEscape, escapeInject } from "vike/server";
 import type { OnRenderHtmlAsync } from "vike/types";
+import { DataProvider } from "./context/data";
 
 export const onRenderHtml: OnRenderHtmlAsync = async (
   pageContext
@@ -12,9 +13,12 @@ export const onRenderHtml: OnRenderHtmlAsync = async (
     throw new Error("Page component is required");
   }
 
-  const PageElement = React.createElement(Page as React.ComponentType);
   const pageHtml = ReactDOMServer.renderToString(
-    <React.StrictMode>{PageElement}</React.StrictMode>
+    <React.StrictMode>
+      <DataProvider data={pageContext.data}>
+        {React.createElement(Page)}
+      </DataProvider>
+    </React.StrictMode>
   );
 
   const title = (config as any)?.title || "My App";

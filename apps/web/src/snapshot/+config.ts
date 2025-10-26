@@ -4,8 +4,6 @@ export default {
   prerender: true,
   clientRouting: false,
   hydrationCanBeAborted: false,
-  prefetch: false,
-  prefetchStaticAssets: false,
   name: "snapshot",
   meta: {
     title: {

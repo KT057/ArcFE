@@ -1,12 +1,12 @@
 import { resolve } from "node:path";
 import react from "@vitejs/plugin-react";
 import { defineConfig, mergeConfig } from "vite";
-import { commonConfig, reactPlugin } from "./vite.config.common";
+import { commonConfig } from "./vite.config.common";
 
 export default defineConfig(
   mergeConfig(commonConfig, {
     root: resolve(__dirname, "src/csr"),
-    plugins: [react(), reactPlugin(false)],
+    plugins: [react()],
     build: {
       outDir: resolve(__dirname, "dist/csr"),
       emptyOutDir: true,

@@ -23,7 +23,7 @@
   <link rel="icon" href="<?php echo get_image_url('favicon.ico'); ?>">
 
   <!-- ビルドしたJSを読み込む -->
-  <script type="module" src="<?php echo get_script_url('about.js'); ?>"></script>
+  <script type="module" src="<?php echo get_script_url('main.js'); ?>"></script>
 
   <title><?php echo $information['title']; ?></title>
   <?php wp_head(); ?>

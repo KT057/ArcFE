@@ -1,4 +1,5 @@
-import { DOMAIN } from "../../base";
+import { useAxiosMutation } from "@packages/hooks";
+import { DOMAIN, WP_API_CONTACT_FORM_7_PATH } from "../../base";
 
 import type { WPContact7FeedbackResponse } from "./response";
 
@@ -24,7 +25,7 @@ export const postWpContact7Feedback = async ({ id }: Args) => {
   bodyFormData.append("date-45", "2025-08-30");
 
   const response = await fetch(
-    `${DOMAIN()}/wp-json/contact-form-7/v1/contact-forms/${id}/feedback`,
+    `${DOMAIN()}${WP_API_CONTACT_FORM_7_PATH}/${id}/feedback`,
     {
       method: "POST",
       body: bodyFormData
@@ -35,4 +36,12 @@ export const postWpContact7Feedback = async ({ id }: Args) => {
   }
   const data: WPContact7FeedbackResponse = await response.json();
   return data;
+};
+
+export const useWpContact7Feedback = (id: string) => {
+  return useAxiosMutation<FormData, WPContact7FeedbackResponse>({
+    url: `${WP_API_CONTACT_FORM_7_PATH}/{id}/feedback`,
+    pathParams: { id },
+    method: "POST"
+  });
 };
