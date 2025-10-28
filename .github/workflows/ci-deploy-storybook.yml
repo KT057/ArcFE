@@ -42,6 +42,9 @@ jobs:
 
       - name: Build project
         run: pnpm @ui build-storybook
+        env:
+          GOOGLE_MAP_ID: ${{ secrets.GOOGLE_MAP_ID }}
+          GOOGLE_MAPS_API_KEY: ${{ secrets.GOOGLE_MAPS_API_KEY }}
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
