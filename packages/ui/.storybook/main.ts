@@ -4,9 +4,7 @@ import type { StorybookConfig } from "@storybook/react-vite";
 /** @type { import('@storybook/react-vite').StorybookConfig } */
 const config: StorybookConfig = {
   staticDirs: ["../public"],
-  stories: [
-    "../components/**/*.stories.@(js|jsx|ts|tsx)"
-  ],
+  stories: ["../components/**/*.stories.@(js|jsx|ts|tsx)"],
   addons: [
     "@storybook/addon-docs",
     "@storybook/addon-themes",
@@ -25,6 +23,10 @@ const config: StorybookConfig = {
       ...config.define,
       "process.env": "{}",
       "process.env.STORYBOOK_BASE": JSON.stringify(process.env.STORYBOOK_BASE),
+      "process.env.GOOGLE_MAP_ID": JSON.stringify(process.env.GOOGLE_MAP_ID),
+      "process.env.GOOGLE_MAPS_API_KEY": JSON.stringify(
+        process.env.GOOGLE_MAPS_API_KEY
+      ),
       SC_DISABLE_SPEEDY: true
     };
 
