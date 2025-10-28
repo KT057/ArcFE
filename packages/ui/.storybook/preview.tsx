@@ -1,5 +1,6 @@
 /** biome-ignore-all lint/correctness/noUnusedImports: lint/suppressions/incorrect */
 import type { Preview } from "@storybook/react";
+import { APIProvider } from "@vis.gl/react-google-maps";
 import React from "react";
 import { ParallaxProvider } from "react-scroll-parallax";
 import { ThemeProvider } from "styled-components";
@@ -23,16 +24,18 @@ const preview: Preview = {
   },
   decorators: [
     (Story) => (
-      <ParallaxProvider>
-        <MediaProvider>
-          <ThemeProvider theme={themes}>
-            <GlobalStyles />
-            <div style={{ width: "100%", padding: "40px" }}>
-              <Story />
-            </div>
-          </ThemeProvider>
-        </MediaProvider>
-      </ParallaxProvider>
+      <APIProvider apiKey={process.env.GOOGLE_MAPS_API_KEY ?? ""}>
+        <ParallaxProvider>
+          <MediaProvider>
+            <ThemeProvider theme={themes}>
+              <GlobalStyles />
+              <div style={{ width: "100%", padding: "40px" }}>
+                <Story />
+              </div>
+            </ThemeProvider>
+          </MediaProvider>
+        </ParallaxProvider>
+      </APIProvider>
     )
   ]
 };
