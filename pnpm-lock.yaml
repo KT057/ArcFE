@@ -18,8 +18,8 @@ importers:
         specifier: ^3.2.2
         version: 3.2.2(react@19.2.0)
       '@vis.gl/react-google-maps':
-        specifier: ^1.6.1
-        version: 1.6.1(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
+        specifier: ^1.7.0
+        version: 1.7.0(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       axios:
         specifier: ^1.13.1
         version: 1.13.1
@@ -2197,8 +2197,8 @@ packages:
   '@types/stylis@4.2.5':
     resolution: {integrity: sha512-1Xve+NMN7FWjY14vLoY5tL3BVEQ/n42YLwaqJIPYhotZ9uBHt87VceMwWQpzmdEt2TNXIorIFG+YeCUUW7RInw==}
 
-  '@vis.gl/react-google-maps@1.6.1':
-    resolution: {integrity: sha512-y9qI1m8E5Zn55xh+J5MM1kdFLEE/ttOF2bOFLVd99TiKBYUNwG6doOC1JEc6lf7Zum2MT3GQ9aeEOAPzukRLxA==}
+  '@vis.gl/react-google-maps@1.7.0':
+    resolution: {integrity: sha512-8lUmsQp++iGYkEitWXIz/Ds/dPB+/NcssyNjhIqWtZpNL1WUiaJMWGmBktoKT2vyxT0ZXFzE/Rg/xPLklJGYHw==}
     peerDependencies:
       react: '>=16.8.0 || ^19.0 || ^19.0.0-rc'
       react-dom: '>=16.8.0 || ^19.0 || ^19.0.0-rc'
@@ -7707,7 +7707,7 @@ snapshots:
 
   '@types/stylis@4.2.5': {}
 
-  '@vis.gl/react-google-maps@1.6.1(react-dom@19.2.0(react@19.2.0))(react@19.2.0)':
+  '@vis.gl/react-google-maps@1.7.0(react-dom@19.2.0(react@19.2.0))(react@19.2.0)':
     dependencies:
       '@types/google.maps': 3.58.1
       fast-deep-equal: 3.1.3
