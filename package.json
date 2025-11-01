@@ -32,7 +32,7 @@
     "@dnd-kit/sortable": "^10.0.0",
     "@dnd-kit/utilities": "^3.2.2",
     "axios": "^1.13.1",
-    "@vis.gl/react-google-maps": "^1.6.1",
+    "@vis.gl/react-google-maps": "^1.7.0",
     "gsap": "^3.13.0",
     "keen-slider": "^6.8.6",
     "react": "^19.2.0",
