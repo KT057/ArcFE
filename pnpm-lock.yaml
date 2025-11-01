@@ -137,8 +137,8 @@ importers:
         specifier: ^7.1.12
         version: 7.1.12(@types/node@24.9.1)(terser@5.44.0)
       vite-plugin-image-optimizer:
-        specifier: ^2.0.2
-        version: 2.0.2(sharp@0.34.4)(vite@7.1.12(@types/node@24.9.1)(terser@5.44.0))
+        specifier: ^2.0.3
+        version: 2.0.3(sharp@0.34.4)(vite@7.1.12(@types/node@24.9.1)(terser@5.44.0))
 
   apps/wordpress: {}
 
@@ -5015,8 +5015,8 @@ packages:
       vite:
         optional: true
 
-  vite-plugin-image-optimizer@2.0.2:
-    resolution: {integrity: sha512-BYK27SpSScRIaveJVjbP7EjSrawuCc+ffESGvKVRhByAu6RGvwE3EyGg9ZeqQiLUE8e1hKSCr8v5ZfvQNiqvJQ==}
+  vite-plugin-image-optimizer@2.0.3:
+    resolution: {integrity: sha512-1vrFOTcpSvv6DCY7h8UXab4wqMAjTJB/ndOzG/Kmj1oDOuPF6mbjkNQoGzzCEYeWGe7qU93jc8oQqvoJ57al3A==}
     engines: {node: '>=18.17.0'}
     peerDependencies:
       sharp: '>=0.34.0'
@@ -10923,7 +10923,7 @@ snapshots:
       react-streaming: 0.4.11(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       vite: 7.1.12(@types/node@24.9.1)(terser@5.44.0)
 
-  vite-plugin-image-optimizer@2.0.2(sharp@0.34.4)(vite@7.1.12(@types/node@24.9.1)(terser@5.44.0)):
+  vite-plugin-image-optimizer@2.0.3(sharp@0.34.4)(vite@7.1.12(@types/node@24.9.1)(terser@5.44.0)):
     dependencies:
       ansi-colors: 4.1.3
       pathe: 2.0.3
