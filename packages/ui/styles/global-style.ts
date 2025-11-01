@@ -6,7 +6,10 @@ export const GlobalStyles = createGlobalStyle`
   }
 
   body {
+    ${({ theme }) => theme.font.fontFamily.notoSansJP()}
+
     margin: 0;
+    font-weight: 400;
   }
 
   *,

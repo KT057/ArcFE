@@ -3,7 +3,7 @@ import { Button001, FadeInAndZoomImages } from "@packages/ui/components";
 export const About = () => {
   return (
     <>
-      <Button001>Home Page</Button001>
+      <Button001>ボタン</Button001>
       <FadeInAndZoomImages
         images={[
           {

@@ -2,7 +2,19 @@ import { css } from "styled-components";
 import { color } from "./color";
 import { easing } from "./easing";
 import { font } from "./figma-fonts";
-import { baseFontSizeForEm, baseFontSizeForRem, em, rem } from "./font";
+import {
+  baseFontSizeForEm,
+  baseFontSizeForRem,
+  ebGaramond,
+  em,
+  lato,
+  montserrat,
+  notoSansJP,
+  rem,
+  roboto,
+  zenKakuGothicNew,
+  zenOldMincho
+} from "./font";
 import { media } from "./media";
 import type { Size } from "./size";
 
@@ -19,6 +31,15 @@ export const themes = {
     baseSize: {
       em: () => baseFontSizeForEm,
       rem: () => baseFontSizeForRem
+    },
+    fontFamily: {
+      notoSansJP: () => notoSansJP,
+      roboto: () => roboto,
+      zenKakuGothicNew: () => zenKakuGothicNew,
+      lato: () => lato,
+      montserrat: () => montserrat,
+      ebGaramond: () => ebGaramond,
+      zenOldMincho: () => zenOldMincho
     }
   },
   animation: {
