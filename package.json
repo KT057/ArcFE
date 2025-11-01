@@ -19,7 +19,7 @@
     "@types/react-dom": "^19.2.2",
     "browser-sync": "^3.0.4",
     "cross-env": "^10.1.0",
-    "jsdom": "^27.0.1",
+    "jsdom": "^27.1.0",
     "msw": "^2.11.6",
     "tsup": "^8.5.0",
     "turbo": "^2.5.8",
