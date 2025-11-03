@@ -5,6 +5,7 @@ import React from "react";
 import { ParallaxProvider } from "react-scroll-parallax";
 import { ThemeProvider } from "styled-components";
 import { MediaProvider } from "../context/MediaContext";
+import { color } from "../styles";
 import { GlobalStyles } from "../styles/global-style";
 import { themes } from "../styles/themes";
 
@@ -27,7 +28,7 @@ const preview: Preview = {
       <APIProvider apiKey={process.env.GOOGLE_MAPS_API_KEY ?? ""}>
         <ParallaxProvider>
           <MediaProvider>
-            <ThemeProvider theme={themes}>
+            <ThemeProvider theme={themes(color)}>
               <GlobalStyles />
               <div style={{ width: "100%", padding: "40px" }}>
                 <Story />

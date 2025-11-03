@@ -1,5 +1,5 @@
 import { AxiosProvider } from "@packages/context";
-import { GlobalStyles, MediaProvider, themes } from "@packages/ui";
+import { color, GlobalStyles, MediaProvider, themes } from "@packages/ui";
 import { ParallaxProvider } from "react-scroll-parallax";
 import { ThemeProvider } from "styled-components";
 
@@ -31,7 +31,7 @@ export const Layout = ({ children }: Props) => {
         <ClientOnlyAxiosProvider
           initialConfig={{ baseURL: "http://localhost:3000" }}
         >
-          <ThemeProvider theme={themes}>
+          <ThemeProvider theme={themes(color)}>
             <GlobalStyles />
             {children}
           </ThemeProvider>

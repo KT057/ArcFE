@@ -1,7 +1,6 @@
-import { css } from "styled-components";
-import { color } from "./color";
+import { css, type RuleSet } from "styled-components";
+import type { color } from "./color";
 import { easing } from "./easing";
-import { font } from "./figma-fonts";
 import {
   baseFontSizeForEm,
   baseFontSizeForRem,
@@ -18,7 +17,43 @@ import {
 import { media } from "./media";
 import type { Size } from "./size";
 
-export const themes = {
+export type Theme<C extends typeof color = typeof color> = {
+  color: C;
+  media: typeof media;
+  size: {
+    em: (px: number) => string;
+    rem: (px: number) => string;
+    customEm: (px: number, base: number) => string;
+  };
+  font: {
+    baseSize: {
+      em: () => RuleSet<object>;
+      rem: () => RuleSet<object>;
+    };
+    fontFamily: {
+      notoSansJP: () => RuleSet<object>;
+      roboto: () => RuleSet<object>;
+      zenKakuGothicNew: () => RuleSet<object>;
+      lato: () => RuleSet<object>;
+      montserrat: () => RuleSet<object>;
+      ebGaramond: () => RuleSet<object>;
+      zenOldMincho: () => RuleSet<object>;
+    };
+  };
+  animation: {
+    easing: typeof easing;
+  };
+  icon: {
+    size: {
+      large: number;
+      middle: number;
+      small: number;
+      style: (size: Size) => RuleSet<object>;
+    };
+  };
+};
+
+export const themes = <C extends typeof color>(color: C): Theme<C> => ({
   color,
   media,
   size: {
@@ -27,7 +62,6 @@ export const themes = {
     customEm: (px: number, base: number) => `${px / base}em`
   },
   font: {
-    ...font,
     baseSize: {
       em: () => baseFontSizeForEm,
       rem: () => baseFontSizeForRem
@@ -76,4 +110,4 @@ export const themes = {
       }
     }
   }
-};
+});

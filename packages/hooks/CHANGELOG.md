@@ -1,5 +1,15 @@
 # @packages/hooks
 
+## 1.1.5
+
+### Patch Changes
+
+- Fix color
+- Updated dependencies
+  - @packages/utils@1.1.5
+  - @packages/context@1.1.5
+  - @packages/tests@1.1.5
+
 ## 1.1.4
 
 ### Patch Changes
