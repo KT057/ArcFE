@@ -15,6 +15,7 @@ interface ListProps {
     columnGap?: number;
     rowGap?: number;
     borderColor?: string;
+    isAlignItemsCenter?: boolean;
   };
 }
 
@@ -26,6 +27,7 @@ export const List001 = ({ type = "001", items, style }: ListProps) => {
         type={type}
         columnGap={style?.columnGap}
         rowGap={style?.rowGap}
+        isAlignItemsCenter={style?.isAlignItemsCenter}
       >
         {items.map((item) => (
           <StyledListItem

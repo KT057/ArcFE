@@ -5,6 +5,7 @@ type ListProps = {
   type: Type;
   columnGap?: number;
   rowGap?: number;
+  isAlignItemsCenter?: boolean;
 };
 
 type ListItemProps = {
@@ -18,12 +19,16 @@ export const StyledListWrapper = styled.div`
 
 export const StyledList = styled.div.withConfig({
   shouldForwardProp: (prop) =>
-    prop !== "type" && prop !== "columnGap" && prop !== "rowGap"
+    prop !== "type" &&
+    prop !== "columnGap" &&
+    prop !== "rowGap" &&
+    prop !== "isAlignItemsCenter"
 })<ListProps>`
   display: flex;
   list-style: none;
   padding: 0;
   margin: 0;
+  align-items: ${({ isAlignItemsCenter }) => (isAlignItemsCenter ? "center" : "flex-start")};
 
   ${({ type, theme, columnGap, rowGap }) => {
     switch (type) {
