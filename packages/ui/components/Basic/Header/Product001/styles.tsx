@@ -12,7 +12,8 @@ export const StyledHeader = styled.header.withConfig({
     prop !== "animationBackgroundColor" &&
     prop !== "showModal" &&
     prop !== "easing" &&
-    prop !== "duration"
+    prop !== "duration" &&
+    prop !== "sidePadding"
 })<{
   height: number;
   backgroundColor: string | undefined;
@@ -20,6 +21,7 @@ export const StyledHeader = styled.header.withConfig({
   showModal: boolean | undefined;
   easing: EasingKey | undefined;
   duration: string | undefined;
+  sidePadding: number | undefined;
 }>`
   position: fixed;
   top: 0;
@@ -30,7 +32,7 @@ export const StyledHeader = styled.header.withConfig({
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 ${({ theme }) => theme.size.em(20)};
+  padding: 0 ${({ sidePadding, theme }) => (sidePadding ? theme.size.em(sidePadding) : theme.size.em(20))};
   z-index: 100;
   transition: background-color ${({ duration }) => duration ?? "0.3s"} ${({ theme, easing }) => theme.animation.easing[easing ?? "easeInCubic"]};
 

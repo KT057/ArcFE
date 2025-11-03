@@ -21,6 +21,7 @@ interface Header001Props {
     leftGap?: number;
     rightGap?: number;
     header?: {
+      sidePadding?: number;
       height?: number;
       backgroundColor?: string;
       animation?: {
@@ -49,6 +50,7 @@ export const Header001 = ({
         animationBackgroundColor={style?.header?.animation?.backgroundColor}
         easing={style?.header?.animation?.easing}
         duration={style?.header?.animation?.duration}
+        sidePadding={style?.header?.sidePadding}
         showModal={showModal}
       >
         <StyledHeaderInner>
