@@ -1,5 +1,11 @@
 # @packages/utils
 
+## 1.1.9
+
+### Patch Changes
+
+- Fix type
+
 ## 1.1.8
 
 ### Patch Changes
