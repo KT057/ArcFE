@@ -1,5 +1,11 @@
 # @packages/utils
 
+## 1.1.15
+
+### Patch Changes
+
+- Add Component
+
 ## 1.1.14
 
 ### Patch Changes
