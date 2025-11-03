@@ -1,6 +1,6 @@
 {
   "name": "root",
-  "version": "1.1.7",
+  "version": "1.1.8",
   "private": true,
   "packageManager": "pnpm@10.12.1",
   "scripts": {
@@ -11,12 +11,9 @@
     "tsc": "pnpm --filter @packages/tests tsc && pnpm --filter @packages/hooks tsc && pnpm --filter @packages/context tsc && pnpm --filter @packages/utils tsc",
     "changeset": "changeset",
     "changeset:add": "node scripts/create-changeset.mjs",
-    "changeset:version": "changeset version && node scripts/sync-root-version.mjs",
+    "changeset:version": "changeset version",
     "changeset:publish": "changeset publish",
-    "version:packages": "pnpm changeset:version",
-    "commit:dist": "bash scripts/commit-dist.sh",
-    "tag:packages": "node scripts/tag-packages.mjs",
-    "release": "pnpm version:packages && pnpm tag:packages"
+    "release": "pnpm changeset:version && node scripts/sync-root-version.mjs"
   },
   "devDependencies": {
     "@biomejs/biome": "2.3.2",

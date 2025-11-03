@@ -1,5 +1,15 @@
 # @packages/hooks
 
+## 1.1.8
+
+### Patch Changes
+
+- Test release workflow
+- Updated dependencies
+  - @packages/utils@1.1.8
+  - @packages/context@1.1.8
+  - @packages/tests@1.1.8
+
 ## 1.1.7
 
 ### Patch Changes
