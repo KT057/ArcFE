@@ -53,7 +53,9 @@ export type Theme<C extends { [key: string]: string } = typeof color> = {
   };
 };
 
-export const themes = <C extends typeof color>(color: C): Theme<C> => ({
+export const themes = <C extends { [key: string]: string } = typeof color>(
+  color: C
+): Theme<C> => ({
   color,
   media,
   size: {
