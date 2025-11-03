@@ -1,5 +1,15 @@
 # @packages/hooks
 
+## 1.1.13
+
+### Patch Changes
+
+- Fix Global type
+- Updated dependencies
+  - @packages/utils@1.1.13
+  - @packages/context@1.1.13
+  - @packages/tests@1.1.13
+
 ## 1.1.12
 
 ### Patch Changes
