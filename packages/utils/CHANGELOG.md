@@ -1,5 +1,11 @@
 # @packages/utils
 
+## 1.1.2
+
+### Patch Changes
+
+- Add postinstall script
+
 ## 1.1.1
 
 ### Patch Changes

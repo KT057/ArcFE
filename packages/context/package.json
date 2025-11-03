@@ -1,6 +1,6 @@
 {
   "name": "@packages/context",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "Context for the application",
   "author": "Kota Ichikawa",
   "main": "./dist/index.js",
