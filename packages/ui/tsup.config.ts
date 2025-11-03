@@ -4,10 +4,10 @@ export default defineConfig({
   entry: ['src/index.ts'],
   format: ['esm'],
   dts: { resolve: true },
-  minify: true,
+  minify: false, // UIコンポーネントなので、デバッグのためminifyは無効化
   sourcemap: true,
   clean: true,
-  tsconfig: 'tsconfig.build.json',
+  external: ['react', 'react-dom', 'styled-components'],
   outExtension({ format }) {
     return {
       js: '.js',

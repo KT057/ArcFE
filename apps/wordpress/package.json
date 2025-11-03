@@ -1,6 +1,7 @@
 {
   "name": "@apps/wordpress",
   "version": "1.0.0",
+  "private": true,
   "main": "scripts/index.ts",
   "repository": "git@github.com.bylegal:attivita/front-end-boilerplate.git",
   "author": "kota <k.ichikawa@attivita.co.jp>",

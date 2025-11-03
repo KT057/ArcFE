@@ -1,7 +1,20 @@
 {
   "name": "@packages/ui",
-  "version": "1.0.0",
+  "version": "1.1.0",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.mts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.mts"
+    }
+  },
+  "files": [
+    "dist"
+  ],
   "scripts": {
+    "build": "tsup src/index.ts --format esm --dts --out-dir dist --external react --external react-dom --external styled-components",
     "gen:icons": "npx @svgr/cli -d ./components/Basic/Icons ./svgr/icons --replace-attr-values '#000=currentColor' && ts-node svgr/scripts/generateIconComponentForStorybook.ts && pnpm lint:script:fix",
     "storybook": "storybook dev -p 6006",
     "test-storybook": "vitest --project=storybook --run",
@@ -13,9 +26,15 @@
     "test:storybook": "vitest --run --project=storybook",
     "reg-suit:run": "reg-suit run",
     "reg-suit:publish": "reg-suit publish",
-    "install:playwright:browser": "npx playwright install --with-deps chromium"
+    "install:playwright:browser": "npx playwright install --with-deps chromium",
+    "prepublishOnly": "pnpm run build"
   },
   "packageManager": "pnpm@10.12.1",
+  "peerDependencies": {
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "styled-components": "^6.1.19"
+  },
   "devDependencies": {
     "@storybook/addon-docs": "^9.1.10",
     "@storybook/addon-onboarding": "^9.1.10",

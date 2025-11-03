@@ -1,9 +1,20 @@
 {
   "name": "@packages/hooks",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "Utils for the application",
   "author": "Kota Ichikawa",
-  "main": "src/index.ts",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.mts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.mts"
+    }
+  },
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "tsup src/index.ts --format esm --dts --out-dir dist",
     "types": "tsc -p tsconfig.build.json",

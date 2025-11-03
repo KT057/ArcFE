@@ -7,7 +7,7 @@ export default defineConfig({
   minify: true,
   sourcemap: true,
   clean: true,
-  tsconfig: 'tsconfig.build.json',
+  tsconfig: "tsconfig.build.json",
   outExtension({ format }) {
     return {
       js: '.js',
