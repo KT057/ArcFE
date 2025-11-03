@@ -1,5 +1,11 @@
 # @packages/tests
 
+## 1.1.4
+
+### Patch Changes
+
+- Fix bug
+
 ## 1.1.3
 
 ## 1.1.2

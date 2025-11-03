@@ -12,23 +12,18 @@ const args = process.argv.slice(2);
 
 const usage = `
 使用方法:
-  node scripts/create-changeset.mjs <packages> <type> <description>
+  node scripts/create-changeset.mjs <type> <description>
 
 引数:
-  packages     - カンマ区切りのパッケージ名 (例: @packages/utils,@packages/ui)
   type         - 変更タイプ (patch/minor/major)
   description  - 変更内容の説明
 
 例:
-  node scripts/create-changeset.mjs "@packages/utils,@packages/ui" patch "Fix bug in utils"
-  node scripts/create-changeset.mjs "@packages/hooks" minor "Add new useCustomHook"
+  node scripts/create-changeset.mjs patch "Fix bug"
+  node scripts/create-changeset.mjs minor "Add new feature"
+  node scripts/create-changeset.mjs major "Breaking change"
 
-利用可能なパッケージ:
-  - @packages/utils
-  - @packages/hooks
-  - @packages/context
-  - @packages/tests
-  - @packages/ui
+※ すべてのパッケージに対して同じバージョン変更が適用されます（fixedモード）
 `;
 
 if (args.length === 0 || args.includes('--help') || args.includes('-h')) {
@@ -36,15 +31,23 @@ if (args.length === 0 || args.includes('--help') || args.includes('-h')) {
   process.exit(0);
 }
 
-if (args.length < 3) {
+if (args.length < 2) {
   console.error('エラー: 引数が不足しています');
   console.log(usage);
   process.exit(1);
 }
 
-const [packagesArg, bumpType, ...descriptionParts] = args;
-const packages = packagesArg.split(',').map(p => p.trim());
+const [bumpType, ...descriptionParts] = args;
 const description = descriptionParts.join(' ');
+
+// すべてのパッケージを対象にする
+const packages = [
+  '@packages/utils',
+  '@packages/hooks',
+  '@packages/context',
+  '@packages/tests',
+  '@packages/ui'
+];
 
 // バリデーション
 if (!['patch', 'minor', 'major'].includes(bumpType)) {
