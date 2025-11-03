@@ -11,7 +11,6 @@ export const DIR_FOLDER_NAME = "dist";
 export const SSR_NO_EXTERNAL = [
   "styled-components",
   "@packages/ui",
-  "@packages/context",
   "@packages/hooks",
   "@packages/utils"
 ] as const;
@@ -56,7 +55,9 @@ export const commonResolve = {
     "@packages/ui": resolve(__dirname, "../../packages/ui"),
     "@packages/context": resolve(__dirname, "../../packages/context"),
     "@packages/hooks": resolve(__dirname, "../../packages/hooks"),
-    "@packages/utils": resolve(__dirname, "../../packages/utils")
+    "@packages/utils": resolve(__dirname, "../../packages/utils"),
+    // Node.js モジュールのポリフィル
+    util: "util/"
   }
 };
 

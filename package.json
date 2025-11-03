@@ -9,7 +9,6 @@
     "@wp": "pnpm --filter @apps/wordpress",
     "test": "vitest --run",
     "tsc": "pnpm --filter @packages/tests tsc && pnpm --filter @packages/hooks tsc && pnpm --filter @packages/context tsc && pnpm --filter @packages/utils tsc",
-    "build:packages": "pnpm --filter @packages/utils build && pnpm --filter @packages/tests build && pnpm --filter @packages/context build && pnpm --filter @packages/hooks build && pnpm --filter @packages/ui build",
     "changeset": "changeset",
     "changeset:add": "node scripts/create-changeset.mjs",
     "changeset:version": "changeset version",
@@ -17,7 +16,7 @@
     "version:packages": "pnpm changeset:version && pnpm build:packages",
     "commit:dist": "bash scripts/commit-dist.sh",
     "tag:packages": "node scripts/tag-packages.mjs",
-    "release": "pnpm version:packages && pnpm commit:dist && pnpm tag:packages"
+    "release": "pnpm tag:packages"
   },
   "devDependencies": {
     "@biomejs/biome": "2.3.2",

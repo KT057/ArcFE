@@ -28,7 +28,8 @@ export default defineConfig(
       outDir: resolve(__dirname, DIR_FOLDER_NAME)
     },
     ssr: {
-      noExternal: SSR_NO_EXTERNAL
+      noExternal: SSR_NO_EXTERNAL,
+      external: ["@packages/context", "axios"]
     }
   })
 );

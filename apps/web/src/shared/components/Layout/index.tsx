@@ -1,6 +1,5 @@
 import { AxiosProvider } from "@packages/context";
-import { MediaProvider } from "@packages/ui/context";
-import { GlobalStyles, themes } from "@packages/ui/styles";
+import { GlobalStyles, MediaProvider, themes } from "@packages/ui";
 import { ParallaxProvider } from "react-scroll-parallax";
 import { ThemeProvider } from "styled-components";
 
@@ -8,16 +7,35 @@ type Props = {
   children: React.ReactNode;
 };
 
+// クライアントサイド専用のProviderラッパー
+const ClientOnlyAxiosProvider = ({
+  children,
+  initialConfig
+}: {
+  children: React.ReactNode;
+  initialConfig?: any;
+}) => {
+  // SSR中はAxiosProviderをスキップ
+  if (typeof window === "undefined") {
+    return <>{children}</>;
+  }
+  return (
+    <AxiosProvider initialConfig={initialConfig}>{children}</AxiosProvider>
+  );
+};
+
 export const Layout = ({ children }: Props) => {
   return (
     <ParallaxProvider>
       <MediaProvider>
-        <AxiosProvider initialConfig={{ baseURL: "http://localhost:3000" }}>
+        <ClientOnlyAxiosProvider
+          initialConfig={{ baseURL: "http://localhost:3000" }}
+        >
           <ThemeProvider theme={themes}>
             <GlobalStyles />
             {children}
           </ThemeProvider>
-        </AxiosProvider>
+        </ClientOnlyAxiosProvider>
       </MediaProvider>
     </ParallaxProvider>
   );

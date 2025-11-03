@@ -24,7 +24,8 @@
     "@packages/context": "workspace:*",
     "@packages/hooks": "workspace:*",
     "@packages/ui": "workspace:*",
-    "@packages/utils": "workspace:*"
+    "@packages/utils": "workspace:*",
+    "util": "^0.12.5"
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^5.1.0",

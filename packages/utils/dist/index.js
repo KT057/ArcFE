@@ -1,2 +1,0 @@
-function s(r,t){let i=r.match(/\{([^}]+)\}/g);if(!i)return r;if(!t){let o=i.map(n=>n.slice(1,-1));throw new Error(`Missing path param: ${o.join(", ")}`)}return r.replace(/\{([^}]+)\}/g,(o,n)=>{let e=t[n];if(e==null)throw new Error(`Missing path param: ${n}`);return encodeURIComponent(String(e))})}export{s as expandPath};
-//# sourceMappingURL=index.js.map

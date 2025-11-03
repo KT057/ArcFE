@@ -21,6 +21,7 @@
     "./styles/**/*",
     "./context/**/*",
     "./@types/**/*",
-    "./vitest.config.ts"
+    "./vitest.config.ts",
+    "./index.ts"
   ]
 }
