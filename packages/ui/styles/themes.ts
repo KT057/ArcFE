@@ -17,7 +17,7 @@ import {
 import { media } from "./media";
 import type { Size } from "./size";
 
-export type Theme<C extends typeof color = typeof color> = {
+export type Theme<C extends { [key: string]: string } = typeof color> = {
   color: C;
   media: typeof media;
   size: {
