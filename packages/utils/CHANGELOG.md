@@ -1,5 +1,11 @@
 # @packages/utils
 
+## 1.1.12
+
+### Patch Changes
+
+- Fix Global type
+
 ## 1.1.11
 
 ### Patch Changes
