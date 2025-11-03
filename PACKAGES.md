@@ -88,45 +88,31 @@ pnpm changeset:add major "Remove deprecated hooks"
 
 ### 3. リリースを作成
 
-以下のコマンド一つで、バージョン更新・ビルド・dist コミット・Git タグ作成を実行：
+以下のコマンド一つで、バージョン更新・Git コミット・タグ作成を実行：
 
 ```bash
 pnpm release
 ```
 
-このコマンドは以下を実行します：
+このコマンドは以下を自動的に実行します：
 
-1. 全パッケージのバージョンを統一バージョンに更新（`changeset:version`）
-2. パッケージをビルド（`build:packages`）
-3. dist ディレクトリをコミット（`commit:dist`）
-4. 統一バージョンで Git タグを作成（`tag:packages`）例: `v1.1.0`
-
-または、個別に実行する場合:
-
-```bash
-# 1. バージョン更新とビルド
-pnpm version:packages
-
-# 3. Gitタグを作成
-pnpm tag:packages
-```
+1. 全パッケージのバージョンを統一バージョンに更新（`changeset version`）
+2. ルートの `package.json` のバージョンを同期
+3. 全ての変更を Git にコミット（コミットメッセージ: `Release v<バージョン>`）
+4. Git タグを作成（例: `v1.1.0`）
 
 これにより、以下が自動的に行われます：
 
 - 全パッケージの `package.json` のバージョンが同じバージョンに更新されます
-- `CHANGELOG.md` が生成/更新されます
+- ルートの `package.json` のバージョンも同じバージョンに更新されます
+- 各パッケージの `CHANGELOG.md` が生成/更新されます
 - Changeset ファイルが削除されます
-- パッケージがビルドされます
-- `dist` ディレクトリが Git にコミットされます（通常は `.gitignore` されているため）
+- 全ての変更が自動的にコミットされます
 - リポジトリ全体に対して `v<バージョン>` 形式の Git タグが作成されます（例: `v1.1.0`）
 
-### 4. 変更をコミットしてプッシュ
+### 4. リモートにプッシュ
 
 ```bash
-# 変更をコミット
-git add .
-git commit -m "Release v1.1.0"
-
 # タグと一緒にプッシュ
 git push origin master --tags
 ```
@@ -151,19 +137,15 @@ pnpm changeset:add minor "Add new Button component"
 ### ステップ 3: リリースを作成
 
 ```bash
-# バージョン更新・ビルド・distコミット・Gitタグ作成を一括実行
+# バージョン更新・Gitコミット・タグ作成を一括実行
 pnpm release
 ```
 
-これにより、全パッケージが例えば `1.0.0` → `1.1.0` に更新され、`v1.1.0` タグが作成されます。
+これにより、全パッケージとルートが例えば `1.0.0` → `1.1.0` に更新され、自動的にコミットされ、`v1.1.0` タグが作成されます。
 
-### ステップ 4: 変更をプッシュ
+### ステップ 4: リモートにプッシュ
 
 ```bash
-# 変更をコミット
-git add .
-git commit -m "Release v1.1.0"
-
 # タグと一緒にプッシュ
 git push origin master --tags
 ```
@@ -406,30 +388,24 @@ pnpm changeset:add patch "Fix bug"
 
 これは正常な動作です。このメッセージは無視して問題ありません。changeset のコマンド自体は正常に実行されています。
 
-#### Git タグが作成されない
+#### リリースが正常に完了しない
 
-タグが作成されない場合は、以下を確認してください:
-
-```bash
-# タグを手動で作成
-pnpm tag:packages
-
-# タグを確認
-git tag
-
-# タグをプッシュ
-git push origin --tags
-```
-
-### ビルドエラーが発生する場合
+リリースコマンドでエラーが発生した場合：
 
 ```bash
-# node_modulesをクリーンアップ
-rm -rf node_modules
-pnpm install
+# Changesetの状態を確認
+ls .changeset/*.md
 
-# 再ビルド
-pnpm build:packages
+# 手動でバージョン更新
+pnpm changeset:version
+
+# 変更を確認
+git status
+
+# 手動でコミット＆タグ作成
+git add .
+git commit -m "Release v1.1.0"
+git tag v1.1.0
 ```
 
 ### 型定義が見つからない場合
