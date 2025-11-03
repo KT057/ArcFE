@@ -9,6 +9,8 @@ import { color } from "../styles";
 import { GlobalStyles } from "../styles/global-style";
 import { themes } from "../styles/themes";
 
+const Styles = GlobalStyles({ fontFamily: "notoSansJP" });
+
 const preview: Preview = {
   parameters: {
     layout: "fullscreen",
@@ -29,7 +31,7 @@ const preview: Preview = {
         <ParallaxProvider>
           <MediaProvider>
             <ThemeProvider theme={themes(color)}>
-              <GlobalStyles />
+              <Styles />
               <div style={{ width: "100%", padding: "40px" }}>
                 <Story />
               </div>

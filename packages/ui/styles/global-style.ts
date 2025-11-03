@@ -1,12 +1,17 @@
 import { createGlobalStyle } from "styled-components";
+import type { Theme } from "./themes";
 
-export const GlobalStyles = createGlobalStyle`
+export const GlobalStyles = ({
+  fontFamily
+}: {
+  fontFamily: keyof Theme["font"]["fontFamily"];
+}) => createGlobalStyle`
   html {
     ${({ theme }) => theme.font.baseSize.rem()}
   }
 
   body {
-    ${({ theme }) => theme.font.fontFamily.notoSansJP()}
+    ${({ theme }) => theme.font.fontFamily[fontFamily]()}
 
     margin: 0;
     font-weight: 400;

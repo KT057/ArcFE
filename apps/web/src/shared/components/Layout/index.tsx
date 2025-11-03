@@ -24,6 +24,8 @@ const ClientOnlyAxiosProvider = ({
   );
 };
 
+const Styles = GlobalStyles({ fontFamily: "notoSansJP" });
+
 export const Layout = ({ children }: Props) => {
   return (
     <ParallaxProvider>
@@ -32,7 +34,7 @@ export const Layout = ({ children }: Props) => {
           initialConfig={{ baseURL: "http://localhost:3000" }}
         >
           <ThemeProvider theme={themes(color)}>
-            <GlobalStyles />
+            <Styles />
             {children}
           </ThemeProvider>
         </ClientOnlyAxiosProvider>
