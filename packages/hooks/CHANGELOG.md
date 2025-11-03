@@ -1,5 +1,15 @@
 # @packages/hooks
 
+## 1.1.16
+
+### Patch Changes
+
+- Add Component
+- Updated dependencies
+  - @packages/utils@1.1.16
+  - @packages/context@1.1.16
+  - @packages/tests@1.1.16
+
 ## 1.1.15
 
 ### Patch Changes

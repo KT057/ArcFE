@@ -1,5 +1,11 @@
 # @packages/context
 
+## 1.1.16
+
+### Patch Changes
+
+- Add Component
+
 ## 1.1.15
 
 ### Patch Changes
