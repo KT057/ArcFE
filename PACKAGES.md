@@ -14,6 +14,8 @@
 - `@packages/hooks` - カスタムReact Hooks
 - `@packages/ui` - UIコンポーネントライブラリ
 
+**バージョン管理:** すべてのパッケージは統一バージョンで管理されます（Changesets の `fixed` モード）。つまり、1つのパッケージを更新すると、全てのパッケージが同じバージョンに更新されます。
+
 ## ビルド
 
 ### 全パッケージをビルド
@@ -37,7 +39,7 @@ pnpm --filter @packages/utils build
 
 ## セマンティックバージョニングの運用
 
-このプロジェクトでは、[Changesets](https://github.com/changesets/changesets) を使用してバージョン管理を行います。
+このプロジェクトでは、[Changesets](https://github.com/changesets/changesets) を使用してバージョン管理を行います。すべてのパッケージは統一バージョンで管理されます。
 
 ### 1. 変更を加える
 
@@ -71,6 +73,8 @@ pnpm changeset:add "@packages/hooks" major "Remove deprecated hooks"
 - `minor` - 新機能の追加 (1.0.0 → 1.1.0)
 - `major` - 破壊的変更 (1.0.0 → 2.0.0)
 
+**注意:** fixed モードでは、どのパッケージを指定しても、全パッケージが同じバージョンに更新されます。
+
 #### 方法2: インタラクティブに作成（ターミナル環境）
 
 ターミナルから直接実行する場合:
@@ -102,16 +106,17 @@ pnpm changeset:add "@packages/hooks" major "Remove deprecated hooks"
 
 ### 3. リリースを作成
 
-以下のコマンド一つで、バージョン更新・ビルド・Gitタグ作成を実行：
+以下のコマンド一つで、バージョン更新・ビルド・distコミット・Gitタグ作成を実行：
 
 ```bash
 pnpm release
 ```
 
 このコマンドは以下を実行します：
-1. バージョンを更新（`changeset:version`）
+1. 全パッケージのバージョンを統一バージョンに更新（`changeset:version`）
 2. パッケージをビルド（`build:packages`）
-3. Gitタグを自動作成（`tag:packages`）
+3. distディレクトリをコミット（`commit:dist`）
+4. 統一バージョンでGitタグを作成（`tag:packages`）例: `v1.1.0`
 
 または、個別に実行する場合:
 
@@ -119,23 +124,27 @@ pnpm release
 # 1. バージョン更新とビルド
 pnpm version:packages
 
-# 2. Gitタグを作成
+# 2. distディレクトリをコミット
+pnpm commit:dist
+
+# 3. Gitタグを作成
 pnpm tag:packages
 ```
 
 これにより、以下が自動的に行われます：
-- 各パッケージの `package.json` のバージョンが更新されます
+- 全パッケージの `package.json` のバージョンが同じバージョンに更新されます
 - `CHANGELOG.md` が生成/更新されます
 - Changesetファイルが削除されます
 - パッケージがビルドされます
-- 各パッケージに対して`@packages/パッケージ名@バージョン`形式のGitタグが作成されます
+- `dist` ディレクトリがGitにコミットされます（通常は `.gitignore` されているため）
+- リポジトリ全体に対して `v<バージョン>` 形式のGitタグが作成されます（例: `v1.1.0`）
 
 ### 4. 変更をコミットしてプッシュ
 
 ```bash
 # 変更をコミット
 git add .
-git commit -m "Release packages"
+git commit -m "Release v1.1.0"
 
 # タグと一緒にプッシュ
 git push origin master --tags
@@ -149,7 +158,7 @@ git push origin master --tags
 
 ```bash
 # 機能を追加・修正
-# ...
+# packages/ui/src/Button.tsx を編集
 ```
 
 ### ステップ2: Changesetを作成
@@ -161,9 +170,11 @@ pnpm changeset:add "@packages/ui" minor "Add new Button component"
 ### ステップ3: リリースを作成
 
 ```bash
-# バージョン更新・ビルド・Gitタグ作成を一括実行
+# バージョン更新・ビルド・distコミット・Gitタグ作成を一括実行
 pnpm release
 ```
+
+これにより、全パッケージが例えば `1.0.0` → `1.1.0` に更新され、`v1.1.0` タグが作成されます。
 
 ### ステップ4: 変更をプッシュ
 
@@ -183,13 +194,22 @@ git push origin master --tags
 ```json
 {
   "dependencies": {
-    "@packages/ui": "git+https://github.com/kichikawa57/front-end-boilerplate.git#packages-ui-v1.1.0:packages/ui"
+    "front-end-boilerplate": "github:kichikawa57/front-end-boilerplate#v1.1.0"
   }
 }
 ```
 
-**タグ形式:** `packages-<パッケージ名>-v<バージョン>`
-- 例: `packages-ui-v1.1.0`, `packages-hooks-v1.0.2`
+**タグ形式:** `v<バージョン>`
+- 例: `v1.1.0`, `v2.0.0`
+
+使用例：
+
+```typescript
+// リポジトリ全体をインストールして、サブディレクトリから個別にインポート
+import { Button } from 'front-end-boilerplate/packages/ui/dist';
+import { useDebounce } from 'front-end-boilerplate/packages/hooks/dist';
+import { formatDate } from 'front-end-boilerplate/packages/utils/dist';
+```
 
 インストール:
 
@@ -199,33 +219,54 @@ pnpm install
 
 ## 別プロジェクトでの利用方法
 
-### 特定のバージョン（タグ）を指定してインストール（推奨）
+### 基本的な使用方法
 
-他のプロジェクトの`package.json`で、リリース時に作成したGitタグを指定してインストール：
+統一バージョン管理のため、リポジトリ全体を特定のバージョンタグで指定してインストールします：
 
 ```json
 {
   "dependencies": {
-    "@packages/ui": "git+https://github.com/kichikawa57/front-end-boilerplate.git#packages-ui-v1.1.0:packages/ui",
-    "@packages/hooks": "git+https://github.com/kichikawa57/front-end-boilerplate.git#packages-hooks-v1.0.2:packages/hooks",
-    "@packages/utils": "git+https://github.com/kichikawa57/front-end-boilerplate.git#packages-utils-v1.0.2:packages/utils"
+    "front-end-boilerplate": "github:kichikawa57/front-end-boilerplate#v1.1.0"
   }
 }
 ```
 
-**フォーマット:** `git+<リポジトリURL>#<タグ名>:<パッケージのパス>`
+**フォーマット:** `github:<ユーザー名>/<リポジトリ名>#<タグ名>`
 
-**タグ命名規則:**
-- `packages-ui-v1.1.0` - UIパッケージ バージョン1.1.0
-- `packages-hooks-v1.0.2` - Hooksパッケージ バージョン1.0.2
-- など
+### TypeScriptでの使用
+
+```typescript
+// UIコンポーネントのインポート
+import { Button, Panel } from 'front-end-boilerplate/packages/ui/dist';
+
+// Hooksのインポート
+import { useDebounce, useAxiosQuery } from 'front-end-boilerplate/packages/hooks/dist';
+
+// Utilsのインポート
+import { formatDate } from 'front-end-boilerplate/packages/utils/dist';
+
+// コンポーネント内で使用
+function MyComponent() {
+  const { data, loading } = useAxiosQuery({
+    url: '/api/users'
+  });
+
+  return (
+    <Panel>
+      <Button onClick={() => console.log('clicked')}>
+        Click me
+      </Button>
+    </Panel>
+  );
+}
+```
 
 ### コミットハッシュを指定（特定のコミット）
 
 ```json
 {
   "dependencies": {
-    "@packages/ui": "git+https://github.com/kichikawa57/front-end-boilerplate.git#abc1234:packages/ui"
+    "front-end-boilerplate": "github:kichikawa57/front-end-boilerplate#abc1234"
   }
 }
 ```
@@ -237,7 +278,7 @@ pnpm install
 ```json
 {
   "dependencies": {
-    "@packages/ui": "git+https://github.com/kichikawa57/front-end-boilerplate.git#master:packages/ui"
+    "front-end-boilerplate": "github:kichikawa57/front-end-boilerplate#master"
   }
 }
 ```
@@ -255,18 +296,48 @@ pnpm install
 }
 ```
 
+この場合は、通常通りインポートできます：
+
+```typescript
+import { Button } from '@packages/ui';
+import { useDebounce } from '@packages/hooks';
+```
+
 ### ローカル開発時のリンク
 
 開発中に、他のプロジェクトからこのリポジトリのパッケージを直接参照する場合：
 
 ```bash
-# このリポジトリ側
-cd packages/ui
+# このリポジトリ側（ルートディレクトリで）
 pnpm link --global
 
 # 利用側のプロジェクト
 cd /path/to/your-project
-pnpm link --global @packages/ui
+pnpm link --global front-end-boilerplate
+```
+
+### TypeScript設定
+
+他のプロジェクトでTypeScriptを使用する場合、`tsconfig.json` にパスエイリアスを設定すると便利です：
+
+```json
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@packages/ui": ["node_modules/front-end-boilerplate/packages/ui/dist"],
+      "@packages/hooks": ["node_modules/front-end-boilerplate/packages/hooks/dist"],
+      "@packages/utils": ["node_modules/front-end-boilerplate/packages/utils/dist"]
+    }
+  }
+}
+```
+
+これにより、以下のようにインポートできます：
+
+```typescript
+import { Button } from '@packages/ui';
+import { useDebounce } from '@packages/hooks';
 ```
 
 ## package.json の設定
@@ -278,37 +349,6 @@ pnpm link --global @packages/ui
 - `types`: TypeScript型定義ファイル
 - `exports`: Node.js 12+用のエクスポートマップ
 - `files`: 公開時に含めるファイル（`dist` ディレクトリのみ）
-
-## 使用例
-
-パッケージをインストールした後の使用方法です。
-
-### TypeScriptでの使用
-
-```typescript
-// UIコンポーネントのインポート
-import { Button, Panel } from '@packages/ui';
-
-// Hooksのインポート
-import { useDebounce, useLocalStorage } from '@packages/hooks';
-
-// Utilsのインポート
-import { formatDate, parseQuery } from '@packages/utils';
-
-// コンポーネント内で使用
-function MyComponent() {
-  const [value, setValue] = useLocalStorage('key', 'default');
-  const debouncedValue = useDebounce(value, 500);
-
-  return (
-    <Panel>
-      <Button onClick={() => setValue('new value')}>
-        Click me
-      </Button>
-    </Panel>
-  );
-}
-```
 
 ## 注意事項
 
@@ -336,11 +376,27 @@ pnpm add react react-dom styled-components
 
 ```bash
 # package.jsonのタグを更新
-# 例: @packages/ui@1.0.1 → @packages/ui@1.1.0
+# 例: "front-end-boilerplate": "github:kichikawa57/front-end-boilerplate#v1.0.0"
+#  → "front-end-boilerplate": "github:kichikawa57/front-end-boilerplate#v1.1.0"
 
 # 依存関係を再インストール
 pnpm install
 ```
+
+### 統一バージョン管理について
+
+このプロジェクトは **fixed モード** で管理されています：
+
+- **メリット:**
+  - 全パッケージのバージョンが常に一致するため、互換性の問題が起きにくい
+  - バージョン管理がシンプル
+  - pnpmのサブディレクトリ制限を回避できる
+
+- **デメリット:**
+  - 1つのパッケージの小さな変更でも、全パッケージのバージョンが上がる
+  - 使用していないパッケージも含めて全体をインストールする必要がある
+
+もし個別のバージョン管理が必要な場合は、パッケージを独立したリポジトリに分離することを検討してください。
 
 ## トラブルシューティング
 
@@ -373,7 +429,7 @@ pnpm changeset:add "@packages/utils" patch "Fix bug"
 pnpm tag:packages
 
 # タグを確認
-git tag | grep @packages
+git tag
 
 # タグをプッシュ
 git push origin --tags
@@ -383,7 +439,7 @@ git push origin --tags
 
 ```bash
 # node_modulesをクリーンアップ
-pnpm clean
+rm -rf node_modules
 pnpm install
 
 # 再ビルド
@@ -395,3 +451,13 @@ pnpm build:packages
 - `package.json` の `types` フィールドが正しいことを確認
 - `dist/index.d.mts` ファイルが存在することを確認
 - TypeScriptの `moduleResolution` が `node` または `node16` に設定されていることを確認
+
+### 他のプロジェクトでインポートエラーが発生する場合
+
+```bash
+# パスが正しいか確認
+# ❌ import { Button } from '@packages/ui';
+# ✅ import { Button } from 'front-end-boilerplate/packages/ui/dist';
+
+# または、tsconfig.jsonでパスエイリアスを設定
+```

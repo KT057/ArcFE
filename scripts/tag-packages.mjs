@@ -9,70 +9,42 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 const rootDir = join(__dirname, '..');
 
-// パッケージディレクトリ
-const packages = [
-  'packages/utils',
-  'packages/hooks',
-  'packages/context',
-  'packages/tests',
-  'packages/ui',
-];
-
 console.log('=== Package Tagging Script ===\n');
 
-const tags = [];
+// いずれかのパッケージからバージョンを取得（fixedモードなので全て同じバージョン）
+const packageJsonPath = join(rootDir, 'packages/ui/package.json');
+let version;
 
-// 各パッケージのバージョンを取得
-for (const packageDir of packages) {
-  const packageJsonPath = join(rootDir, packageDir, 'package.json');
-  try {
-    const packageJson = JSON.parse(readFileSync(packageJsonPath, 'utf-8'));
-    // @packages/ui → packages-ui のように変換
-    const packageName = packageJson.name.replace('@', '').replace('/', '-');
-    const tag = `${packageName}-v${packageJson.version}`;
-    tags.push(tag);
-  } catch (error) {
-    console.error(`Error reading ${packageJsonPath}:`, error.message);
-  }
-}
-
-if (tags.length === 0) {
-  console.error('No packages found');
+try {
+  const packageJson = JSON.parse(readFileSync(packageJsonPath, 'utf-8'));
+  version = packageJson.version;
+} catch (error) {
+  console.error(`Error reading ${packageJsonPath}:`, error.message);
   process.exit(1);
 }
 
-console.log('以下のタグを作成します:\n');
-tags.forEach(tag => console.log(`  - ${tag}`));
-console.log('');
+const tag = `v${version}`;
+
+console.log(`以下のタグを作成します: ${tag}\n`);
 
 // タグを作成
-let createdCount = 0;
-let skippedCount = 0;
-
-for (const tag of tags) {
+try {
+  // タグが既に存在するか確認
+  execSync(`git rev-parse ${tag}`, { stdio: 'ignore' });
+  console.log(`⚠️  タグ ${tag} は既に存在します（スキップ）`);
+} catch {
+  // タグが存在しない場合は作成
   try {
-    // タグが既に存在するか確認
-    execSync(`git rev-parse ${tag}`, { stdio: 'ignore' });
-    console.log(`⚠️  タグ ${tag} は既に存在します（スキップ）`);
-    skippedCount++;
-  } catch {
-    // タグが存在しない場合は作成
-    try {
-      execSync(`git tag ${tag}`, { stdio: 'inherit' });
-      console.log(`✅ タグを作成: ${tag}`);
-      createdCount++;
-    } catch (error) {
-      console.error(`❌ タグの作成に失敗: ${tag}`);
-    }
+    execSync(`git tag ${tag}`, { stdio: 'inherit' });
+    console.log(`✅ タグを作成: ${tag}`);
+  } catch (error) {
+    console.error(`❌ タグの作成に失敗: ${tag}`);
+    process.exit(1);
   }
 }
 
 console.log('');
-console.log(`タグの作成が完了しました（作成: ${createdCount}, スキップ: ${skippedCount}）`);
-console.log('');
 console.log('次のステップ:');
 console.log('  タグをリモートにプッシュ:');
-console.log('    git push origin --tags');
+console.log(`    git push origin ${tag}`);
 console.log('');
-console.log('  または個別にプッシュ:');
-tags.forEach(tag => console.log(`    git push origin ${tag}`));

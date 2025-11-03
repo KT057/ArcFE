@@ -15,8 +15,9 @@
     "changeset:version": "changeset version",
     "changeset:publish": "pnpm build:packages && changeset publish",
     "version:packages": "pnpm changeset:version && pnpm build:packages",
+    "commit:dist": "bash scripts/commit-dist.sh",
     "tag:packages": "node scripts/tag-packages.mjs",
-    "release": "pnpm version:packages && pnpm tag:packages"
+    "release": "pnpm version:packages && pnpm commit:dist && pnpm tag:packages"
   },
   "devDependencies": {
     "@biomejs/biome": "2.3.2",

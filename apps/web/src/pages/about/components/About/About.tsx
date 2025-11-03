@@ -1,4 +1,4 @@
-import { Button001, FadeInAndZoomImages } from "@packages/ui/components";
+import { Button001, FadeInAndZoomImages } from "@packages/ui";
 
 export const About = () => {
   return (
