@@ -1,5 +1,11 @@
 # @packages/tests
 
+## 1.1.6
+
+### Patch Changes
+
+- Fix color
+
 ## 1.1.5
 
 ### Patch Changes
