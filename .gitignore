@@ -5,6 +5,7 @@ node_modules
 .pnp
 .pnp.js
 dist
+!packages/*/dist
 production
 development
 
@@ -49,6 +50,5 @@ public/icon-font
 storybook-static
 
 # Wordpress
-dist
 wp
 db

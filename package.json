@@ -10,7 +10,6 @@
     "test": "vitest --run",
     "tsc": "pnpm --filter @packages/tests tsc && pnpm --filter @packages/hooks tsc && pnpm --filter @packages/context tsc && pnpm --filter @packages/utils tsc",
     "build:packages": "pnpm --filter @packages/utils build && pnpm --filter @packages/tests build && pnpm --filter @packages/context build && pnpm --filter @packages/hooks build && pnpm --filter @packages/ui build",
-    "postinstall": "pnpm build:packages",
     "changeset": "changeset",
     "changeset:add": "node scripts/create-changeset.mjs",
     "changeset:version": "changeset version",

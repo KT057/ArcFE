@@ -19,7 +19,7 @@ PACKAGES=(
 for package_dir in "${PACKAGES[@]}"; do
   if [ -d "$package_dir/dist" ]; then
     echo "📦 Adding $package_dir/dist"
-    git add -f "$package_dir/dist"
+    git add "$package_dir/dist"
   else
     echo "⚠️  $package_dir/dist does not exist"
   fi
