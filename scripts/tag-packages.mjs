@@ -27,7 +27,9 @@ for (const packageDir of packages) {
   const packageJsonPath = join(rootDir, packageDir, 'package.json');
   try {
     const packageJson = JSON.parse(readFileSync(packageJsonPath, 'utf-8'));
-    const tag = `${packageJson.name}@${packageJson.version}`;
+    // @packages/ui → packages-ui のように変換
+    const packageName = packageJson.name.replace('@', '').replace('/', '-');
+    const tag = `${packageName}-v${packageJson.version}`;
     tags.push(tag);
   } catch (error) {
     console.error(`Error reading ${packageJsonPath}:`, error.message);

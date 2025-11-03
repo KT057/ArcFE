@@ -103,8 +103,8 @@ pnpm tag:packages
 ```
 
 このスクリプトは各パッケージの`package.json`を読み取り、以下の形式でタグを作成します:
-- `@packages/ui@1.0.1`
-- `@packages/hooks@1.0.1`
+- `packages-ui-v1.0.1`
+- `packages-hooks-v1.0.1`
 - など
 
 既に存在するタグはスキップされます。

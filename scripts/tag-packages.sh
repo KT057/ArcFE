@@ -27,7 +27,9 @@ for package_dir in "${PACKAGES[@]}"; do
     package_name=$(node -p "require('./$package_dir/package.json').name")
     version=$(node -p "require('./$package_dir/package.json').version")
 
-    tag="${package_name}@${version}"
+    # @packages/ui → packages-ui のように変換
+    package_name_clean=$(echo "$package_name" | sed 's/@//g' | sed 's/\//-/g')
+    tag="${package_name_clean}-v${version}"
     echo "  - $tag"
     TAGS+=("$tag")
   fi

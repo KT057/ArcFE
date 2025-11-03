@@ -183,10 +183,13 @@ git push origin master --tags
 ```json
 {
   "dependencies": {
-    "@packages/ui": "git+https://github.com/your-org/your-repo.git#@packages/ui@1.1.0:packages/ui"
+    "@packages/ui": "git+https://github.com/kichikawa57/front-end-boilerplate.git#packages-ui-v1.1.0:packages/ui"
   }
 }
 ```
+
+**タグ形式:** `packages-<パッケージ名>-v<バージョン>`
+- 例: `packages-ui-v1.1.0`, `packages-hooks-v1.0.2`
 
 インストール:
 
@@ -203,20 +206,26 @@ pnpm install
 ```json
 {
   "dependencies": {
-    "@packages/ui": "git+https://github.com/your-org/your-repo.git#@packages/ui@1.0.1:packages/ui",
-    "@packages/hooks": "git+https://github.com/your-org/your-repo.git#@packages/hooks@1.0.1:packages/hooks"
+    "@packages/ui": "git+https://github.com/kichikawa57/front-end-boilerplate.git#packages-ui-v1.1.0:packages/ui",
+    "@packages/hooks": "git+https://github.com/kichikawa57/front-end-boilerplate.git#packages-hooks-v1.0.2:packages/hooks",
+    "@packages/utils": "git+https://github.com/kichikawa57/front-end-boilerplate.git#packages-utils-v1.0.2:packages/utils"
   }
 }
 ```
 
 **フォーマット:** `git+<リポジトリURL>#<タグ名>:<パッケージのパス>`
 
+**タグ命名規則:**
+- `packages-ui-v1.1.0` - UIパッケージ バージョン1.1.0
+- `packages-hooks-v1.0.2` - Hooksパッケージ バージョン1.0.2
+- など
+
 ### コミットハッシュを指定（特定のコミット）
 
 ```json
 {
   "dependencies": {
-    "@packages/ui": "git+https://github.com/your-org/your-repo.git#abc1234:packages/ui"
+    "@packages/ui": "git+https://github.com/kichikawa57/front-end-boilerplate.git#abc1234:packages/ui"
   }
 }
 ```
@@ -228,7 +237,7 @@ pnpm install
 ```json
 {
   "dependencies": {
-    "@packages/ui": "git+https://github.com/your-org/your-repo.git#master:packages/ui"
+    "@packages/ui": "git+https://github.com/kichikawa57/front-end-boilerplate.git#master:packages/ui"
   }
 }
 ```
