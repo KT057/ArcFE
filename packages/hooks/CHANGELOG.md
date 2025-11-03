@@ -1,5 +1,15 @@
 # @packages/hooks
 
+## 1.1.7
+
+### Patch Changes
+
+- Fix type
+- Updated dependencies
+  - @packages/utils@1.1.7
+  - @packages/context@1.1.7
+  - @packages/tests@1.1.7
+
 ## 1.1.6
 
 ### Patch Changes

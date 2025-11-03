@@ -1,5 +1,11 @@
 # @packages/context
 
+## 1.1.7
+
+### Patch Changes
+
+- Fix type
+
 ## 1.1.6
 
 ### Patch Changes
