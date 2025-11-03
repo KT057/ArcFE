@@ -1,5 +1,11 @@
 # @packages/utils
 
+## 1.1.3
+
+### Patch Changes
+
+- Fix dist directory tracking in Git
+
 ## 1.1.2
 
 ### Patch Changes
