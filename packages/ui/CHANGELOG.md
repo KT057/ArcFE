@@ -1,5 +1,11 @@
 # @packages/ui
 
+## 1.2.0
+
+### Minor Changes
+
+- Add new Button component
+
 ## 1.1.16
 
 ### Patch Changes

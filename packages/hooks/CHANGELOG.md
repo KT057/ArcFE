@@ -1,5 +1,18 @@
 # @packages/hooks
 
+## 1.2.0
+
+### Minor Changes
+
+- Add new Button component
+
+### Patch Changes
+
+- Updated dependencies
+  - @packages/utils@1.2.0
+  - @packages/context@1.2.0
+  - @packages/tests@1.2.0
+
 ## 1.1.16
 
 ### Patch Changes
