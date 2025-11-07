@@ -1,4 +1,5 @@
 import styled, { css, keyframes } from "styled-components";
+import { hexToRgb } from "../../../../styles/color";
 import type { EasingKey } from "../../../../styles/easing";
 import type { Size } from "../../../../styles/size";
 
@@ -21,26 +22,6 @@ export type Animation = {
   easing?: EasingKey;
   backgroundColor?: string;
   textColor?: string;
-};
-
-type ButtonProps = {
-  type: Type;
-  backgroundColor: string;
-  borderColor: string;
-  animation?: Animation;
-  size: Size;
-  iconDirection: IconDirection;
-  isHover: boolean | null;
-};
-
-type TextProps = {
-  size: Size;
-  color: string;
-  fontWeight: number;
-};
-
-type IconProps = {
-  color: string;
 };
 
 const ArrowHide = keyframes`
@@ -78,8 +59,21 @@ export const StyledButton = styled.span.withConfig({
     prop !== "animation" &&
     prop !== "size" &&
     prop !== "iconDirection" &&
-    prop !== "isHover"
-})<ButtonProps>`
+    prop !== "isHover" &&
+    prop !== "disabledBackgroundColor" &&
+    prop !== "disabledBorderColor"
+})<{
+  type: Type;
+  backgroundColor: string;
+  borderColor: string;
+  animation?: Animation;
+  size: Size;
+  iconDirection: IconDirection;
+  isHover: boolean | null;
+  disabled: boolean;
+  disabledBackgroundColor: string | undefined;
+  disabledBorderColor: string | undefined;
+}>`
   width: 100%;
   text-align: center;
   cursor: pointer;
@@ -362,6 +356,21 @@ export const StyledButton = styled.span.withConfig({
       }
     }
   }}
+
+  ${({
+    disabled,
+    disabledBackgroundColor,
+    backgroundColor,
+    disabledBorderColor,
+    borderColor
+  }) =>
+    disabled &&
+    css`
+    cursor: not-allowed;
+    pointer-events: none;
+    background-color: ${disabledBackgroundColor ?? `rgba(${hexToRgb(backgroundColor)}, 0.5)`};
+    border-color: ${disabledBorderColor ?? `rgba(${hexToRgb(borderColor)}, 0.5)`};
+  `}
 `;
 
 export const StyledIconWrapper = styled.span`
@@ -378,8 +387,13 @@ export const StyledIconInner = styled.span`
 `;
 
 export const StyledIcon = styled.span.withConfig({
-  shouldForwardProp: (prop) => prop !== "color"
-})<IconProps>`
+  shouldForwardProp: (prop) =>
+    prop !== "color" && prop !== "disabled" && prop !== "disabledColor"
+})<{
+  color: string;
+  disabled: boolean;
+  disabledColor: string | undefined;
+}>`
   display: block;
   position: absolute;
   top: 0;
@@ -395,12 +409,28 @@ export const StyledIcon = styled.span.withConfig({
   &:nth-child(2) {
     transform: translateX(100%);
   }
+
+  ${({ disabled, disabledColor, color }) =>
+    disabled &&
+    css`
+    color: ${disabledColor ?? `rgba(${hexToRgb(color)}, 0.5)`};
+  `}
 `;
 
 export const StyledText = styled.span.withConfig({
   shouldForwardProp: (prop) =>
-    prop !== "size" && prop !== "color" && prop !== "fontWeight"
-})<TextProps>`
+    prop !== "size" &&
+    prop !== "color" &&
+    prop !== "fontWeight" &&
+    prop !== "disabled" &&
+    prop !== "disabledColor"
+})<{
+  size: Size;
+  color: string;
+  fontWeight: number;
+  disabled: boolean;
+  disabledColor: string | undefined;
+}>`
   ${({ size, theme }) => {
     switch (size) {
       case "small":
@@ -417,4 +447,10 @@ export const StyledText = styled.span.withConfig({
   color: ${({ color }) => color};
   position: relative;
   z-index: 1;
+
+  ${({ disabled, disabledColor, color }) =>
+    disabled &&
+    css`
+    color: ${disabledColor ?? `rgba(${hexToRgb(color)}, 0.5)`};
+  `}
 `;

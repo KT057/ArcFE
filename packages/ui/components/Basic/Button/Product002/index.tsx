@@ -13,6 +13,7 @@ import {
 } from "./styles";
 
 interface ButtonProps {
+  as?: "button" | "a" | "span";
   type?: Type;
   size?: Size;
   href?: string;
@@ -23,19 +24,25 @@ interface ButtonProps {
     borderColor?: string;
     color?: string;
     fontWeight?: number;
+    disabledColor?: string;
+    disabledBackgroundColor?: string;
+    disabledBorderColor?: string;
   };
   iconDirection?: IconDirection;
   icon: ReactNode;
+  disabled?: boolean;
   onClick?: () => void;
 }
 
 export const Button002 = ({
+  as = "button",
   type = "001",
   size = "middle",
   animation,
   onClick,
   children,
   style,
+  disabled,
   iconDirection = "right",
   icon,
   href
@@ -45,7 +52,7 @@ export const Button002 = ({
   return (
     <StyledButtonWrapper>
       <StyledButton
-        as={href ? "a" : "button"}
+        as={as}
         href={href}
         type={type}
         size={size}
@@ -55,6 +62,9 @@ export const Button002 = ({
         borderColor={style?.borderColor ?? "#000"}
         iconDirection={iconDirection}
         isHover={isHover}
+        disabled={!!disabled}
+        disabledBackgroundColor={style?.disabledBackgroundColor}
+        disabledBorderColor={style?.disabledBorderColor}
         onMouseEnter={() => setIsHover(true)}
         onMouseLeave={() => setIsHover(false)}
       >
@@ -62,13 +72,27 @@ export const Button002 = ({
           size={size}
           color={style?.color ?? "#000"}
           fontWeight={style?.fontWeight ?? 700}
+          disabled={!!disabled}
+          disabledColor={style?.disabledColor}
         >
           {children}
         </StyledText>
         <StyledIconWrapper>
           <StyledIconInner>
-            <StyledIcon color={style?.color ?? "#000"}>{icon}</StyledIcon>
-            <StyledIcon color={style?.color ?? "#000"}>{icon}</StyledIcon>
+            <StyledIcon
+              color={style?.color ?? "#000"}
+              disabled={!!disabled}
+              disabledColor={style?.disabledColor}
+            >
+              {icon}
+            </StyledIcon>
+            <StyledIcon
+              color={style?.color ?? "#000"}
+              disabled={!!disabled}
+              disabledColor={style?.disabledColor}
+            >
+              {icon}
+            </StyledIcon>
           </StyledIconInner>
         </StyledIconWrapper>
       </StyledButton>

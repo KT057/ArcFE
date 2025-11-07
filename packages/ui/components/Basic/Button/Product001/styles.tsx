@@ -1,4 +1,5 @@
 import styled, { css } from "styled-components";
+import { hexToRgb } from "../../../../styles/color";
 import type { EasingKey } from "../../../../styles/easing";
 import type { Size } from "../../../../styles/size";
 
@@ -13,34 +14,31 @@ export type Animation = {
   textColor?: string;
 };
 
-type ButtonProps = {
-  type?: Type;
-  backgroundColor: string;
-  borderColor: string;
-  animation?: Animation;
-  size: Size;
-};
-
-type TextProps = {
-  size: Size;
-  color: string;
-  fontWeight: number;
-};
-
 export const StyledButtonWrapper = styled.span`
   ${({ theme }) => theme.font.baseSize.em()};
 
   display: block;
 `;
 
-export const StyledButton = styled.span.withConfig({
+export const StyledButton = styled.button.withConfig({
   shouldForwardProp: (prop) =>
     prop !== "type" &&
     prop !== "backgroundColor" &&
     prop !== "borderColor" &&
     prop !== "animation" &&
-    prop !== "size"
-})<ButtonProps>`
+    prop !== "size" &&
+    prop !== "disabledBackgroundColor" &&
+    prop !== "disabledBorderColor"
+})<{
+  type?: Type;
+  backgroundColor: string;
+  borderColor: string;
+  animation?: Animation;
+  size: Size;
+  disabled: boolean;
+  disabledBackgroundColor: string | undefined;
+  disabledBorderColor: string | undefined;
+}>`
   width: 100%;
   text-align: center;
   cursor: pointer;
@@ -132,9 +130,37 @@ export const StyledButton = styled.span.withConfig({
         `;
     }
   }}
+
+  ${({
+    disabled,
+    disabledBackgroundColor,
+    backgroundColor,
+    disabledBorderColor,
+    borderColor
+  }) =>
+    disabled &&
+    css`
+    cursor: not-allowed;
+    pointer-events: none;
+    background-color: ${disabledBackgroundColor ?? `${hexToRgb(backgroundColor)}, 0.5`};
+    border-color: ${disabledBorderColor ?? `${hexToRgb(borderColor)}, 0.5`};
+  `}
 `;
 
-export const StyledText = styled.span<TextProps>`
+export const StyledText = styled.span.withConfig({
+  shouldForwardProp: (prop) =>
+    prop !== "size" &&
+    prop !== "color" &&
+    prop !== "fontWeight" &&
+    prop !== "disabled" &&
+    prop !== "disabledColor"
+})<{
+  size: Size;
+  color: string;
+  fontWeight: number;
+  disabled: boolean;
+  disabledColor: string | undefined;
+}>`
   ${({ size, theme }) => {
     switch (size) {
       case "small":
@@ -151,4 +177,12 @@ export const StyledText = styled.span<TextProps>`
   color: ${({ color }) => color};
   position: relative;
   z-index: 1;
+
+  ${({ disabled, disabledColor, color }) =>
+    disabled &&
+    css`
+    opacity: 0.5;
+    cursor: not-allowed;
+    color: ${disabledColor ?? `${hexToRgb(color)}, 0.5`};
+  `}
 `;

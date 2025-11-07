@@ -119,6 +119,25 @@ Animation003.args = {
   }
 };
 
+export const Disabled = Template.bind({});
+Disabled.args = {
+  children: "Disabled",
+  icon: <Svg002Icon />,
+  type: "001",
+  size: "middle",
+  disabled: true,
+  as: "span",
+  style: {
+    backgroundColor: "#fff",
+    borderColor: "#000",
+    color: "#000",
+    fontWeight: 700,
+    disabledColor: "#6c757d",
+    disabledBackgroundColor: "#f8f9fa",
+    disabledBorderColor: "#dee2e6"
+  }
+};
+
 export const Animation004 = Template.bind({});
 Animation004.args = {
   children: "Button",

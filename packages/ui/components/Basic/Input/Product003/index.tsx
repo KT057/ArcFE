@@ -42,7 +42,9 @@ export const Input003 = ({
     <StyledInputWrapper>
       <StyledInput error={error || !!errorText} size={size}>
         <StyledInputField
+          id={name}
           name={name}
+          autoComplete={name}
           type="text"
           placeholder={placeholder}
           value={value}

@@ -9,16 +9,21 @@ import {
 } from "./styles";
 
 interface ButtonProps {
+  as?: "button" | "a" | "span";
   href?: string;
   type?: Type;
   size?: Size;
   children: ReactNode;
   animation?: Animation;
+  disabled?: boolean;
   style?: {
     backgroundColor?: string;
     borderColor?: string;
     color?: string;
     fontWeight?: number;
+    disabledColor?: string;
+    disabledBackgroundColor?: string;
+    disabledBorderColor?: string;
   };
   onClick?: () => void;
 }
@@ -26,6 +31,8 @@ interface ButtonProps {
 export const Button001 = ({
   type = "001",
   size = "middle",
+  as = "button",
+  disabled,
   animation,
   onClick,
   children,
@@ -35,7 +42,7 @@ export const Button001 = ({
   return (
     <StyledButtonWrapper>
       <StyledButton
-        as={href ? "a" : "button"}
+        as={as}
         href={href}
         type={type}
         size={size}
@@ -43,11 +50,16 @@ export const Button001 = ({
         animation={animation}
         backgroundColor={style?.backgroundColor ?? "#fff"}
         borderColor={style?.borderColor ?? "#000"}
+        disabled={!!disabled}
+        disabledBackgroundColor={style?.disabledBackgroundColor}
+        disabledBorderColor={style?.disabledBorderColor}
       >
         <StyledText
           size={size}
           color={style?.color ?? "#000"}
           fontWeight={style?.fontWeight ?? 700}
+          disabled={!!disabled}
+          disabledColor={style?.disabledColor}
         >
           {children}
         </StyledText>
