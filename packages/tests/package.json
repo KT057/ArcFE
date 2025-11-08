@@ -1,6 +1,6 @@
 {
   "name": "@packages/tests",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Tests for the application",
   "author": "Kota Ichikawa",
   "main": "./dist/index.js",

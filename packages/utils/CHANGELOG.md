@@ -1,5 +1,11 @@
 # @packages/utils
 
+## 1.2.1
+
+### Patch Changes
+
+- 389f606: Add Component
+
 ## 1.2.0
 
 ### Minor Changes

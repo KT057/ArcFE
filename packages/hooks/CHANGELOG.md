@@ -1,5 +1,15 @@
 # @packages/hooks
 
+## 1.2.1
+
+### Patch Changes
+
+- 389f606: Add Component
+- Updated dependencies [389f606]
+  - @packages/utils@1.2.1
+  - @packages/context@1.2.1
+  - @packages/tests@1.2.1
+
 ## 1.2.0
 
 ### Minor Changes

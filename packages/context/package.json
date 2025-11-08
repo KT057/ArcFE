@@ -1,6 +1,6 @@
 {
   "name": "@packages/context",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Context for the application",
   "author": "Kota Ichikawa",
   "main": "./index.ts",
