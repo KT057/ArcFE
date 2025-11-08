@@ -20,6 +20,12 @@ interface ButtonProps {
   children: ReactNode;
   animation?: Animation;
   style?: {
+    paddingTop?: number;
+    paddingRight?: number;
+    paddingBottom?: number;
+    paddingLeft?: number;
+    iconSize?: number;
+    fontSize?: number;
     backgroundColor?: string;
     borderColor?: string;
     color?: string;
@@ -65,6 +71,12 @@ export const Button002 = ({
         disabled={!!disabled}
         disabledBackgroundColor={style?.disabledBackgroundColor}
         disabledBorderColor={style?.disabledBorderColor}
+        paddingTop={style?.paddingTop}
+        paddingRight={style?.paddingRight}
+        paddingBottom={style?.paddingBottom}
+        paddingLeft={style?.paddingLeft}
+        iconSize={style?.iconSize}
+        fontSize={style?.fontSize}
         onMouseEnter={() => setIsHover(true)}
         onMouseLeave={() => setIsHover(false)}
       >

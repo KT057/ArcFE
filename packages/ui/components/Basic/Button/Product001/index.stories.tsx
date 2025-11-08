@@ -213,3 +213,21 @@ AsLink.args = {
     fontWeight: 700
   }
 };
+
+export const CustomStyle = Template.bind({});
+CustomStyle.args = {
+  children: "Custom Style Button",
+  type: "001",
+  size: "middle",
+  style: {
+    backgroundColor: "#fff",
+    borderColor: "#000",
+    color: "#000",
+    fontSize: 19,
+    paddingTop: 10,
+    paddingRight: 20,
+    paddingBottom: 10,
+    paddingLeft: 20,
+    fontWeight: 700
+  }
+};

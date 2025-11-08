@@ -28,7 +28,11 @@ export const StyledButton = styled.button.withConfig({
     prop !== "animation" &&
     prop !== "size" &&
     prop !== "disabledBackgroundColor" &&
-    prop !== "disabledBorderColor"
+    prop !== "disabledBorderColor" &&
+    prop !== "paddingTop" &&
+    prop !== "paddingRight" &&
+    prop !== "paddingBottom" &&
+    prop !== "paddingLeft"
 })<{
   type?: Type;
   backgroundColor: string;
@@ -38,6 +42,10 @@ export const StyledButton = styled.button.withConfig({
   disabled: boolean;
   disabledBackgroundColor: string | undefined;
   disabledBorderColor: string | undefined;
+  paddingTop: number | undefined;
+  paddingRight: number | undefined;
+  paddingBottom: number | undefined;
+  paddingLeft: number | undefined;
 }>`
   width: 100%;
   text-align: center;
@@ -70,14 +78,14 @@ export const StyledButton = styled.button.withConfig({
     }
   }}
 
-  ${({ size, theme }) => {
+  ${({ size, paddingTop, paddingRight, paddingBottom, paddingLeft, theme }) => {
     switch (size) {
       case "small":
-        return css`padding: ${theme.size.em(7)} ${theme.size.em(13)};`;
+        return css`padding: ${theme.size.em(paddingTop ?? 7)} ${theme.size.em(paddingRight ?? 13)} ${theme.size.em(paddingBottom ?? 7)} ${theme.size.em(paddingLeft ?? 13)};`;
       case "middle":
-        return css`padding: ${theme.size.em(15)} ${theme.size.em(28)};`;
+        return css`padding: ${theme.size.em(paddingTop ?? 15)} ${theme.size.em(paddingRight ?? 28)} ${theme.size.em(paddingBottom ?? 15)} ${theme.size.em(paddingLeft ?? 28)};`;
       default:
-        return css`padding: ${theme.size.em(25)} ${theme.size.em(45)};`;
+        return css`padding: ${theme.size.em(paddingTop ?? 25)} ${theme.size.em(paddingRight ?? 45)} ${theme.size.em(paddingBottom ?? 25)} ${theme.size.em(paddingLeft ?? 45)};`;
     }
   }}
 
@@ -153,22 +161,24 @@ export const StyledText = styled.span.withConfig({
     prop !== "color" &&
     prop !== "fontWeight" &&
     prop !== "disabled" &&
-    prop !== "disabledColor"
+    prop !== "disabledColor" &&
+    prop !== "fontSize"
 })<{
   size: Size;
   color: string;
   fontWeight: number;
   disabled: boolean;
   disabledColor: string | undefined;
+  fontSize: number | undefined;
 }>`
-  ${({ size, theme }) => {
+  ${({ size, fontSize, theme }) => {
     switch (size) {
       case "small":
-        return css`font-size: ${theme.size.em(12)};`;
+        return css`font-size: ${theme.size.em(fontSize ?? 12)};`;
       case "middle":
-        return css`font-size: ${theme.size.em(16)};`;
+        return css`font-size: ${theme.size.em(fontSize ?? 16)};`;
       default:
-        return css`font-size: ${theme.size.em(18)};`;
+        return css`font-size: ${theme.size.em(fontSize ?? 18)};`;
     }
   }}
 

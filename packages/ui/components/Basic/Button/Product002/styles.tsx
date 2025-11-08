@@ -58,10 +58,16 @@ export const StyledButton = styled.span.withConfig({
     prop !== "borderColor" &&
     prop !== "animation" &&
     prop !== "size" &&
+    prop !== "iconSize" &&
+    prop !== "fontSize" &&
     prop !== "iconDirection" &&
     prop !== "isHover" &&
     prop !== "disabledBackgroundColor" &&
-    prop !== "disabledBorderColor"
+    prop !== "disabledBorderColor" &&
+    prop !== "paddingTop" &&
+    prop !== "paddingRight" &&
+    prop !== "paddingBottom" &&
+    prop !== "paddingLeft"
 })<{
   type: Type;
   backgroundColor: string;
@@ -70,9 +76,15 @@ export const StyledButton = styled.span.withConfig({
   size: Size;
   iconDirection: IconDirection;
   isHover: boolean | null;
+  iconSize: number | undefined;
+  fontSize: number | undefined;
   disabled: boolean;
   disabledBackgroundColor: string | undefined;
   disabledBorderColor: string | undefined;
+  paddingTop: number | undefined;
+  paddingRight: number | undefined;
+  paddingBottom: number | undefined;
+  paddingLeft: number | undefined;
 }>`
   width: 100%;
   text-align: center;
@@ -182,15 +194,24 @@ export const StyledButton = styled.span.withConfig({
     }
   }}
 
-  ${({ size, theme }) => {
+  ${({
+    size,
+    iconSize,
+    fontSize,
+    paddingTop,
+    paddingRight,
+    paddingBottom,
+    paddingLeft,
+    theme
+  }) => {
     switch (size) {
       case "small":
         return css`
-          padding: ${theme.size.em(7)} ${theme.size.em(13)};
+          padding: ${theme.size.em(paddingTop ?? 7)} ${theme.size.em(paddingRight ?? 13)} ${theme.size.em(paddingBottom ?? 7)} ${theme.size.em(paddingLeft ?? 13)};
 
           ${StyledIconWrapper} {
-            width: ${theme.size.em(theme.icon.size.small)};
-            height: ${theme.size.em(theme.icon.size.small)};
+            width: ${theme.size.em(iconSize ?? theme.icon.size.small)};
+            height: ${theme.size.em(iconSize ?? theme.icon.size.small)};
           }
 
           ${StyledText} {
@@ -199,33 +220,33 @@ export const StyledButton = styled.span.withConfig({
         `;
       case "middle":
         return css`
-          padding: ${theme.size.em(15)} ${theme.size.em(28)};
+          padding: ${theme.size.em(paddingTop ?? 15)} ${theme.size.em(paddingRight ?? 28)} ${theme.size.em(paddingBottom ?? 15)} ${theme.size.em(paddingLeft ?? 28)};
 
           ${StyledIconWrapper} {
-            width: ${theme.size.em(theme.icon.size.middle)};
-            height: ${theme.size.em(theme.icon.size.middle)};
+            width: ${theme.size.em(iconSize ?? theme.icon.size.middle)};
+            height: ${theme.size.em(iconSize ?? theme.icon.size.middle)};
           }
 
           ${StyledText} {
-            font-size: ${theme.size.em(16)};
+            font-size: ${theme.size.em(fontSize ?? 16)};
           }
         `;
       case "large":
         return css`
-          padding: ${theme.size.em(25)} ${theme.size.em(45)};
+          padding: ${theme.size.em(paddingTop ?? 25)} ${theme.size.em(paddingRight ?? 45)} ${theme.size.em(paddingBottom ?? 25)} ${theme.size.em(paddingLeft ?? 45)};
 
           ${StyledIconWrapper} {
-            width: ${theme.size.em(theme.icon.size.large)};
-            height: ${theme.size.em(theme.icon.size.large)};
+            width: ${theme.size.em(iconSize ?? theme.icon.size.large)};
+            height: ${theme.size.em(iconSize ?? theme.icon.size.large)};
           }
 
           ${StyledText} {
-            font-size: ${theme.size.em(18)};
+            font-size: ${theme.size.em(fontSize ?? 18)};
           }
         `;
       default:
         return css`
-          padding: ${theme.size.em(25)} ${theme.size.em(45)};
+          padding: ${theme.size.em(paddingTop ?? 25)} ${theme.size.em(paddingRight ?? 45)} ${theme.size.em(paddingBottom ?? 25)} ${theme.size.em(paddingLeft ?? 45)};
         `;
     }
   }}

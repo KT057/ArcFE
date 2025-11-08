@@ -158,3 +158,26 @@ Animation004.args = {
     fontWeight: 700
   }
 };
+
+export const CustomStyle = Template.bind({});
+CustomStyle.args = {
+  children: "Custom Style Button",
+  icon: <Svg002Icon />,
+  type: "004",
+  animation: {
+    type: "003"
+  },
+  size: "middle",
+  style: {
+    backgroundColor: "#fff",
+    borderColor: "#000",
+    color: "#000",
+    fontSize: 19,
+    paddingTop: 10,
+    paddingRight: 20,
+    paddingBottom: 10,
+    paddingLeft: 20,
+    fontWeight: 700,
+    iconSize: 30
+  }
+};

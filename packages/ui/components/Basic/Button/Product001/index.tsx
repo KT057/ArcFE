@@ -19,6 +19,11 @@ interface ButtonProps {
   style?: {
     backgroundColor?: string;
     borderColor?: string;
+    paddingTop?: number;
+    paddingRight?: number;
+    paddingBottom?: number;
+    paddingLeft?: number;
+    fontSize?: number;
     color?: string;
     fontWeight?: number;
     disabledColor?: string;
@@ -50,6 +55,10 @@ export const Button001 = ({
         animation={animation}
         backgroundColor={style?.backgroundColor ?? "#fff"}
         borderColor={style?.borderColor ?? "#000"}
+        paddingTop={style?.paddingTop}
+        paddingRight={style?.paddingRight}
+        paddingBottom={style?.paddingBottom}
+        paddingLeft={style?.paddingLeft}
         disabled={!!disabled}
         disabledBackgroundColor={style?.disabledBackgroundColor}
         disabledBorderColor={style?.disabledBorderColor}
@@ -60,6 +69,7 @@ export const Button001 = ({
           fontWeight={style?.fontWeight ?? 700}
           disabled={!!disabled}
           disabledColor={style?.disabledColor}
+          fontSize={style?.fontSize}
         >
           {children}
         </StyledText>
