@@ -32,7 +32,7 @@
     "babel-plugin-styled-components": "^2.1.4",
     "cross-env": "^10.1.0",
     "dotenv": "^17.2.3",
-    "sharp": "^0.34.4",
+    "sharp": "^0.34.5",
     "vike": "^0.4.244",
     "vike-react": "^0.6.10",
     "vite": "^7.1.12",
