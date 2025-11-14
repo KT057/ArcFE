@@ -3,9 +3,14 @@ import {
   forwardRef,
   type MouseEvent,
   type ReactNode,
+  type RefObject,
+  useCallback,
   useMemo,
+  useRef,
   useState
 } from "react";
+import { useButton } from "@react-aria/button";
+import { mergeProps } from "@react-aria/utils";
 import type { Size } from "../../../../styles/size";
 import {
   type Animation,
@@ -55,6 +60,11 @@ type ButtonProps = BaseProps &
     rel?: string;
   };
 
+type UseButtonOnClick = NonNullable<
+  Parameters<typeof useButton>[0]["onClick"]
+>;
+type AriaClickEvent = Parameters<UseButtonOnClick>[0];
+
 const defaultAppearance: Required<ButtonAppearance> = {
   paddingTop: 0,
   paddingRight: 0,
@@ -89,12 +99,59 @@ export const Button002 = forwardRef<HTMLButtonElement, ButtonProps>(
     },
     ref
   ) => {
+    const { href, target, rel, ...domProps } = rest;
     const [isHover, setIsHover] = useState<boolean | null>(null);
 
     const mergedAppearance = useMemo(
       () => ({ ...defaultAppearance, ...appearance }),
       [appearance]
     );
+
+    const localRef = useRef<
+      HTMLButtonElement | HTMLAnchorElement | HTMLSpanElement | null
+    >(null);
+
+    const handleAriaClick = useCallback(
+      (event: AriaClickEvent) => {
+        onClick?.(event as MouseEvent<HTMLButtonElement>);
+      },
+      [onClick]
+    );
+
+    const { buttonProps } = useButton(
+      {
+        elementType: as,
+        isDisabled: disabled,
+        href,
+        target,
+        rel,
+        onClick: handleAriaClick
+      },
+      localRef
+    );
+
+    const handleRef = useCallback(
+      (
+        node: HTMLButtonElement | HTMLAnchorElement | HTMLSpanElement | null
+      ) => {
+        localRef.current = node;
+        if (!ref) {
+          return;
+        }
+        if (typeof ref === "function") {
+          ref(node as HTMLButtonElement | null);
+        } else {
+          (ref as RefObject<HTMLButtonElement | null>).current =
+            node as HTMLButtonElement | null;
+        }
+      },
+      [ref]
+    );
+
+    const mergedButtonProps = mergeProps(buttonProps, domProps, {
+      onMouseEnter: () => setIsHover(true),
+      onMouseLeave: () => setIsHover(false)
+    });
 
     const {
       paddingTop,
@@ -114,11 +171,11 @@ export const Button002 = forwardRef<HTMLButtonElement, ButtonProps>(
 
     return (
       <StyledButton
-        ref={ref}
+        {...mergedButtonProps}
+        ref={handleRef}
         as={as as any}
         $type={type}
         $size={size}
-        onClick={onClick}
         $animation={animation}
         $backgroundColor={backgroundColor}
         $borderColor={borderColor}
@@ -133,10 +190,7 @@ export const Button002 = forwardRef<HTMLButtonElement, ButtonProps>(
         $iconSize={iconSize || undefined}
         $fontSize={fontSize || undefined}
         $disabled={disabled}
-        onMouseEnter={() => setIsHover(true)}
-        onMouseLeave={() => setIsHover(false)}
         $fullWidth={fullWidth}
-        {...rest}
       >
         <StyledText
           $size={size}

@@ -27,6 +27,7 @@ export const StyledButton = styled.button<{
   $paddingRight: number | undefined;
   $paddingBottom: number | undefined;
   $paddingLeft: number | undefined;
+  $isDisabled: boolean;
 }>`
   ${({ theme }) => theme.font.baseSize.em()};
 
@@ -130,13 +131,13 @@ export const StyledButton = styled.button<{
   }}
 
   ${({
-    disabled,
+    $isDisabled,
     $disabledBackgroundColor,
     $backgroundColor,
     $disabledBorderColor,
     $borderColor
   }) =>
-    disabled &&
+    $isDisabled &&
     css`
     cursor: not-allowed;
     pointer-events: none;

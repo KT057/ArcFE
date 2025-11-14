@@ -476,6 +476,7 @@ type BaseProps$1 = {
     animation?: Animation$1;
     disabled?: boolean;
     appearance?: ButtonAppearance$1;
+    fullWidth?: boolean;
     onClick?: (event: MouseEvent<HTMLButtonElement>) => void;
 };
 declare const Button001: react.ForwardRefExoticComponent<BaseProps$1 & Omit<ButtonHTMLAttributes<HTMLButtonElement>, keyof BaseProps$1> & {
@@ -519,6 +520,7 @@ type BaseProps = {
     appearance?: ButtonAppearance;
     iconDirection?: IconDirection;
     icon: ReactNode;
+    fullWidth?: boolean;
     disabled?: boolean;
     onClick?: (event: MouseEvent<HTMLButtonElement>) => void;
 };
