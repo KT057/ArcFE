@@ -33,7 +33,7 @@ export const MediaProvider = ({ children }: { children: React.ReactNode }) => {
     }
   };
 
-  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
+  // biome-ignore lint/correctness/useExhaustiveDependencies: handleCheckWindowSizeは依存関係に含めない
   useEffect(() => {
     handleCheckWindowSize();
     window.addEventListener("resize", handleCheckWindowSize);
