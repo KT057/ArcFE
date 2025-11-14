@@ -1,5 +1,5 @@
 import "styled-components";
-import type { Theme } from "@packages/ui/styles";
+import type { Theme } from "@packages/ui";
 
 declare module "styled-components" {
   // eslint-disable-next-line @typescript-eslint/no-empty-interface
