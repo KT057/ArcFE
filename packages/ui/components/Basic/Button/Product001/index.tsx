@@ -1,3 +1,5 @@
+import { useButton } from "@react-aria/button";
+import { mergeProps } from "@react-aria/utils";
 import {
   type ButtonHTMLAttributes,
   forwardRef,
@@ -8,8 +10,6 @@ import {
   useMemo,
   useRef
 } from "react";
-import { useButton } from "@react-aria/button";
-import { mergeProps } from "@react-aria/utils";
 import type { Size } from "../../../../styles/size";
 import { type Animation, StyledButton, StyledText, type Type } from "./styles";
 
@@ -47,9 +47,7 @@ type ButtonProps = BaseProps &
     rel?: string;
   };
 
-type UseButtonOnClick = NonNullable<
-  Parameters<typeof useButton>[0]["onClick"]
->;
+type UseButtonOnClick = NonNullable<Parameters<typeof useButton>[0]["onClick"]>;
 type AriaClickEvent = Parameters<UseButtonOnClick>[0];
 
 const defaultAppearance: Required<ButtonAppearance> = {
