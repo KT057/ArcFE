@@ -1,7 +1,9 @@
 import styled13, { css, keyframes, createGlobalStyle } from 'styled-components';
 import { jsx, jsxs, Fragment } from 'react/jsx-runtime';
 import gsap, { gsap as gsap$1 } from 'gsap';
-import React4, { forwardRef, useMemo, useState, createContext, useImperativeHandle, Children, useEffect, useContext, useRef, useCallback, memo, useReducer, useLayoutEffect } from 'react';
+import React4, { forwardRef, useMemo, useRef, useCallback, useState, createContext, useImperativeHandle, Children, useEffect, useContext, memo, useReducer, useLayoutEffect } from 'react';
+import { useButton } from '@react-aria/button';
+import { mergeProps } from '@react-aria/utils';
 import { createPortal, unstable_batchedUpdates } from 'react-dom';
 import 'keen-slider/keen-slider.min.css';
 import { useKeenSlider } from 'keen-slider/react';
@@ -3269,7 +3271,7 @@ var Breadcrumbs = ({ items, style }) => {
 var StyledButton = styled13.button`
   ${({ theme }) => theme.font.baseSize.em()};
 
-  width: 100%;
+  width: ${({ $fullWidth }) => $fullWidth ? "100%" : "auto"};
   text-align: center;
   cursor: pointer;
   display: block;
@@ -3368,12 +3370,12 @@ var StyledButton = styled13.button`
 }}
 
   ${({
-  disabled,
+  $isDisabled,
   $disabledBackgroundColor,
   $backgroundColor,
   $disabledBorderColor,
   $borderColor
-}) => disabled && css`
+}) => $isDisabled && css`
     cursor: not-allowed;
     pointer-events: none;
     background-color: ${$disabledBackgroundColor ?? `${hexToRgb($backgroundColor)}, 0.5`};
@@ -3392,7 +3394,6 @@ var StyledText = styled13.span`
   }
 }}
 
-  display: block;
   font-weight: ${({ $fontWeight }) => $fontWeight};
   color: ${({ $color }) => $color};
   position: relative;
@@ -3428,12 +3429,47 @@ var Button001 = forwardRef(
     onClick,
     children,
     appearance,
+    fullWidth = true,
     ...rest
   }, ref) => {
+    const { href, target, rel, ...domProps } = rest;
     const mergedAppearance = useMemo(
       () => ({ ...defaultAppearance, ...appearance }),
       [appearance]
     );
+    const localRef = useRef(null);
+    const handleAriaClick = useCallback(
+      (event) => {
+        onClick?.(event);
+      },
+      [onClick]
+    );
+    const { buttonProps } = useButton(
+      {
+        elementType: as,
+        isDisabled: disabled,
+        href,
+        target,
+        rel,
+        onClick: handleAriaClick
+      },
+      localRef
+    );
+    const handleRef = useCallback(
+      (node) => {
+        localRef.current = node;
+        if (!ref) {
+          return;
+        }
+        if (typeof ref === "function") {
+          ref(node);
+        } else {
+          ref.current = node;
+        }
+      },
+      [ref]
+    );
+    const mergedButtonProps = mergeProps(buttonProps, domProps);
     const {
       backgroundColor,
       borderColor,
@@ -3451,11 +3487,11 @@ var Button001 = forwardRef(
     return /* @__PURE__ */ jsx(
       StyledButton,
       {
-        ref,
+        ...mergedButtonProps,
+        ref: handleRef,
         as,
         $type: type,
         $size: size,
-        onClick,
         $animation: animation,
         $backgroundColor: backgroundColor,
         $borderColor: borderColor,
@@ -3463,10 +3499,10 @@ var Button001 = forwardRef(
         $paddingRight: paddingRight || void 0,
         $paddingBottom: paddingBottom || void 0,
         $paddingLeft: paddingLeft || void 0,
-        disabled,
         $disabledBackgroundColor: disabledBackgroundColor,
         $disabledBorderColor: disabledBorderColor,
-        ...rest,
+        $fullWidth: fullWidth,
+        $isDisabled: disabled,
         children: /* @__PURE__ */ jsx(
           StyledText,
           {
@@ -3505,7 +3541,7 @@ var ArrowShow = keyframes`
 var StyledButton2 = styled13.span`
   ${({ theme }) => theme.font.baseSize.em()};
 
-  width: 100%;
+  width: ${({ $fullWidth }) => $fullWidth ? "100%" : "auto"};
   text-align: center;
   cursor: pointer;
   display: block;
@@ -3870,13 +3906,51 @@ var Button002 = forwardRef(
     disabled = false,
     iconDirection = "right",
     icon,
+    fullWidth = true,
     ...rest
   }, ref) => {
+    const { href, target, rel, ...domProps } = rest;
     const [isHover, setIsHover] = useState(null);
     const mergedAppearance = useMemo(
       () => ({ ...defaultAppearance2, ...appearance }),
       [appearance]
     );
+    const localRef = useRef(null);
+    const handleAriaClick = useCallback(
+      (event) => {
+        onClick?.(event);
+      },
+      [onClick]
+    );
+    const { buttonProps } = useButton(
+      {
+        elementType: as,
+        isDisabled: disabled,
+        href,
+        target,
+        rel,
+        onClick: handleAriaClick
+      },
+      localRef
+    );
+    const handleRef = useCallback(
+      (node) => {
+        localRef.current = node;
+        if (!ref) {
+          return;
+        }
+        if (typeof ref === "function") {
+          ref(node);
+        } else {
+          ref.current = node;
+        }
+      },
+      [ref]
+    );
+    const mergedButtonProps = mergeProps(buttonProps, domProps, {
+      onMouseEnter: () => setIsHover(true),
+      onMouseLeave: () => setIsHover(false)
+    });
     const {
       paddingTop,
       paddingRight,
@@ -3895,11 +3969,11 @@ var Button002 = forwardRef(
     return /* @__PURE__ */ jsxs(
       StyledButton2,
       {
-        ref,
+        ...mergedButtonProps,
+        ref: handleRef,
         as,
         $type: type,
         $size: size,
-        onClick,
         $animation: animation,
         $backgroundColor: backgroundColor,
         $borderColor: borderColor,
@@ -3914,9 +3988,7 @@ var Button002 = forwardRef(
         $iconSize: iconSize || void 0,
         $fontSize: fontSize || void 0,
         $disabled: disabled,
-        onMouseEnter: () => setIsHover(true),
-        onMouseLeave: () => setIsHover(false),
-        ...rest,
+        $fullWidth: fullWidth,
         children: [
           /* @__PURE__ */ jsx(
             StyledText2,
