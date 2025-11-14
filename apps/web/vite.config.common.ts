@@ -58,7 +58,8 @@ export const commonResolve = {
     "@packages/utils": resolve(__dirname, "../../packages/utils"),
     // Node.js モジュールのポリフィル
     util: "util/"
-  }
+  },
+  conditions: ['import', 'module', 'browser', 'default']
 };
 
 // 共通の設定
