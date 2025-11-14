@@ -1,5 +1,11 @@
 # @packages/tests
 
+## 1.4.0
+
+### Minor Changes
+
+- Add SSR support for MediaProvider with proper initial state detection
+
 ## 1.2.1
 
 ### Patch Changes

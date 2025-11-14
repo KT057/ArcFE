@@ -1,5 +1,18 @@
 # @packages/hooks
 
+## 1.4.0
+
+### Minor Changes
+
+- Add SSR support for MediaProvider with proper initial state detection
+
+### Patch Changes
+
+- Updated dependencies
+  - @packages/utils@1.4.0
+  - @packages/context@1.4.0
+  - @packages/tests@1.4.0
+
 ## 1.2.1
 
 ### Patch Changes

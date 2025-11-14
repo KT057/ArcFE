@@ -11829,8 +11829,20 @@ var themes = (color2) => ({
   }
 });
 var MediaContext = createContext("pc");
+var getInitialMedia = () => {
+  if (typeof window === "undefined") {
+    return "pc";
+  }
+  if (window.innerWidth > SP_SIZE && window.innerWidth <= TABLET_SIZE) {
+    return "tablet";
+  }
+  if (window.innerWidth <= SP_SIZE) {
+    return "sp";
+  }
+  return "pc";
+};
 var MediaProvider = ({ children }) => {
-  const [media2, setMedia] = useState("pc");
+  const [media2, setMedia] = useState(getInitialMedia);
   const handleCheckWindowSize = () => {
     if (window.innerWidth > SP_SIZE && window.innerWidth <= TABLET_SIZE) {
       setMedia("tablet");
