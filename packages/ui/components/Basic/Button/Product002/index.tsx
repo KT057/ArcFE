@@ -1,10 +1,16 @@
-import { type ReactNode, useState } from "react";
+import {
+  type ButtonHTMLAttributes,
+  forwardRef,
+  type MouseEvent,
+  type ReactNode,
+  useMemo,
+  useState
+} from "react";
 import type { Size } from "../../../../styles/size";
 import {
   type Animation,
   type IconDirection,
   StyledButton,
-  StyledButtonWrapper,
   StyledIcon,
   StyledIconInner,
   StyledIconWrapper,
@@ -12,102 +18,156 @@ import {
   type Type
 } from "./styles";
 
-interface ButtonProps {
+interface ButtonAppearance {
+  paddingTop?: number;
+  paddingRight?: number;
+  paddingBottom?: number;
+  paddingLeft?: number;
+  iconSize?: number;
+  fontSize?: number;
+  backgroundColor?: string;
+  borderColor?: string;
+  color?: string;
+  fontWeight?: number;
+  disabledColor?: string;
+  disabledBackgroundColor?: string;
+  disabledBorderColor?: string;
+}
+
+type BaseProps = {
   as?: "button" | "a" | "span";
   type?: Type;
   size?: Size;
-  href?: string;
   children: ReactNode;
   animation?: Animation;
-  style?: {
-    paddingTop?: number;
-    paddingRight?: number;
-    paddingBottom?: number;
-    paddingLeft?: number;
-    iconSize?: number;
-    fontSize?: number;
-    backgroundColor?: string;
-    borderColor?: string;
-    color?: string;
-    fontWeight?: number;
-    disabledColor?: string;
-    disabledBackgroundColor?: string;
-    disabledBorderColor?: string;
-  };
+  appearance?: ButtonAppearance;
   iconDirection?: IconDirection;
   icon: ReactNode;
+  fullWidth?: boolean;
   disabled?: boolean;
-  onClick?: () => void;
-}
+  onClick?: (event: MouseEvent<HTMLButtonElement>) => void;
+};
 
-export const Button002 = ({
-  as = "button",
-  type = "001",
-  size = "middle",
-  animation,
-  onClick,
-  children,
-  style,
-  disabled,
-  iconDirection = "right",
-  icon,
-  href
-}: ButtonProps) => {
-  const [isHover, setIsHover] = useState<boolean | null>(null);
+type ButtonProps = BaseProps &
+  Omit<ButtonHTMLAttributes<HTMLButtonElement>, keyof BaseProps | "type"> & {
+    href?: string;
+    target?: string;
+    rel?: string;
+  };
 
-  return (
-    <StyledButtonWrapper>
+const defaultAppearance: Required<ButtonAppearance> = {
+  paddingTop: 0,
+  paddingRight: 0,
+  paddingBottom: 0,
+  paddingLeft: 0,
+  iconSize: 0,
+  fontSize: 0,
+  backgroundColor: "#fff",
+  borderColor: "#000",
+  color: "#000",
+  fontWeight: 700,
+  disabledColor: "#999",
+  disabledBackgroundColor: "#e0e0e0",
+  disabledBorderColor: "#ccc"
+};
+
+export const Button002 = forwardRef<HTMLButtonElement, ButtonProps>(
+  (
+    {
+      as = "button",
+      type = "001",
+      size = "middle",
+      animation,
+      onClick,
+      children,
+      appearance,
+      disabled = false,
+      iconDirection = "right",
+      icon,
+      fullWidth = true,
+      ...rest
+    },
+    ref
+  ) => {
+    const [isHover, setIsHover] = useState<boolean | null>(null);
+
+    const mergedAppearance = useMemo(
+      () => ({ ...defaultAppearance, ...appearance }),
+      [appearance]
+    );
+
+    const {
+      paddingTop,
+      paddingRight,
+      paddingBottom,
+      paddingLeft,
+      iconSize,
+      fontSize,
+      backgroundColor,
+      borderColor,
+      color,
+      fontWeight,
+      disabledColor,
+      disabledBackgroundColor,
+      disabledBorderColor
+    } = mergedAppearance;
+
+    return (
       <StyledButton
-        as={as}
-        href={href}
-        type={type}
-        size={size}
+        ref={ref}
+        as={as as any}
+        $type={type}
+        $size={size}
         onClick={onClick}
-        animation={animation}
-        backgroundColor={style?.backgroundColor ?? "#fff"}
-        borderColor={style?.borderColor ?? "#000"}
-        iconDirection={iconDirection}
-        isHover={isHover}
-        disabled={!!disabled}
-        disabledBackgroundColor={style?.disabledBackgroundColor}
-        disabledBorderColor={style?.disabledBorderColor}
-        paddingTop={style?.paddingTop}
-        paddingRight={style?.paddingRight}
-        paddingBottom={style?.paddingBottom}
-        paddingLeft={style?.paddingLeft}
-        iconSize={style?.iconSize}
-        fontSize={style?.fontSize}
+        $animation={animation}
+        $backgroundColor={backgroundColor}
+        $borderColor={borderColor}
+        $iconDirection={iconDirection}
+        $isHover={isHover}
+        $disabledBackgroundColor={disabledBackgroundColor}
+        $disabledBorderColor={disabledBorderColor}
+        $paddingTop={paddingTop || undefined}
+        $paddingRight={paddingRight || undefined}
+        $paddingBottom={paddingBottom || undefined}
+        $paddingLeft={paddingLeft || undefined}
+        $iconSize={iconSize || undefined}
+        $fontSize={fontSize || undefined}
+        $disabled={disabled}
         onMouseEnter={() => setIsHover(true)}
         onMouseLeave={() => setIsHover(false)}
+        $fullWidth={fullWidth}
+        {...rest}
       >
         <StyledText
-          size={size}
-          color={style?.color ?? "#000"}
-          fontWeight={style?.fontWeight ?? 700}
-          disabled={!!disabled}
-          disabledColor={style?.disabledColor}
+          $size={size}
+          $color={color}
+          $fontWeight={fontWeight}
+          $disabled={disabled}
+          $disabledColor={disabledColor}
         >
           {children}
         </StyledText>
         <StyledIconWrapper>
           <StyledIconInner>
             <StyledIcon
-              color={style?.color ?? "#000"}
-              disabled={!!disabled}
-              disabledColor={style?.disabledColor}
+              $color={color}
+              $disabled={disabled}
+              $disabledColor={disabledColor}
             >
               {icon}
             </StyledIcon>
             <StyledIcon
-              color={style?.color ?? "#000"}
-              disabled={!!disabled}
-              disabledColor={style?.disabledColor}
+              $color={color}
+              $disabled={disabled}
+              $disabledColor={disabledColor}
             >
               {icon}
             </StyledIcon>
           </StyledIconInner>
         </StyledIconWrapper>
       </StyledButton>
-    </StyledButtonWrapper>
-  );
-};
+    );
+  }
+);
+
+Button002.displayName = "Button002";

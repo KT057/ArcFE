@@ -28,13 +28,13 @@ Default.args = {
   ),
   footer: (
     <FooterButtons>
-      <Button001 onClick={() => {}} size="small" type="003">
+      <Button001 onClick={() => {}} size="small" fullWidth={false} type="003">
         キャンセル
       </Button001>
       <Button001
         onClick={() => {}}
         size="small"
-        style={{
+        appearance={{
           backgroundColor: "#000",
           borderColor: "#000",
           color: "#fff",
@@ -45,6 +45,7 @@ Default.args = {
           backgroundColor: "#fff",
           textColor: "#000"
         }}
+        fullWidth={false}
         type="003"
       >
         確定
@@ -62,7 +63,7 @@ ContentLongHeight.args = {
       <Button001
         onClick={() => {}}
         size="small"
-        style={{
+        appearance={{
           backgroundColor: "#fff",
           borderColor: "#000",
           color: "#000",
