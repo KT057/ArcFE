@@ -25,7 +25,7 @@ Default.args = {
   },
   type: "001",
   size: "middle",
-  style: {
+  appearance: {
     backgroundColor: "#fff",
     borderColor: "#000",
     color: "#000",
@@ -45,7 +45,7 @@ Animation002.args = {
   },
   type: "001",
   size: "middle",
-  style: {
+  appearance: {
     backgroundColor: "#fff",
     borderColor: "#000",
     color: "#000",
@@ -58,7 +58,7 @@ Type002.args = {
   children: "Type002 Button",
   type: "002",
   size: "middle",
-  style: {
+  appearance: {
     backgroundColor: "#fff",
     borderColor: "#000",
     color: "#000",
@@ -71,7 +71,7 @@ Type003.args = {
   children: "Type003 Button",
   type: "003",
   size: "middle",
-  style: {
+  appearance: {
     backgroundColor: "#fff",
     borderColor: "#000",
     color: "#000",
@@ -84,7 +84,7 @@ SmallSize.args = {
   children: "Small Button",
   type: "001",
   size: "small",
-  style: {
+  appearance: {
     backgroundColor: "#fff",
     borderColor: "#000",
     color: "#000",
@@ -97,7 +97,7 @@ LargeSize.args = {
   children: "Large Button",
   type: "001",
   size: "large",
-  style: {
+  appearance: {
     backgroundColor: "#fff",
     borderColor: "#000",
     color: "#000",
@@ -110,7 +110,7 @@ PrimaryTheme.args = {
   children: "Primary",
   type: "001",
   size: "middle",
-  style: {
+  appearance: {
     backgroundColor: "#007bff",
     borderColor: "#0056b3",
     color: "#fff",
@@ -123,7 +123,7 @@ DangerTheme.args = {
   children: "Danger",
   type: "001",
   size: "middle",
-  style: {
+  appearance: {
     backgroundColor: "#dc3545",
     borderColor: "#c82333",
     color: "#fff",
@@ -136,7 +136,7 @@ SuccessTheme.args = {
   children: "Success",
   type: "001",
   size: "middle",
-  style: {
+  appearance: {
     backgroundColor: "#28a745",
     borderColor: "#1e7e34",
     color: "#fff",
@@ -149,7 +149,7 @@ WithoutAnimation.args = {
   children: "No Animation",
   type: "001",
   size: "middle",
-  style: {
+  appearance: {
     backgroundColor: "#fff",
     borderColor: "#000",
     color: "#000",
@@ -162,7 +162,7 @@ LongText.args = {
   children: "This is a very long button text",
   type: "001",
   size: "middle",
-  style: {
+  appearance: {
     backgroundColor: "#fff",
     borderColor: "#000",
     color: "#000",
@@ -175,7 +175,7 @@ LightWeight.args = {
   children: "Light Weight",
   type: "001",
   size: "middle",
-  style: {
+  appearance: {
     backgroundColor: "#f8f9fa",
     borderColor: "#dee2e6",
     color: "#495057",
@@ -189,7 +189,7 @@ Disabled.args = {
   type: "001",
   size: "middle",
   disabled: true,
-  style: {
+  appearance: {
     backgroundColor: "#fff",
     borderColor: "#000",
     color: "#000",
@@ -202,11 +202,12 @@ Disabled.args = {
 
 export const AsLink = Template.bind({});
 AsLink.args = {
+  as: "a",
   href: "#",
   children: "Link Button",
   type: "001",
   size: "middle",
-  style: {
+  appearance: {
     backgroundColor: "#6f42c1",
     borderColor: "#5a3a9e",
     color: "#fff",
@@ -219,7 +220,7 @@ CustomStyle.args = {
   children: "Custom Style Button",
   type: "001",
   size: "middle",
-  style: {
+  appearance: {
     backgroundColor: "#fff",
     borderColor: "#000",
     color: "#000",

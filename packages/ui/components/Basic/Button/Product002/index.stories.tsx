@@ -27,7 +27,7 @@ Default.args = {
   },
   type: "001",
   size: "middle",
-  style: {
+  appearance: {
     backgroundColor: "#fff",
     borderColor: "#000",
     color: "#000",
@@ -48,7 +48,7 @@ Type002.args = {
   },
   type: "002",
   size: "middle",
-  style: {
+  appearance: {
     backgroundColor: "#fff",
     borderColor: "#000",
     color: "#000",
@@ -69,7 +69,7 @@ Type003.args = {
   },
   type: "003",
   size: "middle",
-  style: {
+  appearance: {
     backgroundColor: "#fff",
     borderColor: "#000",
     color: "#000",
@@ -90,7 +90,7 @@ Animation002.args = {
   },
   type: "001",
   size: "middle",
-  style: {
+  appearance: {
     backgroundColor: "#fff",
     borderColor: "#000",
     color: "#000",
@@ -111,7 +111,7 @@ Animation003.args = {
   },
   type: "001",
   size: "middle",
-  style: {
+  appearance: {
     backgroundColor: "#fff",
     borderColor: "#000",
     color: "#000",
@@ -127,7 +127,7 @@ Disabled.args = {
   size: "middle",
   disabled: true,
   as: "span",
-  style: {
+  appearance: {
     backgroundColor: "#fff",
     borderColor: "#000",
     color: "#000",
@@ -151,7 +151,7 @@ Animation004.args = {
   },
   type: "001",
   size: "middle",
-  style: {
+  appearance: {
     backgroundColor: "#fff",
     borderColor: "#000",
     color: "#000",
@@ -168,7 +168,7 @@ CustomStyle.args = {
     type: "003"
   },
   size: "middle",
-  style: {
+  appearance: {
     backgroundColor: "#fff",
     borderColor: "#000",
     color: "#000",

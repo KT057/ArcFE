@@ -1,7 +1,7 @@
 import styled13, { css, keyframes, createGlobalStyle } from 'styled-components';
 import { jsx, jsxs, Fragment } from 'react/jsx-runtime';
 import gsap, { gsap as gsap$1 } from 'gsap';
-import React4, { createContext, forwardRef, useMemo, useImperativeHandle, useState, Children, useEffect, useContext, useRef, useCallback, memo, useReducer, useLayoutEffect } from 'react';
+import React4, { forwardRef, useMemo, useState, createContext, useImperativeHandle, Children, useEffect, useContext, useRef, useCallback, memo, useReducer, useLayoutEffect } from 'react';
 import { createPortal, unstable_batchedUpdates } from 'react-dom';
 import 'keen-slider/keen-slider.min.css';
 import { useKeenSlider } from 'keen-slider/react';
@@ -3266,22 +3266,17 @@ var Breadcrumbs = ({ items, style }) => {
     index !== items.length - 1 && /* @__PURE__ */ jsx(StyledBreadcrumbsItemIcon, { color: style?.iconColor ?? "#000", children: /* @__PURE__ */ jsx(Svg004, {}) })
   ] }, item.text)) }) });
 };
-var StyledButtonWrapper = styled13.span`
+var StyledButton = styled13.button`
   ${({ theme }) => theme.font.baseSize.em()};
 
-  display: block;
-`;
-var StyledButton = styled13.button.withConfig({
-  shouldForwardProp: (prop) => prop !== "type" && prop !== "backgroundColor" && prop !== "borderColor" && prop !== "animation" && prop !== "size" && prop !== "disabledBackgroundColor" && prop !== "disabledBorderColor" && prop !== "paddingTop" && prop !== "paddingRight" && prop !== "paddingBottom" && prop !== "paddingLeft"
-})`
   width: 100%;
   text-align: center;
   cursor: pointer;
   display: block;
-  background-color: ${({ backgroundColor }) => backgroundColor};
+  background-color: ${({ $backgroundColor }) => $backgroundColor};
   position: relative;
   overflow: hidden;
-  border: 1px solid ${({ borderColor }) => borderColor};
+  border: 1px solid ${({ $borderColor }) => $borderColor};
 
   &::after {
     content: "";
@@ -3290,12 +3285,12 @@ var StyledButton = styled13.button.withConfig({
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: ${({ backgroundColor }) => backgroundColor};
+    background-color: ${({ $backgroundColor }) => $backgroundColor};
     z-index: 0;
   }
 
-  ${({ type, theme }) => {
-  switch (type) {
+  ${({ $type, theme }) => {
+  switch ($type) {
     case "001":
       return css`border-radius: ${theme.size.em(30)};`;
     case "002":
@@ -3305,36 +3300,43 @@ var StyledButton = styled13.button.withConfig({
   }
 }}
 
-  ${({ size, paddingTop, paddingRight, paddingBottom, paddingLeft, theme }) => {
-  switch (size) {
+  ${({
+  $size,
+  $paddingTop,
+  $paddingRight,
+  $paddingBottom,
+  $paddingLeft,
+  theme
+}) => {
+  switch ($size) {
     case "small":
-      return css`padding: ${theme.size.em(paddingTop ?? 7)} ${theme.size.em(paddingRight ?? 13)} ${theme.size.em(paddingBottom ?? 7)} ${theme.size.em(paddingLeft ?? 13)};`;
+      return css`padding: ${theme.size.em($paddingTop ?? 7)} ${theme.size.em($paddingRight ?? 13)} ${theme.size.em($paddingBottom ?? 7)} ${theme.size.em($paddingLeft ?? 13)};`;
     case "middle":
-      return css`padding: ${theme.size.em(paddingTop ?? 15)} ${theme.size.em(paddingRight ?? 28)} ${theme.size.em(paddingBottom ?? 15)} ${theme.size.em(paddingLeft ?? 28)};`;
+      return css`padding: ${theme.size.em($paddingTop ?? 15)} ${theme.size.em($paddingRight ?? 28)} ${theme.size.em($paddingBottom ?? 15)} ${theme.size.em($paddingLeft ?? 28)};`;
     default:
-      return css`padding: ${theme.size.em(paddingTop ?? 25)} ${theme.size.em(paddingRight ?? 45)} ${theme.size.em(paddingBottom ?? 25)} ${theme.size.em(paddingLeft ?? 45)};`;
+      return css`padding: ${theme.size.em($paddingTop ?? 25)} ${theme.size.em($paddingRight ?? 45)} ${theme.size.em($paddingBottom ?? 25)} ${theme.size.em($paddingLeft ?? 45)};`;
   }
 }}
 
-  ${({ animation, theme }) => {
-  switch (animation?.type ?? "001") {
+  ${({ $animation, theme }) => {
+  switch ($animation?.type ?? "001") {
     case "001":
       return css`
           &::after {
-            transition: background-color ${animation?.duration ?? 0.25}s ${theme.animation.easing[animation?.easing ?? "easeInOutCubic"]};
+            transition: background-color ${$animation?.duration ?? 0.25}s ${theme.animation.easing[$animation?.easing ?? "easeInOutCubic"]};
           }
 
           ${StyledText} {
-            transition: color ${animation?.duration ?? 0.25}s ${theme.animation.easing[animation?.easing ?? "easeInOutCubic"]};
+            transition: color ${$animation?.duration ?? 0.25}s ${theme.animation.easing[$animation?.easing ?? "easeInOutCubic"]};
           }
 
           &:hover {
             ${StyledText} {
-              color: ${animation?.textColor ?? "#fff"};
+              color: ${$animation?.textColor ?? "#fff"};
             }
 
             &::after {
-              background-color: ${animation?.backgroundColor ?? "#000"};
+              background-color: ${$animation?.backgroundColor ?? "#000"};
             }
           }
         `;
@@ -3343,17 +3345,17 @@ var StyledButton = styled13.button.withConfig({
           &::after {
             transform: scaleX(0);
             transform-origin: bottom right;
-            transition: transform ${animation?.duration ?? 0.25}s ${theme.animation.easing[animation?.easing ?? "easeOutCubic"]};
-            background-color: ${animation?.backgroundColor ?? "#fff"};
+            transition: transform ${$animation?.duration ?? 0.25}s ${theme.animation.easing[$animation?.easing ?? "easeOutCubic"]};
+            background-color: ${$animation?.backgroundColor ?? "#fff"};
           }
 
           ${StyledText} {
-            transition: color ${animation?.duration ?? 0.25}s ${theme.animation.easing[animation?.easing ?? "easeOutCubic"]};
+            transition: color ${$animation?.duration ?? 0.25}s ${theme.animation.easing[$animation?.easing ?? "easeOutCubic"]};
           }
 
           &:hover {
             ${StyledText} {
-              color: ${animation?.textColor ?? "#fff"};
+              color: ${$animation?.textColor ?? "#fff"};
             }
 
             &::after {
@@ -3367,87 +3369,121 @@ var StyledButton = styled13.button.withConfig({
 
   ${({
   disabled,
-  disabledBackgroundColor,
-  backgroundColor,
-  disabledBorderColor,
-  borderColor
+  $disabledBackgroundColor,
+  $backgroundColor,
+  $disabledBorderColor,
+  $borderColor
 }) => disabled && css`
     cursor: not-allowed;
     pointer-events: none;
-    background-color: ${disabledBackgroundColor ?? `${hexToRgb(backgroundColor)}, 0.5`};
-    border-color: ${disabledBorderColor ?? `${hexToRgb(borderColor)}, 0.5`};
+    background-color: ${$disabledBackgroundColor ?? `${hexToRgb($backgroundColor)}, 0.5`};
+    border-color: ${$disabledBorderColor ?? `${hexToRgb($borderColor)}, 0.5`};
   `}
 `;
-var StyledText = styled13.span.withConfig({
-  shouldForwardProp: (prop) => prop !== "size" && prop !== "color" && prop !== "fontWeight" && prop !== "disabled" && prop !== "disabledColor" && prop !== "fontSize"
-})`
-  ${({ size, fontSize, theme }) => {
-  switch (size) {
+var StyledText = styled13.span`
+  ${({ $size, $fontSize, theme }) => {
+  switch ($size) {
     case "small":
-      return css`font-size: ${theme.size.em(fontSize ?? 12)};`;
+      return css`font-size: ${theme.size.em($fontSize ?? 12)};`;
     case "middle":
-      return css`font-size: ${theme.size.em(fontSize ?? 16)};`;
+      return css`font-size: ${theme.size.em($fontSize ?? 16)};`;
     default:
-      return css`font-size: ${theme.size.em(fontSize ?? 18)};`;
+      return css`font-size: ${theme.size.em($fontSize ?? 18)};`;
   }
 }}
 
   display: block;
-  font-weight: ${({ fontWeight }) => fontWeight};
-  color: ${({ color: color2 }) => color2};
+  font-weight: ${({ $fontWeight }) => $fontWeight};
+  color: ${({ $color }) => $color};
   position: relative;
   z-index: 1;
 
-  ${({ disabled, disabledColor, color: color2 }) => disabled && css`
+  ${({ $disabled, $disabledColor, $color }) => $disabled && css`
     opacity: 0.5;
     cursor: not-allowed;
-    color: ${disabledColor ?? `${hexToRgb(color2)}, 0.5`};
+    color: ${$disabledColor ?? `${hexToRgb($color)}, 0.5`};
   `}
 `;
-var Button001 = ({
-  type = "001",
-  size = "middle",
-  as = "button",
-  disabled,
-  animation,
-  onClick,
-  children,
-  href,
-  style
-}) => {
-  return /* @__PURE__ */ jsx(StyledButtonWrapper, { children: /* @__PURE__ */ jsx(
-    StyledButton,
-    {
-      as,
-      href,
-      type,
-      size,
-      onClick,
-      animation,
-      backgroundColor: style?.backgroundColor ?? "#fff",
-      borderColor: style?.borderColor ?? "#000",
-      paddingTop: style?.paddingTop,
-      paddingRight: style?.paddingRight,
-      paddingBottom: style?.paddingBottom,
-      paddingLeft: style?.paddingLeft,
-      disabled: !!disabled,
-      disabledBackgroundColor: style?.disabledBackgroundColor,
-      disabledBorderColor: style?.disabledBorderColor,
-      children: /* @__PURE__ */ jsx(
-        StyledText,
-        {
-          size,
-          color: style?.color ?? "#000",
-          fontWeight: style?.fontWeight ?? 700,
-          disabled: !!disabled,
-          disabledColor: style?.disabledColor,
-          fontSize: style?.fontSize,
-          children
-        }
-      )
-    }
-  ) });
+var defaultAppearance = {
+  backgroundColor: "#fff",
+  borderColor: "#000",
+  paddingTop: 0,
+  paddingRight: 0,
+  paddingBottom: 0,
+  paddingLeft: 0,
+  fontSize: 0,
+  color: "#000",
+  fontWeight: 700,
+  disabledColor: "#999",
+  disabledBackgroundColor: "#e0e0e0",
+  disabledBorderColor: "#ccc"
 };
+var Button001 = forwardRef(
+  ({
+    type = "001",
+    size = "middle",
+    as = "button",
+    disabled = false,
+    animation,
+    onClick,
+    children,
+    appearance,
+    ...rest
+  }, ref) => {
+    const mergedAppearance = useMemo(
+      () => ({ ...defaultAppearance, ...appearance }),
+      [appearance]
+    );
+    const {
+      backgroundColor,
+      borderColor,
+      paddingTop,
+      paddingRight,
+      paddingBottom,
+      paddingLeft,
+      fontSize,
+      color: color2,
+      fontWeight,
+      disabledColor,
+      disabledBackgroundColor,
+      disabledBorderColor
+    } = mergedAppearance;
+    return /* @__PURE__ */ jsx(
+      StyledButton,
+      {
+        ref,
+        as,
+        $type: type,
+        $size: size,
+        onClick,
+        $animation: animation,
+        $backgroundColor: backgroundColor,
+        $borderColor: borderColor,
+        $paddingTop: paddingTop || void 0,
+        $paddingRight: paddingRight || void 0,
+        $paddingBottom: paddingBottom || void 0,
+        $paddingLeft: paddingLeft || void 0,
+        disabled,
+        $disabledBackgroundColor: disabledBackgroundColor,
+        $disabledBorderColor: disabledBorderColor,
+        ...rest,
+        children: /* @__PURE__ */ jsx(
+          StyledText,
+          {
+            $size: size,
+            $color: color2,
+            $fontWeight: fontWeight,
+            $disabled: disabled,
+            $disabledColor: disabledColor,
+            $fontSize: fontSize || void 0,
+            children
+          }
+        )
+      }
+    );
+  }
+);
+Button001.displayName = "Button001";
 var ArrowHide = keyframes`
   from {
     transform: translateX(0);
@@ -3466,23 +3502,17 @@ var ArrowShow = keyframes`
     transform: translateX(0);
   }
 `;
-var StyledButtonWrapper2 = styled13.span`
+var StyledButton2 = styled13.span`
   ${({ theme }) => theme.font.baseSize.em()};
 
-  display: block;
-  width: 100%;
-`;
-var StyledButton2 = styled13.span.withConfig({
-  shouldForwardProp: (prop) => prop !== "type" && prop !== "backgroundColor" && prop !== "borderColor" && prop !== "animation" && prop !== "size" && prop !== "iconSize" && prop !== "fontSize" && prop !== "iconDirection" && prop !== "isHover" && prop !== "disabledBackgroundColor" && prop !== "disabledBorderColor" && prop !== "paddingTop" && prop !== "paddingRight" && prop !== "paddingBottom" && prop !== "paddingLeft"
-})`
   width: 100%;
   text-align: center;
   cursor: pointer;
   display: block;
-  background-color: ${({ backgroundColor }) => backgroundColor};
+  background-color: ${({ $backgroundColor }) => $backgroundColor};
   position: relative;
   overflow: hidden;
-  border: 1px solid ${({ borderColor }) => borderColor};
+  border: 1px solid ${({ $borderColor }) => $borderColor};
 
   &::after {
     content: "";
@@ -3491,12 +3521,12 @@ var StyledButton2 = styled13.span.withConfig({
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: ${({ backgroundColor }) => backgroundColor};
+    background-color: ${({ $backgroundColor }) => $backgroundColor};
     z-index: 0;
   }
 
-  ${({ type, theme }) => {
-  switch (type) {
+  ${({ $type, theme }) => {
+  switch ($type) {
     case "001":
     case "004":
     case "007":
@@ -3510,8 +3540,8 @@ var StyledButton2 = styled13.span.withConfig({
   }
 }}
 
-  ${({ type, iconDirection, theme }) => {
-  switch (type) {
+  ${({ $type, $iconDirection, theme }) => {
+  switch ($type) {
     case "001":
     case "002":
     case "003":
@@ -3545,11 +3575,11 @@ var StyledButton2 = styled13.span.withConfig({
               transform: translateY(-50%);
               z-index: 1;
 
-              ${iconDirection === "left" && css`
+              ${$iconDirection === "left" && css`
                   left: ${theme.size.em(24)};
                 `}
 
-              ${iconDirection === "right" && css`
+              ${$iconDirection === "right" && css`
                   right: ${theme.size.em(24)};
                 `}
             }
@@ -3564,8 +3594,8 @@ var StyledButton2 = styled13.span.withConfig({
   }
 }}
 
-  ${({ iconDirection }) => {
-  switch (iconDirection) {
+  ${({ $iconDirection }) => {
+  switch ($iconDirection) {
     case "left":
       return css`
           flex-direction: row-reverse;
@@ -3578,23 +3608,23 @@ var StyledButton2 = styled13.span.withConfig({
 }}
 
   ${({
-  size,
-  iconSize,
-  fontSize,
-  paddingTop,
-  paddingRight,
-  paddingBottom,
-  paddingLeft,
+  $size,
+  $iconSize,
+  $fontSize,
+  $paddingTop,
+  $paddingRight,
+  $paddingBottom,
+  $paddingLeft,
   theme
 }) => {
-  switch (size) {
+  switch ($size) {
     case "small":
       return css`
-          padding: ${theme.size.em(paddingTop ?? 7)} ${theme.size.em(paddingRight ?? 13)} ${theme.size.em(paddingBottom ?? 7)} ${theme.size.em(paddingLeft ?? 13)};
+          padding: ${theme.size.em($paddingTop ?? 7)} ${theme.size.em($paddingRight ?? 13)} ${theme.size.em($paddingBottom ?? 7)} ${theme.size.em($paddingLeft ?? 13)};
 
           ${StyledIconWrapper} {
-            width: ${theme.size.em(iconSize ?? theme.icon.size.small)};
-            height: ${theme.size.em(iconSize ?? theme.icon.size.small)};
+            width: ${theme.size.em($iconSize ?? theme.icon.size.small)};
+            height: ${theme.size.em($iconSize ?? theme.icon.size.small)};
           }
 
           ${StyledText2} {
@@ -3603,86 +3633,86 @@ var StyledButton2 = styled13.span.withConfig({
         `;
     case "middle":
       return css`
-          padding: ${theme.size.em(paddingTop ?? 15)} ${theme.size.em(paddingRight ?? 28)} ${theme.size.em(paddingBottom ?? 15)} ${theme.size.em(paddingLeft ?? 28)};
+          padding: ${theme.size.em($paddingTop ?? 15)} ${theme.size.em($paddingRight ?? 28)} ${theme.size.em($paddingBottom ?? 15)} ${theme.size.em($paddingLeft ?? 28)};
 
           ${StyledIconWrapper} {
-            width: ${theme.size.em(iconSize ?? theme.icon.size.middle)};
-            height: ${theme.size.em(iconSize ?? theme.icon.size.middle)};
+            width: ${theme.size.em($iconSize ?? theme.icon.size.middle)};
+            height: ${theme.size.em($iconSize ?? theme.icon.size.middle)};
           }
 
           ${StyledText2} {
-            font-size: ${theme.size.em(fontSize ?? 16)};
+            font-size: ${theme.size.em($fontSize ?? 16)};
           }
         `;
     case "large":
       return css`
-          padding: ${theme.size.em(paddingTop ?? 25)} ${theme.size.em(paddingRight ?? 45)} ${theme.size.em(paddingBottom ?? 25)} ${theme.size.em(paddingLeft ?? 45)};
+          padding: ${theme.size.em($paddingTop ?? 25)} ${theme.size.em($paddingRight ?? 45)} ${theme.size.em($paddingBottom ?? 25)} ${theme.size.em($paddingLeft ?? 45)};
 
           ${StyledIconWrapper} {
-            width: ${theme.size.em(iconSize ?? theme.icon.size.large)};
-            height: ${theme.size.em(iconSize ?? theme.icon.size.large)};
+            width: ${theme.size.em($iconSize ?? theme.icon.size.large)};
+            height: ${theme.size.em($iconSize ?? theme.icon.size.large)};
           }
 
           ${StyledText2} {
-            font-size: ${theme.size.em(fontSize ?? 18)};
+            font-size: ${theme.size.em($fontSize ?? 18)};
           }
         `;
     default:
       return css`
-          padding: ${theme.size.em(paddingTop ?? 25)} ${theme.size.em(paddingRight ?? 45)} ${theme.size.em(paddingBottom ?? 25)} ${theme.size.em(paddingLeft ?? 45)};
+          padding: ${theme.size.em($paddingTop ?? 25)} ${theme.size.em($paddingRight ?? 45)} ${theme.size.em($paddingBottom ?? 25)} ${theme.size.em($paddingLeft ?? 45)};
         `;
   }
 }}
 
-  ${({ animation, theme, isHover }) => {
-  switch (animation?.type ?? "001") {
+  ${({ $animation, theme, $isHover }) => {
+  switch ($animation?.type ?? "001") {
     case "001":
       return css`
           &::after {
-            transition: background-color ${animation?.duration ?? 0.25}s ${theme.animation.easing[animation?.easing ?? "easeInOutCubic"]};
+            transition: background-color ${$animation?.duration ?? 0.25}s ${theme.animation.easing[$animation?.easing ?? "easeInOutCubic"]};
           }
 
           ${StyledText2} {
-            transition: color ${animation?.duration ?? 0.25}s ${theme.animation.easing[animation?.easing ?? "easeInOutCubic"]};
+            transition: color ${$animation?.duration ?? 0.25}s ${theme.animation.easing[$animation?.easing ?? "easeInOutCubic"]};
           }
 
           ${StyledIcon} {
-            transition: color ${animation?.duration ?? 0.25}s ${theme.animation.easing[animation?.easing ?? "easeInOutCubic"]};
+            transition: color ${$animation?.duration ?? 0.25}s ${theme.animation.easing[$animation?.easing ?? "easeInOutCubic"]};
           }
 
           &:hover {
             ${StyledText2} {
-              color: ${animation?.textColor ?? "#fff"};
+              color: ${$animation?.textColor ?? "#fff"};
             }
 
             ${StyledIcon} {
-              color: ${animation?.textColor ?? "#fff"};
+              color: ${$animation?.textColor ?? "#fff"};
             }
 
             &::after {
-              background-color: ${animation?.backgroundColor ?? "#000"};
+              background-color: ${$animation?.backgroundColor ?? "#000"};
             }
           }
         `;
     case "002": {
       return css`
           ${StyledIcon}:nth-child(1) {
-            ${isHover === true && css`
-                animation: ${ArrowHide} ${animation?.duration ?? 0.25}s ${theme.animation.easing[animation?.easing ?? "easeOutCubic"]} forwards;
+            ${$isHover === true && css`
+                animation: ${ArrowHide} ${$animation?.duration ?? 0.25}s ${theme.animation.easing[$animation?.easing ?? "easeOutCubic"]} forwards;
               `}
 
-            ${isHover === false && css`
-                animation: ${ArrowShow} ${animation?.duration ?? 0.25}s ${theme.animation.easing[animation?.easing ?? "easeOutCubic"]} forwards;
+            ${$isHover === false && css`
+                animation: ${ArrowShow} ${$animation?.duration ?? 0.25}s ${theme.animation.easing[$animation?.easing ?? "easeOutCubic"]} forwards;
               `}
           }
 
           ${StyledIcon}:nth-child(2) {
-            ${isHover === true && css`  
-                animation: ${ArrowShow} ${animation?.duration ?? 0.25}s ${theme.animation.easing[animation?.easing ?? "easeOutCubic"]} forwards;
+            ${$isHover === true && css`
+                animation: ${ArrowShow} ${$animation?.duration ?? 0.25}s ${theme.animation.easing[$animation?.easing ?? "easeOutCubic"]} forwards;
               `}
 
-            ${isHover === false && css`
-                animation: ${ArrowHide} ${animation?.duration ?? 0.25}s ${theme.animation.easing[animation?.easing ?? "easeOutCubic"]} forwards;
+            ${$isHover === false && css`
+                animation: ${ArrowHide} ${$animation?.duration ?? 0.25}s ${theme.animation.easing[$animation?.easing ?? "easeOutCubic"]} forwards;
               `}
           }
         `;
@@ -3691,12 +3721,12 @@ var StyledButton2 = styled13.span.withConfig({
       return css`
           ${StyledIcon}:nth-child(1) {
             transform: translateX(-100%);
-            transition: transform ${animation?.duration ?? 0.25}s ${theme.animation.easing[animation?.easing ?? "easeOutCubic"]};
+            transition: transform ${$animation?.duration ?? 0.25}s ${theme.animation.easing[$animation?.easing ?? "easeOutCubic"]};
           }
 
           ${StyledIcon}:nth-child(2) {
             transform: translateX(0);
-            transition: transform ${animation?.duration ?? 0.25}s ${theme.animation.easing[animation?.easing ?? "easeOutCubic"]};
+            transition: transform ${$animation?.duration ?? 0.25}s ${theme.animation.easing[$animation?.easing ?? "easeOutCubic"]};
           }
 
           &:hover {
@@ -3715,25 +3745,25 @@ var StyledButton2 = styled13.span.withConfig({
             &::after {
               transform: scaleX(0);
               transform-origin: right bottom;
-              transition: transform ${animation?.duration ?? 0.25}s ${theme.animation.easing[animation?.easing ?? "easeOutCubic"]};
-              background-color: ${animation?.backgroundColor ?? "#fff"};
+              transition: transform ${$animation?.duration ?? 0.25}s ${theme.animation.easing[$animation?.easing ?? "easeOutCubic"]};
+              background-color: ${$animation?.backgroundColor ?? "#fff"};
             }
 
             ${StyledText2} {
-              transition: color ${animation?.duration ?? 0.25}s ${theme.animation.easing[animation?.easing ?? "easeOutCubic"]};
+              transition: color ${$animation?.duration ?? 0.25}s ${theme.animation.easing[$animation?.easing ?? "easeOutCubic"]};
             }
 
             ${StyledIcon} {
-              transition: color ${animation?.duration ?? 0.25}s ${theme.animation.easing[animation?.easing ?? "easeOutCubic"]};
+              transition: color ${$animation?.duration ?? 0.25}s ${theme.animation.easing[$animation?.easing ?? "easeOutCubic"]};
             }
 
             &:hover {
               ${StyledText2} {
-                color: ${animation?.textColor ?? "#fff"};
+                color: ${$animation?.textColor ?? "#fff"};
               }
 
               ${StyledIcon} {
-                color: ${animation?.textColor ?? "#fff"};
+                color: ${$animation?.textColor ?? "#fff"};
               }
 
               &::after {
@@ -3747,16 +3777,16 @@ var StyledButton2 = styled13.span.withConfig({
 }}
 
   ${({
-  disabled,
-  disabledBackgroundColor,
-  backgroundColor,
-  disabledBorderColor,
-  borderColor
-}) => disabled && css`
+  $disabled,
+  $disabledBackgroundColor,
+  $backgroundColor,
+  $disabledBorderColor,
+  $borderColor
+}) => $disabled && css`
     cursor: not-allowed;
     pointer-events: none;
-    background-color: ${disabledBackgroundColor ?? `rgba(${hexToRgb(backgroundColor)}, 0.5)`};
-    border-color: ${disabledBorderColor ?? `rgba(${hexToRgb(borderColor)}, 0.5)`};
+    background-color: ${$disabledBackgroundColor ?? `rgba(${hexToRgb($backgroundColor)}, 0.5)`};
+    border-color: ${$disabledBorderColor ?? `rgba(${hexToRgb($borderColor)}, 0.5)`};
   `}
 `;
 var StyledIconWrapper = styled13.span`
@@ -3770,16 +3800,14 @@ var StyledIconInner = styled13.span`
   overflow: hidden;
   display: block;
 `;
-var StyledIcon = styled13.span.withConfig({
-  shouldForwardProp: (prop) => prop !== "color" && prop !== "disabled" && prop !== "disabledColor"
-})`
+var StyledIcon = styled13.span`
   display: block;
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  color: ${({ color: color2 }) => color2};
+  color: ${({ $color }) => $color};
 
   &:nth-child(1) {
     transform: translateX(0);
@@ -3789,15 +3817,13 @@ var StyledIcon = styled13.span.withConfig({
     transform: translateX(100%);
   }
 
-  ${({ disabled, disabledColor, color: color2 }) => disabled && css`
-    color: ${disabledColor ?? `rgba(${hexToRgb(color2)}, 0.5)`};
+  ${({ $disabled, $disabledColor, $color }) => $disabled && css`
+    color: ${$disabledColor ?? `rgba(${hexToRgb($color)}, 0.5)`};
   `}
 `;
-var StyledText2 = styled13.span.withConfig({
-  shouldForwardProp: (prop) => prop !== "size" && prop !== "color" && prop !== "fontWeight" && prop !== "disabled" && prop !== "disabledColor"
-})`
-  ${({ size, theme }) => {
-  switch (size) {
+var StyledText2 = styled13.span`
+  ${({ $size, theme }) => {
+  switch ($size) {
     case "small":
       return css`font-size: ${theme.size.em(12)};`;
     case "middle":
@@ -3808,89 +3834,127 @@ var StyledText2 = styled13.span.withConfig({
 }}
 
   display: block;
-  font-weight: ${({ fontWeight }) => fontWeight};
-  color: ${({ color: color2 }) => color2};
+  font-weight: ${({ $fontWeight }) => $fontWeight};
+  color: ${({ $color }) => $color};
   position: relative;
   z-index: 1;
 
-  ${({ disabled, disabledColor, color: color2 }) => disabled && css`
-    color: ${disabledColor ?? `rgba(${hexToRgb(color2)}, 0.5)`};
+  ${({ $disabled, $disabledColor, $color }) => $disabled && css`
+    color: ${$disabledColor ?? `rgba(${hexToRgb($color)}, 0.5)`};
   `}
 `;
-var Button002 = ({
-  as = "button",
-  type = "001",
-  size = "middle",
-  animation,
-  onClick,
-  children,
-  style,
-  disabled,
-  iconDirection = "right",
-  icon,
-  href
-}) => {
-  const [isHover, setIsHover] = useState(null);
-  return /* @__PURE__ */ jsx(StyledButtonWrapper2, { children: /* @__PURE__ */ jsxs(
-    StyledButton2,
-    {
-      as,
-      href,
-      type,
-      size,
-      onClick,
-      animation,
-      backgroundColor: style?.backgroundColor ?? "#fff",
-      borderColor: style?.borderColor ?? "#000",
-      iconDirection,
-      isHover,
-      disabled: !!disabled,
-      disabledBackgroundColor: style?.disabledBackgroundColor,
-      disabledBorderColor: style?.disabledBorderColor,
-      paddingTop: style?.paddingTop,
-      paddingRight: style?.paddingRight,
-      paddingBottom: style?.paddingBottom,
-      paddingLeft: style?.paddingLeft,
-      iconSize: style?.iconSize,
-      fontSize: style?.fontSize,
-      onMouseEnter: () => setIsHover(true),
-      onMouseLeave: () => setIsHover(false),
-      children: [
-        /* @__PURE__ */ jsx(
-          StyledText2,
-          {
-            size,
-            color: style?.color ?? "#000",
-            fontWeight: style?.fontWeight ?? 700,
-            disabled: !!disabled,
-            disabledColor: style?.disabledColor,
-            children
-          }
-        ),
-        /* @__PURE__ */ jsx(StyledIconWrapper, { children: /* @__PURE__ */ jsxs(StyledIconInner, { children: [
+var defaultAppearance2 = {
+  paddingTop: 0,
+  paddingRight: 0,
+  paddingBottom: 0,
+  paddingLeft: 0,
+  iconSize: 0,
+  fontSize: 0,
+  backgroundColor: "#fff",
+  borderColor: "#000",
+  color: "#000",
+  fontWeight: 700,
+  disabledColor: "#999",
+  disabledBackgroundColor: "#e0e0e0",
+  disabledBorderColor: "#ccc"
+};
+var Button002 = forwardRef(
+  ({
+    as = "button",
+    type = "001",
+    size = "middle",
+    animation,
+    onClick,
+    children,
+    appearance,
+    disabled = false,
+    iconDirection = "right",
+    icon,
+    ...rest
+  }, ref) => {
+    const [isHover, setIsHover] = useState(null);
+    const mergedAppearance = useMemo(
+      () => ({ ...defaultAppearance2, ...appearance }),
+      [appearance]
+    );
+    const {
+      paddingTop,
+      paddingRight,
+      paddingBottom,
+      paddingLeft,
+      iconSize,
+      fontSize,
+      backgroundColor,
+      borderColor,
+      color: color2,
+      fontWeight,
+      disabledColor,
+      disabledBackgroundColor,
+      disabledBorderColor
+    } = mergedAppearance;
+    return /* @__PURE__ */ jsxs(
+      StyledButton2,
+      {
+        ref,
+        as,
+        $type: type,
+        $size: size,
+        onClick,
+        $animation: animation,
+        $backgroundColor: backgroundColor,
+        $borderColor: borderColor,
+        $iconDirection: iconDirection,
+        $isHover: isHover,
+        $disabledBackgroundColor: disabledBackgroundColor,
+        $disabledBorderColor: disabledBorderColor,
+        $paddingTop: paddingTop || void 0,
+        $paddingRight: paddingRight || void 0,
+        $paddingBottom: paddingBottom || void 0,
+        $paddingLeft: paddingLeft || void 0,
+        $iconSize: iconSize || void 0,
+        $fontSize: fontSize || void 0,
+        $disabled: disabled,
+        onMouseEnter: () => setIsHover(true),
+        onMouseLeave: () => setIsHover(false),
+        ...rest,
+        children: [
           /* @__PURE__ */ jsx(
-            StyledIcon,
+            StyledText2,
             {
-              color: style?.color ?? "#000",
-              disabled: !!disabled,
-              disabledColor: style?.disabledColor,
-              children: icon
+              $size: size,
+              $color: color2,
+              $fontWeight: fontWeight,
+              $disabled: disabled,
+              $disabledColor: disabledColor,
+              children
             }
           ),
-          /* @__PURE__ */ jsx(
-            StyledIcon,
-            {
-              color: style?.color ?? "#000",
-              disabled: !!disabled,
-              disabledColor: style?.disabledColor,
-              children: icon
-            }
-          )
-        ] }) })
-      ]
-    }
-  ) });
-};
+          /* @__PURE__ */ jsx(StyledIconWrapper, { children: /* @__PURE__ */ jsxs(StyledIconInner, { children: [
+            /* @__PURE__ */ jsx(
+              StyledIcon,
+              {
+                $color: color2,
+                $disabled: disabled,
+                $disabledColor: disabledColor,
+                children: icon
+              }
+            ),
+            /* @__PURE__ */ jsx(
+              StyledIcon,
+              {
+                $color: color2,
+                $disabled: disabled,
+                $disabledColor: disabledColor,
+                children: icon
+              }
+            )
+          ] }) })
+        ]
+      }
+    );
+  }
+);
+Button002.displayName = "Button002";
 var StyledCheckBoxWrapper = styled13.div`
   ${({ theme }) => theme.font.baseSize.em()};
 

@@ -1,79 +1,128 @@
-import type { ReactNode } from "react";
-import type { Size } from "../../../../styles/size";
 import {
-  type Animation,
-  StyledButton,
-  StyledButtonWrapper,
-  StyledText,
-  type Type
-} from "./styles";
+  type ButtonHTMLAttributes,
+  forwardRef,
+  type MouseEvent,
+  type ReactNode,
+  useMemo
+} from "react";
+import type { Size } from "../../../../styles/size";
+import { type Animation, StyledButton, StyledText, type Type } from "./styles";
 
-interface ButtonProps {
+interface ButtonAppearance {
+  backgroundColor?: string;
+  borderColor?: string;
+  paddingTop?: number;
+  paddingRight?: number;
+  paddingBottom?: number;
+  paddingLeft?: number;
+  fontSize?: number;
+  color?: string;
+  fontWeight?: number;
+  disabledColor?: string;
+  disabledBackgroundColor?: string;
+  disabledBorderColor?: string;
+}
+
+type BaseProps = {
   as?: "button" | "a" | "span";
-  href?: string;
   type?: Type;
   size?: Size;
   children: ReactNode;
   animation?: Animation;
   disabled?: boolean;
-  style?: {
-    backgroundColor?: string;
-    borderColor?: string;
-    paddingTop?: number;
-    paddingRight?: number;
-    paddingBottom?: number;
-    paddingLeft?: number;
-    fontSize?: number;
-    color?: string;
-    fontWeight?: number;
-    disabledColor?: string;
-    disabledBackgroundColor?: string;
-    disabledBorderColor?: string;
-  };
-  onClick?: () => void;
-}
+  appearance?: ButtonAppearance;
+  onClick?: (event: MouseEvent<HTMLButtonElement>) => void;
+};
 
-export const Button001 = ({
-  type = "001",
-  size = "middle",
-  as = "button",
-  disabled,
-  animation,
-  onClick,
-  children,
-  href,
-  style
-}: ButtonProps) => {
-  return (
-    <StyledButtonWrapper>
+type ButtonProps = BaseProps &
+  Omit<ButtonHTMLAttributes<HTMLButtonElement>, keyof BaseProps | "type"> & {
+    href?: string;
+    target?: string;
+    rel?: string;
+  };
+
+const defaultAppearance: Required<ButtonAppearance> = {
+  backgroundColor: "#fff",
+  borderColor: "#000",
+  paddingTop: 0,
+  paddingRight: 0,
+  paddingBottom: 0,
+  paddingLeft: 0,
+  fontSize: 0,
+  color: "#000",
+  fontWeight: 700,
+  disabledColor: "#999",
+  disabledBackgroundColor: "#e0e0e0",
+  disabledBorderColor: "#ccc"
+};
+
+export const Button001 = forwardRef<HTMLButtonElement, ButtonProps>(
+  (
+    {
+      type = "001",
+      size = "middle",
+      as = "button",
+      disabled = false,
+      animation,
+      onClick,
+      children,
+      appearance,
+      ...rest
+    },
+    ref
+  ) => {
+    const mergedAppearance = useMemo(
+      () => ({ ...defaultAppearance, ...appearance }),
+      [appearance]
+    );
+
+    const {
+      backgroundColor,
+      borderColor,
+      paddingTop,
+      paddingRight,
+      paddingBottom,
+      paddingLeft,
+      fontSize,
+      color,
+      fontWeight,
+      disabledColor,
+      disabledBackgroundColor,
+      disabledBorderColor
+    } = mergedAppearance;
+
+    return (
       <StyledButton
-        as={as}
-        href={href}
-        type={type}
-        size={size}
+        ref={ref}
+        as={as as any}
+        $type={type}
+        $size={size}
         onClick={onClick}
-        animation={animation}
-        backgroundColor={style?.backgroundColor ?? "#fff"}
-        borderColor={style?.borderColor ?? "#000"}
-        paddingTop={style?.paddingTop}
-        paddingRight={style?.paddingRight}
-        paddingBottom={style?.paddingBottom}
-        paddingLeft={style?.paddingLeft}
-        disabled={!!disabled}
-        disabledBackgroundColor={style?.disabledBackgroundColor}
-        disabledBorderColor={style?.disabledBorderColor}
+        $animation={animation}
+        $backgroundColor={backgroundColor}
+        $borderColor={borderColor}
+        $paddingTop={paddingTop || undefined}
+        $paddingRight={paddingRight || undefined}
+        $paddingBottom={paddingBottom || undefined}
+        $paddingLeft={paddingLeft || undefined}
+        disabled={disabled}
+        $disabledBackgroundColor={disabledBackgroundColor}
+        $disabledBorderColor={disabledBorderColor}
+        {...rest}
       >
         <StyledText
-          size={size}
-          color={style?.color ?? "#000"}
-          fontWeight={style?.fontWeight ?? 700}
-          disabled={!!disabled}
-          disabledColor={style?.disabledColor}
-          fontSize={style?.fontSize}
+          $size={size}
+          $color={color}
+          $fontWeight={fontWeight}
+          $disabled={disabled}
+          $disabledColor={disabledColor}
+          $fontSize={fontSize || undefined}
         >
           {children}
         </StyledText>
       </StyledButton>
-    </StyledButtonWrapper>
-  );
-};
+    );
+  }
+);
+
+Button001.displayName = "Button001";

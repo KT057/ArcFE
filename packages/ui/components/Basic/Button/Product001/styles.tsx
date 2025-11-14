@@ -14,47 +14,29 @@ export type Animation = {
   textColor?: string;
 };
 
-export const StyledButtonWrapper = styled.span`
+export const StyledButton = styled.button<{
+  $type?: Type;
+  $backgroundColor: string;
+  $borderColor: string;
+  $animation?: Animation;
+  $size: Size;
+  $disabledBackgroundColor: string | undefined;
+  $disabledBorderColor: string | undefined;
+  $paddingTop: number | undefined;
+  $paddingRight: number | undefined;
+  $paddingBottom: number | undefined;
+  $paddingLeft: number | undefined;
+}>`
   ${({ theme }) => theme.font.baseSize.em()};
 
-  display: block;
-`;
-
-export const StyledButton = styled.button.withConfig({
-  shouldForwardProp: (prop) =>
-    prop !== "type" &&
-    prop !== "backgroundColor" &&
-    prop !== "borderColor" &&
-    prop !== "animation" &&
-    prop !== "size" &&
-    prop !== "disabledBackgroundColor" &&
-    prop !== "disabledBorderColor" &&
-    prop !== "paddingTop" &&
-    prop !== "paddingRight" &&
-    prop !== "paddingBottom" &&
-    prop !== "paddingLeft"
-})<{
-  type?: Type;
-  backgroundColor: string;
-  borderColor: string;
-  animation?: Animation;
-  size: Size;
-  disabled: boolean;
-  disabledBackgroundColor: string | undefined;
-  disabledBorderColor: string | undefined;
-  paddingTop: number | undefined;
-  paddingRight: number | undefined;
-  paddingBottom: number | undefined;
-  paddingLeft: number | undefined;
-}>`
   width: 100%;
   text-align: center;
   cursor: pointer;
   display: block;
-  background-color: ${({ backgroundColor }) => backgroundColor};
+  background-color: ${({ $backgroundColor }) => $backgroundColor};
   position: relative;
   overflow: hidden;
-  border: 1px solid ${({ borderColor }) => borderColor};
+  border: 1px solid ${({ $borderColor }) => $borderColor};
 
   &::after {
     content: "";
@@ -63,12 +45,12 @@ export const StyledButton = styled.button.withConfig({
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: ${({ backgroundColor }) => backgroundColor};
+    background-color: ${({ $backgroundColor }) => $backgroundColor};
     z-index: 0;
   }
 
-  ${({ type, theme }) => {
-    switch (type) {
+  ${({ $type, theme }) => {
+    switch ($type) {
       case "001":
         return css`border-radius: ${theme.size.em(30)};`;
       case "002":
@@ -78,36 +60,43 @@ export const StyledButton = styled.button.withConfig({
     }
   }}
 
-  ${({ size, paddingTop, paddingRight, paddingBottom, paddingLeft, theme }) => {
-    switch (size) {
+  ${({
+    $size,
+    $paddingTop,
+    $paddingRight,
+    $paddingBottom,
+    $paddingLeft,
+    theme
+  }) => {
+    switch ($size) {
       case "small":
-        return css`padding: ${theme.size.em(paddingTop ?? 7)} ${theme.size.em(paddingRight ?? 13)} ${theme.size.em(paddingBottom ?? 7)} ${theme.size.em(paddingLeft ?? 13)};`;
+        return css`padding: ${theme.size.em($paddingTop ?? 7)} ${theme.size.em($paddingRight ?? 13)} ${theme.size.em($paddingBottom ?? 7)} ${theme.size.em($paddingLeft ?? 13)};`;
       case "middle":
-        return css`padding: ${theme.size.em(paddingTop ?? 15)} ${theme.size.em(paddingRight ?? 28)} ${theme.size.em(paddingBottom ?? 15)} ${theme.size.em(paddingLeft ?? 28)};`;
+        return css`padding: ${theme.size.em($paddingTop ?? 15)} ${theme.size.em($paddingRight ?? 28)} ${theme.size.em($paddingBottom ?? 15)} ${theme.size.em($paddingLeft ?? 28)};`;
       default:
-        return css`padding: ${theme.size.em(paddingTop ?? 25)} ${theme.size.em(paddingRight ?? 45)} ${theme.size.em(paddingBottom ?? 25)} ${theme.size.em(paddingLeft ?? 45)};`;
+        return css`padding: ${theme.size.em($paddingTop ?? 25)} ${theme.size.em($paddingRight ?? 45)} ${theme.size.em($paddingBottom ?? 25)} ${theme.size.em($paddingLeft ?? 45)};`;
     }
   }}
 
-  ${({ animation, theme }) => {
-    switch (animation?.type ?? "001") {
+  ${({ $animation, theme }) => {
+    switch ($animation?.type ?? "001") {
       case "001":
         return css`
           &::after {
-            transition: background-color ${animation?.duration ?? 0.25}s ${theme.animation.easing[animation?.easing ?? "easeInOutCubic"]};
+            transition: background-color ${$animation?.duration ?? 0.25}s ${theme.animation.easing[$animation?.easing ?? "easeInOutCubic"]};
           }
 
           ${StyledText} {
-            transition: color ${animation?.duration ?? 0.25}s ${theme.animation.easing[animation?.easing ?? "easeInOutCubic"]};
+            transition: color ${$animation?.duration ?? 0.25}s ${theme.animation.easing[$animation?.easing ?? "easeInOutCubic"]};
           }
 
           &:hover {
             ${StyledText} {
-              color: ${animation?.textColor ?? "#fff"};
+              color: ${$animation?.textColor ?? "#fff"};
             }
 
             &::after {
-              background-color: ${animation?.backgroundColor ?? "#000"};
+              background-color: ${$animation?.backgroundColor ?? "#000"};
             }
           }
         `;
@@ -117,17 +106,17 @@ export const StyledButton = styled.button.withConfig({
           &::after {
             transform: scaleX(0);
             transform-origin: bottom right;
-            transition: transform ${animation?.duration ?? 0.25}s ${theme.animation.easing[animation?.easing ?? "easeOutCubic"]};
-            background-color: ${animation?.backgroundColor ?? "#fff"};
+            transition: transform ${$animation?.duration ?? 0.25}s ${theme.animation.easing[$animation?.easing ?? "easeOutCubic"]};
+            background-color: ${$animation?.backgroundColor ?? "#fff"};
           }
 
           ${StyledText} {
-            transition: color ${animation?.duration ?? 0.25}s ${theme.animation.easing[animation?.easing ?? "easeOutCubic"]};
+            transition: color ${$animation?.duration ?? 0.25}s ${theme.animation.easing[$animation?.easing ?? "easeOutCubic"]};
           }
 
           &:hover {
             ${StyledText} {
-              color: ${animation?.textColor ?? "#fff"};
+              color: ${$animation?.textColor ?? "#fff"};
             }
 
             &::after {
@@ -141,58 +130,50 @@ export const StyledButton = styled.button.withConfig({
 
   ${({
     disabled,
-    disabledBackgroundColor,
-    backgroundColor,
-    disabledBorderColor,
-    borderColor
+    $disabledBackgroundColor,
+    $backgroundColor,
+    $disabledBorderColor,
+    $borderColor
   }) =>
     disabled &&
     css`
     cursor: not-allowed;
     pointer-events: none;
-    background-color: ${disabledBackgroundColor ?? `${hexToRgb(backgroundColor)}, 0.5`};
-    border-color: ${disabledBorderColor ?? `${hexToRgb(borderColor)}, 0.5`};
+    background-color: ${$disabledBackgroundColor ?? `${hexToRgb($backgroundColor)}, 0.5`};
+    border-color: ${$disabledBorderColor ?? `${hexToRgb($borderColor)}, 0.5`};
   `}
 `;
 
-export const StyledText = styled.span.withConfig({
-  shouldForwardProp: (prop) =>
-    prop !== "size" &&
-    prop !== "color" &&
-    prop !== "fontWeight" &&
-    prop !== "disabled" &&
-    prop !== "disabledColor" &&
-    prop !== "fontSize"
-})<{
-  size: Size;
-  color: string;
-  fontWeight: number;
-  disabled: boolean;
-  disabledColor: string | undefined;
-  fontSize: number | undefined;
+export const StyledText = styled.span<{
+  $size: Size;
+  $color: string;
+  $fontWeight: number;
+  $disabled: boolean;
+  $disabledColor: string | undefined;
+  $fontSize: number | undefined;
 }>`
-  ${({ size, fontSize, theme }) => {
-    switch (size) {
+  ${({ $size, $fontSize, theme }) => {
+    switch ($size) {
       case "small":
-        return css`font-size: ${theme.size.em(fontSize ?? 12)};`;
+        return css`font-size: ${theme.size.em($fontSize ?? 12)};`;
       case "middle":
-        return css`font-size: ${theme.size.em(fontSize ?? 16)};`;
+        return css`font-size: ${theme.size.em($fontSize ?? 16)};`;
       default:
-        return css`font-size: ${theme.size.em(fontSize ?? 18)};`;
+        return css`font-size: ${theme.size.em($fontSize ?? 18)};`;
     }
   }}
 
   display: block;
-  font-weight: ${({ fontWeight }) => fontWeight};
-  color: ${({ color }) => color};
+  font-weight: ${({ $fontWeight }) => $fontWeight};
+  color: ${({ $color }) => $color};
   position: relative;
   z-index: 1;
 
-  ${({ disabled, disabledColor, color }) =>
-    disabled &&
+  ${({ $disabled, $disabledColor, $color }) =>
+    $disabled &&
     css`
     opacity: 0.5;
     cursor: not-allowed;
-    color: ${disabledColor ?? `${hexToRgb(color)}, 0.5`};
+    color: ${$disabledColor ?? `${hexToRgb($color)}, 0.5`};
   `}
 `;

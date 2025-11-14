@@ -1,6 +1,6 @@
 import * as react_jsx_runtime from 'react/jsx-runtime';
 import * as react from 'react';
-import react__default, { ReactNode, ComponentProps, SVGProps, FC } from 'react';
+import react__default, { ReactNode, ComponentProps, MouseEvent, ButtonHTMLAttributes, SVGProps, FC } from 'react';
 import { ParallaxProps, BannerLayer } from 'react-scroll-parallax';
 import { KeenSliderOptions } from 'keen-slider/react';
 import { KeenSliderInstance, KeenSliderHooks } from 'keen-slider';
@@ -105,7 +105,7 @@ interface ArrowButtonProps {
 }
 declare const JmcArrowButton: ({ size, onClick, as, href, style }: ArrowButtonProps) => react_jsx_runtime.JSX.Element;
 
-interface ButtonProps$2 {
+interface ButtonProps {
     children: react__default.ReactNode;
     onClick?: () => void;
     as?: "button" | "a" | "span";
@@ -121,7 +121,7 @@ interface ButtonProps$2 {
         circleToggleDotColor?: string;
     };
 }
-declare const JmcButton: ({ children, onClick, as, href, isHovered: controlledIsHovered, onMouseEnter, onMouseLeave, style }: ButtonProps$2) => react_jsx_runtime.JSX.Element;
+declare const JmcButton: ({ children, onClick, as, href, isHovered: controlledIsHovered, onMouseEnter, onMouseLeave, style }: ButtonProps) => react_jsx_runtime.JSX.Element;
 
 interface CircleToggleProps {
     isHovered?: boolean;
@@ -454,31 +454,35 @@ type Animation$1 = {
     textColor?: string;
 };
 
-interface ButtonProps$1 {
+interface ButtonAppearance$1 {
+    backgroundColor?: string;
+    borderColor?: string;
+    paddingTop?: number;
+    paddingRight?: number;
+    paddingBottom?: number;
+    paddingLeft?: number;
+    fontSize?: number;
+    color?: string;
+    fontWeight?: number;
+    disabledColor?: string;
+    disabledBackgroundColor?: string;
+    disabledBorderColor?: string;
+}
+type BaseProps$1 = {
     as?: "button" | "a" | "span";
-    href?: string;
     type?: Type$d;
     size?: Size;
     children: ReactNode;
     animation?: Animation$1;
     disabled?: boolean;
-    style?: {
-        backgroundColor?: string;
-        borderColor?: string;
-        paddingTop?: number;
-        paddingRight?: number;
-        paddingBottom?: number;
-        paddingLeft?: number;
-        fontSize?: number;
-        color?: string;
-        fontWeight?: number;
-        disabledColor?: string;
-        disabledBackgroundColor?: string;
-        disabledBorderColor?: string;
-    };
-    onClick?: () => void;
-}
-declare const Button001: ({ type, size, as, disabled, animation, onClick, children, href, style }: ButtonProps$1) => react_jsx_runtime.JSX.Element;
+    appearance?: ButtonAppearance$1;
+    onClick?: (event: MouseEvent<HTMLButtonElement>) => void;
+};
+declare const Button001: react.ForwardRefExoticComponent<BaseProps$1 & Omit<ButtonHTMLAttributes<HTMLButtonElement>, keyof BaseProps$1> & {
+    href?: string;
+    target?: string;
+    rel?: string;
+} & react.RefAttributes<HTMLButtonElement>>;
 
 type Type$c = "001" | "002" | "003" | "004" | "005" | "006" | "007" | "008" | "009";
 type AnimationType = "001" | "002" | "003" | "004";
@@ -491,34 +495,38 @@ type Animation = {
     textColor?: string;
 };
 
-interface ButtonProps {
+interface ButtonAppearance {
+    paddingTop?: number;
+    paddingRight?: number;
+    paddingBottom?: number;
+    paddingLeft?: number;
+    iconSize?: number;
+    fontSize?: number;
+    backgroundColor?: string;
+    borderColor?: string;
+    color?: string;
+    fontWeight?: number;
+    disabledColor?: string;
+    disabledBackgroundColor?: string;
+    disabledBorderColor?: string;
+}
+type BaseProps = {
     as?: "button" | "a" | "span";
     type?: Type$c;
     size?: Size;
-    href?: string;
     children: ReactNode;
     animation?: Animation;
-    style?: {
-        paddingTop?: number;
-        paddingRight?: number;
-        paddingBottom?: number;
-        paddingLeft?: number;
-        iconSize?: number;
-        fontSize?: number;
-        backgroundColor?: string;
-        borderColor?: string;
-        color?: string;
-        fontWeight?: number;
-        disabledColor?: string;
-        disabledBackgroundColor?: string;
-        disabledBorderColor?: string;
-    };
+    appearance?: ButtonAppearance;
     iconDirection?: IconDirection;
     icon: ReactNode;
     disabled?: boolean;
-    onClick?: () => void;
-}
-declare const Button002: ({ as, type, size, animation, onClick, children, style, disabled, iconDirection, icon, href }: ButtonProps) => react_jsx_runtime.JSX.Element;
+    onClick?: (event: MouseEvent<HTMLButtonElement>) => void;
+};
+declare const Button002: react.ForwardRefExoticComponent<BaseProps & Omit<ButtonHTMLAttributes<HTMLButtonElement>, keyof BaseProps> & {
+    href?: string;
+    target?: string;
+    rel?: string;
+} & react.RefAttributes<HTMLButtonElement>>;
 
 type CheckBoxType = "001" | "002" | "003";
 interface CheckBoxProps$1 {

@@ -44,56 +44,34 @@ const ArrowShow = keyframes`
   }
 `;
 
-export const StyledButtonWrapper = styled.span`
+export const StyledButton = styled.span<{
+  $type: Type;
+  $backgroundColor: string;
+  $borderColor: string;
+  $animation?: Animation;
+  $size: Size;
+  $iconDirection: IconDirection;
+  $isHover: boolean | null;
+  $iconSize: number | undefined;
+  $fontSize: number | undefined;
+  $disabled: boolean;
+  $disabledBackgroundColor: string | undefined;
+  $disabledBorderColor: string | undefined;
+  $paddingTop: number | undefined;
+  $paddingRight: number | undefined;
+  $paddingBottom: number | undefined;
+  $paddingLeft: number | undefined;
+}>`
   ${({ theme }) => theme.font.baseSize.em()};
 
-  display: block;
-  width: 100%;
-`;
-
-export const StyledButton = styled.span.withConfig({
-  shouldForwardProp: (prop) =>
-    prop !== "type" &&
-    prop !== "backgroundColor" &&
-    prop !== "borderColor" &&
-    prop !== "animation" &&
-    prop !== "size" &&
-    prop !== "iconSize" &&
-    prop !== "fontSize" &&
-    prop !== "iconDirection" &&
-    prop !== "isHover" &&
-    prop !== "disabledBackgroundColor" &&
-    prop !== "disabledBorderColor" &&
-    prop !== "paddingTop" &&
-    prop !== "paddingRight" &&
-    prop !== "paddingBottom" &&
-    prop !== "paddingLeft"
-})<{
-  type: Type;
-  backgroundColor: string;
-  borderColor: string;
-  animation?: Animation;
-  size: Size;
-  iconDirection: IconDirection;
-  isHover: boolean | null;
-  iconSize: number | undefined;
-  fontSize: number | undefined;
-  disabled: boolean;
-  disabledBackgroundColor: string | undefined;
-  disabledBorderColor: string | undefined;
-  paddingTop: number | undefined;
-  paddingRight: number | undefined;
-  paddingBottom: number | undefined;
-  paddingLeft: number | undefined;
-}>`
   width: 100%;
   text-align: center;
   cursor: pointer;
   display: block;
-  background-color: ${({ backgroundColor }) => backgroundColor};
+  background-color: ${({ $backgroundColor }) => $backgroundColor};
   position: relative;
   overflow: hidden;
-  border: 1px solid ${({ borderColor }) => borderColor};
+  border: 1px solid ${({ $borderColor }) => $borderColor};
 
   &::after {
     content: "";
@@ -102,12 +80,12 @@ export const StyledButton = styled.span.withConfig({
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: ${({ backgroundColor }) => backgroundColor};
+    background-color: ${({ $backgroundColor }) => $backgroundColor};
     z-index: 0;
   }
 
-  ${({ type, theme }) => {
-    switch (type) {
+  ${({ $type, theme }) => {
+    switch ($type) {
       case "001":
       case "004":
       case "007":
@@ -121,8 +99,8 @@ export const StyledButton = styled.span.withConfig({
     }
   }}
 
-  ${({ type, iconDirection, theme }) => {
-    switch (type) {
+  ${({ $type, $iconDirection, theme }) => {
+    switch ($type) {
       case "001":
       case "002":
       case "003":
@@ -157,14 +135,14 @@ export const StyledButton = styled.span.withConfig({
               z-index: 1;
 
               ${
-                iconDirection === "left" &&
+                $iconDirection === "left" &&
                 css`
                   left: ${theme.size.em(24)};
                 `
               }
 
               ${
-                iconDirection === "right" &&
+                $iconDirection === "right" &&
                 css`
                   right: ${theme.size.em(24)};
                 `
@@ -181,8 +159,8 @@ export const StyledButton = styled.span.withConfig({
     }
   }}
 
-  ${({ iconDirection }) => {
-    switch (iconDirection) {
+  ${({ $iconDirection }) => {
+    switch ($iconDirection) {
       case "left":
         return css`
           flex-direction: row-reverse;
@@ -195,23 +173,23 @@ export const StyledButton = styled.span.withConfig({
   }}
 
   ${({
-    size,
-    iconSize,
-    fontSize,
-    paddingTop,
-    paddingRight,
-    paddingBottom,
-    paddingLeft,
+    $size,
+    $iconSize,
+    $fontSize,
+    $paddingTop,
+    $paddingRight,
+    $paddingBottom,
+    $paddingLeft,
     theme
   }) => {
-    switch (size) {
+    switch ($size) {
       case "small":
         return css`
-          padding: ${theme.size.em(paddingTop ?? 7)} ${theme.size.em(paddingRight ?? 13)} ${theme.size.em(paddingBottom ?? 7)} ${theme.size.em(paddingLeft ?? 13)};
+          padding: ${theme.size.em($paddingTop ?? 7)} ${theme.size.em($paddingRight ?? 13)} ${theme.size.em($paddingBottom ?? 7)} ${theme.size.em($paddingLeft ?? 13)};
 
           ${StyledIconWrapper} {
-            width: ${theme.size.em(iconSize ?? theme.icon.size.small)};
-            height: ${theme.size.em(iconSize ?? theme.icon.size.small)};
+            width: ${theme.size.em($iconSize ?? theme.icon.size.small)};
+            height: ${theme.size.em($iconSize ?? theme.icon.size.small)};
           }
 
           ${StyledText} {
@@ -220,64 +198,64 @@ export const StyledButton = styled.span.withConfig({
         `;
       case "middle":
         return css`
-          padding: ${theme.size.em(paddingTop ?? 15)} ${theme.size.em(paddingRight ?? 28)} ${theme.size.em(paddingBottom ?? 15)} ${theme.size.em(paddingLeft ?? 28)};
+          padding: ${theme.size.em($paddingTop ?? 15)} ${theme.size.em($paddingRight ?? 28)} ${theme.size.em($paddingBottom ?? 15)} ${theme.size.em($paddingLeft ?? 28)};
 
           ${StyledIconWrapper} {
-            width: ${theme.size.em(iconSize ?? theme.icon.size.middle)};
-            height: ${theme.size.em(iconSize ?? theme.icon.size.middle)};
+            width: ${theme.size.em($iconSize ?? theme.icon.size.middle)};
+            height: ${theme.size.em($iconSize ?? theme.icon.size.middle)};
           }
 
           ${StyledText} {
-            font-size: ${theme.size.em(fontSize ?? 16)};
+            font-size: ${theme.size.em($fontSize ?? 16)};
           }
         `;
       case "large":
         return css`
-          padding: ${theme.size.em(paddingTop ?? 25)} ${theme.size.em(paddingRight ?? 45)} ${theme.size.em(paddingBottom ?? 25)} ${theme.size.em(paddingLeft ?? 45)};
+          padding: ${theme.size.em($paddingTop ?? 25)} ${theme.size.em($paddingRight ?? 45)} ${theme.size.em($paddingBottom ?? 25)} ${theme.size.em($paddingLeft ?? 45)};
 
           ${StyledIconWrapper} {
-            width: ${theme.size.em(iconSize ?? theme.icon.size.large)};
-            height: ${theme.size.em(iconSize ?? theme.icon.size.large)};
+            width: ${theme.size.em($iconSize ?? theme.icon.size.large)};
+            height: ${theme.size.em($iconSize ?? theme.icon.size.large)};
           }
 
           ${StyledText} {
-            font-size: ${theme.size.em(fontSize ?? 18)};
+            font-size: ${theme.size.em($fontSize ?? 18)};
           }
         `;
       default:
         return css`
-          padding: ${theme.size.em(paddingTop ?? 25)} ${theme.size.em(paddingRight ?? 45)} ${theme.size.em(paddingBottom ?? 25)} ${theme.size.em(paddingLeft ?? 45)};
+          padding: ${theme.size.em($paddingTop ?? 25)} ${theme.size.em($paddingRight ?? 45)} ${theme.size.em($paddingBottom ?? 25)} ${theme.size.em($paddingLeft ?? 45)};
         `;
     }
   }}
 
-  ${({ animation, theme, isHover }) => {
-    switch (animation?.type ?? "001") {
+  ${({ $animation, theme, $isHover }) => {
+    switch ($animation?.type ?? "001") {
       case "001":
         return css`
           &::after {
-            transition: background-color ${animation?.duration ?? 0.25}s ${theme.animation.easing[animation?.easing ?? "easeInOutCubic"]};
+            transition: background-color ${$animation?.duration ?? 0.25}s ${theme.animation.easing[$animation?.easing ?? "easeInOutCubic"]};
           }
 
           ${StyledText} {
-            transition: color ${animation?.duration ?? 0.25}s ${theme.animation.easing[animation?.easing ?? "easeInOutCubic"]};
+            transition: color ${$animation?.duration ?? 0.25}s ${theme.animation.easing[$animation?.easing ?? "easeInOutCubic"]};
           }
 
           ${StyledIcon} {
-            transition: color ${animation?.duration ?? 0.25}s ${theme.animation.easing[animation?.easing ?? "easeInOutCubic"]};
+            transition: color ${$animation?.duration ?? 0.25}s ${theme.animation.easing[$animation?.easing ?? "easeInOutCubic"]};
           }
 
           &:hover {
             ${StyledText} {
-              color: ${animation?.textColor ?? "#fff"};
+              color: ${$animation?.textColor ?? "#fff"};
             }
 
             ${StyledIcon} {
-              color: ${animation?.textColor ?? "#fff"};
+              color: ${$animation?.textColor ?? "#fff"};
             }
 
             &::after {
-              background-color: ${animation?.backgroundColor ?? "#000"};
+              background-color: ${$animation?.backgroundColor ?? "#000"};
             }
           }
         `;
@@ -286,32 +264,32 @@ export const StyledButton = styled.span.withConfig({
         return css`
           ${StyledIcon}:nth-child(1) {
             ${
-              isHover === true &&
+              $isHover === true &&
               css`
-                animation: ${ArrowHide} ${animation?.duration ?? 0.25}s ${theme.animation.easing[animation?.easing ?? "easeOutCubic"]} forwards;
+                animation: ${ArrowHide} ${$animation?.duration ?? 0.25}s ${theme.animation.easing[$animation?.easing ?? "easeOutCubic"]} forwards;
               `
             }
 
             ${
-              isHover === false &&
+              $isHover === false &&
               css`
-                animation: ${ArrowShow} ${animation?.duration ?? 0.25}s ${theme.animation.easing[animation?.easing ?? "easeOutCubic"]} forwards;
+                animation: ${ArrowShow} ${$animation?.duration ?? 0.25}s ${theme.animation.easing[$animation?.easing ?? "easeOutCubic"]} forwards;
               `
             }
           }
 
           ${StyledIcon}:nth-child(2) {
             ${
-              isHover === true &&
-              css`  
-                animation: ${ArrowShow} ${animation?.duration ?? 0.25}s ${theme.animation.easing[animation?.easing ?? "easeOutCubic"]} forwards;
+              $isHover === true &&
+              css`
+                animation: ${ArrowShow} ${$animation?.duration ?? 0.25}s ${theme.animation.easing[$animation?.easing ?? "easeOutCubic"]} forwards;
               `
             }
 
             ${
-              isHover === false &&
+              $isHover === false &&
               css`
-                animation: ${ArrowHide} ${animation?.duration ?? 0.25}s ${theme.animation.easing[animation?.easing ?? "easeOutCubic"]} forwards;
+                animation: ${ArrowHide} ${$animation?.duration ?? 0.25}s ${theme.animation.easing[$animation?.easing ?? "easeOutCubic"]} forwards;
               `
             }
           }
@@ -322,12 +300,12 @@ export const StyledButton = styled.span.withConfig({
         return css`
           ${StyledIcon}:nth-child(1) {
             transform: translateX(-100%);
-            transition: transform ${animation?.duration ?? 0.25}s ${theme.animation.easing[animation?.easing ?? "easeOutCubic"]};
+            transition: transform ${$animation?.duration ?? 0.25}s ${theme.animation.easing[$animation?.easing ?? "easeOutCubic"]};
           }
 
           ${StyledIcon}:nth-child(2) {
             transform: translateX(0);
-            transition: transform ${animation?.duration ?? 0.25}s ${theme.animation.easing[animation?.easing ?? "easeOutCubic"]};
+            transition: transform ${$animation?.duration ?? 0.25}s ${theme.animation.easing[$animation?.easing ?? "easeOutCubic"]};
           }
 
           &:hover {
@@ -347,25 +325,25 @@ export const StyledButton = styled.span.withConfig({
             &::after {
               transform: scaleX(0);
               transform-origin: right bottom;
-              transition: transform ${animation?.duration ?? 0.25}s ${theme.animation.easing[animation?.easing ?? "easeOutCubic"]};
-              background-color: ${animation?.backgroundColor ?? "#fff"};
+              transition: transform ${$animation?.duration ?? 0.25}s ${theme.animation.easing[$animation?.easing ?? "easeOutCubic"]};
+              background-color: ${$animation?.backgroundColor ?? "#fff"};
             }
 
             ${StyledText} {
-              transition: color ${animation?.duration ?? 0.25}s ${theme.animation.easing[animation?.easing ?? "easeOutCubic"]};
+              transition: color ${$animation?.duration ?? 0.25}s ${theme.animation.easing[$animation?.easing ?? "easeOutCubic"]};
             }
 
             ${StyledIcon} {
-              transition: color ${animation?.duration ?? 0.25}s ${theme.animation.easing[animation?.easing ?? "easeOutCubic"]};
+              transition: color ${$animation?.duration ?? 0.25}s ${theme.animation.easing[$animation?.easing ?? "easeOutCubic"]};
             }
 
             &:hover {
               ${StyledText} {
-                color: ${animation?.textColor ?? "#fff"};
+                color: ${$animation?.textColor ?? "#fff"};
               }
 
               ${StyledIcon} {
-                color: ${animation?.textColor ?? "#fff"};
+                color: ${$animation?.textColor ?? "#fff"};
               }
 
               &::after {
@@ -379,18 +357,18 @@ export const StyledButton = styled.span.withConfig({
   }}
 
   ${({
-    disabled,
-    disabledBackgroundColor,
-    backgroundColor,
-    disabledBorderColor,
-    borderColor
+    $disabled,
+    $disabledBackgroundColor,
+    $backgroundColor,
+    $disabledBorderColor,
+    $borderColor
   }) =>
-    disabled &&
+    $disabled &&
     css`
     cursor: not-allowed;
     pointer-events: none;
-    background-color: ${disabledBackgroundColor ?? `rgba(${hexToRgb(backgroundColor)}, 0.5)`};
-    border-color: ${disabledBorderColor ?? `rgba(${hexToRgb(borderColor)}, 0.5)`};
+    background-color: ${$disabledBackgroundColor ?? `rgba(${hexToRgb($backgroundColor)}, 0.5)`};
+    border-color: ${$disabledBorderColor ?? `rgba(${hexToRgb($borderColor)}, 0.5)`};
   `}
 `;
 
@@ -407,13 +385,10 @@ export const StyledIconInner = styled.span`
   display: block;
 `;
 
-export const StyledIcon = styled.span.withConfig({
-  shouldForwardProp: (prop) =>
-    prop !== "color" && prop !== "disabled" && prop !== "disabledColor"
-})<{
-  color: string;
-  disabled: boolean;
-  disabledColor: string | undefined;
+export const StyledIcon = styled.span<{
+  $color: string;
+  $disabled: boolean;
+  $disabledColor: string | undefined;
 }>`
   display: block;
   position: absolute;
@@ -421,7 +396,7 @@ export const StyledIcon = styled.span.withConfig({
   left: 0;
   width: 100%;
   height: 100%;
-  color: ${({ color }) => color};
+  color: ${({ $color }) => $color};
 
   &:nth-child(1) {
     transform: translateX(0);
@@ -431,29 +406,22 @@ export const StyledIcon = styled.span.withConfig({
     transform: translateX(100%);
   }
 
-  ${({ disabled, disabledColor, color }) =>
-    disabled &&
+  ${({ $disabled, $disabledColor, $color }) =>
+    $disabled &&
     css`
-    color: ${disabledColor ?? `rgba(${hexToRgb(color)}, 0.5)`};
+    color: ${$disabledColor ?? `rgba(${hexToRgb($color)}, 0.5)`};
   `}
 `;
 
-export const StyledText = styled.span.withConfig({
-  shouldForwardProp: (prop) =>
-    prop !== "size" &&
-    prop !== "color" &&
-    prop !== "fontWeight" &&
-    prop !== "disabled" &&
-    prop !== "disabledColor"
-})<{
-  size: Size;
-  color: string;
-  fontWeight: number;
-  disabled: boolean;
-  disabledColor: string | undefined;
+export const StyledText = styled.span<{
+  $size: Size;
+  $color: string;
+  $fontWeight: number;
+  $disabled: boolean;
+  $disabledColor: string | undefined;
 }>`
-  ${({ size, theme }) => {
-    switch (size) {
+  ${({ $size, theme }) => {
+    switch ($size) {
       case "small":
         return css`font-size: ${theme.size.em(12)};`;
       case "middle":
@@ -464,14 +432,14 @@ export const StyledText = styled.span.withConfig({
   }}
 
   display: block;
-  font-weight: ${({ fontWeight }) => fontWeight};
-  color: ${({ color }) => color};
+  font-weight: ${({ $fontWeight }) => $fontWeight};
+  color: ${({ $color }) => $color};
   position: relative;
   z-index: 1;
 
-  ${({ disabled, disabledColor, color }) =>
-    disabled &&
+  ${({ $disabled, $disabledColor, $color }) =>
+    $disabled &&
     css`
-    color: ${disabledColor ?? `rgba(${hexToRgb(color)}, 0.5)`};
+    color: ${$disabledColor ?? `rgba(${hexToRgb($color)}, 0.5)`};
   `}
 `;
