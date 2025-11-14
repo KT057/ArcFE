@@ -7,6 +7,13 @@ export default defineConfig(
   mergeConfig(commonConfig, {
     root: resolve(__dirname, "src/csr"),
     plugins: [react()],
+    resolve: {
+      mainFields: ['module', 'main']
+    },
+    optimizeDeps: {
+      include: ['react', 'react-dom', 'axios'],
+      exclude: ['@packages/ui', '@packages/hooks', '@packages/context', '@packages/utils']
+    },
     build: {
       outDir: resolve(__dirname, "dist/csr"),
       emptyOutDir: true,
