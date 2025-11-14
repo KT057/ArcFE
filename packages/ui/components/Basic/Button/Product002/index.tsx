@@ -43,6 +43,7 @@ type BaseProps = {
   appearance?: ButtonAppearance;
   iconDirection?: IconDirection;
   icon: ReactNode;
+  fullWidth?: boolean;
   disabled?: boolean;
   onClick?: (event: MouseEvent<HTMLButtonElement>) => void;
 };
@@ -83,6 +84,7 @@ export const Button002 = forwardRef<HTMLButtonElement, ButtonProps>(
       disabled = false,
       iconDirection = "right",
       icon,
+      fullWidth = true,
       ...rest
     },
     ref
@@ -133,6 +135,7 @@ export const Button002 = forwardRef<HTMLButtonElement, ButtonProps>(
         $disabled={disabled}
         onMouseEnter={() => setIsHover(true)}
         onMouseLeave={() => setIsHover(false)}
+        $fullWidth={fullWidth}
         {...rest}
       >
         <StyledText

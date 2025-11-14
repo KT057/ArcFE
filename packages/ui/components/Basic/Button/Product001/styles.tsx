@@ -18,6 +18,7 @@ export const StyledButton = styled.button<{
   $type?: Type;
   $backgroundColor: string;
   $borderColor: string;
+  $fullWidth: boolean;
   $animation?: Animation;
   $size: Size;
   $disabledBackgroundColor: string | undefined;
@@ -29,7 +30,7 @@ export const StyledButton = styled.button<{
 }>`
   ${({ theme }) => theme.font.baseSize.em()};
 
-  width: 100%;
+  width: ${({ $fullWidth }) => ($fullWidth ? "100%" : "auto")};
   text-align: center;
   cursor: pointer;
   display: block;
@@ -163,7 +164,6 @@ export const StyledText = styled.span<{
     }
   }}
 
-  display: block;
   font-weight: ${({ $fontWeight }) => $fontWeight};
   color: ${({ $color }) => $color};
   position: relative;

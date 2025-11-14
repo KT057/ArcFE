@@ -61,10 +61,11 @@ export const StyledButton = styled.span<{
   $paddingRight: number | undefined;
   $paddingBottom: number | undefined;
   $paddingLeft: number | undefined;
+  $fullWidth: boolean;
 }>`
   ${({ theme }) => theme.font.baseSize.em()};
 
-  width: 100%;
+  width: ${({ $fullWidth }) => ($fullWidth ? "100%" : "auto")};
   text-align: center;
   cursor: pointer;
   display: block;

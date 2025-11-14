@@ -31,6 +31,7 @@ type BaseProps = {
   animation?: Animation;
   disabled?: boolean;
   appearance?: ButtonAppearance;
+  fullWidth?: boolean;
   onClick?: (event: MouseEvent<HTMLButtonElement>) => void;
 };
 
@@ -67,6 +68,7 @@ export const Button001 = forwardRef<HTMLButtonElement, ButtonProps>(
       onClick,
       children,
       appearance,
+      fullWidth = true,
       ...rest
     },
     ref
@@ -108,6 +110,7 @@ export const Button001 = forwardRef<HTMLButtonElement, ButtonProps>(
         disabled={disabled}
         $disabledBackgroundColor={disabledBackgroundColor}
         $disabledBorderColor={disabledBorderColor}
+        $fullWidth={fullWidth}
         {...rest}
       >
         <StyledText
