@@ -1,141 +1,113 @@
-import styled, { css } from "styled-components";
-import type { Type } from "./index";
-
-type SelectProps = {
-  type: Type;
-  error: boolean;
-};
+import styled from "styled-components";
+import type { SelectVariant } from "./index";
 
 type SelectInnerProps = {
-  borderColor?: string;
-  backgroundColor?: string;
-  errorBorderColor?: string;
+  $variant: SelectVariant;
+  $borderColor: string;
+  $backgroundColor?: string;
+  $focusRingColor?: string;
+  $placeholderColor?: string;
 };
 
 type SelectFieldProps = {
-  fontSize?: number;
-  color?: string;
-  placeholderColor?: string;
-  hasPlaceholder?: boolean;
+  $fontSize?: number;
+  $color?: string;
+  $placeholderColor?: string;
+  $hasPlaceholder?: boolean;
 };
 
 type SelectIconProps = {
-  color: string;
+  $color: string;
 };
 
 type SelectErrorProps = {
-  errorColor: string;
-  errorFontSize: number;
+  $errorColor: string;
+  $errorFontSize: number;
+};
+
+type SelectLabelProps = {
+  $fontSize?: number;
+  $color?: string;
+  $fontWeight?: number | string;
+  $marginBottom?: number;
 };
 
 export const StyledSelectWrapper = styled.div`
   ${({ theme }) => theme.font.baseSize.em()}
 `;
 
+export const StyledSelect = styled.div`
+  position: relative;
+  width: 100%;
+`;
+
+export const StyledSelectLabel = styled.label.withConfig({
+  shouldForwardProp: (prop) => !prop.startsWith("$")
+})<SelectLabelProps>`
+  display: block;
+  font-size: ${({ theme, $fontSize }) => theme.size.em($fontSize ?? 16)};
+  margin-bottom: ${({ theme, $marginBottom }) => theme.size.em($marginBottom ?? 5)};
+  color: ${({ $color }) => $color ?? "#000"};
+  font-weight: ${({ $fontWeight }) => $fontWeight ?? "normal"};
+`;
+
 export const StyledSelectInner = styled.div.withConfig({
-  shouldForwardProp: (prop) =>
-    prop !== "borderColor" &&
-    prop !== "backgroundColor" &&
-    prop !== "errorBorderColor"
+  shouldForwardProp: (prop) => !prop.startsWith("$")
 })<SelectInnerProps>`
   width: 100%;
-  border: 1px solid ${({ borderColor }) => borderColor ?? "#000"};
+  border: 1px solid ${({ $borderColor }) => $borderColor};
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: ${({ backgroundColor }) => backgroundColor ?? "#fff"};
+  background-color: ${({ $backgroundColor }) => $backgroundColor ?? "#fff"};
   position: relative;
   overflow: hidden;
   box-sizing: border-box;
   padding-right: ${({ theme }) => theme.size.em(16)};
+  border-radius: ${({ $variant, theme }) =>
+    $variant === "002" ? theme.size.em(5) : 0};
+  transition: box-shadow 0.2s ease, border-color 0.2s ease;
+  cursor: pointer;
+
+  &:focus-within {
+    box-shadow: 0 0 0 ${({ theme }) => theme.size.em(0.25)} ${({ $focusRingColor }) => $focusRingColor ?? "rgba(0, 0, 0, 0.25)"};
+  }
 `;
 
-const defaultFontSize = (size: number | undefined) => size ?? 24;
+const defaultFontSize = (size: number | undefined) => size ?? 18;
 
 export const StyledSelectField = styled.select.withConfig({
-  shouldForwardProp: (prop) =>
-    prop !== "fontSize" &&
-    prop !== "color" &&
-    prop !== "placeholderColor" &&
-    prop !== "hasPlaceholder"
+  shouldForwardProp: (prop) => !prop.startsWith("$")
 })<SelectFieldProps>`
   width: 100%;
   cursor: pointer;
   border: none;
   background-color: transparent;
-  color: ${({ color, placeholderColor, hasPlaceholder }) =>
-    hasPlaceholder ? (placeholderColor ?? "#909090") : (color ?? "#000")};
-  font-size: ${({ theme, fontSize }) => theme.size.em(defaultFontSize(fontSize))};
-  padding: ${({ theme, fontSize }) =>
-    `${theme.size.customEm(20, defaultFontSize(fontSize))} ${theme.size.customEm(20, defaultFontSize(fontSize))} ${theme.size.customEm(20, defaultFontSize(fontSize))} ${theme.size.customEm(10, defaultFontSize(fontSize))}`};
+  color: ${({ $color, $hasPlaceholder, $placeholderColor }) => ($hasPlaceholder ? ($placeholderColor ?? "#909090") : ($color ?? "#000"))};
+  font-size: ${({ theme, $fontSize }) => theme.size.em(defaultFontSize($fontSize))};
+  padding: ${({ theme, $fontSize }) => `${theme.size.customEm(12, defaultFontSize($fontSize))} ${theme.size.customEm(16, defaultFontSize($fontSize))}`};
   appearance: none;
   outline: none;
-
-  &:focus {
-    outline: none;
-  }
 `;
 
 export const StyledSelectIcon = styled.span.withConfig({
-  shouldForwardProp: (prop) => prop !== "color"
+  shouldForwardProp: (prop) => !prop.startsWith("$")
 })<SelectIconProps>`
   display: flex;
   align-items: center;
   justify-content: center;
-  pointer-events: none;
-  color: ${({ color }) => color ?? "#000"};
+  cursor: pointer;
+  color: ${({ $color }) => $color ?? "#000"};
 
   ${({ theme }) => theme.icon.size.style("large")}
 `;
 
-export const StyledSelect = styled.div.withConfig({
-  shouldForwardProp: (prop) => prop !== "type" && prop !== "error"
-})<SelectProps>`
-  position: relative;
-  width: 100%;
-
-  ${({ error }) =>
-    error &&
-    css`
-    ${StyledSelectInner} {
-      border-color: #f00;
-    }
-
-    ${StyledSelectError} {
-      display: block;
-    }
-  `}
-
-  ${({ type, theme }) => {
-    switch (type) {
-      case "001":
-        return css`
-          ${StyledSelectInner} {
-            border-radius: 0;
-          }
-        `;
-      case "002":
-        return css`
-          ${StyledSelectInner} {
-            border-radius: ${theme.size.em(5)};
-          }
-        `;
-      default:
-        return css`
-          ${StyledSelectInner} {
-            border-radius: 0;
-          }
-        `;
-    }
-  }}
-`;
-
 export const StyledSelectError = styled.p.withConfig({
-  shouldForwardProp: (prop) => prop !== "errorColor" && prop !== "errorFontSize"
+  shouldForwardProp: (prop) => !prop.startsWith("$")
 })<SelectErrorProps>`
-  display: none;
-  color: ${({ errorColor }) => errorColor ?? "#f00"};
-  font-size: ${({ theme, errorFontSize }) => theme.size.em(errorFontSize ?? 16)};
+  color: ${({ $errorColor }) => $errorColor ?? "#f00"};
+  font-size: ${({ theme, $errorFontSize }) => theme.size.em($errorFontSize ?? 16)};
   margin: ${({ theme }) => theme.size.em(5)} 0 0;
-  line-height: 1;
+  min-height: ${({ theme, $errorFontSize }) => theme.size.em($errorFontSize ?? 16)};
+  line-height: 1.2;
 `;
