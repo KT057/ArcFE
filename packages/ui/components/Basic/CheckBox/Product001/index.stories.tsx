@@ -1,22 +1,87 @@
 import type { Meta, StoryFn } from "@storybook/react";
+import { useState } from "react";
 import { CheckBox001 } from "./index";
 
-export default {
+const meta: Meta<typeof CheckBox001> = {
   title: "Basic/CheckBox/Product001",
   component: CheckBox001,
   tags: ["autodocs"]
-} as Meta<typeof CheckBox001>;
+};
 
-const Template: StoryFn<typeof CheckBox001> = (args) => (
-  <div style={{ width: "300px" }}>
-    <CheckBox001 {...args} />
-  </div>
-);
+export default meta;
+
+const Template: StoryFn<typeof CheckBox001> = (args) => {
+  const [checked, setChecked] = useState(args.checked || false);
+
+  return (
+    <div style={{ width: "300px" }}>
+      <CheckBox001
+        {...args}
+        checked={checked}
+        onChange={(e) => setChecked(e.target.checked)}
+      />
+    </div>
+  );
+};
 
 export const Default = Template.bind({});
 Default.args = {
   id: "checkbox-001",
   type: "001",
+  size: "middle",
+  style: {
+    backgroundColor: "#fff",
+    borderColor: "#000",
+    checkedBackgroundColor: "#411fe6",
+    markColor: "#fff"
+  }
+};
+
+export const Checked = Template.bind({});
+Checked.args = {
+  id: "checkbox-checked",
+  type: "001",
+  size: "middle",
+  checked: true,
+  style: {
+    backgroundColor: "#fff",
+    borderColor: "#000",
+    checkedBackgroundColor: "#411fe6",
+    markColor: "#fff"
+  }
+};
+
+export const Disabled = Template.bind({});
+Disabled.args = {
+  id: "checkbox-disabled",
+  type: "001",
+  size: "middle",
+  disabled: true,
+  style: {
+    backgroundColor: "#fff",
+    borderColor: "#000",
+    checkedBackgroundColor: "#411fe6",
+    markColor: "#fff"
+  }
+};
+
+export const Type002 = Template.bind({});
+Type002.args = {
+  id: "checkbox-002",
+  type: "002",
+  size: "middle",
+  style: {
+    backgroundColor: "#fff",
+    borderColor: "#000",
+    checkedBackgroundColor: "#411fe6",
+    markColor: "#fff"
+  }
+};
+
+export const Type003 = Template.bind({});
+Type003.args = {
+  id: "checkbox-003",
+  type: "003",
   size: "middle",
   style: {
     backgroundColor: "#fff",

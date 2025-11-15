@@ -10,7 +10,6 @@ type CheckBoxBackgroundProps = {
 };
 
 type CheckBoxInputProps = {
-  checked: boolean;
   checkedBackgroundColor: string;
 };
 
@@ -99,8 +98,7 @@ export const StyledCheckBoxCheckmark = styled.div.withConfig({
 `;
 
 export const StyledCheckBoxInput = styled.input.withConfig({
-  shouldForwardProp: (prop) =>
-    prop !== "checked" && prop !== "checkedBackgroundColor"
+  shouldForwardProp: (prop) => prop !== "checkedBackgroundColor"
 })<CheckBoxInputProps>`
   width: 100%;
   height: 100%;
@@ -111,7 +109,10 @@ export const StyledCheckBoxInput = styled.input.withConfig({
   cursor: pointer;
   z-index: 2;
   margin: 0;
-  
+  &:disabled {
+    cursor: not-allowed;
+  }
+
 
   &[type="checkbox"]:checked ~ ${StyledCheckBoxBackground} {
     background-color: ${({ checkedBackgroundColor }) => checkedBackgroundColor};
