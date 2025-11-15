@@ -54,7 +54,13 @@ export const StyledListItem = styled.li<ListItemProps>`
   column-gap: ${({ theme, $gap }) => theme.size.em($gap)};
   align-items: ${({ $alignItemsCenter }) => ($alignItemsCenter ? "center" : "start")};
 
-  ${({ $hasOnClick, $animationOpacity, $animationDuration, $animationEase, theme }) =>
+  ${({
+    $hasOnClick,
+    $animationOpacity,
+    $animationDuration,
+    $animationEase,
+    theme
+  }) =>
     $hasOnClick &&
     css`
       cursor: pointer;
