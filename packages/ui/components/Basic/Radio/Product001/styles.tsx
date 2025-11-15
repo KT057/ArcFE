@@ -1,37 +1,85 @@
 import styled from "styled-components";
 
 type RadioProps = {
-  backgroundColor?: string;
+  $backgroundColor?: string;
+  $gap?: number;
+  $isDisabled?: boolean;
 };
 
-type RadioTextProps = {
-  fontSize?: number;
-  color?: string;
+type RadioInputProps = {
+  $borderColor?: string;
+  $checkedBackgroundColor?: string;
+  $focusRingColor?: string;
+  $isSelected?: boolean;
+  $isFocusVisible?: boolean;
+  $isDisabled?: boolean;
 };
 
-export const StyledRadioWrapper = styled.div`
-  ${({ theme }) => theme.font.baseSize.em()}
-`;
+type RadioLabelProps = {
+  $fontSize?: number;
+  $color?: string;
+  $isDisabled?: boolean;
+};
 
-export const StyledRadio = styled.div.withConfig({
-  shouldForwardProp: (prop) => prop !== "backgroundColor"
+type RadioMarkProps = {
+  $markColor?: string;
+};
+
+export const StyledRadio = styled.label.withConfig({
+  shouldForwardProp: (prop) => !prop.startsWith("$")
 })<RadioProps>`
-  background-color: ${({ backgroundColor }) => backgroundColor || "transparent"};
+  ${({ theme }) => theme.font.baseSize.em()}
+  background-color: ${({ $backgroundColor }) =>
+    $backgroundColor || "transparent"};
   display: flex;
   align-items: center;
+  gap: ${({ theme, $gap }) => theme.size.em($gap ?? 8)};
+  cursor: ${({ $isDisabled }) => ($isDisabled ? "not-allowed" : "pointer")};
+  opacity: ${({ $isDisabled }) => ($isDisabled ? 0.5 : 1)};
 `;
 
-export const StyledRadioCheckBox = styled.div`
+export const StyledRadioInput = styled.div.withConfig({
+  shouldForwardProp: (prop) => !prop.startsWith("$")
+})<RadioInputProps>`
+  width: ${({ theme }) => theme.size.em(20)};
+  height: ${({ theme }) => theme.size.em(20)};
+  border: 2px solid
+    ${({ $borderColor, $isSelected, $checkedBackgroundColor }) =>
+      $isSelected
+        ? ($checkedBackgroundColor ?? "#000")
+        : ($borderColor ?? "#000")};
+  border-radius: 50%;
+  background-color: ${({ $isSelected, $checkedBackgroundColor }) =>
+    $isSelected ? ($checkedBackgroundColor ?? "#000") : "transparent"};
   display: flex;
   align-items: center;
+  justify-content: center;
+  transition: box-shadow 0.2s ease;
+  box-sizing: border-box;
+  pointer-events: ${({ $isDisabled }) => ($isDisabled ? "none" : "auto")};
+
+  ${({ $isFocusVisible, $focusRingColor, $isDisabled }) =>
+    $isFocusVisible &&
+    !$isDisabled &&
+    `
+    box-shadow: 0 0 0 0.25em ${$focusRingColor ?? "rgba(0, 0, 0, 0.25)"};
+  `}
 `;
 
-export const StyledRadioText = styled.label.withConfig({
-  shouldForwardProp: (prop) => prop !== "fontSize" && prop !== "color"
-})<RadioTextProps>`
-  padding-left: ${({ theme, fontSize }) => theme.size.em((5 / (fontSize ?? 18)) * 10)};
-  font-size: ${({ theme, fontSize }) => theme.size.em(fontSize ?? 18)};
-  color: ${({ color }) => color ?? "#fff"};
-  line-height: 1;
-  cursor: pointer;
+export const StyledRadioMark = styled.div.withConfig({
+  shouldForwardProp: (prop) => !prop.startsWith("$")
+})<RadioMarkProps>`
+  width: ${({ theme }) => theme.size.em(8)};
+  height: ${({ theme }) => theme.size.em(8)};
+  border-radius: 50%;
+  background-color: ${({ $markColor }) => $markColor ?? "#fff"};
+`;
+
+export const StyledRadioLabel = styled.span.withConfig({
+  shouldForwardProp: (prop) => !prop.startsWith("$")
+})<RadioLabelProps>`
+  font-size: ${({ theme, $fontSize }) => theme.size.em($fontSize ?? 16)};
+  color: ${({ $color }) => $color ?? "#000"};
+  line-height: 0;
+  display: block;
 `;
