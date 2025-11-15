@@ -1,4 +1,7 @@
+import { useTextField } from "@react-aria/textfield";
+import { mergeProps, useObjectRef } from "@react-aria/utils";
 import type React from "react";
+import { forwardRef, useId } from "react";
 import type { Size } from "../../../../styles/size";
 import {
   StyledInput,
@@ -6,25 +9,32 @@ import {
   StyledInputField,
   StyledInputFieldWrapper,
   StyledInputIcon,
+  StyledInputLabel,
   StyledInputWrapper
 } from "./styles";
 
-export type Type = "001" | "002";
+export type InputVariant = "001" | "002";
 export type IconPosition = "left" | "right";
 
 interface InputProps {
-  type: Type;
-  size: Size;
+  variant?: InputVariant;
+  size?: Size;
   iconPosition?: IconPosition;
   icon: React.ReactNode;
   name?: string;
   placeholder?: string;
   value?: string;
+  defaultValue?: string;
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   error?: boolean;
   errorText?: string;
+  inputType?: React.HTMLInputTypeAttribute;
+  autoComplete?: React.InputHTMLAttributes<HTMLInputElement>["autoComplete"];
+  id?: string;
+  label?: string;
+  ariaLabel?: string;
   inputProps?: React.InputHTMLAttributes<HTMLInputElement>;
-  style?: {
+  appearance?: {
     fontSize?: number;
     color?: string;
     borderColor?: string;
@@ -33,59 +43,144 @@ interface InputProps {
     errorColor?: string;
     errorFontSize?: number;
     errorBorderColor?: string;
+    labelFontSize?: number;
+    labelColor?: string;
+    labelFontWeight?: number | string;
+    labelMarginBottom?: number;
+    focusRingColor?: string;
   };
 }
 
-export const Input006 = ({
-  type = "001",
-  size = "small",
-  iconPosition = "right",
-  icon,
-  name = "input-006",
-  placeholder = "入力してください",
-  value,
-  onChange,
-  error = false,
-  errorText,
-  style,
-  inputProps
-}: InputProps) => {
-  return (
-    <StyledInputWrapper>
-      <StyledInput error={error || !!errorText} type={type} size={size}>
-        <StyledInputFieldWrapper
-          iconPosition={iconPosition}
-          borderColor={style?.borderColor}
-          backgroundColor={style?.backgroundColor}
-          errorBorderColor={style?.errorBorderColor}
-        >
-          <StyledInputField
-            name={name}
-            type="text"
-            placeholder={placeholder}
-            value={value}
-            onChange={onChange}
-            fontSize={style?.fontSize}
-            color={style?.color}
-            backgroundColor={style?.backgroundColor}
-            placeholderColor={style?.placeholderColor}
-            {...inputProps}
-            size={size}
-            iconPosition={iconPosition}
-          />
-          <StyledInputIcon iconPosition={iconPosition} size={size}>
-            {icon}
-          </StyledInputIcon>
-        </StyledInputFieldWrapper>
-        {errorText && (
-          <StyledInputError
-            errorColor={style?.errorColor ?? "#f00"}
-            errorFontSize={style?.errorFontSize ?? 16}
+export const Input006 = forwardRef<HTMLInputElement, InputProps>(
+  (
+    {
+      variant = "001",
+      size = "small",
+      iconPosition = "right",
+      icon,
+      name = "input-006",
+      placeholder = "入力してください",
+      value,
+      defaultValue,
+      onChange,
+      error = false,
+      errorText,
+      inputType = "text",
+      autoComplete,
+      id,
+      label,
+      ariaLabel,
+      appearance,
+      inputProps
+    },
+    ref
+  ) => {
+    const generatedId = useId();
+    const inputId = id ?? generatedId;
+    const hasError = error || !!errorText;
+    const inputRef = useObjectRef(ref);
+
+    const {
+      labelProps,
+      inputProps: ariaInputProps,
+      errorMessageProps
+    } = useTextField(
+      {
+        id: inputId,
+        label,
+        "aria-label": label ? undefined : ariaLabel,
+        validationState: hasError ? "invalid" : undefined,
+        errorMessage: errorText,
+        inputElementType: "input",
+        isDisabled: inputProps?.disabled,
+        isRequired: inputProps?.required,
+        isReadOnly: inputProps?.readOnly
+      },
+      inputRef
+    );
+
+    const {
+      value: _ariaValue,
+      defaultValue: _ariaDefaultValue,
+      onChange: _ariaOnChange,
+      ...restAriaInputProps
+    } = ariaInputProps;
+
+    const baseInputProps: React.InputHTMLAttributes<HTMLInputElement> = {
+      id: inputId,
+      name,
+      type: inputType,
+      placeholder,
+      autoComplete
+    };
+
+    if (value !== undefined) {
+      baseInputProps.value = value;
+    }
+
+    if (defaultValue !== undefined) {
+      baseInputProps.defaultValue = defaultValue;
+    }
+
+    if (onChange) {
+      baseInputProps.onChange = onChange;
+    }
+
+    const mergedInputProps = mergeProps(
+      restAriaInputProps,
+      baseInputProps,
+      inputProps || {}
+    );
+
+    return (
+      <StyledInputWrapper>
+        <StyledInput $error={hasError} $variant={variant} $size={size}>
+          {label && (
+            <StyledInputLabel
+              {...labelProps}
+              $fontSize={appearance?.labelFontSize}
+              $color={appearance?.labelColor}
+              $fontWeight={appearance?.labelFontWeight}
+              $marginBottom={appearance?.labelMarginBottom}
+            >
+              {label}
+            </StyledInputLabel>
+          )}
+          <StyledInputFieldWrapper
+            $iconPosition={iconPosition}
+            $borderColor={appearance?.borderColor}
+            $backgroundColor={appearance?.backgroundColor}
+            $errorBorderColor={appearance?.errorBorderColor}
+            $focusRingColor={appearance?.focusRingColor}
           >
-            {errorText}
-          </StyledInputError>
-        )}
-      </StyledInput>
-    </StyledInputWrapper>
-  );
-};
+            <StyledInputField
+              {...mergedInputProps}
+              ref={inputRef}
+              $fontSize={appearance?.fontSize}
+              $color={appearance?.color}
+              $backgroundColor={appearance?.backgroundColor}
+              $placeholderColor={appearance?.placeholderColor}
+              $size={size}
+              $iconPosition={iconPosition}
+            />
+            <StyledInputIcon $iconPosition={iconPosition} $size={size}>
+              {icon}
+            </StyledInputIcon>
+          </StyledInputFieldWrapper>
+          {errorText && (
+            <StyledInputError
+              {...errorMessageProps}
+              $errorColor={appearance?.errorColor ?? "#f00"}
+              $errorFontSize={appearance?.errorFontSize ?? 16}
+              aria-live="polite"
+            >
+              {errorText || ""}
+            </StyledInputError>
+          )}
+        </StyledInput>
+      </StyledInputWrapper>
+    );
+  }
+);
+
+Input006.displayName = "Input006";

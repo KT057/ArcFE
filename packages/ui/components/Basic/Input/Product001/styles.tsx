@@ -57,6 +57,7 @@ export const StyledInputField = styled.input.withConfig({
   color: ${({ $color }) => $color ?? "#000"};
   box-sizing: border-box;
   line-height: 1;
+  transition: box-shadow 0.2s ease-in-out;
 
   &::placeholder {
     color: ${({ $placeholderColor }) => $placeholderColor ?? "#909090"};
