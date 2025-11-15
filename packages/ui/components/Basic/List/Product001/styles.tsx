@@ -1,63 +1,53 @@
 import styled, { css } from "styled-components";
-import type { Type } from "./index";
+import type { ListType } from "./index";
 
 type ListProps = {
-  type: Type;
-  columnGap?: number;
-  rowGap?: number;
-  isAlignItemsCenter?: boolean;
+  $type: ListType;
+  $listStyle: "ul" | "ol";
+  $columnGap?: number;
+  $rowGap?: number;
+  $isAlignItemsCenter?: boolean;
 };
 
 type ListItemProps = {
-  type: Type;
-  borderColor: string | undefined;
+  $type: ListType;
+  $borderColor?: string;
 };
 
-export const StyledListWrapper = styled.div`
+export const StyledList = styled.ul<ListProps>`
   ${({ theme }) => theme.font.baseSize.em()}
-`;
-
-export const StyledList = styled.div.withConfig({
-  shouldForwardProp: (prop) =>
-    prop !== "type" &&
-    prop !== "columnGap" &&
-    prop !== "rowGap" &&
-    prop !== "isAlignItemsCenter"
-})<ListProps>`
   display: flex;
   list-style: none;
   padding: 0;
   margin: 0;
-  align-items: ${({ isAlignItemsCenter }) => (isAlignItemsCenter ? "center" : "flex-start")};
+  align-items: ${({ $isAlignItemsCenter }) => ($isAlignItemsCenter ? "center" : "flex-start")};
 
-  ${({ type, theme, columnGap, rowGap }) => {
-    switch (type) {
+  ${({ $type, theme, $columnGap, $rowGap }) => {
+    switch ($type) {
       case "001":
       case "002":
         return css`
           flex-direction: column;
-          gap: ${theme.size.em(columnGap ?? 10)};
+          gap: ${theme.size.em($columnGap ?? 10)};
         `;
       case "003":
         return css`
-          gap: ${theme.size.em(rowGap ?? 40)};
+          gap: ${theme.size.em($rowGap ?? 40)};
         `;
       default:
         return css`
           flex-direction: column;
-          gap: ${theme.size.em(columnGap ?? 10)};
+          gap: ${theme.size.em($columnGap ?? 10)};
         `;
     }
   }}
 `;
 
-export const StyledListItem = styled.li.withConfig({
-  shouldForwardProp: (prop) => prop !== "type" && prop !== "borderColor"
-})<ListItemProps>`
-  ${({ type, borderColor }) =>
-    type === "002" &&
+export const StyledListItem = styled.li<ListItemProps>`
+  ${({ $type, $borderColor }) =>
+    $type === "002" &&
     css`
-      border-bottom: 1px solid ${borderColor ?? "#000"};
+      border-bottom: 1px solid ${$borderColor ?? "#000"};
       padding-bottom: ${({ theme }) => theme.size.em(8)};
 
       &:last-child {
