@@ -1,22 +1,71 @@
 import type { Meta, StoryFn } from "@storybook/react";
+import { useState } from "react";
 import { CheckBox002 } from "./index";
 
-export default {
+const meta: Meta<typeof CheckBox002> = {
   title: "Basic/CheckBox/Product002",
   component: CheckBox002,
   tags: ["autodocs"]
-} as Meta<typeof CheckBox002>;
+};
 
-const Template: StoryFn<typeof CheckBox002> = (args) => (
-  <div style={{ width: "300px" }}>
-    <CheckBox002 {...args} />
-  </div>
-);
+export default meta;
+
+const Template: StoryFn<typeof CheckBox002> = (args) => {
+  const [checked, setChecked] = useState(args.checked || false);
+
+  return (
+    <div style={{ width: "300px" }}>
+      <CheckBox002
+        {...args}
+        checked={checked}
+        onChange={(e) => setChecked(e.target.checked)}
+      />
+    </div>
+  );
+};
 
 export const Default = Template.bind({});
 Default.args = {
   id: "checkbox-001",
   size: "middle",
+  style: {
+    backgroundColor: "#ccc",
+    borderColor: "#000",
+    checkedBackgroundColor: "#411fe6",
+    markColor: "#fff"
+  }
+};
+
+export const Checked = Template.bind({});
+Checked.args = {
+  id: "checkbox-checked",
+  size: "middle",
+  checked: true,
+  style: {
+    backgroundColor: "#ccc",
+    borderColor: "#000",
+    checkedBackgroundColor: "#411fe6",
+    markColor: "#fff"
+  }
+};
+
+export const Disabled = Template.bind({});
+Disabled.args = {
+  id: "checkbox-disabled",
+  size: "middle",
+  disabled: true,
+  style: {
+    backgroundColor: "#ccc",
+    borderColor: "#000",
+    checkedBackgroundColor: "#411fe6",
+    markColor: "#fff"
+  }
+};
+
+export const Small = Template.bind({});
+Small.args = {
+  id: "checkbox-small",
+  size: "small",
   style: {
     backgroundColor: "#ccc",
     borderColor: "#000",

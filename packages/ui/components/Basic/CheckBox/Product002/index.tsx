@@ -1,4 +1,4 @@
-import { useState } from "react";
+import type React from "react";
 import {
   StyledCheckBox,
   StyledCheckBoxBackground,
@@ -12,6 +12,11 @@ export type CheckBoxSize = "small" | "middle";
 interface CheckBoxProps {
   id: string;
   size: CheckBoxSize;
+  name?: string;
+  checked?: boolean;
+  defaultChecked?: boolean;
+  disabled?: boolean;
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   style?: {
     backgroundColor?: string;
     borderColor?: string;
@@ -20,19 +25,32 @@ interface CheckBoxProps {
   };
 }
 
-export const CheckBox002 = ({ style, id, size }: CheckBoxProps) => {
-  const [checked, setChecked] = useState(false);
+export const CheckBox002 = ({
+  style,
+  id,
+  size,
+  name,
+  checked,
+  defaultChecked,
+  disabled,
+  onChange
+}: CheckBoxProps) => {
+  const inputName = name ?? id;
+  const uncontrolledDefaultChecked =
+    checked === undefined ? defaultChecked : undefined;
 
   return (
     <StyledCheckBoxWrapper>
       <StyledCheckBox size={size}>
         <StyledCheckBoxInput
           id={id}
-          name={id}
+          name={inputName}
           type="checkbox"
-          checked={checked}
+          checked={checked ?? false}
+          defaultChecked={uncontrolledDefaultChecked}
+          disabled={disabled}
           checkedBackgroundColor={style?.checkedBackgroundColor ?? "#000"}
-          onClick={() => setChecked(!checked)}
+          onChange={onChange}
         />
         <StyledCheckBoxBackground
           backgroundColor={style?.backgroundColor ?? "#fff"}
