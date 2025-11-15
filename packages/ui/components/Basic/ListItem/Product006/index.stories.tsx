@@ -62,7 +62,7 @@ NonClickable.args = {
 export const AsArticle = Template.bind({});
 AsArticle.args = {
   as: "article",
-  frameNumber: <FrameNumber001 number={4} type="004" size="small" />,
+  frameNumber: <FrameNumber001 number={4} type="001" size="small" />,
   children: (
     <p style={{ fontSize: rem(24) }}>
       "articleタグとしてレンダリングされるリストアイテムです。"
@@ -73,7 +73,7 @@ AsArticle.args = {
 
 export const WithFrameNumberPaddingTop = Template.bind({});
 WithFrameNumberPaddingTop.args = {
-  frameNumber: <FrameNumber001 number={5} type="005" size="small" />,
+  frameNumber: <FrameNumber001 number={5} type="001" size="small" />,
   children: (
     <p style={{ fontSize: rem(24) }}>
       "フレーム番号に上部パディングを追加した例です。複数行のテキストの場合に便利です。これは長いテキストの例です。"
