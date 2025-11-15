@@ -114,9 +114,13 @@ export const ListItem006 = forwardRef<HTMLLIElement, ListItemProps>(
         $hasOnClick={!!onClick}
         $gap={gap}
         $alignItemsCenter={frameNumberPaddingTop === 0}
-        aria-label={typeof frameNumber === "string" ? `Frame ${frameNumber}` : undefined}
+        aria-label={
+          typeof frameNumber === "string" ? `Frame ${frameNumber}` : undefined
+        }
       >
-        <StyledListItemFrameNumberWrapper $frameNumberPaddingTop={frameNumberPaddingTop}>
+        <StyledListItemFrameNumberWrapper
+          $frameNumberPaddingTop={frameNumberPaddingTop}
+        >
           <StyledListItemFrameNumber aria-hidden="true">
             {frameNumber}
           </StyledListItemFrameNumber>
