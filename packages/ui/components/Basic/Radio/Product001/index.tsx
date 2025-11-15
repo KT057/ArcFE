@@ -53,9 +53,7 @@ export const Radio001 = forwardRef<HTMLLabelElement, RadioProps>(
           $isFocusVisible={isFocusVisible}
           $isDisabled={isDisabled}
         >
-          {isSelected && (
-            <StyledRadioMark $markColor={appearance?.markColor} />
-          )}
+          {isSelected && <StyledRadioMark $markColor={appearance?.markColor} />}
         </StyledRadioInput>
         <StyledRadioLabel
           $fontSize={appearance?.fontSize}

@@ -1,7 +1,7 @@
-import type React from "react";
 import { useRadioGroup } from "@react-aria/radio";
 import { useRadioGroupState } from "@react-stately/radio";
 import type { AriaRadioGroupProps } from "@react-types/radio";
+import type React from "react";
 import { forwardRef, useId } from "react";
 import { RadioContext } from "../../Radio/Product001/radio-context";
 import { StyledRadioGroup, StyledRadioGroupLabel } from "./styles";
