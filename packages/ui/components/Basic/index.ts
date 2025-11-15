@@ -1,5 +1,6 @@
 export * from "./Accordion";
 export * from "./Balloon";
+export * from "./BlurBg";
 export * from "./Breadcrumbs";
 export * from "./Button";
 export * from "./CheckBox";
