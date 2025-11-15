@@ -28,19 +28,21 @@ WithError.args = {
   errorText: "※ 必須項目に入力してください。"
 };
 
-export const CustomStyle = Template.bind({});
-CustomStyle.args = {
+export const CustomAppearance = Template.bind({});
+CustomAppearance.args = {
   name: "text-field-custom",
   placeholder: "カスタムスタイル（下線のみ）",
-  style: {
+  label: "カスタムフィールド",
+  appearance: {
     fontSize: 16,
     color: "#333",
     borderColor: "#2196f3",
     placeholderColor: "#999",
-    errorStyle: {
-      fontSize: 14,
-      color: "#ff5722",
-      borderColor: "#ff5722"
-    }
+    errorFontSize: 14,
+    errorColor: "#ff5722",
+    errorBorderColor: "#ff5722",
+    labelFontSize: 14,
+    labelColor: "#666",
+    focusRingColor: "#2196f3"
   }
 };

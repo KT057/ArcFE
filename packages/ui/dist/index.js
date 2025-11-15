@@ -1,10 +1,11 @@
 import styled13, { css, keyframes, createGlobalStyle } from 'styled-components';
 import { jsx, jsxs, Fragment } from 'react/jsx-runtime';
 import gsap, { gsap as gsap$1 } from 'gsap';
-import React4, { forwardRef, useMemo, useRef, useCallback, useState, createContext, useImperativeHandle, Children, useEffect, useContext, memo, useReducer, useLayoutEffect } from 'react';
+import React4, { forwardRef, useMemo, useRef, useCallback, useState, createContext, useImperativeHandle, Children, useEffect, useId, useContext, memo, cloneElement, useReducer, useLayoutEffect, isValidElement } from 'react';
 import { useButton } from '@react-aria/button';
-import { mergeProps } from '@react-aria/utils';
+import { mergeProps, useObjectRef } from '@react-aria/utils';
 import { createPortal, unstable_batchedUpdates } from 'react-dom';
+import { useTextField } from '@react-aria/textfield';
 import 'keen-slider/keen-slider.min.css';
 import { useKeenSlider } from 'keen-slider/react';
 
@@ -9661,40 +9662,55 @@ var Header001 = ({
 var StyledInputWrapper = styled13.div`
   ${({ theme }) => theme.font.baseSize.em()}
 `;
+var StyledInputLabel = styled13.label.withConfig({
+  shouldForwardProp: (prop) => !prop.startsWith("$")
+})`
+  display: block;
+  font-size: ${({ theme, $fontSize }) => theme.size.em($fontSize ?? 16)};
+  margin-bottom: ${({ theme, $marginBottom }) => theme.size.em($marginBottom ?? 5)};
+  color: ${({ $color }) => $color ?? "#000"};
+  font-weight: ${({ $fontWeight }) => $fontWeight ?? "normal"};
+`;
 var defaultFontSize = (size) => size ?? 18;
 var StyledInputField = styled13.input.withConfig({
-  shouldForwardProp: (prop) => prop !== "size" && prop !== "style"
+  shouldForwardProp: (prop) => !prop.startsWith("$") && prop !== "size"
 })`
   width: 100%;
   display: block;
-  border: 1px solid ${({ borderColor }) => borderColor ?? "#000"};
-  font-size: ${({ theme, fontSize }) => theme.size.em(defaultFontSize(fontSize))};
-  padding-left: ${({ theme, fontSize }) => theme.size.customEm(10, defaultFontSize(fontSize))};
-  padding-right: ${({ theme, fontSize }) => theme.size.customEm(10, defaultFontSize(fontSize))};
-  color: ${({ style }) => style?.color || "#000"};
+  border: 1px solid ${({ $borderColor }) => $borderColor ?? "#000"};
+  font-size: ${({ theme, $fontSize }) => theme.size.em(defaultFontSize($fontSize))};
+  padding-left: ${({ theme, $fontSize }) => theme.size.customEm(10, defaultFontSize($fontSize))};
+  padding-right: ${({ theme, $fontSize }) => theme.size.customEm(10, defaultFontSize($fontSize))};
+  color: ${({ $color }) => $color ?? "#000"};
   box-sizing: border-box;
   line-height: 1;
+  transition: box-shadow 0.2s ease-in-out;
 
   &::placeholder {
-    color: ${({ placeholderColor }) => placeholderColor ?? "#909090"};
+    color: ${({ $placeholderColor }) => $placeholderColor ?? "#909090"};
   }
 
-  ${({ size, theme, fontSize }) => {
-  switch (size) {
+  &:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 ${({ theme }) => theme.size.em(0.25)} ${({ $focusRingColor }) => $focusRingColor ?? "#007bff"};
+  }
+
+  ${({ $size, theme, $fontSize }) => {
+  switch ($size) {
     case "small":
       return css`
-          padding-top: ${theme.size.customEm(5, defaultFontSize(fontSize))};
-          padding-bottom: ${theme.size.customEm(5, defaultFontSize(fontSize))};
+          padding-top: ${theme.size.customEm(5, defaultFontSize($fontSize))};
+          padding-bottom: ${theme.size.customEm(5, defaultFontSize($fontSize))};
         `;
     case "middle":
       return css`
-          padding-top: ${theme.size.customEm(10, defaultFontSize(fontSize))};
-          padding-bottom: ${theme.size.customEm(10, defaultFontSize(fontSize))};
+          padding-top: ${theme.size.customEm(10, defaultFontSize($fontSize))};
+          padding-bottom: ${theme.size.customEm(10, defaultFontSize($fontSize))};
         `;
     case "large":
       return css`
-          padding-top: ${theme.size.customEm(15, defaultFontSize(fontSize))};
-          padding-bottom: ${theme.size.customEm(15, defaultFontSize(fontSize))};
+          padding-top: ${theme.size.customEm(15, defaultFontSize($fontSize))};
+          padding-bottom: ${theme.size.customEm(15, defaultFontSize($fontSize))};
         `;
     default:
       return css`
@@ -9705,23 +9721,19 @@ var StyledInputField = styled13.input.withConfig({
 }}
 `;
 var StyledInput = styled13.div.withConfig({
-  shouldForwardProp: (prop) => prop !== "type" && prop !== "size" && prop !== "error"
+  shouldForwardProp: (prop) => !prop.startsWith("$")
 })`
   position: relative;
   width: 100%;
 
-  ${({ error }) => error && css`
+  ${({ $error }) => $error && css`
     ${StyledInputField} {
       border-color: #f00;
     }
-
-    ${StyledInputError} {
-      display: block;
-    }
   `}
 
-  ${({ type, theme }) => {
-  switch (type) {
+  ${({ $variant, theme }) => {
+  switch ($variant) {
     case "001":
       return css`
           ${StyledInputField} {
@@ -9744,347 +9756,584 @@ var StyledInput = styled13.div.withConfig({
 }}
 `;
 var StyledInputError = styled13.p.withConfig({
-  shouldForwardProp: (prop) => prop !== "errorColor" && prop !== "errorFontSize"
+  shouldForwardProp: (prop) => !prop.startsWith("$")
 })`
-  display: none;
-  color: ${({ errorColor }) => errorColor ?? "#f00"};
-  font-size: ${({ theme, errorFontSize }) => theme.size.em(errorFontSize ?? 16)};
+  color: ${({ $errorColor }) => $errorColor ?? "#f00"};
+  font-size: ${({ theme, $errorFontSize }) => theme.size.em($errorFontSize ?? 16)};
   margin: ${({ theme }) => theme.size.em(5)} 0 0;
-  line-height: 1;
+  min-height: ${({ theme, $errorFontSize }) => theme.size.em($errorFontSize ?? 16)};
+  line-height: 1.2;
 `;
-var Input001 = ({
-  type = "001",
-  size = "small",
-  name = "input-001",
-  placeholder = "\u5165\u529B\u3057\u3066\u304F\u3060\u3055\u3044",
-  value,
-  onChange,
-  error = false,
-  errorText,
-  style,
-  inputProps
-}) => {
-  return /* @__PURE__ */ jsx(StyledInputWrapper, { children: /* @__PURE__ */ jsxs(StyledInput, { error: error || !!errorText, type, size, children: [
-    /* @__PURE__ */ jsx(
-      StyledInputField,
+var Input001 = forwardRef(
+  ({
+    variant = "001",
+    size = "small",
+    name = "input-001",
+    placeholder = "\u5165\u529B\u3057\u3066\u304F\u3060\u3055\u3044",
+    value,
+    defaultValue: defaultValue2,
+    onChange,
+    error = false,
+    errorText,
+    inputType = "text",
+    autoComplete,
+    id: id2,
+    label,
+    ariaLabel,
+    appearance,
+    inputProps
+  }, ref) => {
+    const generatedId = useId();
+    const inputId = id2 ?? generatedId;
+    const hasError = error || !!errorText;
+    const inputRef = useObjectRef(ref);
+    const {
+      labelProps,
+      inputProps: ariaInputProps,
+      errorMessageProps
+    } = useTextField(
       {
-        name,
-        type: "text",
-        placeholder,
-        value,
-        onChange,
-        fontSize: style?.fontSize,
-        color: style?.color,
-        borderColor: style?.borderColor,
-        placeholderColor: style?.placeholderColor,
-        ...inputProps,
-        size
-      }
-    ),
-    errorText && /* @__PURE__ */ jsx(
-      StyledInputError,
-      {
-        errorColor: style?.errorColor ?? "#f00",
-        errorFontSize: style?.errorFontSize ?? 16,
-        children: errorText
-      }
-    )
-  ] }) });
-};
+        id: inputId,
+        label,
+        "aria-label": label ? void 0 : ariaLabel,
+        validationState: hasError ? "invalid" : void 0,
+        errorMessage: errorText,
+        inputElementType: "input",
+        isDisabled: inputProps?.disabled,
+        isRequired: inputProps?.required,
+        isReadOnly: inputProps?.readOnly
+      },
+      inputRef
+    );
+    const {
+      value: _ariaValue,
+      defaultValue: _ariaDefaultValue,
+      onChange: _ariaOnChange,
+      ...restAriaInputProps
+    } = ariaInputProps;
+    const baseInputProps = {
+      id: inputId,
+      name,
+      type: inputType,
+      placeholder,
+      autoComplete
+    };
+    if (value !== void 0) {
+      baseInputProps.value = value;
+    }
+    if (defaultValue2 !== void 0) {
+      baseInputProps.defaultValue = defaultValue2;
+    }
+    if (onChange) {
+      baseInputProps.onChange = onChange;
+    }
+    const mergedInputProps = mergeProps(
+      restAriaInputProps,
+      baseInputProps,
+      inputProps || {}
+    );
+    return /* @__PURE__ */ jsx(StyledInputWrapper, { children: /* @__PURE__ */ jsxs(StyledInput, { $error: hasError, $variant: variant, $size: size, children: [
+      label && /* @__PURE__ */ jsx(
+        StyledInputLabel,
+        {
+          ...labelProps,
+          $fontSize: appearance?.labelFontSize,
+          $color: appearance?.labelColor,
+          $fontWeight: appearance?.labelFontWeight,
+          $marginBottom: appearance?.labelMarginBottom,
+          children: label
+        }
+      ),
+      /* @__PURE__ */ jsx(
+        StyledInputField,
+        {
+          ...mergedInputProps,
+          ref: inputRef,
+          $fontSize: appearance?.fontSize,
+          $color: appearance?.color,
+          $borderColor: appearance?.borderColor,
+          $placeholderColor: appearance?.placeholderColor,
+          $focusRingColor: appearance?.focusRingColor,
+          $size: size
+        }
+      ),
+      errorText && /* @__PURE__ */ jsx(
+        StyledInputError,
+        {
+          ...errorMessageProps,
+          $errorColor: appearance?.errorColor ?? "#f00",
+          $errorFontSize: appearance?.errorFontSize ?? 16,
+          "aria-live": "polite",
+          children: errorText || ""
+        }
+      )
+    ] }) });
+  }
+);
+Input001.displayName = "Input001";
 var StyledInputWrapper2 = styled13.div`
   ${({ theme }) => theme.font.baseSize.em()}
 `;
+var StyledInputLabel2 = styled13.label.withConfig({
+  shouldForwardProp: (prop) => !prop.startsWith("$")
+})`
+  display: block;
+  font-size: ${({ theme, $fontSize }) => theme.size.em($fontSize ?? 16)};
+  margin-bottom: ${({ theme, $marginBottom }) => theme.size.em($marginBottom ?? 5)};
+  color: ${({ $color }) => $color ?? "#000"};
+  font-weight: ${({ $fontWeight }) => $fontWeight ?? "normal"};
+`;
 var defaultFontSize2 = (size) => size ?? 18;
 var StyledInputField2 = styled13.input.withConfig({
-  shouldForwardProp: (prop) => prop !== "size" && prop !== "fontSize" && prop !== "color" && prop !== "borderColor" && prop !== "placeholderColor"
+  shouldForwardProp: (prop) => !prop.startsWith("$") && prop !== "size"
 })`
   width: 100%;
   display: block;
   border-top: 0;
   border-left: 0;
   border-right: 0;
-  border-bottom: 1px solid ${({ borderColor }) => borderColor ?? "#000"};
-  font-size: ${({ theme, fontSize }) => theme.size.em(defaultFontSize2(fontSize))};
-  padding-left: ${({ theme, fontSize }) => theme.size.customEm(10, defaultFontSize2(fontSize))};
-  padding-right: ${({ theme, fontSize }) => theme.size.customEm(10, defaultFontSize2(fontSize))};
-  color: ${({ color: color2 }) => color2 ?? "#000"};
+  border-bottom: 1px solid ${({ $borderColor }) => $borderColor ?? "#000"};
+  font-size: ${({ theme, $fontSize }) => theme.size.em(defaultFontSize2($fontSize))};
+  padding-left: ${({ theme, $fontSize }) => theme.size.customEm(10, defaultFontSize2($fontSize))};
+  padding-right: ${({ theme, $fontSize }) => theme.size.customEm(10, defaultFontSize2($fontSize))};
+  color: ${({ $color }) => $color ?? "#000"};
   box-sizing: border-box;
   line-height: 1;
+  transition: border-bottom-width 0.2s ease-in-out, border-bottom-color 0.2s ease-in-out;
 
   &::placeholder {
-    color: ${({ placeholderColor }) => placeholderColor ?? "#909090"};
+    color: ${({ $placeholderColor }) => $placeholderColor ?? "#909090"};
   }
 
-  ${({ size, theme, fontSize }) => {
-  switch (size) {
+  &:focus-visible {
+    outline: none;
+    border-bottom-width: ${({ theme }) => theme.size.em(0.125)};
+    border-bottom-color: ${({ $focusRingColor }) => $focusRingColor ?? "#007bff"};
+  }
+
+  ${({ $size, theme, $fontSize }) => {
+  switch ($size) {
     case "small":
       return css`
-          padding-top: ${theme.size.customEm(3, defaultFontSize2(fontSize))};
-          padding-bottom: ${theme.size.customEm(3, defaultFontSize2(fontSize))};
+          padding-top: ${theme.size.customEm(3, defaultFontSize2($fontSize))};
+          padding-bottom: ${theme.size.customEm(3, defaultFontSize2($fontSize))};
         `;
     case "middle":
       return css`
-          padding-top: ${theme.size.customEm(7, defaultFontSize2(fontSize))};
-          padding-bottom: ${theme.size.customEm(7, defaultFontSize2(fontSize))};
+          padding-top: ${theme.size.customEm(7, defaultFontSize2($fontSize))};
+          padding-bottom: ${theme.size.customEm(7, defaultFontSize2($fontSize))};
         `;
     case "large":
       return css`
-          padding-top: ${theme.size.customEm(7, defaultFontSize2(fontSize))};
-          padding-bottom: ${theme.size.customEm(7, defaultFontSize2(fontSize))};
+          padding-top: ${theme.size.customEm(7, defaultFontSize2($fontSize))};
+          padding-bottom: ${theme.size.customEm(7, defaultFontSize2($fontSize))};
         `;
     default:
       return css`
-          padding-top: ${theme.size.customEm(5, defaultFontSize2(fontSize))};
-          padding-bottom: ${theme.size.customEm(5, defaultFontSize2(fontSize))};
+          padding-top: ${theme.size.customEm(5, defaultFontSize2($fontSize))};
+          padding-bottom: ${theme.size.customEm(5, defaultFontSize2($fontSize))};
         `;
   }
 }}
 `;
 var StyledInput2 = styled13.div.withConfig({
-  shouldForwardProp: (prop) => prop !== "size" && prop !== "error"
+  shouldForwardProp: (prop) => !prop.startsWith("$")
 })`
   position: relative;
   width: 100%;
 
-  ${({ error }) => error && css`
+  ${({ $error }) => $error && css`
     ${StyledInputField2} {
       border-bottom-color: #f00;
-    }
-
-    ${StyledInputError2} {
-      display: block;
     }
   `}
 `;
 var StyledInputError2 = styled13.p.withConfig({
-  shouldForwardProp: (prop) => prop !== "errorColor" && prop !== "errorFontSize"
+  shouldForwardProp: (prop) => !prop.startsWith("$")
 })`
-  display: none;
-  color: ${({ errorColor }) => errorColor ?? "#f00"};
-  font-size: ${({ theme, errorFontSize }) => theme.size.em(errorFontSize ?? 16)};
+  color: ${({ $errorColor }) => $errorColor ?? "#f00"};
+  font-size: ${({ theme, $errorFontSize }) => theme.size.em($errorFontSize ?? 16)};
   margin: ${({ theme }) => theme.size.em(5)} 0 0;
-  line-height: 1;
+  min-height: ${({ theme, $errorFontSize }) => theme.size.em($errorFontSize ?? 16)};
+  line-height: 1.2;
 `;
-var Input002 = ({
-  size = "small",
-  name = "input-002",
-  placeholder = "\u5165\u529B\u3057\u3066\u304F\u3060\u3055\u3044",
-  value,
-  onChange,
-  error = false,
-  errorText,
-  style,
-  inputProps
-}) => {
-  return /* @__PURE__ */ jsx(StyledInputWrapper2, { children: /* @__PURE__ */ jsxs(StyledInput2, { error: error || !!errorText, size, children: [
-    /* @__PURE__ */ jsx(
-      StyledInputField2,
+var Input002 = forwardRef(
+  ({
+    size = "small",
+    name = "input-002",
+    placeholder = "\u5165\u529B\u3057\u3066\u304F\u3060\u3055\u3044",
+    value,
+    defaultValue: defaultValue2,
+    onChange,
+    error = false,
+    errorText,
+    inputType = "text",
+    autoComplete,
+    id: id2,
+    label,
+    ariaLabel,
+    appearance,
+    inputProps
+  }, ref) => {
+    const generatedId = useId();
+    const inputId = id2 ?? generatedId;
+    const hasError = error || !!errorText;
+    const inputRef = useObjectRef(ref);
+    const {
+      labelProps,
+      inputProps: ariaInputProps,
+      errorMessageProps
+    } = useTextField(
       {
-        name,
-        type: "text",
-        placeholder,
-        value,
-        onChange,
-        fontSize: style?.fontSize,
-        color: style?.color,
-        borderColor: style?.borderColor,
-        placeholderColor: style?.placeholderColor,
-        ...inputProps,
-        size
-      }
-    ),
-    errorText && /* @__PURE__ */ jsx(
-      StyledInputError2,
-      {
-        errorColor: style?.errorColor ?? "#f00",
-        errorFontSize: style?.errorFontSize ?? 16,
-        children: errorText
-      }
-    )
-  ] }) });
-};
+        id: inputId,
+        label,
+        "aria-label": label ? void 0 : ariaLabel,
+        validationState: hasError ? "invalid" : void 0,
+        errorMessage: errorText,
+        inputElementType: "input",
+        isDisabled: inputProps?.disabled,
+        isRequired: inputProps?.required,
+        isReadOnly: inputProps?.readOnly
+      },
+      inputRef
+    );
+    const {
+      value: _ariaValue,
+      defaultValue: _ariaDefaultValue,
+      onChange: _ariaOnChange,
+      ...restAriaInputProps
+    } = ariaInputProps;
+    const baseInputProps = {
+      id: inputId,
+      name,
+      type: inputType,
+      placeholder,
+      autoComplete
+    };
+    if (value !== void 0) {
+      baseInputProps.value = value;
+    }
+    if (defaultValue2 !== void 0) {
+      baseInputProps.defaultValue = defaultValue2;
+    }
+    if (onChange) {
+      baseInputProps.onChange = onChange;
+    }
+    const mergedInputProps = mergeProps(
+      restAriaInputProps,
+      baseInputProps,
+      inputProps || {}
+    );
+    return /* @__PURE__ */ jsx(StyledInputWrapper2, { children: /* @__PURE__ */ jsxs(StyledInput2, { $error: hasError, $size: size, children: [
+      label && /* @__PURE__ */ jsx(
+        StyledInputLabel2,
+        {
+          ...labelProps,
+          $fontSize: appearance?.labelFontSize,
+          $color: appearance?.labelColor,
+          $fontWeight: appearance?.labelFontWeight,
+          $marginBottom: appearance?.labelMarginBottom,
+          children: label
+        }
+      ),
+      /* @__PURE__ */ jsx(
+        StyledInputField2,
+        {
+          ...mergedInputProps,
+          ref: inputRef,
+          $fontSize: appearance?.fontSize,
+          $color: appearance?.color,
+          $borderColor: appearance?.borderColor,
+          $placeholderColor: appearance?.placeholderColor,
+          $focusRingColor: appearance?.focusRingColor,
+          $size: size
+        }
+      ),
+      errorText && /* @__PURE__ */ jsx(
+        StyledInputError2,
+        {
+          ...errorMessageProps,
+          $errorColor: appearance?.errorColor ?? "#f00",
+          $errorFontSize: appearance?.errorFontSize ?? 16,
+          "aria-live": "polite",
+          children: errorText || ""
+        }
+      )
+    ] }) });
+  }
+);
+Input002.displayName = "Input002";
 var StyledInputWrapper3 = styled13.div`
   ${({ theme }) => theme.font.baseSize.em()}
 `;
+var StyledInputLabel3 = styled13.label.withConfig({
+  shouldForwardProp: (prop) => !prop.startsWith("$")
+})`
+  display: block;
+  font-size: ${({ theme, $fontSize }) => theme.size.em($fontSize ?? 16)};
+  margin-bottom: ${({ theme, $marginBottom }) => theme.size.em($marginBottom ?? 5)};
+  color: ${({ $color }) => $color ?? "#000"};
+  font-weight: ${({ $fontWeight }) => $fontWeight ?? "normal"};
+`;
 var defaultFontSize3 = (size) => size ?? 18;
 var StyledInputField3 = styled13.input.withConfig({
-  shouldForwardProp: (prop) => prop !== "size" && prop !== "fontSize" && prop !== "color" && prop !== "borderColor" && prop !== "backgroundColor" && prop !== "placeholderColor" && prop !== "errorBackgroundColor"
+  shouldForwardProp: (prop) => !prop.startsWith("$") && prop !== "size"
 })`
   width: 100%;
   display: block;
   border-top: 0;
   border-left: 0;
   border-right: 0;
-  border-bottom: 1px solid ${({ borderColor }) => borderColor ?? "#000"};
-  font-size: ${({ theme, fontSize }) => theme.size.em(fontSize ?? 18)};
-  padding-left: ${({ theme, fontSize }) => theme.size.customEm(10, defaultFontSize3(fontSize))};
-  padding-right: ${({ theme, fontSize }) => theme.size.customEm(10, defaultFontSize3(fontSize))};
-  background-color: ${({ backgroundColor }) => backgroundColor ?? "#eee"};
-  color: ${({ color: color2 }) => color2 ?? "#000"};
+  border-bottom: 1px solid ${({ $borderColor }) => $borderColor ?? "#000"};
+  font-size: ${({ theme, $fontSize }) => theme.size.em(defaultFontSize3($fontSize))};
+  padding-left: ${({ theme, $fontSize }) => theme.size.customEm(10, defaultFontSize3($fontSize))};
+  padding-right: ${({ theme, $fontSize }) => theme.size.customEm(10, defaultFontSize3($fontSize))};
+  background-color: ${({ $backgroundColor }) => $backgroundColor ?? "#eee"};
+  color: ${({ $color }) => $color ?? "#000"};
   box-sizing: border-box;
   line-height: 1;
+  transition: border-bottom-width 0.2s ease-in-out, border-bottom-color 0.2s ease-in-out;
 
   &::placeholder {
-    color: ${({ placeholderColor }) => placeholderColor ?? "#909090"};
+    color: ${({ $placeholderColor }) => $placeholderColor ?? "#909090"};
   }
 
-  ${({ size, theme, fontSize }) => {
-  switch (size) {
+  &:focus-visible {
+    outline: none;
+    border-bottom-width: ${({ theme }) => theme.size.em(0.125)};
+    border-bottom-color: ${({ $focusRingColor }) => $focusRingColor ?? "#007bff"};
+  }
+
+  ${({ $size, theme, $fontSize }) => {
+  switch ($size) {
     case "small":
       return css`
-          padding-top: ${theme.size.customEm(5, defaultFontSize3(fontSize))};
-          padding-bottom: ${theme.size.customEm(5, defaultFontSize3(fontSize))};
+          padding-top: ${theme.size.customEm(5, defaultFontSize3($fontSize))};
+          padding-bottom: ${theme.size.customEm(5, defaultFontSize3($fontSize))};
         `;
     case "middle":
       return css`
-          padding-top: ${theme.size.customEm(10, defaultFontSize3(fontSize))};
-          padding-bottom: ${theme.size.customEm(10, defaultFontSize3(fontSize))};
+          padding-top: ${theme.size.customEm(10, defaultFontSize3($fontSize))};
+          padding-bottom: ${theme.size.customEm(10, defaultFontSize3($fontSize))};
         `;
     case "large":
       return css`
-          padding-top: ${theme.size.customEm(15, defaultFontSize3(fontSize))};
-          padding-bottom: ${theme.size.customEm(15, defaultFontSize3(fontSize))};
+          padding-top: ${theme.size.customEm(15, defaultFontSize3($fontSize))};
+          padding-bottom: ${theme.size.customEm(15, defaultFontSize3($fontSize))};
         `;
     default:
       return css`
-          padding-top: ${theme.size.customEm(5, defaultFontSize3(fontSize))};
-          padding-bottom: ${theme.size.customEm(5, defaultFontSize3(fontSize))};
+          padding-top: ${theme.size.customEm(5, defaultFontSize3($fontSize))};
+          padding-bottom: ${theme.size.customEm(5, defaultFontSize3($fontSize))};
         `;
   }
 }}
 `;
 var StyledInput3 = styled13.div.withConfig({
-  shouldForwardProp: (prop) => prop !== "size" && prop !== "error"
+  shouldForwardProp: (prop) => !prop.startsWith("$")
 })`
   position: relative;
   width: 100%;
 
-  ${({ error }) => error && css`
+  ${({ $error }) => $error && css`
     ${StyledInputField3} {
       background-color: #fdd;
-    }
-
-    ${StyledInputError3} {
-      display: block;
     }
   `}
 `;
 var StyledInputError3 = styled13.p.withConfig({
-  shouldForwardProp: (prop) => prop !== "errorColor" && prop !== "errorFontSize"
+  shouldForwardProp: (prop) => !prop.startsWith("$")
 })`
-  display: none;
-  color: ${({ errorColor }) => errorColor ?? "#f00"};
-  font-size: ${({ theme, errorFontSize }) => theme.size.em(errorFontSize ?? 16)};
+  color: ${({ $errorColor }) => $errorColor ?? "#f00"};
+  font-size: ${({ theme, $errorFontSize }) => theme.size.em($errorFontSize ?? 16)};
   margin: ${({ theme }) => theme.size.em(5)} 0 0;
-  line-height: 1;
+  min-height: ${({ theme, $errorFontSize }) => theme.size.em($errorFontSize ?? 16)};
+  line-height: 1.2;
 `;
-var Input003 = ({
-  size = "small",
-  name = "input-003",
-  placeholder = "\u5165\u529B\u3057\u3066\u304F\u3060\u3055\u3044",
-  value,
-  onChange,
-  error = false,
-  errorText,
-  style,
-  inputProps
-}) => {
-  return /* @__PURE__ */ jsx(StyledInputWrapper3, { children: /* @__PURE__ */ jsxs(StyledInput3, { error: error || !!errorText, size, children: [
-    /* @__PURE__ */ jsx(
-      StyledInputField3,
+var Input003 = forwardRef(
+  ({
+    size = "small",
+    name = "input-003",
+    placeholder = "\u5165\u529B\u3057\u3066\u304F\u3060\u3055\u3044",
+    value,
+    defaultValue: defaultValue2,
+    onChange,
+    error = false,
+    errorText,
+    inputType = "text",
+    autoComplete,
+    id: id2,
+    label,
+    ariaLabel,
+    appearance,
+    inputProps
+  }, ref) => {
+    const generatedId = useId();
+    const inputId = id2 ?? generatedId;
+    const hasError = error || !!errorText;
+    const inputRef = useObjectRef(ref);
+    const {
+      labelProps,
+      inputProps: ariaInputProps,
+      errorMessageProps
+    } = useTextField(
       {
-        id: name,
-        name,
-        autoComplete: name,
-        type: "text",
-        placeholder,
-        value,
-        onChange,
-        fontSize: style?.fontSize,
-        color: style?.color,
-        borderColor: style?.borderColor,
-        backgroundColor: style?.backgroundColor,
-        placeholderColor: style?.placeholderColor,
-        errorBackgroundColor: style?.errorBackgroundColor,
-        ...inputProps,
-        size
-      }
-    ),
-    errorText && /* @__PURE__ */ jsx(
-      StyledInputError3,
-      {
-        errorColor: style?.errorColor ?? "#f00",
-        errorFontSize: style?.errorFontSize ?? 16,
-        children: errorText
-      }
-    )
-  ] }) });
-};
+        id: inputId,
+        label,
+        "aria-label": label ? void 0 : ariaLabel,
+        validationState: hasError ? "invalid" : void 0,
+        errorMessage: errorText,
+        inputElementType: "input",
+        isDisabled: inputProps?.disabled,
+        isRequired: inputProps?.required,
+        isReadOnly: inputProps?.readOnly
+      },
+      inputRef
+    );
+    const {
+      value: _ariaValue,
+      defaultValue: _ariaDefaultValue,
+      onChange: _ariaOnChange,
+      ...restAriaInputProps
+    } = ariaInputProps;
+    const baseInputProps = {
+      id: inputId,
+      name,
+      type: inputType,
+      placeholder,
+      autoComplete
+    };
+    if (value !== void 0) {
+      baseInputProps.value = value;
+    }
+    if (defaultValue2 !== void 0) {
+      baseInputProps.defaultValue = defaultValue2;
+    }
+    if (onChange) {
+      baseInputProps.onChange = onChange;
+    }
+    const mergedInputProps = mergeProps(
+      restAriaInputProps,
+      baseInputProps,
+      inputProps || {}
+    );
+    return /* @__PURE__ */ jsx(StyledInputWrapper3, { children: /* @__PURE__ */ jsxs(StyledInput3, { $error: hasError, $size: size, children: [
+      label && /* @__PURE__ */ jsx(
+        StyledInputLabel3,
+        {
+          ...labelProps,
+          $fontSize: appearance?.labelFontSize,
+          $color: appearance?.labelColor,
+          $fontWeight: appearance?.labelFontWeight,
+          $marginBottom: appearance?.labelMarginBottom,
+          children: label
+        }
+      ),
+      /* @__PURE__ */ jsx(
+        StyledInputField3,
+        {
+          ...mergedInputProps,
+          ref: inputRef,
+          $fontSize: appearance?.fontSize,
+          $color: appearance?.color,
+          $borderColor: appearance?.borderColor,
+          $backgroundColor: appearance?.backgroundColor,
+          $placeholderColor: appearance?.placeholderColor,
+          $errorBackgroundColor: appearance?.errorBackgroundColor,
+          $focusRingColor: appearance?.focusRingColor,
+          $size: size
+        }
+      ),
+      errorText && /* @__PURE__ */ jsx(
+        StyledInputError3,
+        {
+          ...errorMessageProps,
+          $errorColor: appearance?.errorColor ?? "#f00",
+          $errorFontSize: appearance?.errorFontSize ?? 16,
+          "aria-live": "polite",
+          children: errorText || ""
+        }
+      )
+    ] }) });
+  }
+);
+Input003.displayName = "Input003";
 var StyledInputWrapper4 = styled13.div`
   ${({ theme }) => theme.font.baseSize.em()}
 `;
+var StyledInputLabel4 = styled13.label.withConfig({
+  shouldForwardProp: (prop) => !prop.startsWith("$")
+})`
+  display: block;
+  font-size: ${({ theme, $fontSize }) => theme.size.em($fontSize ?? 16)};
+  margin-bottom: ${({ theme, $marginBottom }) => theme.size.em($marginBottom ?? 5)};
+  color: ${({ $color }) => $color ?? "#000"};
+  font-weight: ${({ $fontWeight }) => $fontWeight ?? "normal"};
+`;
 var defaultFontSize4 = (size) => size ?? 18;
 var StyledInputField4 = styled13.input.withConfig({
-  shouldForwardProp: (prop) => prop !== "size" && prop !== "fontSize" && prop !== "color" && prop !== "backgroundColor" && prop !== "placeholderColor" && prop !== "errorBackgroundColor"
+  shouldForwardProp: (prop) => !prop.startsWith("$") && prop !== "size"
 })`
   width: 100%;
   display: block;
   border: 0;
-  font-size: ${({ theme, fontSize }) => theme.size.em(fontSize ?? 18)};
-  padding-left: ${({ theme, fontSize }) => theme.size.customEm(10, defaultFontSize4(fontSize))};
-  padding-right: ${({ theme, fontSize }) => theme.size.customEm(10, defaultFontSize4(fontSize))};
-  background-color: ${({ backgroundColor }) => backgroundColor ?? "#eee"};
-  color: ${({ color: color2 }) => color2 ?? "#000"};
+  font-size: ${({ theme, $fontSize }) => theme.size.em(defaultFontSize4($fontSize))};
+  padding-left: ${({ theme, $fontSize }) => theme.size.customEm(10, defaultFontSize4($fontSize))};
+  padding-right: ${({ theme, $fontSize }) => theme.size.customEm(10, defaultFontSize4($fontSize))};
+  background-color: ${({ $backgroundColor }) => $backgroundColor ?? "#eee"};
+  color: ${({ $color }) => $color ?? "#000"};
   box-sizing: border-box;
   line-height: 1;
+  transition: box-shadow 0.2s ease-in-out;
 
   &::placeholder {
-    color: ${({ placeholderColor }) => placeholderColor ?? "#909090"};
+    color: ${({ $placeholderColor }) => $placeholderColor ?? "#909090"};
   }
 
-  ${({ size, theme, fontSize }) => {
-  switch (size) {
+  &:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 ${({ theme }) => theme.size.em(0.25)} ${({ $focusRingColor }) => $focusRingColor ?? "#007bff"};
+  }
+
+  ${({ $size, theme, $fontSize }) => {
+  switch ($size) {
     case "small":
       return css`
-          padding-top: ${theme.size.customEm(5, defaultFontSize4(fontSize))};
-          padding-bottom: ${theme.size.customEm(5, defaultFontSize4(fontSize))};
+          padding-top: ${theme.size.customEm(5, defaultFontSize4($fontSize))};
+          padding-bottom: ${theme.size.customEm(5, defaultFontSize4($fontSize))};
         `;
     case "middle":
       return css`
-          padding-top: ${theme.size.customEm(10, defaultFontSize4(fontSize))};
-          padding-bottom: ${theme.size.customEm(10, defaultFontSize4(fontSize))};
+          padding-top: ${theme.size.customEm(10, defaultFontSize4($fontSize))};
+          padding-bottom: ${theme.size.customEm(10, defaultFontSize4($fontSize))};
         `;
     case "large":
       return css`
-          padding-top: ${theme.size.customEm(15, defaultFontSize4(fontSize))};
-          padding-bottom: ${theme.size.customEm(15, defaultFontSize4(fontSize))};
+          padding-top: ${theme.size.customEm(15, defaultFontSize4($fontSize))};
+          padding-bottom: ${theme.size.customEm(15, defaultFontSize4($fontSize))};
         `;
     default:
       return css`
-          padding-top: ${theme.size.customEm(5, defaultFontSize4(fontSize))};
-          padding-bottom: ${theme.size.customEm(5, defaultFontSize4(fontSize))};
+          padding-top: ${theme.size.customEm(5, defaultFontSize4($fontSize))};
+          padding-bottom: ${theme.size.customEm(5, defaultFontSize4($fontSize))};
         `;
   }
 }}
 `;
 var StyledInput4 = styled13.div.withConfig({
-  shouldForwardProp: (prop) => prop !== "type" && prop !== "size" && prop !== "error"
+  shouldForwardProp: (prop) => !prop.startsWith("$")
 })`
   position: relative;
   width: 100%;
 
-  ${({ error }) => error && css`
+  ${({ $error }) => $error && css`
     ${StyledInputField4} {
       background-color: #fdd;
     }
-
-    ${StyledInputError4} {
-      display: block;
-    }
   `}
 
-  ${({ type, theme }) => {
-  switch (type) {
+  ${({ $variant, theme }) => {
+  switch ($variant) {
     case "001":
       return css`
           ${StyledInputField4} {
@@ -10107,119 +10356,198 @@ var StyledInput4 = styled13.div.withConfig({
 }}
 `;
 var StyledInputError4 = styled13.p.withConfig({
-  shouldForwardProp: (prop) => prop !== "errorColor" && prop !== "errorFontSize"
+  shouldForwardProp: (prop) => !prop.startsWith("$")
 })`
-  display: none;
-  color: ${({ errorColor }) => errorColor ?? "#f00"};
-  font-size: ${({ theme, errorFontSize }) => theme.size.em(errorFontSize ?? 16)};
+  color: ${({ $errorColor }) => $errorColor ?? "#f00"};
+  font-size: ${({ theme, $errorFontSize }) => theme.size.em($errorFontSize ?? 16)};
   margin: ${({ theme }) => theme.size.em(5)} 0 0;
-  line-height: 1;
+  min-height: ${({ theme, $errorFontSize }) => theme.size.em($errorFontSize ?? 16)};
+  line-height: 1.2;
 `;
-var Input004 = ({
-  type = "001",
-  size = "small",
-  name = "input-004",
-  placeholder = "\u5165\u529B\u3057\u3066\u304F\u3060\u3055\u3044",
-  value,
-  onChange,
-  error = false,
-  errorText,
-  style,
-  inputProps
-}) => {
-  return /* @__PURE__ */ jsx(StyledInputWrapper4, { children: /* @__PURE__ */ jsxs(StyledInput4, { error: error || !!errorText, type, size, children: [
-    /* @__PURE__ */ jsx(
-      StyledInputField4,
+var Input004 = forwardRef(
+  ({
+    variant = "001",
+    size = "small",
+    name = "input-004",
+    placeholder = "\u5165\u529B\u3057\u3066\u304F\u3060\u3055\u3044",
+    value,
+    defaultValue: defaultValue2,
+    onChange,
+    error = false,
+    errorText,
+    inputType = "text",
+    autoComplete,
+    id: id2,
+    label,
+    ariaLabel,
+    appearance,
+    inputProps
+  }, ref) => {
+    const generatedId = useId();
+    const inputId = id2 ?? generatedId;
+    const hasError = error || !!errorText;
+    const inputRef = useObjectRef(ref);
+    const {
+      labelProps,
+      inputProps: ariaInputProps,
+      errorMessageProps
+    } = useTextField(
       {
-        name,
-        type: "text",
-        placeholder,
-        value,
-        onChange,
-        fontSize: style?.fontSize,
-        color: style?.color,
-        backgroundColor: style?.backgroundColor,
-        placeholderColor: style?.placeholderColor,
-        errorBackgroundColor: style?.errorBackgroundColor,
-        ...inputProps,
-        size
-      }
-    ),
-    errorText && /* @__PURE__ */ jsx(
-      StyledInputError4,
-      {
-        errorColor: style?.errorColor ?? "#f00",
-        errorFontSize: style?.errorFontSize ?? 16,
-        children: errorText
-      }
-    )
-  ] }) });
-};
+        id: inputId,
+        label,
+        "aria-label": label ? void 0 : ariaLabel,
+        validationState: hasError ? "invalid" : void 0,
+        errorMessage: errorText,
+        inputElementType: "input",
+        isDisabled: inputProps?.disabled,
+        isRequired: inputProps?.required,
+        isReadOnly: inputProps?.readOnly
+      },
+      inputRef
+    );
+    const {
+      value: _ariaValue,
+      defaultValue: _ariaDefaultValue,
+      onChange: _ariaOnChange,
+      ...restAriaInputProps
+    } = ariaInputProps;
+    const baseInputProps = {
+      id: inputId,
+      name,
+      type: inputType,
+      placeholder,
+      autoComplete
+    };
+    if (value !== void 0) {
+      baseInputProps.value = value;
+    }
+    if (defaultValue2 !== void 0) {
+      baseInputProps.defaultValue = defaultValue2;
+    }
+    if (onChange) {
+      baseInputProps.onChange = onChange;
+    }
+    const mergedInputProps = mergeProps(
+      restAriaInputProps,
+      baseInputProps,
+      inputProps || {}
+    );
+    return /* @__PURE__ */ jsx(StyledInputWrapper4, { children: /* @__PURE__ */ jsxs(StyledInput4, { $error: hasError, $variant: variant, $size: size, children: [
+      label && /* @__PURE__ */ jsx(
+        StyledInputLabel4,
+        {
+          ...labelProps,
+          $fontSize: appearance?.labelFontSize,
+          $color: appearance?.labelColor,
+          $fontWeight: appearance?.labelFontWeight,
+          $marginBottom: appearance?.labelMarginBottom,
+          children: label
+        }
+      ),
+      /* @__PURE__ */ jsx(
+        StyledInputField4,
+        {
+          ...mergedInputProps,
+          ref: inputRef,
+          $fontSize: appearance?.fontSize,
+          $color: appearance?.color,
+          $backgroundColor: appearance?.backgroundColor,
+          $placeholderColor: appearance?.placeholderColor,
+          $errorBackgroundColor: appearance?.errorBackgroundColor,
+          $focusRingColor: appearance?.focusRingColor,
+          $size: size
+        }
+      ),
+      errorText && /* @__PURE__ */ jsx(
+        StyledInputError4,
+        {
+          ...errorMessageProps,
+          $errorColor: appearance?.errorColor ?? "#f00",
+          $errorFontSize: appearance?.errorFontSize ?? 16,
+          "aria-live": "polite",
+          children: errorText || ""
+        }
+      )
+    ] }) });
+  }
+);
+Input004.displayName = "Input004";
 var StyledInputWrapper5 = styled13.div`
   ${({ theme }) => theme.font.baseSize.em()}
 `;
+var StyledInputLabel5 = styled13.label.withConfig({
+  shouldForwardProp: (prop) => !prop.startsWith("$")
+})`
+  display: block;
+  font-size: ${({ theme, $fontSize }) => theme.size.em($fontSize ?? 16)};
+  margin-bottom: ${({ theme, $marginBottom }) => theme.size.em($marginBottom ?? 5)};
+  color: ${({ $color }) => $color ?? "#000"};
+  font-weight: ${({ $fontWeight }) => $fontWeight ?? "normal"};
+`;
 var defaultFontSize5 = (size) => size ?? 18;
 var StyledInputField5 = styled13.input.withConfig({
-  shouldForwardProp: (prop) => prop !== "size" && prop !== "fontSize" && prop !== "color" && prop !== "borderColor" && prop !== "backgroundColor" && prop !== "placeholderColor" && prop !== "errorBackgroundColor"
+  shouldForwardProp: (prop) => !prop.startsWith("$") && prop !== "size"
 })`
   width: 100%;
   display: block;
-  border: 1px solid ${({ borderColor }) => borderColor ?? "#000"};
-  font-size: ${({ theme, fontSize }) => theme.size.em(fontSize ?? 18)};
-  padding-left: ${({ theme, fontSize }) => theme.size.customEm(10, defaultFontSize5(fontSize))};
-  padding-right: ${({ theme, fontSize }) => theme.size.customEm(10, defaultFontSize5(fontSize))};
-  background-color: ${({ backgroundColor }) => backgroundColor ?? "#eee"};
-  color: ${({ color: color2 }) => color2 ?? "#000"};
+  border: 1px solid ${({ $borderColor }) => $borderColor ?? "#000"};
+  font-size: ${({ theme, $fontSize }) => theme.size.em(defaultFontSize5($fontSize))};
+  padding-left: ${({ theme, $fontSize }) => theme.size.customEm(10, defaultFontSize5($fontSize))};
+  padding-right: ${({ theme, $fontSize }) => theme.size.customEm(10, defaultFontSize5($fontSize))};
+  background-color: ${({ $backgroundColor }) => $backgroundColor ?? "#eee"};
+  color: ${({ $color }) => $color ?? "#000"};
   box-sizing: border-box;
   line-height: 1;
+  transition: box-shadow 0.2s ease-in-out;
 
   &::placeholder {
-    color: ${({ placeholderColor }) => placeholderColor ?? "#909090"};
+    color: ${({ $placeholderColor }) => $placeholderColor ?? "#909090"};
   }
 
-  ${({ size, theme, fontSize }) => {
-  switch (size) {
+  &:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 ${({ theme }) => theme.size.em(0.25)} ${({ $focusRingColor }) => $focusRingColor ?? "#007bff"};
+  }
+
+  ${({ $size, theme, $fontSize }) => {
+  switch ($size) {
     case "small":
-      return css`  
-          padding-top: ${theme.size.customEm(5, defaultFontSize5(fontSize))};
-          padding-bottom: ${theme.size.customEm(5, defaultFontSize5(fontSize))};
+      return css`
+          padding-top: ${theme.size.customEm(5, defaultFontSize5($fontSize))};
+          padding-bottom: ${theme.size.customEm(5, defaultFontSize5($fontSize))};
         `;
     case "middle":
       return css`
-          padding-top: ${theme.size.customEm(10, defaultFontSize5(fontSize))};
-          padding-bottom: ${theme.size.customEm(10, defaultFontSize5(fontSize))};
+          padding-top: ${theme.size.customEm(10, defaultFontSize5($fontSize))};
+          padding-bottom: ${theme.size.customEm(10, defaultFontSize5($fontSize))};
         `;
     case "large":
       return css`
-          padding-top: ${theme.size.customEm(15, defaultFontSize5(fontSize))};
-          padding-bottom: ${theme.size.customEm(15, defaultFontSize5(fontSize))};
+          padding-top: ${theme.size.customEm(15, defaultFontSize5($fontSize))};
+          padding-bottom: ${theme.size.customEm(15, defaultFontSize5($fontSize))};
         `;
     default:
       return css`
-          padding-top: ${theme.size.customEm(5, defaultFontSize5(fontSize))};
-          padding-bottom: ${theme.size.customEm(5, defaultFontSize5(fontSize))};
+          padding-top: ${theme.size.customEm(5, defaultFontSize5($fontSize))};
+          padding-bottom: ${theme.size.customEm(5, defaultFontSize5($fontSize))};
         `;
   }
 }}
 `;
 var StyledInput5 = styled13.div.withConfig({
-  shouldForwardProp: (prop) => prop !== "type" && prop !== "size" && prop !== "error"
+  shouldForwardProp: (prop) => !prop.startsWith("$")
 })`
   position: relative;
   width: 100%;
 
-  ${({ error }) => error && css`
+  ${({ $error }) => $error && css`
     ${StyledInputField5} {
       background-color: #fdd;
     }
-
-    ${StyledInputError5} {
-      display: block;
-    }
   `}
 
-  ${({ type, theme }) => {
-  switch (type) {
+  ${({ $variant, theme }) => {
+  switch ($variant) {
     case "001":
       return css`
           ${StyledInputField5} {
@@ -10242,67 +10570,150 @@ var StyledInput5 = styled13.div.withConfig({
 }}
 `;
 var StyledInputError5 = styled13.p.withConfig({
-  shouldForwardProp: (prop) => prop !== "errorColor" && prop !== "errorFontSize"
+  shouldForwardProp: (prop) => !prop.startsWith("$")
 })`
-  display: none;
-  color: ${({ errorColor }) => errorColor ?? "#f00"};
-  font-size: ${({ theme, errorFontSize }) => theme.size.em(errorFontSize ?? 16)};
+  color: ${({ $errorColor }) => $errorColor ?? "#f00"};
+  font-size: ${({ theme, $errorFontSize }) => theme.size.em($errorFontSize ?? 16)};
   margin: ${({ theme }) => theme.size.em(5)} 0 0;
-  line-height: 1;
+  min-height: ${({ theme, $errorFontSize }) => theme.size.em($errorFontSize ?? 16)};
+  line-height: 1.2;
 `;
-var Input005 = ({
-  type = "001",
-  size = "small",
-  name = "input-005",
-  placeholder = "\u5165\u529B\u3057\u3066\u304F\u3060\u3055\u3044",
-  value,
-  onChange,
-  error = false,
-  errorText,
-  style,
-  inputProps
-}) => {
-  return /* @__PURE__ */ jsx(StyledInputWrapper5, { children: /* @__PURE__ */ jsxs(StyledInput5, { error: error || !!errorText, type, size, children: [
-    /* @__PURE__ */ jsx(
-      StyledInputField5,
+var Input005 = forwardRef(
+  ({
+    variant = "001",
+    size = "small",
+    name = "input-005",
+    placeholder = "\u5165\u529B\u3057\u3066\u304F\u3060\u3055\u3044",
+    value,
+    defaultValue: defaultValue2,
+    onChange,
+    error = false,
+    errorText,
+    inputType = "text",
+    autoComplete,
+    id: id2,
+    label,
+    ariaLabel,
+    appearance,
+    inputProps
+  }, ref) => {
+    const generatedId = useId();
+    const inputId = id2 ?? generatedId;
+    const hasError = error || !!errorText;
+    const inputRef = useObjectRef(ref);
+    const {
+      labelProps,
+      inputProps: ariaInputProps,
+      errorMessageProps
+    } = useTextField(
       {
-        name,
-        type: "text",
-        placeholder,
-        value,
-        onChange,
-        fontSize: style?.fontSize,
-        color: style?.color,
-        borderColor: style?.borderColor,
-        backgroundColor: style?.backgroundColor,
-        placeholderColor: style?.placeholderColor,
-        errorBackgroundColor: style?.errorBackgroundColor,
-        ...inputProps,
-        size
-      }
-    ),
-    errorText && /* @__PURE__ */ jsx(
-      StyledInputError5,
-      {
-        errorColor: style?.errorColor ?? "#f00",
-        errorFontSize: style?.errorFontSize ?? 16,
-        children: errorText
-      }
-    )
-  ] }) });
-};
+        id: inputId,
+        label,
+        "aria-label": label ? void 0 : ariaLabel,
+        validationState: hasError ? "invalid" : void 0,
+        errorMessage: errorText,
+        inputElementType: "input",
+        isDisabled: inputProps?.disabled,
+        isRequired: inputProps?.required,
+        isReadOnly: inputProps?.readOnly
+      },
+      inputRef
+    );
+    const {
+      value: _ariaValue,
+      defaultValue: _ariaDefaultValue,
+      onChange: _ariaOnChange,
+      ...restAriaInputProps
+    } = ariaInputProps;
+    const baseInputProps = {
+      id: inputId,
+      name,
+      type: inputType,
+      placeholder,
+      autoComplete
+    };
+    if (value !== void 0) {
+      baseInputProps.value = value;
+    }
+    if (defaultValue2 !== void 0) {
+      baseInputProps.defaultValue = defaultValue2;
+    }
+    if (onChange) {
+      baseInputProps.onChange = onChange;
+    }
+    const mergedInputProps = mergeProps(
+      restAriaInputProps,
+      baseInputProps,
+      inputProps || {}
+    );
+    return /* @__PURE__ */ jsx(StyledInputWrapper5, { children: /* @__PURE__ */ jsxs(StyledInput5, { $error: hasError, $variant: variant, $size: size, children: [
+      label && /* @__PURE__ */ jsx(
+        StyledInputLabel5,
+        {
+          ...labelProps,
+          $fontSize: appearance?.labelFontSize,
+          $color: appearance?.labelColor,
+          $fontWeight: appearance?.labelFontWeight,
+          $marginBottom: appearance?.labelMarginBottom,
+          children: label
+        }
+      ),
+      /* @__PURE__ */ jsx(
+        StyledInputField5,
+        {
+          ...mergedInputProps,
+          ref: inputRef,
+          $fontSize: appearance?.fontSize,
+          $color: appearance?.color,
+          $borderColor: appearance?.borderColor,
+          $backgroundColor: appearance?.backgroundColor,
+          $placeholderColor: appearance?.placeholderColor,
+          $errorBackgroundColor: appearance?.errorBackgroundColor,
+          $focusRingColor: appearance?.focusRingColor,
+          $size: size
+        }
+      ),
+      errorText && /* @__PURE__ */ jsx(
+        StyledInputError5,
+        {
+          ...errorMessageProps,
+          $errorColor: appearance?.errorColor ?? "#f00",
+          $errorFontSize: appearance?.errorFontSize ?? 16,
+          "aria-live": "polite",
+          children: errorText || ""
+        }
+      )
+    ] }) });
+  }
+);
+Input005.displayName = "Input005";
 var StyledInputWrapper6 = styled13.div`
   ${({ theme }) => theme.font.baseSize.em()}
 `;
+var StyledInputLabel6 = styled13.label.withConfig({
+  shouldForwardProp: (prop) => !prop.startsWith("$")
+})`
+  display: block;
+  font-size: ${({ theme, $fontSize }) => theme.size.em($fontSize ?? 16)};
+  margin-bottom: ${({ theme, $marginBottom }) => theme.size.em($marginBottom ?? 5)};
+  color: ${({ $color }) => $color ?? "#000"};
+  font-weight: ${({ $fontWeight }) => $fontWeight ?? "normal"};
+`;
 var StyledInputFieldWrapper = styled13.div.withConfig({
-  shouldForwardProp: (prop) => prop !== "iconPosition" && prop !== "borderColor" && prop !== "backgroundColor" && prop !== "errorBorderColor"
+  shouldForwardProp: (prop) => !prop.startsWith("$")
 })`
   position: relative;
-  border: 1px solid ${({ borderColor }) => borderColor ?? "#000"};
-  background-color: ${({ backgroundColor }) => backgroundColor ?? "#fff"};
+  border: 1px solid ${({ $borderColor }) => $borderColor ?? "#000"};
+  background-color: ${({ $backgroundColor }) => $backgroundColor ?? "#fff"};
+  transition: box-shadow 0.2s ease-in-out;
 
-  ${({ iconPosition, theme }) => {
-  switch (iconPosition) {
+  &:focus-within {
+    outline: none;
+    box-shadow: 0 0 0 ${({ theme }) => theme.size.em(0.25)} ${({ $focusRingColor }) => $focusRingColor ?? "#007bff"};
+  }
+
+  ${({ $iconPosition, theme }) => {
+  switch ($iconPosition) {
     case "right":
       return css`
           padding-right: ${theme.size.em(40)};
@@ -10320,37 +10731,41 @@ var StyledInputFieldWrapper = styled13.div.withConfig({
 `;
 var defaultFontSize6 = (size) => size ?? 18;
 var StyledInputField6 = styled13.input.withConfig({
-  shouldForwardProp: (prop) => prop !== "size" && prop !== "iconPosition" && prop !== "fontSize" && prop !== "color" && prop !== "backgroundColor" && prop !== "placeholderColor"
+  shouldForwardProp: (prop) => !prop.startsWith("$") && prop !== "size"
 })`
   width: 100%;
   display: block;
   border: 0;
-  font-size: ${({ theme, fontSize }) => theme.size.em(defaultFontSize6(fontSize))};
-  color: ${({ color: color2 }) => color2 ?? "#000"};
-  background-color: ${({ backgroundColor }) => backgroundColor ?? "#fff"};
+  font-size: ${({ theme, $fontSize }) => theme.size.em(defaultFontSize6($fontSize))};
+  color: ${({ $color }) => $color ?? "#000"};
+  background-color: ${({ $backgroundColor }) => $backgroundColor ?? "#fff"};
   box-sizing: border-box;
   line-height: 1;
 
-  &::placeholder {
-    color: ${({ placeholderColor }) => placeholderColor ?? "#909090"};
+  &:focus-visible {
+    outline: none;
   }
 
-  ${({ size, theme, fontSize }) => {
-  switch (size) {
+  &::placeholder {
+    color: ${({ $placeholderColor }) => $placeholderColor ?? "#909090"};
+  }
+
+  ${({ $size, theme, $fontSize }) => {
+  switch ($size) {
     case "small":
       return css`
-          padding-top: ${theme.size.customEm(5, defaultFontSize6(fontSize))};
-          padding-bottom: ${theme.size.customEm(5, defaultFontSize6(fontSize))};
+          padding-top: ${theme.size.customEm(5, defaultFontSize6($fontSize))};
+          padding-bottom: ${theme.size.customEm(5, defaultFontSize6($fontSize))};
         `;
     case "middle":
       return css`
-          padding-top: ${theme.size.customEm(10, defaultFontSize6(fontSize))};
-          padding-bottom: ${theme.size.customEm(10, defaultFontSize6(fontSize))};
+          padding-top: ${theme.size.customEm(10, defaultFontSize6($fontSize))};
+          padding-bottom: ${theme.size.customEm(10, defaultFontSize6($fontSize))};
         `;
     case "large":
       return css`
-          padding-top: ${theme.size.customEm(15, defaultFontSize6(fontSize))};
-          padding-bottom: ${theme.size.customEm(15, defaultFontSize6(fontSize))};
+          padding-top: ${theme.size.customEm(15, defaultFontSize6($fontSize))};
+          padding-bottom: ${theme.size.customEm(15, defaultFontSize6($fontSize))};
         `;
     default:
       return css`
@@ -10360,8 +10775,8 @@ var StyledInputField6 = styled13.input.withConfig({
   }
 }}
 
-  ${({ iconPosition, theme }) => {
-  switch (iconPosition) {
+  ${({ $iconPosition, theme }) => {
+  switch ($iconPosition) {
     case "right":
       return css`
           padding-left: ${theme.size.em(10)};
@@ -10381,16 +10796,16 @@ var StyledInputField6 = styled13.input.withConfig({
 }}
 `;
 var StyledInputIcon = styled13.div.withConfig({
-  shouldForwardProp: (prop) => prop !== "iconPosition"
+  shouldForwardProp: (prop) => !prop.startsWith("$")
 })`
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
 
-  ${({ theme, size }) => theme.icon.size.style(size)}
+  ${({ theme, $size }) => theme.icon.size.style($size)}
 
-  ${({ iconPosition, theme }) => {
-  switch (iconPosition) {
+  ${({ $iconPosition, theme }) => {
+  switch ($iconPosition) {
     case "right":
       return css`
           right: ${theme.size.em(5)};
@@ -10407,23 +10822,19 @@ var StyledInputIcon = styled13.div.withConfig({
 }}
 `;
 var StyledInput6 = styled13.div.withConfig({
-  shouldForwardProp: (prop) => prop !== "type" && prop !== "size" && prop !== "error"
+  shouldForwardProp: (prop) => !prop.startsWith("$")
 })`
   position: relative;
   width: 100%;
 
-  ${({ error }) => error && css`
+  ${({ $error }) => $error && css`
     ${StyledInputFieldWrapper} {
       border-color: #f00;
     }
-
-    ${StyledInputError6} {
-      display: block;
-    }
   `}
 
-  ${({ type, theme }) => {
-  switch (type) {
+  ${({ $variant, theme }) => {
+  switch ($variant) {
     case "001":
       return css`
           ${StyledInputFieldWrapper},
@@ -10449,68 +10860,136 @@ var StyledInput6 = styled13.div.withConfig({
 }}
 `;
 var StyledInputError6 = styled13.p.withConfig({
-  shouldForwardProp: (prop) => prop !== "errorColor" && prop !== "errorFontSize"
+  shouldForwardProp: (prop) => !prop.startsWith("$")
 })`
-  display: none;
-  color: ${({ errorColor }) => errorColor ?? "#f00"};
-  font-size: ${({ theme, errorFontSize }) => theme.size.em(errorFontSize ?? 16)};
+  color: ${({ $errorColor }) => $errorColor ?? "#f00"};
+  font-size: ${({ theme, $errorFontSize }) => theme.size.em($errorFontSize ?? 16)};
   margin: ${({ theme }) => theme.size.em(5)} 0 0;
-  line-height: 1;
+  min-height: ${({ theme, $errorFontSize }) => theme.size.em($errorFontSize ?? 16)};
+  line-height: 1.2;
 `;
-var Input006 = ({
-  type = "001",
-  size = "small",
-  iconPosition = "right",
-  icon,
-  name = "input-006",
-  placeholder = "\u5165\u529B\u3057\u3066\u304F\u3060\u3055\u3044",
-  value,
-  onChange,
-  error = false,
-  errorText,
-  style,
-  inputProps
-}) => {
-  return /* @__PURE__ */ jsx(StyledInputWrapper6, { children: /* @__PURE__ */ jsxs(StyledInput6, { error: error || !!errorText, type, size, children: [
-    /* @__PURE__ */ jsxs(
-      StyledInputFieldWrapper,
+var Input006 = forwardRef(
+  ({
+    variant = "001",
+    size = "small",
+    iconPosition = "right",
+    icon,
+    name = "input-006",
+    placeholder = "\u5165\u529B\u3057\u3066\u304F\u3060\u3055\u3044",
+    value,
+    defaultValue: defaultValue2,
+    onChange,
+    error = false,
+    errorText,
+    inputType = "text",
+    autoComplete,
+    id: id2,
+    label,
+    ariaLabel,
+    appearance,
+    inputProps
+  }, ref) => {
+    const generatedId = useId();
+    const inputId = id2 ?? generatedId;
+    const hasError = error || !!errorText;
+    const inputRef = useObjectRef(ref);
+    const {
+      labelProps,
+      inputProps: ariaInputProps,
+      errorMessageProps
+    } = useTextField(
       {
-        iconPosition,
-        borderColor: style?.borderColor,
-        backgroundColor: style?.backgroundColor,
-        errorBorderColor: style?.errorBorderColor,
-        children: [
-          /* @__PURE__ */ jsx(
-            StyledInputField6,
-            {
-              name,
-              type: "text",
-              placeholder,
-              value,
-              onChange,
-              fontSize: style?.fontSize,
-              color: style?.color,
-              backgroundColor: style?.backgroundColor,
-              placeholderColor: style?.placeholderColor,
-              ...inputProps,
-              size,
-              iconPosition
-            }
-          ),
-          /* @__PURE__ */ jsx(StyledInputIcon, { iconPosition, size, children: icon })
-        ]
-      }
-    ),
-    errorText && /* @__PURE__ */ jsx(
-      StyledInputError6,
-      {
-        errorColor: style?.errorColor ?? "#f00",
-        errorFontSize: style?.errorFontSize ?? 16,
-        children: errorText
-      }
-    )
-  ] }) });
-};
+        id: inputId,
+        label,
+        "aria-label": label ? void 0 : ariaLabel,
+        validationState: hasError ? "invalid" : void 0,
+        errorMessage: errorText,
+        inputElementType: "input",
+        isDisabled: inputProps?.disabled,
+        isRequired: inputProps?.required,
+        isReadOnly: inputProps?.readOnly
+      },
+      inputRef
+    );
+    const {
+      value: _ariaValue,
+      defaultValue: _ariaDefaultValue,
+      onChange: _ariaOnChange,
+      ...restAriaInputProps
+    } = ariaInputProps;
+    const baseInputProps = {
+      id: inputId,
+      name,
+      type: inputType,
+      placeholder,
+      autoComplete
+    };
+    if (value !== void 0) {
+      baseInputProps.value = value;
+    }
+    if (defaultValue2 !== void 0) {
+      baseInputProps.defaultValue = defaultValue2;
+    }
+    if (onChange) {
+      baseInputProps.onChange = onChange;
+    }
+    const mergedInputProps = mergeProps(
+      restAriaInputProps,
+      baseInputProps,
+      inputProps || {}
+    );
+    return /* @__PURE__ */ jsx(StyledInputWrapper6, { children: /* @__PURE__ */ jsxs(StyledInput6, { $error: hasError, $variant: variant, $size: size, children: [
+      label && /* @__PURE__ */ jsx(
+        StyledInputLabel6,
+        {
+          ...labelProps,
+          $fontSize: appearance?.labelFontSize,
+          $color: appearance?.labelColor,
+          $fontWeight: appearance?.labelFontWeight,
+          $marginBottom: appearance?.labelMarginBottom,
+          children: label
+        }
+      ),
+      /* @__PURE__ */ jsxs(
+        StyledInputFieldWrapper,
+        {
+          $iconPosition: iconPosition,
+          $borderColor: appearance?.borderColor,
+          $backgroundColor: appearance?.backgroundColor,
+          $errorBorderColor: appearance?.errorBorderColor,
+          $focusRingColor: appearance?.focusRingColor,
+          children: [
+            /* @__PURE__ */ jsx(
+              StyledInputField6,
+              {
+                ...mergedInputProps,
+                ref: inputRef,
+                $fontSize: appearance?.fontSize,
+                $color: appearance?.color,
+                $backgroundColor: appearance?.backgroundColor,
+                $placeholderColor: appearance?.placeholderColor,
+                $size: size,
+                $iconPosition: iconPosition
+              }
+            ),
+            /* @__PURE__ */ jsx(StyledInputIcon, { $iconPosition: iconPosition, $size: size, children: icon })
+          ]
+        }
+      ),
+      errorText && /* @__PURE__ */ jsx(
+        StyledInputError6,
+        {
+          ...errorMessageProps,
+          $errorColor: appearance?.errorColor ?? "#f00",
+          $errorFontSize: appearance?.errorFontSize ?? 16,
+          "aria-live": "polite",
+          children: errorText || ""
+        }
+      )
+    ] }) });
+  }
+);
+Input006.displayName = "Input006";
 var StyledLabelWrapper = styled13.div`
   ${({ theme }) => theme.font.baseSize.em()}
 `;
@@ -10746,43 +11225,37 @@ var Label002 = ({
     }
   ) });
 };
-var StyledListWrapper2 = styled13.div`
+var StyledList2 = styled13.ul`
   ${({ theme }) => theme.font.baseSize.em()}
-`;
-var StyledList2 = styled13.div.withConfig({
-  shouldForwardProp: (prop) => prop !== "type" && prop !== "columnGap" && prop !== "rowGap" && prop !== "isAlignItemsCenter"
-})`
   display: flex;
   list-style: none;
   padding: 0;
   margin: 0;
-  align-items: ${({ isAlignItemsCenter }) => isAlignItemsCenter ? "center" : "flex-start"};
+  align-items: ${({ $isAlignItemsCenter }) => $isAlignItemsCenter ? "center" : "flex-start"};
 
-  ${({ type, theme, columnGap, rowGap }) => {
-  switch (type) {
+  ${({ $type, theme, $columnGap, $rowGap }) => {
+  switch ($type) {
     case "001":
     case "002":
       return css`
           flex-direction: column;
-          gap: ${theme.size.em(columnGap ?? 10)};
+          gap: ${theme.size.em($columnGap ?? 10)};
         `;
     case "003":
       return css`
-          gap: ${theme.size.em(rowGap ?? 40)};
+          gap: ${theme.size.em($rowGap ?? 40)};
         `;
     default:
       return css`
           flex-direction: column;
-          gap: ${theme.size.em(columnGap ?? 10)};
+          gap: ${theme.size.em($columnGap ?? 10)};
         `;
   }
 }}
 `;
-var StyledListItem2 = styled13.li.withConfig({
-  shouldForwardProp: (prop) => prop !== "type" && prop !== "borderColor"
-})`
-  ${({ type, borderColor }) => type === "002" && css`
-      border-bottom: 1px solid ${borderColor ?? "#000"};
+var StyledListItem2 = styled13.li`
+  ${({ $type, $borderColor }) => $type === "002" && css`
+      border-bottom: 1px solid ${$borderColor ?? "#000"};
       padding-bottom: ${({ theme }) => theme.size.em(8)};
 
       &:last-child {
@@ -10790,526 +11263,956 @@ var StyledListItem2 = styled13.li.withConfig({
       }
     `}
 `;
-var List001 = ({ type = "001", items, style }) => {
-  return /* @__PURE__ */ jsx(StyledListWrapper2, { children: /* @__PURE__ */ jsx(
-    StyledList2,
-    {
-      as: "ul",
-      type,
-      columnGap: style?.columnGap,
-      rowGap: style?.rowGap,
-      isAlignItemsCenter: style?.isAlignItemsCenter,
-      children: items.map((item) => /* @__PURE__ */ jsx(
-        StyledListItem2,
-        {
-          type,
-          borderColor: style?.borderColor,
-          children: item.content
-        },
-        item.id
-      ))
-    }
-  ) });
-};
-var StyledListItemWrapper = styled13.span`
-  ${({ theme }) => theme.font.baseSize.em()}
-`;
-var StyledListItemNumber = styled13.span.withConfig({
-  shouldForwardProp: (prop) => prop !== "fontSize"
-})`
-  height: calc(${({ theme, fontSize }) => theme.size.em(fontSize ?? 24)} * 1.5);
-  position: relative;
-`;
-var StyledListItemNumberText = styled13.span.withConfig({
-  shouldForwardProp: (prop) => prop !== "numberFontSize" && prop !== "numberColor" && prop !== "animationDuration" && prop !== "animationEase"
-})`
-  position: absolute;
-  top: 50%;
-  left: 0;
-  transform: translateY(-50%);
-  color: ${({ numberColor }) => numberColor ?? "#000"};
-  font-size: ${({ theme, numberFontSize }) => theme.size.em(numberFontSize ?? 24)};
-  transition: color ${({ animationDuration }) => animationDuration ?? "0.25s"} ${({ animationEase, theme }) => theme.animation.easing[animationEase ?? "easeInOutCubic"]};
-`;
-var StyledListItemTextWrapper = styled13.span.withConfig({
-  shouldForwardProp: (prop) => prop !== "gap"
-})`
-  width: 100%;
-  padding-left: ${({ theme, gap }) => theme.size.em(30 + (gap ?? 10))};
-`;
-var StyledListItemText = styled13.span.withConfig({
-  shouldForwardProp: (prop) => prop !== "fontSize" && prop !== "color" && prop !== "animationColor" && prop !== "animationDuration" && prop !== "animationEase"
-})`
-  display: block;
-  color: ${({ color: color2 }) => color2 ?? "#000"};
-  font-size: ${({ theme, fontSize }) => theme.size.em(fontSize ?? 24)};
-  overflow-wrap: break-word;
-  line-height: 1.5;
-  transition: color ${({ animationDuration }) => animationDuration ?? "0.25s"} ${({ animationEase, theme }) => theme.animation.easing[animationEase ?? "easeInOutCubic"]};
-`;
-var StyledListItem3 = styled13.span.withConfig({
-  shouldForwardProp: (prop) => prop !== "animationColor"
-})`
-  cursor: pointer;
-  display: flex;
-  justify-content: left;
-
-  &:hover {
-    ${StyledListItemText} {
-      color: ${({ animationColor }) => animationColor ?? "#ccc"};
-    }
-
-    ${StyledListItemNumberText} {
-      color: ${({ animationColor }) => animationColor ?? "#ccc"};
+var isListItemElement = (node) => {
+  if (!isValidElement(node)) return false;
+  if (node.type === "li") return true;
+  if (typeof node.type === "object" && node.type !== null) {
+    const displayName = node.type.displayName;
+    if (displayName && typeof displayName === "string" && displayName.includes("ListItem")) {
+      return true;
     }
   }
-`;
-var ListItem001 = ({
-  number,
-  children,
-  onClick,
+  if (typeof node.type === "function") {
+    const displayName = node.type.displayName;
+    if (displayName && typeof displayName === "string" && displayName.includes("ListItem")) {
+      return true;
+    }
+  }
+  return false;
+};
+var List001 = ({
+  type = "001",
+  listStyle = "ul",
+  items,
+  ariaLabel,
   style
 }) => {
-  return /* @__PURE__ */ jsx(StyledListItemWrapper, { children: /* @__PURE__ */ jsxs(StyledListItem3, { onClick, animationColor: style?.animationColor, children: [
-    /* @__PURE__ */ jsx(StyledListItemNumber, { fontSize: style?.fontSize, children: /* @__PURE__ */ jsx(
-      StyledListItemNumberText,
+  const listProps = {
+    as: listStyle,
+    $type: type,
+    $listStyle: listStyle,
+    $columnGap: style?.columnGap,
+    $rowGap: style?.rowGap,
+    $isAlignItemsCenter: style?.isAlignItemsCenter,
+    role: "list",
+    "aria-label": ariaLabel,
+    ...type === "003" && { "aria-orientation": "horizontal" }
+  };
+  return /* @__PURE__ */ jsx(StyledList2, { ...listProps, children: items.map((item) => {
+    const itemProps = {
+      "aria-current": item.ariaCurrent,
+      "aria-selected": item.ariaSelected
+    };
+    if (isListItemElement(item.content)) {
+      return cloneElement(item.content, {
+        key: item.id,
+        ...itemProps,
+        $type: type,
+        $borderColor: style?.borderColor
+      });
+    }
+    return /* @__PURE__ */ jsx(
+      StyledListItem2,
       {
-        numberFontSize: style?.numberFontSize,
-        numberColor: style?.numberColor,
-        animationColor: style?.animationColor,
-        animationDuration: style?.animationDuration,
-        animationEase: style?.animationEase,
-        children: number
-      }
-    ) }),
-    /* @__PURE__ */ jsx(StyledListItemTextWrapper, { gap: style?.gap, children: /* @__PURE__ */ jsx(
-      StyledListItemText,
-      {
-        fontSize: style?.fontSize,
-        color: style?.color,
-        animationColor: style?.animationColor,
-        animationDuration: style?.animationDuration,
-        animationEase: style?.animationEase,
-        children
-      }
-    ) })
-  ] }) });
+        ...itemProps,
+        $type: type,
+        $borderColor: style?.borderColor,
+        children: item.content
+      },
+      item.id
+    );
+  }) });
 };
-var StyledListItemWrapper2 = styled13.span`
-  ${({ theme }) => theme.font.baseSize.em()}
+var StyledListItemNumber = styled13.div`
+  display: flex;
+  justify-content: center;
+  padding-top: ${({ theme, $numberPaddingTop }) => $numberPaddingTop === 0 || $numberPaddingTop === void 0 ? "0" : theme.size.em($numberPaddingTop)};
 `;
-var StyledListItemPointWrapper = styled13.span.withConfig({
-  shouldForwardProp: (prop) => prop !== "fontSize"
-})`
-  height: calc(${({ theme, fontSize }) => theme.size.em(fontSize ?? 24)} * 1.5);
-  position: relative;
+var StyledListItemNumberText = styled13.span`
+  color: ${({ $numberColor }) => $numberColor};
+  font-size: ${({ theme, $numberFontSize }) => theme.size.em($numberFontSize)};
+  transition: color
+    ${({ $animationDuration }) => $animationDuration}s
+    ${({ $animationEase, theme }) => theme.animation.easing[$animationEase]};
 `;
-var StyledListItemPoint = styled13.span.withConfig({
-  shouldForwardProp: (prop) => prop !== "pointSize" && prop !== "pointColor" && prop !== "animationPointColor" && prop !== "animationDuration" && prop !== "animationEase"
-})`
-  position: absolute;
-  top: 50%;
-  left: 0;
-  transform: translateY(-50%);
-  background-color: ${({ pointColor }) => pointColor ?? "#000"};
-  width: ${({ theme, pointSize }) => theme.size.em(pointSize ?? 8)};
-  height: ${({ theme, pointSize }) => theme.size.em(pointSize ?? 8)};
+var StyledListItemTextWrapper = styled13.div`
+  display: block;
+`;
+var StyledListItemText = styled13.div`
+  display: block;
+  color: ${({ $color }) => $color};
+  overflow-wrap: break-word;
+  line-height: 1.5;
+  margin: 0;
+  transition: color
+    ${({ $animationDuration }) => $animationDuration}s
+    ${({ $animationEase, theme }) => theme.animation.easing[$animationEase]};
+`;
+var StyledListItem3 = styled13.li`
+  ${({ theme }) => theme.font.baseSize.em()};
+  list-style: none;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  column-gap: ${({ theme, $gap }) => theme.size.em(30 + $gap)};
+  align-items: ${({ $alignItemsCenter }) => $alignItemsCenter ? "center" : "start"};
+
+  ${({ $hasOnClick, $animationColor }) => $hasOnClick && css`
+      cursor: pointer;
+
+      &:hover {
+        ${StyledListItemText} {
+          color: ${$animationColor};
+        }
+
+        ${StyledListItemNumberText} {
+          color: ${$animationColor};
+        }
+      }
+
+      &:focus-visible {
+        outline: 2px solid ${$animationColor};
+        outline-offset: 2px;
+      }
+    `}
+`;
+var defaultAppearance3 = {
+  color: "#000",
+  gap: 10,
+  numberFontSize: 24,
+  numberColor: "#000",
+  numberPaddingTop: 0,
+  animationColor: "#ccc",
+  animationDuration: 0.25,
+  animationEase: "easeInOutCubic"
+};
+var ListItem001 = forwardRef(
+  ({ as = "li", number, children, appearance, onClick, ...rest }, ref) => {
+    const mergedAppearance = useMemo(
+      () => ({ ...defaultAppearance3, ...appearance }),
+      [appearance]
+    );
+    const localRef = useRef(null);
+    const handleAriaClick = useCallback(
+      (event) => {
+        onClick?.(event);
+      },
+      [onClick]
+    );
+    const { buttonProps } = useButton(
+      {
+        elementType: as,
+        onClick: handleAriaClick,
+        isDisabled: !onClick
+      },
+      localRef
+    );
+    const handleRef = useCallback(
+      (node) => {
+        localRef.current = node;
+        if (!ref) {
+          return;
+        }
+        if (typeof ref === "function") {
+          ref(node);
+        } else {
+          ref.current = node;
+        }
+      },
+      [ref]
+    );
+    const mergedProps = onClick ? mergeProps(buttonProps, rest) : rest;
+    const {
+      color: color2,
+      gap,
+      numberFontSize,
+      numberColor,
+      numberPaddingTop,
+      animationColor,
+      animationDuration,
+      animationEase
+    } = mergedAppearance;
+    return /* @__PURE__ */ jsxs(
+      StyledListItem3,
+      {
+        ...mergedProps,
+        ref: handleRef,
+        as,
+        $animationColor: animationColor,
+        $hasOnClick: !!onClick,
+        $gap: gap,
+        $alignItemsCenter: numberPaddingTop === 0,
+        "aria-label": `Step ${number}`,
+        children: [
+          /* @__PURE__ */ jsx(StyledListItemNumber, { $numberPaddingTop: numberPaddingTop, children: /* @__PURE__ */ jsx(
+            StyledListItemNumberText,
+            {
+              $numberFontSize: numberFontSize,
+              $numberColor: numberColor,
+              $animationColor: animationColor,
+              $animationDuration: animationDuration,
+              $animationEase: animationEase,
+              "aria-hidden": "true",
+              children: number
+            }
+          ) }),
+          /* @__PURE__ */ jsx(StyledListItemTextWrapper, { children: /* @__PURE__ */ jsx(
+            StyledListItemText,
+            {
+              $color: color2,
+              $animationColor: animationColor,
+              $animationDuration: animationDuration,
+              $animationEase: animationEase,
+              children
+            }
+          ) })
+        ]
+      }
+    );
+  }
+);
+ListItem001.displayName = "ListItem001";
+var StyledListItemPointWrapper = styled13.div`
+  display: flex;
+  justify-content: center;
+  padding-top: ${({ theme, $pointPaddingTop }) => $pointPaddingTop === 0 || $pointPaddingTop === void 0 ? "0" : theme.size.em($pointPaddingTop ?? 0)};
+`;
+var StyledListItemPoint = styled13.span`
+  background-color: ${({ $pointColor }) => $pointColor};
+  width: ${({ theme, $pointSize }) => theme.size.em($pointSize)};
+  height: ${({ theme, $pointSize }) => theme.size.em($pointSize)};
   border-radius: 50%;
-  transition: background-color ${({ animationDuration }) => animationDuration ?? "0.25s"} ${({ animationEase, theme }) => theme.animation.easing[animationEase ?? "easeInOutCubic"]};
+  transition: background-color
+    ${({ $animationDuration }) => $animationDuration}s
+    ${({ $animationEase, theme }) => theme.animation.easing[$animationEase]};
 `;
-var StyledListItemTextWrapper2 = styled13.span.withConfig({
-  shouldForwardProp: (prop) => prop !== "gap"
-})`
-  width: 100%;
-  padding-left: ${({ theme, gap }) => theme.size.em(gap ?? 24)};
-`;
-var StyledListItemText2 = styled13.span.withConfig({
-  shouldForwardProp: (prop) => prop !== "fontSize" && prop !== "color" && prop !== "animationColor" && prop !== "animationDuration" && prop !== "animationEase"
-})`
+var StyledListItemTextWrapper2 = styled13.div`
   display: block;
-  color: ${({ color: color2 }) => color2 ?? "#000"};
-  font-size: ${({ theme, fontSize }) => theme.size.em(fontSize ?? 24)};
+`;
+var StyledListItemText2 = styled13.div`
+  display: block;
+  color: ${({ $color }) => $color};
   overflow-wrap: break-word;
   line-height: 1.5;
-  transition: color ${({ animationDuration }) => animationDuration ?? "0.25s"} ${({ animationEase, theme }) => theme.animation.easing[animationEase ?? "easeInOutCubic"]};
+  margin: 0;
+  transition: color
+    ${({ $animationDuration }) => $animationDuration}s
+    ${({ $animationEase, theme }) => theme.animation.easing[$animationEase]};
 `;
-var StyledListItem4 = styled13.span.withConfig({
-  shouldForwardProp: (prop) => prop !== "animationColor" && prop !== "animationPointColor"
-})`
-  cursor: pointer;
-  display: flex;
-  justify-content: left;
+var StyledListItem4 = styled13.li`
+  ${({ theme }) => theme.font.baseSize.em()};
+  list-style: none;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  column-gap: ${({ theme, $gap }) => theme.size.em($gap)};
+  align-items: ${({ $alignItemsCenter }) => $alignItemsCenter ? "center" : "start"};
 
-  &:hover {
-    ${StyledListItemText2} {
-      color: ${({ animationColor }) => animationColor ?? "#ccc"};
-    }
+  ${({ $hasOnClick, $animationColor, $animationPointColor }) => $hasOnClick && css`
+      cursor: pointer;
 
-    ${StyledListItemPoint} {
-      background-color: ${({ animationPointColor }) => animationPointColor ?? "#ccc"};
-    }
-  }
+      &:hover {
+        ${StyledListItemText2} {
+          color: ${$animationColor};
+        }
+
+        ${StyledListItemPoint} {
+          background-color: ${$animationPointColor};
+        }
+      }
+
+      &:focus-visible {
+        outline: 2px solid ${$animationColor};
+        outline-offset: 2px;
+      }
+    `}
 `;
-var ListItem002 = ({ children, onClick, style }) => {
-  return /* @__PURE__ */ jsx(StyledListItemWrapper2, { children: /* @__PURE__ */ jsxs(
-    StyledListItem4,
-    {
-      onClick,
-      animationColor: style?.animationColor,
-      animationPointColor: style?.animationPointColor,
-      children: [
-        /* @__PURE__ */ jsx(StyledListItemPointWrapper, { fontSize: style?.fontSize, children: /* @__PURE__ */ jsx(
-          StyledListItemPoint,
-          {
-            pointSize: style?.pointSize,
-            pointColor: style?.pointColor,
-            animationPointColor: style?.animationPointColor,
-            animationDuration: style?.animationDuration,
-            animationEase: style?.animationEase
-          }
-        ) }),
-        /* @__PURE__ */ jsx(StyledListItemTextWrapper2, { gap: style?.gap, children: /* @__PURE__ */ jsx(
-          StyledListItemText2,
-          {
-            fontSize: style?.fontSize,
-            color: style?.color,
-            animationColor: style?.animationColor,
-            animationDuration: style?.animationDuration,
-            animationEase: style?.animationEase,
-            children
-          }
-        ) })
-      ]
-    }
-  ) });
+var defaultAppearance4 = {
+  color: "#000",
+  gap: 24,
+  pointSize: 8,
+  pointColor: "#000",
+  pointPaddingTop: 0,
+  animationColor: "#ccc",
+  animationDuration: 0.25,
+  animationEase: "easeInOutCubic",
+  animationPointColor: "#ccc"
 };
-var StyledListItemWrapper3 = styled13.span`
-  ${({ theme }) => theme.font.baseSize.em()}
+var ListItem002 = forwardRef(
+  ({ as = "li", children, appearance, onClick, ...rest }, ref) => {
+    const mergedAppearance = useMemo(
+      () => ({ ...defaultAppearance4, ...appearance }),
+      [appearance]
+    );
+    const localRef = useRef(null);
+    const handleAriaClick = useCallback(
+      (event) => {
+        onClick?.(event);
+      },
+      [onClick]
+    );
+    const { buttonProps } = useButton(
+      {
+        elementType: as,
+        onClick: handleAriaClick,
+        isDisabled: !onClick
+      },
+      localRef
+    );
+    const handleRef = useCallback(
+      (node) => {
+        localRef.current = node;
+        if (!ref) {
+          return;
+        }
+        if (typeof ref === "function") {
+          ref(node);
+        } else {
+          ref.current = node;
+        }
+      },
+      [ref]
+    );
+    const mergedProps = onClick ? mergeProps(buttonProps, rest) : rest;
+    const {
+      color: color2,
+      gap,
+      pointSize,
+      pointColor,
+      pointPaddingTop,
+      animationColor,
+      animationDuration,
+      animationEase,
+      animationPointColor
+    } = mergedAppearance;
+    return /* @__PURE__ */ jsxs(
+      StyledListItem4,
+      {
+        ...mergedProps,
+        ref: handleRef,
+        as,
+        $animationColor: animationColor,
+        $animationPointColor: animationPointColor,
+        $hasOnClick: !!onClick,
+        $gap: gap,
+        $alignItemsCenter: pointPaddingTop === 0,
+        "aria-label": "List item",
+        children: [
+          /* @__PURE__ */ jsx(StyledListItemPointWrapper, { $pointPaddingTop: pointPaddingTop, children: /* @__PURE__ */ jsx(
+            StyledListItemPoint,
+            {
+              $pointSize: pointSize,
+              $pointColor: pointColor,
+              $animationPointColor: animationPointColor,
+              $animationDuration: animationDuration,
+              $animationEase: animationEase,
+              "aria-hidden": "true"
+            }
+          ) }),
+          /* @__PURE__ */ jsx(StyledListItemTextWrapper2, { children: /* @__PURE__ */ jsx(
+            StyledListItemText2,
+            {
+              $color: color2,
+              $animationColor: animationColor,
+              $animationDuration: animationDuration,
+              $animationEase: animationEase,
+              children
+            }
+          ) })
+        ]
+      }
+    );
+  }
+);
+ListItem002.displayName = "ListItem002";
+var StyledListItemPointWrapper2 = styled13.div`
+  display: flex;
+  justify-content: center;
+  padding-top: ${({ theme, $pointPaddingTop }) => $pointPaddingTop === 0 || $pointPaddingTop === void 0 ? "0" : theme.size.em($pointPaddingTop ?? 0)};
 `;
-var StyledListItemPointWrapper2 = styled13.span.withConfig({
-  shouldForwardProp: (prop) => prop !== "fontSize"
-})`
-  height: calc(${({ theme, fontSize }) => theme.size.em(fontSize ?? 24)} * 1.5);
-  position: relative;
+var StyledListItemPoint2 = styled13.span`
+  background-color: ${({ $pointColor }) => $pointColor};
+  width: ${({ theme, $pointSize }) => theme.size.em($pointSize)};
+  height: ${({ theme, $pointSize }) => theme.size.em($pointSize)};
+  border-radius: 50%;
+  transition: background-color
+    ${({ $animationDuration }) => $animationDuration}s
+    ${({ $animationEase, theme }) => theme.animation.easing[$animationEase]};
 `;
-var StyledListItemPoint2 = styled13.span.withConfig({
-  shouldForwardProp: (prop) => prop !== "pointSize" && prop !== "pointColor" && prop !== "animationPointColor" && prop !== "animationDuration" && prop !== "animationEase"
-})`
-  position: absolute;
-  top: 50%;
-  left: 0;
-  transform: translateY(-50%);
-  background-color: ${({ pointColor }) => pointColor ?? "#000"};
-  width: ${({ theme, pointSize }) => theme.size.em(pointSize ?? 8)};
-  height: ${({ theme, pointSize }) => theme.size.em(pointSize ?? 8)};
-  transition: background-color ${({ animationDuration }) => animationDuration ?? "0.25s"} ${({ animationEase, theme }) => theme.animation.easing[animationEase ?? "easeInOutCubic"]};
-`;
-var StyledListItemTextWrapper3 = styled13.span.withConfig({
-  shouldForwardProp: (prop) => prop !== "gap"
-})`
-  width: 100%;
-  padding-left: ${({ theme, gap }) => theme.size.em(gap ?? 24)};
-`;
-var StyledListItemText3 = styled13.span.withConfig({
-  shouldForwardProp: (prop) => prop !== "fontSize" && prop !== "color" && prop !== "animationColor" && prop !== "animationDuration" && prop !== "animationEase"
-})`
+var StyledListItemTextWrapper3 = styled13.div`
   display: block;
-  color: ${({ color: color2 }) => color2 ?? "#000"};
-  font-size: ${({ theme, fontSize }) => theme.size.em(fontSize ?? 24)};
+`;
+var StyledListItemText3 = styled13.div`
+  display: block;
+  color: ${({ $color }) => $color};
   overflow-wrap: break-word;
   line-height: 1.5;
-  transition: color ${({ animationDuration }) => animationDuration ?? "0.25s"} ${({ animationEase, theme }) => theme.animation.easing[animationEase ?? "easeInOutCubic"]};
+  margin: 0;
+  transition: color
+    ${({ $animationDuration }) => $animationDuration}s
+    ${({ $animationEase, theme }) => theme.animation.easing[$animationEase]};
 `;
-var StyledListItem5 = styled13.span.withConfig({
-  shouldForwardProp: (prop) => prop !== "animationColor" && prop !== "animationPointColor"
-})`
-  cursor: pointer;
-  display: flex;
-  justify-content: left;
+var StyledListItem5 = styled13.li`
+  ${({ theme }) => theme.font.baseSize.em()};
+  list-style: none;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  column-gap: ${({ theme, $gap }) => theme.size.em($gap)};
+  align-items: ${({ $alignItemsCenter }) => $alignItemsCenter ? "center" : "start"};
 
-  &:hover {
-    ${StyledListItemText3} {
-      color: ${({ animationColor }) => animationColor ?? "#ccc"};
-    }
+  ${({ $hasOnClick, $animationColor, $animationPointColor }) => $hasOnClick && css`
+      cursor: pointer;
 
-    ${StyledListItemPoint2} {
-      background-color: ${({ animationPointColor }) => animationPointColor ?? "#ccc"};
-    }
-  }
+      &:hover {
+        ${StyledListItemText3} {
+          color: ${$animationColor};
+        }
+
+        ${StyledListItemPoint2} {
+          background-color: ${$animationPointColor};
+        }
+      }
+
+      &:focus-visible {
+        outline: 2px solid ${$animationColor};
+        outline-offset: 2px;
+      }
+    `}
 `;
-var ListItem003 = ({ children, onClick, style }) => {
-  return /* @__PURE__ */ jsx(StyledListItemWrapper3, { children: /* @__PURE__ */ jsxs(
-    StyledListItem5,
-    {
-      onClick,
-      animationColor: style?.animationColor,
-      animationPointColor: style?.animationPointColor,
-      children: [
-        /* @__PURE__ */ jsx(StyledListItemPointWrapper2, { fontSize: style?.fontSize, children: /* @__PURE__ */ jsx(
-          StyledListItemPoint2,
-          {
-            pointSize: style?.pointSize,
-            pointColor: style?.pointColor,
-            animationPointColor: style?.animationPointColor,
-            animationDuration: style?.animationDuration,
-            animationEase: style?.animationEase
-          }
-        ) }),
-        /* @__PURE__ */ jsx(StyledListItemTextWrapper3, { gap: style?.gap, children: /* @__PURE__ */ jsx(
-          StyledListItemText3,
-          {
-            fontSize: style?.fontSize,
-            color: style?.color,
-            animationColor: style?.animationColor,
-            animationDuration: style?.animationDuration,
-            animationEase: style?.animationEase,
-            children
-          }
-        ) })
-      ]
-    }
-  ) });
+var defaultAppearance5 = {
+  color: "#000",
+  gap: 24,
+  pointSize: 8,
+  pointColor: "#000",
+  pointPaddingTop: 0,
+  animationColor: "#ccc",
+  animationDuration: 0.25,
+  animationEase: "easeInOutCubic",
+  animationPointColor: "#ccc"
 };
-var StyledListItemWrapper4 = styled13.span`
-  ${({ theme }) => theme.font.baseSize.em()}
+var ListItem003 = forwardRef(
+  ({ as = "li", children, appearance, onClick, ...rest }, ref) => {
+    const mergedAppearance = useMemo(
+      () => ({ ...defaultAppearance5, ...appearance }),
+      [appearance]
+    );
+    const localRef = useRef(null);
+    const handleAriaClick = useCallback(
+      (event) => {
+        onClick?.(event);
+      },
+      [onClick]
+    );
+    const { buttonProps } = useButton(
+      {
+        elementType: as,
+        onClick: handleAriaClick,
+        isDisabled: !onClick
+      },
+      localRef
+    );
+    const handleRef = useCallback(
+      (node) => {
+        localRef.current = node;
+        if (!ref) {
+          return;
+        }
+        if (typeof ref === "function") {
+          ref(node);
+        } else {
+          ref.current = node;
+        }
+      },
+      [ref]
+    );
+    const mergedProps = onClick ? mergeProps(buttonProps, rest) : rest;
+    const {
+      color: color2,
+      gap,
+      pointSize,
+      pointColor,
+      pointPaddingTop,
+      animationColor,
+      animationDuration,
+      animationEase,
+      animationPointColor
+    } = mergedAppearance;
+    return /* @__PURE__ */ jsxs(
+      StyledListItem5,
+      {
+        ...mergedProps,
+        ref: handleRef,
+        as,
+        $animationColor: animationColor,
+        $animationPointColor: animationPointColor,
+        $hasOnClick: !!onClick,
+        $gap: gap,
+        $alignItemsCenter: pointPaddingTop === 0,
+        "aria-label": "List item",
+        children: [
+          /* @__PURE__ */ jsx(StyledListItemPointWrapper2, { $pointPaddingTop: pointPaddingTop, children: /* @__PURE__ */ jsx(
+            StyledListItemPoint2,
+            {
+              $pointSize: pointSize,
+              $pointColor: pointColor,
+              $animationPointColor: animationPointColor,
+              $animationDuration: animationDuration,
+              $animationEase: animationEase,
+              "aria-hidden": "true"
+            }
+          ) }),
+          /* @__PURE__ */ jsx(StyledListItemTextWrapper3, { children: /* @__PURE__ */ jsx(
+            StyledListItemText3,
+            {
+              $color: color2,
+              $animationColor: animationColor,
+              $animationDuration: animationDuration,
+              $animationEase: animationEase,
+              children
+            }
+          ) })
+        ]
+      }
+    );
+  }
+);
+ListItem003.displayName = "ListItem003";
+var StyledListItemIconWrapper = styled13.div`
+  display: flex;
+  justify-content: center;
+  padding-top: ${({ theme, $iconPaddingTop }) => $iconPaddingTop === 0 || $iconPaddingTop === void 0 ? "0" : theme.size.em($iconPaddingTop ?? 0)};
 `;
-var StyledListItemIconWrapper = styled13.span.withConfig({
-  shouldForwardProp: (prop) => prop !== "fontSize"
-})`
-  height: calc(${({ theme, fontSize }) => theme.size.em(fontSize ?? 24)} * 1.5);
-  position: relative;
-`;
-var StyledListItemIcon = styled13.span.withConfig({
-  shouldForwardProp: (prop) => prop !== "iconColor" && prop !== "animationIconColor" && prop !== "animationDuration" && prop !== "animationEase"
-})`
-  position: absolute;
-  top: 50%;
-  left: 0;
-  transform: translateY(-50%);
-  transition: color ${({ animationDuration }) => animationDuration ?? "0.25s"} ${({ animationEase, theme }) => theme.animation.easing[animationEase ?? "easeInOutCubic"]};
-  color: ${({ iconColor }) => iconColor ?? "#000"};
+var StyledListItemIcon = styled13.span`
+  color: ${({ $iconColor }) => $iconColor};
   ${({ theme }) => theme.icon.size.style("large")}
+  transition: color
+    ${({ $animationDuration }) => $animationDuration}s
+    ${({ $animationEase, theme }) => theme.animation.easing[$animationEase]};
 `;
-var StyledListItemTextWrapper4 = styled13.span.withConfig({
-  shouldForwardProp: (prop) => prop !== "gap"
-})`
-  width: 100%;
-  padding-left: ${({ theme, gap }) => theme.size.em((gap ?? 8) + 24)};
-`;
-var StyledListItemText4 = styled13.span.withConfig({
-  shouldForwardProp: (prop) => prop !== "fontSize" && prop !== "color" && prop !== "animationColor" && prop !== "animationDuration" && prop !== "animationEase"
-})`
+var StyledListItemTextWrapper4 = styled13.div`
   display: block;
-  color: ${({ color: color2 }) => color2 ?? "#000"};
-  font-size: ${({ theme, fontSize }) => theme.size.em(fontSize ?? 24)};
+`;
+var StyledListItemText4 = styled13.div`
+  display: block;
+  color: ${({ $color }) => $color};
   overflow-wrap: break-word;
   line-height: 1.5;
-  transition: color ${({ animationDuration }) => animationDuration ?? "0.25s"} ${({ animationEase, theme }) => theme.animation.easing[animationEase ?? "easeInOutCubic"]};
+  margin: 0;
+  transition: color
+    ${({ $animationDuration }) => $animationDuration}s
+    ${({ $animationEase, theme }) => theme.animation.easing[$animationEase]};
 `;
-var StyledListItem6 = styled13.span.withConfig({
-  shouldForwardProp: (prop) => prop !== "animationColor" && prop !== "animationIconColor"
-})`
-  cursor: pointer;
-  display: flex;
-  justify-content: left;
+var StyledListItem6 = styled13.li`
+  ${({ theme }) => theme.font.baseSize.em()};
+  list-style: none;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  column-gap: ${({ theme, $gap }) => theme.size.em($gap)};
+  align-items: ${({ $alignItemsCenter }) => $alignItemsCenter ? "center" : "start"};
 
-  &:hover {
-    ${StyledListItemText4} {
-      color: ${({ animationColor }) => animationColor ?? "#ccc"};
-    }
+  ${({ $hasOnClick, $animationColor, $animationIconColor }) => $hasOnClick && css`
+      cursor: pointer;
 
-    ${StyledListItemIcon} {
-      color: ${({ animationIconColor }) => animationIconColor ?? "#ccc"};
-    }
-  }
+      &:hover {
+        ${StyledListItemText4} {
+          color: ${$animationColor};
+        }
+
+        ${StyledListItemIcon} {
+          color: ${$animationIconColor};
+        }
+      }
+
+      &:focus-visible {
+        outline: 2px solid ${$animationColor};
+        outline-offset: 2px;
+      }
+    `}
 `;
-var ListItem004 = ({
-  icon,
-  children,
-  onClick,
-  style
-}) => {
-  return /* @__PURE__ */ jsx(StyledListItemWrapper4, { children: /* @__PURE__ */ jsxs(
-    StyledListItem6,
-    {
-      onClick,
-      animationColor: style?.animationColor,
-      animationIconColor: style?.animationIconColor,
-      children: [
-        /* @__PURE__ */ jsx(StyledListItemIconWrapper, { fontSize: style?.fontSize, children: /* @__PURE__ */ jsx(
-          StyledListItemIcon,
-          {
-            iconColor: style?.iconColor,
-            animationIconColor: style?.animationIconColor,
-            animationDuration: style?.animationDuration,
-            animationEase: style?.animationEase,
-            children: icon
-          }
-        ) }),
-        /* @__PURE__ */ jsx(StyledListItemTextWrapper4, { gap: style?.gap, children: /* @__PURE__ */ jsx(
-          StyledListItemText4,
-          {
-            fontSize: style?.fontSize,
-            color: style?.color,
-            animationColor: style?.animationColor,
-            animationDuration: style?.animationDuration,
-            animationEase: style?.animationEase,
-            children
-          }
-        ) })
-      ]
-    }
-  ) });
+var defaultAppearance6 = {
+  color: "#000",
+  gap: 8,
+  iconColor: "#000",
+  iconPaddingTop: 0,
+  animationColor: "#ccc",
+  animationDuration: 0.25,
+  animationEase: "easeInOutCubic",
+  animationIconColor: "#ccc"
 };
-var StyledListItemWrapper5 = styled13.span`
-  ${({ theme }) => theme.font.baseSize.em()}
+var ListItem004 = forwardRef(
+  ({ as = "li", icon, children, appearance, onClick, ...rest }, ref) => {
+    const mergedAppearance = useMemo(
+      () => ({ ...defaultAppearance6, ...appearance }),
+      [appearance]
+    );
+    const localRef = useRef(null);
+    const handleAriaClick = useCallback(
+      (event) => {
+        onClick?.(event);
+      },
+      [onClick]
+    );
+    const { buttonProps } = useButton(
+      {
+        elementType: as,
+        onClick: handleAriaClick,
+        isDisabled: !onClick
+      },
+      localRef
+    );
+    const handleRef = useCallback(
+      (node) => {
+        localRef.current = node;
+        if (!ref) {
+          return;
+        }
+        if (typeof ref === "function") {
+          ref(node);
+        } else {
+          ref.current = node;
+        }
+      },
+      [ref]
+    );
+    const mergedProps = onClick ? mergeProps(buttonProps, rest) : rest;
+    const {
+      color: color2,
+      gap,
+      iconColor,
+      iconPaddingTop,
+      animationColor,
+      animationDuration,
+      animationEase,
+      animationIconColor
+    } = mergedAppearance;
+    return /* @__PURE__ */ jsxs(
+      StyledListItem6,
+      {
+        ...mergedProps,
+        ref: handleRef,
+        as,
+        $animationColor: animationColor,
+        $animationIconColor: animationIconColor,
+        $hasOnClick: !!onClick,
+        $gap: gap,
+        $alignItemsCenter: iconPaddingTop === 0,
+        "aria-label": "List item",
+        children: [
+          /* @__PURE__ */ jsx(StyledListItemIconWrapper, { $iconPaddingTop: iconPaddingTop, children: /* @__PURE__ */ jsx(
+            StyledListItemIcon,
+            {
+              $iconColor: iconColor,
+              $animationIconColor: animationIconColor,
+              $animationDuration: animationDuration,
+              $animationEase: animationEase,
+              "aria-hidden": "true",
+              children: icon
+            }
+          ) }),
+          /* @__PURE__ */ jsx(StyledListItemTextWrapper4, { children: /* @__PURE__ */ jsx(
+            StyledListItemText4,
+            {
+              $color: color2,
+              $animationColor: animationColor,
+              $animationDuration: animationDuration,
+              $animationEase: animationEase,
+              children
+            }
+          ) })
+        ]
+      }
+    );
+  }
+);
+ListItem004.displayName = "ListItem004";
+var StyledListItemPointWrapper3 = styled13.div`
+  display: flex;
+  justify-content: center;
+  padding-top: ${({ theme, $pointPaddingTop }) => $pointPaddingTop === 0 || $pointPaddingTop === void 0 ? "0" : theme.size.em($pointPaddingTop ?? 0)};
 `;
-var StyledListItemPointWrapper3 = styled13.span.withConfig({
-  shouldForwardProp: (prop) => prop !== "fontSize"
-})`
-  height: calc(${({ theme, fontSize }) => theme.size.em(fontSize ?? 24)} * 1.5);
-  position: relative;
-`;
-var StyledListItemPoint3 = styled13.span.withConfig({
-  shouldForwardProp: (prop) => prop !== "pointSize" && prop !== "pointColor" && prop !== "animationPointColor" && prop !== "animationDuration" && prop !== "animationEase"
-})`
-  position: absolute;
-  top: 50%;
-  left: 0;
-  transform: translateY(-50%);
-  background-color: ${({ pointColor }) => pointColor ?? "#000"};
-  width: ${({ theme, pointSize }) => theme.size.em(pointSize ?? 8)};
+var StyledListItemPoint3 = styled13.span`
+  background-color: ${({ $pointColor }) => $pointColor};
+  width: ${({ theme, $pointSize }) => theme.size.em($pointSize)};
   height: 1px;
-  transition: background-color ${({ animationDuration }) => animationDuration ?? "0.25s"} ${({ animationEase, theme }) => theme.animation.easing[animationEase ?? "easeInOutCubic"]};
+  transition: background-color
+    ${({ $animationDuration }) => $animationDuration}s
+    ${({ $animationEase, theme }) => theme.animation.easing[$animationEase]};
 `;
-var StyledListItemTextWrapper5 = styled13.span.withConfig({
-  shouldForwardProp: (prop) => prop !== "gap"
-})`
-  width: 100%;
-  padding-left: ${({ theme, gap }) => theme.size.em(gap ?? 24)};
-`;
-var StyledListItemText5 = styled13.span.withConfig({
-  shouldForwardProp: (prop) => prop !== "fontSize" && prop !== "color" && prop !== "animationColor" && prop !== "animationDuration" && prop !== "animationEase"
-})`
+var StyledListItemTextWrapper5 = styled13.div`
   display: block;
-  color: ${({ color: color2 }) => color2 ?? "#000"};
-  font-size: ${({ theme, fontSize }) => theme.size.em(fontSize ?? 24)};
+`;
+var StyledListItemText5 = styled13.div`
+  display: block;
+  color: ${({ $color }) => $color};
   overflow-wrap: break-word;
   line-height: 1.5;
-  transition: color ${({ animationDuration }) => animationDuration ?? "0.25s"} ${({ animationEase, theme }) => theme.animation.easing[animationEase ?? "easeInOutCubic"]};
+  margin: 0;
+  transition: color
+    ${({ $animationDuration }) => $animationDuration}s
+    ${({ $animationEase, theme }) => theme.animation.easing[$animationEase]};
 `;
-var StyledListItem7 = styled13.span.withConfig({
-  shouldForwardProp: (prop) => prop !== "animationColor" && prop !== "animationPointColor"
-})`
-  cursor: pointer;
-  display: flex;
-  justify-content: left;
+var StyledListItem7 = styled13.li`
+  ${({ theme }) => theme.font.baseSize.em()};
+  list-style: none;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  column-gap: ${({ theme, $gap }) => theme.size.em($gap)};
+  align-items: ${({ $alignItemsCenter }) => $alignItemsCenter ? "center" : "start"};
 
-  &:hover {
-    ${StyledListItemText5} {
-      color: ${({ animationColor }) => animationColor ?? "#ccc"};
-    }
+  ${({ $hasOnClick, $animationColor, $animationPointColor }) => $hasOnClick && css`
+      cursor: pointer;
 
-    ${StyledListItemPoint3} {
-      background-color: ${({ animationPointColor }) => animationPointColor ?? "#ccc"};
-    }
-  }
+      &:hover {
+        ${StyledListItemText5} {
+          color: ${$animationColor};
+        }
+
+        ${StyledListItemPoint3} {
+          background-color: ${$animationPointColor};
+        }
+      }
+
+      &:focus-visible {
+        outline: 2px solid ${$animationColor};
+        outline-offset: 2px;
+      }
+    `}
 `;
-var ListItem005 = ({ children, onClick, style }) => {
-  return /* @__PURE__ */ jsx(StyledListItemWrapper5, { children: /* @__PURE__ */ jsxs(
-    StyledListItem7,
-    {
-      onClick,
-      animationColor: style?.animationColor,
-      animationPointColor: style?.animationPointColor,
-      children: [
-        /* @__PURE__ */ jsx(StyledListItemPointWrapper3, { fontSize: style?.fontSize, children: /* @__PURE__ */ jsx(
-          StyledListItemPoint3,
-          {
-            pointSize: style?.pointSize,
-            pointColor: style?.pointColor,
-            animationPointColor: style?.animationPointColor,
-            animationDuration: style?.animationDuration,
-            animationEase: style?.animationEase
-          }
-        ) }),
-        /* @__PURE__ */ jsx(StyledListItemTextWrapper5, { gap: style?.gap, children: /* @__PURE__ */ jsx(
-          StyledListItemText5,
-          {
-            fontSize: style?.fontSize,
-            color: style?.color,
-            animationColor: style?.animationColor,
-            animationDuration: style?.animationDuration,
-            animationEase: style?.animationEase,
-            children
-          }
-        ) })
-      ]
-    }
-  ) });
+var defaultAppearance7 = {
+  color: "#000",
+  gap: 24,
+  pointSize: 8,
+  pointColor: "#000",
+  pointPaddingTop: 0,
+  animationColor: "#ccc",
+  animationDuration: 0.25,
+  animationEase: "easeInOutCubic",
+  animationPointColor: "#ccc"
 };
-var StyledListItemWrapper6 = styled13.span`
-  ${({ theme }) => theme.font.baseSize.em()}
-`;
-var StyledListItemFrameNumberWrapper = styled13.span.withConfig({
-  shouldForwardProp: (prop) => prop !== "fontSize"
-})`
-  height: calc(${({ theme, fontSize }) => theme.size.em(fontSize ?? 24)} * 1.5);
-  position: relative;
+var ListItem005 = forwardRef(
+  ({ as = "li", children, appearance, onClick, ...rest }, ref) => {
+    const mergedAppearance = useMemo(
+      () => ({ ...defaultAppearance7, ...appearance }),
+      [appearance]
+    );
+    const localRef = useRef(null);
+    const handleAriaClick = useCallback(
+      (event) => {
+        onClick?.(event);
+      },
+      [onClick]
+    );
+    const { buttonProps } = useButton(
+      {
+        elementType: as,
+        onClick: handleAriaClick,
+        isDisabled: !onClick
+      },
+      localRef
+    );
+    const handleRef = useCallback(
+      (node) => {
+        localRef.current = node;
+        if (!ref) {
+          return;
+        }
+        if (typeof ref === "function") {
+          ref(node);
+        } else {
+          ref.current = node;
+        }
+      },
+      [ref]
+    );
+    const mergedProps = onClick ? mergeProps(buttonProps, rest) : rest;
+    const {
+      color: color2,
+      gap,
+      pointSize,
+      pointColor,
+      pointPaddingTop,
+      animationColor,
+      animationDuration,
+      animationEase,
+      animationPointColor
+    } = mergedAppearance;
+    return /* @__PURE__ */ jsxs(
+      StyledListItem7,
+      {
+        ...mergedProps,
+        ref: handleRef,
+        as,
+        $animationColor: animationColor,
+        $animationPointColor: animationPointColor,
+        $hasOnClick: !!onClick,
+        $gap: gap,
+        $alignItemsCenter: pointPaddingTop === 0,
+        "aria-label": "List item",
+        children: [
+          /* @__PURE__ */ jsx(StyledListItemPointWrapper3, { $pointPaddingTop: pointPaddingTop, children: /* @__PURE__ */ jsx(
+            StyledListItemPoint3,
+            {
+              $pointSize: pointSize,
+              $pointColor: pointColor,
+              $animationPointColor: animationPointColor,
+              $animationDuration: animationDuration,
+              $animationEase: animationEase,
+              "aria-hidden": "true"
+            }
+          ) }),
+          /* @__PURE__ */ jsx(StyledListItemTextWrapper5, { children: /* @__PURE__ */ jsx(
+            StyledListItemText5,
+            {
+              $color: color2,
+              $animationColor: animationColor,
+              $animationDuration: animationDuration,
+              $animationEase: animationEase,
+              children
+            }
+          ) })
+        ]
+      }
+    );
+  }
+);
+ListItem005.displayName = "ListItem005";
+var StyledListItemFrameNumberWrapper = styled13.div`
+  display: flex;
+  justify-content: center;
+  padding-top: ${({ theme, $frameNumberPaddingTop }) => $frameNumberPaddingTop === 0 || $frameNumberPaddingTop === void 0 ? "0" : theme.size.em($frameNumberPaddingTop)};
 `;
 var StyledListItemFrameNumber = styled13.span`
-  position: absolute;
-  top: 50%;
-  left: 0;
-  transform: translateY(-50%);
-`;
-var StyledListItemTextWrapper6 = styled13.span.withConfig({
-  shouldForwardProp: (prop) => prop !== "gap"
-})`
-  width: 100%;
-  padding-left: ${({ theme, gap }) => theme.size.em(gap ?? 44)};
-`;
-var StyledListItemText6 = styled13.span.withConfig({
-  shouldForwardProp: (prop) => prop !== "fontSize" && prop !== "color"
-})`
   display: block;
-  color: ${({ color: color2 }) => color2 ?? "#000"};
-  font-size: ${({ theme, fontSize }) => theme.size.em(fontSize ?? 24)};
+`;
+var StyledListItemTextWrapper6 = styled13.div`
+  display: block;
+`;
+var StyledListItemText6 = styled13.div`
+  display: block;
+  color: ${({ $color }) => $color};
   overflow-wrap: break-word;
   line-height: 1.5;
+  margin: 0;
+  transition: opacity
+    ${({ $animationDuration }) => $animationDuration}s
+    ${({ $animationEase, theme }) => theme.animation.easing[$animationEase]};
 `;
-var StyledListItem8 = styled13.span.withConfig({
-  shouldForwardProp: (prop) => prop !== "animationOpacity" && prop !== "animationDuration" && prop !== "animationEase"
-})`
-  cursor: pointer;
-  display: flex;
-  justify-content: left;
-  transition: opacity ${({ animationDuration }) => animationDuration ?? "0.25s"} ${({ animationEase, theme }) => theme.animation.easing[animationEase ?? "easeInOutCubic"]};
+var StyledListItem8 = styled13.li`
+  ${({ theme }) => theme.font.baseSize.em()};
+  list-style: none;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  column-gap: ${({ theme, $gap }) => theme.size.em($gap)};
+  align-items: ${({ $alignItemsCenter }) => $alignItemsCenter ? "center" : "start"};
 
-  &:hover {
-    opacity: ${({ animationOpacity }) => animationOpacity ?? 0.5};
-  }
+  ${({
+  $hasOnClick,
+  $animationOpacity,
+  $animationDuration,
+  $animationEase,
+  theme
+}) => $hasOnClick && css`
+      cursor: pointer;
+      transition: opacity ${$animationDuration}s
+        ${theme.animation.easing[$animationEase]};
+
+      &:hover {
+        opacity: ${$animationOpacity};
+      }
+
+      &:focus-visible {
+        outline: 2px solid currentColor;
+        outline-offset: 2px;
+      }
+    `}
 `;
-var ListItem006 = ({
-  frameNumber,
-  children,
-  onClick,
-  style
-}) => {
-  return /* @__PURE__ */ jsx(StyledListItemWrapper6, { children: /* @__PURE__ */ jsxs(
-    StyledListItem8,
-    {
-      onClick,
-      animationOpacity: style?.animationOpacity,
-      animationDuration: style?.animationDuration,
-      animationEase: style?.animationEase,
-      children: [
-        /* @__PURE__ */ jsx(StyledListItemFrameNumberWrapper, { fontSize: style?.fontSize, children: /* @__PURE__ */ jsx(StyledListItemFrameNumber, { children: frameNumber }) }),
-        /* @__PURE__ */ jsx(StyledListItemTextWrapper6, { gap: style?.gap, children: /* @__PURE__ */ jsx(StyledListItemText6, { fontSize: style?.fontSize, color: style?.color, children }) })
-      ]
-    }
-  ) });
+var defaultAppearance8 = {
+  color: "#000",
+  gap: 44,
+  frameNumberPaddingTop: 0,
+  animationOpacity: 0.5,
+  animationDuration: 0.25,
+  animationEase: "easeInOutCubic"
 };
+var ListItem006 = forwardRef(
+  ({ as = "li", frameNumber, children, appearance, onClick, ...rest }, ref) => {
+    const mergedAppearance = useMemo(
+      () => ({ ...defaultAppearance8, ...appearance }),
+      [appearance]
+    );
+    const localRef = useRef(null);
+    const handleAriaClick = useCallback(
+      (event) => {
+        onClick?.(event);
+      },
+      [onClick]
+    );
+    const { buttonProps } = useButton(
+      {
+        elementType: as,
+        onClick: handleAriaClick,
+        isDisabled: !onClick
+      },
+      localRef
+    );
+    const handleRef = useCallback(
+      (node) => {
+        localRef.current = node;
+        if (!ref) {
+          return;
+        }
+        if (typeof ref === "function") {
+          ref(node);
+        } else {
+          ref.current = node;
+        }
+      },
+      [ref]
+    );
+    const mergedProps = onClick ? mergeProps(buttonProps, rest) : rest;
+    const {
+      color: color2,
+      gap,
+      frameNumberPaddingTop,
+      animationOpacity,
+      animationDuration,
+      animationEase
+    } = mergedAppearance;
+    return /* @__PURE__ */ jsxs(
+      StyledListItem8,
+      {
+        ...mergedProps,
+        ref: handleRef,
+        as,
+        $animationOpacity: animationOpacity,
+        $animationDuration: animationDuration,
+        $animationEase: animationEase,
+        $hasOnClick: !!onClick,
+        $gap: gap,
+        $alignItemsCenter: frameNumberPaddingTop === 0,
+        "aria-label": typeof frameNumber === "string" ? `Frame ${frameNumber}` : void 0,
+        children: [
+          /* @__PURE__ */ jsx(
+            StyledListItemFrameNumberWrapper,
+            {
+              $frameNumberPaddingTop: frameNumberPaddingTop,
+              children: /* @__PURE__ */ jsx(StyledListItemFrameNumber, { "aria-hidden": "true", children: frameNumber })
+            }
+          ),
+          /* @__PURE__ */ jsx(StyledListItemTextWrapper6, { children: /* @__PURE__ */ jsx(
+            StyledListItemText6,
+            {
+              $color: color2,
+              $animationOpacity: animationOpacity,
+              $animationDuration: animationDuration,
+              $animationEase: animationEase,
+              children
+            }
+          ) })
+        ]
+      }
+    );
+  }
+);
+ListItem006.displayName = "ListItem006";
 var LOADING_SIZE = {
   large: 52,
   middle: 44,
@@ -14129,461 +15032,831 @@ var TextButton001 = ({
 var StyledTextFieldWrapper = styled13.div`
   ${({ theme }) => theme.font.baseSize.em()}
 `;
-var StyledTextField = styled13.div.withConfig({
-  shouldForwardProp: (prop) => prop !== "type" && prop !== "hasError"
-})`
+var StyledTextField = styled13.div`
   position: relative;
   width: 100%;
 `;
+var StyledTextFieldLabel = styled13.label.withConfig({
+  shouldForwardProp: (prop) => !prop.startsWith("$")
+})`
+  display: block;
+  font-size: ${({ theme, $fontSize }) => theme.size.em($fontSize ?? 16)};
+  margin-bottom: ${({ theme, $marginBottom }) => theme.size.em($marginBottom ?? 5)};
+  color: ${({ $color }) => $color ?? "#000"};
+  font-weight: ${({ $fontWeight }) => $fontWeight ?? "normal"};
+`;
+var defaultFontSize11 = (size) => size ?? 18;
+var defaultLineHeight = (lineHeight) => lineHeight ?? 1.5;
 var StyledTextFieldInput = styled13.textarea.withConfig({
-  shouldForwardProp: (prop) => prop !== "fontSize" && prop !== "lineHeight" && prop !== "color" && prop !== "borderColor" && prop !== "placeholderColor" && prop !== "inputType"
+  shouldForwardProp: (prop) => !prop.startsWith("$")
 })`
   width: 100%;
   display: block;
-  border: 1px solid ${({ borderColor }) => borderColor ?? "#000"};
-  font-size: ${({ theme, fontSize }) => theme.size.em(fontSize ?? 18)};
-  padding: ${({ theme, fontSize }) => theme.size.em(10 / (fontSize ?? 18) * 10)};
-  color: ${({ color: color2 }) => color2 ?? "#000"};
+  border: 1px solid ${({ $borderColor }) => $borderColor ?? "#000"};
+  font-size: ${({ theme, $fontSize }) => theme.size.em(defaultFontSize11($fontSize))};
+  padding: ${({ theme, $fontSize }) => theme.size.customEm(10, defaultFontSize11($fontSize))};
+  color: ${({ $color }) => $color ?? "#000"};
   box-sizing: border-box;
-  line-height: ${({ theme, fontSize }) => theme.size.em(fontSize ?? 18)};
-  height: calc((${({ lineHeight }) => lineHeight ?? 1.5} * 5em) + ${({ theme, fontSize }) => theme.size.em(10 / (fontSize ?? 18) * 10)} * 2);
-  min-height: calc((${({ lineHeight }) => lineHeight ?? 1.5} * 3em) + ${({ theme, fontSize }) => theme.size.em(10 / (fontSize ?? 18) * 10)} * 2);
-  max-height: calc((${({ lineHeight }) => lineHeight ?? 1.5} * 15em) + ${({ theme, fontSize }) => theme.size.em(10 / (fontSize ?? 18) * 10)} * 2);
+  line-height: ${({ $lineHeight }) => defaultLineHeight($lineHeight)};
+  height: calc((${({ $lineHeight }) => defaultLineHeight($lineHeight)} * 5em) + ${({ theme, $fontSize }) => theme.size.customEm(10, defaultFontSize11($fontSize))} * 2);
+  min-height: calc((${({ $lineHeight }) => defaultLineHeight($lineHeight)} * 3em) + ${({ theme, $fontSize }) => theme.size.customEm(10, defaultFontSize11($fontSize))} * 2);
+  max-height: calc((${({ $lineHeight }) => defaultLineHeight($lineHeight)} * 15em) + ${({ theme, $fontSize }) => theme.size.customEm(10, defaultFontSize11($fontSize))} * 2);
   resize: vertical;
 
   &::placeholder {
-    color: ${({ placeholderColor }) => placeholderColor ?? "#909090"};
+    color: ${({ $placeholderColor }) => $placeholderColor ?? "#909090"};
   }
 
-  ${({ inputType }) => inputType === "001" && css`
+  &:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 ${({ theme }) => theme.size.em(0.25)} ${({ $focusRingColor }) => $focusRingColor ?? "#007bff"};
+  }
+
+  ${({ $variant }) => $variant === "001" && css`
       border-radius: 0;
     `}
 
-  ${({ inputType }) => inputType === "002" && css`
-      border-radius: ${({ theme }) => theme.size.em(4)};
+  ${({ $variant, theme }) => $variant === "002" && css`
+      border-radius: ${theme.size.em(4)};
     `}
 `;
 var StyledTextFieldError = styled13.p.withConfig({
-  shouldForwardProp: (prop) => prop !== "fontSize" && prop !== "color"
+  shouldForwardProp: (prop) => !prop.startsWith("$")
 })`
-  color: ${({ color: color2 }) => color2 ?? "#f00"};
-  font-size: ${({ theme, fontSize }) => theme.size.em(fontSize ?? 16)};
-  margin: ${({ theme, fontSize }) => theme.size.em(5 / (fontSize ?? 16) * 10)} 0 0;
-  line-height: 1;
+  color: ${({ $color }) => $color ?? "#f00"};
+  font-size: ${({ theme, $fontSize }) => theme.size.em($fontSize ?? 16)};
+  margin: ${({ theme }) => theme.size.em(5)} 0 0;
+  min-height: ${({ theme, $fontSize }) => theme.size.em($fontSize ?? 16)};
+  line-height: 1.2;
 `;
-var TextField001 = ({
-  type = "001",
-  name = "text-field-001",
-  placeholder = "\u5165\u529B\u3057\u3066\u304F\u3060\u3055\u3044",
-  value,
-  onChange,
-  error = false,
-  errorText,
-  style
-}) => {
-  const [internalValue, setInternalValue] = useState("");
-  const currentValue = value !== void 0 ? value : internalValue;
-  const handleChange = (e) => {
-    if (value === void 0) {
-      setInternalValue(e.target.value);
+var TextField001 = forwardRef(
+  ({
+    variant = "001",
+    name = "text-field-001",
+    placeholder = "\u5165\u529B\u3057\u3066\u304F\u3060\u3055\u3044",
+    value,
+    defaultValue: defaultValue2,
+    onChange,
+    error = false,
+    errorText,
+    id: id2,
+    label,
+    ariaLabel,
+    autoComplete,
+    appearance,
+    inputProps
+  }, ref) => {
+    const generatedId = useId();
+    const fieldId = id2 ?? generatedId;
+    const hasError = error || !!errorText;
+    const textareaRef = useObjectRef(ref);
+    const {
+      labelProps,
+      inputProps: ariaInputProps,
+      errorMessageProps
+    } = useTextField(
+      {
+        id: fieldId,
+        label,
+        "aria-label": label ? void 0 : ariaLabel,
+        validationState: hasError ? "invalid" : void 0,
+        errorMessage: errorText,
+        inputElementType: "textarea",
+        isDisabled: inputProps?.disabled,
+        isRequired: inputProps?.required,
+        isReadOnly: inputProps?.readOnly
+      },
+      textareaRef
+    );
+    const {
+      value: _ariaValue,
+      defaultValue: _ariaDefaultValue,
+      onChange: _ariaOnChange,
+      ...restAriaInputProps
+    } = ariaInputProps;
+    const baseInputProps = {
+      id: fieldId,
+      name,
+      placeholder,
+      autoComplete
+    };
+    if (value !== void 0) {
+      baseInputProps.value = value;
     }
-    onChange?.(e);
-  };
-  const hasError = error || !!errorText;
-  return /* @__PURE__ */ jsx(StyledTextFieldWrapper, { children: /* @__PURE__ */ jsxs(StyledTextField, { type, hasError, children: [
-    /* @__PURE__ */ jsx(
-      StyledTextFieldInput,
-      {
-        name,
-        placeholder,
-        value: currentValue,
-        onChange: handleChange,
-        fontSize: style?.fontSize,
-        lineHeight: style?.lineHeight,
-        color: style?.color,
-        borderColor: hasError ? style?.errorStyle?.borderColor ?? "#f00" : style?.borderColor ?? "#000",
-        placeholderColor: style?.placeholderColor,
-        inputType: type
-      }
-    ),
-    errorText && /* @__PURE__ */ jsx(
-      StyledTextFieldError,
-      {
-        fontSize: style?.errorStyle?.fontSize,
-        color: style?.errorStyle?.color,
-        children: errorText
-      }
-    )
-  ] }) });
-};
+    if (defaultValue2 !== void 0) {
+      baseInputProps.defaultValue = defaultValue2;
+    }
+    if (onChange) {
+      baseInputProps.onChange = onChange;
+    }
+    const mergedInputProps = mergeProps(
+      restAriaInputProps,
+      baseInputProps,
+      inputProps || {}
+    );
+    const borderColor = hasError ? appearance?.errorBorderColor ?? "#f00" : appearance?.borderColor ?? "#000";
+    return /* @__PURE__ */ jsx(StyledTextFieldWrapper, { children: /* @__PURE__ */ jsxs(StyledTextField, { children: [
+      label && /* @__PURE__ */ jsx(
+        StyledTextFieldLabel,
+        {
+          ...labelProps,
+          $fontSize: appearance?.labelFontSize,
+          $color: appearance?.labelColor,
+          $fontWeight: appearance?.labelFontWeight,
+          $marginBottom: appearance?.labelMarginBottom,
+          children: label
+        }
+      ),
+      /* @__PURE__ */ jsx(
+        StyledTextFieldInput,
+        {
+          ...mergedInputProps,
+          ref: textareaRef,
+          $fontSize: appearance?.fontSize,
+          $lineHeight: appearance?.lineHeight,
+          $color: appearance?.color,
+          $borderColor: borderColor,
+          $placeholderColor: appearance?.placeholderColor,
+          $variant: variant,
+          $focusRingColor: appearance?.focusRingColor
+        }
+      ),
+      errorText && /* @__PURE__ */ jsx(
+        StyledTextFieldError,
+        {
+          ...errorMessageProps,
+          $fontSize: appearance?.errorFontSize,
+          $color: appearance?.errorColor,
+          "aria-live": "polite",
+          children: errorText || ""
+        }
+      )
+    ] }) });
+  }
+);
+TextField001.displayName = "TextField001";
 var StyledTextFieldWrapper2 = styled13.div`
   ${({ theme }) => theme.font.baseSize.em()}
 `;
-var StyledTextField2 = styled13.div.withConfig({
-  shouldForwardProp: (prop) => prop !== "hasError"
-})`
+var StyledTextField2 = styled13.div`
   position: relative;
   width: 100%;
 `;
+var StyledTextFieldLabel2 = styled13.label.withConfig({
+  shouldForwardProp: (prop) => !prop.startsWith("$")
+})`
+  display: block;
+  font-size: ${({ theme, $fontSize }) => theme.size.em($fontSize ?? 16)};
+  margin-bottom: ${({ theme, $marginBottom }) => theme.size.em($marginBottom ?? 5)};
+  color: ${({ $color }) => $color ?? "#000"};
+  font-weight: ${({ $fontWeight }) => $fontWeight ?? "normal"};
+`;
+var defaultFontSize12 = (size) => size ?? 18;
+var defaultLineHeight2 = (lineHeight) => lineHeight ?? 1.5;
 var StyledTextFieldInput2 = styled13.textarea.withConfig({
-  shouldForwardProp: (prop) => prop !== "fontSize" && prop !== "lineHeight" && prop !== "color" && prop !== "borderColor" && prop !== "placeholderColor"
+  shouldForwardProp: (prop) => !prop.startsWith("$")
 })`
   width: 100%;
   display: block;
   border-top: 0;
   border-left: 0;
   border-right: 0;
-  border-bottom: 1px solid ${({ borderColor }) => borderColor ?? "#000"};
-  font-size: ${({ theme, fontSize }) => theme.size.em(fontSize ?? 18)};
-  padding: ${({ theme, fontSize }) => theme.size.em(5 / (fontSize ?? 18) * 10)} ${({ theme, fontSize }) => theme.size.em(10 / (fontSize ?? 18) * 10)} ${({ theme, fontSize }) => theme.size.em(5 / (fontSize ?? 18) * 10)};
-  color: ${({ color: color2 }) => color2 ?? "#000"};
+  border-bottom: 1px solid ${({ $borderColor }) => $borderColor ?? "#000"};
+  font-size: ${({ theme, $fontSize }) => theme.size.em(defaultFontSize12($fontSize))};
+  padding: ${({ theme, $fontSize }) => theme.size.customEm(5, defaultFontSize12($fontSize))} ${({ theme, $fontSize }) => theme.size.customEm(10, defaultFontSize12($fontSize))} ${({ theme, $fontSize }) => theme.size.customEm(5, defaultFontSize12($fontSize))};
+  color: ${({ $color }) => $color ?? "#000"};
   box-sizing: border-box;
-  line-height: ${({ theme, fontSize }) => theme.size.em(fontSize ?? 18)};
-  height: calc((${({ lineHeight }) => lineHeight ?? 1.5} * 5em) + ${({ theme, fontSize }) => theme.size.em(5 / (fontSize ?? 18) * 10)} * 2);
-  min-height: calc((${({ lineHeight }) => lineHeight ?? 1.5} * 3em) + ${({ theme, fontSize }) => theme.size.em(5 / (fontSize ?? 18) * 10)} * 2);
-  max-height: calc((${({ lineHeight }) => lineHeight ?? 1.5} * 15em) + ${({ theme, fontSize }) => theme.size.em(5 / (fontSize ?? 18) * 10)} * 2);
+  line-height: ${({ $lineHeight }) => defaultLineHeight2($lineHeight)};
+  height: calc((${({ $lineHeight }) => defaultLineHeight2($lineHeight)} * 5em) + ${({ theme, $fontSize }) => theme.size.customEm(5, defaultFontSize12($fontSize))} * 2);
+  min-height: calc((${({ $lineHeight }) => defaultLineHeight2($lineHeight)} * 3em) + ${({ theme, $fontSize }) => theme.size.customEm(5, defaultFontSize12($fontSize))} * 2);
+  max-height: calc((${({ $lineHeight }) => defaultLineHeight2($lineHeight)} * 15em) + ${({ theme, $fontSize }) => theme.size.customEm(5, defaultFontSize12($fontSize))} * 2);
   resize: vertical;
   background: transparent;
+  transition: border-bottom-width 0.2s ease-in-out, border-bottom-color 0.2s ease-in-out;
 
   &::placeholder {
-    color: ${({ placeholderColor }) => placeholderColor ?? "#909090"};
+    color: ${({ $placeholderColor }) => $placeholderColor ?? "#909090"};
   }
 
-  &:focus {
+  &:focus-visible {
     outline: none;
+    border-bottom-width: ${({ theme }) => theme.size.em(0.125)};
+    border-bottom-color: ${({ $focusRingColor }) => $focusRingColor ?? "#007bff"};
   }
 `;
 var StyledTextFieldError2 = styled13.p.withConfig({
-  shouldForwardProp: (prop) => prop !== "fontSize" && prop !== "color"
+  shouldForwardProp: (prop) => !prop.startsWith("$")
 })`
-  color: ${({ color: color2 }) => color2 ?? "#f00"};
-  font-size: ${({ theme, fontSize }) => theme.size.em(fontSize ?? 16)};
-  margin: ${({ theme, fontSize }) => theme.size.em(5 / (fontSize ?? 16) * 10)} 0 0;
-  line-height: 1;
+  color: ${({ $color }) => $color ?? "#f00"};
+  font-size: ${({ theme, $fontSize }) => theme.size.em($fontSize ?? 16)};
+  margin: ${({ theme }) => theme.size.em(5)} 0 0;
+  min-height: ${({ theme, $fontSize }) => theme.size.em($fontSize ?? 16)};
+  line-height: 1.2;
 `;
-var TextField002 = ({
-  name = "text-field-002",
-  placeholder = "\u5165\u529B\u3057\u3066\u304F\u3060\u3055\u3044",
-  value,
-  onChange,
-  error = false,
-  errorText,
-  style
-}) => {
-  const [internalValue, setInternalValue] = useState("");
-  const currentValue = value !== void 0 ? value : internalValue;
-  const handleChange = (e) => {
-    if (value === void 0) {
-      setInternalValue(e.target.value);
+var TextField002 = forwardRef(
+  ({
+    name = "text-field-002",
+    placeholder = "\u5165\u529B\u3057\u3066\u304F\u3060\u3055\u3044",
+    value,
+    defaultValue: defaultValue2,
+    onChange,
+    error = false,
+    errorText,
+    id: id2,
+    label,
+    ariaLabel,
+    autoComplete,
+    appearance,
+    inputProps
+  }, ref) => {
+    const generatedId = useId();
+    const fieldId = id2 ?? generatedId;
+    const hasError = error || !!errorText;
+    const textareaRef = useObjectRef(ref);
+    const {
+      labelProps,
+      inputProps: ariaInputProps,
+      errorMessageProps
+    } = useTextField(
+      {
+        id: fieldId,
+        label,
+        "aria-label": label ? void 0 : ariaLabel,
+        validationState: hasError ? "invalid" : void 0,
+        errorMessage: errorText,
+        inputElementType: "textarea",
+        isDisabled: inputProps?.disabled,
+        isRequired: inputProps?.required,
+        isReadOnly: inputProps?.readOnly
+      },
+      textareaRef
+    );
+    const {
+      value: _ariaValue,
+      defaultValue: _ariaDefaultValue,
+      onChange: _ariaOnChange,
+      ...restAriaInputProps
+    } = ariaInputProps;
+    const baseInputProps = {
+      id: fieldId,
+      name,
+      placeholder,
+      autoComplete
+    };
+    if (value !== void 0) {
+      baseInputProps.value = value;
     }
-    onChange?.(e);
-  };
-  const hasError = error || !!errorText;
-  return /* @__PURE__ */ jsx(StyledTextFieldWrapper2, { children: /* @__PURE__ */ jsxs(StyledTextField2, { hasError, children: [
-    /* @__PURE__ */ jsx(
-      StyledTextFieldInput2,
-      {
-        name,
-        placeholder,
-        value: currentValue,
-        onChange: handleChange,
-        fontSize: style?.fontSize,
-        lineHeight: style?.lineHeight,
-        color: style?.color,
-        borderColor: hasError ? style?.errorStyle?.borderColor ?? "#f00" : style?.borderColor ?? "#000",
-        placeholderColor: style?.placeholderColor
-      }
-    ),
-    errorText && /* @__PURE__ */ jsx(
-      StyledTextFieldError2,
-      {
-        fontSize: style?.errorStyle?.fontSize,
-        color: style?.errorStyle?.color,
-        children: errorText
-      }
-    )
-  ] }) });
-};
+    if (defaultValue2 !== void 0) {
+      baseInputProps.defaultValue = defaultValue2;
+    }
+    if (onChange) {
+      baseInputProps.onChange = onChange;
+    }
+    const mergedInputProps = mergeProps(
+      restAriaInputProps,
+      baseInputProps,
+      inputProps || {}
+    );
+    const borderColor = hasError ? appearance?.errorBorderColor ?? "#f00" : appearance?.borderColor ?? "#000";
+    return /* @__PURE__ */ jsx(StyledTextFieldWrapper2, { children: /* @__PURE__ */ jsxs(StyledTextField2, { children: [
+      label && /* @__PURE__ */ jsx(
+        StyledTextFieldLabel2,
+        {
+          ...labelProps,
+          $fontSize: appearance?.labelFontSize,
+          $color: appearance?.labelColor,
+          $fontWeight: appearance?.labelFontWeight,
+          $marginBottom: appearance?.labelMarginBottom,
+          children: label
+        }
+      ),
+      /* @__PURE__ */ jsx(
+        StyledTextFieldInput2,
+        {
+          ...mergedInputProps,
+          ref: textareaRef,
+          $fontSize: appearance?.fontSize,
+          $lineHeight: appearance?.lineHeight,
+          $color: appearance?.color,
+          $borderColor: borderColor,
+          $placeholderColor: appearance?.placeholderColor,
+          $focusRingColor: appearance?.focusRingColor
+        }
+      ),
+      errorText && /* @__PURE__ */ jsx(
+        StyledTextFieldError2,
+        {
+          ...errorMessageProps,
+          $fontSize: appearance?.errorFontSize,
+          $color: appearance?.errorColor,
+          "aria-live": "polite",
+          children: errorText || ""
+        }
+      )
+    ] }) });
+  }
+);
+TextField002.displayName = "TextField002";
 var StyledTextFieldWrapper3 = styled13.div`
   ${({ theme }) => theme.font.baseSize.em()}
 `;
-var StyledTextField3 = styled13.div.withConfig({
-  shouldForwardProp: (prop) => prop !== "hasError"
-})`
+var StyledTextField3 = styled13.div`
   position: relative;
   width: 100%;
 `;
+var StyledTextFieldLabel3 = styled13.label.withConfig({
+  shouldForwardProp: (prop) => !prop.startsWith("$")
+})`
+  display: block;
+  font-size: ${({ theme, $fontSize }) => theme.size.em($fontSize ?? 16)};
+  margin-bottom: ${({ theme, $marginBottom }) => theme.size.em($marginBottom ?? 5)};
+  color: ${({ $color }) => $color ?? "#000"};
+  font-weight: ${({ $fontWeight }) => $fontWeight ?? "normal"};
+`;
+var defaultFontSize13 = (size) => size ?? 18;
+var defaultLineHeight3 = (lineHeight) => lineHeight ?? 1.5;
 var StyledTextFieldInput3 = styled13.textarea.withConfig({
-  shouldForwardProp: (prop) => prop !== "fontSize" && prop !== "lineHeight" && prop !== "color" && prop !== "borderColor" && prop !== "backgroundColor" && prop !== "placeholderColor"
+  shouldForwardProp: (prop) => !prop.startsWith("$")
 })`
   width: 100%;
   display: block;
   border-top: 0;
   border-left: 0;
   border-right: 0;
-  border-bottom: 1px solid ${({ borderColor }) => borderColor ?? "#000"};
-  font-size: ${({ theme, fontSize }) => theme.size.em(fontSize ?? 18)};
-  background-color: ${({ backgroundColor }) => backgroundColor ?? "#eee"};
-  padding: ${({ theme, fontSize }) => theme.size.em(10 / (fontSize ?? 18) * 10)};
-  color: ${({ color: color2 }) => color2 ?? "#000"};
+  border-bottom: 1px solid ${({ $borderColor }) => $borderColor ?? "#000"};
+  font-size: ${({ theme, $fontSize }) => theme.size.em(defaultFontSize13($fontSize))};
+  background-color: ${({ $backgroundColor }) => $backgroundColor ?? "#eee"};
+  padding: ${({ theme, $fontSize }) => theme.size.customEm(10, defaultFontSize13($fontSize))};
+  color: ${({ $color }) => $color ?? "#000"};
   box-sizing: border-box;
-  line-height: ${({ theme, fontSize }) => theme.size.em(fontSize ?? 18)};
-  height: calc((${({ lineHeight }) => lineHeight ?? 1.5} * 5em) + ${({ theme, fontSize }) => theme.size.em(10 / (fontSize ?? 18) * 10)} * 2);
-  min-height: calc((${({ lineHeight }) => lineHeight ?? 1.5} * 3em) + ${({ theme, fontSize }) => theme.size.em(10 / (fontSize ?? 18) * 10)} * 2);
-  max-height: calc((${({ lineHeight }) => lineHeight ?? 1.5} * 15em) + ${({ theme, fontSize }) => theme.size.em(10 / (fontSize ?? 18) * 10)} * 2);
+  line-height: ${({ $lineHeight }) => defaultLineHeight3($lineHeight)};
+  height: calc((${({ $lineHeight }) => defaultLineHeight3($lineHeight)} * 5em) + ${({ theme, $fontSize }) => theme.size.customEm(10, defaultFontSize13($fontSize))} * 2);
+  min-height: calc((${({ $lineHeight }) => defaultLineHeight3($lineHeight)} * 3em) + ${({ theme, $fontSize }) => theme.size.customEm(10, defaultFontSize13($fontSize))} * 2);
+  max-height: calc((${({ $lineHeight }) => defaultLineHeight3($lineHeight)} * 15em) + ${({ theme, $fontSize }) => theme.size.customEm(10, defaultFontSize13($fontSize))} * 2);
   resize: vertical;
+  transition: border-bottom-width 0.2s ease-in-out, border-bottom-color 0.2s ease-in-out;
 
   &::placeholder {
-    color: ${({ placeholderColor }) => placeholderColor ?? "#909090"};
+    color: ${({ $placeholderColor }) => $placeholderColor ?? "#909090"};
   }
 
-  &:focus {
+  &:focus-visible {
     outline: none;
+    border-bottom-width: ${({ theme }) => theme.size.em(0.125)};
+    border-bottom-color: ${({ $focusRingColor }) => $focusRingColor ?? "#007bff"};
   }
 `;
 var StyledTextFieldError3 = styled13.p.withConfig({
-  shouldForwardProp: (prop) => prop !== "fontSize" && prop !== "color"
+  shouldForwardProp: (prop) => !prop.startsWith("$")
 })`
-  color: ${({ color: color2 }) => color2 ?? "#f00"};
-  font-size: ${({ theme, fontSize }) => theme.size.em(fontSize ?? 16)};
-  margin: ${({ theme, fontSize }) => theme.size.em(5 / (fontSize ?? 16) * 10)} 0 0;
-  line-height: 1;
+  color: ${({ $color }) => $color ?? "#f00"};
+  font-size: ${({ theme, $fontSize }) => theme.size.em($fontSize ?? 16)};
+  margin: ${({ theme }) => theme.size.em(5)} 0 0;
+  min-height: ${({ theme, $fontSize }) => theme.size.em($fontSize ?? 16)};
+  line-height: 1.2;
 `;
-var TextField003 = ({
-  name = "text-field-003",
-  placeholder = "\u5165\u529B\u3057\u3066\u304F\u3060\u3055\u3044",
-  value,
-  onChange,
-  error = false,
-  errorText,
-  style
-}) => {
-  const [internalValue, setInternalValue] = useState("");
-  const currentValue = value !== void 0 ? value : internalValue;
-  const handleChange = (e) => {
-    if (value === void 0) {
-      setInternalValue(e.target.value);
+var TextField003 = forwardRef(
+  ({
+    name = "text-field-003",
+    placeholder = "\u5165\u529B\u3057\u3066\u304F\u3060\u3055\u3044",
+    value,
+    defaultValue: defaultValue2,
+    onChange,
+    error = false,
+    errorText,
+    id: id2,
+    label,
+    ariaLabel,
+    autoComplete,
+    appearance,
+    inputProps
+  }, ref) => {
+    const generatedId = useId();
+    const fieldId = id2 ?? generatedId;
+    const hasError = error || !!errorText;
+    const textareaRef = useObjectRef(ref);
+    const {
+      labelProps,
+      inputProps: ariaInputProps,
+      errorMessageProps
+    } = useTextField(
+      {
+        id: fieldId,
+        label,
+        "aria-label": label ? void 0 : ariaLabel,
+        validationState: hasError ? "invalid" : void 0,
+        errorMessage: errorText,
+        inputElementType: "textarea",
+        isDisabled: inputProps?.disabled,
+        isRequired: inputProps?.required,
+        isReadOnly: inputProps?.readOnly
+      },
+      textareaRef
+    );
+    const {
+      value: _ariaValue,
+      defaultValue: _ariaDefaultValue,
+      onChange: _ariaOnChange,
+      ...restAriaInputProps
+    } = ariaInputProps;
+    const baseInputProps = {
+      id: fieldId,
+      name,
+      placeholder,
+      autoComplete
+    };
+    if (value !== void 0) {
+      baseInputProps.value = value;
     }
-    onChange?.(e);
-  };
-  const hasError = error || !!errorText;
-  return /* @__PURE__ */ jsx(StyledTextFieldWrapper3, { children: /* @__PURE__ */ jsxs(StyledTextField3, { hasError, children: [
-    /* @__PURE__ */ jsx(
-      StyledTextFieldInput3,
-      {
-        name,
-        placeholder,
-        value: currentValue,
-        onChange: handleChange,
-        fontSize: style?.fontSize,
-        lineHeight: style?.lineHeight,
-        color: style?.color,
-        borderColor: style?.borderColor,
-        backgroundColor: hasError ? style?.errorStyle?.backgroundColor ?? "#fdd" : style?.backgroundColor ?? "#eee",
-        placeholderColor: style?.placeholderColor
-      }
-    ),
-    errorText && /* @__PURE__ */ jsx(
-      StyledTextFieldError3,
-      {
-        fontSize: style?.errorStyle?.fontSize,
-        color: style?.errorStyle?.color,
-        children: errorText
-      }
-    )
-  ] }) });
-};
+    if (defaultValue2 !== void 0) {
+      baseInputProps.defaultValue = defaultValue2;
+    }
+    if (onChange) {
+      baseInputProps.onChange = onChange;
+    }
+    const mergedInputProps = mergeProps(
+      restAriaInputProps,
+      baseInputProps,
+      inputProps || {}
+    );
+    const borderColor = hasError ? appearance?.errorBorderColor ?? "#f00" : appearance?.borderColor ?? "#000";
+    const backgroundColor = hasError ? appearance?.errorBackgroundColor ?? "#fdd" : appearance?.backgroundColor ?? "#eee";
+    return /* @__PURE__ */ jsx(StyledTextFieldWrapper3, { children: /* @__PURE__ */ jsxs(StyledTextField3, { children: [
+      label && /* @__PURE__ */ jsx(
+        StyledTextFieldLabel3,
+        {
+          ...labelProps,
+          $fontSize: appearance?.labelFontSize,
+          $color: appearance?.labelColor,
+          $fontWeight: appearance?.labelFontWeight,
+          $marginBottom: appearance?.labelMarginBottom,
+          children: label
+        }
+      ),
+      /* @__PURE__ */ jsx(
+        StyledTextFieldInput3,
+        {
+          ...mergedInputProps,
+          ref: textareaRef,
+          $fontSize: appearance?.fontSize,
+          $lineHeight: appearance?.lineHeight,
+          $color: appearance?.color,
+          $borderColor: borderColor,
+          $backgroundColor: backgroundColor,
+          $placeholderColor: appearance?.placeholderColor,
+          $focusRingColor: appearance?.focusRingColor
+        }
+      ),
+      errorText && /* @__PURE__ */ jsx(
+        StyledTextFieldError3,
+        {
+          ...errorMessageProps,
+          $fontSize: appearance?.errorFontSize,
+          $color: appearance?.errorColor,
+          "aria-live": "polite",
+          children: errorText || ""
+        }
+      )
+    ] }) });
+  }
+);
+TextField003.displayName = "TextField003";
 var StyledTextFieldWrapper4 = styled13.div`
   ${({ theme }) => theme.font.baseSize.em()}
 `;
-var StyledTextField4 = styled13.div.withConfig({
-  shouldForwardProp: (prop) => prop !== "hasError"
-})`
+var StyledTextField4 = styled13.div`
   position: relative;
   width: 100%;
 `;
+var StyledTextFieldLabel4 = styled13.label.withConfig({
+  shouldForwardProp: (prop) => !prop.startsWith("$")
+})`
+  display: block;
+  font-size: ${({ theme, $fontSize }) => theme.size.em($fontSize ?? 16)};
+  margin-bottom: ${({ theme, $marginBottom }) => theme.size.em($marginBottom ?? 5)};
+  color: ${({ $color }) => $color ?? "#000"};
+  font-weight: ${({ $fontWeight }) => $fontWeight ?? "normal"};
+`;
+var defaultFontSize14 = (size) => size ?? 18;
+var defaultLineHeight4 = (lineHeight) => lineHeight ?? 1.5;
 var StyledTextFieldInput4 = styled13.textarea.withConfig({
-  shouldForwardProp: (prop) => prop !== "fontSize" && prop !== "lineHeight" && prop !== "color" && prop !== "backgroundColor" && prop !== "placeholderColor" && prop !== "inputType"
+  shouldForwardProp: (prop) => !prop.startsWith("$")
 })`
   width: 100%;
   display: block;
   border: 0;
-  font-size: ${({ theme, fontSize }) => theme.size.em(fontSize ?? 18)};
-  background-color: ${({ backgroundColor }) => backgroundColor ?? "#eee"};
-  padding: ${({ theme, fontSize }) => theme.size.em(10 / (fontSize ?? 18) * 10)};
-  color: ${({ color: color2 }) => color2 ?? "#000"};
+  font-size: ${({ theme, $fontSize }) => theme.size.em(defaultFontSize14($fontSize))};
+  background-color: ${({ $backgroundColor }) => $backgroundColor ?? "#eee"};
+  padding: ${({ theme, $fontSize }) => theme.size.customEm(10, defaultFontSize14($fontSize))};
+  color: ${({ $color }) => $color ?? "#000"};
   box-sizing: border-box;
-  line-height: ${({ theme, fontSize }) => theme.size.em(fontSize ?? 18)};
-  height: calc((${({ lineHeight }) => lineHeight ?? 1.5} * 5em) + ${({ theme, fontSize }) => theme.size.em(10 / (fontSize ?? 18) * 10)} * 2);
-  min-height: calc((${({ lineHeight }) => lineHeight ?? 1.5} * 3em) + ${({ theme, fontSize }) => theme.size.em(10 / (fontSize ?? 18) * 10)} * 2);
-  max-height: calc((${({ lineHeight }) => lineHeight ?? 1.5} * 15em) + ${({ theme, fontSize }) => theme.size.em(10 / (fontSize ?? 18) * 10)} * 2);
+  line-height: ${({ $lineHeight }) => defaultLineHeight4($lineHeight)};
+  height: calc((${({ $lineHeight }) => defaultLineHeight4($lineHeight)} * 5em) + ${({ theme, $fontSize }) => theme.size.customEm(10, defaultFontSize14($fontSize))} * 2);
+  min-height: calc((${({ $lineHeight }) => defaultLineHeight4($lineHeight)} * 3em) + ${({ theme, $fontSize }) => theme.size.customEm(10, defaultFontSize14($fontSize))} * 2);
+  max-height: calc((${({ $lineHeight }) => defaultLineHeight4($lineHeight)} * 15em) + ${({ theme, $fontSize }) => theme.size.customEm(10, defaultFontSize14($fontSize))} * 2);
   resize: vertical;
 
   &::placeholder {
-    color: ${({ placeholderColor }) => placeholderColor ?? "#909090"};
+    color: ${({ $placeholderColor }) => $placeholderColor ?? "#909090"};
   }
 
-  &:focus {
+  &:focus-visible {
     outline: none;
+    box-shadow: 0 0 0 ${({ theme }) => theme.size.em(0.25)} ${({ $focusRingColor }) => $focusRingColor ?? "#007bff"};
   }
 
-  ${({ inputType }) => inputType === "001" && css`
+  ${({ $variant }) => $variant === "001" && css`
       border-radius: 0;
     `}
 
-  ${({ inputType }) => inputType === "002" && css`
-      border-radius: ${({ theme }) => theme.size.em(4)};
+  ${({ $variant, theme }) => $variant === "002" && css`
+      border-radius: ${theme.size.em(4)};
     `}
 `;
 var StyledTextFieldError4 = styled13.p.withConfig({
-  shouldForwardProp: (prop) => prop !== "fontSize" && prop !== "color"
+  shouldForwardProp: (prop) => !prop.startsWith("$")
 })`
-  color: ${({ color: color2 }) => color2 ?? "#f00"};
-  font-size: ${({ theme, fontSize }) => theme.size.em(fontSize ?? 16)};
-  margin: ${({ theme, fontSize }) => theme.size.em(5 / (fontSize ?? 16) * 10)} 0 0;
-  line-height: 1;
+  color: ${({ $color }) => $color ?? "#f00"};
+  font-size: ${({ theme, $fontSize }) => theme.size.em($fontSize ?? 16)};
+  margin: ${({ theme }) => theme.size.em(5)} 0 0;
+  min-height: ${({ theme, $fontSize }) => theme.size.em($fontSize ?? 16)};
+  line-height: 1.2;
 `;
-var TextField004 = ({
-  type = "001",
-  name = "text-field-004",
-  placeholder = "\u5165\u529B\u3057\u3066\u304F\u3060\u3055\u3044",
-  value,
-  onChange,
-  error = false,
-  errorText,
-  style
-}) => {
-  const [internalValue, setInternalValue] = useState("");
-  const currentValue = value !== void 0 ? value : internalValue;
-  const handleChange = (e) => {
-    if (value === void 0) {
-      setInternalValue(e.target.value);
+var TextField004 = forwardRef(
+  ({
+    variant = "001",
+    name = "text-field-004",
+    placeholder = "\u5165\u529B\u3057\u3066\u304F\u3060\u3055\u3044",
+    value,
+    defaultValue: defaultValue2,
+    onChange,
+    error = false,
+    errorText,
+    id: id2,
+    label,
+    ariaLabel,
+    autoComplete,
+    appearance,
+    inputProps
+  }, ref) => {
+    const generatedId = useId();
+    const fieldId = id2 ?? generatedId;
+    const hasError = error || !!errorText;
+    const textareaRef = useObjectRef(ref);
+    const {
+      labelProps,
+      inputProps: ariaInputProps,
+      errorMessageProps
+    } = useTextField(
+      {
+        id: fieldId,
+        label,
+        "aria-label": label ? void 0 : ariaLabel,
+        validationState: hasError ? "invalid" : void 0,
+        errorMessage: errorText,
+        inputElementType: "textarea",
+        isDisabled: inputProps?.disabled,
+        isRequired: inputProps?.required,
+        isReadOnly: inputProps?.readOnly
+      },
+      textareaRef
+    );
+    const {
+      value: _ariaValue,
+      defaultValue: _ariaDefaultValue,
+      onChange: _ariaOnChange,
+      ...restAriaInputProps
+    } = ariaInputProps;
+    const baseInputProps = {
+      id: fieldId,
+      name,
+      placeholder,
+      autoComplete
+    };
+    if (value !== void 0) {
+      baseInputProps.value = value;
     }
-    onChange?.(e);
-  };
-  const hasError = error || !!errorText;
-  return /* @__PURE__ */ jsx(StyledTextFieldWrapper4, { children: /* @__PURE__ */ jsxs(StyledTextField4, { hasError, children: [
-    /* @__PURE__ */ jsx(
-      StyledTextFieldInput4,
-      {
-        name,
-        placeholder,
-        value: currentValue,
-        onChange: handleChange,
-        fontSize: style?.fontSize,
-        lineHeight: style?.lineHeight,
-        color: style?.color,
-        backgroundColor: hasError ? style?.errorStyle?.backgroundColor ?? "#fdd" : style?.backgroundColor ?? "#eee",
-        placeholderColor: style?.placeholderColor,
-        inputType: type
-      }
-    ),
-    errorText && /* @__PURE__ */ jsx(
-      StyledTextFieldError4,
-      {
-        fontSize: style?.errorStyle?.fontSize,
-        color: style?.errorStyle?.color,
-        children: errorText
-      }
-    )
-  ] }) });
-};
+    if (defaultValue2 !== void 0) {
+      baseInputProps.defaultValue = defaultValue2;
+    }
+    if (onChange) {
+      baseInputProps.onChange = onChange;
+    }
+    const mergedInputProps = mergeProps(
+      restAriaInputProps,
+      baseInputProps,
+      inputProps || {}
+    );
+    const backgroundColor = hasError ? appearance?.errorBackgroundColor ?? "#fdd" : appearance?.backgroundColor ?? "#eee";
+    return /* @__PURE__ */ jsx(StyledTextFieldWrapper4, { children: /* @__PURE__ */ jsxs(StyledTextField4, { children: [
+      label && /* @__PURE__ */ jsx(
+        StyledTextFieldLabel4,
+        {
+          ...labelProps,
+          $fontSize: appearance?.labelFontSize,
+          $color: appearance?.labelColor,
+          $fontWeight: appearance?.labelFontWeight,
+          $marginBottom: appearance?.labelMarginBottom,
+          children: label
+        }
+      ),
+      /* @__PURE__ */ jsx(
+        StyledTextFieldInput4,
+        {
+          ...mergedInputProps,
+          ref: textareaRef,
+          $fontSize: appearance?.fontSize,
+          $lineHeight: appearance?.lineHeight,
+          $color: appearance?.color,
+          $backgroundColor: backgroundColor,
+          $placeholderColor: appearance?.placeholderColor,
+          $variant: variant,
+          $focusRingColor: appearance?.focusRingColor
+        }
+      ),
+      errorText && /* @__PURE__ */ jsx(
+        StyledTextFieldError4,
+        {
+          ...errorMessageProps,
+          $fontSize: appearance?.errorFontSize,
+          $color: appearance?.errorColor,
+          "aria-live": "polite",
+          children: errorText || ""
+        }
+      )
+    ] }) });
+  }
+);
+TextField004.displayName = "TextField004";
 var StyledTextFieldWrapper5 = styled13.div`
   ${({ theme }) => theme.font.baseSize.em()}
 `;
-var StyledTextField5 = styled13.div.withConfig({
-  shouldForwardProp: (prop) => prop !== "hasError"
-})`
+var StyledTextField5 = styled13.div`
   position: relative;
   width: 100%;
 `;
+var StyledTextFieldLabel5 = styled13.label.withConfig({
+  shouldForwardProp: (prop) => !prop.startsWith("$")
+})`
+  display: block;
+  font-size: ${({ theme, $fontSize }) => theme.size.em($fontSize ?? 16)};
+  margin-bottom: ${({ theme, $marginBottom }) => theme.size.em($marginBottom ?? 5)};
+  color: ${({ $color }) => $color ?? "#000"};
+  font-weight: ${({ $fontWeight }) => $fontWeight ?? "normal"};
+`;
+var defaultFontSize15 = (size) => size ?? 18;
+var defaultLineHeight5 = (lineHeight) => lineHeight ?? 1.5;
 var StyledTextFieldInput5 = styled13.textarea.withConfig({
-  shouldForwardProp: (prop) => prop !== "fontSize" && prop !== "lineHeight" && prop !== "color" && prop !== "borderColor" && prop !== "backgroundColor" && prop !== "placeholderColor" && prop !== "inputType"
+  shouldForwardProp: (prop) => !prop.startsWith("$")
 })`
   width: 100%;
   display: block;
-  border: 1px solid ${({ borderColor }) => borderColor ?? "#000"};
-  font-size: ${({ theme, fontSize }) => theme.size.em(fontSize ?? 18)};
-  background-color: ${({ backgroundColor }) => backgroundColor ?? "#eee"};
-  padding: ${({ theme, fontSize }) => theme.size.em(10 / (fontSize ?? 18) * 10)};
-  color: ${({ color: color2 }) => color2 ?? "#000"};
+  border: 1px solid ${({ $borderColor }) => $borderColor ?? "#000"};
+  font-size: ${({ theme, $fontSize }) => theme.size.em(defaultFontSize15($fontSize))};
+  background-color: ${({ $backgroundColor }) => $backgroundColor ?? "#eee"};
+  padding: ${({ theme, $fontSize }) => theme.size.customEm(10, defaultFontSize15($fontSize))};
+  color: ${({ $color }) => $color ?? "#000"};
   box-sizing: border-box;
-  line-height: ${({ theme, fontSize }) => theme.size.em(fontSize ?? 18)};
-  height: calc((${({ lineHeight }) => lineHeight ?? 1.5} * 5em) + ${({ theme, fontSize }) => theme.size.em(10 / (fontSize ?? 18) * 10)} * 2);
-  min-height: calc((${({ lineHeight }) => lineHeight ?? 1.5} * 3em) + ${({ theme, fontSize }) => theme.size.em(10 / (fontSize ?? 18) * 10)} * 2);
-  max-height: calc((${({ lineHeight }) => lineHeight ?? 1.5} * 15em) + ${({ theme, fontSize }) => theme.size.em(10 / (fontSize ?? 18) * 10)} * 2);
+  line-height: ${({ $lineHeight }) => defaultLineHeight5($lineHeight)};
+  height: calc((${({ $lineHeight }) => defaultLineHeight5($lineHeight)} * 5em) + ${({ theme, $fontSize }) => theme.size.customEm(10, defaultFontSize15($fontSize))} * 2);
+  min-height: calc((${({ $lineHeight }) => defaultLineHeight5($lineHeight)} * 3em) + ${({ theme, $fontSize }) => theme.size.customEm(10, defaultFontSize15($fontSize))} * 2);
+  max-height: calc((${({ $lineHeight }) => defaultLineHeight5($lineHeight)} * 15em) + ${({ theme, $fontSize }) => theme.size.customEm(10, defaultFontSize15($fontSize))} * 2);
   resize: vertical;
 
   &::placeholder {
-    color: ${({ placeholderColor }) => placeholderColor ?? "#909090"};
+    color: ${({ $placeholderColor }) => $placeholderColor ?? "#909090"};
   }
 
-  &:focus {
+  &:focus-visible {
     outline: none;
+    box-shadow: 0 0 0 ${({ theme }) => theme.size.em(0.25)} ${({ $focusRingColor }) => $focusRingColor ?? "#007bff"};
   }
 
-  ${({ inputType }) => inputType === "001" && css`
+  ${({ $variant }) => $variant === "001" && css`
       border-radius: 0;
     `}
 
-  ${({ inputType }) => inputType === "002" && css`
-      border-radius: ${({ theme }) => theme.size.em(4)};
+  ${({ $variant, theme }) => $variant === "002" && css`
+      border-radius: ${theme.size.em(4)};
     `}
 `;
 var StyledTextFieldError5 = styled13.p.withConfig({
-  shouldForwardProp: (prop) => prop !== "fontSize" && prop !== "color"
+  shouldForwardProp: (prop) => !prop.startsWith("$")
 })`
-  color: ${({ color: color2 }) => color2 ?? "#f00"};
-  font-size: ${({ theme, fontSize }) => theme.size.em(fontSize ?? 16)};
-  margin: ${({ theme, fontSize }) => theme.size.em(5 / (fontSize ?? 16) * 10)} 0 0;
-  line-height: 1;
+  color: ${({ $color }) => $color ?? "#f00"};
+  font-size: ${({ theme, $fontSize }) => theme.size.em($fontSize ?? 16)};
+  margin: ${({ theme }) => theme.size.em(5)} 0 0;
+  min-height: ${({ theme, $fontSize }) => theme.size.em($fontSize ?? 16)};
+  line-height: 1.2;
 `;
-var TextField005 = ({
-  type = "001",
-  name = "text-field-005",
-  placeholder = "\u5165\u529B\u3057\u3066\u304F\u3060\u3055\u3044",
-  value,
-  onChange,
-  error = false,
-  errorText,
-  style
-}) => {
-  const [internalValue, setInternalValue] = useState("");
-  const currentValue = value !== void 0 ? value : internalValue;
-  const handleChange = (e) => {
-    if (value === void 0) {
-      setInternalValue(e.target.value);
+var TextField005 = forwardRef(
+  ({
+    variant = "001",
+    name = "text-field-005",
+    placeholder = "\u5165\u529B\u3057\u3066\u304F\u3060\u3055\u3044",
+    value,
+    defaultValue: defaultValue2,
+    onChange,
+    error = false,
+    errorText,
+    id: id2,
+    label,
+    ariaLabel,
+    autoComplete,
+    appearance,
+    inputProps
+  }, ref) => {
+    const generatedId = useId();
+    const fieldId = id2 ?? generatedId;
+    const hasError = error || !!errorText;
+    const textareaRef = useObjectRef(ref);
+    const {
+      labelProps,
+      inputProps: ariaInputProps,
+      errorMessageProps
+    } = useTextField(
+      {
+        id: fieldId,
+        label,
+        "aria-label": label ? void 0 : ariaLabel,
+        validationState: hasError ? "invalid" : void 0,
+        errorMessage: errorText,
+        inputElementType: "textarea",
+        isDisabled: inputProps?.disabled,
+        isRequired: inputProps?.required,
+        isReadOnly: inputProps?.readOnly
+      },
+      textareaRef
+    );
+    const {
+      value: _ariaValue,
+      defaultValue: _ariaDefaultValue,
+      onChange: _ariaOnChange,
+      ...restAriaInputProps
+    } = ariaInputProps;
+    const baseInputProps = {
+      id: fieldId,
+      name,
+      placeholder,
+      autoComplete
+    };
+    if (value !== void 0) {
+      baseInputProps.value = value;
     }
-    onChange?.(e);
-  };
-  const hasError = error || !!errorText;
-  return /* @__PURE__ */ jsx(StyledTextFieldWrapper5, { children: /* @__PURE__ */ jsxs(StyledTextField5, { hasError, children: [
-    /* @__PURE__ */ jsx(
-      StyledTextFieldInput5,
-      {
-        name,
-        placeholder,
-        value: currentValue,
-        onChange: handleChange,
-        fontSize: style?.fontSize,
-        lineHeight: style?.lineHeight,
-        color: style?.color,
-        borderColor: style?.borderColor,
-        backgroundColor: hasError ? style?.errorStyle?.backgroundColor ?? "#fdd" : style?.backgroundColor ?? "#eee",
-        placeholderColor: style?.placeholderColor,
-        inputType: type
-      }
-    ),
-    errorText && /* @__PURE__ */ jsx(
-      StyledTextFieldError5,
-      {
-        fontSize: style?.errorStyle?.fontSize,
-        color: style?.errorStyle?.color,
-        children: errorText
-      }
-    )
-  ] }) });
-};
+    if (defaultValue2 !== void 0) {
+      baseInputProps.defaultValue = defaultValue2;
+    }
+    if (onChange) {
+      baseInputProps.onChange = onChange;
+    }
+    const mergedInputProps = mergeProps(
+      restAriaInputProps,
+      baseInputProps,
+      inputProps || {}
+    );
+    const borderColor = hasError ? appearance?.errorBorderColor ?? "#f00" : appearance?.borderColor ?? "#000";
+    const backgroundColor = hasError ? appearance?.errorBackgroundColor ?? "#fdd" : appearance?.backgroundColor ?? "#eee";
+    return /* @__PURE__ */ jsx(StyledTextFieldWrapper5, { children: /* @__PURE__ */ jsxs(StyledTextField5, { children: [
+      label && /* @__PURE__ */ jsx(
+        StyledTextFieldLabel5,
+        {
+          ...labelProps,
+          $fontSize: appearance?.labelFontSize,
+          $color: appearance?.labelColor,
+          $fontWeight: appearance?.labelFontWeight,
+          $marginBottom: appearance?.labelMarginBottom,
+          children: label
+        }
+      ),
+      /* @__PURE__ */ jsx(
+        StyledTextFieldInput5,
+        {
+          ...mergedInputProps,
+          ref: textareaRef,
+          $fontSize: appearance?.fontSize,
+          $lineHeight: appearance?.lineHeight,
+          $color: appearance?.color,
+          $borderColor: borderColor,
+          $backgroundColor: backgroundColor,
+          $placeholderColor: appearance?.placeholderColor,
+          $variant: variant,
+          $focusRingColor: appearance?.focusRingColor
+        }
+      ),
+      errorText && /* @__PURE__ */ jsx(
+        StyledTextFieldError5,
+        {
+          ...errorMessageProps,
+          $fontSize: appearance?.errorFontSize,
+          $color: appearance?.errorColor,
+          "aria-live": "polite",
+          children: errorText || ""
+        }
+      )
+    ] }) });
+  }
+);
+TextField005.displayName = "TextField005";
 var StyledTextIconWrapper = styled13.div`
   ${({ theme }) => theme.font.baseSize.em()}
 `;
