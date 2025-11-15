@@ -1,59 +1,151 @@
-import type React from "react";
+import { useButton } from "@react-aria/button";
+import { mergeProps } from "@react-aria/utils";
+import {
+  forwardRef,
+  type HTMLAttributes,
+  type MouseEvent,
+  type ReactNode,
+  type RefObject,
+  useCallback,
+  useMemo,
+  useRef
+} from "react";
 import type { EasingKey } from "../../../../styles/easing";
 import {
   StyledListItem,
   StyledListItemPoint,
   StyledListItemPointWrapper,
   StyledListItemText,
-  StyledListItemTextWrapper,
-  StyledListItemWrapper
+  StyledListItemTextWrapper
 } from "./styles";
 
-interface ListItemProps {
-  children: React.ReactNode;
-  onClick?: () => void;
-  style?: {
-    fontSize?: number;
-    color?: string;
-    gap?: number;
-    pointSize?: number;
-    pointColor?: string;
-    animationColor?: string;
-    animationDuration?: string;
-    animationEase?: EasingKey;
-    animationPointColor?: string;
-  };
+interface ListItemAppearance {
+  color?: string;
+  gap?: number;
+  pointSize?: number;
+  pointColor?: string;
+  pointPaddingTop?: number;
+  animationColor?: string;
+  animationDuration?: number;
+  animationEase?: EasingKey;
+  animationPointColor?: string;
 }
 
-export const ListItem003 = ({ children, onClick, style }: ListItemProps) => {
-  return (
-    <StyledListItemWrapper>
+type BaseProps = {
+  as?: "li" | "article";
+  children: ReactNode;
+  appearance?: ListItemAppearance;
+  onClick?: (event: MouseEvent<HTMLElement>) => void;
+};
+
+type ListItemProps = BaseProps &
+  Omit<HTMLAttributes<HTMLLIElement>, keyof BaseProps>;
+
+type UseButtonOnClick = NonNullable<Parameters<typeof useButton>[0]["onClick"]>;
+type AriaClickEvent = Parameters<UseButtonOnClick>[0];
+
+const defaultAppearance: Required<ListItemAppearance> = {
+  color: "#000",
+  gap: 24,
+  pointSize: 8,
+  pointColor: "#000",
+  pointPaddingTop: 0,
+  animationColor: "#ccc",
+  animationDuration: 0.25,
+  animationEase: "easeInOutCubic",
+  animationPointColor: "#ccc"
+};
+
+export const ListItem003 = forwardRef<HTMLLIElement, ListItemProps>(
+  ({ as = "li", children, appearance, onClick, ...rest }, ref) => {
+    const mergedAppearance = useMemo(
+      () => ({ ...defaultAppearance, ...appearance }),
+      [appearance]
+    );
+
+    const localRef = useRef<HTMLLIElement | HTMLElement | null>(null);
+
+    const handleAriaClick = useCallback(
+      (event: AriaClickEvent) => {
+        onClick?.(event as MouseEvent<HTMLElement>);
+      },
+      [onClick]
+    );
+
+    const { buttonProps } = useButton(
+      {
+        elementType: as,
+        onClick: handleAriaClick,
+        isDisabled: !onClick
+      },
+      localRef
+    );
+
+    const handleRef = useCallback(
+      (node: HTMLLIElement | HTMLElement | null) => {
+        localRef.current = node;
+        if (!ref) {
+          return;
+        }
+        if (typeof ref === "function") {
+          ref(node as HTMLLIElement | null);
+        } else {
+          (ref as RefObject<HTMLLIElement | null>).current =
+            node as HTMLLIElement | null;
+        }
+      },
+      [ref]
+    );
+
+    const mergedProps = onClick ? mergeProps(buttonProps, rest) : rest;
+
+    const {
+      color,
+      gap,
+      pointSize,
+      pointColor,
+      pointPaddingTop,
+      animationColor,
+      animationDuration,
+      animationEase,
+      animationPointColor
+    } = mergedAppearance;
+
+    return (
       <StyledListItem
-        onClick={onClick}
-        animationColor={style?.animationColor}
-        animationPointColor={style?.animationPointColor}
+        {...mergedProps}
+        ref={handleRef}
+        as={as as any}
+        $animationColor={animationColor}
+        $animationPointColor={animationPointColor}
+        $hasOnClick={!!onClick}
+        $gap={gap}
+        $alignItemsCenter={pointPaddingTop === 0}
+        aria-label="List item"
       >
-        <StyledListItemPointWrapper fontSize={style?.fontSize}>
+        <StyledListItemPointWrapper $pointPaddingTop={pointPaddingTop}>
           <StyledListItemPoint
-            pointSize={style?.pointSize}
-            pointColor={style?.pointColor}
-            animationPointColor={style?.animationPointColor}
-            animationDuration={style?.animationDuration}
-            animationEase={style?.animationEase}
+            $pointSize={pointSize}
+            $pointColor={pointColor}
+            $animationPointColor={animationPointColor}
+            $animationDuration={animationDuration}
+            $animationEase={animationEase}
+            aria-hidden="true"
           />
         </StyledListItemPointWrapper>
-        <StyledListItemTextWrapper gap={style?.gap}>
+        <StyledListItemTextWrapper>
           <StyledListItemText
-            fontSize={style?.fontSize}
-            color={style?.color}
-            animationColor={style?.animationColor}
-            animationDuration={style?.animationDuration}
-            animationEase={style?.animationEase}
+            $color={color}
+            $animationColor={animationColor}
+            $animationDuration={animationDuration}
+            $animationEase={animationEase}
           >
             {children}
           </StyledListItemText>
         </StyledListItemTextWrapper>
       </StyledListItem>
-    </StyledListItemWrapper>
-  );
-};
+    );
+  }
+);
+
+ListItem003.displayName = "ListItem003";

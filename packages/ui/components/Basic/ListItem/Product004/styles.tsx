@@ -1,99 +1,87 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import type { EasingKey } from "../../../../styles/easing";
 
-type ListItemIconWrapperProps = {
-  fontSize?: number;
-};
-
 type ListItemIconProps = {
-  iconColor?: string;
-  animationIconColor?: string;
-  animationDuration?: string;
-  animationEase?: EasingKey;
-};
-
-type ListItemTextWrapperProps = {
-  gap?: number;
+  $iconColor: string;
+  $animationIconColor: string;
+  $animationDuration: number;
+  $animationEase: EasingKey;
 };
 
 type ListItemTextProps = {
-  fontSize?: number;
-  color?: string;
-  animationColor?: string;
-  animationDuration?: string;
-  animationEase?: EasingKey;
+  $color: string;
+  $animationColor: string;
+  $animationDuration: number;
+  $animationEase: EasingKey;
 };
 
 type ListItemProps = {
-  animationColor?: string;
-  animationIconColor?: string;
+  $animationColor: string;
+  $animationIconColor: string;
+  $hasOnClick: boolean;
+  $gap: number;
+  $alignItemsCenter: boolean;
 };
 
-export const StyledListItemWrapper = styled.span`
-  ${({ theme }) => theme.font.baseSize.em()}
+type ListItemIconWrapperProps = {
+  $iconPaddingTop: number;
+};
+
+export const StyledListItemIconWrapper = styled.div<ListItemIconWrapperProps>`
+  display: flex;
+  justify-content: center;
+  padding-top: ${({ theme, $iconPaddingTop }) => ($iconPaddingTop === 0 || $iconPaddingTop === undefined ? "0" : theme.size.em($iconPaddingTop ?? 0))};
 `;
 
-export const StyledListItemIconWrapper = styled.span.withConfig({
-  shouldForwardProp: (prop) => prop !== "fontSize"
-})<ListItemIconWrapperProps>`
-  height: calc(${({ theme, fontSize }) => theme.size.em(fontSize ?? 24)} * 1.5);
-  position: relative;
-`;
-
-export const StyledListItemIcon = styled.span.withConfig({
-  shouldForwardProp: (prop) =>
-    prop !== "iconColor" &&
-    prop !== "animationIconColor" &&
-    prop !== "animationDuration" &&
-    prop !== "animationEase"
-})<ListItemIconProps>`
-  position: absolute;
-  top: 50%;
-  left: 0;
-  transform: translateY(-50%);
-  transition: color ${({ animationDuration }) => animationDuration ?? "0.25s"} ${({ animationEase, theme }) => theme.animation.easing[animationEase ?? "easeInOutCubic"]};
-  color: ${({ iconColor }) => iconColor ?? "#000"};
+export const StyledListItemIcon = styled.span<ListItemIconProps>`
+  color: ${({ $iconColor }) => $iconColor};
   ${({ theme }) => theme.icon.size.style("large")}
+  transition: color
+    ${({ $animationDuration }) => $animationDuration}s
+    ${({ $animationEase, theme }) => theme.animation.easing[$animationEase]};
 `;
 
-export const StyledListItemTextWrapper = styled.span.withConfig({
-  shouldForwardProp: (prop) => prop !== "gap"
-})<ListItemTextWrapperProps>`
-  width: 100%;
-  padding-left: ${({ theme, gap }) => theme.size.em((gap ?? 8) + 24)};
-`;
-
-export const StyledListItemText = styled.span.withConfig({
-  shouldForwardProp: (prop) =>
-    prop !== "fontSize" &&
-    prop !== "color" &&
-    prop !== "animationColor" &&
-    prop !== "animationDuration" &&
-    prop !== "animationEase"
-})<ListItemTextProps>`
+export const StyledListItemTextWrapper = styled.div`
   display: block;
-  color: ${({ color }) => color ?? "#000"};
-  font-size: ${({ theme, fontSize }) => theme.size.em(fontSize ?? 24)};
+`;
+
+export const StyledListItemText = styled.div<ListItemTextProps>`
+  display: block;
+  color: ${({ $color }) => $color};
   overflow-wrap: break-word;
   line-height: 1.5;
-  transition: color ${({ animationDuration }) => animationDuration ?? "0.25s"} ${({ animationEase, theme }) => theme.animation.easing[animationEase ?? "easeInOutCubic"]};
+  margin: 0;
+  transition: color
+    ${({ $animationDuration }) => $animationDuration}s
+    ${({ $animationEase, theme }) => theme.animation.easing[$animationEase]};
 `;
 
-export const StyledListItem = styled.span.withConfig({
-  shouldForwardProp: (prop) =>
-    prop !== "animationColor" && prop !== "animationIconColor"
-})<ListItemProps>`
-  cursor: pointer;
-  display: flex;
-  justify-content: left;
+export const StyledListItem = styled.li<ListItemProps>`
+  ${({ theme }) => theme.font.baseSize.em()};
+  list-style: none;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  column-gap: ${({ theme, $gap }) => theme.size.em($gap)};
+  align-items: ${({ $alignItemsCenter }) => ($alignItemsCenter ? "center" : "start")};
 
-  &:hover {
-    ${StyledListItemText} {
-      color: ${({ animationColor }) => animationColor ?? "#ccc"};
-    }
+  ${({ $hasOnClick, $animationColor, $animationIconColor }) =>
+    $hasOnClick &&
+    css`
+      cursor: pointer;
 
-    ${StyledListItemIcon} {
-      color: ${({ animationIconColor }) => animationIconColor ?? "#ccc"};
-    }
-  }
+      &:hover {
+        ${StyledListItemText} {
+          color: ${$animationColor};
+        }
+
+        ${StyledListItemIcon} {
+          color: ${$animationIconColor};
+        }
+      }
+
+      &:focus-visible {
+        outline: 2px solid ${$animationColor};
+        outline-offset: 2px;
+      }
+    `}
 `;

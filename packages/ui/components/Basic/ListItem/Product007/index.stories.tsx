@@ -1,42 +1,39 @@
 import type { Meta, StoryFn } from "@storybook/react";
 import { rem } from "../../../../styles/font";
-import { Svg031Icon } from "../../Icons";
-import { ListItem004 } from "./index";
+import { ListItem007 } from "./index";
 
-const meta: Meta<typeof ListItem004> = {
-  title: "Basic/ListItem/Product004",
-  component: ListItem004,
+const meta: Meta<typeof ListItem007> = {
+  title: "Basic/ListItem/Product007",
+  component: ListItem007,
   tags: ["autodocs"]
 };
 
 export default meta;
 
-const Template: StoryFn<typeof ListItem004> = (args) => (
+const Template: StoryFn<typeof ListItem007> = (args) => (
   <ul style={{ padding: "20px", margin: 0, listStyle: "none" }}>
-    <ListItem004 {...args} />
+    <ListItem007 {...args} />
   </ul>
 );
 
 export const Default = Template.bind({});
 Default.args = {
-  icon: <Svg031Icon />,
   children: (
     <p style={{ fontSize: rem(24) }}>
-      "これはアイコン付きのリストアイテムです。長いテキストでも改行されて表示されます。"
+      "これはシンプルなリストアイテムです。長いテキストでも改行されて表示されます。"
     </p>
   ),
   onClick: () => alert("クリックされました！")
 };
 
-export const WithCustomAppearance: StoryFn<typeof ListItem004> = (args) => (
+export const WithCustomAppearance: StoryFn<typeof ListItem007> = (args) => (
   <ul
     style={{ padding: "20px", margin: 0, listStyle: "none", fontSize: rem(18) }}
   >
-    <ListItem004 {...args} />
+    <ListItem007 {...args} />
   </ul>
 );
 WithCustomAppearance.args = {
-  icon: <Svg031Icon />,
   children: (
     <p style={{ fontSize: rem(18) }}>
       "カスタムスタイルを適用したリストアイテムです。"
@@ -44,16 +41,12 @@ WithCustomAppearance.args = {
   ),
   appearance: {
     color: "#333",
-    gap: 12,
-    iconColor: "#0066cc",
-    animationColor: "#0066cc",
-    animationIconColor: "#0099ff"
+    animationColor: "#0066cc"
   }
 };
 
 export const Clickable = Template.bind({});
 Clickable.args = {
-  icon: <Svg031Icon />,
   children: (
     <p style={{ fontSize: rem(24) }}>
       "クリック可能なリストアイテムです。ホバーやフォーカスで色が変わります。"
@@ -65,29 +58,9 @@ Clickable.args = {
 export const AsArticle = Template.bind({});
 AsArticle.args = {
   as: "article",
-  icon: <Svg031Icon />,
   children: (
     <p style={{ fontSize: rem(24) }}>
       "articleタグとしてレンダリングされるリストアイテムです。"
     </p>
   )
-};
-
-export const WithIconPaddingTop: StoryFn<typeof ListItem004> = (args) => (
-  <ul
-    style={{ padding: "20px", margin: 0, listStyle: "none", fontSize: rem(24) }}
-  >
-    <ListItem004 {...args} />
-  </ul>
-);
-WithIconPaddingTop.args = {
-  icon: <Svg031Icon />,
-  children: (
-    <p style={{ fontSize: rem(24) }}>
-      "アイコンにパディングを追加したリストアイテムです。アイコンが上に配置されます。"
-    </p>
-  ),
-  appearance: {
-    iconPaddingTop: 4
-  }
 };

@@ -11,28 +11,17 @@ import {
   useRef
 } from "react";
 import type { EasingKey } from "../../../../styles/easing";
-import {
-  StyledListItem,
-  StyledListItemIcon,
-  StyledListItemIconWrapper,
-  StyledListItemText,
-  StyledListItemTextWrapper
-} from "./styles";
+import { StyledListItem, StyledListItemText } from "./styles";
 
 interface ListItemAppearance {
   color?: string;
-  gap?: number;
-  iconColor?: string;
-  iconPaddingTop?: number;
   animationColor?: string;
   animationDuration?: number;
   animationEase?: EasingKey;
-  animationIconColor?: string;
 }
 
 type BaseProps = {
   as?: "li" | "article";
-  icon: ReactNode;
   children: ReactNode;
   appearance?: ListItemAppearance;
   onClick?: (event: MouseEvent<HTMLElement>) => void;
@@ -46,17 +35,13 @@ type AriaClickEvent = Parameters<UseButtonOnClick>[0];
 
 const defaultAppearance: Required<ListItemAppearance> = {
   color: "#000",
-  gap: 8,
-  iconColor: "#000",
-  iconPaddingTop: 0,
   animationColor: "#ccc",
   animationDuration: 0.25,
-  animationEase: "easeInOutCubic",
-  animationIconColor: "#ccc"
+  animationEase: "easeInOutCubic"
 };
 
-export const ListItem004 = forwardRef<HTMLLIElement, ListItemProps>(
-  ({ as = "li", icon, children, appearance, onClick, ...rest }, ref) => {
+export const ListItem007 = forwardRef<HTMLLIElement, ListItemProps>(
+  ({ as = "li", children, appearance, onClick, ...rest }, ref) => {
     const mergedAppearance = useMemo(
       () => ({ ...defaultAppearance, ...appearance }),
       [appearance]
@@ -98,16 +83,8 @@ export const ListItem004 = forwardRef<HTMLLIElement, ListItemProps>(
 
     const mergedProps = onClick ? mergeProps(buttonProps, rest) : rest;
 
-    const {
-      color,
-      gap,
-      iconColor,
-      iconPaddingTop,
-      animationColor,
-      animationDuration,
-      animationEase,
-      animationIconColor
-    } = mergedAppearance;
+    const { color, animationColor, animationDuration, animationEase } =
+      mergedAppearance;
 
     return (
       <StyledListItem
@@ -115,36 +92,20 @@ export const ListItem004 = forwardRef<HTMLLIElement, ListItemProps>(
         ref={handleRef}
         as={as as any}
         $animationColor={animationColor}
-        $animationIconColor={animationIconColor}
         $hasOnClick={!!onClick}
-        $gap={gap}
-        $alignItemsCenter={iconPaddingTop === 0}
         aria-label="List item"
       >
-        <StyledListItemIconWrapper $iconPaddingTop={iconPaddingTop}>
-          <StyledListItemIcon
-            $iconColor={iconColor}
-            $animationIconColor={animationIconColor}
-            $animationDuration={animationDuration}
-            $animationEase={animationEase}
-            aria-hidden="true"
-          >
-            {icon}
-          </StyledListItemIcon>
-        </StyledListItemIconWrapper>
-        <StyledListItemTextWrapper>
-          <StyledListItemText
-            $color={color}
-            $animationColor={animationColor}
-            $animationDuration={animationDuration}
-            $animationEase={animationEase}
-          >
-            {children}
-          </StyledListItemText>
-        </StyledListItemTextWrapper>
+        <StyledListItemText
+          $color={color}
+          $animationColor={animationColor}
+          $animationDuration={animationDuration}
+          $animationEase={animationEase}
+        >
+          {children}
+        </StyledListItemText>
       </StyledListItem>
     );
   }
 );
 
-ListItem004.displayName = "ListItem004";
+ListItem007.displayName = "ListItem007";
