@@ -15,42 +15,52 @@ const Template: StoryFn<typeof TextField001> = (args) => (
   </div>
 );
 
-export const Type001 = Template.bind({});
-Type001.args = {
-  type: "001",
+export const Variant001 = Template.bind({});
+Variant001.args = {
+  variant: "001",
   name: "text-field-001",
-  placeholder: "入力してください"
+  placeholder: "内容を入力してください"
 };
 
-export const Type002 = Template.bind({});
-Type002.args = {
-  type: "002",
+export const Variant002 = Template.bind({});
+Variant002.args = {
+  variant: "002",
   name: "text-field-002",
-  placeholder: "入力してください"
+  placeholder: "補足情報を入力してください",
+  label: "補足情報",
+  appearance: {
+    labelFontWeight: 600
+  }
 };
 
 export const WithError = Template.bind({});
 WithError.args = {
-  type: "001",
+  variant: "001",
   name: "text-field-error",
   placeholder: "入力してください",
+  label: "コメント",
   errorText: "※ 必須項目に入力してください。"
 };
 
-export const CustomStyle = Template.bind({});
-CustomStyle.args = {
-  type: "002",
+export const CustomAppearance = Template.bind({});
+CustomAppearance.args = {
+  variant: "002",
   name: "text-field-custom",
   placeholder: "カスタムスタイル",
-  style: {
+  label: "備考",
+  appearance: {
     fontSize: 16,
+    lineHeight: 1.8,
     color: "#333",
     borderColor: "#2196f3",
     placeholderColor: "#999",
-    errorStyle: {
-      fontSize: 14,
-      color: "#ff5722",
-      borderColor: "#ff5722"
-    }
+    focusRingColor: "rgba(33, 150, 243, 0.5)",
+    errorColor: "#ff5722",
+    errorFontSize: 14,
+    errorBorderColor: "#ff5722",
+    labelFontSize: 18,
+    labelColor: "#1f2933",
+    labelFontWeight: "bold",
+    labelMarginBottom: 8
   }
 };
