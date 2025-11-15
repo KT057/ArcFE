@@ -1,10 +1,9 @@
 import type React from "react";
-import type { Size } from "../../../../styles/size";
+import { forwardRef } from "react";
 import {
   StyledTextIcon,
   StyledTextIconIcon,
-  StyledTextIconText,
-  StyledTextIconWrapper
+  StyledTextIconText
 } from "./styles";
 
 export type IconPosition = "left" | "right";
@@ -13,32 +12,28 @@ interface TextIconProps {
   icon: React.ReactNode;
   children: React.ReactNode;
   iconPosition?: IconPosition;
-  iconSize?: Size;
-  style?: {
-    fontSize?: number;
-    color?: string;
-    iconColor?: string;
+  appearance?: {
     gap?: number;
+    paddingTop?: number;
   };
 }
 
-export const TextIcon001 = ({
-  icon,
-  children,
-  iconPosition = "right",
-  iconSize,
-  style
-}: TextIconProps) => {
-  return (
-    <StyledTextIconWrapper>
-      <StyledTextIcon iconPosition={iconPosition} gap={style?.gap}>
-        <StyledTextIconText fontSize={style?.fontSize} color={style?.color}>
-          {children}
-        </StyledTextIconText>
-        <StyledTextIconIcon iconColor={style?.iconColor} iconSize={iconSize}>
+export const TextIcon001 = forwardRef<HTMLDivElement, TextIconProps>(
+  ({ icon, children, iconPosition = "right", appearance }, ref) => {
+    return (
+      <StyledTextIcon
+        ref={ref}
+        $iconPosition={iconPosition}
+        $gap={appearance?.gap}
+        $isCenter={!appearance?.paddingTop}
+      >
+        <StyledTextIconText>{children}</StyledTextIconText>
+        <StyledTextIconIcon $paddingTop={appearance?.paddingTop}>
           {icon}
         </StyledTextIconIcon>
       </StyledTextIcon>
-    </StyledTextIconWrapper>
-  );
-};
+    );
+  }
+);
+
+TextIcon001.displayName = "TextIcon001";
