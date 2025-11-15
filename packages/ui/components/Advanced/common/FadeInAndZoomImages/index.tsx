@@ -16,8 +16,10 @@ interface FadeInAndZoomImagesProps {
   images: FadeInAndZoomImagesImageItem[];
   duration?: number;
   fadeDuration?: number;
+  scaleFrom?: number;
   scaleTo?: number;
   height?: number;
+  zoomDirection?: "in" | "out" | "none";
   state?: {
     currentIndex: number;
     setCurrentIndex: (index: number) => void;
@@ -31,7 +33,9 @@ export const FadeInAndZoomImages = ({
   images,
   duration = 4,
   fadeDuration = 2,
+  scaleFrom = 1,
   scaleTo = 1.2,
+  zoomDirection = "in",
   state,
   height,
   onImageChange,
@@ -40,6 +44,8 @@ export const FadeInAndZoomImages = ({
   const wrapperRef = useRef<HTMLDivElement>(null);
   const [isFirstAnimation, setIsFirstAnimation] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(state?.currentIndex ?? 0);
+
+  const shouldAnimate = images.length > 1;
 
   const getImageElements = useCallback(() => {
     if (!wrapperRef.current) return [];
@@ -96,13 +102,26 @@ export const FadeInAndZoomImages = ({
 
   const fadeInAndZoomImagesAnimation = useCallback(
     ({ imageElement }: { imageElement: HTMLDivElement }) => {
+      const fromScale =
+        zoomDirection === "out"
+          ? scaleTo
+          : zoomDirection === "none"
+            ? scaleFrom
+            : scaleFrom;
+      const toScale =
+        zoomDirection === "out"
+          ? scaleFrom
+          : zoomDirection === "none"
+            ? scaleFrom
+            : scaleTo;
+
       gsap.set(imageElement, {
-        scale: 1,
+        scale: fromScale,
         opacity: 1
       });
 
       const tween = gsap.to(imageElement, {
-        scale: scaleTo,
+        scale: toScale,
         opacity: 1,
         duration: duration,
         ease: "power2.out",
@@ -119,16 +138,18 @@ export const FadeInAndZoomImages = ({
     [
       currentIndexData,
       duration,
+      scaleFrom,
       onImageChange,
       onNextIndex,
       onProgress,
-      scaleTo
+      scaleTo,
+      zoomDirection
     ]
   );
 
   const switchToIndex = useCallback(
     (index: number) => {
-      if (!wrapperRef.current || images.length <= 1) return;
+      if (!wrapperRef.current || !shouldAnimate) return;
 
       const imageElements = getImageElements();
       gsap.killTweensOf(imageElements);
@@ -163,20 +184,22 @@ export const FadeInAndZoomImages = ({
       completeAnimation,
       fadeInAndZoomImagesAnimation,
       getImageElements,
-      images.length,
-      isFirstAnimation
+      isFirstAnimation,
+      shouldAnimate
     ]
   );
 
   // biome-ignore lint/correctness/useExhaustiveDependencies: lint/suppressions/incorrect
   useEffect(() => {
+    if (!shouldAnimate) return;
+
     switchToIndex(currentIndexData);
 
     return () => {
       const imageElements = getImageElements();
       gsap.killTweensOf(imageElements);
     };
-  }, [currentIndexData]);
+  }, [currentIndexData, shouldAnimate]);
 
   if (!images || images.length === 0) return null;
 
@@ -187,6 +210,14 @@ export const FadeInAndZoomImages = ({
           <StyledFadeInAndZoomImagesContent
             key={image.src}
             className="fade-in-zoom-content"
+            style={
+              !shouldAnimate && index === 0
+                ? {
+                    opacity: 1,
+                    zIndex: 1
+                  }
+                : undefined
+            }
           >
             <StyledFadeInAndZoomImagesImage
               src={image.src}

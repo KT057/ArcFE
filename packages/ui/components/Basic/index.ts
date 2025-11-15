@@ -10,6 +10,7 @@ export * from "./FrameNumber";
 export * from "./GoogleMap";
 export * from "./Header";
 export * from "./Icons";
+export * from "./Image";
 export * from "./Input";
 export * from "./Label";
 export * from "./List";
