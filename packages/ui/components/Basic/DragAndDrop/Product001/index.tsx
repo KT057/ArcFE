@@ -82,7 +82,7 @@ export const DragAndDrop001 = ({
     [items]
   );
 
-  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
+  // biome-ignore lint/correctness/useExhaustiveDependencies: 依存関係を最小限にするため
   const handleDragEnd = useCallback(
     (event: DragEndEvent) => {
       const { active, over } = event;

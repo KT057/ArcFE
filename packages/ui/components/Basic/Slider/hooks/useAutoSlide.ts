@@ -65,19 +65,19 @@ export const useAutoSlide = ({ autoPlay, instanceRef, options }: Args) => {
     cancelAnimationFrame(raf.current);
   }, []);
 
-  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
+  // biome-ignore lint/correctness/useExhaustiveDependencies: 依存関係を最小限にするため
   const mouseOverHandler = useCallback(() => {
     mouseOver.current = true;
     stopLoop();
   }, []);
 
-  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
+  // biome-ignore lint/correctness/useExhaustiveDependencies: 依存関係を最小限にするため
   const mouseOutHandler = useCallback(() => {
     mouseOver.current = false;
     startLoop();
   }, []);
 
-  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
+  // biome-ignore lint/correctness/useExhaustiveDependencies: 依存関係を最小限にするため
   useEffect(() => {
     if (!autoPlay || !instanceRef.current) return;
 

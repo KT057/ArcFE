@@ -1,98 +1,87 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import type { EasingKey } from "../../../../styles/easing";
 
-type ListItemNumberProps = {
-  fontSize?: number;
-};
-
 type ListItemNumberTextProps = {
-  numberFontSize?: number;
-  numberColor?: string;
-  animationColor?: string;
-  animationDuration?: string;
-  animationEase?: EasingKey;
-};
-
-type ListItemTextWrapperProps = {
-  gap?: number;
+  $numberFontSize: number;
+  $numberColor: string;
+  $animationColor: string;
+  $animationDuration: number;
+  $animationEase: EasingKey;
 };
 
 type ListItemTextProps = {
-  fontSize?: number;
-  color?: string;
-  animationColor?: string;
-  animationDuration?: string;
-  animationEase?: EasingKey;
+  $color: string;
+  $animationColor: string;
+  $animationDuration: number;
+  $animationEase: EasingKey;
 };
 
 type ListItemProps = {
-  animationColor?: string;
+  $animationColor: string;
+  $hasOnClick: boolean;
+  $gap: number;
+  $alignItemsCenter: boolean;
 };
 
-export const StyledListItemWrapper = styled.span`
-  ${({ theme }) => theme.font.baseSize.em()}
+type ListItemNumberProps = {
+  $numberPaddingTop: number;
+};
+
+export const StyledListItemNumber = styled.div<ListItemNumberProps>`
+  display: flex;
+  justify-content: center;
+  padding-top: ${({ theme, $numberPaddingTop }) => ($numberPaddingTop === 0 || $numberPaddingTop === undefined ? "0" : theme.size.em($numberPaddingTop))};
 `;
 
-export const StyledListItemNumber = styled.span.withConfig({
-  shouldForwardProp: (prop) => prop !== "fontSize"
-})<ListItemNumberProps>`
-  height: calc(${({ theme, fontSize }) => theme.size.em(fontSize ?? 24)} * 1.5);
-  position: relative;
+export const StyledListItemNumberText = styled.span<ListItemNumberTextProps>`
+  color: ${({ $numberColor }) => $numberColor};
+  font-size: ${({ theme, $numberFontSize }) => theme.size.em($numberFontSize)};
+  transition: color
+    ${({ $animationDuration }) => $animationDuration}s
+    ${({ $animationEase, theme }) => theme.animation.easing[$animationEase]};
 `;
 
-export const StyledListItemNumberText = styled.span.withConfig({
-  shouldForwardProp: (prop) =>
-    prop !== "numberFontSize" &&
-    prop !== "numberColor" &&
-    prop !== "animationDuration" &&
-    prop !== "animationEase"
-})<ListItemNumberTextProps>`
-  position: absolute;
-  top: 50%;
-  left: 0;
-  transform: translateY(-50%);
-  color: ${({ numberColor }) => numberColor ?? "#000"};
-  font-size: ${({ theme, numberFontSize }) => theme.size.em(numberFontSize ?? 24)};
-  transition: color ${({ animationDuration }) => animationDuration ?? "0.25s"} ${({ animationEase, theme }) => theme.animation.easing[animationEase ?? "easeInOutCubic"]};
-`;
-
-export const StyledListItemTextWrapper = styled.span.withConfig({
-  shouldForwardProp: (prop) => prop !== "gap"
-})<ListItemTextWrapperProps>`
-  width: 100%;
-  padding-left: ${({ theme, gap }) => theme.size.em(30 + (gap ?? 10))};
-`;
-
-export const StyledListItemText = styled.span.withConfig({
-  shouldForwardProp: (prop) =>
-    prop !== "fontSize" &&
-    prop !== "color" &&
-    prop !== "animationColor" &&
-    prop !== "animationDuration" &&
-    prop !== "animationEase"
-})<ListItemTextProps>`
+export const StyledListItemTextWrapper = styled.div`
   display: block;
-  color: ${({ color }) => color ?? "#000"};
-  font-size: ${({ theme, fontSize }) => theme.size.em(fontSize ?? 24)};
+`;
+
+export const StyledListItemText = styled.div<ListItemTextProps>`
+  display: block;
+  color: ${({ $color }) => $color};
   overflow-wrap: break-word;
   line-height: 1.5;
-  transition: color ${({ animationDuration }) => animationDuration ?? "0.25s"} ${({ animationEase, theme }) => theme.animation.easing[animationEase ?? "easeInOutCubic"]};
+  margin: 0;
+  transition: color
+    ${({ $animationDuration }) => $animationDuration}s
+    ${({ $animationEase, theme }) => theme.animation.easing[$animationEase]};
 `;
 
-export const StyledListItem = styled.span.withConfig({
-  shouldForwardProp: (prop) => prop !== "animationColor"
-})<ListItemProps>`
-  cursor: pointer;
-  display: flex;
-  justify-content: left;
+export const StyledListItem = styled.li<ListItemProps>`
+  ${({ theme }) => theme.font.baseSize.em()};
+  list-style: none;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  column-gap: ${({ theme, $gap }) => theme.size.em(30 + $gap)};
+  align-items: ${({ $alignItemsCenter }) => ($alignItemsCenter ? "center" : "start")};
 
-  &:hover {
-    ${StyledListItemText} {
-      color: ${({ animationColor }) => animationColor ?? "#ccc"};
-    }
+  ${({ $hasOnClick, $animationColor }) =>
+    $hasOnClick &&
+    css`
+      cursor: pointer;
 
-    ${StyledListItemNumberText} {
-      color: ${({ animationColor }) => animationColor ?? "#ccc"};
-    }
-  }
+      &:hover {
+        ${StyledListItemText} {
+          color: ${$animationColor};
+        }
+
+        ${StyledListItemNumberText} {
+          color: ${$animationColor};
+        }
+      }
+
+      &:focus-visible {
+        outline: 2px solid ${$animationColor};
+        outline-offset: 2px;
+      }
+    `}
 `;

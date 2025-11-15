@@ -1,72 +1,79 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import type { EasingKey } from "../../../../styles/easing";
 
 type ListItemFrameNumberWrapperProps = {
-  fontSize?: number;
-};
-
-type ListItemTextWrapperProps = {
-  gap?: number;
+  $frameNumberPaddingTop: number;
 };
 
 type ListItemTextProps = {
-  fontSize?: number;
-  color?: string;
+  $color: string;
+  $animationOpacity: number;
+  $animationDuration: number;
+  $animationEase: EasingKey;
 };
 
 type ListItemProps = {
-  animationOpacity?: number;
-  animationDuration?: string;
-  animationEase?: EasingKey;
+  $animationOpacity: number;
+  $animationDuration: number;
+  $animationEase: EasingKey;
+  $hasOnClick: boolean;
+  $gap: number;
+  $alignItemsCenter: boolean;
 };
 
-export const StyledListItemWrapper = styled.span`
-  ${({ theme }) => theme.font.baseSize.em()}
-`;
-
-export const StyledListItemFrameNumberWrapper = styled.span.withConfig({
-  shouldForwardProp: (prop) => prop !== "fontSize"
-})<ListItemFrameNumberWrapperProps>`
-  height: calc(${({ theme, fontSize }) => theme.size.em(fontSize ?? 24)} * 1.5);
-  position: relative;
+export const StyledListItemFrameNumberWrapper = styled.div<ListItemFrameNumberWrapperProps>`
+  display: flex;
+  justify-content: center;
+  padding-top: ${({ theme, $frameNumberPaddingTop }) => ($frameNumberPaddingTop === 0 || $frameNumberPaddingTop === undefined ? "0" : theme.size.em($frameNumberPaddingTop))};
 `;
 
 export const StyledListItemFrameNumber = styled.span`
-  position: absolute;
-  top: 50%;
-  left: 0;
-  transform: translateY(-50%);
-`;
-
-export const StyledListItemTextWrapper = styled.span.withConfig({
-  shouldForwardProp: (prop) => prop !== "gap"
-})<ListItemTextWrapperProps>`
-  width: 100%;
-  padding-left: ${({ theme, gap }) => theme.size.em(gap ?? 44)};
-`;
-
-export const StyledListItemText = styled.span.withConfig({
-  shouldForwardProp: (prop) => prop !== "fontSize" && prop !== "color"
-})<ListItemTextProps>`
   display: block;
-  color: ${({ color }) => color ?? "#000"};
-  font-size: ${({ theme, fontSize }) => theme.size.em(fontSize ?? 24)};
+`;
+
+export const StyledListItemTextWrapper = styled.div`
+  display: block;
+`;
+
+export const StyledListItemText = styled.div<ListItemTextProps>`
+  display: block;
+  color: ${({ $color }) => $color};
   overflow-wrap: break-word;
   line-height: 1.5;
+  margin: 0;
+  transition: opacity
+    ${({ $animationDuration }) => $animationDuration}s
+    ${({ $animationEase, theme }) => theme.animation.easing[$animationEase]};
 `;
 
-export const StyledListItem = styled.span.withConfig({
-  shouldForwardProp: (prop) =>
-    prop !== "animationOpacity" &&
-    prop !== "animationDuration" &&
-    prop !== "animationEase"
-})<ListItemProps>`
-  cursor: pointer;
-  display: flex;
-  justify-content: left;
-  transition: opacity ${({ animationDuration }) => animationDuration ?? "0.25s"} ${({ animationEase, theme }) => theme.animation.easing[animationEase ?? "easeInOutCubic"]};
+export const StyledListItem = styled.li<ListItemProps>`
+  ${({ theme }) => theme.font.baseSize.em()};
+  list-style: none;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  column-gap: ${({ theme, $gap }) => theme.size.em($gap)};
+  align-items: ${({ $alignItemsCenter }) => ($alignItemsCenter ? "center" : "start")};
 
-  &:hover {
-    opacity: ${({ animationOpacity }) => animationOpacity ?? 0.5};
-  }
+  ${({
+    $hasOnClick,
+    $animationOpacity,
+    $animationDuration,
+    $animationEase,
+    theme
+  }) =>
+    $hasOnClick &&
+    css`
+      cursor: pointer;
+      transition: opacity ${$animationDuration}s
+        ${theme.animation.easing[$animationEase]};
+
+      &:hover {
+        opacity: ${$animationOpacity};
+      }
+
+      &:focus-visible {
+        outline: 2px solid currentColor;
+        outline-offset: 2px;
+      }
+    `}
 `;
