@@ -1,103 +1,90 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import type { EasingKey } from "../../../../styles/easing";
 
-type ListItemPointWrapperProps = {
-  fontSize?: number;
-};
-
 type ListItemPointProps = {
-  pointSize?: number;
-  pointColor?: string;
-  animationPointColor?: string;
-  animationDuration?: string;
-  animationEase?: EasingKey;
-};
-
-type ListItemTextWrapperProps = {
-  gap?: number;
+  $pointSize: number;
+  $pointColor: string;
+  $animationPointColor: string;
+  $animationDuration: number;
+  $animationEase: EasingKey;
 };
 
 type ListItemTextProps = {
-  fontSize?: number;
-  color?: string;
-  animationColor?: string;
-  animationDuration?: string;
-  animationEase?: EasingKey;
+  $color: string;
+  $animationColor: string;
+  $animationDuration: number;
+  $animationEase: EasingKey;
 };
 
 type ListItemProps = {
-  animationColor?: string;
-  animationPointColor?: string;
+  $animationColor: string;
+  $animationPointColor: string;
+  $hasOnClick: boolean;
+  $gap: number;
+  $alignItemsCenter: boolean;
 };
 
-export const StyledListItemWrapper = styled.span`
-  ${({ theme }) => theme.font.baseSize.em()}
+type ListItemPointWrapperProps = {
+  $pointPaddingTop: number;
+};
+
+export const StyledListItemPointWrapper = styled.div<ListItemPointWrapperProps>`
+  display: flex;
+  justify-content: center;
+  padding-top: ${({ theme, $pointPaddingTop }) => ($pointPaddingTop === 0 || $pointPaddingTop === undefined ? "0" : theme.size.em($pointPaddingTop ?? 0))};
 `;
 
-export const StyledListItemPointWrapper = styled.span.withConfig({
-  shouldForwardProp: (prop) => prop !== "fontSize"
-})<ListItemPointWrapperProps>`
-  height: calc(${({ theme, fontSize }) => theme.size.em(fontSize ?? 24)} * 1.5);
-  position: relative;
-`;
-
-export const StyledListItemPoint = styled.span.withConfig({
-  shouldForwardProp: (prop) =>
-    prop !== "pointSize" &&
-    prop !== "pointColor" &&
-    prop !== "animationPointColor" &&
-    prop !== "animationDuration" &&
-    prop !== "animationEase"
-})<ListItemPointProps>`
-  position: absolute;
-  top: 50%;
-  left: 0;
-  transform: translateY(-50%);
-  background-color: ${({ pointColor }) => pointColor ?? "#000"};
-  width: ${({ theme, pointSize }) => theme.size.em(pointSize ?? 8)};
-  height: ${({ theme, pointSize }) => theme.size.em(pointSize ?? 8)};
+export const StyledListItemPoint = styled.span<ListItemPointProps>`
+  background-color: ${({ $pointColor }) => $pointColor};
+  width: ${({ theme, $pointSize }) => theme.size.em($pointSize)};
+  height: ${({ theme, $pointSize }) => theme.size.em($pointSize)};
   border-radius: 50%;
-  transition: background-color ${({ animationDuration }) => animationDuration ?? "0.25s"} ${({ animationEase, theme }) => theme.animation.easing[animationEase ?? "easeInOutCubic"]};
+  transition: background-color
+    ${({ $animationDuration }) => $animationDuration}s
+    ${({ $animationEase, theme }) => theme.animation.easing[$animationEase]};
 `;
 
-export const StyledListItemTextWrapper = styled.span.withConfig({
-  shouldForwardProp: (prop) => prop !== "gap"
-})<ListItemTextWrapperProps>`
-  width: 100%;
-  padding-left: ${({ theme, gap }) => theme.size.em(gap ?? 24)};
-`;
-
-export const StyledListItemText = styled.span.withConfig({
-  shouldForwardProp: (prop) =>
-    prop !== "fontSize" &&
-    prop !== "color" &&
-    prop !== "animationColor" &&
-    prop !== "animationDuration" &&
-    prop !== "animationEase"
-})<ListItemTextProps>`
+export const StyledListItemTextWrapper = styled.div`
   display: block;
-  color: ${({ color }) => color ?? "#000"};
-  font-size: ${({ theme, fontSize }) => theme.size.em(fontSize ?? 24)};
+`;
+
+export const StyledListItemText = styled.div<ListItemTextProps>`
+  display: block;
+  color: ${({ $color }) => $color};
   overflow-wrap: break-word;
   line-height: 1.5;
-  transition: color ${({ animationDuration }) => animationDuration ?? "0.25s"} ${({ animationEase, theme }) => theme.animation.easing[animationEase ?? "easeInOutCubic"]};
+  margin: 0;
+  transition: color
+    ${({ $animationDuration }) => $animationDuration}s
+    ${({ $animationEase, theme }) => theme.animation.easing[$animationEase]};
 `;
 
-export const StyledListItem = styled.span.withConfig({
-  shouldForwardProp: (prop) =>
-    prop !== "animationColor" && prop !== "animationPointColor"
-})<ListItemProps>`
-  cursor: pointer;
-  display: flex;
-  justify-content: left;
+export const StyledListItem = styled.li<ListItemProps>`
+  ${({ theme }) => theme.font.baseSize.em()};
+  list-style: none;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  column-gap: ${({ theme, $gap }) => theme.size.em($gap)};
+  align-items: ${({ $alignItemsCenter }) => ($alignItemsCenter ? "center" : "start")};
 
-  &:hover {
-    ${StyledListItemText} {
-      color: ${({ animationColor }) => animationColor ?? "#ccc"};
-    }
+  ${({ $hasOnClick, $animationColor, $animationPointColor }) =>
+    $hasOnClick &&
+    css`
+      cursor: pointer;
 
-    ${StyledListItemPoint} {
-      background-color: ${({ animationPointColor }) => animationPointColor ?? "#ccc"};
-    }
-  }
+      &:hover {
+        ${StyledListItemText} {
+          color: ${$animationColor};
+        }
+
+        ${StyledListItemPoint} {
+          background-color: ${$animationPointColor};
+        }
+      }
+
+      &:focus-visible {
+        outline: 2px solid ${$animationColor};
+        outline-offset: 2px;
+      }
+    `}
 `;
