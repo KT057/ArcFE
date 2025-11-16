@@ -542,8 +542,6 @@ var FadeInAndZoomImages = ({
 var Svg001 = (props) => /* @__PURE__ */ jsx(
   "svg",
   {
-    width: 24,
-    height: 24,
     viewBox: "0 0 24 24",
     fill: "none",
     xmlns: "http://www.w3.org/2000/svg",
@@ -562,8 +560,6 @@ var Svg001 = (props) => /* @__PURE__ */ jsx(
 var Svg002 = (props) => /* @__PURE__ */ jsx(
   "svg",
   {
-    width: 24,
-    height: 24,
     viewBox: "0 0 24 24",
     fill: "none",
     xmlns: "http://www.w3.org/2000/svg",
@@ -581,8 +577,6 @@ var Svg002 = (props) => /* @__PURE__ */ jsx(
 var Svg003 = (props) => /* @__PURE__ */ jsx(
   "svg",
   {
-    width: 24,
-    height: 24,
     viewBox: "0 0 24 24",
     fill: "none",
     xmlns: "http://www.w3.org/2000/svg",
@@ -601,8 +595,6 @@ var Svg003 = (props) => /* @__PURE__ */ jsx(
 var Svg004 = (props) => /* @__PURE__ */ jsx(
   "svg",
   {
-    width: 24,
-    height: 24,
     viewBox: "0 0 24 24",
     fill: "none",
     xmlns: "http://www.w3.org/2000/svg",
@@ -621,8 +613,6 @@ var Svg004 = (props) => /* @__PURE__ */ jsx(
 var Svg005 = (props) => /* @__PURE__ */ jsxs(
   "svg",
   {
-    width: 24,
-    height: 24,
     viewBox: "0 0 24 24",
     fill: "none",
     xmlns: "http://www.w3.org/2000/svg",
@@ -652,8 +642,6 @@ var Svg005 = (props) => /* @__PURE__ */ jsxs(
 var Svg006 = (props) => /* @__PURE__ */ jsxs(
   "svg",
   {
-    width: 24,
-    height: 24,
     viewBox: "0 0 24 24",
     fill: "none",
     xmlns: "http://www.w3.org/2000/svg",
@@ -683,8 +671,6 @@ var Svg006 = (props) => /* @__PURE__ */ jsxs(
 var Svg007 = (props) => /* @__PURE__ */ jsx(
   "svg",
   {
-    width: 24,
-    height: 24,
     viewBox: "0 0 24 24",
     fill: "none",
     xmlns: "http://www.w3.org/2000/svg",
@@ -695,8 +681,6 @@ var Svg007 = (props) => /* @__PURE__ */ jsx(
 var Svg008 = (props) => /* @__PURE__ */ jsx(
   "svg",
   {
-    width: 24,
-    height: 24,
     viewBox: "0 0 24 24",
     fill: "none",
     xmlns: "http://www.w3.org/2000/svg",
@@ -713,8 +697,6 @@ var Svg008 = (props) => /* @__PURE__ */ jsx(
 var Svg009 = (props) => /* @__PURE__ */ jsx(
   "svg",
   {
-    width: 24,
-    height: 24,
     viewBox: "0 0 24 24",
     fill: "none",
     xmlns: "http://www.w3.org/2000/svg",
@@ -731,8 +713,6 @@ var Svg009 = (props) => /* @__PURE__ */ jsx(
 var Svg010 = (props) => /* @__PURE__ */ jsx(
   "svg",
   {
-    width: 24,
-    height: 24,
     viewBox: "0 0 24 24",
     fill: "none",
     xmlns: "http://www.w3.org/2000/svg",
@@ -750,8 +730,6 @@ var Svg010 = (props) => /* @__PURE__ */ jsx(
 var Svg011 = (props) => /* @__PURE__ */ jsx(
   "svg",
   {
-    width: 24,
-    height: 24,
     viewBox: "0 0 24 24",
     fill: "none",
     xmlns: "http://www.w3.org/2000/svg",
@@ -768,8 +746,6 @@ var Svg011 = (props) => /* @__PURE__ */ jsx(
 var Svg012 = (props) => /* @__PURE__ */ jsx(
   "svg",
   {
-    width: 24,
-    height: 24,
     viewBox: "0 0 24 24",
     fill: "none",
     xmlns: "http://www.w3.org/2000/svg",
@@ -786,8 +762,6 @@ var Svg012 = (props) => /* @__PURE__ */ jsx(
 var Svg013 = (props) => /* @__PURE__ */ jsxs(
   "svg",
   {
-    width: 24,
-    height: 24,
     viewBox: "0 0 24 24",
     fill: "none",
     xmlns: "http://www.w3.org/2000/svg",
@@ -821,8 +795,6 @@ var Svg013 = (props) => /* @__PURE__ */ jsxs(
 var Svg014 = (props) => /* @__PURE__ */ jsxs(
   "svg",
   {
-    width: 24,
-    height: 24,
     viewBox: "0 0 24 24",
     fill: "none",
     xmlns: "http://www.w3.org/2000/svg",
@@ -854,8 +826,6 @@ var Svg014 = (props) => /* @__PURE__ */ jsxs(
 var Svg015 = (props) => /* @__PURE__ */ jsxs(
   "svg",
   {
-    width: 24,
-    height: 24,
     viewBox: "0 0 24 24",
     fill: "none",
     xmlns: "http://www.w3.org/2000/svg",
@@ -892,8 +862,6 @@ var Svg015 = (props) => /* @__PURE__ */ jsxs(
 var Svg016 = (props) => /* @__PURE__ */ jsx(
   "svg",
   {
-    width: 24,
-    height: 24,
     viewBox: "0 0 24 24",
     fill: "none",
     xmlns: "http://www.w3.org/2000/svg",
@@ -910,8 +878,6 @@ var Svg016 = (props) => /* @__PURE__ */ jsx(
 var Svg017 = (props) => /* @__PURE__ */ jsx(
   "svg",
   {
-    width: 24,
-    height: 24,
     viewBox: "0 0 24 24",
     fill: "none",
     xmlns: "http://www.w3.org/2000/svg",
@@ -928,8 +894,6 @@ var Svg017 = (props) => /* @__PURE__ */ jsx(
 var Svg018 = (props) => /* @__PURE__ */ jsxs(
   "svg",
   {
-    width: 24,
-    height: 24,
     viewBox: "0 0 24 24",
     fill: "none",
     xmlns: "http://www.w3.org/2000/svg",
@@ -960,8 +924,6 @@ var Svg018 = (props) => /* @__PURE__ */ jsxs(
 var Svg019 = (props) => /* @__PURE__ */ jsx(
   "svg",
   {
-    width: 24,
-    height: 24,
     viewBox: "0 0 24 24",
     fill: "none",
     xmlns: "http://www.w3.org/2000/svg",
@@ -980,8 +942,6 @@ var Svg019 = (props) => /* @__PURE__ */ jsx(
 var Svg020 = (props) => /* @__PURE__ */ jsxs(
   "svg",
   {
-    width: 24,
-    height: 24,
     viewBox: "0 0 24 24",
     fill: "none",
     xmlns: "http://www.w3.org/2000/svg",
@@ -1011,8 +971,6 @@ var Svg020 = (props) => /* @__PURE__ */ jsxs(
 var Svg021 = (props) => /* @__PURE__ */ jsxs(
   "svg",
   {
-    width: 24,
-    height: 24,
     viewBox: "0 0 24 24",
     fill: "none",
     xmlns: "http://www.w3.org/2000/svg",
@@ -1038,8 +996,6 @@ var Svg021 = (props) => /* @__PURE__ */ jsxs(
 var Svg022 = (props) => /* @__PURE__ */ jsx(
   "svg",
   {
-    width: 24,
-    height: 24,
     viewBox: "0 0 24 24",
     fill: "none",
     xmlns: "http://www.w3.org/2000/svg",
@@ -1056,8 +1012,6 @@ var Svg022 = (props) => /* @__PURE__ */ jsx(
 var Svg023 = (props) => /* @__PURE__ */ jsx(
   "svg",
   {
-    width: 24,
-    height: 24,
     viewBox: "0 0 24 24",
     fill: "none",
     xmlns: "http://www.w3.org/2000/svg",
@@ -1074,8 +1028,6 @@ var Svg023 = (props) => /* @__PURE__ */ jsx(
 var Svg024 = (props) => /* @__PURE__ */ jsx(
   "svg",
   {
-    width: 24,
-    height: 24,
     viewBox: "0 0 24 24",
     fill: "none",
     xmlns: "http://www.w3.org/2000/svg",
@@ -1092,8 +1044,6 @@ var Svg024 = (props) => /* @__PURE__ */ jsx(
 var Svg025 = (props) => /* @__PURE__ */ jsxs(
   "svg",
   {
-    width: 24,
-    height: 24,
     viewBox: "0 0 24 24",
     fill: "none",
     xmlns: "http://www.w3.org/2000/svg",
@@ -1108,8 +1058,6 @@ var Svg025 = (props) => /* @__PURE__ */ jsxs(
 var Svg026 = (props) => /* @__PURE__ */ jsx(
   "svg",
   {
-    width: 24,
-    height: 24,
     viewBox: "0 0 24 24",
     fill: "none",
     xmlns: "http://www.w3.org/2000/svg",
@@ -1126,8 +1074,6 @@ var Svg026 = (props) => /* @__PURE__ */ jsx(
 var Svg027 = (props) => /* @__PURE__ */ jsxs(
   "svg",
   {
-    width: 24,
-    height: 24,
     viewBox: "0 0 24 24",
     fill: "none",
     xmlns: "http://www.w3.org/2000/svg",
@@ -1155,8 +1101,6 @@ var Svg027 = (props) => /* @__PURE__ */ jsxs(
 var Svg028 = (props) => /* @__PURE__ */ jsx(
   "svg",
   {
-    width: 24,
-    height: 24,
     viewBox: "0 0 24 24",
     fill: "none",
     xmlns: "http://www.w3.org/2000/svg",
@@ -1175,8 +1119,6 @@ var Svg028 = (props) => /* @__PURE__ */ jsx(
 var Svg029 = (props) => /* @__PURE__ */ jsxs(
   "svg",
   {
-    width: 24,
-    height: 24,
     viewBox: "0 0 24 24",
     fill: "none",
     xmlns: "http://www.w3.org/2000/svg",
@@ -1210,8 +1152,6 @@ var Svg029 = (props) => /* @__PURE__ */ jsxs(
 var Svg030 = (props) => /* @__PURE__ */ jsxs(
   "svg",
   {
-    width: 24,
-    height: 24,
     viewBox: "0 0 24 24",
     fill: "none",
     xmlns: "http://www.w3.org/2000/svg",
@@ -1240,8 +1180,6 @@ var Svg030 = (props) => /* @__PURE__ */ jsxs(
 var Svg031 = (props) => /* @__PURE__ */ jsx(
   "svg",
   {
-    width: 24,
-    height: 24,
     viewBox: "0 0 24 24",
     fill: "none",
     xmlns: "http://www.w3.org/2000/svg",
@@ -1261,8 +1199,6 @@ var Svg031 = (props) => /* @__PURE__ */ jsx(
 var Svg032 = (props) => /* @__PURE__ */ jsx(
   "svg",
   {
-    width: 24,
-    height: 24,
     viewBox: "0 0 24 24",
     fill: "none",
     xmlns: "http://www.w3.org/2000/svg",
@@ -1282,8 +1218,6 @@ var Svg032 = (props) => /* @__PURE__ */ jsx(
 var Svg033 = (props) => /* @__PURE__ */ jsx(
   "svg",
   {
-    width: 24,
-    height: 24,
     viewBox: "0 0 24 24",
     fill: "none",
     xmlns: "http://www.w3.org/2000/svg",
@@ -1302,8 +1236,6 @@ var Svg033 = (props) => /* @__PURE__ */ jsx(
 var Svg034 = (props) => /* @__PURE__ */ jsx(
   "svg",
   {
-    width: 24,
-    height: 24,
     viewBox: "0 0 24 24",
     fill: "none",
     xmlns: "http://www.w3.org/2000/svg",
@@ -1320,8 +1252,6 @@ var Svg034 = (props) => /* @__PURE__ */ jsx(
 var Svg035 = (props) => /* @__PURE__ */ jsx(
   "svg",
   {
-    width: 24,
-    height: 24,
     viewBox: "0 0 24 24",
     fill: "none",
     xmlns: "http://www.w3.org/2000/svg",
@@ -1338,8 +1268,6 @@ var Svg035 = (props) => /* @__PURE__ */ jsx(
 var Svg036 = (props) => /* @__PURE__ */ jsx(
   "svg",
   {
-    width: 24,
-    height: 24,
     viewBox: "0 0 24 24",
     fill: "none",
     xmlns: "http://www.w3.org/2000/svg",
@@ -1358,8 +1286,6 @@ var Svg036 = (props) => /* @__PURE__ */ jsx(
 var Svg037 = (props) => /* @__PURE__ */ jsx(
   "svg",
   {
-    width: 24,
-    height: 24,
     viewBox: "0 0 24 24",
     fill: "none",
     xmlns: "http://www.w3.org/2000/svg",
@@ -1378,8 +1304,6 @@ var Svg037 = (props) => /* @__PURE__ */ jsx(
 var Svg038 = (props) => /* @__PURE__ */ jsxs(
   "svg",
   {
-    width: 24,
-    height: 24,
     viewBox: "0 0 24 24",
     fill: "none",
     xmlns: "http://www.w3.org/2000/svg",
@@ -1409,8 +1333,6 @@ var Svg038 = (props) => /* @__PURE__ */ jsxs(
 var Svg039 = (props) => /* @__PURE__ */ jsxs(
   "svg",
   {
-    width: 24,
-    height: 24,
     viewBox: "0 0 24 24",
     fill: "none",
     xmlns: "http://www.w3.org/2000/svg",
@@ -1440,8 +1362,6 @@ var Svg039 = (props) => /* @__PURE__ */ jsxs(
 var Svg040 = (props) => /* @__PURE__ */ jsx(
   "svg",
   {
-    width: 24,
-    height: 24,
     viewBox: "0 0 24 24",
     fill: "none",
     xmlns: "http://www.w3.org/2000/svg",
@@ -1458,8 +1378,6 @@ var Svg040 = (props) => /* @__PURE__ */ jsx(
 var Svg041 = (props) => /* @__PURE__ */ jsx(
   "svg",
   {
-    width: 24,
-    height: 24,
     viewBox: "0 0 24 24",
     fill: "none",
     xmlns: "http://www.w3.org/2000/svg",
@@ -1478,8 +1396,6 @@ var Svg041 = (props) => /* @__PURE__ */ jsx(
 var Svg042 = (props) => /* @__PURE__ */ jsxs(
   "svg",
   {
-    width: 24,
-    height: 24,
     viewBox: "0 0 24 24",
     fill: "none",
     xmlns: "http://www.w3.org/2000/svg",
@@ -1513,8 +1429,6 @@ var Svg042 = (props) => /* @__PURE__ */ jsxs(
 var Svg043 = (props) => /* @__PURE__ */ jsxs(
   "svg",
   {
-    width: 38,
-    height: 38,
     viewBox: "0 0 38 38",
     fill: "none",
     xmlns: "http://www.w3.org/2000/svg",

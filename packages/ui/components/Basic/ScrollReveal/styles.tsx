@@ -9,7 +9,10 @@ type StyledScrollRevealWrapperProps = {
   $distance: number;
 };
 
-const getInitialTransform = (type: ScrollRevealAnimationType, distance: number): string => {
+const getInitialTransform = (
+  type: ScrollRevealAnimationType,
+  distance: number
+): string => {
   switch (type) {
     case "fadeUp":
       return `translateY(${distance}px)`;

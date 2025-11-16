@@ -92,7 +92,9 @@ export const RepeatAnimation: StoryFn<typeof ScrollReveal> = () => (
   <div>
     <div style={{ height: "100vh", background: "#f0f0f0", padding: "20px" }}>
       <h2>Scroll up and down to repeat the animation</h2>
-      <p>The animation will trigger every time the element enters the viewport</p>
+      <p>
+        The animation will trigger every time the element enters the viewport
+      </p>
     </div>
 
     <div style={{ padding: "20px", background: "#fff" }}>
