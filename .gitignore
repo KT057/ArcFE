@@ -37,8 +37,6 @@ yarn-error.log*
 
 .env
 
-__screenshots__
-
 public/icon-font
 .reg
 
