@@ -112,7 +112,7 @@ importers:
         specifier: ^27.2.0
         version: 27.2.0
       msw:
-        specifier: ^2.11.6
+        specifier: ^2.12.2
         version: 2.12.2(@types/node@22.19.1)(typescript@5.9.3)
       tsup:
         specifier: ^8.5.1
