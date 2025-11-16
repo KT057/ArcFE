@@ -14,6 +14,7 @@ export * from "./Icons";
 export * from "./Image";
 export * from "./Input";
 export * from "./Label";
+export * from "./LazyImage";
 export * from "./List";
 export * from "./ListItem";
 export * from "./Loading";
