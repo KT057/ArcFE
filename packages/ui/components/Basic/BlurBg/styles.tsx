@@ -27,7 +27,8 @@ const generateMaskImage = (direction: Direction, fadeStart: number): string => {
 };
 
 export const StyledMaskBg = styled.div.withConfig({
-  shouldForwardProp: (prop) => !["direction", "fadeStart", "bgColor", "blurAmount"].includes(prop)
+  shouldForwardProp: (prop) =>
+    !["direction", "fadeStart", "bgColor", "blurAmount"].includes(prop)
 })<StyledMaskBgProps>`
   position: absolute;
   width: 100%;

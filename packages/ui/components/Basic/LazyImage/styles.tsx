@@ -18,7 +18,8 @@ type StyledLazyImageWrapperProps = {
 };
 
 export const StyledLazyImageWrapper = styled.div.withConfig({
-  shouldForwardProp: (prop) => !["isLoaded", "duration", "aspectRatio"].includes(prop)
+  shouldForwardProp: (prop) =>
+    !["isLoaded", "duration", "aspectRatio"].includes(prop)
 })<StyledLazyImageWrapperProps>`
   position: relative;
   width: 100%;
