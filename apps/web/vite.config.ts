@@ -23,10 +23,6 @@ export default defineConfig({
       }
     })
   ],
-  define: {
-    "process.env.ENV": JSON.stringify(process.env.ENV),
-    "process.env.WP_PREVIEW_BASE64": JSON.stringify(process.env.WP_PREVIEW_BASE64)
-  },
   resolve: {
     alias: {
       "@shared": resolve(__dirname, "src/shared"),
@@ -34,6 +30,7 @@ export default defineConfig({
       "@packages/context": resolve(__dirname, "../../packages/context"),
       "@packages/hooks": resolve(__dirname, "../../packages/hooks"),
       "@packages/utils": resolve(__dirname, "../../packages/utils"),
+      axios: resolve(__dirname, "../../node_modules/axios/dist/esm/axios.js"),
       util: "util/"
     },
     conditions: ['import', 'module', 'browser', 'default'],
