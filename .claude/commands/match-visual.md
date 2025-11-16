@@ -163,8 +163,80 @@ import { [Component] } from '@arcfe/ui';
 2. それぞれに最適なArcFEコンポーネントを推薦
 3. 全体のレイアウト構成も提案
 
-### 完全一致がない場合
-既存コンポーネントで再現できない場合：
-1. 最も近いコンポーネントを提示
-2. appearance propsでのカスタマイズ方法を詳述
-3. または新規コンポーネント作成を提案
+### マッチング判定基準
+
+#### ✅ ArcFEで実装（類似度70%以上）
+- 形状が一致（pill-shaped / rounded / sharp）
+- UIパターンが一致（ボタン、入力、カード等）
+- appearance propsでカスタマイズ可能
+
+#### ❌ 新規作成（類似度70%未満）
+- 複雑なデザイン（グラデーション、特殊アニメーション）
+- 特殊なレイアウト（3カラム、独自グリッド）
+- ArcFEに該当するコンポーネントがない
+
+### 完全一致がない場合（類似度70%未満）
+
+**重要:** ArcFEに該当しない場合は、新規コンポーネントを一から作成してください。
+
+#### 出力例:
+
+```markdown
+⚠️ ArcFEに該当するコンポーネントが見つかりませんでした
+
+**解析結果:**
+- 形状: 複雑なグラデーション背景
+- レイアウト: 2カラム + アイコン + バッジ
+- アニメーション: カスタムホバーエフェクト
+
+**最も近いコンポーネント:**
+- Button/Product001 (類似度: 45%) - 形状は似ていますが、デザインの複雑さが異なります
+
+💡 **新規コンポーネントを作成します**
+
+\`\`\`tsx
+import styled from 'styled-components';
+
+const CustomButton = styled.button\`
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 12px;
+  padding: 16px 32px;
+  color: white;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+  }
+\`;
+
+export const MyComponent = () => {
+  return (
+    <CustomButton>
+      クリック
+    </CustomButton>
+  );
+};
+\`\`\`
+
+新規コンポーネントを作成しました。
+必要に応じて、このコンポーネントをArcFEに追加することも検討してください。
+```
+
+### Figma URL対応（Figma MCP使用時）
+
+Figma MCPが設定されている場合、URLからも実装可能：
+
+```
+このFigmaノードを実装してください
+https://www.figma.com/file/xxx/yyy?node-id=123:456
+```
+
+**処理:**
+1. Figma MCPでノード情報を取得
+2. デザイントークン（色、サイズ、フォント）を抽出
+3. `arcfe-catalog.json`から検索
+4. マッチング → 実装 or 新規作成
