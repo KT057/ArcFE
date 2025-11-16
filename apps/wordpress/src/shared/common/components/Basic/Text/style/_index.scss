@@ -1,7 +1,0 @@
-@use "../../../../styles/import" as *;
-
-@mixin Text() {
-  .cm-text {
-    @include baseFontSizeForEm();
-  }
-}

@@ -1,35 +1,50 @@
 import { resolve } from "node:path";
 import react from "@vitejs/plugin-react";
-import vike from "vike/plugin";
-import { defineConfig, mergeConfig } from "vite";
-import {
-  commonConfig,
-  DIR_FOLDER_NAME,
-  imageOptimizerPlugin,
-  reactPlugin,
-  SSR_NO_EXTERNAL
-} from "./vite.config.common";
+import dotenv from "dotenv";
+import { defineConfig } from "vite";
 
-const isWp = process.env.BUILD_TYPE === "wp";
+dotenv.config();
 
-export default defineConfig(
-  mergeConfig(commonConfig, {
-    root: resolve(__dirname, isWp ? "src/snapshot" : "src/prerender"),
-    plugins: [
-      vike({
-        prerender: true,
-        redirects: {},
-        includeAssetsImportedByServer: !isWp
-      }),
-      isWp ? react() : reactPlugin(true),
-      imageOptimizerPlugin
-    ],
-    build: {
-      outDir: resolve(__dirname, DIR_FOLDER_NAME)
+export default defineConfig({
+  root: __dirname,
+  publicDir: resolve(__dirname, "src/public"),
+  plugins: [
+    react({
+      babel: {
+        plugins: [
+          [
+            "babel-plugin-styled-components",
+            {
+              displayName: true,
+              fileName: true
+            }
+          ]
+        ]
+      }
+    })
+  ],
+  define: {
+    "process.env.ENV": JSON.stringify(process.env.ENV),
+    "process.env.WP_PREVIEW_BASE64": JSON.stringify(process.env.WP_PREVIEW_BASE64)
+  },
+  resolve: {
+    alias: {
+      "@shared": resolve(__dirname, "src/shared"),
+      "@packages/ui": resolve(__dirname, "../../packages/ui"),
+      "@packages/context": resolve(__dirname, "../../packages/context"),
+      "@packages/hooks": resolve(__dirname, "../../packages/hooks"),
+      "@packages/utils": resolve(__dirname, "../../packages/utils"),
+      util: "util/"
     },
-    ssr: {
-      noExternal: SSR_NO_EXTERNAL,
-      external: ["@packages/context", "axios"]
-    }
-  })
-);
+    conditions: ['import', 'module', 'browser', 'default'],
+    mainFields: ['module', 'main']
+  },
+  optimizeDeps: {
+    include: ['react', 'react-dom', 'axios'],
+    exclude: ['@packages/ui', '@packages/hooks', '@packages/context', '@packages/utils']
+  },
+  build: {
+    outDir: resolve(__dirname, "dist"),
+    emptyOutDir: true
+  }
+});

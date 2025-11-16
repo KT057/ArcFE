@@ -7,15 +7,9 @@
   "author": "kota <k.ichikawa@attivita.co.jp>",
   "license": "MIT",
   "scripts": {
-    "rm-dist": "rm -rf dist",
-    "dev": "cross-env ENV=local vite",
-    "dev:wp": "vite --config vite.config.csr.ts",
-    "build:prerender": "vite build",
-    "build": "pnpm rm-dist && pnpm build:prerender",
-    "build:csr": "vite build --config vite.config.csr.ts",
-    "build:wp": "pnpm rm-dist && pnpm build:csr && BUILD_TYPE=wp pnpm build:prerender",
-    "start": "browser-sync start -s 'dist/client'",
-    "start:csr": "browser-sync start -s 'dist/csr'",
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
     "tsc": "tsc --noEmit",
     "lint": "pnpm biome check --diagnostic-level=warn .",
     "lint:fix": "pnpm biome check --diagnostic-level=warn --write ."
@@ -25,6 +19,7 @@
     "@packages/hooks": "workspace:*",
     "@packages/ui": "workspace:*",
     "@packages/utils": "workspace:*",
+    "react-router-dom": "^7.9.6",
     "util": "^0.12.5"
   },
   "devDependencies": {
@@ -32,10 +27,6 @@
     "babel-plugin-styled-components": "^2.1.4",
     "cross-env": "^10.1.0",
     "dotenv": "^17.2.3",
-    "sharp": "^0.34.5",
-    "vike": "^0.4.246",
-    "vike-react": "^0.6.13",
-    "vite": "^7.1.12",
-    "vite-plugin-image-optimizer": "^2.0.3"
+    "vite": "^7.1.12"
   }
 }
