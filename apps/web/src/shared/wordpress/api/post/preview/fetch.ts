@@ -15,7 +15,7 @@ type QueryParams = {
 };
 
 export const getWpPreviewPost = async ({ id }: Args) => {
-  const previewBase64 = process.env.WP_PREVIEW_BASE64;
+  const previewBase64 = import.meta.env.VITE_WP_PREVIEW_BASE64;
 
   const response = await fetch(
     `${WP_API_BASE_URL}${path}/${id}?_embed&status=draft`,
@@ -34,7 +34,7 @@ export const getWpPreviewPost = async ({ id }: Args) => {
 };
 
 export const useWpPreviewPost = (id: number) => {
-  const previewBase64 = process.env.WP_PREVIEW_BASE64;
+  const previewBase64 = import.meta.env.VITE_WP_PREVIEW_BASE64;
 
   return useAxiosQuery<WPPostResponse, QueryParams>({
     url: `${WP_API_BASE_PATH}${path}/{id}`,

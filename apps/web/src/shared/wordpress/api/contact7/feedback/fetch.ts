@@ -25,7 +25,7 @@ export const postWpContact7Feedback = async ({ id }: Args) => {
   bodyFormData.append("date-45", "2025-08-30");
 
   const response = await fetch(
-    `${DOMAIN()}${WP_API_CONTACT_FORM_7_PATH}/${id}/feedback`,
+    `${DOMAIN}${WP_API_CONTACT_FORM_7_PATH}/${id}/feedback`,
     {
       method: "POST",
       body: bodyFormData

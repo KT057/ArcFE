@@ -109,7 +109,7 @@ importers:
         specifier: ^11.0.3
         version: 11.0.3
       jsdom:
-        specifier: ^27.1.0
+        specifier: ^27.2.0
         version: 27.2.0
       msw:
         specifier: ^2.11.6
@@ -255,7 +255,7 @@ importers:
         specifier: ^17.2.3
         version: 17.2.3
       gsap:
-        specifier: ^3.0.0
+        specifier: ^3.13.0
         version: 3.13.0
       keen-slider:
         specifier: ^6.0.0
