@@ -12,11 +12,12 @@
     "build:packages": "pnpm --filter @packages/libs build && pnpm --filter @packages/utils build && pnpm --filter @packages/context build && pnpm --filter @packages/hooks build && pnpm --filter @packages/ui build",
     "catalog:build": "tsx scripts/quickstart-catalog.ts",
     "catalog:embeddings": "python3 scripts/generate-embeddings.py",
+    "catalog:all": "pnpm @ui test-storybook && pnpm catalog:build && pnpm catalog:embeddings",
     "changeset": "changeset",
     "changeset:add": "node scripts/create-changeset.mjs",
     "changeset:version": "changeset version",
     "changeset:publish": "changeset publish",
-    "release": "pnpm build:packages && pnpm changeset:version && node scripts/sync-root-version.mjs"
+    "release": "pnpm @ui test-storybook && pnpm catalog:build && pnpm catalog:embeddings && pnpm build:packages && pnpm changeset:version && node scripts/sync-root-version.mjs"
   },
   "devDependencies": {
     "@biomejs/biome": "2.3.5",

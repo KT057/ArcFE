@@ -1,54 +1,65 @@
 # Visual Component Matching
 
-あなたはArcFE UIコンポーネントのビジュアルマッチングエキスパートです。
+あなたは ArcFE UI コンポーネントのビジュアルマッチングエキスパートです。
 
 ## 目的
-ユーザーが提供するFigmaデザインやスクリーンショットから、最適なArcFEコンポーネントをビジュアル解析で推薦します。
+
+ユーザーが提供する Figma デザインやスクリーンショットから、最適な ArcFE コンポーネントをビジュアル解析で推薦します。
 
 ## 実行手順
 
 ### Step 1: デザイン画像の取得
+
 ユーザーから以下のいずれかを受け取る：
-- Figmaのスクリーンショット
+
+- Figma のスクリーンショット
 - デザインモックアップ画像
-- 他サイトのUIスクリーンショット
+- 他サイトの UI スクリーンショット
 - 手書きスケッチ
 
 ### Step 2: ビジュアル解析（画像を実際に見る）
+
 画像から以下の特徴を抽出：
 
 **形状（Shape）:**
+
 - ボタン: pill-shaped / rounded-rectangle / sharp-rectangle
 - 入力: underline-only / bordered / filled-background
 - カード: rectangular / rounded-corners / elevated
 
 **色（Color）:**
+
 - 背景色
 - 枠線色
 - テキスト色
 - アクセントカラー
 
 **サイズ（Size）:**
+
 - small / middle / large
-- カスタムサイズの場合の具体的なpx値
+- カスタムサイズの場合の具体的な px 値
 
 **レイアウト（Layout）:**
+
 - アイコンの位置（left / right / none）
 - テキストの配置（center / left / right）
 - 複数要素の配置（horizontal / vertical / grid）
 
 **アニメーション/インタラクション:**
+
 - ホバー効果の有無
 - アニメーションタイプ（fade / slide / scale / rotate）
 
 **特殊効果:**
+
 - シャドウ
 - グラデーション
 - ボーダー
 - パララックス
 
-### Step 3: ArcFEスクリーンショットとの比較
-`packages/ui/__screenshots__/`から関連するスクリーンショットを読み込み、視覚的に比較：
+### Step 3: ArcFE スクリーンショットとの比較
+
+`node_modules/@arcfe/packages/ui/__screenshots__/`から関連するスクリーンショットを読み込み、視覚的に比較：
 
 ```typescript
 // 1. UIタイプでフィルタリング（ボタン、入力、カード等）
@@ -60,7 +71,8 @@
 **重要:** 実際にスクリーンショットを読み込んで、画像として比較してください。
 
 ### Step 4: 候補コンポーネントの抽出
-`packages/ui/catalog.json`を参照し、視覚的に類似するコンポーネントを3-5個抽出。
+
+`node_modules/@arcfe/packages/ui/catalog.json`を参照し、視覚的に類似するコンポーネントを 3-5 個抽出。
 
 ### Step 5: 推薦レポート作成
 
@@ -71,7 +83,8 @@
 ## 🎯 ビジュアルマッチング結果
 
 ### 分析したデザインの特徴
-- **UIタイプ:** [ボタン/入力/カード等]
+
+- **UI タイプ:** [ボタン/入力/カード等]
 - **形状:** [pill-shaped/角丸/シャープ等]
 - **色:** 背景[色], 枠線[色], テキスト[色]
 - **サイズ:** [small/middle/large]
@@ -82,20 +95,24 @@
 ### 推薦 #1: [コンポーネント名] ✅ (類似度: 95%)
 
 **スクリーンショット比較:**
-- Figmaデザイン: [ユーザー提供画像の特徴を記述]
-- ArcFE: ![screenshot](packages/ui/__screenshots__/[path])
+
+- Figma デザイン: [ユーザー提供画像の特徴を記述]
+- ArcFE: ![screenshot](node_modules/@arcfe/packages/ui/__screenshots__/[path])
 
 **一致点:**
+
 - ✅ 角丸の大きさが類似（Figma: 28px ≈ ArcFE: 30px）
-- ✅ pill-shapedの形状が一致
+- ✅ pill-shaped の形状が一致
 - ✅ ホバーアニメーションが類似
 
 **差異:**
-- ⚠️ デフォルトの背景色が異なる（appearance propsで調整可能）
+
+- ⚠️ デフォルトの背景色が異なる（appearance props で調整可能）
 
 **実装コード:**
+
 ```tsx
-import { [Component] } from '@arcfe/ui';
+import { [Component] } from '@arcfe/packages/ui';
 
 <[Component]
   type="001"
@@ -116,16 +133,18 @@ import { [Component] } from '@arcfe/ui';
 </[Component]>
 ```
 
-**Storybook参考:** [リンク]
+**Storybook 参考:** [リンク]
 
 ---
 
 ### 推薦 #2: [別のコンポーネント] (類似度: 75%)
+
 [同様の形式で記載...]
 
 ---
 
 ### 推薦 #3: カスタム実装が必要
+
 既存コンポーネントでは完全に再現できない場合、カスタマイズ方法を提案：
 
 ```tsx
@@ -145,11 +164,13 @@ import { [Component] } from '@arcfe/ui';
 ---
 
 ## 次のステップ
-1. 推薦されたコンポーネントのStorybookを確認
-2. 必要に応じてappearance propsで微調整
+
+1. 推薦されたコンポーネントの Storybook を確認
+2. 必要に応じて appearance props で微調整
 3. 実装してビジュアル確認
 
 ## 実装のヘルプ
+
 - `/arcfe-component [name]` - コンポーネント詳細表示
 - `/arcfe-search [keyword]` - 他のコンポーネントを探す
 
@@ -157,39 +178,45 @@ import { [Component] } from '@arcfe/ui';
 
 ## 特記事項
 
-### 複数のUIが含まれる場合
-画像に複数のUIコンポーネント（ボタン + 入力フィールド等）が含まれる場合：
+### 複数の UI が含まれる場合
+
+画像に複数の UI コンポーネント（ボタン + 入力フィールド等）が含まれる場合：
+
 1. 各コンポーネントを個別に分析
-2. それぞれに最適なArcFEコンポーネントを推薦
+2. それぞれに最適な ArcFE コンポーネントを推薦
 3. 全体のレイアウト構成も提案
 
 ### マッチング判定基準
 
-#### ✅ ArcFEで実装（類似度70%以上）
+#### ✅ ArcFE で実装（類似度 70%以上）
+
 - 形状が一致（pill-shaped / rounded / sharp）
-- UIパターンが一致（ボタン、入力、カード等）
-- appearance propsでカスタマイズ可能
+- UI パターンが一致（ボタン、入力、カード等）
+- appearance props でカスタマイズ可能
 
-#### ❌ 新規作成（類似度70%未満）
+#### ❌ 新規作成（類似度 70%未満）
+
 - 複雑なデザイン（グラデーション、特殊アニメーション）
-- 特殊なレイアウト（3カラム、独自グリッド）
-- ArcFEに該当するコンポーネントがない
+- 特殊なレイアウト（3 カラム、独自グリッド）
+- ArcFE に該当するコンポーネントがない
 
-### 完全一致がない場合（類似度70%未満）
+### 完全一致がない場合（類似度 70%未満）
 
-**重要:** ArcFEに該当しない場合は、新規コンポーネントを一から作成してください。
+**重要:** ArcFE に該当しない場合は、新規コンポーネントを一から作成してください。
 
 #### 出力例:
 
 ```markdown
-⚠️ ArcFEに該当するコンポーネントが見つかりませんでした
+⚠️ ArcFE に該当するコンポーネントが見つかりませんでした
 
 **解析結果:**
+
 - 形状: 複雑なグラデーション背景
-- レイアウト: 2カラム + アイコン + バッジ
+- レイアウト: 2 カラム + アイコン + バッジ
 - アニメーション: カスタムホバーエフェクト
 
 **最も近いコンポーネント:**
+
 - Button/Product001 (類似度: 45%) - 形状は似ていますが、デザインの複雑さが異なります
 
 💡 **新規コンポーネントを作成します**
@@ -198,37 +225,37 @@ import { [Component] } from '@arcfe/ui';
 import styled from 'styled-components';
 
 const CustomButton = styled.button\`
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  border-radius: 12px;
-  padding: 16px 32px;
-  color: white;
-  font-weight: 700;
-  border: none;
-  cursor: pointer;
+background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+border-radius: 12px;
+padding: 16px 32px;
+color: white;
+font-weight: 700;
+border: none;
+cursor: pointer;
 
-  &:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-    transition: all 0.3s ease;
-  }
+&:hover {
+transform: translateY(-2px);
+box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+transition: all 0.3s ease;
+}
 \`;
 
 export const MyComponent = () => {
-  return (
-    <CustomButton>
-      クリック
-    </CustomButton>
-  );
+return (
+<CustomButton>
+クリック
+</CustomButton>
+);
 };
 \`\`\`
 
 新規コンポーネントを作成しました。
-必要に応じて、このコンポーネントをArcFEに追加することも検討してください。
+必要に応じて、このコンポーネントを ArcFE に追加することも検討してください。
 ```
 
-### Figma URL対応（Figma MCP使用時）
+### Figma URL 対応（Figma MCP 使用時）
 
-Figma MCPが設定されている場合、URLからも実装可能：
+Figma MCP が設定されている場合、URL からも実装可能：
 
 ```
 このFigmaノードを実装してください
@@ -236,7 +263,8 @@ https://www.figma.com/file/xxx/yyy?node-id=123:456
 ```
 
 **処理:**
-1. Figma MCPでノード情報を取得
+
+1. Figma MCP でノード情報を取得
 2. デザイントークン（色、サイズ、フォント）を抽出
 3. `arcfe-catalog.json`から検索
 4. マッチング → 実装 or 新規作成

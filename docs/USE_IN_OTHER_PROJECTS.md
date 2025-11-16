@@ -1,27 +1,27 @@
-# 別プロジェクトでArcFE UIを使う完全ガイド
+# 別プロジェクトで ArcFE UI を使う完全ガイド
 
-**新しいプロジェクトでArcFE UIをインストールして、AIに学習させ、開発を高速化する手順**
+**新しいプロジェクトで ArcFE UI をインストールして、AI に学習させ、開発を高速化する手順**
 
 ---
 
 ## 🎯 このガイドの目標
 
-1. 新規プロジェクトにArcFE UIをインストール
-2. AIにArcFEコンポーネントを学習させる
-3. Figmaデザイン → 自動コード生成を実現
-4. 開発速度を4-6倍向上
+1. 新規プロジェクトに ArcFE UI をインストール
+2. AI に ArcFE コンポーネントを学習させる
+3. Figma デザイン → 自動コード生成を実現
+4. 開発速度を 4-6 倍向上
 
 ---
 
 ## 📋 前提条件
 
 - Node.js 18+
-- pnpm（またはnpm / yarn）
+- pnpm（または npm / yarn）
 - Claude Code または Cursor
 
 ---
 
-## 🚀 セットアップ（10分）
+## 🚀 セットアップ（5 分）
 
 ### **Step 1: 新規プロジェクト作成**
 
@@ -36,7 +36,7 @@ cd /path/to/your-existing-project
 
 ---
 
-### **Step 2: ArcFE UIインストール**
+### **Step 2: ArcFE UI インストール**
 
 ```bash
 pnpm add @arcfe/ui styled-components
@@ -45,9 +45,10 @@ pnpm add @arcfe/ui styled-components
 pnpm add -D @types/styled-components
 ```
 
-**注意:** 現在ArcFE UIはnpmに未公開のため、以下のいずれかの方法でインストール：
+**注意:** 現在 ArcFE UI は npm に未公開のため、以下のいずれかの方法でインストール：
 
-#### オプション1: ローカルパス（開発用）
+#### オプション 1: ローカルパス（開発用）
+
 ```bash
 # ArcFEリポジトリをビルド
 cd /Users/kotaichikawa/works/front-end-boilerplate
@@ -58,7 +59,8 @@ cd /path/to/my-new-project
 pnpm add file:/Users/kotaichikawa/works/front-end-boilerplate/packages/ui
 ```
 
-#### オプション2: npmに公開（本番用）
+#### オプション 2: npm に公開（本番用）
+
 ```bash
 # ArcFEリポジトリで公開
 cd /Users/kotaichikawa/works/front-end-boilerplate/packages/ui
@@ -76,19 +78,17 @@ pnpm add @arcfe/ui
 // app/layout.tsx (Next.js App Router)
 // または pages/_app.tsx (Next.js Pages Router)
 
-'use client'; // App Routerの場合
+"use client"; // App Routerの場合
 
-import { ThemeProvider } from 'styled-components';
-import { themes } from '@arcfe/ui/styles/themes';
-import { color } from '@arcfe/ui/styles/color';
+import { ThemeProvider } from "styled-components";
+import { themes } from "@arcfe/ui/styles/themes";
+import { color } from "@arcfe/ui/styles/color";
 
 export default function RootLayout({ children }) {
   return (
     <html lang="ja">
       <body>
-        <ThemeProvider theme={themes(color)}>
-          {children}
-        </ThemeProvider>
+        <ThemeProvider theme={themes(color)}>{children}</ThemeProvider>
       </body>
     </html>
   );
@@ -97,37 +97,13 @@ export default function RootLayout({ children }) {
 
 ---
 
-### **Step 4: ArcFEカタログのセットアップ（重要）**
-
-ここからがAI学習の肝です！
-
-#### **オプションA: 公開Storybook経由（推奨）**
-
-##### 4.1 ArcFEリポジトリでStorybookを公開
-
-```bash
-# ArcFEリポジトリで
-cd /Users/kotaichikawa/works/front-end-boilerplate
-
-# Storybookビルド
-pnpm --filter @packages/ui build-storybook
-
-# カタログをStorybook静的ファイルに含める
-cp packages/ui/component-manifest.json \
-   packages/ui/storybook-static/catalog.json
-
-# GitHub Pagesにデプロイ
-pnpm add -D gh-pages
-npx gh-pages -d packages/ui/storybook-static
-```
-
-**公開URL:** `https://kichikawa57.github.io/arcfe/`
-
-##### 4.2 別プロジェクトで`.claude/CLAUDE.md`を作成
+### **Step 4: .claude/CLAUDE.md を作成**
 
 ```bash
 mkdir -p .claude
 ```
+
+`.claude/CLAUDE.md` を作成：
 
 ```markdown
 # プロジェクト設定
@@ -136,89 +112,98 @@ mkdir -p .claude
 
 ## ArcFE UI について
 
-ArcFE UIは96個のReactコンポーネントを提供するデザインシステムです。
+ArcFE UI は 96 個の React コンポーネントを提供するデザインシステムです。
 
-- **公式Storybook**: https://kichikawa57.github.io/arcfe/
-- **コンポーネントカタログ**: https://kichikawa57.github.io/arcfe/catalog.json
-
-## 🤖 AIへの指示
+## 🤖 AI への指示
 
 ### 初回セットアップ時（このメッセージを見たら必ず実行）
 
-**必須:** 以下のURLからArcFEコンポーネントカタログを取得して、全コンポーネントを学習してください：
+**必須:** ArcFE コンポーネントカタログを読み込んで、全コンポーネントを学習してください：
 
 \`\`\`
-https://kichikawa57.github.io/arcfe/catalog.json
+node_modules/@arcfe/packages/ui/component-manifest.json
 \`\`\`
 
 このカタログには以下が含まれます：
-- 96個の全コンポーネント情報
-- Props型定義（AST解析済み）
+
+- 96 個の全コンポーネント情報
+- Props 型定義（AST 解析済み）
 - 使用例（コードスニペット）
 - スクリーンショット情報
 - ビジュアル特性
 
-**重要:** カタログを読み込むまで、ArcFEコンポーネントの推薦やコード生成を行わないでください。
+**重要:** カタログを読み込むまで、ArcFE コンポーネントの推薦やコード生成を行わないでください。
 
 ### コンポーネント使用時の原則
 
 1. **常にカタログを参照**
-   - カタログからコンポーネント情報を取得
+
+   - `node_modules/@arcfe/packages/ui/component-manifest.json`からコンポーネント情報を取得
    - props、使用例を確認
    - 最新の情報を使用
 
-2. **ThemeProviderは必須**
-   - 全ArcFEコンポーネントはThemeProviderが必要
-   - 既にapp/layout.tsxで設定済み
+2. **ThemeProvider は必須**
+
+   - 全 ArcFE コンポーネントは ThemeProvider が必要
+   - 既に app/layout.tsx で設定済み
 
 3. **インポート方法**
    \`\`\`tsx
    import { Button001, TextField003 } from '@arcfe/ui';
    \`\`\`
 
-4. **appearance propsでカスタマイズ**
-   - ほとんどのコンポーネントはappearance propsで外観をカスタマイズ可能
+4. **appearance props でカスタマイズ**
+   - ほとんどのコンポーネントは appearance props で外観をカスタマイズ可能
 
 ## 使用可能なコマンド
 
 ### `/arcfe-search [keyword]`
-キーワードでArcFEコンポーネントを検索
+
+キーワードで ArcFE コンポーネントを検索
 
 例:
+
 \`\`\`
 /arcfe-search button rounded
 \`\`\`
 
 ### `/arcfe-component [name]`
+
 特定コンポーネントの詳細情報を表示
 
 例:
+
 \`\`\`
 /arcfe-component Button/Product001
 \`\`\`
 
 ### `/match-visual`
-Figmaデザインから最適なArcFEコンポーネントを推薦
+
+Figma デザインから最適な ArcFE コンポーネントを推薦
 
 使い方:
+
 \`\`\`
 /match-visual
-[Figmaスクリーンショットを添付]
+[Figma スクリーンショットを添付]
 \`\`\`
 
 ## よくあるコンポーネント選択
 
 ### ボタン
-- **CTAボタン（pill-shaped）**: Button/Product001
+
+- **CTA ボタン（pill-shaped）**: Button/Product001
 - **標準ボタン（中角丸）**: Button/Product002
 - **テキストリンク**: TextButton/Product001
 - **高級感あるボタン**: Rebita/Button
 
 ### 入力フィールド
+
 - **フローティングラベル**: TextField/Product003
 - **シンプルな入力**: Input/Product001
 
 ### その他
+
 - **モーダル**: Modal/Product001
 - **ページネーション**: Pagination/Product001
 - **アコーディオン**: Accordion/Product001-005
@@ -226,16 +211,21 @@ Figmaデザインから最適なArcFEコンポーネントを推薦
 ## トラブルシューティング
 
 ### スタイルが反映されない
-→ ThemeProviderが設定されているか確認
+
+→ ThemeProvider が設定されているか確認
 
 ### コンポーネントが見つからない
-→ カタログを再読み込み: `https://kichikawa57.github.io/arcfe/catalog.json`
+
+→ カタログを再読み込み: `node_modules/@arcfe/packages/ui/component-manifest.json`
 
 ### 型エラーが出る
+
 → `@types/styled-components`がインストールされているか確認
 ```
 
-##### 4.3 スラッシュコマンドをコピー
+---
+
+### **Step 5: スラッシュコマンドをコピー（オプション）**
 
 ```bash
 mkdir -p .claude/commands
@@ -245,123 +235,20 @@ cp /Users/kotaichikawa/works/front-end-boilerplate/.claude/commands/*.md \
    .claude/commands/
 ```
 
-**`.claude/commands/arcfe-search.md` を修正:**
-
-```markdown
-# ArcFE Component Search
-
-ユーザーが指定したキーワードでArcFEコンポーネントを検索します。
-
-## 実行手順
-
-### Step 1: カタログ取得
-```
-https://kichikawa57.github.io/arcfe/catalog.json
-```
-からカタログを取得（キャッシュがあれば再利用）
-
-### Step 2: 検索
-キーワードで以下をフィルタリング：
-- コンポーネント名
-- カテゴリ
-- タグ
-- デザインキーワード
-- 説明
-
-### Step 3: 結果表示
-関連性の高い順に5-10件を表示：
+**注意:** スラッシュコマンドをコピーした場合、各コマンド内のカタログパスを `node_modules/@arcfe/packages/ui/component-manifest.json` に修正してください。
 
 ---
 
-## 🔍 検索結果: "[keyword]"
+### **Step 6: AI に学習させる（初回のみ）**
 
-### 1. Button/Product001 (関連度: 95%)
-**カテゴリ:** Basic > Button
-**説明:** pill-shapedの大きな角丸ボタン
-
-**主な用途:**
-- CTAボタン
-- 重要なアクション
-
-**コード例:**
-\`\`\`tsx
-import { Button001 } from '@arcfe/ui';
-
-<Button001 type="001" size="middle">
-  クリック
-</Button001>
-\`\`\`
-
-**Storybook:** https://kichikawa57.github.io/arcfe/?path=/story/basic-button-product001
-
----
-
-[他の結果...]
-```
-
----
-
-#### **オプションB: ローカルカタログファイル**
-
-公開Storybookを使わない場合。
-
-##### 4.1 カタログをコピー
+Claude Code を開いて：
 
 ```bash
-# ArcFEリポジトリからコピー
-cp /Users/kotaichikawa/works/front-end-boilerplate/packages/ui/component-manifest.json \
-   ./arcfe-catalog.json
+node_modules/@arcfe/packages/ui/component-manifest.json を読み込んで、全ArcFEコンポーネントを学習してください
 ```
 
-##### 4.2 `.claude/CLAUDE.md` を作成
+**AI の応答例:**
 
-```markdown
-# ArcFE UI Component Library
-
-## コンポーネントカタログ
-
-**ローカルカタログ:** `./arcfe-catalog.json`
-
-## 🤖 AIへの指示
-
-### 初回セットアップ
-
-\`./arcfe-catalog.json\` を読み込んで、全ArcFEコンポーネントを学習してください。
-
-### 使用方法
-
-同じ（オプションAと同じコマンドを記載）
-```
-
-##### 4.3 カタログ更新時
-
-```bash
-# 最新版をコピー
-cp /Users/kotaichikawa/works/front-end-boilerplate/packages/ui/component-manifest.json \
-   ./arcfe-catalog.json
-
-# Claude Codeで
-arcfe-catalog.json が更新されました。再読み込みしてください
-```
-
----
-
-### **Step 5: AIに学習させる（初回のみ）**
-
-Claude Codeを開いて：
-
-```bash
-# オプションA（公開Storybook）の場合
-https://kichikawa57.github.io/arcfe/catalog.json
-からArcFEコンポーネントカタログを取得して、全コンポーネントを学習してください
-```
-
-```bash
-# オプションB（ローカルカタログ）の場合
-./arcfe-catalog.json を読み込んで、全ArcFEコンポーネントを学習してください
-```
-
-**AIの応答例:**
 ```
 ✅ カタログを読み込みました。
 
@@ -388,21 +275,23 @@ https://kichikawa57.github.io/arcfe/catalog.json
 
 ## 🎨 使用例
 
-### **例1: Figmaからボタンを実装**
+### **例 1: Figma からボタンを実装**
 
 ```bash
 # Claude Codeで
 /match-visual
 ```
 
-**Figmaスクリーンショットを添付:**
+**Figma スクリーンショットを添付:**
+
 - 青い背景
 - 白いテキスト
 - 大きな角丸
 - "今すぐ購入"
 
-**AIの応答:**
-```
+**AI の応答:**
+
+````
 📸 ビジュアル解析完了
 
 特徴:
@@ -433,20 +322,22 @@ import { Button001 } from '@arcfe/ui';
 >
   今すぐ購入
 </Button001>
-```
+````
 
 実装しますか？
-```
+
+````
 
 ---
 
-### **例2: キーワードでコンポーネント検索**
+### **例 2: キーワードでコンポーネント検索**
 
 ```bash
 /arcfe-search input floating label
-```
+````
 
-**AIの応答:**
+**AI の応答:**
+
 ```
 🔍 検索結果: "input floating label"
 
@@ -460,19 +351,18 @@ import { TextField003 } from '@arcfe/ui';
   label="メールアドレス"
   type="email"
 />
-
-Storybook: https://...
 ```
 
 ---
 
-### **例3: コンポーネント詳細を確認**
+### **例 3: コンポーネント詳細を確認**
 
 ```bash
 /arcfe-component Button/Product001
 ```
 
-**AIの応答:**
+**AI の応答:**
+
 ```
 📖 Button/Product001 詳細
 
@@ -497,9 +387,23 @@ pill-shapedの大きな角丸ボタン。CTAや重要なアクションに最適
 - PrimaryTheme: 青背景、白テキスト
 - DangerTheme: 赤背景、白テキスト
 ...
-
-**Storybook:** https://...
 ```
+
+---
+
+## 🔄 カタログ更新
+
+ArcFE UI を最新バージョンに更新した場合：
+
+```bash
+# パッケージ更新
+pnpm update @arcfe/ui
+
+# Claude Codeで再学習
+node_modules/@arcfe/packages/ui/component-manifest.json が更新されました。再読み込みしてください
+```
+
+カタログは `@arcfe/ui` パッケージに含まれているため、パッケージ更新で自動的に最新版が利用可能になります。
 
 ---
 
@@ -521,10 +425,10 @@ pnpm add -D @types/styled-components
 # ThemeProvider設定
 # app/layout.tsx を編集...
 
-# .claude/ ディレクトリをコピー
-cp -r /Users/kotaichikawa/works/front-end-boilerplate/.claude ./
+# .claude/ ディレクトリを作成
+mkdir -p .claude
 
-# .claude/CLAUDE.md を編集（公開Storybook URLを記載）
+# .claude/CLAUDE.md を作成（上記Step 4の内容）
 
 # GitHubにプッシュ
 git init
@@ -543,33 +447,34 @@ cd my-new-project
 pnpm install
 
 # AIに学習させる
-# Claude Codeが自動で.claude/CLAUDE.mdを読み込み、カタログを取得
+# Claude Codeで以下を実行:
+node_modules/@arcfe/packages/ui/component-manifest.json を読み込んで、全ArcFEコンポーネントを学習してください
 ```
 
 ---
 
 ## 📊 開発速度の比較
 
-### **Before（ArcFE AI統合なし）**
+### **Before（ArcFE AI 統合なし）**
 
-1. Figmaデザインを見る: 1分
-2. どのコンポーネントを使うか調査: 5-10分
-3. Storybookで確認: 3-5分
-4. コード実装: 5-10分
-5. Props調整: 3-5分
+1. Figma デザインを見る: 1 分
+2. どのコンポーネントを使うか調査: 5-10 分
+3. Storybook で確認: 3-5 分
+4. コード実装: 5-10 分
+5. Props 調整: 3-5 分
 
-**合計: 20-30分** ⏱️
+**合計: 20-30 分** ⏱️
 
 ---
 
-### **After（ArcFE AI統合あり）**
+### **After（ArcFE AI 統合あり）**
 
-1. `/match-visual` でマッチング: 30秒
-2. AIがコード生成: 10秒
-3. コピー&ペースト: 10秒
-4. 微調整: 2分
+1. `/match-visual` でマッチング: 30 秒
+2. AI がコード生成: 10 秒
+3. コピー&ペースト: 10 秒
+4. 微調整: 2 分
 
-**合計: 3分** ⚡
+**合計: 3 分** ⚡
 
 **効率: 87-90%削減！**
 
@@ -581,10 +486,10 @@ pnpm install
 
 1. プロジェクトをクローン
 2. `pnpm install`
-3. Claude Codeを開く（自動でカタログ学習）
+3. Claude Code を開く（自動でカタログ学習）
 4. `/arcfe-search button` で試してみる
 
-**所要時間: 5分** → 従来の1-2時間から大幅短縮！
+**所要時間: 5 分** → 従来の 1-2 時間から大幅短縮！
 
 ### **ドキュメント**
 
@@ -594,25 +499,27 @@ pnpm install
 
 ## 🚨 トラブルシューティング
 
-### Q: AIがカタログを読み込まない
+### Q: AI がカタログを読み込まない
 
 ```bash
 # 明示的に指示
-https://kichikawa57.github.io/arcfe/catalog.json
-を読み込んで、全コンポーネントを学習してください
+node_modules/@arcfe/packages/ui/component-manifest.json を読み込んで、全コンポーネントを学習してください
 ```
 
 ### Q: コンポーネントが見つからない
 
 ```bash
+# パッケージが正しくインストールされているか確認
+ls node_modules/@arcfe/packages/ui/component-manifest.json
+
 # カタログを再読み込み
-arcfe-catalog.json（または公開URL）を再読み込みしてください
+node_modules/@arcfe/packages/ui/component-manifest.json を再読み込みしてください
 ```
 
-### Q: Storybookが見れない
+### Q: カタログファイルが見つからない
 
-- GitHub Pagesが公開されているか確認
-- URLが正しいか確認: `https://kichikawa57.github.io/arcfe/`
+- `@arcfe/ui` が正しくインストールされているか確認
+- パッケージに `component-manifest.json` が含まれているか確認（ArcFE リポジトリでビルド時に含まれます）
 
 ### Q: 型エラーが出る
 
@@ -634,15 +541,15 @@ pnpm add -D @types/styled-components
 
 ### **セットアップ完了チェックリスト**
 
-- ✅ ArcFE UIインストール済み
-- ✅ ThemeProvider設定済み
+- ✅ ArcFE UI インストール済み
+- ✅ ThemeProvider 設定済み
 - ✅ `.claude/CLAUDE.md` 作成済み
-- ✅ AIがカタログを学習済み
+- ✅ AI がカタログを学習済み
 - ✅ `/match-visual` が動作する
 
-### **これで開発速度が4-6倍に！**
+### **これで開発速度が 4-6 倍に！**
 
-- ⚡ Figmaデザイン → 3分で実装
+- ⚡ Figma デザイン → 3 分で実装
 - 🎯 コンポーネント選択の迷いゼロ
 - 🔄 デザインシステムの一貫性
 - 🎓 新メンバーのオンボーディング高速化
