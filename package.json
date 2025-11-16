@@ -10,6 +10,8 @@
     "test": "vitest --run",
     "tsc": "pnpm --filter @packages/libs tsc && pnpm --filter @packages/tests tsc && pnpm --filter @packages/hooks tsc && pnpm --filter @packages/context tsc && pnpm --filter @packages/utils tsc",
     "build:packages": "pnpm --filter @packages/libs build && pnpm --filter @packages/utils build && pnpm --filter @packages/context build && pnpm --filter @packages/hooks build && pnpm --filter @packages/ui build",
+    "catalog:build": "tsx scripts/quickstart-catalog.ts",
+    "catalog:embeddings": "python3 scripts/generate-embeddings.py",
     "changeset": "changeset",
     "changeset:add": "node scripts/create-changeset.mjs",
     "changeset:version": "changeset version",
@@ -25,11 +27,15 @@
     "@types/browser-sync": "^2.29.1",
     "@types/react": "^19.2.5",
     "@types/react-dom": "^19.2.3",
+    "@typescript-eslint/parser": "^8.46.4",
+    "@typescript-eslint/typescript-estree": "^8.46.4",
     "browser-sync": "^3.0.4",
     "cross-env": "^10.1.0",
+    "glob": "^11.0.3",
     "jsdom": "^27.1.0",
     "msw": "^2.11.6",
     "tsup": "^8.5.1",
+    "tsx": "^4.20.6",
     "turbo": "^2.6.1",
     "typescript": "^5.9.3",
     "vitest": "^4.0.9",
@@ -59,5 +65,13 @@
     "npm": "use pnpm please!",
     "yarn": "use pnpm please!",
     "pnpm": ">=10.1.0"
+  },
+  "pnpm": {
+    "overrides": {
+      "vitest": "^4.0.9",
+      "@vitest/browser": "^4.0.9",
+      "@vitest/runner": "^4.0.9",
+      "@vitest/utils": "^4.0.9"
+    }
   }
 }

@@ -20,7 +20,7 @@ export default defineConfig({
           }),
           storycap({
             output: {
-              file: (context) =>
+              file: (context: { file: string; name: string }) =>
                 path.join(
                   context.file.replace(".stories.tsx", ""),
                   `${context.name}.png`
