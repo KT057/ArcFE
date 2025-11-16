@@ -23,7 +23,7 @@
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.0",
     "@types/browser-sync": "^2.29.1",
-    "@types/react": "^19.2.4",
+    "@types/react": "^19.2.5",
     "@types/react-dom": "^19.2.3",
     "browser-sync": "^3.0.4",
     "cross-env": "^10.1.0",
@@ -32,7 +32,7 @@
     "tsup": "^8.5.1",
     "turbo": "^2.6.1",
     "typescript": "^5.9.3",
-    "vitest": "^4.0.6",
+    "vitest": "^4.0.9",
     "webpack": "^5.102.1"
   },
   "dependencies": {
@@ -44,7 +44,7 @@
     "@react-aria/visually-hidden": "^3.8.28",
     "@react-stately/radio": "^3.11.2",
     "@react-types/radio": "^3.9.2",
-    "@vis.gl/react-google-maps": "^1.7.0",
+    "@vis.gl/react-google-maps": "^1.7.1",
     "axios": "^1.13.1",
     "gsap": "^3.13.0",
     "keen-slider": "^6.8.6",
