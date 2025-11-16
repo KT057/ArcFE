@@ -1,5 +1,11 @@
 # @packages/tests
 
+## 2.0.0
+
+### Major Changes
+
+- BREAKING: Add AI-powered component development and search capabilities with Claude integration
+
 ## 1.4.0
 
 ### Minor Changes

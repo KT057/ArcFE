@@ -1,5 +1,18 @@
 # @packages/hooks
 
+## 2.0.0
+
+### Major Changes
+
+- BREAKING: Add AI-powered component development and search capabilities with Claude integration
+
+### Patch Changes
+
+- Updated dependencies
+  - @packages/utils@2.0.0
+  - @packages/context@2.0.0
+  - @packages/tests@2.0.0
+
 ## 1.4.0
 
 ### Minor Changes
