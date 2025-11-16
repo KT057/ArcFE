@@ -6,5 +6,6 @@
     "strict": true,
     "baseUrl": "."
   },
-  "include": ["src/**/*", "index.ts"]
+  "include": ["src/**/*", "index.ts"],
+  "exclude": ["src/svgr/templates/**/*.js"]
 }

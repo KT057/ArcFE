@@ -1,14 +1,14 @@
 import type { SVGProps } from "react";
 export const Svg008 = (props: SVGProps<SVGSVGElement>) => (
   <svg
-    xmlns="http://www.w3.org/2000/svg"
-    fill="none"
     viewBox="0 0 24 24"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
     {...props}
   >
     <path
+      d="M15.8297 11.1808C16.3984 11.5789 16.3984 12.4211 15.8297 12.8192L8.57346 17.8986C7.91069 18.3625 7 17.8884 7 17.0793V6.92066C7 6.11163 7.91068 5.63748 8.57346 6.10142L15.8297 11.1808Z"
       fill="currentColor"
-      d="M15.83 11.18a1 1 0 0 1 0 1.64l-7.257 5.079A1 1 0 0 1 7 17.079V6.921a1 1 0 0 1 1.573-.82z"
     />
   </svg>
 );

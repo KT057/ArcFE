@@ -3,8 +3,8 @@
   "version": "1.4.0",
   "description": "Core library scripts for the application",
   "author": "Kota Ichikawa",
-  "main": "./dist/index.js",
-  "module": "./dist/index.js",
+  "main": "./dist/index.mjs",
+  "module": "./dist/index.mjs",
   "types": "./dist/index.d.mts",
   "files": [
     "dist"
@@ -12,8 +12,8 @@
   "exports": {
     ".": {
       "types": "./dist/index.d.mts",
-      "import": "./dist/index.js",
-      "default": "./dist/index.js"
+      "import": "./dist/index.mjs",
+      "default": "./dist/index.mjs"
     }
   },
   "scripts": {
@@ -24,5 +24,12 @@
     "prepublishOnly": "pnpm run build"
   },
   "license": "MIT",
-  "packageManager": "pnpm@10.12.1"
+  "packageManager": "pnpm@10.12.1",
+  "dependencies": {
+    "@svgr/core": "^8.1.0",
+    "@svgr/plugin-jsx": "^8.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0"
+  }
 }

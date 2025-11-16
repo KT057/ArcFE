@@ -1,12 +1,26 @@
 import type { SVGProps } from "react";
 export const Svg042 = (props: SVGProps<SVGSVGElement>) => (
   <svg
-    xmlns="http://www.w3.org/2000/svg"
-    fill="none"
     viewBox="0 0 24 24"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
     {...props}
   >
-    <path fill="currentColor" d="M4 18.545 18.545 4l1.454 1.454L5.454 20z" />
-    <path fill="currentColor" d="M5.455 4 20 18.545 18.546 20 4 5.455z" />
+    <rect
+      x={4}
+      y={18.5454}
+      width={20.5703}
+      height={2.05703}
+      transform="rotate(-45 4 18.5454)"
+      fill="currentColor"
+    />
+    <rect
+      x={5.45459}
+      y={4}
+      width={20.5703}
+      height={2.05703}
+      transform="rotate(45 5.45459 4)"
+      fill="currentColor"
+    />
   </svg>
 );

@@ -1,16 +1,22 @@
 import type { SVGProps } from "react";
 export const Svg006 = (props: SVGProps<SVGSVGElement>) => (
   <svg
-    xmlns="http://www.w3.org/2000/svg"
-    fill="none"
     viewBox="0 0 24 24"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
     {...props}
   >
     <path
+      d="M5 19L12 12L5 5"
       stroke="currentColor"
       strokeLinecap="square"
       strokeLinejoin="round"
-      d="m5 19 7-7-7-7M12 19l7-7-7-7"
+    />
+    <path
+      d="M12 19L19 12L12 5"
+      stroke="currentColor"
+      strokeLinecap="square"
+      strokeLinejoin="round"
     />
   </svg>
 );
