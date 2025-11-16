@@ -1,15 +1,15 @@
 import styled, { css } from "styled-components";
-import type { AnimationType } from "./index";
+import type { ScrollRevealAnimationType } from "./index";
 
 type StyledScrollRevealWrapperProps = {
   $isVisible: boolean;
-  $type: AnimationType;
+  $type: ScrollRevealAnimationType;
   $duration: number;
   $delay: number;
   $distance: number;
 };
 
-const getInitialTransform = (type: AnimationType, distance: number): string => {
+const getInitialTransform = (type: ScrollRevealAnimationType, distance: number): string => {
   switch (type) {
     case "fadeUp":
       return `translateY(${distance}px)`;
