@@ -23,6 +23,7 @@ export * from "./Modal";
 export * from "./NestedListItem";
 export * from "./Parallax";
 export * from "./Radio";
+export * from "./ScrollReveal";
 export * from "./Select";
 export * from "./Slider";
 export * from "./Text";

@@ -2,6 +2,8 @@ import styled from "styled-components";
 
 type AccordionHeaderProps = {
   borderColor: string;
+  paddingSide: number | undefined;
+  paddingVertical: number | undefined;
 };
 
 type AccordionTitleProps = {
@@ -27,9 +29,10 @@ export const StyledAccordion = styled.div`
 `;
 
 export const StyledAccordionHeader = styled.div.withConfig({
-  shouldForwardProp: (prop) => prop !== "borderColor"
+  shouldForwardProp: (prop) =>
+    !["borderColor", "paddingSide", "paddingVertical"].includes(prop)
 })<AccordionHeaderProps>`
-  padding: ${({ theme }) => theme.size.em(10)} ${({ theme }) => theme.size.em(15)};
+  padding: ${({ theme, paddingVertical }) => theme.size.em(paddingVertical ?? 10)} ${({ theme, paddingSide }) => theme.size.em(paddingSide ?? 15)};
   border-bottom: 1px solid ${({ borderColor }) => borderColor};
   cursor: pointer;
 `;
@@ -63,8 +66,14 @@ export const StyledAccordionContentWrapper = styled.div`
   height: 0;
 `;
 
-export const StyledAccordionContent = styled.div`
-  padding: ${({ theme }) => theme.size.em(10)} ${({ theme }) => theme.size.em(15)};
+export const StyledAccordionContent = styled.div.withConfig({
+  shouldForwardProp: (prop) =>
+    !["paddingVertical", "paddingSide"].includes(prop)
+})<{
+  paddingVertical: number | undefined;
+  paddingSide: number | undefined;
+}>`
+  padding: ${({ theme, paddingVertical }) => theme.size.em(paddingVertical ?? 10)} ${({ theme, paddingSide }) => theme.size.em(paddingSide ?? 15)};
 `;
 
 export const StyledAccordionContentText = styled.div<AccordionContentProps>`
