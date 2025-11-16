@@ -1,5 +1,5 @@
 const getDomain = () => {
-  if (process.env.ENV === "production") {
+  if (import.meta.env.MODE === "production") {
     return "https://www.rebita.jp";
   }
 
