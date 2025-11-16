@@ -160,7 +160,7 @@ fixed モードのため、統一バージョンのタグが作成されます:
 ```json
 {
   "dependencies": {
-    "front-end-boilerplate": "github:kichikawa57/front-end-boilerplate#v1.1.0"
+    "@arcfe": "github:kichikawa57/ArcFE#v1.1.0"
   }
 }
 ```
@@ -168,8 +168,8 @@ fixed モードのため、統一バージョンのタグが作成されます:
 使用例：
 
 ```typescript
-import { Button } from 'front-end-boilerplate/packages/ui/dist';
-import { useDebounce } from 'front-end-boilerplate/packages/hooks/dist';
+import { Button } from '@arcfe/packages/ui/dist';
+import { useDebounce } from '@arcfe/packages/hooks/dist';
 ```
 
 詳細は [PACKAGES.md](../PACKAGES.md) を参照してください。

@@ -11,7 +11,7 @@ permissions:
   id-token: write
 
 env:
-  STORYBOOK_BASE: /front-end-boilerplate/
+  STORYBOOK_BASE: /ArcFE/
 
 jobs:
   deploy:

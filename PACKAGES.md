@@ -157,7 +157,7 @@ git push origin master --tags
 ```json
 {
   "dependencies": {
-    "front-end-boilerplate": "github:kichikawa57/front-end-boilerplate#v1.1.0"
+    "@arcfe": "github:kichikawa57/ArcFE#v1.1.0"
   }
 }
 ```
@@ -170,9 +170,9 @@ git push origin master --tags
 
 ```typescript
 // リポジトリ全体をインストールして、サブディレクトリから個別にインポート
-import { Button } from "front-end-boilerplate/packages/ui/dist";
-import { useDebounce } from "front-end-boilerplate/packages/hooks/dist";
-import { formatDate } from "front-end-boilerplate/packages/utils/dist";
+import { Button } from "@arcfe/packages/ui/dist";
+import { useDebounce } from "@arcfe/packages/hooks/dist";
+import { formatDate } from "@arcfe/packages/utils/dist";
 ```
 
 インストール:
@@ -190,7 +190,7 @@ pnpm install
 ```json
 {
   "dependencies": {
-    "front-end-boilerplate": "github:kichikawa57/front-end-boilerplate#v1.1.0"
+    "@arcfe": "github:kichikawa57/ArcFE#v1.1.0"
   }
 }
 ```
@@ -201,16 +201,16 @@ pnpm install
 
 ```typescript
 // UIコンポーネントのインポート
-import { Button, Panel } from "front-end-boilerplate/packages/ui/dist";
+import { Button, Panel } from "@arcfe/packages/ui/dist";
 
 // Hooksのインポート
 import {
   useDebounce,
   useAxiosQuery,
-} from "front-end-boilerplate/packages/hooks/dist";
+} from "@arcfe/packages/hooks/dist";
 
 // Utilsのインポート
-import { formatDate } from "front-end-boilerplate/packages/utils/dist";
+import { formatDate } from "@arcfe/packages/utils/dist";
 
 // コンポーネント内で使用
 function MyComponent() {
@@ -231,7 +231,7 @@ function MyComponent() {
 ```json
 {
   "dependencies": {
-    "front-end-boilerplate": "github:kichikawa57/front-end-boilerplate#abc1234"
+    "@arcfe": "github:kichikawa57/ArcFE#abc1234"
   }
 }
 ```
@@ -243,7 +243,7 @@ function MyComponent() {
 ```json
 {
   "dependencies": {
-    "front-end-boilerplate": "github:kichikawa57/front-end-boilerplate#master"
+    "@arcfe": "github:kichikawa57/ArcFE#master"
   }
 }
 ```
@@ -278,7 +278,7 @@ pnpm link --global
 
 # 利用側のプロジェクト
 cd /path/to/your-project
-pnpm link --global front-end-boilerplate
+pnpm link --global @arcfe
 ```
 
 ### TypeScript 設定
@@ -290,12 +290,12 @@ pnpm link --global front-end-boilerplate
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@packages/ui": ["node_modules/front-end-boilerplate/packages/ui/dist"],
+      "@packages/ui": ["node_modules/@arcfe/packages/ui/dist"],
       "@packages/hooks": [
-        "node_modules/front-end-boilerplate/packages/hooks/dist"
+        "node_modules/@arcfe/packages/hooks/dist"
       ],
       "@packages/utils": [
-        "node_modules/front-end-boilerplate/packages/utils/dist"
+        "node_modules/@arcfe/packages/utils/dist"
       ]
     }
   }
@@ -345,8 +345,8 @@ pnpm add react react-dom styled-components
 
 ```bash
 # package.jsonのタグを更新
-# 例: "front-end-boilerplate": "github:kichikawa57/front-end-boilerplate#v1.0.0"
-#  → "front-end-boilerplate": "github:kichikawa57/front-end-boilerplate#v1.1.0"
+# 例: "@arcfe": "github:kichikawa57/ArcFE#v1.0.0"
+#  → "@arcfe": "github:kichikawa57/ArcFE#v1.1.0"
 
 # 依存関係を再インストール
 pnpm install
@@ -419,7 +419,7 @@ git tag v1.1.0
 ```bash
 # パスが正しいか確認
 # ❌ import { Button } from '@packages/ui';
-# ✅ import { Button } from 'front-end-boilerplate/packages/ui/dist';
+# ✅ import { Button } from '@arcfe/packages/ui/dist';
 
 # または、tsconfig.jsonでパスエイリアスを設定
 ```

@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "main": "scripts/index.ts",
-  "repository": "git@github.com.bylegal:attivita/front-end-boilerplate.git",
+  "repository": "git@github.com:kichikawa57/ArcFE.git",
   "author": "kota <k.ichikawa@attivita.co.jp>",
   "license": "MIT",
   "scripts": {
