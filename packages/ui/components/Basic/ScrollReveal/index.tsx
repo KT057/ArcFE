@@ -1,11 +1,11 @@
 import { type ReactNode, useEffect, useRef, useState } from "react";
 import { StyledScrollRevealWrapper } from "./styles";
 
-export type AnimationType = "fadeUp" | "fadeIn" | "slideLeft" | "slideRight";
+export type ScrollRevealAnimationType = "fadeUp" | "fadeIn" | "slideLeft" | "slideRight";
 
 type Props = {
   children: ReactNode;
-  type?: AnimationType;
+  type?: ScrollRevealAnimationType;
   duration?: number;
   delay?: number;
   distance?: number;
