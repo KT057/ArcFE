@@ -32,6 +32,8 @@ interface Props {
   icon: ReactNode;
   animation?: AccordionAnimation;
   style?: {
+    paddingSide?: number;
+    paddingVertical?: number;
     iconColor?: string;
     borderColor?: string;
     header?: {
@@ -59,6 +61,8 @@ export const Accordion004 = ({
       <StyledAccordion>
         <StyledAccordionHeader
           borderColor={style?.borderColor ?? "#000"}
+          paddingSide={style?.paddingSide}
+          paddingVertical={style?.paddingVertical}
           onClick={handleClick}
         >
           <StyledAccordionHeaderInner>
@@ -85,7 +89,10 @@ export const Accordion004 = ({
         </StyledAccordionHeader>
 
         <StyledAccordionContentWrapper ref={contentRef}>
-          <StyledAccordionContent>
+          <StyledAccordionContent
+            paddingSide={style?.paddingSide}
+            paddingVertical={style?.paddingVertical}
+          >
             <StyledAccordionContentTitle
               titleColor={style?.content?.titleColor ?? "#000"}
             >

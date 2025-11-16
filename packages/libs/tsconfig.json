@@ -1,0 +1,11 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "moduleResolution": "Bundler",
+    "noEmit": true,
+    "strict": true,
+    "baseUrl": "."
+  },
+  "include": ["src/**/*", "index.ts"],
+  "exclude": ["src/svgr/templates/**/*.js"]
+}

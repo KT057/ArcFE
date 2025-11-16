@@ -56,8 +56,34 @@ SlowTransition.args = {
 export const CustomScale = Template.bind({});
 CustomScale.args = {
   images: sampleImages,
+  scaleFrom: 0.9,
   scaleTo: 1.5,
   duration: 4,
+  onProgress: () => null,
+  onImageChange: () => null
+};
+
+export const NoZoom = Template.bind({});
+NoZoom.args = {
+  images: sampleImages,
+  zoomDirection: "none",
+  onProgress: () => null,
+  onImageChange: () => null
+};
+
+export const ZoomOut = Template.bind({});
+ZoomOut.args = {
+  images: sampleImages,
+  zoomDirection: "out",
+  scaleFrom: 1,
+  scaleTo: 1.2,
+  onProgress: () => null,
+  onImageChange: () => null
+};
+
+export const SingleImage = Template.bind({});
+SingleImage.args = {
+  images: [sampleImages[0]],
   onProgress: () => null,
   onImageChange: () => null
 };

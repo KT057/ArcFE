@@ -6,10 +6,10 @@
   "scripts": {
     "@ui": "pnpm --filter @packages/ui",
     "@web": "pnpm --filter @apps/web",
-    "@wp": "pnpm --filter @apps/wordpress",
+    "@libs": "pnpm --filter @packages/libs",
     "test": "vitest --run",
-    "tsc": "pnpm --filter @packages/tests tsc && pnpm --filter @packages/hooks tsc && pnpm --filter @packages/context tsc && pnpm --filter @packages/utils tsc",
-    "build:packages": "pnpm --filter @packages/utils build && pnpm --filter @packages/context build && pnpm --filter @packages/hooks build && pnpm --filter @packages/ui build",
+    "tsc": "pnpm --filter @packages/libs tsc && pnpm --filter @packages/tests tsc && pnpm --filter @packages/hooks tsc && pnpm --filter @packages/context tsc && pnpm --filter @packages/utils tsc",
+    "build:packages": "pnpm --filter @packages/libs build && pnpm --filter @packages/utils build && pnpm --filter @packages/context build && pnpm --filter @packages/hooks build && pnpm --filter @packages/ui build",
     "changeset": "changeset",
     "changeset:add": "node scripts/create-changeset.mjs",
     "changeset:version": "changeset version",

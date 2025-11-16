@@ -72,8 +72,10 @@ interface FadeInAndZoomImagesProps {
     images: FadeInAndZoomImagesImageItem[];
     duration?: number;
     fadeDuration?: number;
+    scaleFrom?: number;
     scaleTo?: number;
     height?: number;
+    zoomDirection?: "in" | "out" | "none";
     state?: {
         currentIndex: number;
         setCurrentIndex: (index: number) => void;
@@ -82,7 +84,7 @@ interface FadeInAndZoomImagesProps {
     onProgress?: (progress: number) => void;
     onCurrentIndexChange?: () => void;
 }
-declare const FadeInAndZoomImages: ({ images, duration, fadeDuration, scaleTo, state, height, onImageChange, onProgress }: FadeInAndZoomImagesProps) => react_jsx_runtime.JSX.Element | null;
+declare const FadeInAndZoomImages: ({ images, duration, fadeDuration, scaleFrom, scaleTo, zoomDirection, state, height, onImageChange, onProgress }: FadeInAndZoomImagesProps) => react_jsx_runtime.JSX.Element | null;
 
 type Size = "small" | "middle" | "large";
 declare const PC_SIZE = 1280;
@@ -223,14 +225,14 @@ interface PanelProps {
 }
 declare const RebitaPanel: ({ imageSrc, imageAlt, imageText, title, description, labels, style, onClick }: PanelProps) => react_jsx_runtime.JSX.Element;
 
-type Direction = "left" | "right";
+type Direction$1 = "left" | "right";
 interface TextButtonWithIconProps {
     text?: ReactNode;
     icon?: ReactNode;
     onClick?: () => void;
     as?: "button" | "a" | "div";
     href?: string;
-    iconDirection?: Direction;
+    iconDirection?: Direction$1;
     style?: {
         fontSize?: number;
         color?: string;
@@ -266,12 +268,14 @@ type AccordionAnimation$4 = {
     duration?: number;
     easing?: gsap.EaseString;
 };
-interface Props$7 {
+interface Props$b {
     headerContent: ReactNode;
     content: ReactNode;
     icon: ReactNode;
     animation?: AccordionAnimation$4;
     style?: {
+        paddingSide?: number;
+        paddingVertical?: number;
         iconColor?: string;
         borderColor?: string;
         header?: {
@@ -282,13 +286,13 @@ interface Props$7 {
         };
     };
 }
-declare const Accordion001: ({ headerContent, content, icon, style, animation }: Props$7) => react_jsx_runtime.JSX.Element;
+declare const Accordion001: ({ headerContent, content, icon, style, animation }: Props$b) => react_jsx_runtime.JSX.Element;
 
 type AccordionAnimation$3 = {
     duration?: number;
     easing?: gsap.EaseString;
 };
-interface Props$6 {
+interface Props$a {
     headerContent: ReactNode;
     content: ReactNode;
     icon: ReactNode;
@@ -304,13 +308,13 @@ interface Props$6 {
         };
     };
 }
-declare const Accordion002: ({ headerContent, content, icon, style, animation }: Props$6) => react_jsx_runtime.JSX.Element;
+declare const Accordion002: ({ headerContent, content, icon, style, animation }: Props$a) => react_jsx_runtime.JSX.Element;
 
 type AccordionAnimation$2 = {
     duration?: number;
     easing?: gsap.EaseString;
 };
-interface Props$5 {
+interface Props$9 {
     headerContent: ReactNode;
     content: ReactNode;
     icon: ReactNode;
@@ -328,13 +332,13 @@ interface Props$5 {
         };
     };
 }
-declare const Accordion003: ({ headerContent, content, icon, style, animation }: Props$5) => react_jsx_runtime.JSX.Element;
+declare const Accordion003: ({ headerContent, content, icon, style, animation }: Props$9) => react_jsx_runtime.JSX.Element;
 
 type AccordionAnimation$1 = {
     duration?: number;
     easing?: gsap.EaseString;
 };
-interface Props$4 {
+interface Props$8 {
     header: {
         title: ReactNode;
         text: ReactNode;
@@ -346,6 +350,8 @@ interface Props$4 {
     icon: ReactNode;
     animation?: AccordionAnimation$1;
     style?: {
+        paddingSide?: number;
+        paddingVertical?: number;
         iconColor?: string;
         borderColor?: string;
         header?: {
@@ -358,13 +364,13 @@ interface Props$4 {
         };
     };
 }
-declare const Accordion004: ({ header, content, icon, style, animation }: Props$4) => react_jsx_runtime.JSX.Element;
+declare const Accordion004: ({ header, content, icon, style, animation }: Props$8) => react_jsx_runtime.JSX.Element;
 
 type AccordionAnimation = {
     duration?: number;
     easing?: gsap.EaseString;
 };
-interface Props$3 {
+interface Props$7 {
     header: {
         title?: ReactNode;
         text: ReactNode;
@@ -388,7 +394,7 @@ interface Props$3 {
         };
     };
 }
-declare const Accordion005: ({ header, content, icon, style, animation }: Props$3) => react_jsx_runtime.JSX.Element;
+declare const Accordion005: ({ header, content, icon, style, animation }: Props$7) => react_jsx_runtime.JSX.Element;
 
 type Type$9 = "001" | "002";
 type ArrowPosition$1 = "top" | "bottom" | "left" | "right";
@@ -421,6 +427,16 @@ interface BalloonProps {
     };
 }
 declare const Balloon002: ({ type, children, style, arrowPosition }: BalloonProps) => react_jsx_runtime.JSX.Element;
+
+type Direction = "top" | "bottom" | "left" | "right" | "all";
+type Props$6 = {
+    direction: Direction;
+    fadeStart?: number;
+    bgColor: string;
+    blurAmount?: number;
+    children?: React__default.ReactNode;
+};
+declare const BlurBg: ({ direction, fadeStart, bgColor, blurAmount, children }: Props$6) => react_jsx_runtime.JSX.Element;
 
 type BreadcrumbsItem = {
     text: string;
@@ -536,6 +552,11 @@ interface CheckBoxProps$1 {
     id: string;
     type: CheckBoxType;
     size: Size;
+    name?: string;
+    checked?: boolean;
+    defaultChecked?: boolean;
+    disabled?: boolean;
+    onChange?: (event: React__default.ChangeEvent<HTMLInputElement>) => void;
     style?: {
         backgroundColor?: string;
         borderColor?: string;
@@ -543,12 +564,17 @@ interface CheckBoxProps$1 {
         markColor?: string;
     };
 }
-declare const CheckBox001: ({ style, id, type, size }: CheckBoxProps$1) => react_jsx_runtime.JSX.Element;
+declare const CheckBox001: ({ style, id, type, size, name, checked, defaultChecked, disabled, onChange }: CheckBoxProps$1) => react_jsx_runtime.JSX.Element;
 
 type CheckBoxSize = "small" | "middle";
 interface CheckBoxProps {
     id: string;
     size: CheckBoxSize;
+    name?: string;
+    checked?: boolean;
+    defaultChecked?: boolean;
+    disabled?: boolean;
+    onChange?: (event: React__default.ChangeEvent<HTMLInputElement>) => void;
     style?: {
         backgroundColor?: string;
         borderColor?: string;
@@ -556,7 +582,7 @@ interface CheckBoxProps {
         markColor?: string;
     };
 }
-declare const CheckBox002: ({ style, id, size }: CheckBoxProps) => react_jsx_runtime.JSX.Element;
+declare const CheckBox002: ({ style, id, size, name, checked, defaultChecked, disabled, onChange }: CheckBoxProps) => react_jsx_runtime.JSX.Element;
 
 interface ListItemWithContent {
     id: string;
@@ -625,7 +651,7 @@ interface FrameNumberProps {
 }
 declare const FrameNumber001: ({ style, type, size, number }: FrameNumberProps) => react_jsx_runtime.JSX.Element;
 
-type Props$2 = {
+type Props$5 = {
     mapId: string;
     defaultCenter?: {
         lat: number;
@@ -635,7 +661,7 @@ type Props$2 = {
     disableDefaultUI?: boolean;
     children: ReactNode;
 };
-declare const GoogleMap: ({ defaultCenter, defaultZoom, disableDefaultUI, mapId, children }: Props$2) => react_jsx_runtime.JSX.Element;
+declare const GoogleMap: ({ defaultCenter, defaultZoom, disableDefaultUI, mapId, children }: Props$5) => react_jsx_runtime.JSX.Element;
 
 interface Header001Props {
     left?: React.ReactNode;
@@ -746,6 +772,18 @@ declare const Svg041: (props: SVGProps<SVGSVGElement>) => react_jsx_runtime.JSX.
 declare const Svg042: (props: SVGProps<SVGSVGElement>) => react_jsx_runtime.JSX.Element;
 
 declare const Svg043: (props: SVGProps<SVGSVGElement>) => react_jsx_runtime.JSX.Element;
+
+type Props$4 = {
+    pc: {
+        src: string;
+    };
+    sp: {
+        src: string;
+    };
+    alt: string;
+    objectFit?: boolean;
+};
+declare const Image: ({ pc, sp, alt, objectFit }: Props$4) => react_jsx_runtime.JSX.Element;
 
 type InputVariant$3 = "001" | "002";
 interface InputProps$5 {
@@ -914,11 +952,11 @@ interface InputProps$1 {
 declare const Input005: React__default.ForwardRefExoticComponent<InputProps$1 & React__default.RefAttributes<HTMLInputElement>>;
 
 type InputVariant = "001" | "002";
-type IconPosition$2 = "left" | "right";
+type IconPosition$3 = "left" | "right";
 interface InputProps {
     variant?: InputVariant;
     size?: Size;
-    iconPosition?: IconPosition$2;
+    iconPosition?: IconPosition$3;
     icon: React__default.ReactNode;
     name?: string;
     placeholder?: string;
@@ -966,11 +1004,11 @@ interface LabelProps$1 {
 declare const Label001: ({ type, size, children, style }: LabelProps$1) => react_jsx_runtime.JSX.Element;
 
 type Type$2 = "001" | "002" | "003";
-type IconPosition$1 = "left" | "right";
+type IconPosition$2 = "left" | "right";
 interface LabelProps {
     type?: Type$2;
     size?: Size;
-    iconPosition?: IconPosition$1;
+    iconPosition?: IconPosition$2;
     icon: React__default.ReactNode;
     children: React__default.ReactNode;
     style?: {
@@ -982,6 +1020,28 @@ interface LabelProps {
     };
 }
 declare const Label002: ({ type, size, iconPosition, icon, children, style }: LabelProps) => react_jsx_runtime.JSX.Element;
+
+type AspectRatio = "16 / 9" | "4 / 3" | "1 / 1" | "3 / 4" | "9 / 16" | "21 / 9";
+interface LazyImageAppearance {
+    placeholderBgColor?: string;
+}
+type Props$3 = {
+    pc: {
+        src: string;
+    };
+    sp: {
+        src: string;
+    };
+    alt: string;
+    objectFit?: boolean;
+    aspectRatio?: AspectRatio;
+    duration?: number;
+    threshold?: number;
+    rootMargin?: string;
+    showPlaceholder?: boolean;
+    appearance?: LazyImageAppearance;
+};
+declare const LazyImage: ({ pc, sp, alt, objectFit, aspectRatio, duration, threshold, rootMargin, showPlaceholder, appearance }: Props$3) => react_jsx_runtime.JSX.Element;
 
 type ListType = "001" | "002" | "003";
 interface ListItem {
@@ -1144,17 +1204,17 @@ interface MediaProps {
 }
 declare const Media: ({ pc: pcNode, tablet: tabletNode, sp: spNode }: MediaProps) => React$1.ReactNode;
 
-type Props$1 = {
+type Props$2 = {
     children: ReactNode;
 };
-declare const FooterButtons: FC<Props$1>;
+declare const FooterButtons: FC<Props$2>;
 
-type Props = {
+type Props$1 = {
     showModal: boolean;
     children: ReactNode;
     footer?: ReactNode;
 };
-declare const Modal001: FC<Props>;
+declare const Modal001: FC<Props$1>;
 
 interface NestedListItemProps$1 {
     icon: React__default.ReactNode;
@@ -1213,6 +1273,19 @@ interface RadioProps extends AriaRadioProps {
     };
 }
 declare const Radio001: React$1.ForwardRefExoticComponent<RadioProps & React$1.RefAttributes<HTMLLabelElement>>;
+
+type ScrollRevealAnimationType = "fadeUp" | "fadeIn" | "slideLeft" | "slideRight";
+type Props = {
+    children: ReactNode;
+    type?: ScrollRevealAnimationType;
+    duration?: number;
+    delay?: number;
+    distance?: number;
+    threshold?: number;
+    rootMargin?: string;
+    triggerOnce?: boolean;
+};
+declare const ScrollReveal: ({ children, type, duration, delay, distance, threshold, rootMargin, triggerOnce }: Props) => react_jsx_runtime.JSX.Element;
 
 type SelectOption = {
     value: string;
@@ -1353,21 +1426,31 @@ interface TextProps {
 declare const Text: ({ children, fontSize, color }: TextProps) => react_jsx_runtime.JSX.Element;
 
 type TextButtonType = "001" | "002";
-interface TextButtonProps {
+type IconPosition$1 = "left" | "right";
+type ButtonElementProps = {
+    as?: "button";
+    buttonType?: React__default.ButtonHTMLAttributes<HTMLButtonElement>["type"];
+} & Omit<React__default.ButtonHTMLAttributes<HTMLButtonElement>, "type" | "style" | "children">;
+type AnchorElementProps = {
+    as: "a";
+} & Omit<React__default.AnchorHTMLAttributes<HTMLAnchorElement>, "style" | "children">;
+type ElementProps = ButtonElementProps | AnchorElementProps;
+type TextButtonProps = ElementProps & {
     type?: TextButtonType;
     children: React__default.ReactNode;
-    onClick?: () => void;
-    as?: "button" | "a" | "span";
-    href?: string;
-    style?: {
-        color?: string;
-        fontSize?: number;
+    icon?: React__default.ReactNode;
+    iconPosition?: IconPosition$1;
+    appearance?: {
         hoverColor?: string;
         hoverDuration?: string;
         hoverEase?: EasingKey;
+        gap?: number;
+        paddingTop?: number;
     };
-}
-declare const TextButton001: ({ type, children, onClick, as, href, style }: TextButtonProps) => react_jsx_runtime.JSX.Element;
+    style?: React__default.CSSProperties;
+};
+type TextButtonElement = HTMLButtonElement | HTMLAnchorElement | HTMLSpanElement;
+declare const TextButton001: React__default.ForwardRefExoticComponent<TextButtonProps & React__default.RefAttributes<TextButtonElement>>;
 
 type TextFieldVariant$2 = "001" | "002";
 type TextFieldType = TextFieldVariant$2;
@@ -1669,4 +1752,4 @@ declare const GlobalStyles: ({ fontFamily }: {
     fontFamily: keyof Theme["font"]["fontFamily"];
 }) => React$1.NamedExoticComponent<styled_components.ExecutionProps & object>;
 
-export { Accordion001, Accordion002, Accordion003, Accordion004, Accordion005, type AccordionAnimation$4 as AccordionAnimation, type AnimationType$2 as AnimationType, type AutoPlay, Balloon001, Balloon002, BgImageContent, Breadcrumbs, Button001, Button002, CheckBox001, CheckBox002, CircleProgress, type Direction, DragAndDrop001, Dropdown001, Dropdown002, FadeInAndZoomImages, type FadeInAndZoomImagesImageItem, FooterButtons, FrameIcon001, FrameNumber001, GlobalStyles, GoogleMap, Header001, Input001, Input002, Input003, Input004, Input005, Input006, type InstanceRef, JmcArrowButton, JmcButton, JmcCircleToggle, Label001, Label002, List001, ListItem001, ListItem002, ListItem003, ListItem004, ListItem005, ListItem006, Loading001, Loading002, Media, MediaContext, MediaProvider, Modal001, NestedListItem001, NestedListItem002, PC_SIZE, ParallaxContent, ParallaxImage, REM_SIZE, Radio001, RebitaButton, RebitaCircleProgress, RebitaFadeSlideImage, RebitaFadeText, RebitaPanel, RebitaSlideGuideDot, RebitaTextButtonWithIcon, RebitaToggle, SP_SIZE, Select001, Select002, type SelectOption, type Size, Slider, type State, Svg001 as Svg001Icon, Svg002 as Svg002Icon, Svg003 as Svg003Icon, Svg004 as Svg004Icon, Svg005 as Svg005Icon, Svg006 as Svg006Icon, Svg007 as Svg007Icon, Svg008 as Svg008Icon, Svg009 as Svg009Icon, Svg010 as Svg010Icon, Svg011 as Svg011Icon, Svg012 as Svg012Icon, Svg013 as Svg013Icon, Svg014 as Svg014Icon, Svg015 as Svg015Icon, Svg016 as Svg016Icon, Svg017 as Svg017Icon, Svg018 as Svg018Icon, Svg019 as Svg019Icon, Svg020 as Svg020Icon, Svg021 as Svg021Icon, Svg022 as Svg022Icon, Svg023 as Svg023Icon, Svg024 as Svg024Icon, Svg025 as Svg025Icon, Svg026 as Svg026Icon, Svg027 as Svg027Icon, Svg028 as Svg028Icon, Svg029 as Svg029Icon, Svg030 as Svg030Icon, Svg031 as Svg031Icon, Svg032 as Svg032Icon, Svg033 as Svg033Icon, Svg034 as Svg034Icon, Svg035 as Svg035Icon, Svg036 as Svg036Icon, Svg037 as Svg037Icon, Svg038 as Svg038Icon, Svg039 as Svg039Icon, Svg040 as Svg040Icon, Svg041 as Svg041Icon, Svg042 as Svg042Icon, Svg043 as Svg043Icon, TABLET_SIZE, Text, TextButton001, TextField001, TextField002, TextField003, TextField004, TextField005, type TextFieldType, TextIcon001, type Theme, Toggle001, Toggle002, Toggle003, ToggleSomething001, type Type, VerticalRollingText, baseFontSizeForEm, baseFontSizeForRem, color, ebGaramond, em, hexToRgb, lato, media, montserrat, notoSansJP, rem, roboto, themes, zenKakuGothicNew, zenOldMincho };
+export { Accordion001, Accordion002, Accordion003, Accordion004, Accordion005, type AccordionAnimation$4 as AccordionAnimation, type AnimationType$2 as AnimationType, type AutoPlay, Balloon001, Balloon002, BgImageContent, BlurBg, Breadcrumbs, Button001, Button002, CheckBox001, CheckBox002, CircleProgress, type Direction$1 as Direction, DragAndDrop001, Dropdown001, Dropdown002, FadeInAndZoomImages, type FadeInAndZoomImagesImageItem, FooterButtons, FrameIcon001, FrameNumber001, GlobalStyles, GoogleMap, Header001, Image, Input001, Input002, Input003, Input004, Input005, Input006, type InstanceRef, JmcArrowButton, JmcButton, JmcCircleToggle, Label001, Label002, LazyImage, List001, ListItem001, ListItem002, ListItem003, ListItem004, ListItem005, ListItem006, Loading001, Loading002, Media, MediaContext, MediaProvider, Modal001, NestedListItem001, NestedListItem002, PC_SIZE, ParallaxContent, ParallaxImage, REM_SIZE, Radio001, RebitaButton, RebitaCircleProgress, RebitaFadeSlideImage, RebitaFadeText, RebitaPanel, RebitaSlideGuideDot, RebitaTextButtonWithIcon, RebitaToggle, SP_SIZE, ScrollReveal, type ScrollRevealAnimationType, Select001, Select002, type SelectOption, type Size, Slider, type State, Svg001 as Svg001Icon, Svg002 as Svg002Icon, Svg003 as Svg003Icon, Svg004 as Svg004Icon, Svg005 as Svg005Icon, Svg006 as Svg006Icon, Svg007 as Svg007Icon, Svg008 as Svg008Icon, Svg009 as Svg009Icon, Svg010 as Svg010Icon, Svg011 as Svg011Icon, Svg012 as Svg012Icon, Svg013 as Svg013Icon, Svg014 as Svg014Icon, Svg015 as Svg015Icon, Svg016 as Svg016Icon, Svg017 as Svg017Icon, Svg018 as Svg018Icon, Svg019 as Svg019Icon, Svg020 as Svg020Icon, Svg021 as Svg021Icon, Svg022 as Svg022Icon, Svg023 as Svg023Icon, Svg024 as Svg024Icon, Svg025 as Svg025Icon, Svg026 as Svg026Icon, Svg027 as Svg027Icon, Svg028 as Svg028Icon, Svg029 as Svg029Icon, Svg030 as Svg030Icon, Svg031 as Svg031Icon, Svg032 as Svg032Icon, Svg033 as Svg033Icon, Svg034 as Svg034Icon, Svg035 as Svg035Icon, Svg036 as Svg036Icon, Svg037 as Svg037Icon, Svg038 as Svg038Icon, Svg039 as Svg039Icon, Svg040 as Svg040Icon, Svg041 as Svg041Icon, Svg042 as Svg042Icon, Svg043 as Svg043Icon, TABLET_SIZE, Text, TextButton001, TextField001, TextField002, TextField003, TextField004, TextField005, type TextFieldType, TextIcon001, type Theme, Toggle001, Toggle002, Toggle003, ToggleSomething001, type Type, VerticalRollingText, baseFontSizeForEm, baseFontSizeForRem, color, ebGaramond, em, hexToRgb, lato, media, montserrat, notoSansJP, rem, roboto, themes, zenKakuGothicNew, zenOldMincho };
