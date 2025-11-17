@@ -108,7 +108,7 @@ jobs:
   vrt_publish:
     needs: setup
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 10
     permissions:
       contents: read
 
@@ -154,8 +154,57 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           pattern: screenshots-*
-          merge-multiple: true
-          path: packages/ui/__screenshots__/
+          merge-multiple: false
+          path: artifacts/
+
+      - name: Merge screenshots safely
+        run: |
+          echo "=== Checking artifact structure ==="
+          ls -la artifacts/
+          for shard in artifacts/screenshots-*; do
+            if [ -d "$shard" ]; then
+              echo "Structure of $shard:"
+              find "$shard" -type f -name "*.png" | head -5
+            fi
+          done
+
+          echo "=== Merging screenshots ==="
+          mkdir -p packages/ui/__screenshots__
+          for shard in artifacts/screenshots-*; do
+            if [ -d "$shard" ]; then
+              echo "Merging $shard..."
+              if [ -d "$shard/packages/ui/__screenshots__" ]; then
+                rsync -av "$shard/packages/ui/__screenshots__/" packages/ui/__screenshots__/
+              else
+                echo "Warning: Expected path not found in $shard"
+                find "$shard" -type f -name "*.png" | head -3
+              fi
+            fi
+          done
+
+          echo "=== Syncing filesystem ==="
+          sync
+          sleep 2
+
+          echo "=== Verifying PNG files ==="
+          total_files=$(find packages/ui/__screenshots__ -name '*.png' | wc -l)
+          echo "Total screenshots: $total_files"
+
+          # Check for corrupted PNGs
+          corrupted=0
+          for png in $(find packages/ui/__screenshots__ -name '*.png' | head -20); do
+            if ! file "$png" | grep -q "PNG image data"; then
+              echo "WARNING: Corrupted file detected: $png"
+              corrupted=$((corrupted + 1))
+            fi
+          done
+
+          if [ $corrupted -gt 0 ]; then
+            echo "ERROR: Found $corrupted corrupted PNG files"
+            exit 1
+          fi
+
+          echo "All PNG files verified successfully"
 
       - name: Publish Reg Suit
         env:
