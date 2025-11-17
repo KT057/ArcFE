@@ -43,7 +43,7 @@
     "tsx": "^4.20.6",
     "turbo": "^2.6.1",
     "typescript": "^5.9.3",
-    "vitest": "^4.0.9",
+    "vitest": "^4.0.10",
     "webpack": "^5.102.1"
   },
   "dependencies": {
@@ -73,10 +73,10 @@
   },
   "pnpm": {
     "overrides": {
-      "vitest": "^4.0.9",
-      "@vitest/browser": "^4.0.9",
-      "@vitest/runner": "^4.0.9",
-      "@vitest/utils": "^4.0.9"
+      "vitest": "^4.0.10",
+      "@vitest/browser": "^4.0.10",
+      "@vitest/runner": "^4.0.10",
+      "@vitest/utils": "^4.0.10"
     }
   }
 }
