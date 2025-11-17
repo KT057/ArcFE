@@ -42,7 +42,7 @@ importers:
         specifier: ^1.7.1
         version: 1.7.1(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       axios:
-        specifier: ^1.13.1
+        specifier: ^1.13.2
         version: 1.13.2
       gsap:
         specifier: ^3.13.0
@@ -173,7 +173,7 @@ importers:
   packages/context:
     dependencies:
       axios:
-        specifier: ^1.0.0
+        specifier: ^1.13.2
         version: 1.13.2
       react:
         specifier: ^18.0.0 || ^19.0.0
@@ -194,7 +194,7 @@ importers:
         specifier: workspace:*
         version: link:../utils
       axios:
-        specifier: ^1.0.0
+        specifier: ^1.13.2
         version: 1.13.2
       react:
         specifier: ^18.0.0 || ^19.0.0
