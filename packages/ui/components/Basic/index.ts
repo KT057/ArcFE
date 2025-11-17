@@ -25,6 +25,7 @@ export * from "./Parallax";
 export * from "./Radio";
 export * from "./ScrollReveal";
 export * from "./Select";
+export * from "./Skeleton";
 export * from "./Slider";
 export * from "./Text";
 export * from "./TextButton";
