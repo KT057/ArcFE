@@ -25,7 +25,7 @@ Default.args = {
     text: "詳細"
   },
   icon: <Svg036Icon />,
-  style: {
+  appearance: {
     backgroundColor: "#ccc",
     iconColor: "#000",
     header: {

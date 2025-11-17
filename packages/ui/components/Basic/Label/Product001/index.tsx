@@ -8,7 +8,7 @@ interface LabelProps {
   type?: Type;
   size?: Size;
   children: React.ReactNode;
-  style?: {
+  appearance?: {
     fontSize?: number;
     backgroundColor?: string;
     color?: string;
@@ -20,17 +20,17 @@ export const Label001 = ({
   type = "001",
   size = "middle",
   children,
-  style
+  appearance
 }: LabelProps) => {
   return (
     <StyledLabelWrapper>
       <StyledLabel
         type={type}
         size={size}
-        fontSize={style?.fontSize}
-        backgroundColor={style?.backgroundColor}
-        color={style?.color}
-        borderColor={style?.borderColor}
+        fontSize={appearance?.fontSize}
+        backgroundColor={appearance?.backgroundColor}
+        color={appearance?.color}
+        borderColor={appearance?.borderColor}
       >
         {children}
       </StyledLabel>

@@ -33,7 +33,7 @@ Hovered.args = {
 
 export const CustomColors = Template.bind({});
 CustomColors.args = {
-  style: {
+  appearance: {
     color: "#2196f3",
     dotColor: "#2196f3"
   }
@@ -42,7 +42,7 @@ CustomColors.args = {
 export const CustomColorsHovered = Template.bind({});
 CustomColorsHovered.args = {
   isHovered: true,
-  style: {
+  appearance: {
     color: "#2196f3",
     dotColor: "#2196f3"
   }

@@ -17,7 +17,7 @@ interface Header001Props {
   rightInner?: React.ReactNode;
   modalContent?: React.ReactNode;
   showModal?: boolean;
-  style?: {
+  appearance?: {
     leftGap?: number;
     rightGap?: number;
     header?: {
@@ -39,33 +39,33 @@ export const Header001 = ({
   leftInner,
   rightInner,
   modalContent,
-  style,
+  appearance,
   showModal
 }: Header001Props) => {
   return (
     <StyledWrapper>
       <StyledHeader
-        height={style?.header?.height ?? HEIGHT}
-        backgroundColor={style?.header?.backgroundColor}
-        animationBackgroundColor={style?.header?.animation?.backgroundColor}
-        easing={style?.header?.animation?.easing}
-        duration={style?.header?.animation?.duration}
-        sidePadding={style?.header?.sidePadding}
+        height={appearance?.header?.height ?? HEIGHT}
+        backgroundColor={appearance?.header?.backgroundColor}
+        animationBackgroundColor={appearance?.header?.animation?.backgroundColor}
+        easing={appearance?.header?.animation?.easing}
+        duration={appearance?.header?.animation?.duration}
+        sidePadding={appearance?.header?.sidePadding}
         showModal={showModal}
       >
         <StyledHeaderInner>
-          <StyledLeftWrapper gap={style?.leftGap}>
+          <StyledLeftWrapper gap={appearance?.leftGap}>
             {left}
             {leftInner}
           </StyledLeftWrapper>
-          <StyledRightWrapper gap={style?.rightGap}>
+          <StyledRightWrapper gap={appearance?.rightGap}>
             {rightInner}
             {right}
           </StyledRightWrapper>
         </StyledHeaderInner>
       </StyledHeader>
       <StyledModalWrapper
-        height={style?.header?.height ?? HEIGHT}
+        height={appearance?.header?.height ?? HEIGHT}
         showModal={showModal}
       >
         {modalContent}

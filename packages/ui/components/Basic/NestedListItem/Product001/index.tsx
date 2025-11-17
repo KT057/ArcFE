@@ -14,7 +14,7 @@ interface NestedListItemProps {
   children: React.ReactNode;
   onClick?: () => void;
   isOpen?: boolean;
-  style?: {
+  appearance?: {
     fontSize?: number;
     lineHeight?: number;
     color?: string;
@@ -28,7 +28,7 @@ export const NestedListItem001 = ({
   children,
   onClick,
   isOpen: controlledIsOpen,
-  style
+  appearance
 }: NestedListItemProps) => {
   const [internalIsOpen, setInternalIsOpen] = useState(
     controlledIsOpen ?? false
@@ -47,21 +47,21 @@ export const NestedListItem001 = ({
     <StyledNestedListItemWrapper>
       <StyledNestedListItem onClick={handleClick}>
         <StyledNestedListItemIconWrapper
-          fontSize={style?.fontSize}
-          lineHeight={style?.lineHeight}
+          fontSize={appearance?.fontSize}
+          lineHeight={appearance?.lineHeight}
         >
           <StyledNestedListItemIcon
             isOpen={isOpen}
-            iconColor={style?.iconColor}
+            iconColor={appearance?.iconColor}
           >
             {icon}
           </StyledNestedListItemIcon>
         </StyledNestedListItemIconWrapper>
-        <StyledNestedListItemTextWrapper gap={style?.gap}>
+        <StyledNestedListItemTextWrapper gap={appearance?.gap}>
           <StyledNestedListItemText
-            fontSize={style?.fontSize}
-            lineHeight={style?.lineHeight}
-            color={style?.color}
+            fontSize={appearance?.fontSize}
+            lineHeight={appearance?.lineHeight}
+            color={appearance?.color}
           >
             {children}
           </StyledNestedListItemText>

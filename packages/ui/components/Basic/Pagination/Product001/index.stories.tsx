@@ -90,7 +90,7 @@ CustomColors.args = {
   size: "middle",
   maxVisiblePages: 5,
 
-  style: {
+  appearance: {
     backgroundColor: "#f8fafc",
     activeBackgroundColor: "red",
     borderColor: "#e2e8f0",
@@ -108,7 +108,7 @@ DarkTheme.args = {
   size: "middle",
   maxVisiblePages: 5,
 
-  style: {
+  appearance: {
     backgroundColor: "#374151",
     activeBackgroundColor: "#10b981",
     borderColor: "#6b7280",

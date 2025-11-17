@@ -101,7 +101,7 @@ Navigation.args = {
           <Svg004Icon />
         </div>
       ),
-      style: {
+      appearance: {
         size: 60,
         position: -50,
         color: "#000",
@@ -111,7 +111,7 @@ Navigation.args = {
     },
     right: {
       children: <Svg004Icon />,
-      style: {
+      appearance: {
         size: 60,
         position: -50,
         color: "#000",

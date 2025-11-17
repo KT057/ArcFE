@@ -59,7 +59,7 @@ const SortableItem = ({ id, children }: SortableItemProps) => {
 
 interface DragAndDropProps {
   items: ListItemWithContent[];
-  style?: {
+  appearance?: {
     gap?: number;
   };
   onReorder: (items: ListItem[]) => void;
@@ -67,7 +67,7 @@ interface DragAndDropProps {
 
 export const DragAndDrop001 = ({
   items,
-  style,
+  appearance,
   onReorder
 }: DragAndDropProps) => {
   const sensors = useSensors(
@@ -112,7 +112,7 @@ export const DragAndDrop001 = ({
           items={items.map((item) => item.id)}
           strategy={verticalListSortingStrategy}
         >
-          <StyledList as="ul" gap={style?.gap}>
+          <StyledList as="ul" gap={appearance?.gap}>
             {items.map((item) => (
               <SortableItem key={item.id} id={item.id}>
                 {item.content}

@@ -17,7 +17,7 @@ interface TextButtonWithIconProps {
   as?: "button" | "a" | "div";
   href?: string;
   iconDirection?: Direction;
-  style?: {
+  appearance?: {
     fontSize?: number;
     color?: string;
     iconSize?: Size;
@@ -31,7 +31,7 @@ export const RebitaTextButtonWithIcon = ({
   as = "div",
   href,
   iconDirection = "right",
-  style
+  appearance
 }: TextButtonWithIconProps) => {
   const [isHover, setIsHover] = useState(false);
 
@@ -55,17 +55,17 @@ export const RebitaTextButtonWithIcon = ({
         <StyledTextButtonWithIconInner>
           <VerticalRollingText
             enableHover={isHover}
-            style={{
-              fontSize: style?.fontSize,
-              color: style?.color
+            appearance={{
+              fontSize: appearance?.fontSize,
+              color: appearance?.color
             }}
           >
             {text}
           </VerticalRollingText>
         </StyledTextButtonWithIconInner>
         <StyledTextButtonWithIconIcon
-          iconSize={style?.iconSize}
-          color={style?.color}
+          iconSize={appearance?.iconSize}
+          color={appearance?.color}
         >
           <>{icon}</>
         </StyledTextButtonWithIconIcon>

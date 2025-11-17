@@ -12,7 +12,7 @@ interface FrameNumberProps {
   number: number;
   type: Type;
   size: Size;
-  style?: {
+  appearance?: {
     backgroundColor?: string;
     color?: string;
     borderColor?: string;
@@ -20,7 +20,7 @@ interface FrameNumberProps {
 }
 
 export const FrameNumber001 = ({
-  style,
+  appearance,
   type,
   size,
   number
@@ -30,10 +30,10 @@ export const FrameNumber001 = ({
       <StyledFrameNumber size={size}>
         <StyledFrameNumberBackground
           type={type}
-          backgroundColor={style?.backgroundColor ?? "#fff"}
-          borderColor={style?.borderColor ?? "#000"}
+          backgroundColor={appearance?.backgroundColor ?? "#fff"}
+          borderColor={appearance?.borderColor ?? "#000"}
         />
-        <StyledFrameNumberInner color={style?.color ?? "#000"} size={size}>
+        <StyledFrameNumberInner color={appearance?.color ?? "#000"} size={size}>
           {number}
         </StyledFrameNumberInner>
       </StyledFrameNumber>

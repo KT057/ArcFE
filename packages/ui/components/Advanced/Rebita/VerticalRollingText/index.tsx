@@ -10,7 +10,7 @@ import {
 interface VerticalRollingTextProps {
   children?: ReactNode;
   enableHover?: boolean;
-  style?: {
+  appearance?: {
     fontSize?: number;
     color?: string;
   };
@@ -19,7 +19,7 @@ interface VerticalRollingTextProps {
 export const VerticalRollingText = ({
   children,
   enableHover,
-  style
+  appearance
 }: VerticalRollingTextProps) => {
   const wrapperRef = useRef<HTMLSpanElement>(null);
   const contentsRef = useRef<HTMLSpanElement>(null);
@@ -82,13 +82,13 @@ export const VerticalRollingText = ({
 
   return (
     <StyledVerticalRollingTextWrapper
-      fontSize={style?.fontSize}
-      color={style?.color}
+      fontSize={appearance?.fontSize}
+      color={appearance?.color}
     >
       <StyledVerticalRollingTextInner
         ref={wrapperRef}
-        fontSize={style?.fontSize}
-        color={style?.color}
+        fontSize={appearance?.fontSize}
+        color={appearance?.color}
         onMouseEnter={() => enableHover === undefined && onRollingText(true)}
         onMouseLeave={() => enableHover === undefined && onRollingText(false)}
       >

@@ -14,7 +14,7 @@ interface ToggleProps {
   isOpen?: boolean;
   onChange?: (isOpen: boolean) => void;
   onClick?: () => void;
-  style?: {
+  appearance?: {
     lineColor?: string;
   };
 }
@@ -23,7 +23,7 @@ export const Toggle002 = ({
   isOpen: controlledIsOpen,
   onChange,
   onClick,
-  style
+  appearance
 }: ToggleProps) => {
   const [internalIsOpen, setInternalIsOpen] = useState<boolean | undefined>(
     undefined
@@ -46,14 +46,14 @@ export const Toggle002 = ({
       <StyledToggle>
         <StyledToggleInner onClick={handleClick} isOpen={isOpen}>
           <StyledToggleOpen>
-            <StyledToggleOpenLine lineColor={style?.lineColor} />
-            <StyledToggleOpenLine lineColor={style?.lineColor} />
-            <StyledToggleOpenLine lineColor={style?.lineColor} />
+            <StyledToggleOpenLine lineColor={appearance?.lineColor} />
+            <StyledToggleOpenLine lineColor={appearance?.lineColor} />
+            <StyledToggleOpenLine lineColor={appearance?.lineColor} />
           </StyledToggleOpen>
           <StyledToggleCloseWrapper>
             <StyledToggleClose>
-              <StyledToggleCloseLine lineColor={style?.lineColor} />
-              <StyledToggleCloseLine lineColor={style?.lineColor} />
+              <StyledToggleCloseLine lineColor={appearance?.lineColor} />
+              <StyledToggleCloseLine lineColor={appearance?.lineColor} />
             </StyledToggleClose>
           </StyledToggleCloseWrapper>
         </StyledToggleInner>

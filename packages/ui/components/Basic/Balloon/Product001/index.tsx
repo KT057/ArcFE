@@ -12,7 +12,7 @@ interface BalloonProps {
   type?: Type;
   children: ReactNode;
   arrowPosition?: ArrowPosition;
-  style?: {
+  appearance?: {
     backgroundColor?: string;
     color?: string;
     fontSize?: number;
@@ -22,24 +22,24 @@ interface BalloonProps {
 export const Balloon001 = ({
   type = "001",
   children,
-  style,
+  appearance,
   arrowPosition
 }: BalloonProps) => {
   return (
     <StyledBalloonWrapper>
       <StyledBalloon
         type={type}
-        backgroundColor={style?.backgroundColor ?? "#ccc"}
+        backgroundColor={appearance?.backgroundColor ?? "#ccc"}
       >
         <StyledBalloonContent
-          fontSize={style?.fontSize ?? 16}
-          color={style?.color ?? "#000"}
+          fontSize={appearance?.fontSize ?? 16}
+          color={appearance?.color ?? "#000"}
         >
           {children}
         </StyledBalloonContent>
         <StyledBalloonArrow
           arrowPosition={arrowPosition ?? "bottom"}
-          backgroundColor={style?.backgroundColor ?? "#ccc"}
+          backgroundColor={appearance?.backgroundColor ?? "#ccc"}
         />
       </StyledBalloon>
     </StyledBalloonWrapper>

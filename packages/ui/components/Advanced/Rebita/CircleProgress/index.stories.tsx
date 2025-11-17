@@ -32,7 +32,7 @@ export const Small = Template.bind({});
 Small.args = {
   progress: 25,
   children: "25%",
-  style: {
+  appearance: {
     size: 60,
     strokeWidth: 2,
     fontSize: 12
@@ -43,7 +43,7 @@ export const Large = Template.bind({});
 Large.args = {
   progress: 75,
   children: "75%",
-  style: {
+  appearance: {
     size: 150,
     strokeWidth: 4,
     fontSize: 20
@@ -54,7 +54,7 @@ export const CustomColors = Template.bind({});
 CustomColors.args = {
   progress: 80,
   children: "80%",
-  style: {
+  appearance: {
     primaryColor: "#22c55e",
     trackColor: "#f3f4f6",
     textColor: "#22c55e",
@@ -66,7 +66,7 @@ export const SlowAnimation = Template.bind({});
 SlowAnimation.args = {
   progress: 90,
   children: "90%",
-  style: {
+  appearance: {
     animationDuration: "5s",
     primaryColor: "#f59e0b"
   }
@@ -76,7 +76,7 @@ export const Complete = Template.bind({});
 Complete.args = {
   progress: 100,
   children: "Complete!",
-  style: {
+  appearance: {
     primaryColor: "#10b981",
     textColor: "#10b981",
     fontSize: 14
@@ -92,7 +92,7 @@ WithCustomContent.args = {
       <div style={{ fontSize: "10px" }}>POINTS</div>
     </div>
   ),
-  style: {
+  appearance: {
     size: 100,
     primaryColor: "#8b5cf6",
     textColor: "#8b5cf6"

@@ -44,25 +44,25 @@ interface BgImageContentProps {
     imageUrl: string;
     height: number;
     animationType?: AnimationType$2;
-    style?: {
+    appearance?: {
         scale?: number;
         duration?: number;
         easing?: EasingKey;
     };
 }
-declare const BgImageContent: ({ children, imageUrl, height, animationType, style }: BgImageContentProps) => react_jsx_runtime.JSX.Element;
+declare const BgImageContent: ({ children, imageUrl, height, animationType, appearance }: BgImageContentProps) => react_jsx_runtime.JSX.Element;
 
 interface CircleProgressProps$1 {
     progress: number;
     size: number;
-    style?: {
+    appearance?: {
         primaryColor?: string;
         trackColor?: string;
         strokeWidth?: number;
         animationDuration?: string;
     };
 }
-declare const CircleProgress: ({ progress, size, style }: CircleProgressProps$1) => react_jsx_runtime.JSX.Element;
+declare const CircleProgress: ({ progress, size, appearance }: CircleProgressProps$1) => react_jsx_runtime.JSX.Element;
 
 type FadeInAndZoomImagesImageItem = {
     src: string;
@@ -97,7 +97,7 @@ interface ArrowButtonProps {
     onClick?: () => void;
     as?: "button" | "a" | "span";
     href?: string;
-    style?: {
+    appearance?: {
         iconColor?: string;
         borderColor?: string;
         backgroundColor?: string;
@@ -106,7 +106,7 @@ interface ArrowButtonProps {
         hoverBackgroundColor?: string;
     };
 }
-declare const JmcArrowButton: ({ size, onClick, as, href, style }: ArrowButtonProps) => react_jsx_runtime.JSX.Element;
+declare const JmcArrowButton: ({ size, onClick, as, href, appearance }: ArrowButtonProps) => react_jsx_runtime.JSX.Element;
 
 interface ButtonProps {
     children: React__default.ReactNode;
@@ -116,7 +116,7 @@ interface ButtonProps {
     isHovered?: boolean;
     onMouseEnter?: () => void;
     onMouseLeave?: () => void;
-    style?: {
+    appearance?: {
         fontSize?: number;
         backgroundColor?: string;
         color?: string;
@@ -124,19 +124,19 @@ interface ButtonProps {
         circleToggleDotColor?: string;
     };
 }
-declare const JmcButton: ({ children, onClick, as, href, isHovered: controlledIsHovered, onMouseEnter, onMouseLeave, style }: ButtonProps) => react_jsx_runtime.JSX.Element;
+declare const JmcButton: ({ children, onClick, as, href, isHovered: controlledIsHovered, onMouseEnter, onMouseLeave, appearance }: ButtonProps) => react_jsx_runtime.JSX.Element;
 
 interface CircleToggleProps {
     isHovered?: boolean;
     onMouseEnter?: () => void;
     onMouseLeave?: () => void;
     onClick?: () => void;
-    style?: {
+    appearance?: {
         color?: string;
         dotColor?: string;
     };
 }
-declare const JmcCircleToggle: ({ isHovered: controlledIsHovered, onMouseEnter, onMouseLeave, onClick, style }: CircleToggleProps) => react_jsx_runtime.JSX.Element;
+declare const JmcCircleToggle: ({ isHovered: controlledIsHovered, onMouseEnter, onMouseLeave, onClick, appearance }: CircleToggleProps) => react_jsx_runtime.JSX.Element;
 
 type DirectionType = "left" | "right";
 
@@ -148,7 +148,7 @@ interface RebitaButtonProps {
     onClick?: () => void;
     as?: "button" | "a" | "div";
     href?: string;
-    style?: {
+    appearance?: {
         fontSize?: number;
         backgroundColor?: string;
         textColor?: string;
@@ -157,12 +157,12 @@ interface RebitaButtonProps {
         leftContentBorderColor?: string;
     };
 }
-declare const RebitaButton: ({ size, direction, text, icon, onClick, as, href, style }: RebitaButtonProps) => react_jsx_runtime.JSX.Element;
+declare const RebitaButton: ({ size, direction, text, icon, onClick, as, href, appearance }: RebitaButtonProps) => react_jsx_runtime.JSX.Element;
 
 interface CircleProgressProps {
     progress?: number;
     children?: ReactNode;
-    style?: {
+    appearance?: {
         primaryColor?: string;
         trackColor?: string;
         textColor?: string;
@@ -172,7 +172,7 @@ interface CircleProgressProps {
         animationDuration?: string;
     };
 }
-declare const RebitaCircleProgress: ({ progress, children, style }: CircleProgressProps) => react_jsx_runtime.JSX.Element;
+declare const RebitaCircleProgress: ({ progress, children, appearance }: CircleProgressProps) => react_jsx_runtime.JSX.Element;
 
 type SlideGuideDotType = "default" | "progress";
 
@@ -180,7 +180,7 @@ interface SlideGuideDotProps {
     type: SlideGuideDotType;
     progress: number;
     onClick: () => void;
-    style?: {
+    appearance?: {
         primaryColor?: string;
         trackColor?: string;
         circleSize?: number;
@@ -189,27 +189,27 @@ interface SlideGuideDotProps {
         animationDuration?: string;
     };
 }
-declare const RebitaSlideGuideDot: ({ type, progress, style, onClick }: SlideGuideDotProps) => react_jsx_runtime.JSX.Element;
+declare const RebitaSlideGuideDot: ({ type, progress, appearance, onClick }: SlideGuideDotProps) => react_jsx_runtime.JSX.Element;
 
 interface FadeSlideImageProps {
     images: FadeInAndZoomImagesImageItem[];
     fadeInAndZoomImagesProps?: Partial<ComponentProps<typeof FadeInAndZoomImages>>;
     slideGuideDotProps?: Partial<ComponentProps<typeof RebitaSlideGuideDot>>;
-    style?: {
+    appearance?: {
         guideGap?: number;
     };
 }
-declare const RebitaFadeSlideImage: ({ images, fadeInAndZoomImagesProps, slideGuideDotProps, style }: FadeSlideImageProps) => react_jsx_runtime.JSX.Element;
+declare const RebitaFadeSlideImage: ({ images, fadeInAndZoomImagesProps, slideGuideDotProps, appearance }: FadeSlideImageProps) => react_jsx_runtime.JSX.Element;
 
 interface FadeTextProps {
     children?: ReactNode;
     progress?: number;
-    style?: {
+    appearance?: {
         color?: string;
         fontSize?: number;
     };
 }
-declare const RebitaFadeText: ({ children, progress, style }: FadeTextProps) => react_jsx_runtime.JSX.Element;
+declare const RebitaFadeText: ({ children, progress, appearance }: FadeTextProps) => react_jsx_runtime.JSX.Element;
 
 interface PanelProps {
     imageSrc: string;
@@ -218,12 +218,12 @@ interface PanelProps {
     title: string;
     description: string;
     labels: ReactNode[];
-    style?: {
+    appearance?: {
         imageHeight?: number;
     };
     onClick: () => void;
 }
-declare const RebitaPanel: ({ imageSrc, imageAlt, imageText, title, description, labels, style, onClick }: PanelProps) => react_jsx_runtime.JSX.Element;
+declare const RebitaPanel: ({ imageSrc, imageAlt, imageText, title, description, labels, appearance, onClick }: PanelProps) => react_jsx_runtime.JSX.Element;
 
 type Direction$1 = "left" | "right";
 interface TextButtonWithIconProps {
@@ -233,36 +233,36 @@ interface TextButtonWithIconProps {
     as?: "button" | "a" | "div";
     href?: string;
     iconDirection?: Direction$1;
-    style?: {
+    appearance?: {
         fontSize?: number;
         color?: string;
         iconSize?: Size;
     };
 }
-declare const RebitaTextButtonWithIcon: ({ text, icon, onClick, as, href, iconDirection, style }: TextButtonWithIconProps) => react_jsx_runtime.JSX.Element;
+declare const RebitaTextButtonWithIcon: ({ text, icon, onClick, as, href, iconDirection, appearance }: TextButtonWithIconProps) => react_jsx_runtime.JSX.Element;
 
 interface ToggleProps$4 {
     size?: Size;
     isOpen?: boolean;
     onChange?: (isOpen: boolean) => void;
     onClick?: () => void;
-    style?: {
+    appearance?: {
         backgroundColor?: string;
         dotColor?: string;
         lineColor?: string;
     };
 }
-declare const RebitaToggle: ({ size, isOpen: controlledIsOpen, onChange, onClick, style }: ToggleProps$4) => react_jsx_runtime.JSX.Element;
+declare const RebitaToggle: ({ size, isOpen: controlledIsOpen, onChange, onClick, appearance }: ToggleProps$4) => react_jsx_runtime.JSX.Element;
 
 interface VerticalRollingTextProps {
     children?: ReactNode;
     enableHover?: boolean;
-    style?: {
+    appearance?: {
         fontSize?: number;
         color?: string;
     };
 }
-declare const VerticalRollingText: ({ children, enableHover, style }: VerticalRollingTextProps) => react_jsx_runtime.JSX.Element;
+declare const VerticalRollingText: ({ children, enableHover, appearance }: VerticalRollingTextProps) => react_jsx_runtime.JSX.Element;
 
 type AccordionAnimation$4 = {
     duration?: number;
@@ -273,7 +273,7 @@ interface Props$b {
     content: ReactNode;
     icon: ReactNode;
     animation?: AccordionAnimation$4;
-    style?: {
+    appearance?: {
         paddingSide?: number;
         paddingVertical?: number;
         iconColor?: string;
@@ -286,7 +286,7 @@ interface Props$b {
         };
     };
 }
-declare const Accordion001: ({ headerContent, content, icon, style, animation }: Props$b) => react_jsx_runtime.JSX.Element;
+declare const Accordion001: ({ headerContent, content, icon, appearance, animation }: Props$b) => react_jsx_runtime.JSX.Element;
 
 type AccordionAnimation$3 = {
     duration?: number;
@@ -297,7 +297,7 @@ interface Props$a {
     content: ReactNode;
     icon: ReactNode;
     animation?: AccordionAnimation$3;
-    style?: {
+    appearance?: {
         iconColor?: string;
         backgroundColor?: string;
         header?: {
@@ -308,7 +308,7 @@ interface Props$a {
         };
     };
 }
-declare const Accordion002: ({ headerContent, content, icon, style, animation }: Props$a) => react_jsx_runtime.JSX.Element;
+declare const Accordion002: ({ headerContent, content, icon, appearance, animation }: Props$a) => react_jsx_runtime.JSX.Element;
 
 type AccordionAnimation$2 = {
     duration?: number;
@@ -319,7 +319,7 @@ interface Props$9 {
     content: ReactNode;
     icon: ReactNode;
     animation?: AccordionAnimation$2;
-    style?: {
+    appearance?: {
         iconColor?: string;
         backgroundColor?: string;
         header?: {
@@ -332,7 +332,7 @@ interface Props$9 {
         };
     };
 }
-declare const Accordion003: ({ headerContent, content, icon, style, animation }: Props$9) => react_jsx_runtime.JSX.Element;
+declare const Accordion003: ({ headerContent, content, icon, appearance, animation }: Props$9) => react_jsx_runtime.JSX.Element;
 
 type AccordionAnimation$1 = {
     duration?: number;
@@ -349,7 +349,7 @@ interface Props$8 {
     };
     icon: ReactNode;
     animation?: AccordionAnimation$1;
-    style?: {
+    appearance?: {
         paddingSide?: number;
         paddingVertical?: number;
         iconColor?: string;
@@ -364,7 +364,7 @@ interface Props$8 {
         };
     };
 }
-declare const Accordion004: ({ header, content, icon, style, animation }: Props$8) => react_jsx_runtime.JSX.Element;
+declare const Accordion004: ({ header, content, icon, appearance, animation }: Props$8) => react_jsx_runtime.JSX.Element;
 
 type AccordionAnimation = {
     duration?: number;
@@ -381,7 +381,7 @@ interface Props$7 {
     };
     icon: ReactNode;
     animation?: AccordionAnimation;
-    style?: {
+    appearance?: {
         iconColor?: string;
         backgroundColor?: string;
         header?: {
@@ -394,7 +394,7 @@ interface Props$7 {
         };
     };
 }
-declare const Accordion005: ({ header, content, icon, style, animation }: Props$7) => react_jsx_runtime.JSX.Element;
+declare const Accordion005: ({ header, content, icon, appearance, animation }: Props$7) => react_jsx_runtime.JSX.Element;
 
 type Type$9 = "001" | "002";
 type ArrowPosition$1 = "top" | "bottom" | "left" | "right";
@@ -403,13 +403,13 @@ interface BalloonProps$1 {
     type?: Type$9;
     children: ReactNode;
     arrowPosition?: ArrowPosition$1;
-    style?: {
+    appearance?: {
         backgroundColor?: string;
         color?: string;
         fontSize?: number;
     };
 }
-declare const Balloon001: ({ type, children, style, arrowPosition }: BalloonProps$1) => react_jsx_runtime.JSX.Element;
+declare const Balloon001: ({ type, children, appearance, arrowPosition }: BalloonProps$1) => react_jsx_runtime.JSX.Element;
 
 type Type$8 = "001" | "002";
 type ArrowPosition = "top" | "bottom" | "left" | "right";
@@ -418,7 +418,7 @@ interface BalloonProps {
     type?: Type$8;
     children: ReactNode;
     arrowPosition?: ArrowPosition;
-    style?: {
+    appearance?: {
         backgroundColor?: string;
         borderColor?: string;
         borderWidth?: number;
@@ -426,7 +426,7 @@ interface BalloonProps {
         fontSize?: number;
     };
 }
-declare const Balloon002: ({ type, children, style, arrowPosition }: BalloonProps) => react_jsx_runtime.JSX.Element;
+declare const Balloon002: ({ type, children, appearance, arrowPosition }: BalloonProps) => react_jsx_runtime.JSX.Element;
 
 type Direction = "top" | "bottom" | "left" | "right" | "all";
 type Props$6 = {
@@ -447,7 +447,7 @@ type BreadcrumbsItem = {
 };
 interface BreadcrumbsProps {
     items: BreadcrumbsItem[];
-    style?: {
+    appearance?: {
         backgroundColor?: string;
         borderColor?: string;
         color?: string;
@@ -459,7 +459,7 @@ interface BreadcrumbsProps {
         iconColor?: string;
     };
 }
-declare const Breadcrumbs: ({ items, style }: BreadcrumbsProps) => react_jsx_runtime.JSX.Element;
+declare const Breadcrumbs: ({ items, appearance }: BreadcrumbsProps) => react_jsx_runtime.JSX.Element;
 
 type Type$7 = "001" | "002" | "003";
 type AnimationType$1 = "001" | "002";
@@ -557,14 +557,14 @@ interface CheckBoxProps$1 {
     defaultChecked?: boolean;
     disabled?: boolean;
     onChange?: (event: React__default.ChangeEvent<HTMLInputElement>) => void;
-    style?: {
+    appearance?: {
         backgroundColor?: string;
         borderColor?: string;
         checkedBackgroundColor?: string;
         markColor?: string;
     };
 }
-declare const CheckBox001: ({ style, id, type, size, name, checked, defaultChecked, disabled, onChange }: CheckBoxProps$1) => react_jsx_runtime.JSX.Element;
+declare const CheckBox001: ({ appearance, id, type, size, name, checked, defaultChecked, disabled, onChange }: CheckBoxProps$1) => react_jsx_runtime.JSX.Element;
 
 type CheckBoxSize = "small" | "middle";
 interface CheckBoxProps {
@@ -575,14 +575,14 @@ interface CheckBoxProps {
     defaultChecked?: boolean;
     disabled?: boolean;
     onChange?: (event: React__default.ChangeEvent<HTMLInputElement>) => void;
-    style?: {
+    appearance?: {
         backgroundColor?: string;
         borderColor?: string;
         checkedBackgroundColor?: string;
         markColor?: string;
     };
 }
-declare const CheckBox002: ({ style, id, size, name, checked, defaultChecked, disabled, onChange }: CheckBoxProps) => react_jsx_runtime.JSX.Element;
+declare const CheckBox002: ({ appearance, id, size, name, checked, defaultChecked, disabled, onChange }: CheckBoxProps) => react_jsx_runtime.JSX.Element;
 
 interface ListItemWithContent {
     id: string;
@@ -593,63 +593,63 @@ interface ListItem$1 {
 }
 interface DragAndDropProps {
     items: ListItemWithContent[];
-    style?: {
+    appearance?: {
         gap?: number;
     };
     onReorder: (items: ListItem$1[]) => void;
 }
-declare const DragAndDrop001: ({ items, style, onReorder }: DragAndDropProps) => react_jsx_runtime.JSX.Element;
+declare const DragAndDrop001: ({ items, appearance, onReorder }: DragAndDropProps) => react_jsx_runtime.JSX.Element;
 
 interface DropdownMenuProps$1 {
     detail: ReactNode;
     contents: ReactNode;
     nowrap?: boolean;
-    style?: {
+    appearance?: {
         backgroundColor?: string;
         borderColor?: string;
         borderRadius?: number;
     };
 }
-declare const Dropdown001: ({ style, detail, contents, nowrap }: DropdownMenuProps$1) => react_jsx_runtime.JSX.Element;
+declare const Dropdown001: ({ appearance, detail, contents, nowrap }: DropdownMenuProps$1) => react_jsx_runtime.JSX.Element;
 
 interface DropdownMenuProps {
     detail: ReactNode;
     contents: ReactNode;
     nowrap?: boolean;
-    style?: {
+    appearance?: {
         backgroundColor?: string;
         borderColor?: string;
         borderRadius?: number;
     };
     balloonProps?: ComponentProps<typeof Balloon001>;
 }
-declare const Dropdown002: ({ style, detail, contents, nowrap, balloonProps }: DropdownMenuProps) => react_jsx_runtime.JSX.Element;
+declare const Dropdown002: ({ appearance, detail, contents, nowrap, balloonProps }: DropdownMenuProps) => react_jsx_runtime.JSX.Element;
 
 type Type$5 = "001" | "002" | "003";
 interface FrameIconProps {
     icon: React.ReactNode;
     type: Type$5;
     size: Size;
-    style?: {
+    appearance?: {
         backgroundColor?: string;
         iconColor?: string;
         borderColor?: string;
     };
 }
-declare const FrameIcon001: ({ style, type, size, icon }: FrameIconProps) => react_jsx_runtime.JSX.Element;
+declare const FrameIcon001: ({ appearance, type, size, icon }: FrameIconProps) => react_jsx_runtime.JSX.Element;
 
 type Type$4 = "001" | "002" | "003";
 interface FrameNumberProps {
     number: number;
     type: Type$4;
     size: Size;
-    style?: {
+    appearance?: {
         backgroundColor?: string;
         color?: string;
         borderColor?: string;
     };
 }
-declare const FrameNumber001: ({ style, type, size, number }: FrameNumberProps) => react_jsx_runtime.JSX.Element;
+declare const FrameNumber001: ({ appearance, type, size, number }: FrameNumberProps) => react_jsx_runtime.JSX.Element;
 
 type Props$5 = {
     mapId: string;
@@ -670,7 +670,7 @@ interface Header001Props {
     rightInner?: React.ReactNode;
     modalContent?: React.ReactNode;
     showModal?: boolean;
-    style?: {
+    appearance?: {
         leftGap?: number;
         rightGap?: number;
         header?: {
@@ -685,7 +685,7 @@ interface Header001Props {
         };
     };
 }
-declare const Header001: ({ left, right, leftInner, rightInner, modalContent, style, showModal }: Header001Props) => react_jsx_runtime.JSX.Element;
+declare const Header001: ({ left, right, leftInner, rightInner, modalContent, appearance, showModal }: Header001Props) => react_jsx_runtime.JSX.Element;
 
 declare const Svg001: (props: SVGProps<SVGSVGElement>) => react_jsx_runtime.JSX.Element;
 
@@ -994,14 +994,14 @@ interface LabelProps$1 {
     type?: Type$3;
     size?: Size;
     children: React__default.ReactNode;
-    style?: {
+    appearance?: {
         fontSize?: number;
         backgroundColor?: string;
         color?: string;
         borderColor?: string;
     };
 }
-declare const Label001: ({ type, size, children, style }: LabelProps$1) => react_jsx_runtime.JSX.Element;
+declare const Label001: ({ type, size, children, appearance }: LabelProps$1) => react_jsx_runtime.JSX.Element;
 
 type Type$2 = "001" | "002" | "003";
 type IconPosition$2 = "left" | "right";
@@ -1011,7 +1011,7 @@ interface LabelProps {
     iconPosition?: IconPosition$2;
     icon: React__default.ReactNode;
     children: React__default.ReactNode;
-    style?: {
+    appearance?: {
         fontSize?: number;
         backgroundColor?: string;
         borderColor?: string;
@@ -1019,7 +1019,7 @@ interface LabelProps {
         iconColor?: string;
     };
 }
-declare const Label002: ({ type, size, iconPosition, icon, children, style }: LabelProps) => react_jsx_runtime.JSX.Element;
+declare const Label002: ({ type, size, iconPosition, icon, children, appearance }: LabelProps) => react_jsx_runtime.JSX.Element;
 
 type AspectRatio = "16 / 9" | "4 / 3" | "1 / 1" | "3 / 4" | "9 / 16" | "21 / 9";
 interface LazyImageAppearance {
@@ -1056,14 +1056,14 @@ interface ListProps {
     listStyle?: "ul" | "ol";
     items: ListItem[];
     ariaLabel?: string;
-    style?: {
+    appearance?: {
         columnGap?: number;
         rowGap?: number;
         borderColor?: string;
         isAlignItemsCenter?: boolean;
     };
 }
-declare const List001: ({ type, listStyle, items, ariaLabel, style }: ListProps) => react_jsx_runtime.JSX.Element;
+declare const List001: ({ type, listStyle, items, ariaLabel, appearance }: ListProps) => react_jsx_runtime.JSX.Element;
 
 interface ListItemAppearance$5 {
     color?: string;
@@ -1181,20 +1181,20 @@ type Type$1 = "001";
 interface LoadingProps$1 {
     type?: Type$1;
     size?: Size;
-    style?: {
+    appearance?: {
         color?: string;
     };
 }
-declare const Loading001: ({ type, size, style }: LoadingProps$1) => react_jsx_runtime.JSX.Element;
+declare const Loading001: ({ type, size, appearance }: LoadingProps$1) => react_jsx_runtime.JSX.Element;
 
 interface LoadingProps {
     size?: Size;
-    style?: {
+    appearance?: {
         indicatorColor?: string;
         backgroundColor?: string;
     };
 }
-declare const Loading002: ({ size, style }: LoadingProps) => react_jsx_runtime.JSX.Element;
+declare const Loading002: ({ size, appearance }: LoadingProps) => react_jsx_runtime.JSX.Element;
 
 type Type = "001";
 interface MediaProps {
@@ -1221,7 +1221,7 @@ interface NestedListItemProps$1 {
     children: React__default.ReactNode;
     onClick?: () => void;
     isOpen?: boolean;
-    style?: {
+    appearance?: {
         fontSize?: number;
         lineHeight?: number;
         color?: string;
@@ -1229,7 +1229,7 @@ interface NestedListItemProps$1 {
         iconColor?: string;
     };
 }
-declare const NestedListItem001: ({ icon, children, onClick, isOpen: controlledIsOpen, style }: NestedListItemProps$1) => react_jsx_runtime.JSX.Element;
+declare const NestedListItem001: ({ icon, children, onClick, isOpen: controlledIsOpen, appearance }: NestedListItemProps$1) => react_jsx_runtime.JSX.Element;
 
 interface NestedListItemProps {
     leftIcon: React__default.ReactNode;
@@ -1237,7 +1237,7 @@ interface NestedListItemProps {
     children: React__default.ReactNode;
     onClick?: () => void;
     isOpen?: boolean;
-    style?: {
+    appearance?: {
         fontSize?: number;
         lineHeight?: number;
         color?: string;
@@ -1245,7 +1245,7 @@ interface NestedListItemProps {
         rightIconColor?: string;
     };
 }
-declare const NestedListItem002: ({ leftIcon, rightIcon, children, onClick, isOpen: controlledIsOpen, style }: NestedListItemProps) => react_jsx_runtime.JSX.Element;
+declare const NestedListItem002: ({ leftIcon, rightIcon, children, onClick, isOpen: controlledIsOpen, appearance }: NestedListItemProps) => react_jsx_runtime.JSX.Element;
 
 interface ParallaxImageProps$1 {
     children: React.ReactNode;
@@ -1394,17 +1394,17 @@ interface SliderProps {
     controller?: {
         left?: {
             children: React.ReactNode;
-            style?: ArrowStyle;
+            appearance?: ArrowStyle;
         };
         right?: {
             children: React.ReactNode;
-            style?: ArrowStyle;
+            appearance?: ArrowStyle;
         };
     };
     autoPlay?: AutoPlay;
     dots?: {
         show: boolean;
-        style?: {
+        appearance?: {
             size?: number;
             gap?: number;
             marginTop?: number;
@@ -1634,35 +1634,35 @@ interface ToggleProps$3 {
     isOpen?: boolean;
     onChange?: (isOpen: boolean) => void;
     onClick?: () => void;
-    style?: {
+    appearance?: {
         lineColor?: string;
         animationBackgroundColorLine?: string;
         animationBackgroundColorBefore?: string;
         animationBackgroundColorAfter?: string;
     };
 }
-declare const Toggle001: ({ isOpen: controlledIsOpen, onChange, onClick, style }: ToggleProps$3) => react_jsx_runtime.JSX.Element;
+declare const Toggle001: ({ isOpen: controlledIsOpen, onChange, onClick, appearance }: ToggleProps$3) => react_jsx_runtime.JSX.Element;
 
 interface ToggleProps$2 {
     isOpen?: boolean;
     onChange?: (isOpen: boolean) => void;
     onClick?: () => void;
-    style?: {
+    appearance?: {
         lineColor?: string;
     };
 }
-declare const Toggle002: ({ isOpen: controlledIsOpen, onChange, onClick, style }: ToggleProps$2) => react_jsx_runtime.JSX.Element;
+declare const Toggle002: ({ isOpen: controlledIsOpen, onChange, onClick, appearance }: ToggleProps$2) => react_jsx_runtime.JSX.Element;
 
 interface ToggleProps$1 {
     isOpen?: boolean;
     onChange?: (isOpen: boolean) => void;
     onClick?: () => void;
-    style?: {
+    appearance?: {
         lineColor?: string;
         backgroundColor?: string;
     };
 }
-declare const Toggle003: ({ isOpen: controlledIsOpen, onChange, onClick, style }: ToggleProps$1) => react_jsx_runtime.JSX.Element;
+declare const Toggle003: ({ isOpen: controlledIsOpen, onChange, onClick, appearance }: ToggleProps$1) => react_jsx_runtime.JSX.Element;
 
 type ToggleProps = {
     isOpen: boolean;

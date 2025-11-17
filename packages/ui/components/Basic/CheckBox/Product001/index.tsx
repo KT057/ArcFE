@@ -20,7 +20,7 @@ interface CheckBoxProps {
   defaultChecked?: boolean;
   disabled?: boolean;
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  style?: {
+  appearance?: {
     backgroundColor?: string;
     borderColor?: string;
     checkedBackgroundColor?: string;
@@ -29,7 +29,7 @@ interface CheckBoxProps {
 }
 
 export const CheckBox001 = ({
-  style,
+  appearance,
   id,
   type,
   size,
@@ -53,17 +53,17 @@ export const CheckBox001 = ({
           checked={checked ?? false}
           defaultChecked={uncontrolledDefaultChecked}
           disabled={disabled}
-          checkedBackgroundColor={style?.checkedBackgroundColor ?? "#000"}
+          checkedBackgroundColor={appearance?.checkedBackgroundColor ?? "#000"}
           onChange={onChange}
         />
         <StyledCheckBoxBackground
           type={type}
-          backgroundColor={style?.backgroundColor ?? "#fff"}
-          borderColor={style?.borderColor ?? "#000"}
+          backgroundColor={appearance?.backgroundColor ?? "#fff"}
+          borderColor={appearance?.borderColor ?? "#000"}
         />
         <StyledCheckBoxCheckmark
           size={size}
-          markColor={style?.markColor ?? "#000"}
+          markColor={appearance?.markColor ?? "#000"}
         >
           <Svg031Icon />
         </StyledCheckBoxCheckmark>

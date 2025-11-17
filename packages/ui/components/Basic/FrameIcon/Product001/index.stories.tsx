@@ -19,7 +19,7 @@ Default.args = {
   icon: <Svg001Icon />,
   type: "001",
   size: "middle",
-  style: {
+  appearance: {
     backgroundColor: "#fff",
     borderColor: "#000",
     iconColor: "#000"

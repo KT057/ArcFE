@@ -31,7 +31,7 @@ interface Props {
   };
   icon: ReactNode;
   animation?: AccordionAnimation;
-  style?: {
+  appearance?: {
     paddingSide?: number;
     paddingVertical?: number;
     iconColor?: string;
@@ -51,7 +51,7 @@ export const Accordion004 = ({
   header,
   content,
   icon,
-  style,
+  appearance,
   animation
 }: Props) => {
   const { handleClick, contentRef, iconRef } = useAccordion({ animation });
@@ -60,20 +60,20 @@ export const Accordion004 = ({
     <StyledAccordionWrapper>
       <StyledAccordion>
         <StyledAccordionHeader
-          borderColor={style?.borderColor ?? "#000"}
-          paddingSide={style?.paddingSide}
-          paddingVertical={style?.paddingVertical}
+          borderColor={appearance?.borderColor ?? "#000"}
+          paddingSide={appearance?.paddingSide}
+          paddingVertical={appearance?.paddingVertical}
           onClick={handleClick}
         >
           <StyledAccordionHeaderInner>
             <StyledAccordionTitleWrapper>
               <StyledAccordionTitle
-                titleColor={style?.header?.titleColor ?? "#f10707"}
+                titleColor={appearance?.header?.titleColor ?? "#f10707"}
               >
                 {header.title}
               </StyledAccordionTitle>
               <StyledAccordionText
-                textColor={style?.header?.textColor ?? "#000"}
+                textColor={appearance?.header?.textColor ?? "#000"}
               >
                 {header.text}
               </StyledAccordionText>
@@ -81,7 +81,7 @@ export const Accordion004 = ({
 
             <StyledAccordionIcon
               ref={iconRef}
-              color={style?.iconColor ?? "#000"}
+              color={appearance?.iconColor ?? "#000"}
             >
               {icon}
             </StyledAccordionIcon>
@@ -90,16 +90,16 @@ export const Accordion004 = ({
 
         <StyledAccordionContentWrapper ref={contentRef}>
           <StyledAccordionContent
-            paddingSide={style?.paddingSide}
-            paddingVertical={style?.paddingVertical}
+            paddingSide={appearance?.paddingSide}
+            paddingVertical={appearance?.paddingVertical}
           >
             <StyledAccordionContentTitle
-              titleColor={style?.content?.titleColor ?? "#000"}
+              titleColor={appearance?.content?.titleColor ?? "#000"}
             >
               {content.title}
             </StyledAccordionContentTitle>
             <StyledAccordionContentText
-              textColor={style?.content?.textColor ?? "#000"}
+              textColor={appearance?.content?.textColor ?? "#000"}
             >
               {content.text}
             </StyledAccordionContentText>

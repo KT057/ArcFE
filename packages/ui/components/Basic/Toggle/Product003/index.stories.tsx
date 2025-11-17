@@ -30,7 +30,7 @@ Interactive.args = {};
 
 export const CustomStyle = Template.bind({});
 CustomStyle.args = {
-  style: {
+  appearance: {
     lineColor: "#2196f3",
     backgroundColor: "#000"
   }

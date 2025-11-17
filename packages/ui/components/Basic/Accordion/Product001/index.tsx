@@ -23,7 +23,7 @@ interface Props {
   content: ReactNode;
   icon: ReactNode;
   animation?: AccordionAnimation;
-  style?: {
+  appearance?: {
     paddingSide?: number;
     paddingVertical?: number;
     iconColor?: string;
@@ -41,7 +41,7 @@ export const Accordion001 = ({
   headerContent,
   content,
   icon,
-  style,
+  appearance,
   animation
 }: Props) => {
   const { handleClick, contentRef, iconRef } = useAccordion({ animation });
@@ -50,21 +50,21 @@ export const Accordion001 = ({
     <StyledAccordionWrapper>
       <StyledAccordion>
         <StyledAccordionHeader
-          borderColor={style?.borderColor ?? "#000"}
-          paddingSide={style?.paddingSide}
-          paddingVertical={style?.paddingVertical}
+          borderColor={appearance?.borderColor ?? "#000"}
+          paddingSide={appearance?.paddingSide}
+          paddingVertical={appearance?.paddingVertical}
           onClick={handleClick}
         >
           <StyledAccordionHeaderInner>
             <StyledAccordionTitleWrapper>
-              <StyledAccordionTitle color={style?.header?.color ?? "#000"}>
+              <StyledAccordionTitle color={appearance?.header?.color ?? "#000"}>
                 {headerContent}
               </StyledAccordionTitle>
             </StyledAccordionTitleWrapper>
 
             <StyledAccordionIcon
               ref={iconRef}
-              color={style?.iconColor ?? "#000"}
+              color={appearance?.iconColor ?? "#000"}
             >
               {icon}
             </StyledAccordionIcon>
@@ -73,10 +73,10 @@ export const Accordion001 = ({
 
         <StyledAccordionContentWrapper ref={contentRef}>
           <StyledAccordionContent
-            paddingSide={style?.paddingSide}
-            paddingVertical={style?.paddingVertical}
+            paddingSide={appearance?.paddingSide}
+            paddingVertical={appearance?.paddingVertical}
           >
-            <StyledAccordionContentText color={style?.content?.color ?? "#000"}>
+            <StyledAccordionContentText color={appearance?.content?.color ?? "#000"}>
               {content}
             </StyledAccordionContentText>
           </StyledAccordionContent>

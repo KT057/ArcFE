@@ -10,7 +10,7 @@ import {
 interface CircleProgressProps {
   progress?: number;
   children?: ReactNode;
-  style?: {
+  appearance?: {
     primaryColor?: string;
     trackColor?: string;
     textColor?: string;
@@ -24,10 +24,10 @@ interface CircleProgressProps {
 export const RebitaCircleProgress = ({
   progress = 0,
   children,
-  style
+  appearance
 }: CircleProgressProps) => {
-  const size = style?.size || 100;
-  const strokeWidth = style?.strokeWidth || 3;
+  const size = appearance?.size || 100;
+  const strokeWidth = appearance?.strokeWidth || 3;
 
   return (
     <StyledCircleProgressWrapper>
@@ -35,17 +35,17 @@ export const RebitaCircleProgress = ({
         <CircleProgress
           progress={progress}
           size={size}
-          style={{
-            primaryColor: style?.primaryColor,
-            trackColor: style?.trackColor,
+          appearance={{
+            primaryColor: appearance?.primaryColor,
+            trackColor: appearance?.trackColor,
             strokeWidth: strokeWidth,
-            animationDuration: style?.animationDuration
+            animationDuration: appearance?.animationDuration
           }}
         />
         <StyledCircleProgressContent>
           <StyledCircleProgressPercentage
-            fontSize={style?.fontSize}
-            textColor={style?.textColor}
+            fontSize={appearance?.fontSize}
+            textColor={appearance?.textColor}
           >
             {children}
           </StyledCircleProgressPercentage>

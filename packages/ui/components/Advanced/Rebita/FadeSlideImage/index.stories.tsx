@@ -38,7 +38,7 @@ CustomImages.args = {
     { src: getPublicPath("/images/img-03.jpg"), alt: "Image+3" }
   ],
   slideGuideDotProps: {
-    style: {
+    appearance: {
       circleSize: 15,
       dotSize: 15,
       primaryColor: "#22c55e",
@@ -47,7 +47,7 @@ CustomImages.args = {
       animationDuration: "5s"
     }
   },
-  style: {
+  appearance: {
     guideGap: 10
   }
 };

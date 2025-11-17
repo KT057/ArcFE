@@ -94,7 +94,7 @@ WithListItem001CustomGap.args = {
   type: "001",
   items: listItemSamples,
   ariaLabel: "List with custom gap",
-  style: {
+  appearance: {
     columnGap: 30
   }
 };

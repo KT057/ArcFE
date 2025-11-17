@@ -21,7 +21,7 @@ interface PanelProps {
   title: string;
   description: string;
   labels: ReactNode[];
-  style?: {
+  appearance?: {
     imageHeight?: number;
   };
   onClick: () => void;
@@ -34,13 +34,13 @@ export const RebitaPanel = ({
   title = "リノア北赤羽",
   description = "工業地域に建つ元企業社宅を地域に開いたシェアスペース付き分譲マンションとして再生",
   labels = [],
-  style,
+  appearance,
   onClick
 }: PanelProps) => {
   return (
     <StyledPanelWrapper>
       <StyledPanel onClick={onClick}>
-        <StyledPanelImageWrapper imageHeight={style?.imageHeight}>
+        <StyledPanelImageWrapper imageHeight={appearance?.imageHeight}>
           <StyledPanelImageContent>
             <StyledPanelImageImage src={imageSrc} alt={imageAlt} />
           </StyledPanelImageContent>

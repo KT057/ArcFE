@@ -19,7 +19,7 @@ interface RebitaButtonProps {
   onClick?: () => void;
   as?: "button" | "a" | "div";
   href?: string;
-  style?: {
+  appearance?: {
     fontSize?: number;
     backgroundColor?: string;
     textColor?: string;
@@ -37,7 +37,7 @@ export const RebitaButton = ({
   onClick,
   as = "a",
   href,
-  style
+  appearance
 }: RebitaButtonProps) => {
   const [isHovered, setIsHovered] = useState(false);
 
@@ -56,21 +56,21 @@ export const RebitaButton = ({
         direction={direction}
         onClick={onClick}
         href={href}
-        backgroundColor={style?.backgroundColor}
-        borderColor={style?.borderColor}
+        backgroundColor={appearance?.backgroundColor}
+        borderColor={appearance?.borderColor}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
       >
         <StyledRebitaButtonLeft
-          textColor={style?.textColor}
-          leftContentBorderColor={style?.leftContentBorderColor}
+          textColor={appearance?.textColor}
+          leftContentBorderColor={appearance?.leftContentBorderColor}
           direction={direction}
         >
-          <StyledRebitaButtonLeftInner fontSize={style?.fontSize}>
+          <StyledRebitaButtonLeftInner fontSize={appearance?.fontSize}>
             <VerticalRollingText
-              style={{
-                fontSize: style?.fontSize,
-                color: style?.textColor || "#fff"
+              appearance={{
+                fontSize: appearance?.fontSize,
+                color: appearance?.textColor || "#fff"
               }}
               enableHover={isHovered}
             >
@@ -81,7 +81,7 @@ export const RebitaButton = ({
         <StyledRebitaButtonRight size={size}>
           <StyledRebitaButtonRightInner
             iconSize={size}
-            iconColor={style?.iconColor}
+            iconColor={appearance?.iconColor}
           >
             <>{icon}</>
           </StyledRebitaButtonRightInner>

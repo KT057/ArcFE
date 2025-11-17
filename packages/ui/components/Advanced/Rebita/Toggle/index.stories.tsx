@@ -38,7 +38,7 @@ CloseState.args = {
 
 export const CustomColors = Template.bind({});
 CustomColors.args = {
-  style: {
+  appearance: {
     backgroundColor: "#2196f3",
     dotColor: "#ffffff",
     lineColor: "#ffffff"
@@ -47,7 +47,7 @@ CustomColors.args = {
 
 export const DarkTheme = Template.bind({});
 DarkTheme.args = {
-  style: {
+  appearance: {
     backgroundColor: "#1f2937",
     dotColor: "#f3f4f6",
     lineColor: "#f3f4f6"
@@ -56,7 +56,7 @@ DarkTheme.args = {
 
 export const ColorfulTheme = Template.bind({});
 ColorfulTheme.args = {
-  style: {
+  appearance: {
     backgroundColor: "#10b981",
     dotColor: "#ffffff",
     lineColor: "#ffffff"
@@ -106,7 +106,7 @@ const MultipleTogglesTemplate: StoryFn<typeof RebitaToggle> = () => {
             <RebitaToggle
               isOpen={isOpen}
               onChange={(newState) => handleToggleChange(index, newState)}
-              style={{
+              appearance={{
                 backgroundColor: isOpen ? "#22c55e" : "#6b7280"
               }}
             />

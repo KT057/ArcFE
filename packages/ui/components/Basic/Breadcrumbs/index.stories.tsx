@@ -27,7 +27,7 @@ Default.args = {
       }
     }
   ],
-  style: {
+  appearance: {
     color: "#000",
     fontSize: 16,
     hoverColor: "#ccc",

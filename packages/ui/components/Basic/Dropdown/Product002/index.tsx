@@ -13,7 +13,7 @@ interface DropdownMenuProps {
   detail: ReactNode;
   contents: ReactNode;
   nowrap?: boolean;
-  style?: {
+  appearance?: {
     backgroundColor?: string;
     borderColor?: string;
     borderRadius?: number;
@@ -22,7 +22,7 @@ interface DropdownMenuProps {
 }
 
 export const Dropdown002 = ({
-  style,
+  appearance,
   detail,
   contents,
   nowrap,
@@ -36,9 +36,9 @@ export const Dropdown002 = ({
           <StyledDetail nowrap={nowrap}>
             <Balloon001
               {...balloonProps}
-              style={{
-                ...balloonProps?.style,
-                backgroundColor: style?.backgroundColor
+              appearance={{
+                ...balloonProps?.appearance,
+                backgroundColor: appearance?.backgroundColor
               }}
               type="001"
               arrowPosition="top"

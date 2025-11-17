@@ -29,7 +29,7 @@ Default.args = {
   id: "checkbox-001",
   type: "001",
   size: "middle",
-  style: {
+  appearance: {
     backgroundColor: "#fff",
     borderColor: "#000",
     checkedBackgroundColor: "#411fe6",
@@ -43,7 +43,7 @@ Checked.args = {
   type: "001",
   size: "middle",
   checked: true,
-  style: {
+  appearance: {
     backgroundColor: "#fff",
     borderColor: "#000",
     checkedBackgroundColor: "#411fe6",
@@ -57,7 +57,7 @@ Disabled.args = {
   type: "001",
   size: "middle",
   disabled: true,
-  style: {
+  appearance: {
     backgroundColor: "#fff",
     borderColor: "#000",
     checkedBackgroundColor: "#411fe6",
@@ -70,7 +70,7 @@ Type002.args = {
   id: "checkbox-002",
   type: "002",
   size: "middle",
-  style: {
+  appearance: {
     backgroundColor: "#fff",
     borderColor: "#000",
     checkedBackgroundColor: "#411fe6",
@@ -83,7 +83,7 @@ Type003.args = {
   id: "checkbox-003",
   type: "003",
   size: "middle",
-  style: {
+  appearance: {
     backgroundColor: "#fff",
     borderColor: "#000",
     checkedBackgroundColor: "#411fe6",
