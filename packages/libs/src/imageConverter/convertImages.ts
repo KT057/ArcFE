@@ -3,14 +3,21 @@ import path from "node:path";
 import sharp from "sharp";
 
 /**
+ * サポートされている出力フォーマット
+ */
+export type OutputFormat = "webp" | "jpeg" | "png" | "avif";
+
+/**
  * 画像変換オプション
  */
-export type ConvertImagesToWebPOptions = {
+export type ConvertImagesOptions = {
   /** 元画像のディレクトリパス */
   sourceDir: string;
   /** 出力先ディレクトリパス */
   outputDir: string;
-  /** WebP品質 (0-100) */
+  /** 出力フォーマット (デフォルト: 'webp') */
+  outputFormat?: OutputFormat;
+  /** 品質 (0-100) */
   quality?: number;
   /** サポートする画像形式 */
   supportedFormats?: readonly string[];
@@ -39,6 +46,7 @@ export type ConversionStats = {
  * デフォルト設定
  */
 const DEFAULT_OPTIONS = {
+  outputFormat: "webp" as OutputFormat,
   quality: 80,
   supportedFormats: [".jpg", ".jpeg", ".png", ".gif", ".webp"] as const,
   logger: {
@@ -89,16 +97,35 @@ const formatBytes = (bytes: number): string => {
 };
 
 /**
- * 画像をWebP形式に変換
+ * 画像を指定されたフォーマットに変換
  */
-const convertToWebP = async (
+const convertImage = async (
   inputPath: string,
   outputPath: string,
+  format: OutputFormat,
   quality: number,
-  logger: ConvertImagesToWebPOptions["logger"]
+  logger: ConvertImagesOptions["logger"]
 ): Promise<{ success: boolean; bytesSaved: number }> => {
   try {
-    await sharp(inputPath).webp({ quality }).toFile(outputPath);
+    const image = sharp(inputPath);
+
+    // フォーマットに応じて変換
+    switch (format) {
+      case "webp":
+        await image.webp({ quality }).toFile(outputPath);
+        break;
+      case "jpeg":
+        await image.jpeg({ quality }).toFile(outputPath);
+        break;
+      case "png":
+        await image.png({ quality }).toFile(outputPath);
+        break;
+      case "avif":
+        await image.avif({ quality }).toFile(outputPath);
+        break;
+      default:
+        throw new Error(`Unsupported format: ${format}`);
+    }
 
     const inputStats = fs.statSync(inputPath);
     const outputStats = fs.statSync(outputPath);
@@ -125,18 +152,19 @@ const convertToWebP = async (
 /**
  * 画像変換のメイン処理
  */
-export const convertImagesToWebP = async (
-  options: ConvertImagesToWebPOptions
+export const convertImages = async (
+  options: ConvertImagesOptions
 ): Promise<ConversionStats> => {
   const {
     sourceDir,
     outputDir,
+    outputFormat = DEFAULT_OPTIONS.outputFormat,
     quality = DEFAULT_OPTIONS.quality,
     supportedFormats = DEFAULT_OPTIONS.supportedFormats,
     logger = DEFAULT_OPTIONS.logger,
   } = options;
 
-  logger.log("🖼️  画像変換スクリプトを開始します...\n");
+  logger.log(`🖼️  画像変換スクリプトを開始します (出力形式: ${outputFormat})...\n`);
 
   // 元ディレクトリの存在確認
   if (!fs.existsSync(sourceDir)) {
@@ -177,10 +205,10 @@ export const convertImagesToWebP = async (
     const relativePath = path.relative(sourceDir, inputPath);
     const parsedPath = path.parse(relativePath);
 
-    // 出力パスを生成 (拡張子を.webpに変更)
+    // 出力パスを生成 (拡張子を指定されたフォーマットに変更)
     const outputRelativePath = path.join(
       parsedPath.dir,
-      `${parsedPath.name}.webp`
+      `${parsedPath.name}.${outputFormat}`
     );
     const outputPath = path.join(outputDir, outputRelativePath);
 
@@ -188,7 +216,7 @@ export const convertImagesToWebP = async (
     ensureDir(path.dirname(outputPath));
 
     // 変換
-    const result = await convertToWebP(inputPath, outputPath, quality, logger);
+    const result = await convertImage(inputPath, outputPath, outputFormat, quality, logger);
 
     if (result.success) {
       successCount++;

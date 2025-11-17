@@ -1,1 +1,1 @@
-export * from "./convertImagesToWebP";
+export * from "./convertImages";
