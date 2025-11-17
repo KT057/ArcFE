@@ -154,19 +154,8 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           pattern: screenshots-*
-          merge-multiple: false
-          path: artifacts/
-
-      - name: Merge screenshots safely
-        run: |
-          mkdir -p packages/ui/__screenshots__
-          for shard in artifacts/screenshots-*; do
-            if [ -d "$shard" ]; then
-              echo "Merging $shard..."
-              cp -rn "$shard/packages/ui/__screenshots__/"* packages/ui/__screenshots__/ 2>/dev/null || true
-            fi
-          done
-          echo "Total screenshots: $(find packages/ui/__screenshots__ -name '*.png' | wc -l)"
+          merge-multiple: true
+          path: packages/ui/__screenshots__/
 
       - name: Publish Reg Suit
         env:
