@@ -52,7 +52,7 @@
     "@react-stately/radio": "^3.11.2",
     "@react-types/radio": "^3.9.2",
     "@vis.gl/react-google-maps": "^1.7.1",
-    "axios": "^1.13.1",
+    "axios": "^1.13.2",
     "gsap": "^3.13.0",
     "keen-slider": "^6.8.6",
     "react": "^19.2.0",
