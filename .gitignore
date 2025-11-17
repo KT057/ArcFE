@@ -46,6 +46,9 @@ public/icon-font
 # ui
 storybook-static
 
+component-manifest.json
+packages/ui/__screenshots__
+
 # Wordpress
 wp
 db
