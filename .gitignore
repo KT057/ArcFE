@@ -48,6 +48,7 @@ storybook-static
 
 component-manifest.json
 packages/ui/__screenshots__
+catalog.txt
 
 # Wordpress
 wp

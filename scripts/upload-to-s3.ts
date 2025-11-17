@@ -128,25 +128,34 @@ async function uploadManifest(
   return s3Key;
 }
 
-// catalog.txt に URL を追記
+// catalog.txt に URL を書き込み（毎回新規作成）
 function writeToCatalog(version: string, config: UploadConfig, manifestKey: string): void {
-  console.log('\n📝 catalog.txt に URL を書き込み中...');
+  console.log('\n📝 catalog.txt を作成中...');
 
-  const catalogPath = path.join(process.cwd(), 'packages/ui/catalog.txt');
+  const catalogPath = path.join(process.cwd(), 'catalog.txt');
+
+  // 既存のcatalog.txtを削除
+  if (fs.existsSync(catalogPath)) {
+    fs.unlinkSync(catalogPath);
+    console.log('既存の catalog.txt を削除しました');
+  }
 
   // AWS S3コンソールのURLを生成
   const manifestUrl = `https://${config.region}.console.aws.amazon.com/s3/object/${config.bucketName}?region=${config.region}&prefix=v${version}/component-manifest.json`;
   const screenshotsUrl = `https://${config.region}.console.aws.amazon.com/s3/buckets/${config.bucketName}?region=${config.region}&prefix=v${version}/__screenshots__/&showversions=false`;
 
-  const entry = [
-    `\n# Version ${version} - ${new Date().toISOString()}`,
+  const content = [
+    '# Component Catalog URLs',
+    '# このファイルには、最新バージョンのS3アップロードURLが記録されます',
+    '',
+    `# Version ${version} - ${new Date().toISOString()}`,
     `manifest: ${manifestUrl}`,
     `screenshots: ${screenshotsUrl}`,
     '',
   ].join('\n');
 
-  fs.appendFileSync(catalogPath, entry);
-  console.log(`✅ catalog.txt に追記しました`);
+  fs.writeFileSync(catalogPath, content);
+  console.log(`✅ catalog.txt を作成しました`);
   console.log(`   マニフェスト: ${manifestUrl}`);
   console.log(`   スクリーンショット: ${screenshotsUrl}`);
 }
