@@ -1,4 +1,5 @@
 #!/usr/bin/env tsx
+
 /**
  * ArcFE Catalog Quickstart
  *
@@ -9,10 +10,10 @@
  * - component-manifest.json生成（CLIP Embeddingなし版）
  */
 
-import * as fs from 'fs';
-import * as path from 'path';
-import { parse } from '@typescript-eslint/typescript-estree';
-import { glob } from 'glob';
+import * as fs from "node:fs";
+import * as path from "node:path";
+import { parse } from "@typescript-eslint/typescript-estree";
+import { glob } from "glob";
 
 interface ComponentInfo {
   id: string;
@@ -29,25 +30,27 @@ interface ComponentInfo {
 
 // Step 1: コンポーネント探索
 async function findAllComponents(): Promise<ComponentInfo[]> {
-  console.log('🔍 Step 1: コンポーネント探索中...');
+  console.log("🔍 Step 1: コンポーネント探索中...");
 
-  const componentPaths = await glob('packages/ui/components/**/index.tsx', {
-    ignore: ['**/node_modules/**', '**/dist/**']
+  const componentPaths = await glob("packages/ui/components/**/index.tsx", {
+    ignore: ["**/node_modules/**", "**/dist/**"]
   });
 
   const components: ComponentInfo[] = [];
 
   for (const componentPath of componentPaths) {
-    const parts = componentPath.split('/');
+    const parts = componentPath.split("/");
     const category = parts[3]; // Basic or Advanced
     const subcategory = parts[4]; // Button, Input, etc.
-    const productVariant = parts[5]?.startsWith('Product') ? parts[5] : undefined;
+    const productVariant = parts[5]?.startsWith("Product")
+      ? parts[5]
+      : undefined;
 
     const name = productVariant
-      ? `${subcategory}${productVariant.replace('Product', '')}`
+      ? `${subcategory}${productVariant.replace("Product", "")}`
       : subcategory;
 
-    const id = `${category.toLowerCase()}-${subcategory.toLowerCase()}${productVariant ? '-' + productVariant.toLowerCase() : ''}`;
+    const id = `${category.toLowerCase()}-${subcategory.toLowerCase()}${productVariant ? "-" + productVariant.toLowerCase() : ""}`;
 
     components.push({
       id,
@@ -87,7 +90,7 @@ function extractProps(sourceCode: string): any {
       extracted: parseInterface(propsInterface)
     };
   } catch (error) {
-    console.error('AST解析エラー:', error);
+    console.error("AST解析エラー:", error);
     return { extracted: {} };
   }
 }
@@ -96,10 +99,16 @@ function findPropsInterface(ast: any): any {
   // 簡易版: interface XXXProps または type XXXProps を探す
   // 実際の実装では再帰的に探索
   for (const node of ast.body || []) {
-    if (node.type === 'TSInterfaceDeclaration' && node.id.name.endsWith('Props')) {
+    if (
+      node.type === "TSInterfaceDeclaration" &&
+      node.id.name.endsWith("Props")
+    ) {
       return node;
     }
-    if (node.type === 'TSTypeAliasDeclaration' && node.id.name.endsWith('Props')) {
+    if (
+      node.type === "TSTypeAliasDeclaration" &&
+      node.id.name.endsWith("Props")
+    ) {
       return node;
     }
   }
@@ -111,10 +120,10 @@ function parseInterface(interfaceNode: any): any {
   const props: any = {};
 
   for (const member of interfaceNode.body?.body || []) {
-    if (member.type === 'TSPropertySignature') {
+    if (member.type === "TSPropertySignature") {
       const propName = member.key.name;
       props[propName] = {
-        kind: 'unknown',
+        kind: "unknown",
         optional: member.optional
       };
     }
@@ -125,28 +134,28 @@ function parseInterface(interfaceNode: any): any {
 
 // Step 3: Storybookストーリー解析
 async function extractStories(componentPath: string): Promise<any[]> {
-  const storiesPath = componentPath.replace('index.tsx', 'index.stories.tsx');
+  const storiesPath = componentPath.replace("index.tsx", "index.stories.tsx");
 
   if (!fs.existsSync(storiesPath)) {
     return [];
   }
 
-  const storiesCode = fs.readFileSync(storiesPath, 'utf-8');
+  const storiesCode = fs.readFileSync(storiesPath, "utf-8");
 
   // 簡易版: export const XXX = で始まる行を探す
   const storyNames = storiesCode
-    .split('\n')
-    .filter(line => /^export const \w+ = /.test(line))
-    .map(line => {
+    .split("\n")
+    .filter((line) => /^export const \w+ = /.test(line))
+    .map((line) => {
       const match = line.match(/^export const (\w+) = /);
       return match ? match[1] : null;
     })
     .filter(Boolean);
 
-  return storyNames.map(name => ({
+  return storyNames.map((name) => ({
     name,
     code: `// Story: ${name}\n// See ${storiesPath}`,
-    providers: ['ThemeProvider'] // デフォルト
+    providers: ["ThemeProvider"] // デフォルト
   }));
 }
 
@@ -160,8 +169,8 @@ async function findScreenshots(component: ComponentInfo): Promise<any> {
 
   return {
     basePath: screenshotBase,
-    variants: screenshots.map(screenshot => {
-      const filename = path.basename(screenshot, '.png');
+    variants: screenshots.map((screenshot) => {
+      const filename = path.basename(screenshot, ".png");
       return {
         id: `${component.id}-${filename.toLowerCase()}`,
         name: filename,
@@ -171,7 +180,7 @@ async function findScreenshots(component: ComponentInfo): Promise<any> {
         visualFeatures: {
           // 後で画像解析して追加
           dominantColors: [],
-          shape: 'unknown'
+          shape: "unknown"
         },
         props: {} // Storiesから推測
       };
@@ -182,21 +191,23 @@ async function findScreenshots(component: ComponentInfo): Promise<any> {
 
 // メイン処理
 async function main() {
-  console.log('🚀 ArcFE Catalog Quickstart');
-  console.log('================================\n');
+  console.log("🚀 ArcFE Catalog Quickstart");
+  console.log("================================\n");
 
   // Step 1: コンポーネント探索
   const components = await findAllComponents();
 
   // Step 2-4: 各コンポーネントの詳細情報を抽出
-  console.log('\n📝 Step 2-4: コンポーネント詳細を解析中...');
+  console.log("\n📝 Step 2-4: コンポーネント詳細を解析中...");
 
   for (let i = 0; i < components.length; i++) {
     const component = components[i];
-    process.stdout.write(`\r[${i + 1}/${components.length}] ${component.name}...`);
+    process.stdout.write(
+      `\r[${i + 1}/${components.length}] ${component.name}...`
+    );
 
     // AST解析
-    const sourceCode = fs.readFileSync(component.sourceFile, 'utf-8');
+    const sourceCode = fs.readFileSync(component.sourceFile, "utf-8");
     component.props = extractProps(sourceCode);
 
     // Storybookストーリー
@@ -205,20 +216,23 @@ async function main() {
     // スクリーンショット
     component.screenshots = await findScreenshots(component);
   }
-  console.log('\n✅ 完了\n');
+  console.log("\n✅ 完了\n");
 
   // Step 5: Manifest生成
-  console.log('📦 Step 5: component-manifest.json を生成中...');
+  console.log("📦 Step 5: component-manifest.json を生成中...");
 
   const manifest = {
-    version: '2.0.0-quickstart',
+    version: "2.0.0-quickstart",
     metadata: {
       totalComponents: components.length,
-      totalScreenshots: components.reduce((sum, c) => sum + c.screenshots.totalVariants, 0),
+      totalScreenshots: components.reduce(
+        (sum, c) => sum + c.screenshots.totalVariants,
+        0
+      ),
       lastUpdated: new Date().toISOString(),
-      note: 'Quickstart版: CLIP Embeddingは未実装'
+      note: "Quickstart版: CLIP Embeddingは未実装"
     },
-    components: components.map(c => ({
+    components: components.map((c) => ({
       id: c.id,
       category: c.category,
       subcategory: c.subcategory,
@@ -229,31 +243,30 @@ async function main() {
       screenshots: c.screenshots,
       usageSnippets: c.usageSnippets,
       dependencies: {
-        requiredProviders: ['ThemeProvider'] // 簡易版
+        requiredProviders: ["ThemeProvider"] // 簡易版
       },
-      tags: [
-        c.category.toLowerCase(),
-        c.subcategory.toLowerCase()
-      ]
+      tags: [c.category.toLowerCase(), c.subcategory.toLowerCase()]
     }))
   };
 
-  const outputPath = 'packages/ui/component-manifest.json';
+  const outputPath = "packages/ui/component-manifest.json";
   fs.writeFileSync(outputPath, JSON.stringify(manifest, null, 2));
 
   console.log(`✅ ${outputPath} を生成しました\n`);
 
   // サマリー
-  console.log('📊 サマリー');
-  console.log('================================');
+  console.log("📊 サマリー");
+  console.log("================================");
   console.log(`コンポーネント数: ${manifest.metadata.totalComponents}`);
   console.log(`スクリーンショット数: ${manifest.metadata.totalScreenshots}`);
-  console.log(`平均バリアント数: ${(manifest.metadata.totalScreenshots / manifest.metadata.totalComponents).toFixed(1)}`);
-  console.log('\n🎉 Quickstart完了！');
-  console.log('\n次のステップ:');
-  console.log('1. component-manifest.json を確認');
-  console.log('2. CLIP Embeddingを追加（scripts/generate-embeddings.py）');
-  console.log('3. カスタムスラッシュコマンドをテスト');
+  console.log(
+    `平均バリアント数: ${(manifest.metadata.totalScreenshots / manifest.metadata.totalComponents).toFixed(1)}`
+  );
+  console.log("\n🎉 Quickstart完了！");
+  console.log("\n次のステップ:");
+  console.log("1. component-manifest.json を確認");
+  console.log("2. CLIP Embeddingを追加（scripts/generate-embeddings.py）");
+  console.log("3. カスタムスラッシュコマンドをテスト");
 }
 
 main().catch(console.error);
