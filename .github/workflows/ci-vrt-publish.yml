@@ -207,4 +207,6 @@ jobs:
           CLOUDFRONT_DOMAIN: ${{ secrets.CLOUDFRONT_DOMAIN }}
           REGION: ${{ secrets.REGION }}
         run: |
+          # Clean working directory to avoid corrupted cache
+          rm -rf packages/ui/.reg
           pnpm @ui reg-suit:run
