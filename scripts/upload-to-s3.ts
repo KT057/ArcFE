@@ -7,12 +7,12 @@
  * - アップロード後、URLをcatalog.txtに追記
  */
 
-import 'dotenv/config';
-import * as fs from 'fs';
-import * as path from 'path';
-import { S3Client, PutObjectCommand } from '@aws-sdk/client-s3';
-import { Upload } from '@aws-sdk/lib-storage';
-import { glob } from 'glob';
+import "dotenv/config";
+import * as fs from "node:fs";
+import * as path from "node:path";
+import { S3Client } from "@aws-sdk/client-s3";
+import { Upload } from "@aws-sdk/lib-storage";
+import { glob } from "glob";
 
 interface UploadConfig {
   bucketName: string;
@@ -23,11 +23,13 @@ interface UploadConfig {
 // 環境変数から設定を取得
 function getConfig(): UploadConfig {
   const bucketName = process.env.AWS_S3_BUCKET;
-  const region = process.env.AWS_REGION || 'ap-northeast-1';
-  const baseUrl = process.env.S3_BASE_URL || `https://${bucketName}.s3.${region}.amazonaws.com`;
+  const region = process.env.AWS_REGION || "ap-northeast-1";
+  const baseUrl =
+    process.env.S3_BASE_URL ||
+    `https://${bucketName}.s3.${region}.amazonaws.com`;
 
   if (!bucketName) {
-    throw new Error('AWS_S3_BUCKET 環境変数が設定されていません');
+    throw new Error("AWS_S3_BUCKET 環境変数が設定されていません");
   }
 
   return { bucketName, region, baseUrl };
@@ -35,8 +37,8 @@ function getConfig(): UploadConfig {
 
 // バージョン番号を取得
 function getVersion(): string {
-  const packageJsonPath = path.join(process.cwd(), 'package.json');
-  const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf-8'));
+  const packageJsonPath = path.join(process.cwd(), "package.json");
+  const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, "utf-8"));
   return packageJson.version;
 }
 
@@ -61,8 +63,8 @@ async function uploadFile(
       Bucket: bucketName,
       Key: s3Key,
       Body: fileStream,
-      ContentType: contentType,
-    },
+      ContentType: contentType
+    }
   });
 
   await upload.done();
@@ -73,13 +75,13 @@ async function uploadFile(
 function getContentType(filePath: string): string {
   const ext = path.extname(filePath).toLowerCase();
   const contentTypes: Record<string, string> = {
-    '.png': 'image/png',
-    '.jpg': 'image/jpeg',
-    '.jpeg': 'image/jpeg',
-    '.json': 'application/json',
-    '.txt': 'text/plain',
+    ".png": "image/png",
+    ".jpg": "image/jpeg",
+    ".jpeg": "image/jpeg",
+    ".json": "application/json",
+    ".txt": "text/plain"
   };
-  return contentTypes[ext] || 'application/octet-stream';
+  return contentTypes[ext] || "application/octet-stream";
 }
 
 // スクリーンショットをアップロード
@@ -88,10 +90,13 @@ async function uploadScreenshots(
   bucketName: string,
   version: string
 ): Promise<string[]> {
-  console.log('\n📸 スクリーンショットをアップロード中...');
+  console.log("\n📸 スクリーンショットをアップロード中...");
 
-  const screenshotsDir = path.join(process.cwd(), 'packages/ui/__screenshots__');
-  const screenshots = await glob('**/*.png', { cwd: screenshotsDir });
+  const screenshotsDir = path.join(
+    process.cwd(),
+    "packages/ui/__screenshots__"
+  );
+  const screenshots = await glob("**/*.png", { cwd: screenshotsDir });
 
   const uploadedUrls: string[] = [];
 
@@ -103,7 +108,9 @@ async function uploadScreenshots(
     uploadedUrls.push(s3Key);
   }
 
-  console.log(`✅ ${screenshots.length}個のスクリーンショットをアップロードしました`);
+  console.log(
+    `✅ ${screenshots.length}個のスクリーンショットをアップロードしました`
+  );
   return uploadedUrls;
 }
 
@@ -113,31 +120,40 @@ async function uploadManifest(
   bucketName: string,
   version: string
 ): Promise<string> {
-  console.log('\n📦 component-manifest.json をアップロード中...');
+  console.log("\n📦 component-manifest.json をアップロード中...");
 
-  const manifestPath = path.join(process.cwd(), 'packages/ui/component-manifest.json');
+  const manifestPath = path.join(
+    process.cwd(),
+    "packages/ui/component-manifest.json"
+  );
 
   if (!fs.existsSync(manifestPath)) {
-    throw new Error('component-manifest.json が見つかりません。先に pnpm catalog:build を実行してください。');
+    throw new Error(
+      "component-manifest.json が見つかりません。先に pnpm catalog:build を実行してください。"
+    );
   }
 
   const s3Key = `v${version}/component-manifest.json`;
   await uploadFile(s3Client, bucketName, manifestPath, s3Key);
 
-  console.log('✅ component-manifest.json をアップロードしました');
+  console.log("✅ component-manifest.json をアップロードしました");
   return s3Key;
 }
 
 // catalog.txt に URL を書き込み（毎回新規作成）
-function writeToCatalog(version: string, config: UploadConfig, manifestKey: string): void {
-  console.log('\n📝 catalog.txt を作成中...');
+function writeToCatalog(
+  version: string,
+  config: UploadConfig,
+  manifestKey: string
+): void {
+  console.log("\n📝 catalog.txt を作成中...");
 
-  const catalogPath = path.join(process.cwd(), 'catalog.txt');
+  const catalogPath = path.join(process.cwd(), "catalog.txt");
 
   // 既存のcatalog.txtを削除
   if (fs.existsSync(catalogPath)) {
     fs.unlinkSync(catalogPath);
-    console.log('既存の catalog.txt を削除しました');
+    console.log("既存の catalog.txt を削除しました");
   }
 
   // AWS S3コンソールのURLを生成
@@ -145,14 +161,14 @@ function writeToCatalog(version: string, config: UploadConfig, manifestKey: stri
   const screenshotsUrl = `https://${config.region}.console.aws.amazon.com/s3/buckets/${config.bucketName}?region=${config.region}&prefix=v${version}/__screenshots__/&showversions=false`;
 
   const content = [
-    '# Component Catalog URLs',
-    '# このファイルには、最新バージョンのS3アップロードURLが記録されます',
-    '',
+    "# Component Catalog URLs",
+    "# このファイルには、最新バージョンのS3アップロードURLが記録されます",
+    "",
     `# Version ${version} - ${new Date().toISOString()}`,
     `manifest: ${manifestUrl}`,
     `screenshots: ${screenshotsUrl}`,
-    '',
-  ].join('\n');
+    ""
+  ].join("\n");
 
   fs.writeFileSync(catalogPath, content);
   console.log(`✅ catalog.txt を作成しました`);
@@ -162,8 +178,8 @@ function writeToCatalog(version: string, config: UploadConfig, manifestKey: stri
 
 // メイン処理
 async function main() {
-  console.log('🚀 S3 アップロード開始');
-  console.log('================================\n');
+  console.log("🚀 S3 アップロード開始");
+  console.log("================================\n");
 
   try {
     // 設定を取得
@@ -182,14 +198,18 @@ async function main() {
     await uploadScreenshots(s3Client, config.bucketName, version);
 
     // component-manifest.json をアップロード
-    const manifestKey = await uploadManifest(s3Client, config.bucketName, version);
+    const manifestKey = await uploadManifest(
+      s3Client,
+      config.bucketName,
+      version
+    );
 
     // catalog.txt に URL を書き込み
     writeToCatalog(version, config, manifestKey);
 
-    console.log('\n🎉 アップロード完了！');
+    console.log("\n🎉 アップロード完了！");
   } catch (error) {
-    console.error('❌ エラーが発生しました:', error);
+    console.error("❌ エラーが発生しました:", error);
     process.exit(1);
   }
 }
