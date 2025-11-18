@@ -59,7 +59,7 @@
 
 ### Step 3: ArcFE スクリーンショットとの比較
 
-`node_modules/@arcfe/packages/ui/__screenshots__/`から関連するスクリーンショットを読み込み、視覚的に比較：
+`/__screenshots__/`から関連するスクリーンショットを読み込み、視覚的に比較：
 
 ```typescript
 // 1. UIタイプでフィルタリング（ボタン、入力、カード等）
@@ -72,7 +72,7 @@
 
 ### Step 4: 候補コンポーネントの抽出
 
-`node_modules/@arcfe/packages/ui/catalog.json`を参照し、視覚的に類似するコンポーネントを 3-5 個抽出。
+`catalog.json`を参照し、視覚的に類似するコンポーネントを 3-5 個抽出。
 
 ### Step 5: 推薦レポート作成
 
@@ -97,7 +97,7 @@
 **スクリーンショット比較:**
 
 - Figma デザイン: [ユーザー提供画像の特徴を記述]
-- ArcFE: ![screenshot](node_modules/@arcfe/packages/ui/__screenshots__/[path])
+- ArcFE: ![screenshot](/__screenshots__/[path])
 
 **一致点:**
 
