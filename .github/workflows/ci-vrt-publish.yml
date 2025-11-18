@@ -102,8 +102,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: screenshots-${{ matrix.index }}
-          path: |
-            packages/ui/__screenshots__/**
+          path: packages/ui/__screenshots__
 
   vrt_publish:
     needs: setup
