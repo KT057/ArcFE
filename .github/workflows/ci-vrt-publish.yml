@@ -172,12 +172,7 @@ jobs:
           for shard in artifacts/screenshots-*; do
             if [ -d "$shard" ]; then
               echo "Merging $shard..."
-              if [ -d "$shard/packages/ui/__screenshots__" ]; then
-                rsync -av "$shard/packages/ui/__screenshots__/" packages/ui/__screenshots__/
-              else
-                echo "Warning: Expected path not found in $shard"
-                find "$shard" -type f -name "*.png" | head -3
-              fi
+              rsync -av "$shard/" packages/ui/__screenshots__/
             fi
           done
 
