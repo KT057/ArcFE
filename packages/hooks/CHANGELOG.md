@@ -1,5 +1,18 @@
 # @packages/hooks
 
+## 2.1.0
+
+### Minor Changes
+
+- Add TypeScript and Biome checks for scripts folder
+
+### Patch Changes
+
+- Updated dependencies
+  - @packages/utils@2.1.0
+  - @packages/context@2.1.0
+  - @packages/tests@2.1.0
+
 ## 2.0.0
 
 ### Major Changes

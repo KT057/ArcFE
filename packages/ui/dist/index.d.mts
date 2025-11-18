@@ -396,11 +396,11 @@ interface Props$7 {
 }
 declare const Accordion005: ({ header, content, icon, style, animation }: Props$7) => react_jsx_runtime.JSX.Element;
 
-type Type$9 = "001" | "002";
+type Type$a = "001" | "002";
 type ArrowPosition$1 = "top" | "bottom" | "left" | "right";
 
 interface BalloonProps$1 {
-    type?: Type$9;
+    type?: Type$a;
     children: ReactNode;
     arrowPosition?: ArrowPosition$1;
     style?: {
@@ -411,11 +411,11 @@ interface BalloonProps$1 {
 }
 declare const Balloon001: ({ type, children, style, arrowPosition }: BalloonProps$1) => react_jsx_runtime.JSX.Element;
 
-type Type$8 = "001" | "002";
+type Type$9 = "001" | "002";
 type ArrowPosition = "top" | "bottom" | "left" | "right";
 
 interface BalloonProps {
-    type?: Type$8;
+    type?: Type$9;
     children: ReactNode;
     arrowPosition?: ArrowPosition;
     style?: {
@@ -461,7 +461,7 @@ interface BreadcrumbsProps {
 }
 declare const Breadcrumbs: ({ items, style }: BreadcrumbsProps) => react_jsx_runtime.JSX.Element;
 
-type Type$7 = "001" | "002" | "003";
+type Type$8 = "001" | "002" | "003";
 type AnimationType$1 = "001" | "002";
 type Animation$1 = {
     type: AnimationType$1;
@@ -487,7 +487,7 @@ interface ButtonAppearance$1 {
 }
 type BaseProps$7 = {
     as?: "button" | "a" | "span";
-    type?: Type$7;
+    type?: Type$8;
     size?: Size;
     children: ReactNode;
     animation?: Animation$1;
@@ -502,7 +502,7 @@ declare const Button001: React$1.ForwardRefExoticComponent<BaseProps$7 & Omit<Bu
     rel?: string;
 } & React$1.RefAttributes<HTMLButtonElement>>;
 
-type Type$6 = "001" | "002" | "003" | "004" | "005" | "006" | "007" | "008" | "009";
+type Type$7 = "001" | "002" | "003" | "004" | "005" | "006" | "007" | "008" | "009";
 type AnimationType = "001" | "002" | "003" | "004";
 type IconDirection = "left" | "right";
 type Animation = {
@@ -530,7 +530,7 @@ interface ButtonAppearance {
 }
 type BaseProps$6 = {
     as?: "button" | "a" | "span";
-    type?: Type$6;
+    type?: Type$7;
     size?: Size;
     children: ReactNode;
     animation?: Animation;
@@ -625,10 +625,10 @@ interface DropdownMenuProps {
 }
 declare const Dropdown002: ({ style, detail, contents, nowrap, balloonProps }: DropdownMenuProps) => react_jsx_runtime.JSX.Element;
 
-type Type$5 = "001" | "002" | "003";
+type Type$6 = "001" | "002" | "003";
 interface FrameIconProps {
     icon: React.ReactNode;
-    type: Type$5;
+    type: Type$6;
     size: Size;
     style?: {
         backgroundColor?: string;
@@ -638,10 +638,10 @@ interface FrameIconProps {
 }
 declare const FrameIcon001: ({ style, type, size, icon }: FrameIconProps) => react_jsx_runtime.JSX.Element;
 
-type Type$4 = "001" | "002" | "003";
+type Type$5 = "001" | "002" | "003";
 interface FrameNumberProps {
     number: number;
-    type: Type$4;
+    type: Type$5;
     size: Size;
     style?: {
         backgroundColor?: string;
@@ -989,9 +989,9 @@ interface InputProps {
 }
 declare const Input006: React__default.ForwardRefExoticComponent<InputProps & React__default.RefAttributes<HTMLInputElement>>;
 
-type Type$3 = "001" | "002" | "003";
+type Type$4 = "001" | "002" | "003";
 interface LabelProps$1 {
-    type?: Type$3;
+    type?: Type$4;
     size?: Size;
     children: React__default.ReactNode;
     style?: {
@@ -1003,10 +1003,10 @@ interface LabelProps$1 {
 }
 declare const Label001: ({ type, size, children, style }: LabelProps$1) => react_jsx_runtime.JSX.Element;
 
-type Type$2 = "001" | "002" | "003";
+type Type$3 = "001" | "002" | "003";
 type IconPosition$2 = "left" | "right";
 interface LabelProps {
-    type?: Type$2;
+    type?: Type$3;
     size?: Size;
     iconPosition?: IconPosition$2;
     icon: React__default.ReactNode;
@@ -1177,9 +1177,9 @@ type BaseProps = {
 };
 declare const ListItem006: React$1.ForwardRefExoticComponent<BaseProps & Omit<HTMLAttributes<HTMLLIElement>, keyof BaseProps> & React$1.RefAttributes<HTMLLIElement>>;
 
-type Type$1 = "001";
+type Type$2 = "001";
 interface LoadingProps$1 {
-    type?: Type$1;
+    type?: Type$2;
     size?: Size;
     style?: {
         color?: string;
@@ -1196,7 +1196,7 @@ interface LoadingProps {
 }
 declare const Loading002: ({ size, style }: LoadingProps) => react_jsx_runtime.JSX.Element;
 
-type Type = "001";
+type Type$1 = "001";
 interface MediaProps {
     pc: React.ReactNode;
     tablet?: React.ReactNode;
@@ -1361,6 +1361,18 @@ interface SelectProps {
     };
 }
 declare const Select002: React__default.ForwardRefExoticComponent<SelectProps & React__default.RefAttributes<HTMLSelectElement>>;
+
+type Type = "001";
+interface SkeletonProps {
+    type?: Type;
+    style?: {
+        width?: string;
+        height?: string;
+        borderRadius?: string;
+    };
+    className?: string;
+}
+declare const Skeleton001: ({ type, style, className }: SkeletonProps) => react_jsx_runtime.JSX.Element;
 
 interface ArrowStyle {
     size?: number;
@@ -1752,4 +1764,4 @@ declare const GlobalStyles: ({ fontFamily }: {
     fontFamily: keyof Theme["font"]["fontFamily"];
 }) => React$1.NamedExoticComponent<styled_components.ExecutionProps & object>;
 
-export { Accordion001, Accordion002, Accordion003, Accordion004, Accordion005, type AccordionAnimation$4 as AccordionAnimation, type AnimationType$2 as AnimationType, type AutoPlay, Balloon001, Balloon002, BgImageContent, BlurBg, Breadcrumbs, Button001, Button002, CheckBox001, CheckBox002, CircleProgress, type Direction$1 as Direction, DragAndDrop001, Dropdown001, Dropdown002, FadeInAndZoomImages, type FadeInAndZoomImagesImageItem, FooterButtons, FrameIcon001, FrameNumber001, GlobalStyles, GoogleMap, Header001, Image, Input001, Input002, Input003, Input004, Input005, Input006, type InstanceRef, JmcArrowButton, JmcButton, JmcCircleToggle, Label001, Label002, LazyImage, List001, ListItem001, ListItem002, ListItem003, ListItem004, ListItem005, ListItem006, Loading001, Loading002, Media, MediaContext, MediaProvider, Modal001, NestedListItem001, NestedListItem002, PC_SIZE, ParallaxContent, ParallaxImage, REM_SIZE, Radio001, RebitaButton, RebitaCircleProgress, RebitaFadeSlideImage, RebitaFadeText, RebitaPanel, RebitaSlideGuideDot, RebitaTextButtonWithIcon, RebitaToggle, SP_SIZE, ScrollReveal, type ScrollRevealAnimationType, Select001, Select002, type SelectOption, type Size, Slider, type State, Svg001 as Svg001Icon, Svg002 as Svg002Icon, Svg003 as Svg003Icon, Svg004 as Svg004Icon, Svg005 as Svg005Icon, Svg006 as Svg006Icon, Svg007 as Svg007Icon, Svg008 as Svg008Icon, Svg009 as Svg009Icon, Svg010 as Svg010Icon, Svg011 as Svg011Icon, Svg012 as Svg012Icon, Svg013 as Svg013Icon, Svg014 as Svg014Icon, Svg015 as Svg015Icon, Svg016 as Svg016Icon, Svg017 as Svg017Icon, Svg018 as Svg018Icon, Svg019 as Svg019Icon, Svg020 as Svg020Icon, Svg021 as Svg021Icon, Svg022 as Svg022Icon, Svg023 as Svg023Icon, Svg024 as Svg024Icon, Svg025 as Svg025Icon, Svg026 as Svg026Icon, Svg027 as Svg027Icon, Svg028 as Svg028Icon, Svg029 as Svg029Icon, Svg030 as Svg030Icon, Svg031 as Svg031Icon, Svg032 as Svg032Icon, Svg033 as Svg033Icon, Svg034 as Svg034Icon, Svg035 as Svg035Icon, Svg036 as Svg036Icon, Svg037 as Svg037Icon, Svg038 as Svg038Icon, Svg039 as Svg039Icon, Svg040 as Svg040Icon, Svg041 as Svg041Icon, Svg042 as Svg042Icon, Svg043 as Svg043Icon, TABLET_SIZE, Text, TextButton001, TextField001, TextField002, TextField003, TextField004, TextField005, type TextFieldType, TextIcon001, type Theme, Toggle001, Toggle002, Toggle003, ToggleSomething001, type Type, VerticalRollingText, baseFontSizeForEm, baseFontSizeForRem, color, ebGaramond, em, hexToRgb, lato, media, montserrat, notoSansJP, rem, roboto, themes, zenKakuGothicNew, zenOldMincho };
+export { Accordion001, Accordion002, Accordion003, Accordion004, Accordion005, type AccordionAnimation$4 as AccordionAnimation, type AnimationType$2 as AnimationType, type AutoPlay, Balloon001, Balloon002, BgImageContent, BlurBg, Breadcrumbs, Button001, Button002, CheckBox001, CheckBox002, CircleProgress, type Direction$1 as Direction, DragAndDrop001, Dropdown001, Dropdown002, FadeInAndZoomImages, type FadeInAndZoomImagesImageItem, FooterButtons, FrameIcon001, FrameNumber001, GlobalStyles, GoogleMap, Header001, Image, Input001, Input002, Input003, Input004, Input005, Input006, type InstanceRef, JmcArrowButton, JmcButton, JmcCircleToggle, Label001, Label002, LazyImage, List001, ListItem001, ListItem002, ListItem003, ListItem004, ListItem005, ListItem006, Loading001, Loading002, Media, MediaContext, MediaProvider, Modal001, NestedListItem001, NestedListItem002, PC_SIZE, ParallaxContent, ParallaxImage, REM_SIZE, Radio001, RebitaButton, RebitaCircleProgress, RebitaFadeSlideImage, RebitaFadeText, RebitaPanel, RebitaSlideGuideDot, RebitaTextButtonWithIcon, RebitaToggle, SP_SIZE, ScrollReveal, type ScrollRevealAnimationType, Select001, Select002, type SelectOption, type Size, Skeleton001, Slider, type State, Svg001 as Svg001Icon, Svg002 as Svg002Icon, Svg003 as Svg003Icon, Svg004 as Svg004Icon, Svg005 as Svg005Icon, Svg006 as Svg006Icon, Svg007 as Svg007Icon, Svg008 as Svg008Icon, Svg009 as Svg009Icon, Svg010 as Svg010Icon, Svg011 as Svg011Icon, Svg012 as Svg012Icon, Svg013 as Svg013Icon, Svg014 as Svg014Icon, Svg015 as Svg015Icon, Svg016 as Svg016Icon, Svg017 as Svg017Icon, Svg018 as Svg018Icon, Svg019 as Svg019Icon, Svg020 as Svg020Icon, Svg021 as Svg021Icon, Svg022 as Svg022Icon, Svg023 as Svg023Icon, Svg024 as Svg024Icon, Svg025 as Svg025Icon, Svg026 as Svg026Icon, Svg027 as Svg027Icon, Svg028 as Svg028Icon, Svg029 as Svg029Icon, Svg030 as Svg030Icon, Svg031 as Svg031Icon, Svg032 as Svg032Icon, Svg033 as Svg033Icon, Svg034 as Svg034Icon, Svg035 as Svg035Icon, Svg036 as Svg036Icon, Svg037 as Svg037Icon, Svg038 as Svg038Icon, Svg039 as Svg039Icon, Svg040 as Svg040Icon, Svg041 as Svg041Icon, Svg042 as Svg042Icon, Svg043 as Svg043Icon, TABLET_SIZE, Text, TextButton001, TextField001, TextField002, TextField003, TextField004, TextField005, type TextFieldType, TextIcon001, type Theme, Toggle001, Toggle002, Toggle003, ToggleSomething001, type Type$1 as Type, VerticalRollingText, baseFontSizeForEm, baseFontSizeForRem, color, ebGaramond, em, hexToRgb, lato, media, montserrat, notoSansJP, rem, roboto, themes, zenKakuGothicNew, zenOldMincho };

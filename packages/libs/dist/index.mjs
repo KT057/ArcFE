@@ -6,11 +6,12 @@ var formatDate = (date) => {
   return `${year}-${month}-${day}`;
 };
 
-// src/imageConverter/convertImagesToWebP.ts
+// src/imageConverter/convertImages.ts
 import fs from "fs";
 import path from "path";
 import sharp from "sharp";
 var DEFAULT_OPTIONS = {
+  outputFormat: "webp",
   quality: 80,
   supportedFormats: [".jpg", ".jpeg", ".png", ".gif", ".webp"],
   logger: {
@@ -42,9 +43,25 @@ var formatBytes = (bytes) => {
   const i = Math.floor(Math.log(bytes) / Math.log(k));
   return `${Math.round(bytes / Math.pow(k, i) * 100) / 100} ${sizes[i]}`;
 };
-var convertToWebP = async (inputPath, outputPath, quality, logger) => {
+var convertImage = async (inputPath, outputPath, format, quality, logger) => {
   try {
-    await sharp(inputPath).webp({ quality }).toFile(outputPath);
+    const image = sharp(inputPath);
+    switch (format) {
+      case "webp":
+        await image.webp({ quality }).toFile(outputPath);
+        break;
+      case "jpeg":
+        await image.jpeg({ quality }).toFile(outputPath);
+        break;
+      case "png":
+        await image.png({ quality }).toFile(outputPath);
+        break;
+      case "avif":
+        await image.avif({ quality }).toFile(outputPath);
+        break;
+      default:
+        throw new Error(`Unsupported format: ${format}`);
+    }
     const inputStats = fs.statSync(inputPath);
     const outputStats = fs.statSync(outputPath);
     const bytesSaved = inputStats.size - outputStats.size;
@@ -64,15 +81,17 @@ var convertToWebP = async (inputPath, outputPath, quality, logger) => {
     return { success: false, bytesSaved: 0 };
   }
 };
-var convertImagesToWebP = async (options) => {
+var convertImages = async (options) => {
   const {
     sourceDir,
     outputDir,
+    outputFormat = DEFAULT_OPTIONS.outputFormat,
     quality = DEFAULT_OPTIONS.quality,
     supportedFormats = DEFAULT_OPTIONS.supportedFormats,
     logger = DEFAULT_OPTIONS.logger
   } = options;
-  logger.log("\u{1F5BC}\uFE0F  \u753B\u50CF\u5909\u63DB\u30B9\u30AF\u30EA\u30D7\u30C8\u3092\u958B\u59CB\u3057\u307E\u3059...\n");
+  logger.log(`\u{1F5BC}\uFE0F  \u753B\u50CF\u5909\u63DB\u30B9\u30AF\u30EA\u30D7\u30C8\u3092\u958B\u59CB\u3057\u307E\u3059 (\u51FA\u529B\u5F62\u5F0F: ${outputFormat})...
+`);
   if (!fs.existsSync(sourceDir)) {
     throw new Error(
       `\u30A8\u30E9\u30FC: ${sourceDir} \u304C\u898B\u3064\u304B\u308A\u307E\u305B\u3093\u3002
@@ -105,11 +124,11 @@ var convertImagesToWebP = async (options) => {
     const parsedPath = path.parse(relativePath);
     const outputRelativePath = path.join(
       parsedPath.dir,
-      `${parsedPath.name}.webp`
+      `${parsedPath.name}.${outputFormat}`
     );
     const outputPath = path.join(outputDir, outputRelativePath);
     ensureDir(path.dirname(outputPath));
-    const result = await convertToWebP(inputPath, outputPath, quality, logger);
+    const result = await convertImage(inputPath, outputPath, outputFormat, quality, logger);
     if (result.success) {
       successCount++;
       totalBytesSaved += result.bytesSaved;
@@ -311,7 +330,7 @@ var generateSvgComponents = async (options) => {
   fs3.writeFileSync(path2.join(outputDir, "index.ts"), indexContent);
 };
 export {
-  convertImagesToWebP,
+  convertImages,
   formatDate,
   generateStorybookComponent,
   generateSvgComponents

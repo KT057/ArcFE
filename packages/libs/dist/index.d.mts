@@ -6,14 +6,20 @@
 declare const formatDate: (date: Date) => string;
 
 /**
+ * サポートされている出力フォーマット
+ */
+type OutputFormat = "webp" | "jpeg" | "png" | "avif";
+/**
  * 画像変換オプション
  */
-type ConvertImagesToWebPOptions = {
+type ConvertImagesOptions = {
     /** 元画像のディレクトリパス */
     sourceDir: string;
     /** 出力先ディレクトリパス */
     outputDir: string;
-    /** WebP品質 (0-100) */
+    /** 出力フォーマット (デフォルト: 'webp') */
+    outputFormat?: OutputFormat;
+    /** 品質 (0-100) */
     quality?: number;
     /** サポートする画像形式 */
     supportedFormats?: readonly string[];
@@ -39,7 +45,7 @@ type ConversionStats = {
 /**
  * 画像変換のメイン処理
  */
-declare const convertImagesToWebP: (options: ConvertImagesToWebPOptions) => Promise<ConversionStats>;
+declare const convertImages: (options: ConvertImagesOptions) => Promise<ConversionStats>;
 
 type GenerateStorybookComponentOptions = {
     iconsDir: string;
@@ -58,4 +64,4 @@ type GenerateSvgComponentsOptions = {
 };
 declare const generateSvgComponents: (options: GenerateSvgComponentsOptions) => Promise<void>;
 
-export { type ConversionStats, type ConvertImagesToWebPOptions, type GenerateStorybookComponentOptions, type GenerateSvgComponentsOptions, convertImagesToWebP, formatDate, generateStorybookComponent, generateSvgComponents };
+export { type ConversionStats, type ConvertImagesOptions, type GenerateStorybookComponentOptions, type GenerateSvgComponentsOptions, type OutputFormat, convertImages, formatDate, generateStorybookComponent, generateSvgComponents };
