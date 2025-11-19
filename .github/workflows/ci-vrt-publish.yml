@@ -209,4 +209,12 @@ jobs:
         run: |
           # Clean working directory to avoid corrupted cache
           rm -rf packages/ui/.reg
-          pnpm @ui reg-suit:run
+
+          # For master branch, run compare and publish separately to avoid CRC errors
+          if [ "${{ github.ref }}" == "refs/heads/master" ]; then
+            cd packages/ui
+            pnpm exec reg-suit compare
+            pnpm exec reg-suit publish
+          else
+            pnpm @ui reg-suit:run
+          fi
