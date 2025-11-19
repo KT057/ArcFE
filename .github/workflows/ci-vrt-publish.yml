@@ -209,10 +209,4 @@ jobs:
         run: |
           # Clean working directory to avoid corrupted cache
           rm -rf packages/ui/.reg
-
-          # Use publish for master branch to reset corrupted baseline
-          if [ "${{ github.ref }}" == "refs/heads/master" ]; then
-            pnpm @ui reg-suit:publish
-          else
-            pnpm @ui reg-suit:run
-          fi
+          pnpm @ui reg-suit:run
