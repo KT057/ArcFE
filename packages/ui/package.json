@@ -25,7 +25,7 @@
     "lint": "pnpm biome check --diagnostic-level=warn .",
     "lint:fix": "pnpm biome check --diagnostic-level=warn --write .",
     "test:storybook": "vitest --run --project=storybook",
-    "reg-suit:run": "reg-suit run",
+    "reg-suit:run": "reg-suit run --new-expected",
     "reg-suit:publish": "reg-suit publish",
     "install:playwright:browser": "npx playwright install --with-deps chromium",
     "prepublishOnly": "pnpm run build"
