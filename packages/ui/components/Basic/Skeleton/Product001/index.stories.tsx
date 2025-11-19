@@ -16,7 +16,7 @@ const meta: Meta<typeof Skeleton001> = {
       control: { type: "select" },
       options: ["001"]
     },
-    style: {
+    appearance: {
       control: { type: "object" }
     }
   }
@@ -28,7 +28,7 @@ type Story = StoryObj<typeof Skeleton001>;
 export const Default: Story = {
   args: {
     type: "001",
-    style: {
+    appearance: {
       width: "200px",
       height: "20px"
     }
@@ -38,7 +38,7 @@ export const Default: Story = {
 export const Card: Story = {
   args: {
     type: "001",
-    style: {
+    appearance: {
       width: "300px",
       height: "150px",
       borderRadius: "8px"
@@ -49,7 +49,7 @@ export const Card: Story = {
 export const Avatar: Story = {
   args: {
     type: "001",
-    style: {
+    appearance: {
       width: "64px",
       height: "64px",
       borderRadius: "50%"
@@ -67,16 +67,16 @@ export const Multiple: Story = {
         width: "400px"
       }}
     >
-      <Skeleton001 style={{ height: "24px", borderRadius: "4px" }} />
+      <Skeleton001 appearance={{ height: "24px", borderRadius: "4px" }} />
       <Skeleton001
-        style={{ height: "24px", width: "80%", borderRadius: "4px" }}
+        appearance={{ height: "24px", width: "80%", borderRadius: "4px" }}
       />
       <Skeleton001
-        style={{ height: "24px", width: "60%", borderRadius: "4px" }}
+        appearance={{ height: "24px", width: "60%", borderRadius: "4px" }}
       />
       <div style={{ display: "flex", gap: "16px", marginTop: "16px" }}>
         <Skeleton001
-          style={{ width: "64px", height: "64px", borderRadius: "50%" }}
+          appearance={{ width: "64px", height: "64px", borderRadius: "50%" }}
         />
         <div
           style={{
@@ -86,9 +86,9 @@ export const Multiple: Story = {
             gap: "8px"
           }}
         >
-          <Skeleton001 style={{ height: "16px", borderRadius: "4px" }} />
+          <Skeleton001 appearance={{ height: "16px", borderRadius: "4px" }} />
           <Skeleton001
-            style={{ height: "16px", width: "70%", borderRadius: "4px" }}
+            appearance={{ height: "16px", width: "70%", borderRadius: "4px" }}
           />
         </div>
       </div>

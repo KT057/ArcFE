@@ -4,7 +4,7 @@ export type Type = "001";
 
 interface SkeletonProps {
   type?: Type;
-  style?: {
+  appearance?: {
     width?: string;
     height?: string;
     borderRadius?: string;
@@ -14,15 +14,15 @@ interface SkeletonProps {
 
 export const Skeleton001 = ({
   type = "001",
-  style,
+  appearance,
   className
 }: SkeletonProps) => {
   return (
     <StyledSkeleton
       type={type}
-      $width={style?.width}
-      $height={style?.height}
-      $borderRadius={style?.borderRadius}
+      $width={appearance?.width}
+      $height={appearance?.height}
+      $borderRadius={appearance?.borderRadius}
       className={className}
     />
   );
