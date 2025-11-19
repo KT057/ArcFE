@@ -20,7 +20,12 @@ interface FrameIconProps {
   };
 }
 
-export const FrameIcon001 = ({ appearance, type, size, icon }: FrameIconProps) => {
+export const FrameIcon001 = ({
+  appearance,
+  type,
+  size,
+  icon
+}: FrameIconProps) => {
   return (
     <StyledFrameIconWrapper>
       <StyledFrameIcon size={size}>

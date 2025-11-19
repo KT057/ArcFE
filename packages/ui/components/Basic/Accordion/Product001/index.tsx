@@ -76,7 +76,9 @@ export const Accordion001 = ({
             paddingSide={appearance?.paddingSide}
             paddingVertical={appearance?.paddingVertical}
           >
-            <StyledAccordionContentText color={appearance?.content?.color ?? "#000"}>
+            <StyledAccordionContentText
+              color={appearance?.content?.color ?? "#000"}
+            >
               {content}
             </StyledAccordionContentText>
           </StyledAccordionContent>

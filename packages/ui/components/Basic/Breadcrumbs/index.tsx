@@ -59,7 +59,9 @@ export const Breadcrumbs = ({ items, appearance }: BreadcrumbsProps) => {
               </StyledBreadcrumbsItemText>
             )}
             {index !== items.length - 1 && (
-              <StyledBreadcrumbsItemIcon color={appearance?.iconColor ?? "#000"}>
+              <StyledBreadcrumbsItemIcon
+                color={appearance?.iconColor ?? "#000"}
+              >
                 <Svg004Icon />
               </StyledBreadcrumbsItemIcon>
             )}

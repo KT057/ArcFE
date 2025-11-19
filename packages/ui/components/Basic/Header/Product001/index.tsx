@@ -47,7 +47,9 @@ export const Header001 = ({
       <StyledHeader
         height={appearance?.header?.height ?? HEIGHT}
         backgroundColor={appearance?.header?.backgroundColor}
-        animationBackgroundColor={appearance?.header?.animation?.backgroundColor}
+        animationBackgroundColor={
+          appearance?.header?.animation?.backgroundColor
+        }
         easing={appearance?.header?.animation?.easing}
         duration={appearance?.header?.animation?.duration}
         sidePadding={appearance?.header?.sidePadding}

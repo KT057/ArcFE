@@ -68,8 +68,12 @@ export const Toggle001 = ({
       ) : (
         <StyledToggleOpen
           onClick={handleClick}
-          animationBackgroundColorBefore={appearance?.animationBackgroundColorBefore}
-          animationBackgroundColorAfter={appearance?.animationBackgroundColorAfter}
+          animationBackgroundColorBefore={
+            appearance?.animationBackgroundColorBefore
+          }
+          animationBackgroundColorAfter={
+            appearance?.animationBackgroundColorAfter
+          }
         >
           <StyledToggleOpenInner>
             <StyledToggleOpenLine lineColor={appearance?.lineColor} />

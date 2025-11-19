@@ -72,7 +72,9 @@ export const Accordion003 = ({
 
         <StyledAccordionContentWrapper ref={contentRef}>
           <StyledAccordionContent>
-            <StyledAccordionContentText color={appearance?.content?.color ?? "#000"}>
+            <StyledAccordionContentText
+              color={appearance?.content?.color ?? "#000"}
+            >
               {content}
             </StyledAccordionContentText>
           </StyledAccordionContent>

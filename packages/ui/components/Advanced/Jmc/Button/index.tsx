@@ -67,7 +67,10 @@ export const JmcButton = ({
         onMouseLeave={handleMouseLeave}
         {...buttonProps}
       >
-        <StyledJmcButtonLeft fontSize={appearance?.fontSize} color={appearance?.color}>
+        <StyledJmcButtonLeft
+          fontSize={appearance?.fontSize}
+          color={appearance?.color}
+        >
           {children}
         </StyledJmcButtonLeft>
         <JmcCircleToggle
