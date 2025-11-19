@@ -12,102 +12,9 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  setup-playwright:
+  vrt:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 22
-
-      - name: Install pnpm
-        uses: pnpm/action-setup@v4
-
-      - name: Cache node_modules
-        uses: actions/cache@v4
-        with:
-          path: node_modules
-          key: ${{ runner.os }}-node-${{ hashFiles('pnpm-lock.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
-
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile
-
-      # Playwrightのブラウザバイナリを配置するディレクトリを環境変数に設定
-      - run: echo "PLAYWRIGHT_BROWSERS_PATH=${HOME}/pw-browsers" >> "${GITHUB_ENV}"
-
-      - name: Setup Playwright
-        uses: ./.github/actions/setup-playwright
-        with:
-          node-version: 22
-          playwright-browsers-path: ${{ env.PLAYWRIGHT_BROWSERS_PATH }}
-
-  setup:
-    needs: setup-playwright
-    runs-on: ubuntu-latest
-    timeout-minutes: 20
-    strategy:
-      fail-fast: false
-      matrix:
-        total: [3]
-        index: [1, 2, 3]
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 22
-
-      - name: Install pnpm
-        uses: pnpm/action-setup@v4
-
-      - name: Cache node_modules
-        uses: actions/cache@v4
-        with:
-          path: node_modules
-          key: ${{ runner.os }}-node-${{ hashFiles('pnpm-lock.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
-
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile
-
-      # Playwrightのブラウザバイナリを配置するディレクトリを環境変数に設定
-      - run: echo "PLAYWRIGHT_BROWSERS_PATH=${HOME}/pw-browsers" >> "${GITHUB_ENV}"
-
-      - name: Setup Playwright
-        uses: ./.github/actions/setup-playwright
-        with:
-          node-version: 22
-          playwright-browsers-path: ${{ env.PLAYWRIGHT_BROWSERS_PATH }}
-
-      - name: Test Storybook
-        run: |
-          pnpm --filter @packages/ui exec vitest --run \
-            --pool=threads \
-            --maxWorkers=$(nproc) \
-            --shard ${{ matrix.index }}/${{ matrix.total }} \
-            --project=storybook \
-            --reporter=dot
-
-      - name: Upload screenshots from this shard
-        uses: actions/upload-artifact@v4
-        with:
-          name: screenshots-${{ matrix.index }}
-          path: packages/ui/__screenshots__
-
-  vrt_publish:
-    needs: setup
-    runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 30
     permissions:
       contents: read
 
@@ -145,60 +52,26 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
+      # Playwrightのブラウザバイナリを配置するディレクトリを環境変数に設定
+      - run: echo "PLAYWRIGHT_BROWSERS_PATH=${HOME}/pw-browsers" >> "${GITHUB_ENV}"
+
+      - name: Setup Playwright
+        uses: ./.github/actions/setup-playwright
+        with:
+          node-version: 22
+          playwright-browsers-path: ${{ env.PLAYWRIGHT_BROWSERS_PATH }}
+
       - name: workaround for detached HEAD
         run: |
           git checkout ${GITHUB_REF#refs/heads/} || git checkout -b ${GITHUB_REF#refs/heads/} && git pull
 
-      - name: Download all screenshots
-        uses: actions/download-artifact@v4
-        with:
-          pattern: screenshots-*
-          merge-multiple: false
-          path: artifacts/
-
-      - name: Merge screenshots safely
+      - name: Test Storybook
         run: |
-          echo "=== Checking artifact structure ==="
-          ls -la artifacts/
-          for shard in artifacts/screenshots-*; do
-            if [ -d "$shard" ]; then
-              echo "Structure of $shard:"
-              find "$shard" -type f -name "*.png" | head -5
-            fi
-          done
-
-          echo "=== Merging screenshots ==="
-          mkdir -p packages/ui/__screenshots__
-          for shard in artifacts/screenshots-*; do
-            if [ -d "$shard" ]; then
-              echo "Merging $shard..."
-              rsync -av "$shard/" packages/ui/__screenshots__/
-            fi
-          done
-
-          echo "=== Syncing filesystem ==="
-          sync
-          sleep 2
-
-          echo "=== Verifying PNG files ==="
-          total_files=$(find packages/ui/__screenshots__ -name '*.png' | wc -l)
-          echo "Total screenshots: $total_files"
-
-          # Check for corrupted PNGs
-          corrupted=0
-          for png in $(find packages/ui/__screenshots__ -name '*.png' | head -20); do
-            if ! file "$png" | grep -q "PNG image data"; then
-              echo "WARNING: Corrupted file detected: $png"
-              corrupted=$((corrupted + 1))
-            fi
-          done
-
-          if [ $corrupted -gt 0 ]; then
-            echo "ERROR: Found $corrupted corrupted PNG files"
-            exit 1
-          fi
-
-          echo "All PNG files verified successfully"
+          pnpm --filter @packages/ui exec vitest --run \
+            --pool=threads \
+            --maxWorkers=$(nproc) \
+            --project=storybook \
+            --reporter=dot
 
       - name: Publish Reg Suit
         env:
