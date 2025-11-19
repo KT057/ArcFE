@@ -77,7 +77,7 @@ export const CustomColors = Template.bind({});
 CustomColors.args = {
   text: "Custom Colors",
   icon: <Svg007Icon />,
-  style: {
+  appearance: {
     fontSize: 14,
     backgroundColor: "#2196f3",
     textColor: "#ffffff",
@@ -91,7 +91,7 @@ export const DarkTheme = Template.bind({});
 DarkTheme.args = {
   text: "Dark Theme",
   icon: <Svg007Icon />,
-  style: {
+  appearance: {
     fontSize: 13,
     backgroundColor: "#333333",
     textColor: "#ffffff",
@@ -105,7 +105,7 @@ export const WithAnimation = Template.bind({});
 WithAnimation.args = {
   text: "Hover for Animation",
   icon: <Svg007Icon />,
-  style: {
+  appearance: {
     backgroundColor: "#2196f3",
     textColor: "#ffffff",
     iconColor: "#ffffff",

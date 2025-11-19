@@ -15,7 +15,7 @@ interface ToggleProps {
   isOpen?: boolean;
   onChange?: (isOpen: boolean) => void;
   onClick?: () => void;
-  style?: {
+  appearance?: {
     backgroundColor?: string;
     dotColor?: string;
     lineColor?: string;
@@ -27,7 +27,7 @@ export const RebitaToggle = ({
   isOpen: controlledIsOpen,
   onChange,
   onClick,
-  style
+  appearance
 }: ToggleProps) => {
   const [internalIsOpen, setInternalIsOpen] = useState(false);
   const isOpen =
@@ -44,28 +44,28 @@ export const RebitaToggle = ({
 
   return (
     <StyledToggleWrapper
-      backgroundColor={style?.backgroundColor}
-      dotColor={style?.dotColor}
-      lineColor={style?.lineColor}
+      backgroundColor={appearance?.backgroundColor}
+      dotColor={appearance?.dotColor}
+      lineColor={appearance?.lineColor}
       isOpen={isOpen}
     >
       <StyledToggleInner
         size={size}
-        backgroundColor={style?.backgroundColor}
+        backgroundColor={appearance?.backgroundColor}
         onClick={handleClick}
       >
         {/* Dots (open state) */}
         <StyledToggleDotWrapper isOpen={isOpen}>
-          <StyledToggleDot dotColor={style?.dotColor} />
-          <StyledToggleDot dotColor={style?.dotColor} />
-          <StyledToggleDot dotColor={style?.dotColor} />
+          <StyledToggleDot dotColor={appearance?.dotColor} />
+          <StyledToggleDot dotColor={appearance?.dotColor} />
+          <StyledToggleDot dotColor={appearance?.dotColor} />
         </StyledToggleDotWrapper>
 
         {/* Close lines (close state) */}
         <StyledToggleCloseWrapper isOpen={isOpen}>
           <StyledToggleLineWrapper>
-            <StyledToggleLine lineColor={style?.lineColor} />
-            <StyledToggleLine lineColor={style?.lineColor} />
+            <StyledToggleLine lineColor={appearance?.lineColor} />
+            <StyledToggleLine lineColor={appearance?.lineColor} />
           </StyledToggleLineWrapper>
         </StyledToggleCloseWrapper>
       </StyledToggleInner>

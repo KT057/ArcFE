@@ -15,7 +15,7 @@ interface PaginationProps {
   size?: Size;
   maxVisiblePages?: number;
   onPageChange: (page: number) => void;
-  style?: {
+  appearance?: {
     backgroundColor?: string;
     activeBackgroundColor?: string;
     borderColor?: string;
@@ -32,7 +32,7 @@ export const Pagination001 = ({
   size = "middle",
   maxVisiblePages = 5,
   onPageChange,
-  style
+  appearance
 }: PaginationProps) => {
   const { visiblePages, showStartEllipsis, showEndEllipsis, handlePageClick } =
     usePagination({
@@ -51,10 +51,10 @@ export const Pagination001 = ({
             onClick={() => handlePageClick(currentPage - 1)}
             size={size}
             isActive={currentPage === 1}
-            activeBackgroundColor={style?.activeBackgroundColor}
-            backgroundColor={style?.backgroundColor}
-            borderColor={style?.borderColor}
-            borderRadius={style?.borderRadius}
+            activeBackgroundColor={appearance?.activeBackgroundColor}
+            backgroundColor={appearance?.backgroundColor}
+            borderColor={appearance?.borderColor}
+            borderRadius={appearance?.borderRadius}
           >
             <StyledPaginationIcon size={size}>
               <Svg001Icon style={{ transform: "rotate(180deg)" }} />
@@ -68,16 +68,16 @@ export const Pagination001 = ({
           onClick={() => handlePageClick(1)}
           size={size}
           isActive={currentPage === 1}
-          activeBackgroundColor={style?.activeBackgroundColor}
-          backgroundColor={style?.backgroundColor}
-          borderColor={style?.borderColor}
-          borderRadius={style?.borderRadius}
+          activeBackgroundColor={appearance?.activeBackgroundColor}
+          backgroundColor={appearance?.backgroundColor}
+          borderColor={appearance?.borderColor}
+          borderRadius={appearance?.borderRadius}
         >
           <StyledPaginationText
             size={size}
-            activeColor={style?.activeColor}
-            color={style?.color}
-            fontWeight={style?.fontWeight}
+            activeColor={appearance?.activeColor}
+            color={appearance?.color}
+            fontWeight={appearance?.fontWeight}
             isActive={currentPage === 1}
           >
             1
@@ -90,9 +90,9 @@ export const Pagination001 = ({
         <StyledPaginationItem>
           <StyledPaginationText
             size={size}
-            activeColor={style?.activeColor}
-            color={style?.color}
-            fontWeight={style?.fontWeight}
+            activeColor={appearance?.activeColor}
+            color={appearance?.color}
+            fontWeight={appearance?.fontWeight}
             isActive={false}
           >
             ...
@@ -107,17 +107,17 @@ export const Pagination001 = ({
             onClick={() => handlePageClick(page)}
             isActive={page === currentPage}
             size={size}
-            activeBackgroundColor={style?.activeBackgroundColor}
-            backgroundColor={style?.backgroundColor}
-            borderColor={style?.borderColor}
-            borderRadius={style?.borderRadius}
+            activeBackgroundColor={appearance?.activeBackgroundColor}
+            backgroundColor={appearance?.backgroundColor}
+            borderColor={appearance?.borderColor}
+            borderRadius={appearance?.borderRadius}
           >
             <StyledPaginationText
               size={size}
               isActive={page === currentPage}
-              activeColor={style?.activeColor}
-              color={style?.color}
-              fontWeight={style?.fontWeight}
+              activeColor={appearance?.activeColor}
+              color={appearance?.color}
+              fontWeight={appearance?.fontWeight}
             >
               {page}
             </StyledPaginationText>
@@ -130,9 +130,9 @@ export const Pagination001 = ({
         <StyledPaginationItem>
           <StyledPaginationText
             size={size}
-            activeColor={style?.activeColor}
-            color={style?.color}
-            fontWeight={style?.fontWeight}
+            activeColor={appearance?.activeColor}
+            color={appearance?.color}
+            fontWeight={appearance?.fontWeight}
             isActive={false}
           >
             ...
@@ -144,18 +144,18 @@ export const Pagination001 = ({
       {totalPages > 1 && (
         <StyledPaginationItem>
           <StyledPaginationButton
-            activeBackgroundColor={style?.activeBackgroundColor}
-            backgroundColor={style?.backgroundColor}
-            borderColor={style?.borderColor}
+            activeBackgroundColor={appearance?.activeBackgroundColor}
+            backgroundColor={appearance?.backgroundColor}
+            borderColor={appearance?.borderColor}
             onClick={() => handlePageClick(totalPages)}
             size={size}
             isActive={currentPage === totalPages}
-            borderRadius={style?.borderRadius}
+            borderRadius={appearance?.borderRadius}
           >
             <StyledPaginationText
-              activeColor={style?.activeColor}
-              color={style?.color}
-              fontWeight={style?.fontWeight}
+              activeColor={appearance?.activeColor}
+              color={appearance?.color}
+              fontWeight={appearance?.fontWeight}
               size={size}
               isActive={currentPage === totalPages}
             >
@@ -169,13 +169,13 @@ export const Pagination001 = ({
       {currentPage < totalPages && (
         <StyledPaginationItem>
           <StyledPaginationButton
-            activeBackgroundColor={style?.activeBackgroundColor}
-            backgroundColor={style?.backgroundColor}
-            borderColor={style?.borderColor}
+            activeBackgroundColor={appearance?.activeBackgroundColor}
+            backgroundColor={appearance?.backgroundColor}
+            borderColor={appearance?.borderColor}
             onClick={() => handlePageClick(currentPage + 1)}
             size={size}
             isActive={currentPage === totalPages}
-            borderRadius={style?.borderRadius}
+            borderRadius={appearance?.borderRadius}
           >
             <StyledPaginationIcon size={size}>
               <Svg001Icon />

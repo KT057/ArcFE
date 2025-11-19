@@ -17,7 +17,7 @@ interface FadeSlideImageProps {
     ComponentProps<typeof FadeInAndZoomImages>
   >;
   slideGuideDotProps?: Partial<ComponentProps<typeof RebitaSlideGuideDot>>;
-  style?: {
+  appearance?: {
     guideGap?: number;
   };
 }
@@ -26,7 +26,7 @@ export const RebitaFadeSlideImage = ({
   images,
   fadeInAndZoomImagesProps,
   slideGuideDotProps,
-  style
+  appearance
 }: FadeSlideImageProps) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [progress, setProgress] = useState(0);
@@ -47,7 +47,7 @@ export const RebitaFadeSlideImage = ({
         />
       </StyledFadeSlideImageContainer>
 
-      <StyledFadeSlideImageGuideWrapper gap={style?.guideGap}>
+      <StyledFadeSlideImageGuideWrapper gap={appearance?.guideGap}>
         {images.map((_, index) => (
           <StyledFadeSlideImageGuideItem key={index}>
             <RebitaSlideGuideDot

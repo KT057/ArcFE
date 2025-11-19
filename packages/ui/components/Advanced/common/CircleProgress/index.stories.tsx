@@ -51,7 +51,7 @@ export const CustomColors = Template.bind({});
 CustomColors.args = {
   progress: 75,
   size: 20,
-  style: {
+  appearance: {
     primaryColor: "#22c55e",
     trackColor: "#f3f4f6"
   }
@@ -61,7 +61,7 @@ export const LargeSize = Template.bind({});
 LargeSize.args = {
   progress: 60,
   size: 20,
-  style: {
+  appearance: {
     strokeWidth: 3
   }
 };
@@ -70,7 +70,7 @@ export const SlowAnimation = Template.bind({});
 SlowAnimation.args = {
   progress: 80,
   size: 20,
-  style: {
+  appearance: {
     animationDuration: "5s",
     primaryColor: "#f59e0b"
   }
@@ -105,7 +105,7 @@ const MultiDotsTemplate: StoryFn<typeof CircleProgress> = () => {
             key={index}
             size={17}
             progress={index === activeIndex ? 100 : 0}
-            style={{
+            appearance={{
               primaryColor: index === activeIndex ? "#3b82f6" : "#cbd5e1"
             }}
           />

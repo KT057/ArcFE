@@ -18,7 +18,7 @@ Default.args = {
   number: 2,
   type: "001",
   size: "middle",
-  style: {
+  appearance: {
     backgroundColor: "#fff",
     borderColor: "#000",
     color: "#000"
@@ -30,7 +30,7 @@ Type002.args = {
   number: 5,
   type: "002",
   size: "middle",
-  style: {
+  appearance: {
     backgroundColor: "#fff",
     borderColor: "#000",
     color: "#000"
@@ -42,7 +42,7 @@ Type003.args = {
   number: 8,
   type: "003",
   size: "middle",
-  style: {
+  appearance: {
     backgroundColor: "#fff",
     borderColor: "#000",
     color: "#000"
@@ -54,7 +54,7 @@ SmallSize.args = {
   number: 1,
   type: "001",
   size: "small",
-  style: {
+  appearance: {
     backgroundColor: "#fff",
     borderColor: "#000",
     color: "#000"
@@ -66,7 +66,7 @@ LargeSize.args = {
   number: 9,
   type: "001",
   size: "large",
-  style: {
+  appearance: {
     backgroundColor: "#fff",
     borderColor: "#000",
     color: "#000"
@@ -78,7 +78,7 @@ RedTheme.args = {
   number: 3,
   type: "001",
   size: "middle",
-  style: {
+  appearance: {
     backgroundColor: "#ff4444",
     borderColor: "#cc0000",
     color: "#fff"
@@ -90,7 +90,7 @@ BlueTheme.args = {
   number: 7,
   type: "002",
   size: "middle",
-  style: {
+  appearance: {
     backgroundColor: "#4444ff",
     borderColor: "#0000cc",
     color: "#fff"
@@ -102,7 +102,7 @@ GreenTheme.args = {
   number: 4,
   type: "003",
   size: "middle",
-  style: {
+  appearance: {
     backgroundColor: "#44ff44",
     borderColor: "#00cc00",
     color: "#000"
@@ -114,7 +114,7 @@ HighNumber.args = {
   number: 99,
   type: "001",
   size: "middle",
-  style: {
+  appearance: {
     backgroundColor: "#fff",
     borderColor: "#000",
     color: "#000"
@@ -126,7 +126,7 @@ ZeroNumber.args = {
   number: 0,
   type: "002",
   size: "middle",
-  style: {
+  appearance: {
     backgroundColor: "#f0f0f0",
     borderColor: "#666",
     color: "#666"

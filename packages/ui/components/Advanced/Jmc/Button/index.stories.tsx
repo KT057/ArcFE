@@ -44,7 +44,7 @@ LinkElement.args = {
 export const CustomStyle = Template.bind({});
 CustomStyle.args = {
   children: "カスタムボタン",
-  style: {
+  appearance: {
     fontSize: 16,
     backgroundColor: "#2196f3",
     color: "#ffffff"
@@ -54,7 +54,7 @@ CustomStyle.args = {
 export const DarkTheme = Template.bind({});
 DarkTheme.args = {
   children: "Dark Button",
-  style: {
+  appearance: {
     fontSize: 14,
     backgroundColor: "#333333",
     color: "#ffffff"

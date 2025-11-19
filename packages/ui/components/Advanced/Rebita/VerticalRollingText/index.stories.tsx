@@ -30,7 +30,7 @@ Default.args = {
 export const CustomStyle = Template.bind({});
 CustomStyle.args = {
   children: "Custom Text",
-  style: {
+  appearance: {
     fontSize: 20,
     color: "#2196f3"
   }

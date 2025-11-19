@@ -28,7 +28,7 @@ export const Default = Template.bind({});
 Default.args = {
   id: "checkbox-001",
   size: "middle",
-  style: {
+  appearance: {
     backgroundColor: "#ccc",
     borderColor: "#000",
     checkedBackgroundColor: "#411fe6",
@@ -41,7 +41,7 @@ Checked.args = {
   id: "checkbox-checked",
   size: "middle",
   checked: true,
-  style: {
+  appearance: {
     backgroundColor: "#ccc",
     borderColor: "#000",
     checkedBackgroundColor: "#411fe6",
@@ -54,7 +54,7 @@ Disabled.args = {
   id: "checkbox-disabled",
   size: "middle",
   disabled: true,
-  style: {
+  appearance: {
     backgroundColor: "#ccc",
     borderColor: "#000",
     checkedBackgroundColor: "#411fe6",
@@ -66,7 +66,7 @@ export const Small = Template.bind({});
 Small.args = {
   id: "checkbox-small",
   size: "small",
-  style: {
+  appearance: {
     backgroundColor: "#ccc",
     borderColor: "#000",
     checkedBackgroundColor: "#411fe6",

@@ -14,7 +14,7 @@ interface ArrowButtonProps {
   onClick?: () => void;
   as?: "button" | "a" | "span";
   href?: string;
-  style?: {
+  appearance?: {
     iconColor?: string;
     borderColor?: string;
     backgroundColor?: string;
@@ -29,7 +29,7 @@ export const JmcArrowButton = ({
   onClick,
   as = "span",
   href,
-  style
+  appearance
 }: ArrowButtonProps) => {
   const buttonProps = {
     ...(as === "a" && href ? { href } : {}),
@@ -41,27 +41,27 @@ export const JmcArrowButton = ({
       <StyledJmcArrowButton
         as={as}
         size={size}
-        iconColor={style?.iconColor}
-        borderColor={style?.borderColor}
-        backgroundColor={style?.backgroundColor}
-        hoverIconColor={style?.hoverIconColor}
-        hoverBorderColor={style?.hoverBorderColor}
-        hoverBackgroundColor={style?.hoverBackgroundColor}
+        iconColor={appearance?.iconColor}
+        borderColor={appearance?.borderColor}
+        backgroundColor={appearance?.backgroundColor}
+        hoverIconColor={appearance?.hoverIconColor}
+        hoverBorderColor={appearance?.hoverBorderColor}
+        hoverBackgroundColor={appearance?.hoverBackgroundColor}
         {...buttonProps}
       >
         <StyledJmcArrowButtonIconContainer>
           <StyledJmcArrowButtonIconWrapper size={size}>
             <StyledJmcArrowButtonIconInner>
-              <StyledJmcArrowButtonIcon iconColor={style?.iconColor}>
+              <StyledJmcArrowButtonIcon iconColor={appearance?.iconColor}>
                 <Svg043Icon />
               </StyledJmcArrowButtonIcon>
-              <StyledJmcArrowButtonIcon iconColor={style?.iconColor}>
+              <StyledJmcArrowButtonIcon iconColor={appearance?.iconColor}>
                 <Svg043Icon />
               </StyledJmcArrowButtonIcon>
-              <StyledJmcArrowButtonIcon iconColor={style?.iconColor}>
+              <StyledJmcArrowButtonIcon iconColor={appearance?.iconColor}>
                 <Svg043Icon />
               </StyledJmcArrowButtonIcon>
-              <StyledJmcArrowButtonIcon iconColor={style?.iconColor}>
+              <StyledJmcArrowButtonIcon iconColor={appearance?.iconColor}>
                 <Svg043Icon />
               </StyledJmcArrowButtonIcon>
             </StyledJmcArrowButtonIconInner>

@@ -47,7 +47,7 @@ Default.args = {
       content: <div>アイテム 4</div>
     }
   ],
-  style: {
+  appearance: {
     gap: 8
   }
 };
@@ -168,7 +168,7 @@ export const WithComplexContent: StoryFn<typeof DragAndDrop001> = () => {
             })
           );
         }}
-        style={{
+        appearance={{
           gap: 8
         }}
       />

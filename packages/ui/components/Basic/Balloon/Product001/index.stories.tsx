@@ -17,7 +17,7 @@ export const Default = Template.bind({});
 Default.args = {
   children: "Balloon",
   type: "001",
-  style: {
+  appearance: {
     backgroundColor: "#ccc",
     color: "#000",
     fontSize: 16

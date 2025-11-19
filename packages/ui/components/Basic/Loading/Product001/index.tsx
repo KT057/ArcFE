@@ -6,7 +6,7 @@ export type Type = "001";
 interface LoadingProps {
   type?: Type;
   size?: Size;
-  style?: {
+  appearance?: {
     color?: string;
   };
 }
@@ -14,14 +14,14 @@ interface LoadingProps {
 export const Loading001 = ({
   type = "001",
   size = "large",
-  style
+  appearance
 }: LoadingProps) => {
   return (
     <StyledLoadingWrapper>
       <StyledLoading
         type={type}
         size={size}
-        color={style?.color}
+        color={appearance?.color}
         viewBox="0 0 24 24"
       >
         <circle cx="12" cy="2" r="2" opacity=".1">

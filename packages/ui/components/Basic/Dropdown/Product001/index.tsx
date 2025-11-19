@@ -11,7 +11,7 @@ interface DropdownMenuProps {
   detail: ReactNode;
   contents: ReactNode;
   nowrap?: boolean;
-  style?: {
+  appearance?: {
     backgroundColor?: string;
     borderColor?: string;
     borderRadius?: number;
@@ -19,7 +19,7 @@ interface DropdownMenuProps {
 }
 
 export const Dropdown001 = ({
-  style,
+  appearance,
   detail,
   contents,
   nowrap
@@ -31,9 +31,9 @@ export const Dropdown001 = ({
         <StyledDetailWrapper>
           <StyledDetail
             nowrap={nowrap}
-            borderColor={style?.borderColor}
-            backgroundColor={style?.backgroundColor}
-            borderRadius={style?.borderRadius}
+            borderColor={appearance?.borderColor}
+            backgroundColor={appearance?.backgroundColor}
+            borderRadius={appearance?.borderRadius}
           >
             {detail}
           </StyledDetail>

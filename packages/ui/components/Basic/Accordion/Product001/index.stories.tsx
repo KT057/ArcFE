@@ -19,7 +19,7 @@ Default.args = {
   headerContent: "Accordion",
   content: "コンテキスト",
   icon: <Svg036Icon />,
-  style: {
+  appearance: {
     borderColor: "#000",
     header: {
       color: "#000"

@@ -9,7 +9,7 @@ import {
 interface CircleProgressProps {
   progress: number;
   size: number;
-  style?: {
+  appearance?: {
     primaryColor?: string;
     trackColor?: string;
     strokeWidth?: number;
@@ -20,21 +20,21 @@ interface CircleProgressProps {
 export const CircleProgress = ({
   progress = 0,
   size,
-  style
+  appearance
 }: CircleProgressProps) => {
   return (
     <StyledCircleProgressWrapper>
       <StyledCircleProgressContainer size={size}>
         <StyledCircleProgressSvg size={size}>
           <StyledCircleProgressTrack
-            trackColor={style?.trackColor}
+            trackColor={appearance?.trackColor}
             size={size}
           />
           <StyledCircleProgressProgress
-            primaryColor={style?.primaryColor}
+            primaryColor={appearance?.primaryColor}
             size={size}
-            strokeWidth={style?.strokeWidth}
-            animationDuration={style?.animationDuration}
+            strokeWidth={appearance?.strokeWidth}
+            animationDuration={appearance?.animationDuration}
             progress={progress}
           />
         </StyledCircleProgressSvg>

@@ -243,7 +243,7 @@ var BgImageContent = ({
   imageUrl,
   height,
   animationType,
-  style
+  appearance
 }) => {
   return /* @__PURE__ */ jsx(StyledBgImageContentWrapper, { children: /* @__PURE__ */ jsx(
     StyledBgImageContentContainer,
@@ -251,9 +251,9 @@ var BgImageContent = ({
       height,
       imageUrl,
       animationType,
-      scale: style?.scale,
-      duration: style?.duration,
-      easing: style?.easing,
+      scale: appearance?.scale,
+      duration: appearance?.duration,
+      easing: appearance?.easing,
       children: /* @__PURE__ */ jsx(StyledBgImageContentInner, { children })
     }
   ) });
@@ -322,23 +322,23 @@ var StyledCircleProgressProgress = styled13.circle.withConfig({
 var CircleProgress = ({
   progress = 0,
   size,
-  style
+  appearance
 }) => {
   return /* @__PURE__ */ jsx(StyledCircleProgressWrapper, { children: /* @__PURE__ */ jsx(StyledCircleProgressContainer, { size, children: /* @__PURE__ */ jsxs(StyledCircleProgressSvg, { size, children: [
     /* @__PURE__ */ jsx(
       StyledCircleProgressTrack,
       {
-        trackColor: style?.trackColor,
+        trackColor: appearance?.trackColor,
         size
       }
     ),
     /* @__PURE__ */ jsx(
       StyledCircleProgressProgress,
       {
-        primaryColor: style?.primaryColor,
+        primaryColor: appearance?.primaryColor,
         size,
-        strokeWidth: style?.strokeWidth,
-        animationDuration: style?.animationDuration,
+        strokeWidth: appearance?.strokeWidth,
+        animationDuration: appearance?.animationDuration,
         progress
       }
     )
@@ -1593,7 +1593,7 @@ var JmcArrowButton = ({
   onClick,
   as = "span",
   href,
-  style
+  appearance
 }) => {
   const buttonProps = {
     ...as === "a" && href ? { href } : {},
@@ -1604,18 +1604,18 @@ var JmcArrowButton = ({
     {
       as,
       size,
-      iconColor: style?.iconColor,
-      borderColor: style?.borderColor,
-      backgroundColor: style?.backgroundColor,
-      hoverIconColor: style?.hoverIconColor,
-      hoverBorderColor: style?.hoverBorderColor,
-      hoverBackgroundColor: style?.hoverBackgroundColor,
+      iconColor: appearance?.iconColor,
+      borderColor: appearance?.borderColor,
+      backgroundColor: appearance?.backgroundColor,
+      hoverIconColor: appearance?.hoverIconColor,
+      hoverBorderColor: appearance?.hoverBorderColor,
+      hoverBackgroundColor: appearance?.hoverBackgroundColor,
       ...buttonProps,
       children: /* @__PURE__ */ jsx(StyledJmcArrowButtonIconContainer, { children: /* @__PURE__ */ jsx(StyledJmcArrowButtonIconWrapper, { size, children: /* @__PURE__ */ jsxs(StyledJmcArrowButtonIconInner, { children: [
-        /* @__PURE__ */ jsx(StyledJmcArrowButtonIcon, { iconColor: style?.iconColor, children: /* @__PURE__ */ jsx(Svg043, {}) }),
-        /* @__PURE__ */ jsx(StyledJmcArrowButtonIcon, { iconColor: style?.iconColor, children: /* @__PURE__ */ jsx(Svg043, {}) }),
-        /* @__PURE__ */ jsx(StyledJmcArrowButtonIcon, { iconColor: style?.iconColor, children: /* @__PURE__ */ jsx(Svg043, {}) }),
-        /* @__PURE__ */ jsx(StyledJmcArrowButtonIcon, { iconColor: style?.iconColor, children: /* @__PURE__ */ jsx(Svg043, {}) })
+        /* @__PURE__ */ jsx(StyledJmcArrowButtonIcon, { iconColor: appearance?.iconColor, children: /* @__PURE__ */ jsx(Svg043, {}) }),
+        /* @__PURE__ */ jsx(StyledJmcArrowButtonIcon, { iconColor: appearance?.iconColor, children: /* @__PURE__ */ jsx(Svg043, {}) }),
+        /* @__PURE__ */ jsx(StyledJmcArrowButtonIcon, { iconColor: appearance?.iconColor, children: /* @__PURE__ */ jsx(Svg043, {}) }),
+        /* @__PURE__ */ jsx(StyledJmcArrowButtonIcon, { iconColor: appearance?.iconColor, children: /* @__PURE__ */ jsx(Svg043, {}) })
       ] }) }) })
     }
   ) });
@@ -1682,7 +1682,7 @@ var JmcCircleToggle = ({
   onMouseEnter,
   onMouseLeave,
   onClick,
-  style
+  appearance
 }) => {
   const [internalIsHovered, setInternalIsHovered] = useState(false);
   const isHovered = controlledIsHovered !== void 0 ? controlledIsHovered : internalIsHovered;
@@ -1701,15 +1701,15 @@ var JmcCircleToggle = ({
   return /* @__PURE__ */ jsx(StyledJmcCircleToggleWrapper, { children: /* @__PURE__ */ jsx(
     StyledJmcCircleToggle,
     {
-      color: style?.color,
+      color: appearance?.color,
       isHovered,
       onMouseEnter: handleMouseEnter,
       onMouseLeave: handleMouseLeave,
       onClick,
       children: /* @__PURE__ */ jsx(StyledJmcCircleToggleInner, { children: /* @__PURE__ */ jsxs(StyledJmcCircleToggleDotWrapper, { children: [
-        /* @__PURE__ */ jsx(StyledJmcCircleToggleDot, { dotColor: style?.dotColor }),
-        /* @__PURE__ */ jsx(StyledJmcCircleToggleDot, { dotColor: style?.dotColor }),
-        /* @__PURE__ */ jsx(StyledJmcCircleToggleDot, { dotColor: style?.dotColor })
+        /* @__PURE__ */ jsx(StyledJmcCircleToggleDot, { dotColor: appearance?.dotColor }),
+        /* @__PURE__ */ jsx(StyledJmcCircleToggleDot, { dotColor: appearance?.dotColor }),
+        /* @__PURE__ */ jsx(StyledJmcCircleToggleDot, { dotColor: appearance?.dotColor })
       ] }) })
     }
   ) });
@@ -1744,7 +1744,7 @@ var JmcButton = ({
   isHovered: controlledIsHovered,
   onMouseEnter,
   onMouseLeave,
-  style
+  appearance
 }) => {
   const [internalIsHovered, setInternalIsHovered] = useState(false);
   const isHovered = controlledIsHovered !== void 0 ? controlledIsHovered : internalIsHovered;
@@ -1768,20 +1768,20 @@ var JmcButton = ({
     StyledJmcButton,
     {
       as,
-      backgroundColor: style?.backgroundColor,
-      textColor: style?.color,
+      backgroundColor: appearance?.backgroundColor,
+      textColor: appearance?.color,
       onMouseEnter: handleMouseEnter,
       onMouseLeave: handleMouseLeave,
       ...buttonProps,
       children: [
-        /* @__PURE__ */ jsx(StyledJmcButtonLeft, { fontSize: style?.fontSize, color: style?.color, children }),
+        /* @__PURE__ */ jsx(StyledJmcButtonLeft, { fontSize: appearance?.fontSize, color: appearance?.color, children }),
         /* @__PURE__ */ jsx(
           JmcCircleToggle,
           {
             isHovered,
-            style: {
-              color: style?.circleToggleColor || style?.color,
-              dotColor: style?.circleToggleDotColor || style?.color
+            appearance: {
+              color: appearance?.circleToggleColor || appearance?.color,
+              dotColor: appearance?.circleToggleDotColor || appearance?.color
             }
           }
         )
@@ -1818,7 +1818,7 @@ var StyledVerticalRollingText = styled13.span`
 var VerticalRollingText = ({
   children,
   enableHover,
-  style
+  appearance
 }) => {
   const wrapperRef = useRef(null);
   const contentsRef = useRef(null);
@@ -1866,14 +1866,14 @@ var VerticalRollingText = ({
   return /* @__PURE__ */ jsx(
     StyledVerticalRollingTextWrapper,
     {
-      fontSize: style?.fontSize,
-      color: style?.color,
+      fontSize: appearance?.fontSize,
+      color: appearance?.color,
       children: /* @__PURE__ */ jsx(
         StyledVerticalRollingTextInner,
         {
           ref: wrapperRef,
-          fontSize: style?.fontSize,
-          color: style?.color,
+          fontSize: appearance?.fontSize,
+          color: appearance?.color,
           onMouseEnter: () => enableHover === void 0 && onRollingText(true),
           onMouseLeave: () => enableHover === void 0 && onRollingText(false),
           children: /* @__PURE__ */ jsxs(StyledVerticalRollingTextContents, { ref: contentsRef, children: [
@@ -1966,7 +1966,7 @@ var RebitaButton = ({
   onClick,
   as = "a",
   href,
-  style
+  appearance
 }) => {
   const [isHovered, setIsHovered] = useState(false);
   const handleMouseEnter = () => {
@@ -1982,23 +1982,23 @@ var RebitaButton = ({
       direction,
       onClick,
       href,
-      backgroundColor: style?.backgroundColor,
-      borderColor: style?.borderColor,
+      backgroundColor: appearance?.backgroundColor,
+      borderColor: appearance?.borderColor,
       onMouseEnter: handleMouseEnter,
       onMouseLeave: handleMouseLeave,
       children: [
         /* @__PURE__ */ jsx(
           StyledRebitaButtonLeft,
           {
-            textColor: style?.textColor,
-            leftContentBorderColor: style?.leftContentBorderColor,
+            textColor: appearance?.textColor,
+            leftContentBorderColor: appearance?.leftContentBorderColor,
             direction,
-            children: /* @__PURE__ */ jsx(StyledRebitaButtonLeftInner, { fontSize: style?.fontSize, children: /* @__PURE__ */ jsx(
+            children: /* @__PURE__ */ jsx(StyledRebitaButtonLeftInner, { fontSize: appearance?.fontSize, children: /* @__PURE__ */ jsx(
               VerticalRollingText,
               {
-                style: {
-                  fontSize: style?.fontSize,
-                  color: style?.textColor || "#fff"
+                appearance: {
+                  fontSize: appearance?.fontSize,
+                  color: appearance?.textColor || "#fff"
                 },
                 enableHover: isHovered,
                 children: text
@@ -2010,7 +2010,7 @@ var RebitaButton = ({
           StyledRebitaButtonRightInner,
           {
             iconSize: size,
-            iconColor: style?.iconColor,
+            iconColor: appearance?.iconColor,
             children: /* @__PURE__ */ jsx(Fragment, { children: icon })
           }
         ) })
@@ -2046,29 +2046,29 @@ var StyledCircleProgressPercentage = styled13.span.withConfig({
 var RebitaCircleProgress = ({
   progress = 0,
   children,
-  style
+  appearance
 }) => {
-  const size = style?.size || 100;
-  const strokeWidth = style?.strokeWidth || 3;
+  const size = appearance?.size || 100;
+  const strokeWidth = appearance?.strokeWidth || 3;
   return /* @__PURE__ */ jsx(StyledCircleProgressWrapper2, { children: /* @__PURE__ */ jsxs(StyledCircleProgressContainer2, { size, children: [
     /* @__PURE__ */ jsx(
       CircleProgress,
       {
         progress,
         size,
-        style: {
-          primaryColor: style?.primaryColor,
-          trackColor: style?.trackColor,
+        appearance: {
+          primaryColor: appearance?.primaryColor,
+          trackColor: appearance?.trackColor,
           strokeWidth,
-          animationDuration: style?.animationDuration
+          animationDuration: appearance?.animationDuration
         }
       }
     ),
     /* @__PURE__ */ jsx(StyledCircleProgressContent, { children: /* @__PURE__ */ jsx(
       StyledCircleProgressPercentage,
       {
-        fontSize: style?.fontSize,
-        textColor: style?.textColor,
+        fontSize: appearance?.fontSize,
+        textColor: appearance?.textColor,
         children
       }
     ) })
@@ -2101,19 +2101,19 @@ var StyledSlideGuideDotItem = styled13.span`
 var RebitaSlideGuideDot = ({
   type = "default",
   progress = 0,
-  style,
+  appearance,
   onClick
 }) => {
-  return /* @__PURE__ */ jsx(StyledSlideGuideDotWrapper, { children: /* @__PURE__ */ jsx(StyledSlideGuideDotContainer, { size: style?.dotSize || 17, children: type === "default" ? /* @__PURE__ */ jsx(StyledSlideGuideDotItem, { onClick }) : /* @__PURE__ */ jsx(
+  return /* @__PURE__ */ jsx(StyledSlideGuideDotWrapper, { children: /* @__PURE__ */ jsx(StyledSlideGuideDotContainer, { size: appearance?.dotSize || 17, children: type === "default" ? /* @__PURE__ */ jsx(StyledSlideGuideDotItem, { onClick }) : /* @__PURE__ */ jsx(
     CircleProgress,
     {
       progress,
-      size: style?.circleSize || 17,
-      style: {
-        primaryColor: style?.primaryColor,
-        trackColor: style?.trackColor,
-        strokeWidth: style?.strokeWidth || 2,
-        animationDuration: style?.animationDuration
+      size: appearance?.circleSize || 17,
+      appearance: {
+        primaryColor: appearance?.primaryColor,
+        trackColor: appearance?.trackColor,
+        strokeWidth: appearance?.strokeWidth || 2,
+        animationDuration: appearance?.animationDuration
       }
     }
   ) }) });
@@ -2141,7 +2141,7 @@ var RebitaFadeSlideImage = ({
   images,
   fadeInAndZoomImagesProps,
   slideGuideDotProps,
-  style
+  appearance
 }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [progress, setProgress] = useState(0);
@@ -2160,7 +2160,7 @@ var RebitaFadeSlideImage = ({
         ...fadeInAndZoomImagesProps
       }
     ) }),
-    /* @__PURE__ */ jsx(StyledFadeSlideImageGuideWrapper, { gap: style?.guideGap, children: images.map((_, index) => /* @__PURE__ */ jsx(StyledFadeSlideImageGuideItem, { children: /* @__PURE__ */ jsx(
+    /* @__PURE__ */ jsx(StyledFadeSlideImageGuideWrapper, { gap: appearance?.guideGap, children: images.map((_, index) => /* @__PURE__ */ jsx(StyledFadeSlideImageGuideItem, { children: /* @__PURE__ */ jsx(
       RebitaSlideGuideDot,
       {
         type: index === currentIndex ? "progress" : "default",
@@ -2206,17 +2206,17 @@ var StyledFadeText = styled13.span.withConfig({
 var RebitaFadeText = ({
   children,
   progress = 0,
-  style
+  appearance
 }) => {
   return /* @__PURE__ */ jsx(
     StyledFadeTextWrapper,
     {
-      color: style?.color,
-      fontSize: style?.fontSize,
+      color: appearance?.color,
+      fontSize: appearance?.fontSize,
       progress,
-      children: /* @__PURE__ */ jsxs(StyledFadeTextContainer, { fontSize: style?.fontSize, children: [
-        /* @__PURE__ */ jsx(StyledFadeText, { color: style?.color, isFirst: true, progress, children }),
-        /* @__PURE__ */ jsx(StyledFadeText, { color: style?.color, isFirst: false, children })
+      children: /* @__PURE__ */ jsxs(StyledFadeTextContainer, { fontSize: appearance?.fontSize, children: [
+        /* @__PURE__ */ jsx(StyledFadeText, { color: appearance?.color, isFirst: true, progress, children }),
+        /* @__PURE__ */ jsx(StyledFadeText, { color: appearance?.color, isFirst: false, children })
       ] })
     }
   );
@@ -2333,11 +2333,11 @@ var RebitaPanel = ({
   title = "\u30EA\u30CE\u30A2\u5317\u8D64\u7FBD",
   description = "\u5DE5\u696D\u5730\u57DF\u306B\u5EFA\u3064\u5143\u4F01\u696D\u793E\u5B85\u3092\u5730\u57DF\u306B\u958B\u3044\u305F\u30B7\u30A7\u30A2\u30B9\u30DA\u30FC\u30B9\u4ED8\u304D\u5206\u8B72\u30DE\u30F3\u30B7\u30E7\u30F3\u3068\u3057\u3066\u518D\u751F",
   labels = [],
-  style,
+  appearance,
   onClick
 }) => {
   return /* @__PURE__ */ jsx(StyledPanelWrapper, { children: /* @__PURE__ */ jsxs(StyledPanel, { onClick, children: [
-    /* @__PURE__ */ jsxs(StyledPanelImageWrapper, { imageHeight: style?.imageHeight, children: [
+    /* @__PURE__ */ jsxs(StyledPanelImageWrapper, { imageHeight: appearance?.imageHeight, children: [
       /* @__PURE__ */ jsx(StyledPanelImageContent, { children: /* @__PURE__ */ jsx(StyledPanelImageImage, { src: imageSrc, alt: imageAlt }) }),
       /* @__PURE__ */ jsx(StyledPanelImageOverlay, { className: "panel-image-overlay" }),
       /* @__PURE__ */ jsx(StyledPanelImageText, { className: "panel-image-text", children: imageText })
@@ -2384,7 +2384,7 @@ var RebitaTextButtonWithIcon = ({
   as = "div",
   href,
   iconDirection = "right",
-  style
+  appearance
 }) => {
   const [isHover, setIsHover] = useState(false);
   const handleMouseEnter = () => {
@@ -2407,9 +2407,9 @@ var RebitaTextButtonWithIcon = ({
           VerticalRollingText,
           {
             enableHover: isHover,
-            style: {
-              fontSize: style?.fontSize,
-              color: style?.color
+            appearance: {
+              fontSize: appearance?.fontSize,
+              color: appearance?.color
             },
             children: text
           }
@@ -2417,8 +2417,8 @@ var RebitaTextButtonWithIcon = ({
         /* @__PURE__ */ jsx(
           StyledTextButtonWithIconIcon,
           {
-            iconSize: style?.iconSize,
-            color: style?.color,
+            iconSize: appearance?.iconSize,
+            color: appearance?.color,
             children: /* @__PURE__ */ jsx(Fragment, { children: icon })
           }
         )
@@ -2506,7 +2506,7 @@ var RebitaToggle = ({
   isOpen: controlledIsOpen,
   onChange,
   onClick,
-  style
+  appearance
 }) => {
   const [internalIsOpen, setInternalIsOpen] = useState(false);
   const isOpen = controlledIsOpen !== void 0 ? controlledIsOpen : internalIsOpen;
@@ -2521,25 +2521,25 @@ var RebitaToggle = ({
   return /* @__PURE__ */ jsx(
     StyledToggleWrapper,
     {
-      backgroundColor: style?.backgroundColor,
-      dotColor: style?.dotColor,
-      lineColor: style?.lineColor,
+      backgroundColor: appearance?.backgroundColor,
+      dotColor: appearance?.dotColor,
+      lineColor: appearance?.lineColor,
       isOpen,
       children: /* @__PURE__ */ jsxs(
         StyledToggleInner,
         {
           size,
-          backgroundColor: style?.backgroundColor,
+          backgroundColor: appearance?.backgroundColor,
           onClick: handleClick,
           children: [
             /* @__PURE__ */ jsxs(StyledToggleDotWrapper, { isOpen, children: [
-              /* @__PURE__ */ jsx(StyledToggleDot, { dotColor: style?.dotColor }),
-              /* @__PURE__ */ jsx(StyledToggleDot, { dotColor: style?.dotColor }),
-              /* @__PURE__ */ jsx(StyledToggleDot, { dotColor: style?.dotColor })
+              /* @__PURE__ */ jsx(StyledToggleDot, { dotColor: appearance?.dotColor }),
+              /* @__PURE__ */ jsx(StyledToggleDot, { dotColor: appearance?.dotColor }),
+              /* @__PURE__ */ jsx(StyledToggleDot, { dotColor: appearance?.dotColor })
             ] }),
             /* @__PURE__ */ jsx(StyledToggleCloseWrapper, { isOpen, children: /* @__PURE__ */ jsxs(StyledToggleLineWrapper, { children: [
-              /* @__PURE__ */ jsx(StyledToggleLine, { lineColor: style?.lineColor }),
-              /* @__PURE__ */ jsx(StyledToggleLine, { lineColor: style?.lineColor })
+              /* @__PURE__ */ jsx(StyledToggleLine, { lineColor: appearance?.lineColor }),
+              /* @__PURE__ */ jsx(StyledToggleLine, { lineColor: appearance?.lineColor })
             ] }) })
           ]
         }
@@ -2626,7 +2626,7 @@ var Accordion001 = ({
   headerContent,
   content,
   icon,
-  style,
+  appearance,
   animation
 }) => {
   const { handleClick, contentRef, iconRef } = useAccordion({ animation });
@@ -2634,17 +2634,17 @@ var Accordion001 = ({
     /* @__PURE__ */ jsx(
       StyledAccordionHeader,
       {
-        borderColor: style?.borderColor ?? "#000",
-        paddingSide: style?.paddingSide,
-        paddingVertical: style?.paddingVertical,
+        borderColor: appearance?.borderColor ?? "#000",
+        paddingSide: appearance?.paddingSide,
+        paddingVertical: appearance?.paddingVertical,
         onClick: handleClick,
         children: /* @__PURE__ */ jsxs(StyledAccordionHeaderInner, { children: [
-          /* @__PURE__ */ jsx(StyledAccordionTitleWrapper, { children: /* @__PURE__ */ jsx(StyledAccordionTitle, { color: style?.header?.color ?? "#000", children: headerContent }) }),
+          /* @__PURE__ */ jsx(StyledAccordionTitleWrapper, { children: /* @__PURE__ */ jsx(StyledAccordionTitle, { color: appearance?.header?.color ?? "#000", children: headerContent }) }),
           /* @__PURE__ */ jsx(
             StyledAccordionIcon,
             {
               ref: iconRef,
-              color: style?.iconColor ?? "#000",
+              color: appearance?.iconColor ?? "#000",
               children: icon
             }
           )
@@ -2654,9 +2654,9 @@ var Accordion001 = ({
     /* @__PURE__ */ jsx(StyledAccordionContentWrapper, { ref: contentRef, children: /* @__PURE__ */ jsx(
       StyledAccordionContent,
       {
-        paddingSide: style?.paddingSide,
-        paddingVertical: style?.paddingVertical,
-        children: /* @__PURE__ */ jsx(StyledAccordionContentText, { color: style?.content?.color ?? "#000", children: content })
+        paddingSide: appearance?.paddingSide,
+        paddingVertical: appearance?.paddingVertical,
+        children: /* @__PURE__ */ jsx(StyledAccordionContentText, { color: appearance?.content?.color ?? "#000", children: content })
       }
     ) })
   ] }) });
@@ -2712,23 +2712,23 @@ var Accordion002 = ({
   headerContent,
   content,
   icon,
-  style,
+  appearance,
   animation
 }) => {
   const { handleClick, contentRef, iconRef } = useAccordion({ animation });
-  return /* @__PURE__ */ jsx(StyledAccordionWrapper2, { children: /* @__PURE__ */ jsxs(StyledAccordion2, { backgroundColor: style?.backgroundColor ?? "#fff", children: [
+  return /* @__PURE__ */ jsx(StyledAccordionWrapper2, { children: /* @__PURE__ */ jsxs(StyledAccordion2, { backgroundColor: appearance?.backgroundColor ?? "#fff", children: [
     /* @__PURE__ */ jsx(StyledAccordionHeader2, { onClick: handleClick, children: /* @__PURE__ */ jsxs(StyledAccordionHeaderInner2, { children: [
-      /* @__PURE__ */ jsx(StyledAccordionTitleWrapper2, { children: /* @__PURE__ */ jsx(StyledAccordionTitle2, { color: style?.header?.color ?? "#000", children: headerContent }) }),
+      /* @__PURE__ */ jsx(StyledAccordionTitleWrapper2, { children: /* @__PURE__ */ jsx(StyledAccordionTitle2, { color: appearance?.header?.color ?? "#000", children: headerContent }) }),
       /* @__PURE__ */ jsx(
         StyledAccordionIcon2,
         {
           ref: iconRef,
-          color: style?.iconColor ?? "#000",
+          color: appearance?.iconColor ?? "#000",
           children: icon
         }
       )
     ] }) }),
-    /* @__PURE__ */ jsx(StyledAccordionContentWrapper2, { ref: contentRef, children: /* @__PURE__ */ jsx(StyledAccordionContent2, { children: /* @__PURE__ */ jsx(StyledAccordionContentText2, { color: style?.content?.color ?? "#000", children: content }) }) })
+    /* @__PURE__ */ jsx(StyledAccordionContentWrapper2, { ref: contentRef, children: /* @__PURE__ */ jsx(StyledAccordionContent2, { children: /* @__PURE__ */ jsx(StyledAccordionContentText2, { color: appearance?.content?.color ?? "#000", children: content }) }) })
   ] }) });
 };
 var StyledAccordionWrapper3 = styled13.div`
@@ -2793,7 +2793,7 @@ var Accordion003 = ({
   headerContent,
   content,
   icon,
-  style,
+  appearance,
   animation
 }) => {
   const { handleClick, contentRef, iconRef } = useAccordion({ animation });
@@ -2801,23 +2801,23 @@ var Accordion003 = ({
     /* @__PURE__ */ jsx(
       StyledAccordionHeader3,
       {
-        backgroundColor: style?.header?.backgroundColor ?? "#fff",
-        barColor: style?.header?.barColor ?? "#000",
+        backgroundColor: appearance?.header?.backgroundColor ?? "#fff",
+        barColor: appearance?.header?.barColor ?? "#000",
         onClick: handleClick,
         children: /* @__PURE__ */ jsxs(StyledAccordionHeaderInner3, { children: [
-          /* @__PURE__ */ jsx(StyledAccordionTitleWrapper3, { children: /* @__PURE__ */ jsx(StyledAccordionTitle3, { color: style?.header?.color ?? "#000", children: headerContent }) }),
+          /* @__PURE__ */ jsx(StyledAccordionTitleWrapper3, { children: /* @__PURE__ */ jsx(StyledAccordionTitle3, { color: appearance?.header?.color ?? "#000", children: headerContent }) }),
           /* @__PURE__ */ jsx(
             StyledAccordionIcon3,
             {
               ref: iconRef,
-              color: style?.iconColor ?? "#000",
+              color: appearance?.iconColor ?? "#000",
               children: icon
             }
           )
         ] })
       }
     ),
-    /* @__PURE__ */ jsx(StyledAccordionContentWrapper3, { ref: contentRef, children: /* @__PURE__ */ jsx(StyledAccordionContent3, { children: /* @__PURE__ */ jsx(StyledAccordionContentText3, { color: style?.content?.color ?? "#000", children: content }) }) })
+    /* @__PURE__ */ jsx(StyledAccordionContentWrapper3, { ref: contentRef, children: /* @__PURE__ */ jsx(StyledAccordionContent3, { children: /* @__PURE__ */ jsx(StyledAccordionContentText3, { color: appearance?.content?.color ?? "#000", children: content }) }) })
   ] }) });
 };
 var StyledAccordionWrapper4 = styled13.div`
@@ -2903,7 +2903,7 @@ var Accordion004 = ({
   header,
   content,
   icon,
-  style,
+  appearance,
   animation
 }) => {
   const { handleClick, contentRef, iconRef } = useAccordion({ animation });
@@ -2911,23 +2911,23 @@ var Accordion004 = ({
     /* @__PURE__ */ jsx(
       StyledAccordionHeader4,
       {
-        borderColor: style?.borderColor ?? "#000",
-        paddingSide: style?.paddingSide,
-        paddingVertical: style?.paddingVertical,
+        borderColor: appearance?.borderColor ?? "#000",
+        paddingSide: appearance?.paddingSide,
+        paddingVertical: appearance?.paddingVertical,
         onClick: handleClick,
         children: /* @__PURE__ */ jsxs(StyledAccordionHeaderInner4, { children: [
           /* @__PURE__ */ jsxs(StyledAccordionTitleWrapper4, { children: [
             /* @__PURE__ */ jsx(
               StyledAccordionTitle4,
               {
-                titleColor: style?.header?.titleColor ?? "#f10707",
+                titleColor: appearance?.header?.titleColor ?? "#f10707",
                 children: header.title
               }
             ),
             /* @__PURE__ */ jsx(
               StyledAccordionText,
               {
-                textColor: style?.header?.textColor ?? "#000",
+                textColor: appearance?.header?.textColor ?? "#000",
                 children: header.text
               }
             )
@@ -2936,7 +2936,7 @@ var Accordion004 = ({
             StyledAccordionIcon4,
             {
               ref: iconRef,
-              color: style?.iconColor ?? "#000",
+              color: appearance?.iconColor ?? "#000",
               children: icon
             }
           )
@@ -2946,20 +2946,20 @@ var Accordion004 = ({
     /* @__PURE__ */ jsx(StyledAccordionContentWrapper4, { ref: contentRef, children: /* @__PURE__ */ jsxs(
       StyledAccordionContent4,
       {
-        paddingSide: style?.paddingSide,
-        paddingVertical: style?.paddingVertical,
+        paddingSide: appearance?.paddingSide,
+        paddingVertical: appearance?.paddingVertical,
         children: [
           /* @__PURE__ */ jsx(
             StyledAccordionContentTitle,
             {
-              titleColor: style?.content?.titleColor ?? "#000",
+              titleColor: appearance?.content?.titleColor ?? "#000",
               children: content.title
             }
           ),
           /* @__PURE__ */ jsx(
             StyledAccordionContentText4,
             {
-              textColor: style?.content?.textColor ?? "#000",
+              textColor: appearance?.content?.textColor ?? "#000",
               children: content.text
             }
           )
@@ -3049,24 +3049,24 @@ var Accordion005 = ({
   header,
   content,
   icon,
-  style,
+  appearance,
   animation
 }) => {
   const { handleClick, contentRef, iconRef } = useAccordion({ animation });
-  return /* @__PURE__ */ jsx(StyledAccordionWrapper5, { children: /* @__PURE__ */ jsxs(StyledAccordion5, { backgroundColor: style?.backgroundColor ?? "#000", children: [
+  return /* @__PURE__ */ jsx(StyledAccordionWrapper5, { children: /* @__PURE__ */ jsxs(StyledAccordion5, { backgroundColor: appearance?.backgroundColor ?? "#000", children: [
     /* @__PURE__ */ jsx(StyledAccordionHeader5, { onClick: handleClick, children: /* @__PURE__ */ jsxs(StyledAccordionHeaderInner5, { children: [
       /* @__PURE__ */ jsxs(StyledAccordionTitleWrapper5, { children: [
         /* @__PURE__ */ jsx(
           StyledAccordionTitle5,
           {
-            titleColor: style?.header?.titleColor ?? "#f10707",
+            titleColor: appearance?.header?.titleColor ?? "#f10707",
             children: header.title ?? "Q"
           }
         ),
         /* @__PURE__ */ jsx(
           StyledAccordionText2,
           {
-            textColor: style?.header?.textColor ?? "#000",
+            textColor: appearance?.header?.textColor ?? "#000",
             children: header.text
           }
         )
@@ -3075,7 +3075,7 @@ var Accordion005 = ({
         StyledAccordionIcon5,
         {
           ref: iconRef,
-          color: style?.iconColor ?? "#000",
+          color: appearance?.iconColor ?? "#000",
           children: icon
         }
       )
@@ -3084,14 +3084,14 @@ var Accordion005 = ({
       /* @__PURE__ */ jsx(
         StyledAccordionContentTitle2,
         {
-          titleColor: style?.content?.titleColor ?? "#000",
+          titleColor: appearance?.content?.titleColor ?? "#000",
           children: content.title ?? "A"
         }
       ),
       /* @__PURE__ */ jsx(
         StyledAccordionContentText5,
         {
-          textColor: style?.content?.textColor ?? "#000",
+          textColor: appearance?.content?.textColor ?? "#000",
           children: content.text
         }
       )
@@ -3182,20 +3182,20 @@ var StyledBalloonArrow = styled13.div.withConfig({
 var Balloon001 = ({
   type = "001",
   children,
-  style,
+  appearance,
   arrowPosition
 }) => {
   return /* @__PURE__ */ jsx(StyledBalloonWrapper, { children: /* @__PURE__ */ jsxs(
     StyledBalloon,
     {
       type,
-      backgroundColor: style?.backgroundColor ?? "#ccc",
+      backgroundColor: appearance?.backgroundColor ?? "#ccc",
       children: [
         /* @__PURE__ */ jsx(
           StyledBalloonContent,
           {
-            fontSize: style?.fontSize ?? 16,
-            color: style?.color ?? "#000",
+            fontSize: appearance?.fontSize ?? 16,
+            color: appearance?.color ?? "#000",
             children
           }
         ),
@@ -3203,7 +3203,7 @@ var Balloon001 = ({
           StyledBalloonArrow,
           {
             arrowPosition: arrowPosition ?? "bottom",
-            backgroundColor: style?.backgroundColor ?? "#ccc"
+            backgroundColor: appearance?.backgroundColor ?? "#ccc"
           }
         )
       ]
@@ -3335,22 +3335,22 @@ var StyledBalloonContent2 = styled13.div.withConfig({
 var Balloon002 = ({
   type = "001",
   children,
-  style,
+  appearance,
   arrowPosition
 }) => {
   return /* @__PURE__ */ jsx(StyledBalloonWrapper2, { children: /* @__PURE__ */ jsx(
     StyledBalloon2,
     {
       type,
-      borderColor: style?.borderColor ?? "#000",
-      borderWidth: style?.borderWidth ?? 1,
+      borderColor: appearance?.borderColor ?? "#000",
+      borderWidth: appearance?.borderWidth ?? 1,
       arrowPosition: arrowPosition ?? "bottom",
-      backgroundColor: style?.backgroundColor ?? "#fff",
+      backgroundColor: appearance?.backgroundColor ?? "#fff",
       children: /* @__PURE__ */ jsx(
         StyledBalloonContent2,
         {
-          fontSize: style?.fontSize ?? 16,
-          color: style?.color ?? "#000",
+          fontSize: appearance?.fontSize ?? 16,
+          color: appearance?.color ?? "#000",
           children
         }
       )
@@ -3441,29 +3441,29 @@ var StyledBreadcrumbsItemIcon = styled13.div.withConfig({
   width: ${({ theme }) => theme.size.em(theme.icon.size.small)};
   height: ${({ theme }) => theme.size.em(theme.icon.size.small)};
 `;
-var Breadcrumbs = ({ items, style }) => {
+var Breadcrumbs = ({ items, appearance }) => {
   return /* @__PURE__ */ jsx(StyledBreadcrumbsWrapper, { children: /* @__PURE__ */ jsx(StyledBreadcrumbs, { children: items.map((item, index) => /* @__PURE__ */ jsxs(StyledBreadcrumbsItem, { children: [
     item.link ? /* @__PURE__ */ jsx(
       StyledBreadcrumbsItemLink,
       {
         href: item.link.href,
         target: item.link.target,
-        duration: style?.duration ?? 0.3,
-        easing: style?.easing ?? "easeInOutSine",
-        fontSize: style?.fontSize ?? 16,
-        color: style?.color ?? "#000",
-        hoverColor: style?.hoverColor ?? "#ccc",
+        duration: appearance?.duration ?? 0.3,
+        easing: appearance?.easing ?? "easeInOutSine",
+        fontSize: appearance?.fontSize ?? 16,
+        color: appearance?.color ?? "#000",
+        hoverColor: appearance?.hoverColor ?? "#ccc",
         children: item.text
       }
     ) : /* @__PURE__ */ jsx(
       StyledBreadcrumbsItemText,
       {
-        fontSize: style?.fontSize ?? 16,
-        color: style?.color ?? "#000",
+        fontSize: appearance?.fontSize ?? 16,
+        color: appearance?.color ?? "#000",
         children: item.text
       }
     ),
-    index !== items.length - 1 && /* @__PURE__ */ jsx(StyledBreadcrumbsItemIcon, { color: style?.iconColor ?? "#000", children: /* @__PURE__ */ jsx(Svg004, {}) })
+    index !== items.length - 1 && /* @__PURE__ */ jsx(StyledBreadcrumbsItemIcon, { color: appearance?.iconColor ?? "#000", children: /* @__PURE__ */ jsx(Svg004, {}) })
   ] }, item.text)) }) });
 };
 var StyledButton = styled13.button`
@@ -4329,7 +4329,7 @@ var StyledCheckBoxInput = styled13.input.withConfig({
   }
 `;
 var CheckBox001 = ({
-  style,
+  appearance,
   id: id2,
   type,
   size,
@@ -4351,7 +4351,7 @@ var CheckBox001 = ({
         checked: checked ?? false,
         defaultChecked: uncontrolledDefaultChecked,
         disabled,
-        checkedBackgroundColor: style?.checkedBackgroundColor ?? "#000",
+        checkedBackgroundColor: appearance?.checkedBackgroundColor ?? "#000",
         onChange
       }
     ),
@@ -4359,15 +4359,15 @@ var CheckBox001 = ({
       StyledCheckBoxBackground,
       {
         type,
-        backgroundColor: style?.backgroundColor ?? "#fff",
-        borderColor: style?.borderColor ?? "#000"
+        backgroundColor: appearance?.backgroundColor ?? "#fff",
+        borderColor: appearance?.borderColor ?? "#000"
       }
     ),
     /* @__PURE__ */ jsx(
       StyledCheckBoxCheckmark,
       {
         size,
-        markColor: style?.markColor ?? "#000",
+        markColor: appearance?.markColor ?? "#000",
         children: /* @__PURE__ */ jsx(Svg031, {})
       }
     )
@@ -4474,7 +4474,7 @@ var StyledCheckBoxInput2 = styled13.input.withConfig({
   }
 `;
 var CheckBox002 = ({
-  style,
+  appearance,
   id: id2,
   size,
   name,
@@ -4495,20 +4495,20 @@ var CheckBox002 = ({
         checked: checked ?? false,
         defaultChecked: uncontrolledDefaultChecked,
         disabled,
-        checkedBackgroundColor: style?.checkedBackgroundColor ?? "#000",
+        checkedBackgroundColor: appearance?.checkedBackgroundColor ?? "#000",
         onChange
       }
     ),
     /* @__PURE__ */ jsx(
       StyledCheckBoxBackground2,
       {
-        backgroundColor: style?.backgroundColor ?? "#fff"
+        backgroundColor: appearance?.backgroundColor ?? "#fff"
       }
     ),
     /* @__PURE__ */ jsx(
       StyledCheckBoxCheckmark2,
       {
-        markColor: style?.markColor ?? "#000",
+        markColor: appearance?.markColor ?? "#000",
         size
       }
     )
@@ -8534,7 +8534,7 @@ var SortableItem = ({ id: id2, children }) => {
 };
 var DragAndDrop001 = ({
   items,
-  style,
+  appearance,
   onReorder
 }) => {
   const sensors = useSensors(
@@ -8572,7 +8572,7 @@ var DragAndDrop001 = ({
         {
           items: items.map((item) => item.id),
           strategy: verticalListSortingStrategy,
-          children: /* @__PURE__ */ jsx(StyledList, { as: "ul", gap: style?.gap, children: items.map((item) => /* @__PURE__ */ jsx(SortableItem, { id: item.id, children: item.content }, item.id)) })
+          children: /* @__PURE__ */ jsx(StyledList, { as: "ul", gap: appearance?.gap, children: items.map((item) => /* @__PURE__ */ jsx(SortableItem, { id: item.id, children: item.content }, item.id)) })
         }
       )
     }
@@ -8625,7 +8625,7 @@ var StyledContents = styled13.div`
   position: relative;
 `;
 var Dropdown001 = ({
-  style,
+  appearance,
   detail,
   contents,
   nowrap
@@ -8636,9 +8636,9 @@ var Dropdown001 = ({
       StyledDetail,
       {
         nowrap,
-        borderColor: style?.borderColor,
-        backgroundColor: style?.backgroundColor,
-        borderRadius: style?.borderRadius,
+        borderColor: appearance?.borderColor,
+        backgroundColor: appearance?.backgroundColor,
+        borderRadius: appearance?.borderRadius,
         children: detail
       }
     ) })
@@ -8687,7 +8687,7 @@ var StyledContents2 = styled13.div`
   position: relative;
 `;
 var Dropdown002 = ({
-  style,
+  appearance,
   detail,
   contents,
   nowrap,
@@ -8699,9 +8699,9 @@ var Dropdown002 = ({
       Balloon001,
       {
         ...balloonProps,
-        style: {
-          ...balloonProps?.style,
-          backgroundColor: style?.backgroundColor
+        appearance: {
+          ...balloonProps?.appearance,
+          backgroundColor: appearance?.backgroundColor
         },
         type: "001",
         arrowPosition: "top",
@@ -8793,17 +8793,17 @@ var StyledFrameIconContent = styled13.div.withConfig({
 })`
   ${({ theme, size }) => theme.icon.size.style(size)}
 `;
-var FrameIcon001 = ({ style, type, size, icon }) => {
+var FrameIcon001 = ({ appearance, type, size, icon }) => {
   return /* @__PURE__ */ jsx(StyledFrameIconWrapper, { children: /* @__PURE__ */ jsxs(StyledFrameIcon, { size, children: [
     /* @__PURE__ */ jsx(
       StyledFrameIconBackground,
       {
         type,
-        backgroundColor: style?.backgroundColor ?? "#fff",
-        borderColor: style?.borderColor ?? "#000"
+        backgroundColor: appearance?.backgroundColor ?? "#fff",
+        borderColor: appearance?.borderColor ?? "#000"
       }
     ),
-    /* @__PURE__ */ jsx(StyledFrameIconInner, { iconColor: style?.iconColor ?? "#000", children: /* @__PURE__ */ jsx(StyledFrameIconContent, { size, children: icon }) })
+    /* @__PURE__ */ jsx(StyledFrameIconInner, { iconColor: appearance?.iconColor ?? "#000", children: /* @__PURE__ */ jsx(StyledFrameIconContent, { size, children: icon }) })
   ] }) });
 };
 var StyledFrameNumberWrapper = styled13.div`
@@ -8906,7 +8906,7 @@ var StyledFrameNumberInner = styled13.div.withConfig({
 }}
 `;
 var FrameNumber001 = ({
-  style,
+  appearance,
   type,
   size,
   number
@@ -8916,11 +8916,11 @@ var FrameNumber001 = ({
       StyledFrameNumberBackground,
       {
         type,
-        backgroundColor: style?.backgroundColor ?? "#fff",
-        borderColor: style?.borderColor ?? "#000"
+        backgroundColor: appearance?.backgroundColor ?? "#fff",
+        borderColor: appearance?.borderColor ?? "#000"
       }
     ),
-    /* @__PURE__ */ jsx(StyledFrameNumberInner, { color: style?.color ?? "#000", size, children: number })
+    /* @__PURE__ */ jsx(StyledFrameNumberInner, { color: appearance?.color ?? "#000", size, children: number })
   ] }) });
 };
 
@@ -9851,26 +9851,26 @@ var Header001 = ({
   leftInner,
   rightInner,
   modalContent,
-  style,
+  appearance,
   showModal
 }) => {
   return /* @__PURE__ */ jsxs(StyledWrapper3, { children: [
     /* @__PURE__ */ jsx(
       StyledHeader,
       {
-        height: style?.header?.height ?? HEIGHT,
-        backgroundColor: style?.header?.backgroundColor,
-        animationBackgroundColor: style?.header?.animation?.backgroundColor,
-        easing: style?.header?.animation?.easing,
-        duration: style?.header?.animation?.duration,
-        sidePadding: style?.header?.sidePadding,
+        height: appearance?.header?.height ?? HEIGHT,
+        backgroundColor: appearance?.header?.backgroundColor,
+        animationBackgroundColor: appearance?.header?.animation?.backgroundColor,
+        easing: appearance?.header?.animation?.easing,
+        duration: appearance?.header?.animation?.duration,
+        sidePadding: appearance?.header?.sidePadding,
         showModal,
         children: /* @__PURE__ */ jsxs(StyledHeaderInner, { children: [
-          /* @__PURE__ */ jsxs(StyledLeftWrapper, { gap: style?.leftGap, children: [
+          /* @__PURE__ */ jsxs(StyledLeftWrapper, { gap: appearance?.leftGap, children: [
             left,
             leftInner
           ] }),
-          /* @__PURE__ */ jsxs(StyledRightWrapper, { gap: style?.rightGap, children: [
+          /* @__PURE__ */ jsxs(StyledRightWrapper, { gap: appearance?.rightGap, children: [
             rightInner,
             right
           ] })
@@ -9880,7 +9880,7 @@ var Header001 = ({
     /* @__PURE__ */ jsx(
       StyledModalWrapper,
       {
-        height: style?.header?.height ?? HEIGHT,
+        height: appearance?.header?.height ?? HEIGHT,
         showModal,
         children: modalContent
       }
@@ -11312,17 +11312,17 @@ var Label001 = ({
   type = "001",
   size = "middle",
   children,
-  style
+  appearance
 }) => {
   return /* @__PURE__ */ jsx(StyledLabelWrapper, { children: /* @__PURE__ */ jsx(
     StyledLabel,
     {
       type,
       size,
-      fontSize: style?.fontSize,
-      backgroundColor: style?.backgroundColor,
-      color: style?.color,
-      borderColor: style?.borderColor,
+      fontSize: appearance?.fontSize,
+      backgroundColor: appearance?.backgroundColor,
+      color: appearance?.color,
+      borderColor: appearance?.borderColor,
       children
     }
   ) });
@@ -11446,7 +11446,7 @@ var Label002 = ({
   iconPosition = "left",
   icon,
   children,
-  style
+  appearance
 }) => {
   return /* @__PURE__ */ jsx(StyledLabelWrapper2, { children: /* @__PURE__ */ jsxs(
     StyledLabel2,
@@ -11454,15 +11454,15 @@ var Label002 = ({
       type,
       size,
       iconPosition,
-      fontSize: style?.fontSize,
-      backgroundColor: style?.backgroundColor,
-      borderColor: style?.borderColor,
+      fontSize: appearance?.fontSize,
+      backgroundColor: appearance?.backgroundColor,
+      borderColor: appearance?.borderColor,
       children: [
         /* @__PURE__ */ jsx(
           StyledLabelIcon,
           {
             iconPosition,
-            color: style?.iconColor,
+            color: appearance?.iconColor,
             size,
             children: icon
           }
@@ -11471,8 +11471,8 @@ var Label002 = ({
           StyledLabelText,
           {
             iconPosition,
-            fontSize: style?.fontSize,
-            color: style?.color,
+            fontSize: appearance?.fontSize,
+            color: appearance?.color,
             children
           }
         )
@@ -11640,15 +11640,15 @@ var List001 = ({
   listStyle = "ul",
   items,
   ariaLabel,
-  style
+  appearance
 }) => {
   const listProps = {
     as: listStyle,
     $type: type,
     $listStyle: listStyle,
-    $columnGap: style?.columnGap,
-    $rowGap: style?.rowGap,
-    $isAlignItemsCenter: style?.isAlignItemsCenter,
+    $columnGap: appearance?.columnGap,
+    $rowGap: appearance?.rowGap,
+    $isAlignItemsCenter: appearance?.isAlignItemsCenter,
     role: "list",
     "aria-label": ariaLabel,
     ...type === "003" && { "aria-orientation": "horizontal" }
@@ -11663,7 +11663,7 @@ var List001 = ({
         key: item.id,
         ...itemProps,
         $type: type,
-        $borderColor: style?.borderColor
+        $borderColor: appearance?.borderColor
       });
     }
     return /* @__PURE__ */ jsx(
@@ -11671,7 +11671,7 @@ var List001 = ({
       {
         ...itemProps,
         $type: type,
-        $borderColor: style?.borderColor,
+        $borderColor: appearance?.borderColor,
         children: item.content
       },
       item.id
@@ -12588,14 +12588,14 @@ var StyledLoading = styled13.svg.withConfig({
 var Loading001 = ({
   type = "001",
   size = "large",
-  style
+  appearance
 }) => {
   return /* @__PURE__ */ jsx(StyledLoadingWrapper, { children: /* @__PURE__ */ jsxs(
     StyledLoading,
     {
       type,
       size,
-      color: style?.color,
+      color: appearance?.color,
       viewBox: "0 0 24 24",
       children: [
         /* @__PURE__ */ jsx("circle", { cx: "12", cy: "2", r: "2", opacity: ".1", children: /* @__PURE__ */ jsx(
@@ -12714,13 +12714,13 @@ var StyledLoading2 = styled13.svg.withConfig({
     fill: ${({ backgroundColor }) => backgroundColor ?? "#000"};
   }
 `;
-var Loading002 = ({ size = "large", style }) => {
+var Loading002 = ({ size = "large", appearance }) => {
   return /* @__PURE__ */ jsx(StyledLoadingWrapper2, { children: /* @__PURE__ */ jsxs(
     StyledLoading2,
     {
       size,
-      indicatorColor: style?.indicatorColor,
-      backgroundColor: style?.backgroundColor,
+      indicatorColor: appearance?.indicatorColor,
+      backgroundColor: appearance?.backgroundColor,
       viewBox: "0 0 24 24",
       children: [
         /* @__PURE__ */ jsx(
@@ -13384,7 +13384,7 @@ var NestedListItem001 = ({
   children,
   onClick,
   isOpen: controlledIsOpen,
-  style
+  appearance
 }) => {
   const [internalIsOpen, setInternalIsOpen] = useState(
     controlledIsOpen ?? false
@@ -13400,24 +13400,24 @@ var NestedListItem001 = ({
     /* @__PURE__ */ jsx(
       StyledNestedListItemIconWrapper,
       {
-        fontSize: style?.fontSize,
-        lineHeight: style?.lineHeight,
+        fontSize: appearance?.fontSize,
+        lineHeight: appearance?.lineHeight,
         children: /* @__PURE__ */ jsx(
           StyledNestedListItemIcon,
           {
             isOpen,
-            iconColor: style?.iconColor,
+            iconColor: appearance?.iconColor,
             children: icon
           }
         )
       }
     ),
-    /* @__PURE__ */ jsx(StyledNestedListItemTextWrapper, { gap: style?.gap, children: /* @__PURE__ */ jsx(
+    /* @__PURE__ */ jsx(StyledNestedListItemTextWrapper, { gap: appearance?.gap, children: /* @__PURE__ */ jsx(
       StyledNestedListItemText,
       {
-        fontSize: style?.fontSize,
-        lineHeight: style?.lineHeight,
-        color: style?.color,
+        fontSize: appearance?.fontSize,
+        lineHeight: appearance?.lineHeight,
+        color: appearance?.color,
         children
       }
     ) })
@@ -13468,7 +13468,7 @@ var NestedListItem002 = ({
   children,
   onClick,
   isOpen: controlledIsOpen,
-  style
+  appearance
 }) => {
   const [internalIsOpen, setInternalIsOpen] = useState(
     controlledIsOpen ?? false
@@ -13484,14 +13484,14 @@ var NestedListItem002 = ({
     /* @__PURE__ */ jsx(
       StyledNestedListItemIconWrapper2,
       {
-        fontSize: style?.fontSize,
-        lineHeight: style?.lineHeight,
+        fontSize: appearance?.fontSize,
+        lineHeight: appearance?.lineHeight,
         children: /* @__PURE__ */ jsx(
           StyledNestedListItemIcon2,
           {
             position: "left",
             isOpen: false,
-            iconColor: style?.leftIconColor,
+            iconColor: appearance?.leftIconColor,
             children: leftIcon
           }
         )
@@ -13500,23 +13500,23 @@ var NestedListItem002 = ({
     /* @__PURE__ */ jsx(StyledNestedListItemTextWrapper2, { children: /* @__PURE__ */ jsx(
       StyledNestedListItemText2,
       {
-        fontSize: style?.fontSize,
-        lineHeight: style?.lineHeight,
-        color: style?.color,
+        fontSize: appearance?.fontSize,
+        lineHeight: appearance?.lineHeight,
+        color: appearance?.color,
         children
       }
     ) }),
     /* @__PURE__ */ jsx(
       StyledNestedListItemIconWrapper2,
       {
-        fontSize: style?.fontSize,
-        lineHeight: style?.lineHeight,
+        fontSize: appearance?.fontSize,
+        lineHeight: appearance?.lineHeight,
         children: /* @__PURE__ */ jsx(
           StyledNestedListItemIcon2,
           {
             position: "right",
             isOpen,
-            iconColor: style?.rightIconColor,
+            iconColor: appearance?.rightIconColor,
             children: rightIcon
           }
         )
@@ -16771,11 +16771,11 @@ var Slider = ({
       StyledArrow,
       {
         direction: "left",
-        size: controller.left.style?.size,
-        position: controller.left.style?.position,
-        color: controller.left.style?.color,
-        hoverColor: controller.left.style?.hoverColor,
-        disableOpacity: controller.left.style?.disableOpacity,
+        size: controller.left.appearance?.size,
+        position: controller.left.appearance?.position,
+        color: controller.left.appearance?.color,
+        hoverColor: controller.left.appearance?.hoverColor,
+        disableOpacity: controller.left.appearance?.disableOpacity,
         disabled: currentIndex === 0,
         onClick: (e) => {
           e.stopPropagation();
@@ -16788,11 +16788,11 @@ var Slider = ({
       StyledArrow,
       {
         direction: "right",
-        size: controller.right.style?.size,
-        position: controller.right.style?.position,
-        color: controller.right.style?.color,
-        hoverColor: controller.right.style?.hoverColor,
-        disableOpacity: controller.right.style?.disableOpacity,
+        size: controller.right.appearance?.size,
+        position: controller.right.appearance?.position,
+        color: controller.right.appearance?.color,
+        hoverColor: controller.right.appearance?.hoverColor,
+        disableOpacity: controller.right.appearance?.disableOpacity,
         disabled: currentIndex === instanceRef.current.track.details.maxIdx,
         onClick: (e) => {
           e.stopPropagation();
@@ -16804,18 +16804,18 @@ var Slider = ({
     dots?.show && instanceRef.current && /* @__PURE__ */ jsx(
       StyledDotsWrapper,
       {
-        gap: dots.style?.gap,
-        marginTop: dots.style?.marginTop,
+        gap: dots.appearance?.gap,
+        marginTop: dots.appearance?.marginTop,
         children: [...Array(instanceRef.current.track.details.maxIdx + 1).keys()].map(
           (idx) => {
             return /* @__PURE__ */ jsx(
               StyledDot,
               {
-                size: dots.style?.size,
-                backgroundColor: dots.style?.backgroundColor,
-                borderColor: dots.style?.borderColor,
-                activeBackgroundColor: dots.style?.activeBackgroundColor,
-                activeBorderColor: dots.style?.activeBorderColor,
+                size: dots.appearance?.size,
+                backgroundColor: dots.appearance?.backgroundColor,
+                borderColor: dots.appearance?.borderColor,
+                activeBackgroundColor: dots.appearance?.activeBackgroundColor,
+                activeBorderColor: dots.appearance?.activeBorderColor,
                 active: idx === currentIndex,
                 onClick: () => {
                   instanceRef.current?.moveToIdx(idx);
@@ -17932,7 +17932,7 @@ var Toggle001 = ({
   isOpen: controlledIsOpen,
   onChange,
   onClick,
-  style
+  appearance
 }) => {
   const [internalIsOpen, setInternalIsOpen] = useState(false);
   const isOpen = controlledIsOpen !== void 0 ? controlledIsOpen : internalIsOpen;
@@ -17948,27 +17948,27 @@ var Toggle001 = ({
     /* @__PURE__ */ jsx(
       StyledToggleCloseLine,
       {
-        lineColor: style?.lineColor,
-        animationBackgroundColorLine: style?.animationBackgroundColorLine
+        lineColor: appearance?.lineColor,
+        animationBackgroundColorLine: appearance?.animationBackgroundColorLine
       }
     ),
     /* @__PURE__ */ jsx(
       StyledToggleCloseLine,
       {
-        lineColor: style?.lineColor,
-        animationBackgroundColorLine: style?.animationBackgroundColorLine
+        lineColor: appearance?.lineColor,
+        animationBackgroundColorLine: appearance?.animationBackgroundColorLine
       }
     )
   ] }) }) }) }) : /* @__PURE__ */ jsx(
     StyledToggleOpen,
     {
       onClick: handleClick,
-      animationBackgroundColorBefore: style?.animationBackgroundColorBefore,
-      animationBackgroundColorAfter: style?.animationBackgroundColorAfter,
+      animationBackgroundColorBefore: appearance?.animationBackgroundColorBefore,
+      animationBackgroundColorAfter: appearance?.animationBackgroundColorAfter,
       children: /* @__PURE__ */ jsxs(StyledToggleOpenInner, { children: [
-        /* @__PURE__ */ jsx(StyledToggleOpenLine, { lineColor: style?.lineColor }),
-        /* @__PURE__ */ jsx(StyledToggleOpenLine, { lineColor: style?.lineColor }),
-        /* @__PURE__ */ jsx(StyledToggleOpenLine, { lineColor: style?.lineColor })
+        /* @__PURE__ */ jsx(StyledToggleOpenLine, { lineColor: appearance?.lineColor }),
+        /* @__PURE__ */ jsx(StyledToggleOpenLine, { lineColor: appearance?.lineColor }),
+        /* @__PURE__ */ jsx(StyledToggleOpenLine, { lineColor: appearance?.lineColor })
       ] })
     }
   ) });
@@ -18113,7 +18113,7 @@ var Toggle002 = ({
   isOpen: controlledIsOpen,
   onChange,
   onClick,
-  style
+  appearance
 }) => {
   const [internalIsOpen, setInternalIsOpen] = useState(
     void 0
@@ -18130,13 +18130,13 @@ var Toggle002 = ({
   };
   return /* @__PURE__ */ jsx(StyledToggleWrapper3, { children: /* @__PURE__ */ jsx(StyledToggle, { children: /* @__PURE__ */ jsxs(StyledToggleInner2, { onClick: handleClick, isOpen, children: [
     /* @__PURE__ */ jsxs(StyledToggleOpen2, { children: [
-      /* @__PURE__ */ jsx(StyledToggleOpenLine2, { lineColor: style?.lineColor }),
-      /* @__PURE__ */ jsx(StyledToggleOpenLine2, { lineColor: style?.lineColor }),
-      /* @__PURE__ */ jsx(StyledToggleOpenLine2, { lineColor: style?.lineColor })
+      /* @__PURE__ */ jsx(StyledToggleOpenLine2, { lineColor: appearance?.lineColor }),
+      /* @__PURE__ */ jsx(StyledToggleOpenLine2, { lineColor: appearance?.lineColor }),
+      /* @__PURE__ */ jsx(StyledToggleOpenLine2, { lineColor: appearance?.lineColor })
     ] }),
     /* @__PURE__ */ jsx(StyledToggleCloseWrapper2, { children: /* @__PURE__ */ jsxs(StyledToggleClose2, { children: [
-      /* @__PURE__ */ jsx(StyledToggleCloseLine2, { lineColor: style?.lineColor }),
-      /* @__PURE__ */ jsx(StyledToggleCloseLine2, { lineColor: style?.lineColor })
+      /* @__PURE__ */ jsx(StyledToggleCloseLine2, { lineColor: appearance?.lineColor }),
+      /* @__PURE__ */ jsx(StyledToggleCloseLine2, { lineColor: appearance?.lineColor })
     ] }) })
   ] }) }) });
 };
@@ -18204,7 +18204,7 @@ var Toggle003 = ({
   isOpen: controlledIsOpen,
   onChange,
   onClick,
-  style
+  appearance
 }) => {
   const openLine1Ref = useRef(null);
   const openLine2Ref = useRef(null);
@@ -18275,20 +18275,20 @@ var Toggle003 = ({
     {
       onClick: handleClick,
       onMouseEnter: handleMouseEnter,
-      backgroundColor: style?.backgroundColor,
+      backgroundColor: appearance?.backgroundColor,
       children: /* @__PURE__ */ jsx(StyledToggleInner3, { children: isOpen ? /* @__PURE__ */ jsxs(Fragment, { children: [
         /* @__PURE__ */ jsx(StyledToggleOpenLineWrapper, { children: /* @__PURE__ */ jsx(
           StyledToggleLine2,
           {
             ref: openLine1Ref,
-            lineColor: style?.lineColor
+            lineColor: appearance?.lineColor
           }
         ) }),
         /* @__PURE__ */ jsx(StyledToggleOpenLineWrapper, { children: /* @__PURE__ */ jsx(
           StyledToggleLine2,
           {
             ref: openLine2Ref,
-            lineColor: style?.lineColor
+            lineColor: appearance?.lineColor
           }
         ) })
       ] }) : /* @__PURE__ */ jsxs(Fragment, { children: [
@@ -18296,14 +18296,14 @@ var Toggle003 = ({
           StyledToggleLine2,
           {
             ref: closeLine1Ref,
-            lineColor: style?.lineColor
+            lineColor: appearance?.lineColor
           }
         ) }),
         /* @__PURE__ */ jsx(StyledToggleCloseLineWrapper2, { children: /* @__PURE__ */ jsx(
           StyledToggleLine2,
           {
             ref: closeLine2Ref,
-            lineColor: style?.lineColor
+            lineColor: appearance?.lineColor
           }
         ) })
       ] }) })

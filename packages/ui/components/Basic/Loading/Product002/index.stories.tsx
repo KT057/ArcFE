@@ -38,7 +38,7 @@ Middle.args = {
 export const CustomColors = Template.bind({});
 CustomColors.args = {
   size: "large",
-  style: {
+  appearance: {
     indicatorColor: "#ff6b6b",
     backgroundColor: "#e0e0e0"
   }

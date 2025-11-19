@@ -23,7 +23,7 @@ interface Props {
   content: ReactNode;
   icon: ReactNode;
   animation?: AccordionAnimation;
-  style?: {
+  appearance?: {
     iconColor?: string;
     backgroundColor?: string;
     header?: {
@@ -41,7 +41,7 @@ export const Accordion003 = ({
   headerContent,
   content,
   icon,
-  style,
+  appearance,
   animation
 }: Props) => {
   const { handleClick, contentRef, iconRef } = useAccordion({ animation });
@@ -50,20 +50,20 @@ export const Accordion003 = ({
     <StyledAccordionWrapper>
       <StyledAccordion>
         <StyledAccordionHeader
-          backgroundColor={style?.header?.backgroundColor ?? "#fff"}
-          barColor={style?.header?.barColor ?? "#000"}
+          backgroundColor={appearance?.header?.backgroundColor ?? "#fff"}
+          barColor={appearance?.header?.barColor ?? "#000"}
           onClick={handleClick}
         >
           <StyledAccordionHeaderInner>
             <StyledAccordionTitleWrapper>
-              <StyledAccordionTitle color={style?.header?.color ?? "#000"}>
+              <StyledAccordionTitle color={appearance?.header?.color ?? "#000"}>
                 {headerContent}
               </StyledAccordionTitle>
             </StyledAccordionTitleWrapper>
 
             <StyledAccordionIcon
               ref={iconRef}
-              color={style?.iconColor ?? "#000"}
+              color={appearance?.iconColor ?? "#000"}
             >
               {icon}
             </StyledAccordionIcon>
@@ -72,7 +72,9 @@ export const Accordion003 = ({
 
         <StyledAccordionContentWrapper ref={contentRef}>
           <StyledAccordionContent>
-            <StyledAccordionContentText color={style?.content?.color ?? "#000"}>
+            <StyledAccordionContentText
+              color={appearance?.content?.color ?? "#000"}
+            >
               {content}
             </StyledAccordionContentText>
           </StyledAccordionContent>

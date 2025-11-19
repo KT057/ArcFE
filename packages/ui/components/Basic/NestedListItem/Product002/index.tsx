@@ -15,7 +15,7 @@ interface NestedListItemProps {
   children: React.ReactNode;
   onClick?: () => void;
   isOpen?: boolean;
-  style?: {
+  appearance?: {
     fontSize?: number;
     lineHeight?: number;
     color?: string;
@@ -30,7 +30,7 @@ export const NestedListItem002 = ({
   children,
   onClick,
   isOpen: controlledIsOpen,
-  style
+  appearance
 }: NestedListItemProps) => {
   const [internalIsOpen, setInternalIsOpen] = useState(
     controlledIsOpen ?? false
@@ -49,34 +49,34 @@ export const NestedListItem002 = ({
     <StyledNestedListItemWrapper>
       <StyledNestedListItem onClick={handleClick}>
         <StyledNestedListItemIconWrapper
-          fontSize={style?.fontSize}
-          lineHeight={style?.lineHeight}
+          fontSize={appearance?.fontSize}
+          lineHeight={appearance?.lineHeight}
         >
           <StyledNestedListItemIcon
             position="left"
             isOpen={false}
-            iconColor={style?.leftIconColor}
+            iconColor={appearance?.leftIconColor}
           >
             {leftIcon}
           </StyledNestedListItemIcon>
         </StyledNestedListItemIconWrapper>
         <StyledNestedListItemTextWrapper>
           <StyledNestedListItemText
-            fontSize={style?.fontSize}
-            lineHeight={style?.lineHeight}
-            color={style?.color}
+            fontSize={appearance?.fontSize}
+            lineHeight={appearance?.lineHeight}
+            color={appearance?.color}
           >
             {children}
           </StyledNestedListItemText>
         </StyledNestedListItemTextWrapper>
         <StyledNestedListItemIconWrapper
-          fontSize={style?.fontSize}
-          lineHeight={style?.lineHeight}
+          fontSize={appearance?.fontSize}
+          lineHeight={appearance?.lineHeight}
         >
           <StyledNestedListItemIcon
             position="right"
             isOpen={isOpen}
-            iconColor={style?.rightIconColor}
+            iconColor={appearance?.rightIconColor}
           >
             {rightIcon}
           </StyledNestedListItemIcon>

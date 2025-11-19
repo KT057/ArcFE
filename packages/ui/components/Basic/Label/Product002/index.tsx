@@ -16,7 +16,7 @@ interface LabelProps {
   iconPosition?: IconPosition;
   icon: React.ReactNode;
   children: React.ReactNode;
-  style?: {
+  appearance?: {
     fontSize?: number;
     backgroundColor?: string;
     borderColor?: string;
@@ -31,7 +31,7 @@ export const Label002 = ({
   iconPosition = "left",
   icon,
   children,
-  style
+  appearance
 }: LabelProps) => {
   return (
     <StyledLabelWrapper>
@@ -39,21 +39,21 @@ export const Label002 = ({
         type={type}
         size={size}
         iconPosition={iconPosition}
-        fontSize={style?.fontSize}
-        backgroundColor={style?.backgroundColor}
-        borderColor={style?.borderColor}
+        fontSize={appearance?.fontSize}
+        backgroundColor={appearance?.backgroundColor}
+        borderColor={appearance?.borderColor}
       >
         <StyledLabelIcon
           iconPosition={iconPosition}
-          color={style?.iconColor}
+          color={appearance?.iconColor}
           size={size}
         >
           {icon}
         </StyledLabelIcon>
         <StyledLabelText
           iconPosition={iconPosition}
-          fontSize={style?.fontSize}
-          color={style?.color}
+          fontSize={appearance?.fontSize}
+          color={appearance?.color}
         >
           {children}
         </StyledLabelText>

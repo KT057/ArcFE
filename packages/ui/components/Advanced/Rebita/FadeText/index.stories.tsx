@@ -45,7 +45,7 @@ export const CustomStyle = Template.bind({});
 CustomStyle.args = {
   children: "カスタムスタイルのテキスト",
   progress: 75,
-  style: {
+  appearance: {
     color: "#22c55e",
     fontSize: 20
   }
@@ -81,7 +81,7 @@ LongText.args = {
   children:
     "これは非常に長いテキストの例です。clip-pathによってテキストが徐々に表示される効果を確認することができます。",
   progress: 60,
-  style: {
+  appearance: {
     fontSize: 18
   }
 };

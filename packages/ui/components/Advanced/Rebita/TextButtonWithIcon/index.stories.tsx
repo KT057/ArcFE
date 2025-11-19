@@ -60,7 +60,7 @@ export const CustomStyle = Template.bind({});
 CustomStyle.args = {
   text: "カスタムスタイル",
   icon: <Svg001Icon />,
-  style: {
+  appearance: {
     fontSize: 18,
     color: "#2196f3"
   }
@@ -70,7 +70,7 @@ export const LongText = Template.bind({});
 LongText.args = {
   text: "これは非常に長いテキストボタンの例です",
   icon: <Svg001Icon />,
-  style: {
+  appearance: {
     fontSize: 14
   }
 };
@@ -104,7 +104,7 @@ Interactive.args = {
   text: "ホバーしてアニメーションを確認",
   icon: <Svg001Icon />,
   onClick: () => console.log("Button clicked!"),
-  style: {
+  appearance: {
     color: "#22c55e"
   }
 };

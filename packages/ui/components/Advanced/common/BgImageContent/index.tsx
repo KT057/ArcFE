@@ -12,7 +12,7 @@ interface BgImageContentProps {
   imageUrl: string;
   height: number;
   animationType?: AnimationType;
-  style?: {
+  appearance?: {
     scale?: number;
     duration?: number;
     easing?: EasingKey;
@@ -24,7 +24,7 @@ export const BgImageContent = ({
   imageUrl,
   height,
   animationType,
-  style
+  appearance
 }: BgImageContentProps) => {
   return (
     <StyledBgImageContentWrapper>
@@ -32,9 +32,9 @@ export const BgImageContent = ({
         height={height}
         imageUrl={imageUrl}
         animationType={animationType}
-        scale={style?.scale}
-        duration={style?.duration}
-        easing={style?.easing}
+        scale={appearance?.scale}
+        duration={appearance?.duration}
+        easing={appearance?.easing}
       >
         <StyledBgImageContentInner>{children}</StyledBgImageContentInner>
       </StyledBgImageContentContainer>

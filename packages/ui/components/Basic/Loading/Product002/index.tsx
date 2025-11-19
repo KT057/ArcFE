@@ -3,19 +3,19 @@ import { StyledLoading, StyledLoadingWrapper } from "./styles";
 
 interface LoadingProps {
   size?: Size;
-  style?: {
+  appearance?: {
     indicatorColor?: string;
     backgroundColor?: string;
   };
 }
 
-export const Loading002 = ({ size = "large", style }: LoadingProps) => {
+export const Loading002 = ({ size = "large", appearance }: LoadingProps) => {
   return (
     <StyledLoadingWrapper>
       <StyledLoading
         size={size}
-        indicatorColor={style?.indicatorColor}
-        backgroundColor={style?.backgroundColor}
+        indicatorColor={appearance?.indicatorColor}
+        backgroundColor={appearance?.backgroundColor}
         viewBox="0 0 24 24"
       >
         <path

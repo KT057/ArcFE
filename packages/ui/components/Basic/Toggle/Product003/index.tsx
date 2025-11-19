@@ -13,7 +13,7 @@ interface ToggleProps {
   isOpen?: boolean;
   onChange?: (isOpen: boolean) => void;
   onClick?: () => void;
-  style?: {
+  appearance?: {
     lineColor?: string;
     backgroundColor?: string;
   };
@@ -23,7 +23,7 @@ export const Toggle003 = ({
   isOpen: controlledIsOpen,
   onChange,
   onClick,
-  style
+  appearance
 }: ToggleProps) => {
   const openLine1Ref = useRef<HTMLSpanElement>(null);
   const openLine2Ref = useRef<HTMLSpanElement>(null);
@@ -108,7 +108,7 @@ export const Toggle003 = ({
       <StyledToggle
         onClick={handleClick}
         onMouseEnter={handleMouseEnter}
-        backgroundColor={style?.backgroundColor}
+        backgroundColor={appearance?.backgroundColor}
       >
         <StyledToggleInner>
           {isOpen ? (
@@ -116,13 +116,13 @@ export const Toggle003 = ({
               <StyledToggleOpenLineWrapper>
                 <StyledToggleLine
                   ref={openLine1Ref}
-                  lineColor={style?.lineColor}
+                  lineColor={appearance?.lineColor}
                 />
               </StyledToggleOpenLineWrapper>
               <StyledToggleOpenLineWrapper>
                 <StyledToggleLine
                   ref={openLine2Ref}
-                  lineColor={style?.lineColor}
+                  lineColor={appearance?.lineColor}
                 />
               </StyledToggleOpenLineWrapper>
             </>
@@ -131,13 +131,13 @@ export const Toggle003 = ({
               <StyledToggleCloseLineWrapper>
                 <StyledToggleLine
                   ref={closeLine1Ref}
-                  lineColor={style?.lineColor}
+                  lineColor={appearance?.lineColor}
                 />
               </StyledToggleCloseLineWrapper>
               <StyledToggleCloseLineWrapper>
                 <StyledToggleLine
                   ref={closeLine2Ref}
-                  lineColor={style?.lineColor}
+                  lineColor={appearance?.lineColor}
                 />
               </StyledToggleCloseLineWrapper>
             </>

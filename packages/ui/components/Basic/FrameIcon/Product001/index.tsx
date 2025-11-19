@@ -13,23 +13,28 @@ interface FrameIconProps {
   icon: React.ReactNode;
   type: Type;
   size: Size;
-  style?: {
+  appearance?: {
     backgroundColor?: string;
     iconColor?: string;
     borderColor?: string;
   };
 }
 
-export const FrameIcon001 = ({ style, type, size, icon }: FrameIconProps) => {
+export const FrameIcon001 = ({
+  appearance,
+  type,
+  size,
+  icon
+}: FrameIconProps) => {
   return (
     <StyledFrameIconWrapper>
       <StyledFrameIcon size={size}>
         <StyledFrameIconBackground
           type={type}
-          backgroundColor={style?.backgroundColor ?? "#fff"}
-          borderColor={style?.borderColor ?? "#000"}
+          backgroundColor={appearance?.backgroundColor ?? "#fff"}
+          borderColor={appearance?.borderColor ?? "#000"}
         />
-        <StyledFrameIconInner iconColor={style?.iconColor ?? "#000"}>
+        <StyledFrameIconInner iconColor={appearance?.iconColor ?? "#000"}>
           <StyledFrameIconContent size={size}>{icon}</StyledFrameIconContent>
         </StyledFrameIconInner>
       </StyledFrameIcon>

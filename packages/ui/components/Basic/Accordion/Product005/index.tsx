@@ -31,7 +31,7 @@ interface Props {
   };
   icon: ReactNode;
   animation?: AccordionAnimation;
-  style?: {
+  appearance?: {
     iconColor?: string;
     backgroundColor?: string;
     header?: {
@@ -49,24 +49,24 @@ export const Accordion005 = ({
   header,
   content,
   icon,
-  style,
+  appearance,
   animation
 }: Props) => {
   const { handleClick, contentRef, iconRef } = useAccordion({ animation });
 
   return (
     <StyledAccordionWrapper>
-      <StyledAccordion backgroundColor={style?.backgroundColor ?? "#000"}>
+      <StyledAccordion backgroundColor={appearance?.backgroundColor ?? "#000"}>
         <StyledAccordionHeader onClick={handleClick}>
           <StyledAccordionHeaderInner>
             <StyledAccordionTitleWrapper>
               <StyledAccordionTitle
-                titleColor={style?.header?.titleColor ?? "#f10707"}
+                titleColor={appearance?.header?.titleColor ?? "#f10707"}
               >
                 {header.title ?? "Q"}
               </StyledAccordionTitle>
               <StyledAccordionText
-                textColor={style?.header?.textColor ?? "#000"}
+                textColor={appearance?.header?.textColor ?? "#000"}
               >
                 {header.text}
               </StyledAccordionText>
@@ -74,7 +74,7 @@ export const Accordion005 = ({
 
             <StyledAccordionIcon
               ref={iconRef}
-              color={style?.iconColor ?? "#000"}
+              color={appearance?.iconColor ?? "#000"}
             >
               {icon}
             </StyledAccordionIcon>
@@ -84,12 +84,12 @@ export const Accordion005 = ({
         <StyledAccordionContentWrapper ref={contentRef}>
           <StyledAccordionContent>
             <StyledAccordionContentTitle
-              titleColor={style?.content?.titleColor ?? "#000"}
+              titleColor={appearance?.content?.titleColor ?? "#000"}
             >
               {content.title ?? "A"}
             </StyledAccordionContentTitle>
             <StyledAccordionContentText
-              textColor={style?.content?.textColor ?? "#000"}
+              textColor={appearance?.content?.textColor ?? "#000"}
             >
               {content.text}
             </StyledAccordionContentText>

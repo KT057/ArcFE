@@ -50,7 +50,7 @@ export const CustomColors = Template.bind({});
 CustomColors.args = {
   type: "progress",
   progress: 75,
-  style: {
+  appearance: {
     primaryColor: "#22c55e",
     trackColor: "#f3f4f6",
     circleSize: 10,
@@ -62,7 +62,7 @@ export const LargeSize = Template.bind({});
 LargeSize.args = {
   type: "progress",
   progress: 60,
-  style: {
+  appearance: {
     circleSize: 30,
     dotSize: 30,
     strokeWidth: 3
@@ -73,7 +73,7 @@ export const SlowAnimation = Template.bind({});
 SlowAnimation.args = {
   type: "progress",
   progress: 80,
-  style: {
+  appearance: {
     animationDuration: "5s",
     primaryColor: "#f59e0b"
   }
@@ -109,7 +109,7 @@ const MultiDotsTemplate: StoryFn<typeof RebitaSlideGuideDot> = () => {
             type="progress"
             progress={index === activeIndex ? 100 : 0}
             onClick={() => setActiveIndex(index)}
-            style={{
+            appearance={{
               primaryColor: index === activeIndex ? "#3b82f6" : "#cbd5e1"
             }}
           />

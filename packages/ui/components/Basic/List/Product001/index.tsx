@@ -17,7 +17,7 @@ interface ListProps {
   listStyle?: "ul" | "ol";
   items: ListItem[];
   ariaLabel?: string;
-  style?: {
+  appearance?: {
     columnGap?: number;
     rowGap?: number;
     borderColor?: string;
@@ -63,15 +63,15 @@ export const List001 = ({
   listStyle = "ul",
   items,
   ariaLabel,
-  style
+  appearance
 }: ListProps) => {
   const listProps = {
     as: listStyle,
     $type: type,
     $listStyle: listStyle,
-    $columnGap: style?.columnGap,
-    $rowGap: style?.rowGap,
-    $isAlignItemsCenter: style?.isAlignItemsCenter,
+    $columnGap: appearance?.columnGap,
+    $rowGap: appearance?.rowGap,
+    $isAlignItemsCenter: appearance?.isAlignItemsCenter,
     role: "list",
     "aria-label": ariaLabel,
     ...(type === "003" && { "aria-orientation": "horizontal" as const })
@@ -91,7 +91,7 @@ export const List001 = ({
             key: item.id,
             ...itemProps,
             $type: type,
-            $borderColor: style?.borderColor
+            $borderColor: appearance?.borderColor
           } as any);
         }
 
@@ -101,7 +101,7 @@ export const List001 = ({
             key={item.id}
             {...itemProps}
             $type={type}
-            $borderColor={style?.borderColor}
+            $borderColor={appearance?.borderColor}
           >
             {item.content}
           </StyledListItem>

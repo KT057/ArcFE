@@ -8,7 +8,7 @@ import {
 interface FadeTextProps {
   children?: ReactNode;
   progress?: number; // 0-100の値で表示の進捗を制御
-  style?: {
+  appearance?: {
     color?: string;
     fontSize?: number;
   };
@@ -17,21 +17,25 @@ interface FadeTextProps {
 export const RebitaFadeText = ({
   children,
   progress = 0,
-  style
+  appearance
 }: FadeTextProps) => {
   return (
     <StyledFadeTextWrapper
-      color={style?.color}
-      fontSize={style?.fontSize}
+      color={appearance?.color}
+      fontSize={appearance?.fontSize}
       progress={progress}
     >
-      <StyledFadeTextContainer fontSize={style?.fontSize}>
+      <StyledFadeTextContainer fontSize={appearance?.fontSize}>
         {/* 表示される部分（clip-pathで制御） */}
-        <StyledFadeText color={style?.color} isFirst={true} progress={progress}>
+        <StyledFadeText
+          color={appearance?.color}
+          isFirst={true}
+          progress={progress}
+        >
           {children}
         </StyledFadeText>
         {/* 背景の薄いテキスト */}
-        <StyledFadeText color={style?.color} isFirst={false}>
+        <StyledFadeText color={appearance?.color} isFirst={false}>
           {children}
         </StyledFadeText>
       </StyledFadeTextContainer>

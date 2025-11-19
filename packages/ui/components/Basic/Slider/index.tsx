@@ -50,17 +50,17 @@ interface SliderProps {
   controller?: {
     left?: {
       children: React.ReactNode;
-      style?: ArrowStyle;
+      appearance?: ArrowStyle;
     };
     right?: {
       children: React.ReactNode;
-      style?: ArrowStyle;
+      appearance?: ArrowStyle;
     };
   };
   autoPlay?: AutoPlay;
   dots?: {
     show: boolean;
-    style?: {
+    appearance?: {
       size?: number;
       gap?: number;
       marginTop?: number;
@@ -100,11 +100,11 @@ export const Slider = ({
       {!loading && instanceRef.current && controller?.left && (
         <StyledArrow
           direction="left"
-          size={controller.left.style?.size}
-          position={controller.left.style?.position}
-          color={controller.left.style?.color}
-          hoverColor={controller.left.style?.hoverColor}
-          disableOpacity={controller.left.style?.disableOpacity}
+          size={controller.left.appearance?.size}
+          position={controller.left.appearance?.position}
+          color={controller.left.appearance?.color}
+          hoverColor={controller.left.appearance?.hoverColor}
+          disableOpacity={controller.left.appearance?.disableOpacity}
           disabled={currentIndex === 0}
           onClick={(e) => {
             e.stopPropagation();
@@ -117,11 +117,11 @@ export const Slider = ({
       {!loading && instanceRef.current && controller?.right && (
         <StyledArrow
           direction="right"
-          size={controller.right.style?.size}
-          position={controller.right.style?.position}
-          color={controller.right.style?.color}
-          hoverColor={controller.right.style?.hoverColor}
-          disableOpacity={controller.right.style?.disableOpacity}
+          size={controller.right.appearance?.size}
+          position={controller.right.appearance?.position}
+          color={controller.right.appearance?.color}
+          hoverColor={controller.right.appearance?.hoverColor}
+          disableOpacity={controller.right.appearance?.disableOpacity}
           disabled={currentIndex === instanceRef.current.track.details.maxIdx}
           onClick={(e) => {
             e.stopPropagation();
@@ -133,19 +133,19 @@ export const Slider = ({
       )}
       {dots?.show && instanceRef.current && (
         <StyledDotsWrapper
-          gap={dots.style?.gap}
-          marginTop={dots.style?.marginTop}
+          gap={dots.appearance?.gap}
+          marginTop={dots.appearance?.marginTop}
         >
           {[...Array(instanceRef.current.track.details.maxIdx + 1).keys()].map(
             (idx) => {
               return (
                 <StyledDot
                   key={idx}
-                  size={dots.style?.size}
-                  backgroundColor={dots.style?.backgroundColor}
-                  borderColor={dots.style?.borderColor}
-                  activeBackgroundColor={dots.style?.activeBackgroundColor}
-                  activeBorderColor={dots.style?.activeBorderColor}
+                  size={dots.appearance?.size}
+                  backgroundColor={dots.appearance?.backgroundColor}
+                  borderColor={dots.appearance?.borderColor}
+                  activeBackgroundColor={dots.appearance?.activeBackgroundColor}
+                  activeBorderColor={dots.appearance?.activeBorderColor}
                   active={idx === currentIndex}
                   onClick={() => {
                     instanceRef.current?.moveToIdx(idx);

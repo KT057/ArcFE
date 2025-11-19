@@ -12,7 +12,7 @@ interface CircleToggleProps {
   onMouseEnter?: () => void;
   onMouseLeave?: () => void;
   onClick?: () => void;
-  style?: {
+  appearance?: {
     color?: string;
     dotColor?: string;
   };
@@ -23,7 +23,7 @@ export const JmcCircleToggle = ({
   onMouseEnter,
   onMouseLeave,
   onClick,
-  style
+  appearance
 }: CircleToggleProps) => {
   const [internalIsHovered, setInternalIsHovered] = useState(false);
   const isHovered =
@@ -46,7 +46,7 @@ export const JmcCircleToggle = ({
   return (
     <StyledJmcCircleToggleWrapper>
       <StyledJmcCircleToggle
-        color={style?.color}
+        color={appearance?.color}
         isHovered={isHovered}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
@@ -54,9 +54,9 @@ export const JmcCircleToggle = ({
       >
         <StyledJmcCircleToggleInner>
           <StyledJmcCircleToggleDotWrapper>
-            <StyledJmcCircleToggleDot dotColor={style?.dotColor} />
-            <StyledJmcCircleToggleDot dotColor={style?.dotColor} />
-            <StyledJmcCircleToggleDot dotColor={style?.dotColor} />
+            <StyledJmcCircleToggleDot dotColor={appearance?.dotColor} />
+            <StyledJmcCircleToggleDot dotColor={appearance?.dotColor} />
+            <StyledJmcCircleToggleDot dotColor={appearance?.dotColor} />
           </StyledJmcCircleToggleDotWrapper>
         </StyledJmcCircleToggleInner>
       </StyledJmcCircleToggle>

@@ -23,7 +23,7 @@ Default.args = {
   left: <div style={{ color: "#fff", fontSize: "16px" }}>LOGO</div>,
   right: (
     <List001
-      style={{
+      appearance={{
         rowGap: 10
       }}
       items={[
@@ -124,7 +124,7 @@ Default.args = {
       type="003"
     />
   ),
-  style: {
+  appearance: {
     rightGap: 40,
     header: {
       backgroundColor: "#000"
@@ -149,7 +149,7 @@ export const Modal: StoryFn<typeof Header001> = () => {
           onClick={() => {
             setShowModal(!showModal);
           }}
-          style={{
+          appearance={{
             lineColor: "#fff"
           }}
         />
@@ -174,7 +174,7 @@ export const Modal: StoryFn<typeof Header001> = () => {
           </div>
         </ToggleSomething001>
       }
-      style={{
+      appearance={{
         header: {
           backgroundColor: "#000",
           animation: {

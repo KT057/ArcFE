@@ -15,7 +15,7 @@ interface ToggleProps {
   isOpen?: boolean;
   onChange?: (isOpen: boolean) => void;
   onClick?: () => void;
-  style?: {
+  appearance?: {
     lineColor?: string;
     animationBackgroundColorLine?: string;
     animationBackgroundColorBefore?: string;
@@ -27,7 +27,7 @@ export const Toggle001 = ({
   isOpen: controlledIsOpen,
   onChange,
   onClick,
-  style
+  appearance
 }: ToggleProps) => {
   const [internalIsOpen, setInternalIsOpen] = useState(false);
   const isOpen =
@@ -50,15 +50,15 @@ export const Toggle001 = ({
             <StyledToggleCloseContainer>
               <StyledToggleCloseLineWrapper>
                 <StyledToggleCloseLine
-                  lineColor={style?.lineColor}
+                  lineColor={appearance?.lineColor}
                   animationBackgroundColorLine={
-                    style?.animationBackgroundColorLine
+                    appearance?.animationBackgroundColorLine
                   }
                 />
                 <StyledToggleCloseLine
-                  lineColor={style?.lineColor}
+                  lineColor={appearance?.lineColor}
                   animationBackgroundColorLine={
-                    style?.animationBackgroundColorLine
+                    appearance?.animationBackgroundColorLine
                   }
                 />
               </StyledToggleCloseLineWrapper>
@@ -68,13 +68,17 @@ export const Toggle001 = ({
       ) : (
         <StyledToggleOpen
           onClick={handleClick}
-          animationBackgroundColorBefore={style?.animationBackgroundColorBefore}
-          animationBackgroundColorAfter={style?.animationBackgroundColorAfter}
+          animationBackgroundColorBefore={
+            appearance?.animationBackgroundColorBefore
+          }
+          animationBackgroundColorAfter={
+            appearance?.animationBackgroundColorAfter
+          }
         >
           <StyledToggleOpenInner>
-            <StyledToggleOpenLine lineColor={style?.lineColor} />
-            <StyledToggleOpenLine lineColor={style?.lineColor} />
-            <StyledToggleOpenLine lineColor={style?.lineColor} />
+            <StyledToggleOpenLine lineColor={appearance?.lineColor} />
+            <StyledToggleOpenLine lineColor={appearance?.lineColor} />
+            <StyledToggleOpenLine lineColor={appearance?.lineColor} />
           </StyledToggleOpenInner>
         </StyledToggleOpen>
       )}

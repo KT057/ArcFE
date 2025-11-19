@@ -15,7 +15,7 @@ interface ButtonProps {
   isHovered?: boolean;
   onMouseEnter?: () => void;
   onMouseLeave?: () => void;
-  style?: {
+  appearance?: {
     fontSize?: number;
     backgroundColor?: string;
     color?: string;
@@ -32,7 +32,7 @@ export const JmcButton = ({
   isHovered: controlledIsHovered,
   onMouseEnter,
   onMouseLeave,
-  style
+  appearance
 }: ButtonProps) => {
   const [internalIsHovered, setInternalIsHovered] = useState(false);
   const isHovered =
@@ -61,20 +61,23 @@ export const JmcButton = ({
     <StyledJmcButtonWrapper>
       <StyledJmcButton
         as={as}
-        backgroundColor={style?.backgroundColor}
-        textColor={style?.color}
+        backgroundColor={appearance?.backgroundColor}
+        textColor={appearance?.color}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
         {...buttonProps}
       >
-        <StyledJmcButtonLeft fontSize={style?.fontSize} color={style?.color}>
+        <StyledJmcButtonLeft
+          fontSize={appearance?.fontSize}
+          color={appearance?.color}
+        >
           {children}
         </StyledJmcButtonLeft>
         <JmcCircleToggle
           isHovered={isHovered}
-          style={{
-            color: style?.circleToggleColor || style?.color,
-            dotColor: style?.circleToggleDotColor || style?.color
+          appearance={{
+            color: appearance?.circleToggleColor || appearance?.color,
+            dotColor: appearance?.circleToggleDotColor || appearance?.color
           }}
         />
       </StyledJmcButton>

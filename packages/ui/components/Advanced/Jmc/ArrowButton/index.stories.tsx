@@ -54,7 +54,7 @@ LinkElement.args = {
 export const CustomColors = Template.bind({});
 CustomColors.args = {
   size: "middle",
-  style: {
+  appearance: {
     iconColor: "#2196f3",
     borderColor: "#2196f3",
     backgroundColor: "#f5f5f5",

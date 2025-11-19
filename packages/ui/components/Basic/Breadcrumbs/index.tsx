@@ -19,7 +19,7 @@ type BreadcrumbsItem = {
 
 interface BreadcrumbsProps {
   items: BreadcrumbsItem[];
-  style?: {
+  appearance?: {
     backgroundColor?: string;
     borderColor?: string;
     color?: string;
@@ -32,7 +32,7 @@ interface BreadcrumbsProps {
   };
 }
 
-export const Breadcrumbs = ({ items, style }: BreadcrumbsProps) => {
+export const Breadcrumbs = ({ items, appearance }: BreadcrumbsProps) => {
   return (
     <StyledBreadcrumbsWrapper>
       <StyledBreadcrumbs>
@@ -42,24 +42,26 @@ export const Breadcrumbs = ({ items, style }: BreadcrumbsProps) => {
               <StyledBreadcrumbsItemLink
                 href={item.link.href}
                 target={item.link.target}
-                duration={style?.duration ?? 0.3}
-                easing={style?.easing ?? "easeInOutSine"}
-                fontSize={style?.fontSize ?? 16}
-                color={style?.color ?? "#000"}
-                hoverColor={style?.hoverColor ?? "#ccc"}
+                duration={appearance?.duration ?? 0.3}
+                easing={appearance?.easing ?? "easeInOutSine"}
+                fontSize={appearance?.fontSize ?? 16}
+                color={appearance?.color ?? "#000"}
+                hoverColor={appearance?.hoverColor ?? "#ccc"}
               >
                 {item.text}
               </StyledBreadcrumbsItemLink>
             ) : (
               <StyledBreadcrumbsItemText
-                fontSize={style?.fontSize ?? 16}
-                color={style?.color ?? "#000"}
+                fontSize={appearance?.fontSize ?? 16}
+                color={appearance?.color ?? "#000"}
               >
                 {item.text}
               </StyledBreadcrumbsItemText>
             )}
             {index !== items.length - 1 && (
-              <StyledBreadcrumbsItemIcon color={style?.iconColor ?? "#000"}>
+              <StyledBreadcrumbsItemIcon
+                color={appearance?.iconColor ?? "#000"}
+              >
                 <Svg004Icon />
               </StyledBreadcrumbsItemIcon>
             )}
