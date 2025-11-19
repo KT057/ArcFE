@@ -16527,6 +16527,45 @@ var Select002 = forwardRef(
   }
 );
 Select002.displayName = "Select002";
+var shimmer = keyframes`
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+`;
+var StyledSkeleton = styled13.div.withConfig({
+  shouldForwardProp: (prop) => prop !== "type" && prop !== "$width" && prop !== "$height" && prop !== "$borderRadius"
+})`
+  width: ${({ $width }) => $width ?? "100%"};
+  height: ${({ $height }) => $height ?? "100%"};
+  border-radius: ${({ $borderRadius }) => $borderRadius ?? "4px"};
+  background: linear-gradient(
+    90deg,
+    #f0f0f0 25%,
+    #e0e0e0 50%,
+    #f0f0f0 75%
+  );
+  background-size: 200% 100%;
+  animation: ${shimmer} 1.5s infinite ease-in-out;
+`;
+var Skeleton001 = ({
+  type = "001",
+  style,
+  className
+}) => {
+  return /* @__PURE__ */ jsx(
+    StyledSkeleton,
+    {
+      type,
+      $width: style?.width,
+      $height: style?.height,
+      $borderRadius: style?.borderRadius,
+      className
+    }
+  );
+};
 var useAutoSlide = ({ autoPlay, instanceRef, options }) => {
   const raf = useRef(0);
   const start = useRef(0);
@@ -18302,6 +18341,6 @@ var ToggleSomething001 = ({
   );
 };
 
-export { Accordion001, Accordion002, Accordion003, Accordion004, Accordion005, Balloon001, Balloon002, BgImageContent, BlurBg, Breadcrumbs, Button001, Button002, CheckBox001, CheckBox002, CircleProgress, DragAndDrop001, Dropdown001, Dropdown002, FadeInAndZoomImages, FooterButtons, FrameIcon001, FrameNumber001, GlobalStyles, GoogleMap, Header001, Image, Input001, Input002, Input003, Input004, Input005, Input006, JmcArrowButton, JmcButton, JmcCircleToggle, Label001, Label002, LazyImage, List001, ListItem001, ListItem002, ListItem003, ListItem004, ListItem005, ListItem006, Loading001, Loading002, Media, MediaContext, MediaProvider, Modal001, NestedListItem001, NestedListItem002, PC_SIZE, ParallaxContent, ParallaxImage, REM_SIZE, Radio001, RebitaButton, RebitaCircleProgress, RebitaFadeSlideImage, RebitaFadeText, RebitaPanel, RebitaSlideGuideDot, RebitaTextButtonWithIcon, RebitaToggle, SP_SIZE, ScrollReveal, Select001, Select002, Slider, Svg001 as Svg001Icon, Svg002 as Svg002Icon, Svg003 as Svg003Icon, Svg004 as Svg004Icon, Svg005 as Svg005Icon, Svg006 as Svg006Icon, Svg007 as Svg007Icon, Svg008 as Svg008Icon, Svg009 as Svg009Icon, Svg010 as Svg010Icon, Svg011 as Svg011Icon, Svg012 as Svg012Icon, Svg013 as Svg013Icon, Svg014 as Svg014Icon, Svg015 as Svg015Icon, Svg016 as Svg016Icon, Svg017 as Svg017Icon, Svg018 as Svg018Icon, Svg019 as Svg019Icon, Svg020 as Svg020Icon, Svg021 as Svg021Icon, Svg022 as Svg022Icon, Svg023 as Svg023Icon, Svg024 as Svg024Icon, Svg025 as Svg025Icon, Svg026 as Svg026Icon, Svg027 as Svg027Icon, Svg028 as Svg028Icon, Svg029 as Svg029Icon, Svg030 as Svg030Icon, Svg031 as Svg031Icon, Svg032 as Svg032Icon, Svg033 as Svg033Icon, Svg034 as Svg034Icon, Svg035 as Svg035Icon, Svg036 as Svg036Icon, Svg037 as Svg037Icon, Svg038 as Svg038Icon, Svg039 as Svg039Icon, Svg040 as Svg040Icon, Svg041 as Svg041Icon, Svg042 as Svg042Icon, Svg043 as Svg043Icon, TABLET_SIZE, Text, TextButton001, TextField001, TextField002, TextField003, TextField004, TextField005, TextIcon001, Toggle001, Toggle002, Toggle003, ToggleSomething001, VerticalRollingText, baseFontSizeForEm, baseFontSizeForRem, color, ebGaramond, em, hexToRgb, lato, media, montserrat, notoSansJP, rem, roboto, themes, zenKakuGothicNew, zenOldMincho };
+export { Accordion001, Accordion002, Accordion003, Accordion004, Accordion005, Balloon001, Balloon002, BgImageContent, BlurBg, Breadcrumbs, Button001, Button002, CheckBox001, CheckBox002, CircleProgress, DragAndDrop001, Dropdown001, Dropdown002, FadeInAndZoomImages, FooterButtons, FrameIcon001, FrameNumber001, GlobalStyles, GoogleMap, Header001, Image, Input001, Input002, Input003, Input004, Input005, Input006, JmcArrowButton, JmcButton, JmcCircleToggle, Label001, Label002, LazyImage, List001, ListItem001, ListItem002, ListItem003, ListItem004, ListItem005, ListItem006, Loading001, Loading002, Media, MediaContext, MediaProvider, Modal001, NestedListItem001, NestedListItem002, PC_SIZE, ParallaxContent, ParallaxImage, REM_SIZE, Radio001, RebitaButton, RebitaCircleProgress, RebitaFadeSlideImage, RebitaFadeText, RebitaPanel, RebitaSlideGuideDot, RebitaTextButtonWithIcon, RebitaToggle, SP_SIZE, ScrollReveal, Select001, Select002, Skeleton001, Slider, Svg001 as Svg001Icon, Svg002 as Svg002Icon, Svg003 as Svg003Icon, Svg004 as Svg004Icon, Svg005 as Svg005Icon, Svg006 as Svg006Icon, Svg007 as Svg007Icon, Svg008 as Svg008Icon, Svg009 as Svg009Icon, Svg010 as Svg010Icon, Svg011 as Svg011Icon, Svg012 as Svg012Icon, Svg013 as Svg013Icon, Svg014 as Svg014Icon, Svg015 as Svg015Icon, Svg016 as Svg016Icon, Svg017 as Svg017Icon, Svg018 as Svg018Icon, Svg019 as Svg019Icon, Svg020 as Svg020Icon, Svg021 as Svg021Icon, Svg022 as Svg022Icon, Svg023 as Svg023Icon, Svg024 as Svg024Icon, Svg025 as Svg025Icon, Svg026 as Svg026Icon, Svg027 as Svg027Icon, Svg028 as Svg028Icon, Svg029 as Svg029Icon, Svg030 as Svg030Icon, Svg031 as Svg031Icon, Svg032 as Svg032Icon, Svg033 as Svg033Icon, Svg034 as Svg034Icon, Svg035 as Svg035Icon, Svg036 as Svg036Icon, Svg037 as Svg037Icon, Svg038 as Svg038Icon, Svg039 as Svg039Icon, Svg040 as Svg040Icon, Svg041 as Svg041Icon, Svg042 as Svg042Icon, Svg043 as Svg043Icon, TABLET_SIZE, Text, TextButton001, TextField001, TextField002, TextField003, TextField004, TextField005, TextIcon001, Toggle001, Toggle002, Toggle003, ToggleSomething001, VerticalRollingText, baseFontSizeForEm, baseFontSizeForRem, color, ebGaramond, em, hexToRgb, lato, media, montserrat, notoSansJP, rem, roboto, themes, zenKakuGothicNew, zenOldMincho };
 //# sourceMappingURL=index.js.map
 //# sourceMappingURL=index.js.map

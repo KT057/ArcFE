@@ -212,6 +212,64 @@ jobs:
       - name: Run test
         run: pnpm test
 
+  scripts_tsc_check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Cache node_modules
+        uses: actions/cache@v4
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Run Type Check
+        run: pnpm tsc:scripts
+
+  scripts_biome_check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Cache node_modules
+        uses: actions/cache@v4
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Run Biome Check
+        run: pnpm lint:scripts
+
   notify:
     runs-on: ubuntu-latest
     timeout-minutes: 5
@@ -224,11 +282,13 @@ jobs:
         web_build_check,
         web_type_check,
         test,
+        scripts_tsc_check,
+        scripts_biome_check,
       ]
     if: always()
     steps:
       - name: Send Slack notification on failure
-        if: ${{ needs.ui_biome_check.result == 'failure' || needs.ui_storybook_build_check.result == 'failure' || needs.ui_tsc_check.result == 'failure' || needs.packages_tsc_check.result == 'failure' || needs.web_build_check.result == 'failure' || needs.web_type_check.result == 'failure' || needs.test.result == 'failure' }}
+        if: ${{ needs.ui_biome_check.result == 'failure' || needs.ui_storybook_build_check.result == 'failure' || needs.ui_tsc_check.result == 'failure' || needs.packages_tsc_check.result == 'failure' || needs.web_build_check.result == 'failure' || needs.web_type_check.result == 'failure' || needs.test.result == 'failure' || needs.scripts_tsc_check.result == 'failure' || needs.scripts_biome_check.result == 'failure' }}
         uses: slackapi/slack-github-action@v2.1.0
         with:
           webhook: ${{ secrets.SLACK_WORKFLOW_WEBHOOK_URL }}

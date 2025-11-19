@@ -54,20 +54,10 @@ pnpm add -D @types/styled-components
 cd /Users/kotaichikawa/works/front-end-boilerplate
 pnpm --filter @packages/ui build
 
-# 別プロジェクトでリンク
-cd /path/to/my-new-project
-pnpm add file:/Users/kotaichikawa/works/front-end-boilerplate/packages/ui
-```
-
-#### オプション 2: npm に公開（本番用）
-
-```bash
-# ArcFEリポジトリで公開
-cd /Users/kotaichikawa/works/front-end-boilerplate/packages/ui
-pnpm publish --access public
-
-# 別プロジェクトでインストール
-pnpm add @arcfe/ui
+# 別プロジェクトのバッケージに記載
+"dependencies": {
+  "@arcfe": "git+ssh://git@github.com/kichikawa57/ArcFE.git#v2.0.0"
+}
 ```
 
 ---
@@ -81,8 +71,12 @@ pnpm add @arcfe/ui
 "use client"; // App Routerの場合
 
 import { ThemeProvider } from "styled-components";
-import { themes } from "@arcfe/ui/styles/themes";
-import { color } from "@arcfe/ui/styles/color";
+import { themes } from "@arcfe/packages/ui/styles/themes";
+
+const color = {
+  primary: "#000",
+  secondary: "#fff",
+};
 
 export default function RootLayout({ children }) {
   return (
@@ -121,7 +115,7 @@ ArcFE UI は 96 個の React コンポーネントを提供するデザインシ
 **必須:** ArcFE コンポーネントカタログを読み込んで、全コンポーネントを学習してください：
 
 \`\`\`
-node_modules/@arcfe/packages/ui/component-manifest.json
+component-manifest.json
 \`\`\`
 
 このカタログには以下が含まれます：
@@ -138,7 +132,7 @@ node_modules/@arcfe/packages/ui/component-manifest.json
 
 1. **常にカタログを参照**
 
-   - `node_modules/@arcfe/packages/ui/component-manifest.json`からコンポーネント情報を取得
+   - `component-manifest.json`からコンポーネント情報を取得
    - props、使用例を確認
    - 最新の情報を使用
 
@@ -216,7 +210,7 @@ Figma デザインから最適な ArcFE コンポーネントを推薦
 
 ### コンポーネントが見つからない
 
-→ カタログを再読み込み: `node_modules/@arcfe/packages/ui/component-manifest.json`
+→ カタログを再読み込み: `component-manifest.json`
 
 ### 型エラーが出る
 
@@ -231,7 +225,7 @@ Figma デザインから最適な ArcFE コンポーネントを推薦
 mkdir -p .claude/commands
 
 # ArcFEリポジトリからコピー
-cp /Users/kotaichikawa/works/front-end-boilerplate/.claude/commands/*.md \
+cp /node_modules/@arcfe/.claude/commands/*.md \
    .claude/commands/
 ```
 
@@ -244,7 +238,7 @@ cp /Users/kotaichikawa/works/front-end-boilerplate/.claude/commands/*.md \
 Claude Code を開いて：
 
 ```bash
-node_modules/@arcfe/packages/ui/component-manifest.json を読み込んで、全ArcFEコンポーネントを学習してください
+component-manifest.json を読み込んで、全ArcFEコンポーネントを学習してください
 ```
 
 **AI の応答例:**

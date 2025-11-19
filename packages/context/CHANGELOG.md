@@ -1,5 +1,11 @@
 # @packages/context
 
+## 2.1.0
+
+### Minor Changes
+
+- Add TypeScript and Biome checks for scripts folder
+
 ## 2.0.0
 
 ### Major Changes
