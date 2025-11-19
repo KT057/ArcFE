@@ -211,6 +211,17 @@ jobs:
           rm -rf packages/ui/.reg
 
           # For master branch, run compare and publish separately to avoid CRC errors
+          #
+          # Why separate commands prevent CRC errors:
+          # - `reg-suit run` executes compare and publish in a single process with shared state
+          # - When S3 baseline files are corrupted, `run` fails during the download/comparison phase
+          #   and the entire process aborts before reaching the publish step
+          # - Running `compare` and `publish` separately allows each step to complete independently:
+          #   1. `compare` may fail to download corrupted baselines, but still generates comparison results
+          #   2. `publish` can then upload new screenshots as the current baseline, effectively resetting
+          #      the corrupted state in S3
+          # - This approach provides a recovery mechanism for corrupted baselines without manual S3 cleanup
+          #
           if [ "${{ github.ref }}" == "refs/heads/master" ]; then
             cd packages/ui
             pnpm exec reg-suit compare
