@@ -110,13 +110,19 @@ function collectTypeDefinitions(ast: any): Map<string, any> {
   const typeMap = new Map<string, any>();
 
   for (const node of ast.body || []) {
-    if (node.type === "TSInterfaceDeclaration" || node.type === "TSTypeAliasDeclaration") {
+    if (
+      node.type === "TSInterfaceDeclaration" ||
+      node.type === "TSTypeAliasDeclaration"
+    ) {
       typeMap.set(node.id.name, node);
     }
     // export されている型定義も収集
     if (node.type === "ExportNamedDeclaration" && node.declaration) {
       const decl = node.declaration;
-      if (decl.type === "TSInterfaceDeclaration" || decl.type === "TSTypeAliasDeclaration") {
+      if (
+        decl.type === "TSInterfaceDeclaration" ||
+        decl.type === "TSTypeAliasDeclaration"
+      ) {
         typeMap.set(decl.id.name, decl);
       }
     }
@@ -144,7 +150,11 @@ function findPropsInterface(ast: any): any {
   return null;
 }
 
-function parseInterface(interfaceNode: any, typeDefinitions: Map<string, any>, ast: any): any {
+function parseInterface(
+  interfaceNode: any,
+  typeDefinitions: Map<string, any>,
+  ast: any
+): any {
   const props: any = {};
 
   // インターフェースの場合
@@ -173,8 +183,16 @@ function parseInterface(interfaceNode: any, typeDefinitions: Map<string, any>, a
   return props;
 }
 
-function parsePropSignature(member: any, typeDefinitions: Map<string, any>, ast: any): any {
-  const typeInfo = parseTypeAnnotation(member.typeAnnotation, typeDefinitions, ast);
+function parsePropSignature(
+  member: any,
+  typeDefinitions: Map<string, any>,
+  ast: any
+): any {
+  const typeInfo = parseTypeAnnotation(
+    member.typeAnnotation,
+    typeDefinitions,
+    ast
+  );
   const description = extractJSDoc(member);
 
   return {
@@ -188,7 +206,11 @@ function parsePropSignature(member: any, typeDefinitions: Map<string, any>, ast:
   };
 }
 
-function parseTypeAnnotation(typeAnnotation: any, typeDefinitions: Map<string, any>, ast: any): any {
+function parseTypeAnnotation(
+  typeAnnotation: any,
+  typeDefinitions: Map<string, any>,
+  ast: any
+): any {
   if (!typeAnnotation?.typeAnnotation) {
     return { kind: "unknown", tsType: "unknown" };
   }
@@ -239,7 +261,11 @@ function parseTypeAnnotation(typeAnnotation: any, typeDefinitions: Map<string, a
     for (const member of type.members || []) {
       if (member.type === "TSPropertySignature") {
         const propName = member.key.name;
-        nestedProps[propName] = parsePropSignature(member, typeDefinitions, ast);
+        nestedProps[propName] = parsePropSignature(
+          member,
+          typeDefinitions,
+          ast
+        );
       }
     }
     return {
@@ -265,7 +291,11 @@ function parseTypeAnnotation(typeAnnotation: any, typeDefinitions: Map<string, a
     const referencedType = typeDefinitions.get(typeName);
     if (referencedType) {
       // 参照先の型を解析
-      const resolvedProps = parseInterface(referencedType, typeDefinitions, ast);
+      const resolvedProps = parseInterface(
+        referencedType,
+        typeDefinitions,
+        ast
+      );
       return {
         kind: "reference",
         tsType: typeName,
@@ -381,7 +411,7 @@ async function findScreenshots(component: ComponentInfo): Promise<any> {
   const screenshots = await glob(`${screenshotBase}/*.png`);
 
   // basePath から packages/ui/ を除去
-  const basePath = screenshotBase.replace(/^packages\/ui\//, '');
+  const basePath = screenshotBase.replace(/^packages\/ui\//, "");
 
   return {
     basePath: basePath,

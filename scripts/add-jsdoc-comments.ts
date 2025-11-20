@@ -7,7 +7,6 @@
  */
 
 import * as fs from "node:fs";
-import * as path from "node:path";
 import { parse } from "@typescript-eslint/typescript-estree";
 import { glob } from "glob";
 
@@ -20,7 +19,10 @@ interface PropInfo {
 }
 
 // prop 名から推測される説明文
-function getDescriptionForProp(propName: string, typeAnnotation: string): string {
+function getDescriptionForProp(
+  propName: string,
+  typeAnnotation: string
+): string {
   const descriptions: Record<string, string> = {
     as: "HTML 要素タイプ",
     type: "スタイルタイプ",
@@ -85,7 +87,10 @@ function getDescriptionForProp(propName: string, typeAnnotation: string): string
   if (typeAnnotation.includes("ReactNode")) {
     return "表示内容";
   }
-  if (typeAnnotation.includes("MouseEvent") || typeAnnotation.includes("() =>")) {
+  if (
+    typeAnnotation.includes("MouseEvent") ||
+    typeAnnotation.includes("() =>")
+  ) {
     return "コールバック関数";
   }
   if (typeAnnotation.includes("boolean")) {

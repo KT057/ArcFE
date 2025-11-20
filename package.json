@@ -11,6 +11,7 @@
     "tsc": "pnpm --filter @packages/libs tsc && pnpm --filter @packages/tests tsc && pnpm --filter @packages/hooks tsc && pnpm --filter @packages/context tsc && pnpm --filter @packages/utils tsc",
     "tsc:scripts": "tsc --noEmit --project tsconfig.scripts.json",
     "lint:scripts": "biome check scripts",
+    "lint:scripts:fix": "biome check --diagnostic-level=warn --write scripts",
     "build:packages": "pnpm --filter @packages/libs build && pnpm --filter @packages/utils build && pnpm --filter @packages/context build && pnpm --filter @packages/hooks build && pnpm --filter @packages/ui build",
     "catalog:build": "tsx scripts/quickstart-catalog.ts",
     "catalog:embeddings": "python3 scripts/generate-embeddings.py",
