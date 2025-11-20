@@ -92,14 +92,37 @@ function extractProps(sourceCode: string): any {
     const comments = ast.comments || [];
     attachComments(ast, comments);
 
+    // AST全体から全ての型定義を収集
+    const typeDefinitions = collectTypeDefinitions(ast);
+
     return {
       interface: propsInterface.name,
-      extracted: parseInterface(propsInterface)
+      extracted: parseInterface(propsInterface, typeDefinitions, ast)
     };
   } catch (error) {
     console.error("AST解析エラー:", error);
     return { extracted: {} };
   }
+}
+
+// AST全体から型定義を収集
+function collectTypeDefinitions(ast: any): Map<string, any> {
+  const typeMap = new Map<string, any>();
+
+  for (const node of ast.body || []) {
+    if (node.type === "TSInterfaceDeclaration" || node.type === "TSTypeAliasDeclaration") {
+      typeMap.set(node.id.name, node);
+    }
+    // export されている型定義も収集
+    if (node.type === "ExportNamedDeclaration" && node.declaration) {
+      const decl = node.declaration;
+      if (decl.type === "TSInterfaceDeclaration" || decl.type === "TSTypeAliasDeclaration") {
+        typeMap.set(decl.id.name, decl);
+      }
+    }
+  }
+
+  return typeMap;
 }
 
 function findPropsInterface(ast: any): any {
@@ -121,7 +144,7 @@ function findPropsInterface(ast: any): any {
   return null;
 }
 
-function parseInterface(interfaceNode: any): any {
+function parseInterface(interfaceNode: any, typeDefinitions: Map<string, any>, ast: any): any {
   const props: any = {};
 
   // インターフェースの場合
@@ -129,7 +152,7 @@ function parseInterface(interfaceNode: any): any {
     for (const member of interfaceNode.body?.body || []) {
       if (member.type === "TSPropertySignature") {
         const propName = member.key.name;
-        props[propName] = parsePropSignature(member);
+        props[propName] = parsePropSignature(member, typeDefinitions, ast);
       }
     }
   }
@@ -141,7 +164,7 @@ function parseInterface(interfaceNode: any): any {
       for (const member of typeAnnotation.members || []) {
         if (member.type === "TSPropertySignature") {
           const propName = member.key.name;
-          props[propName] = parsePropSignature(member);
+          props[propName] = parsePropSignature(member, typeDefinitions, ast);
         }
       }
     }
@@ -150,8 +173,8 @@ function parseInterface(interfaceNode: any): any {
   return props;
 }
 
-function parsePropSignature(member: any): any {
-  const typeInfo = parseTypeAnnotation(member.typeAnnotation);
+function parsePropSignature(member: any, typeDefinitions: Map<string, any>, ast: any): any {
+  const typeInfo = parseTypeAnnotation(member.typeAnnotation, typeDefinitions, ast);
   const description = extractJSDoc(member);
 
   return {
@@ -160,11 +183,12 @@ function parsePropSignature(member: any): any {
     required: !member.optional,
     optional: member.optional || false,
     description: description || undefined,
-    enumValues: typeInfo.enumValues || undefined
+    enumValues: typeInfo.enumValues || undefined,
+    properties: typeInfo.properties || undefined
   };
 }
 
-function parseTypeAnnotation(typeAnnotation: any): any {
+function parseTypeAnnotation(typeAnnotation: any, typeDefinitions: Map<string, any>, ast: any): any {
   if (!typeAnnotation?.typeAnnotation) {
     return { kind: "unknown", tsType: "unknown" };
   }
@@ -209,16 +233,50 @@ function parseTypeAnnotation(typeAnnotation: any): any {
     return { kind: "function", tsType: "(...args: any[]) => any" };
   }
 
+  // オブジェクトリテラル型（ネストされたプロパティ）
+  if (type.type === "TSTypeLiteral") {
+    const nestedProps: any = {};
+    for (const member of type.members || []) {
+      if (member.type === "TSPropertySignature") {
+        const propName = member.key.name;
+        nestedProps[propName] = parsePropSignature(member, typeDefinitions, ast);
+      }
+    }
+    return {
+      kind: "object",
+      tsType: "object",
+      properties: nestedProps
+    };
+  }
+
   // ReactNode
   if (type.type === "TSTypeReference" && type.typeName?.name === "ReactNode") {
     return { kind: "ReactNode", tsType: "ReactNode" };
   }
 
-  // その他の型参照
+  // 型参照（他の型を参照している場合）
   if (type.type === "TSTypeReference") {
+    const typeName = type.typeName?.name;
+    if (!typeName) {
+      return { kind: "reference", tsType: "unknown" };
+    }
+
+    // 型定義を探す
+    const referencedType = typeDefinitions.get(typeName);
+    if (referencedType) {
+      // 参照先の型を解析
+      const resolvedProps = parseInterface(referencedType, typeDefinitions, ast);
+      return {
+        kind: "reference",
+        tsType: typeName,
+        properties: resolvedProps
+      };
+    }
+
+    // 型定義が見つからない場合は参照として返す
     return {
       kind: "reference",
-      tsType: type.typeName?.name || "unknown"
+      tsType: typeName
     };
   }
 

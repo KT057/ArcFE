@@ -11,9 +11,21 @@ import {
 } from "./styles";
 
 interface ToggleProps {
+  /**
+   * 開いているかどうか
+   */
   isOpen?: boolean;
+  /**
+   * 値変更時のコールバック関数
+   */
   onChange?: (isOpen: boolean) => void;
+  /**
+   * クリック時のコールバック関数
+   */
   onClick?: () => void;
+  /**
+   * 外観をカスタマイズ
+   */
   appearance?: {
     lineColor?: string;
   };

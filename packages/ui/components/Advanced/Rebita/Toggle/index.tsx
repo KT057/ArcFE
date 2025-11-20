@@ -11,13 +11,37 @@ import {
 } from "./styles";
 
 interface ToggleProps {
+  /**
+   * サイズ (small, middle, large)
+   */
   size?: Size;
+  /**
+   * 開閉状態（制御コンポーネントとして使用する場合）
+   */
   isOpen?: boolean;
+  /**
+   * 開閉状態が変更されたときのコールバック関数
+   */
   onChange?: (isOpen: boolean) => void;
+  /**
+   * クリック時のコールバック関数
+   */
   onClick?: () => void;
+  /**
+   * 外観をカスタマイズ
+   */
   appearance?: {
+    /**
+     * 背景色
+     */
     backgroundColor?: string;
+    /**
+     * ドットの色（開いている状態）
+     */
     dotColor?: string;
+    /**
+     * ラインの色（閉じている状態）
+     */
     lineColor?: string;
   };
 }

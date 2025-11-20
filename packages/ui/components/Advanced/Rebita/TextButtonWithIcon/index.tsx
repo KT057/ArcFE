@@ -8,18 +8,53 @@ import {
   StyledTextButtonWithIconWrapper
 } from "./styles";
 
+/**
+ * アイコンの配置方向
+ * - "left": 左側に配置
+ * - "right": 右側に配置
+ */
 export type Direction = "left" | "right";
 
 interface TextButtonWithIconProps {
+  /**
+   * ボタンに表示するテキスト
+   */
   text?: ReactNode;
+  /**
+   * ボタンに表示するアイコン
+   */
   icon?: ReactNode;
+  /**
+   * クリック時のコールバック関数
+   */
   onClick?: () => void;
+  /**
+   * レンダリングするHTML要素の種類
+   */
   as?: "button" | "a" | "div";
+  /**
+   * リンク先URL（asが"a"の場合に使用）
+   */
   href?: string;
+  /**
+   * アイコンの配置方向
+   */
   iconDirection?: Direction;
+  /**
+   * 外観をカスタマイズ
+   */
   appearance?: {
+    /**
+     * フォントサイズ（px）
+     */
     fontSize?: number;
+    /**
+     * テキストとアイコンの色
+     */
     color?: string;
+    /**
+     * アイコンのサイズ
+     */
     iconSize?: Size;
   };
 }

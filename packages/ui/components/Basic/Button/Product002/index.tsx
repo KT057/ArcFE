@@ -23,19 +23,61 @@ import {
   type Type
 } from "./styles";
 
+/**
+ * ボタンの外観カスタマイズ設定
+ */
 interface ButtonAppearance {
+  /**
+   * 上部のパディング（em単位）
+   */
   paddingTop?: number;
+  /**
+   * 右側のパディング（em単位）
+   */
   paddingRight?: number;
+  /**
+   * 下部のパディング（em単位）
+   */
   paddingBottom?: number;
+  /**
+   * 左側のパディング（em単位）
+   */
   paddingLeft?: number;
+  /**
+   * アイコンのサイズ（em単位）
+   */
   iconSize?: number;
+  /**
+   * フォントサイズ（em単位）
+   */
   fontSize?: number;
+  /**
+   * 背景色
+   */
   backgroundColor?: string;
+  /**
+   * ボーダーの色
+   */
   borderColor?: string;
+  /**
+   * テキストの色
+   */
   color?: string;
+  /**
+   * フォントの太さ
+   */
   fontWeight?: number;
+  /**
+   * 無効化時のテキストの色
+   */
   disabledColor?: string;
+  /**
+   * 無効化時の背景色
+   */
   disabledBackgroundColor?: string;
+  /**
+   * 無効化時のボーダーの色
+   */
   disabledBorderColor?: string;
 }
 

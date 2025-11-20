@@ -12,33 +12,91 @@ import {
 } from "./styles";
 
 interface InputProps {
+  /**
+   * サイズ (small, middle, large)
+   */
   size?: Size;
+  /**
+   * input要素のname属性
+   */
   name?: string;
+  /**
+   * プレースホルダーテキスト
+   */
   placeholder?: string;
+  /**
+   * 入力値（制御コンポーネント用）
+   */
   value?: string;
+  /**
+   * 初期値（非制御コンポーネント用）
+   */
   defaultValue?: string;
+  /**
+   * 値変更時のコールバック関数
+   */
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  /**
+   * エラー状態かどうか
+   */
   error?: boolean;
+  /**
+   * エラーメッセージテキスト
+   */
   errorText?: string;
+  /**
+   * input要素のtype属性 (text, email, password等)
+   */
   inputType?: React.HTMLInputTypeAttribute;
+  /**
+   * オートコンプリート属性
+   */
   autoComplete?: React.InputHTMLAttributes<HTMLInputElement>["autoComplete"];
+  /**
+   * input要素のid属性
+   */
   id?: string;
+  /**
+   * ラベルテキスト
+   */
   label?: string;
+  /**
+   * aria-label属性（アクセシビリティ用）
+   */
   ariaLabel?: string;
+  /**
+   * input要素に渡す追加のHTML属性
+   */
   inputProps?: React.InputHTMLAttributes<HTMLInputElement>;
+  /**
+   * 外観のカスタマイズ設定
+   */
   appearance?: {
+    /** フォントサイズ */
     fontSize?: number;
+    /** テキスト色 */
     color?: string;
+    /** ボーダー色 */
     borderColor?: string;
+    /** 背景色 */
     backgroundColor?: string;
+    /** プレースホルダー色 */
     placeholderColor?: string;
+    /** エラー色 */
     errorColor?: string;
+    /** エラーテキストのフォントサイズ */
     errorFontSize?: number;
+    /** エラー時の背景色 */
     errorBackgroundColor?: string;
+    /** ラベルのフォントサイズ */
     labelFontSize?: number;
+    /** ラベルの色 */
     labelColor?: string;
+    /** ラベルのフォントウェイト */
     labelFontWeight?: number | string;
+    /** ラベルの下マージン */
     labelMarginBottom?: number;
+    /** フォーカス時のリング色 */
     focusRingColor?: string;
   };
 }

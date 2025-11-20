@@ -9,12 +9,33 @@ import {
 } from "./styles";
 
 interface BalloonProps {
+  /**
+   * スタイルタイプ
+   */
   type?: Type;
+  /**
+   * 表示内容
+   */
   children: ReactNode;
+  /**
+   * arrowPosition の設定
+   */
   arrowPosition?: ArrowPosition;
+  /**
+   * 外観をカスタマイズ
+   */
   appearance?: {
+    /**
+     * 背景色
+     */
     backgroundColor?: string;
+    /**
+     * テキストの色
+     */
     color?: string;
+    /**
+     * フォントサイズ（px）
+     */
     fontSize?: number;
   };
 }

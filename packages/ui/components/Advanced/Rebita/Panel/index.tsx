@@ -15,15 +15,42 @@ import {
 } from "./styles";
 
 interface PanelProps {
+  /**
+   * 画像のソースURL
+   */
   imageSrc: string;
+  /**
+   * 画像の代替テキスト
+   */
   imageAlt?: string;
+  /**
+   * 画像上に表示するテキスト
+   */
   imageText: string;
+  /**
+   * パネルのタイトル
+   */
   title: string;
+  /**
+   * パネルの説明文
+   */
   description: string;
+  /**
+   * 表示するラベルの配列
+   */
   labels: ReactNode[];
+  /**
+   * 外観をカスタマイズ
+   */
   appearance?: {
+    /**
+     * 画像の高さ（px）
+     */
     imageHeight?: number;
   };
+  /**
+   * クリック時のコールバック関数
+   */
   onClick: () => void;
 }
 

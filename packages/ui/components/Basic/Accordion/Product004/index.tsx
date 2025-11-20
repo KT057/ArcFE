@@ -16,32 +16,95 @@ import {
 } from "./styles";
 
 export type AccordionAnimation = {
+  /**
+   * アニメーションの持続時間（秒）
+   */
   duration?: number;
+  /**
+   * イージング関数
+   */
   easing?: gsap.EaseString;
 };
 
 interface Props {
+  /**
+   * ヘッダーの表示内容
+   */
   header: {
+    /**
+     * タイトル
+     */
     title: ReactNode;
+    /**
+     * 本文テキスト
+     */
     text: ReactNode;
   };
+  /**
+   * コンテンツの表示内容
+   */
   content: {
+    /**
+     * タイトル
+     */
     title: ReactNode;
+    /**
+     * 本文テキスト
+     */
     text: ReactNode;
   };
+  /**
+   * アイコン
+   */
   icon: ReactNode;
+  /**
+   * アニメーション効果
+   */
   animation?: AccordionAnimation;
+  /**
+   * 外観をカスタマイズ
+   */
   appearance?: {
+    /**
+     * 左右のパディング（px）
+     */
     paddingSide?: number;
+    /**
+     * 上下のパディング（px）
+     */
     paddingVertical?: number;
+    /**
+     * アイコンの色
+     */
     iconColor?: string;
+    /**
+     * ボーダーの色
+     */
     borderColor?: string;
+    /**
+     * ヘッダーの外観設定
+     */
     header?: {
+      /**
+       * タイトルの色
+       */
       titleColor?: string;
+      /**
+       * テキストの色
+       */
       textColor?: string;
     };
+    /**
+     * コンテンツの外観設定
+     */
     content?: {
+      /**
+       * タイトルの色
+       */
       titleColor?: string;
+      /**
+       * テキストの色
+       */
       textColor?: string;
     };
   };

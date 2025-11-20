@@ -8,10 +8,25 @@ import {
 } from "./styles";
 
 interface VerticalRollingTextProps {
+  /**
+   * 表示するテキスト内容
+   */
   children?: ReactNode;
+  /**
+   * ホバー状態を外部から制御するかどうか（undefinedの場合は内部のホバーイベントで制御）
+   */
   enableHover?: boolean;
+  /**
+   * 外観をカスタマイズ
+   */
   appearance?: {
+    /**
+     * フォントサイズ（px）
+     */
     fontSize?: number;
+    /**
+     * テキストの色
+     */
     color?: string;
   };
 }

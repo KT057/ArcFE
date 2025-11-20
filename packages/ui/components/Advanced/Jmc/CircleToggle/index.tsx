@@ -8,12 +8,33 @@ import {
 } from "./styles";
 
 interface CircleToggleProps {
+  /**
+   * ホバー状態（外部から制御する場合に使用）
+   */
   isHovered?: boolean;
+  /**
+   * マウスエンター時のコールバック関数
+   */
   onMouseEnter?: () => void;
+  /**
+   * マウスリーブ時のコールバック関数
+   */
   onMouseLeave?: () => void;
+  /**
+   * クリック時のコールバック関数
+   */
   onClick?: () => void;
+  /**
+   * 外観をカスタマイズ
+   */
   appearance?: {
+    /**
+     * サークルの色
+     */
     color?: string;
+    /**
+     * ドット（点）の色
+     */
     dotColor?: string;
   };
 }

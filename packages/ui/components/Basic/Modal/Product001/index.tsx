@@ -10,8 +10,17 @@ import {
 } from "./styles";
 
 type Props = {
+  /**
+   * showModal の設定
+   */
   showModal: boolean;
+  /**
+   * 表示内容
+   */
   children: ReactNode;
+  /**
+   * 表示内容
+   */
   footer?: ReactNode;
 };
 

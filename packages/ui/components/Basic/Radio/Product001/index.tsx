@@ -12,15 +12,29 @@ import {
 } from "./styles";
 
 interface RadioProps extends AriaRadioProps {
+  /**
+   * ラジオボタンのラベル内容
+   */
   children: React.ReactNode;
+  /**
+   * 外観のカスタマイズ設定
+   */
   appearance?: {
+    /** フォントサイズ */
     fontSize?: number;
+    /** テキスト色 */
     color?: string;
+    /** 背景色 */
     backgroundColor?: string;
+    /** ボーダー色 */
     borderColor?: string;
+    /** 選択時の背景色 */
     checkedBackgroundColor?: string;
+    /** チェックマークの色 */
     markColor?: string;
+    /** フォーカス時のリング色 */
     focusRingColor?: string;
+    /** ラベルとの間隔 */
     gap?: number;
   };
 }

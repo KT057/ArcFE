@@ -11,11 +11,29 @@ export type Type = "001" | "002" | "003";
 export type IconPosition = "left" | "right";
 
 interface LabelProps {
+  /**
+   * スタイルタイプ
+   */
   type?: Type;
+  /**
+   * サイズ (small, middle, large)
+   */
   size?: Size;
+  /**
+   * iconPosition の設定
+   */
   iconPosition?: IconPosition;
+  /**
+   * アイコン
+   */
   icon: React.ReactNode;
+  /**
+   * 表示内容
+   */
   children: React.ReactNode;
+  /**
+   * 外観をカスタマイズ
+   */
   appearance?: {
     fontSize?: number;
     backgroundColor?: string;
