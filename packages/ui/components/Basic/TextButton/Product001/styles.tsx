@@ -5,14 +5,41 @@ export type TextButtonType = "001" | "002";
 export type IconPosition = "left" | "right";
 
 type TextButtonProps = {
+  /**
+   * テキストボタンのスタイルタイプ
+   */
   $type: TextButtonType;
+  /**
+   * テキストの色
+   */
   $color?: string;
+  /**
+   * フォントサイズ
+   */
   $fontSize?: number;
+  /**
+   * ホバー時のテキスト色
+   */
   $hoverColor?: string;
+  /**
+   * ホバーアニメーションの持続時間
+   */
   $hoverDuration?: string;
+  /**
+   * ホバーアニメーションのイージング関数
+   */
   $hoverEase?: EasingKey;
+  /**
+   * アイコンの表示位置（左側 or 右側）
+   */
   $iconPosition?: IconPosition;
+  /**
+   * テキストとアイコンの間隔（rem単位）
+   */
   $gap?: number;
+  /**
+   * アイコンを中央揃えにするかどうか
+   */
   $isCenter?: boolean;
 };
 
@@ -68,7 +95,12 @@ export const StyledTextButtonText = styled.span`
   line-height: 1.2;
 `;
 
-export const StyledTextButtonIcon = styled.div<{ $paddingTop?: number }>`
+export const StyledTextButtonIcon = styled.div<{
+  /**
+   * アイコンの上部パディング（rem単位）
+   */
+  $paddingTop?: number;
+}>`
   display: block;
   line-height: 0;
   padding-top: ${({ theme, $paddingTop }) => ($paddingTop !== undefined ? theme.size.rem($paddingTop) : 0)};

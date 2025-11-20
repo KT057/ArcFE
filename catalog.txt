@@ -1,6 +1,0 @@
-# Component Catalog URLs
-# このファイルには、最新バージョンのS3アップロードURLが記録されます
-
-# Version 2.0.0 - 2025-11-18T12:41:46.262Z
-manifest: https://ap-northeast-1.console.aws.amazon.com/s3/object/arcfe-componnet-catalog?region=ap-northeast-1&prefix=v2.0.0/component-manifest.json
-screenshots: https://ap-northeast-1.console.aws.amazon.com/s3/buckets/arcfe-componnet-catalog?region=ap-northeast-1&prefix=v2.0.0/__screenshots__/&showversions=false

@@ -12,12 +12,27 @@ import {
 } from "./styles";
 
 interface FadeSlideImageProps {
+  /**
+   * スライドショーで表示する画像の配列
+   */
   images: FadeInAndZoomImagesImageItem[];
+  /**
+   * FadeInAndZoomImagesコンポーネントに渡すprops
+   */
   fadeInAndZoomImagesProps?: Partial<
     ComponentProps<typeof FadeInAndZoomImages>
   >;
+  /**
+   * SlideGuideDotコンポーネントに渡すprops
+   */
   slideGuideDotProps?: Partial<ComponentProps<typeof RebitaSlideGuideDot>>;
+  /**
+   * 外観をカスタマイズ
+   */
   appearance?: {
+    /**
+     * ガイドドット間の間隔（px）
+     */
     guideGap?: number;
   };
 }

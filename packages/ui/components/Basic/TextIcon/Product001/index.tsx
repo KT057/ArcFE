@@ -9,9 +9,21 @@ import {
 export type IconPosition = "left" | "right";
 
 interface TextIconProps {
+  /**
+   * アイコン
+   */
   icon: React.ReactNode;
+  /**
+   * 表示内容
+   */
   children: React.ReactNode;
+  /**
+   * iconPosition の設定
+   */
   iconPosition?: IconPosition;
+  /**
+   * 外観をカスタマイズ
+   */
   appearance?: {
     gap?: number;
     paddingTop?: number;

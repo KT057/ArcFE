@@ -9,19 +9,49 @@ interface LazyImageAppearance {
 }
 
 type Props = {
+  /**
+   * pc の値
+   */
   pc: {
     src: string;
   };
+  /**
+   * sp の値
+   */
   sp: {
     src: string;
   };
+  /**
+   * 代替テキスト
+   */
   alt: string;
+  /**
+   * objectFit の設定
+   */
   objectFit?: boolean;
+  /**
+   * aspectRatio の設定
+   */
   aspectRatio?: AspectRatio;
+  /**
+   * duration の値
+   */
   duration?: number;
+  /**
+   * threshold の値
+   */
   threshold?: number;
+  /**
+   * rootMargin の値
+   */
   rootMargin?: string;
+  /**
+   * showPlaceholder の設定
+   */
   showPlaceholder?: boolean;
+  /**
+   * 外観をカスタマイズ
+   */
   appearance?: LazyImageAppearance;
 };
 

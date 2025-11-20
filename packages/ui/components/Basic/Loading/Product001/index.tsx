@@ -4,8 +4,17 @@ import { StyledLoading, StyledLoadingWrapper } from "./styles";
 export type Type = "001";
 
 interface LoadingProps {
+  /**
+   * スタイルタイプ
+   */
   type?: Type;
+  /**
+   * サイズ (small, middle, large)
+   */
   size?: Size;
+  /**
+   * 外観をカスタマイズ
+   */
   appearance?: {
     color?: string;
   };

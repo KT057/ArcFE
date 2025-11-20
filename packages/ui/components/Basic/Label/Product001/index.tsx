@@ -5,9 +5,21 @@ import { StyledLabel, StyledLabelWrapper } from "./styles";
 export type Type = "001" | "002" | "003";
 
 interface LabelProps {
+  /**
+   * スタイルタイプ
+   */
   type?: Type;
+  /**
+   * サイズ (small, middle, large)
+   */
   size?: Size;
+  /**
+   * 表示内容
+   */
   children: React.ReactNode;
+  /**
+   * 外観をカスタマイズ
+   */
   appearance?: {
     fontSize?: number;
     backgroundColor?: string;

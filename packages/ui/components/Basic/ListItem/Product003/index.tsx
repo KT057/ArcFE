@@ -32,9 +32,21 @@ interface ListItemAppearance {
 }
 
 type BaseProps = {
+  /**
+   * HTML 要素タイプ
+   */
   as?: "li" | "article";
+  /**
+   * 表示内容
+   */
   children: ReactNode;
+  /**
+   * 外観をカスタマイズ
+   */
   appearance?: ListItemAppearance;
+  /**
+   * クリック時のコールバック関数
+   */
   onClick?: (event: MouseEvent<HTMLElement>) => void;
 };
 

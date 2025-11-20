@@ -13,10 +13,25 @@ interface ListItem {
 }
 
 interface ListProps {
+  /**
+   * スタイルタイプ
+   */
   type?: ListType;
+  /**
+   * listStyle の設定
+   */
   listStyle?: "ul" | "ol";
+  /**
+   * items の設定
+   */
   items: ListItem[];
+  /**
+   * ARIA label 属性
+   */
   ariaLabel?: string;
+  /**
+   * 外観をカスタマイズ
+   */
   appearance?: {
     columnGap?: number;
     rowGap?: number;

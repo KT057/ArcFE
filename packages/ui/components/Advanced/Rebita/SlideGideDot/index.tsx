@@ -7,15 +7,45 @@ import {
 } from "./styles";
 
 interface SlideGuideDotProps {
+  /**
+   * ドットの表示タイプ
+   */
   type: SlideGuideDotType;
-  progress: number; // 0-100の値で進捗を制御
+  /**
+   * 進捗の割合（0-100）
+   */
+  progress: number;
+  /**
+   * クリック時のコールバック関数
+   */
   onClick: () => void;
+  /**
+   * 外観をカスタマイズ
+   */
   appearance?: {
+    /**
+     * プログレスバーの色
+     */
     primaryColor?: string;
+    /**
+     * トラック（背景）の色
+     */
     trackColor?: string;
+    /**
+     * サークルのサイズ（px）
+     */
     circleSize?: number;
+    /**
+     * ドットのサイズ（px）
+     */
     dotSize?: number;
+    /**
+     * ストロークの太さ（px）
+     */
     strokeWidth?: number;
+    /**
+     * アニメーションの持続時間（CSS時間単位: "0.5s", "500ms" など）
+     */
     animationDuration?: string;
   };
 }

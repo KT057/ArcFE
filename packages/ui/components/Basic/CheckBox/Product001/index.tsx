@@ -12,18 +12,49 @@ import {
 export type CheckBoxType = "001" | "002" | "003";
 
 interface CheckBoxProps {
+  /**
+   * チェックボックスの一意なID
+   */
   id: string;
+  /**
+   * チェックボックスのタイプ ("001", "002", "003" - 形状の違い)
+   */
   type: CheckBoxType;
+  /**
+   * サイズ (small, middle, large)
+   */
   size: Size;
+  /**
+   * input要素のname属性
+   */
   name?: string;
+  /**
+   * チェック状態（制御コンポーネント用）
+   */
   checked?: boolean;
+  /**
+   * 初期チェック状態（非制御コンポーネント用）
+   */
   defaultChecked?: boolean;
+  /**
+   * 無効化するかどうか
+   */
   disabled?: boolean;
+  /**
+   * チェック状態変更時のコールバック関数
+   */
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  /**
+   * 外観のカスタマイズ設定
+   */
   appearance?: {
+    /** 背景色 */
     backgroundColor?: string;
+    /** ボーダー色 */
     borderColor?: string;
+    /** チェック時の背景色 */
     checkedBackgroundColor?: string;
+    /** チェックマークの色 */
     markColor?: string;
   };
 }

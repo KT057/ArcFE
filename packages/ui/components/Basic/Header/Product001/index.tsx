@@ -11,12 +11,33 @@ import {
 const HEIGHT = 80;
 
 interface Header001Props {
+  /**
+   * 表示内容
+   */
   left?: React.ReactNode;
+  /**
+   * 表示内容
+   */
   right?: React.ReactNode;
+  /**
+   * 表示内容
+   */
   leftInner?: React.ReactNode;
+  /**
+   * 表示内容
+   */
   rightInner?: React.ReactNode;
+  /**
+   * 表示内容
+   */
   modalContent?: React.ReactNode;
+  /**
+   * showModal の設定
+   */
   showModal?: boolean;
+  /**
+   * 外観をカスタマイズ
+   */
   appearance?: {
     leftGap?: number;
     rightGap?: number;

@@ -7,26 +7,80 @@ export type Type = "001" | "002" | "003";
 export type AnimationType = "001" | "002";
 
 export type Animation = {
+  /**
+   * アニメーションタイプ
+   */
   type: AnimationType;
+  /**
+   * アニメーションの持続時間（秒）
+   */
   duration?: number;
+  /**
+   * イージング関数のキー
+   */
   easing?: EasingKey;
+  /**
+   * ホバー時の背景色
+   */
   backgroundColor?: string;
+  /**
+   * ホバー時のテキスト色
+   */
   textColor?: string;
 };
 
 export const StyledButton = styled.button<{
+  /**
+   * ボタンのスタイルタイプ（角丸の種類）
+   */
   $type?: Type;
+  /**
+   * 背景色
+   */
   $backgroundColor: string;
+  /**
+   * ボーダーの色
+   */
   $borderColor: string;
+  /**
+   * 親要素の幅いっぱいに広げるかどうか
+   */
   $fullWidth: boolean;
+  /**
+   * アニメーション設定
+   */
   $animation?: Animation;
+  /**
+   * ボタンのサイズ
+   */
   $size: Size;
+  /**
+   * 無効化時の背景色
+   */
   $disabledBackgroundColor: string | undefined;
+  /**
+   * 無効化時のボーダー色
+   */
   $disabledBorderColor: string | undefined;
+  /**
+   * 上部のパディング（em単位）
+   */
   $paddingTop: number | undefined;
+  /**
+   * 右側のパディング（em単位）
+   */
   $paddingRight: number | undefined;
+  /**
+   * 下部のパディング（em単位）
+   */
   $paddingBottom: number | undefined;
+  /**
+   * 左側のパディング（em単位）
+   */
   $paddingLeft: number | undefined;
+  /**
+   * 無効化状態かどうか
+   */
   $isDisabled: boolean;
 }>`
   ${({ theme }) => theme.font.baseSize.em()};
@@ -147,11 +201,29 @@ export const StyledButton = styled.button<{
 `;
 
 export const StyledText = styled.span<{
+  /**
+   * テキストのサイズ
+   */
   $size: Size;
+  /**
+   * テキストの色
+   */
   $color: string;
+  /**
+   * フォントの太さ
+   */
   $fontWeight: number;
+  /**
+   * 無効化状態かどうか
+   */
   $disabled: boolean;
+  /**
+   * 無効化時のテキスト色
+   */
   $disabledColor: string | undefined;
+  /**
+   * フォントサイズ（em単位）
+   */
   $fontSize: number | undefined;
 }>`
   ${({ $size, $fontSize, theme }) => {

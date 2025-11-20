@@ -8,13 +8,37 @@ export type ScrollRevealAnimationType =
   | "slideRight";
 
 type Props = {
+  /**
+   * 表示内容
+   */
   children: ReactNode;
+  /**
+   * スタイルタイプ
+   */
   type?: ScrollRevealAnimationType;
+  /**
+   * duration の値
+   */
   duration?: number;
+  /**
+   * delay の値
+   */
   delay?: number;
+  /**
+   * distance の値
+   */
   distance?: number;
+  /**
+   * threshold の値
+   */
   threshold?: number;
+  /**
+   * rootMargin の値
+   */
   rootMargin?: string;
+  /**
+   * triggerOnce の設定
+   */
   triggerOnce?: boolean;
 };
 

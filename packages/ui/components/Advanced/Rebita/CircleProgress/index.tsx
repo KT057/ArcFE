@@ -8,15 +8,45 @@ import {
 } from "./styles";
 
 interface CircleProgressProps {
+  /**
+   * 進捗の割合（0-100）
+   */
   progress?: number;
+  /**
+   * サークル内に表示する内容
+   */
   children?: ReactNode;
+  /**
+   * 外観をカスタマイズ
+   */
   appearance?: {
+    /**
+     * プログレスバーの色
+     */
     primaryColor?: string;
+    /**
+     * トラック（背景）の色
+     */
     trackColor?: string;
+    /**
+     * テキストの色
+     */
     textColor?: string;
+    /**
+     * フォントサイズ（px）
+     */
     fontSize?: number;
+    /**
+     * サークルのサイズ（px）
+     */
     size?: number;
+    /**
+     * ストロークの太さ（px）
+     */
     strokeWidth?: number;
+    /**
+     * アニメーションの持続時間（CSS時間単位: "0.5s", "500ms" など）
+     */
     animationDuration?: string;
   };
 }

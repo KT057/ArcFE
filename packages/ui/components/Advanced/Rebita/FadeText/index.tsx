@@ -6,10 +6,25 @@ import {
 } from "./styles";
 
 interface FadeTextProps {
+  /**
+   * 表示するテキスト内容
+   */
   children?: ReactNode;
-  progress?: number; // 0-100の値で表示の進捗を制御
+  /**
+   * 表示の進捗（0-100）
+   */
+  progress?: number;
+  /**
+   * 外観をカスタマイズ
+   */
   appearance?: {
+    /**
+     * テキストの色
+     */
     color?: string;
+    /**
+     * フォントサイズ（px）
+     */
     fontSize?: number;
   };
 }
