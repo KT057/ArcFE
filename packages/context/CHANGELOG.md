@@ -1,5 +1,11 @@
 # @packages/context
 
+## 2.2.0
+
+### Minor Changes
+
+- Add: comprehensive JSDoc documentation to all components
+
 ## 2.1.0
 
 ### Minor Changes

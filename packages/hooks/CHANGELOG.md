@@ -1,5 +1,18 @@
 # @packages/hooks
 
+## 2.2.0
+
+### Minor Changes
+
+- Add: comprehensive JSDoc documentation to all components
+
+### Patch Changes
+
+- Updated dependencies
+  - @packages/utils@2.2.0
+  - @packages/context@2.2.0
+  - @packages/tests@2.2.0
+
 ## 2.1.0
 
 ### Minor Changes

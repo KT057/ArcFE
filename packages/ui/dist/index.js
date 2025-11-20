@@ -1774,7 +1774,14 @@ var JmcButton = ({
       onMouseLeave: handleMouseLeave,
       ...buttonProps,
       children: [
-        /* @__PURE__ */ jsx(StyledJmcButtonLeft, { fontSize: appearance?.fontSize, color: appearance?.color, children }),
+        /* @__PURE__ */ jsx(
+          StyledJmcButtonLeft,
+          {
+            fontSize: appearance?.fontSize,
+            color: appearance?.color,
+            children
+          }
+        ),
         /* @__PURE__ */ jsx(
           JmcCircleToggle,
           {
@@ -2215,7 +2222,15 @@ var RebitaFadeText = ({
       fontSize: appearance?.fontSize,
       progress,
       children: /* @__PURE__ */ jsxs(StyledFadeTextContainer, { fontSize: appearance?.fontSize, children: [
-        /* @__PURE__ */ jsx(StyledFadeText, { color: appearance?.color, isFirst: true, progress, children }),
+        /* @__PURE__ */ jsx(
+          StyledFadeText,
+          {
+            color: appearance?.color,
+            isFirst: true,
+            progress,
+            children
+          }
+        ),
         /* @__PURE__ */ jsx(StyledFadeText, { color: appearance?.color, isFirst: false, children })
       ] })
     }
@@ -2656,7 +2671,13 @@ var Accordion001 = ({
       {
         paddingSide: appearance?.paddingSide,
         paddingVertical: appearance?.paddingVertical,
-        children: /* @__PURE__ */ jsx(StyledAccordionContentText, { color: appearance?.content?.color ?? "#000", children: content })
+        children: /* @__PURE__ */ jsx(
+          StyledAccordionContentText,
+          {
+            color: appearance?.content?.color ?? "#000",
+            children: content
+          }
+        )
       }
     ) })
   ] }) });
@@ -2728,7 +2749,13 @@ var Accordion002 = ({
         }
       )
     ] }) }),
-    /* @__PURE__ */ jsx(StyledAccordionContentWrapper2, { ref: contentRef, children: /* @__PURE__ */ jsx(StyledAccordionContent2, { children: /* @__PURE__ */ jsx(StyledAccordionContentText2, { color: appearance?.content?.color ?? "#000", children: content }) }) })
+    /* @__PURE__ */ jsx(StyledAccordionContentWrapper2, { ref: contentRef, children: /* @__PURE__ */ jsx(StyledAccordionContent2, { children: /* @__PURE__ */ jsx(
+      StyledAccordionContentText2,
+      {
+        color: appearance?.content?.color ?? "#000",
+        children: content
+      }
+    ) }) })
   ] }) });
 };
 var StyledAccordionWrapper3 = styled13.div`
@@ -2817,7 +2844,13 @@ var Accordion003 = ({
         ] })
       }
     ),
-    /* @__PURE__ */ jsx(StyledAccordionContentWrapper3, { ref: contentRef, children: /* @__PURE__ */ jsx(StyledAccordionContent3, { children: /* @__PURE__ */ jsx(StyledAccordionContentText3, { color: appearance?.content?.color ?? "#000", children: content }) }) })
+    /* @__PURE__ */ jsx(StyledAccordionContentWrapper3, { ref: contentRef, children: /* @__PURE__ */ jsx(StyledAccordionContent3, { children: /* @__PURE__ */ jsx(
+      StyledAccordionContentText3,
+      {
+        color: appearance?.content?.color ?? "#000",
+        children: content
+      }
+    ) }) })
   ] }) });
 };
 var StyledAccordionWrapper4 = styled13.div`
@@ -3463,7 +3496,13 @@ var Breadcrumbs = ({ items, appearance }) => {
         children: item.text
       }
     ),
-    index !== items.length - 1 && /* @__PURE__ */ jsx(StyledBreadcrumbsItemIcon, { color: appearance?.iconColor ?? "#000", children: /* @__PURE__ */ jsx(Svg004, {}) })
+    index !== items.length - 1 && /* @__PURE__ */ jsx(
+      StyledBreadcrumbsItemIcon,
+      {
+        color: appearance?.iconColor ?? "#000",
+        children: /* @__PURE__ */ jsx(Svg004, {})
+      }
+    )
   ] }, item.text)) }) });
 };
 var StyledButton = styled13.button`
@@ -8793,7 +8832,12 @@ var StyledFrameIconContent = styled13.div.withConfig({
 })`
   ${({ theme, size }) => theme.icon.size.style(size)}
 `;
-var FrameIcon001 = ({ appearance, type, size, icon }) => {
+var FrameIcon001 = ({
+  appearance,
+  type,
+  size,
+  icon
+}) => {
   return /* @__PURE__ */ jsx(StyledFrameIconWrapper, { children: /* @__PURE__ */ jsxs(StyledFrameIcon, { size, children: [
     /* @__PURE__ */ jsx(
       StyledFrameIconBackground,
@@ -16552,16 +16596,16 @@ var StyledSkeleton = styled13.div.withConfig({
 `;
 var Skeleton001 = ({
   type = "001",
-  style,
+  appearance,
   className
 }) => {
   return /* @__PURE__ */ jsx(
     StyledSkeleton,
     {
       type,
-      $width: style?.width,
-      $height: style?.height,
-      $borderRadius: style?.borderRadius,
+      $width: appearance?.width,
+      $height: appearance?.height,
+      $borderRadius: appearance?.borderRadius,
       className
     }
   );
