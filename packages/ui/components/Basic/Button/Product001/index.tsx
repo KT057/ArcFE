@@ -13,30 +13,99 @@ import {
 import type { Size } from "../../../../styles/size";
 import { type Animation, StyledButton, StyledText, type Type } from "./styles";
 
+/**
+ * ボタンの外観カスタマイズ設定
+ */
 interface ButtonAppearance {
+  /**
+   * 背景色
+   */
   backgroundColor?: string;
+  /**
+   * ボーダーの色
+   */
   borderColor?: string;
+  /**
+   * 上部のパディング（em単位）
+   */
   paddingTop?: number;
+  /**
+   * 右側のパディング（em単位）
+   */
   paddingRight?: number;
+  /**
+   * 下部のパディング（em単位）
+   */
   paddingBottom?: number;
+  /**
+   * 左側のパディング（em単位）
+   */
   paddingLeft?: number;
+  /**
+   * フォントサイズ（em単位）
+   */
   fontSize?: number;
+  /**
+   * テキストの色
+   */
   color?: string;
+  /**
+   * フォントの太さ
+   */
   fontWeight?: number;
+  /**
+   * 無効化時のテキストの色
+   */
   disabledColor?: string;
+  /**
+   * 無効化時の背景色
+   */
   disabledBackgroundColor?: string;
+  /**
+   * 無効化時のボーダーの色
+   */
   disabledBorderColor?: string;
 }
 
 type BaseProps = {
+  /**
+   * ボタンの HTML 要素タイプ。リンクとして使用する場合は "a" を指定し、href も設定してください。
+   */
   as?: "button" | "a" | "span";
+  /**
+   * ボタンのスタイルタイプ
+   * - "001": 完全に丸い角（pill型、border-radius: 30em）
+   * - "002": 角丸（rounded、border-radius: 8em）
+   * - "003": 角が四角（square、border-radius: 0）
+   */
   type?: Type;
+  /**
+   * ボタンのサイズ (small, middle, large)
+   */
   size?: Size;
+  /**
+   * ボタンの表示内容
+   */
   children: ReactNode;
+  /**
+   * ホバー時のアニメーション効果
+   */
   animation?: Animation;
+  /**
+   * ボタンを無効化するかどうか
+   */
   disabled?: boolean;
+  /**
+   * ボタンの外観をカスタマイズ（背景色、ボーダー色、パディング、フォントサイズなど）
+   */
   appearance?: ButtonAppearance;
+  /**
+   * ボタンを親要素の幅いっぱいに広げるかどうか
+   */
   fullWidth?: boolean;
+  /**
+   * クリック時のコールバック関数
+   */
   onClick?: (event: MouseEvent<HTMLButtonElement>) => void;
 };
 

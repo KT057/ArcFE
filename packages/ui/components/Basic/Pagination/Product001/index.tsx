@@ -10,11 +10,29 @@ import {
 } from "./styles";
 
 interface PaginationProps {
+  /**
+   * currentPage の値
+   */
   currentPage: number;
+  /**
+   * totalPages の値
+   */
   totalPages: number;
+  /**
+   * サイズ (small, middle, large)
+   */
   size?: Size;
+  /**
+   * maxVisiblePages の値
+   */
   maxVisiblePages?: number;
+  /**
+   * onPageChange の値
+   */
   onPageChange: (page: number) => void;
+  /**
+   * 外観をカスタマイズ
+   */
   appearance?: {
     backgroundColor?: string;
     activeBackgroundColor?: string;

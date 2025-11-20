@@ -1,7 +1,13 @@
 import { type ParallaxProps, useParallax } from "react-scroll-parallax";
 
 interface ParallaxImageProps {
+  /**
+   * 表示内容
+   */
   children: React.ReactNode;
+  /**
+   * parallaxProps の設定
+   */
   parallaxProps: ParallaxProps;
 }
 

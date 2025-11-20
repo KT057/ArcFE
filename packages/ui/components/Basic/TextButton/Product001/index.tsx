@@ -25,17 +25,52 @@ type AnchorElementProps = {
 type ElementProps = ButtonElementProps | AnchorElementProps;
 
 type TextButtonProps = ElementProps & {
+  /**
+   * テキストボタンのスタイルタイプ
+   * - "001": 下線アニメーション
+   * - "002": テキストカラー変化
+   */
   type?: TextButtonType;
+  /**
+   * ボタンの表示内容（テキスト）
+   */
   children: React.ReactNode;
+  /**
+   * 表示するアイコン（ReactNode）
+   */
   icon?: React.ReactNode;
+  /**
+   * アイコンの表示位置（左側 or 右側）
+   */
   iconPosition?: IconPosition;
+  /**
+   * ボタンの外観をカスタマイズ（ホバー色、アニメーション設定、間隔など）
+   */
   appearance?: {
+    /**
+     * ホバー時の色
+     */
     hoverColor?: string;
+    /**
+     * ホバーアニメーションの持続時間
+     */
     hoverDuration?: string;
+    /**
+     * ホバーアニメーションのイージング関数
+     */
     hoverEase?: EasingKey;
+    /**
+     * テキストとアイコンの間隔（em単位）
+     */
     gap?: number;
+    /**
+     * アイコンの上部パディング（em単位）
+     */
     paddingTop?: number;
   };
+  /**
+   * 追加する CSS スタイル
+   */
   style?: React.CSSProperties;
 };
 

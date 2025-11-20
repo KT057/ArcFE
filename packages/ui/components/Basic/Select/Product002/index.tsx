@@ -16,34 +16,93 @@ export type SelectVariant = "001" | "002";
 export type Type = SelectVariant;
 
 interface SelectProps {
+  /**
+   * バリアント ("001": 角ばった形状, "002": 丸みのある形状)
+   */
   variant?: SelectVariant;
+  /**
+   * select要素のname属性
+   */
   name?: string;
+  /**
+   * select要素のid属性
+   */
   id?: string;
+  /**
+   * 選択肢の配列
+   */
   options: SelectOption[];
+  /**
+   * 選択値（制御コンポーネント用）
+   */
   value?: string;
+  /**
+   * 初期選択値（非制御コンポーネント用）
+   */
   defaultValue?: string;
+  /**
+   * 値変更時のコールバック関数
+   */
   onChange?: (event: React.ChangeEvent<HTMLSelectElement>) => void;
+  /**
+   * エラー状態かどうか
+   */
   error?: boolean;
+  /**
+   * エラーメッセージテキスト
+   */
   errorText?: string;
+  /**
+   * プレースホルダーテキスト
+   */
   placeholder?: string;
+  /**
+   * ラベルテキスト
+   */
   label?: string;
+  /**
+   * aria-label属性（アクセシビリティ用）
+   */
   ariaLabel?: string;
+  /**
+   * 表示するアイコン要素
+   */
   icon: React.ReactNode;
+  /**
+   * select要素に渡す追加のHTML属性
+   */
   selectProps?: React.SelectHTMLAttributes<HTMLSelectElement>;
+  /**
+   * 外観のカスタマイズ設定
+   */
   appearance?: {
+    /** フォントサイズ */
     fontSize?: number;
+    /** テキスト色 */
     color?: string;
+    /** ボーダー色 */
     borderColor?: string;
+    /** 背景色 */
     backgroundColor?: string;
+    /** プレースホルダー色 */
     placeholderColor?: string;
+    /** エラー色 */
     errorColor?: string;
+    /** エラーテキストのフォントサイズ */
     errorFontSize?: number;
+    /** エラー時のボーダー色 */
     errorBorderColor?: string;
+    /** アイコンの色 */
     iconColor?: string;
+    /** フォーカス時のリング色 */
     focusRingColor?: string;
+    /** ラベルのフォントサイズ */
     labelFontSize?: number;
+    /** ラベルの色 */
     labelColor?: string;
+    /** ラベルのフォントウェイト */
     labelFontWeight?: number | string;
+    /** ラベルの下マージン */
     labelMarginBottom?: number;
   };
 }

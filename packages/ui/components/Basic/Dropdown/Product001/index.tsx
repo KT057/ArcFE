@@ -8,12 +8,33 @@ import {
 } from "./styles";
 
 interface DropdownMenuProps {
+  /**
+   * 表示内容
+   */
   detail: ReactNode;
+  /**
+   * 表示内容
+   */
   contents: ReactNode;
+  /**
+   * nowrap の設定
+   */
   nowrap?: boolean;
+  /**
+   * 外観をカスタマイズ
+   */
   appearance?: {
+    /**
+     * 背景色
+     */
     backgroundColor?: string;
+    /**
+     * ボーダーの色
+     */
     borderColor?: string;
+    /**
+     * ボーダーの角丸（px）
+     */
     borderRadius?: number;
   };
 }

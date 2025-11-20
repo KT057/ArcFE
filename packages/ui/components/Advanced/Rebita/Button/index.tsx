@@ -12,19 +12,61 @@ import {
 } from "./styles";
 
 interface RebitaButtonProps {
+  /**
+   * サイズ (small, middle, large)
+   */
   size?: Size;
+  /**
+   * アイコンの配置方向
+   */
   direction?: DirectionType;
+  /**
+   * ボタンに表示するテキスト
+   */
   text?: ReactNode;
+  /**
+   * ボタンに表示するアイコン
+   */
   icon?: ReactNode;
+  /**
+   * クリック時のコールバック関数
+   */
   onClick?: () => void;
+  /**
+   * レンダリングするHTML要素の種類
+   */
   as?: "button" | "a" | "div";
+  /**
+   * リンク先URL（asが"a"の場合に使用）
+   */
   href?: string;
+  /**
+   * 外観をカスタマイズ
+   */
   appearance?: {
+    /**
+     * フォントサイズ（px）
+     */
     fontSize?: number;
+    /**
+     * 背景色
+     */
     backgroundColor?: string;
+    /**
+     * テキストの色
+     */
     textColor?: string;
+    /**
+     * アイコンの色
+     */
     iconColor?: string;
+    /**
+     * ボーダーの色
+     */
     borderColor?: string;
+    /**
+     * 左側コンテンツのボーダーの色
+     */
     leftContentBorderColor?: string;
   };
 }

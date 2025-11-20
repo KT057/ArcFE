@@ -4,8 +4,17 @@ import { MediaContext } from "../../../context";
 export type Type = "001";
 
 interface MediaProps {
+  /**
+   * 表示内容
+   */
   pc: React.ReactNode;
+  /**
+   * 表示内容
+   */
   tablet?: React.ReactNode;
+  /**
+   * 表示内容
+   */
   sp: React.ReactNode;
 }
 

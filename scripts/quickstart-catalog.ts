@@ -70,12 +70,15 @@ async function findAllComponents(): Promise<ComponentInfo[]> {
   return components;
 }
 
-// Step 2: AST解析でProps抽出
+// Step 2: AST解析でProps抽出（型情報 + JSDoc）
 function extractProps(sourceCode: string): any {
   try {
     const ast = parse(sourceCode, {
       jsx: true,
-      loc: true
+      loc: true,
+      range: true,
+      comment: true,
+      tokens: false
     });
 
     // interface または type の定義を探す
@@ -85,9 +88,16 @@ function extractProps(sourceCode: string): any {
       return { extracted: {} };
     }
 
+    // コメントとノードをマッピング
+    const comments = ast.comments || [];
+    attachComments(ast, comments);
+
+    // AST全体から全ての型定義を収集
+    const typeDefinitions = collectTypeDefinitions(ast);
+
     return {
       interface: propsInterface.name,
-      extracted: parseInterface(propsInterface)
+      extracted: parseInterface(propsInterface, typeDefinitions, ast)
     };
   } catch (error) {
     console.error("AST解析エラー:", error);
@@ -95,9 +105,34 @@ function extractProps(sourceCode: string): any {
   }
 }
 
+// AST全体から型定義を収集
+function collectTypeDefinitions(ast: any): Map<string, any> {
+  const typeMap = new Map<string, any>();
+
+  for (const node of ast.body || []) {
+    if (
+      node.type === "TSInterfaceDeclaration" ||
+      node.type === "TSTypeAliasDeclaration"
+    ) {
+      typeMap.set(node.id.name, node);
+    }
+    // export されている型定義も収集
+    if (node.type === "ExportNamedDeclaration" && node.declaration) {
+      const decl = node.declaration;
+      if (
+        decl.type === "TSInterfaceDeclaration" ||
+        decl.type === "TSTypeAliasDeclaration"
+      ) {
+        typeMap.set(decl.id.name, decl);
+      }
+    }
+  }
+
+  return typeMap;
+}
+
 function findPropsInterface(ast: any): any {
-  // 簡易版: interface XXXProps または type XXXProps を探す
-  // 実際の実装では再帰的に探索
+  // interface XXXProps または type XXXProps を探す
   for (const node of ast.body || []) {
     if (
       node.type === "TSInterfaceDeclaration" &&
@@ -115,21 +150,229 @@ function findPropsInterface(ast: any): any {
   return null;
 }
 
-function parseInterface(interfaceNode: any): any {
-  // 簡易版: 実際にはより詳細な解析が必要
+function parseInterface(
+  interfaceNode: any,
+  typeDefinitions: Map<string, any>,
+  ast: any
+): any {
   const props: any = {};
 
-  for (const member of interfaceNode.body?.body || []) {
-    if (member.type === "TSPropertySignature") {
-      const propName = member.key.name;
-      props[propName] = {
-        kind: "unknown",
-        optional: member.optional
-      };
+  // インターフェースの場合
+  if (interfaceNode.type === "TSInterfaceDeclaration") {
+    for (const member of interfaceNode.body?.body || []) {
+      if (member.type === "TSPropertySignature") {
+        const propName = member.key.name;
+        props[propName] = parsePropSignature(member, typeDefinitions, ast);
+      }
+    }
+  }
+
+  // 型エイリアスの場合
+  if (interfaceNode.type === "TSTypeAliasDeclaration") {
+    const typeAnnotation = interfaceNode.typeAnnotation;
+    if (typeAnnotation?.type === "TSTypeLiteral") {
+      for (const member of typeAnnotation.members || []) {
+        if (member.type === "TSPropertySignature") {
+          const propName = member.key.name;
+          props[propName] = parsePropSignature(member, typeDefinitions, ast);
+        }
+      }
     }
   }
 
   return props;
+}
+
+function parsePropSignature(
+  member: any,
+  typeDefinitions: Map<string, any>,
+  ast: any
+): any {
+  const typeInfo = parseTypeAnnotation(
+    member.typeAnnotation,
+    typeDefinitions,
+    ast
+  );
+  const description = extractJSDoc(member);
+
+  return {
+    type: typeInfo.kind,
+    tsType: typeInfo.tsType,
+    required: !member.optional,
+    optional: member.optional || false,
+    description: description || undefined,
+    enumValues: typeInfo.enumValues || undefined,
+    properties: typeInfo.properties || undefined
+  };
+}
+
+function parseTypeAnnotation(
+  typeAnnotation: any,
+  typeDefinitions: Map<string, any>,
+  ast: any
+): any {
+  if (!typeAnnotation?.typeAnnotation) {
+    return { kind: "unknown", tsType: "unknown" };
+  }
+
+  const type = typeAnnotation.typeAnnotation;
+
+  // プリミティブ型
+  if (type.type === "TSStringKeyword") {
+    return { kind: "string", tsType: "string" };
+  }
+  if (type.type === "TSNumberKeyword") {
+    return { kind: "number", tsType: "number" };
+  }
+  if (type.type === "TSBooleanKeyword") {
+    return { kind: "boolean", tsType: "boolean" };
+  }
+
+  // リテラル型
+  if (type.type === "TSLiteralType") {
+    const value = type.literal.value || type.literal.raw;
+    return { kind: "literal", tsType: String(value) };
+  }
+
+  // Union型
+  if (type.type === "TSUnionType") {
+    const types = type.types.map((t: any) => {
+      if (t.type === "TSLiteralType") {
+        return t.literal.value || t.literal.raw;
+      }
+      return "unknown";
+    });
+    const tsType = types.map((t: any) => JSON.stringify(t)).join(" | ");
+    return {
+      kind: "union",
+      tsType: tsType,
+      enumValues: types
+    };
+  }
+
+  // 関数型
+  if (type.type === "TSFunctionType") {
+    return { kind: "function", tsType: "(...args: any[]) => any" };
+  }
+
+  // オブジェクトリテラル型（ネストされたプロパティ）
+  if (type.type === "TSTypeLiteral") {
+    const nestedProps: any = {};
+    for (const member of type.members || []) {
+      if (member.type === "TSPropertySignature") {
+        const propName = member.key.name;
+        nestedProps[propName] = parsePropSignature(
+          member,
+          typeDefinitions,
+          ast
+        );
+      }
+    }
+    return {
+      kind: "object",
+      tsType: "object",
+      properties: nestedProps
+    };
+  }
+
+  // ReactNode
+  if (type.type === "TSTypeReference" && type.typeName?.name === "ReactNode") {
+    return { kind: "ReactNode", tsType: "ReactNode" };
+  }
+
+  // 型参照（他の型を参照している場合）
+  if (type.type === "TSTypeReference") {
+    const typeName = type.typeName?.name;
+    if (!typeName) {
+      return { kind: "reference", tsType: "unknown" };
+    }
+
+    // 型定義を探す
+    const referencedType = typeDefinitions.get(typeName);
+    if (referencedType) {
+      // 参照先の型を解析
+      const resolvedProps = parseInterface(
+        referencedType,
+        typeDefinitions,
+        ast
+      );
+      return {
+        kind: "reference",
+        tsType: typeName,
+        properties: resolvedProps
+      };
+    }
+
+    // 型定義が見つからない場合は参照として返す
+    return {
+      kind: "reference",
+      tsType: typeName
+    };
+  }
+
+  return { kind: "unknown", tsType: "unknown" };
+}
+
+function attachComments(ast: any, comments: any[]): void {
+  // AST を再帰的に走査して、各ノードにコメントを添付
+  function visit(node: any): void {
+    if (!node || typeof node !== "object") return;
+
+    // range が存在する場合、直前のコメントを探す
+    if (node.range) {
+      const nodeStart = node.range[0];
+      // ノードの直前にあるコメントを探す
+      const leadingComments = comments.filter((comment) => {
+        if (!comment.range) return false;
+        const commentEnd = comment.range[1];
+        // コメントの終了位置がノードの開始位置より前
+        return commentEnd < nodeStart;
+      });
+
+      // 最も近いコメントを選択
+      if (leadingComments.length > 0) {
+        const closestComment = leadingComments[leadingComments.length - 1];
+        // コメントとノードの間に他のコードがないか確認（簡易版）
+        const distance = nodeStart - closestComment.range[1];
+        if (distance < 100) {
+          // 100文字以内なら添付
+          node.leadingComments = [closestComment];
+        }
+      }
+    }
+
+    // 子ノードを再帰的に処理
+    for (const key in node) {
+      if (key === "range" || key === "loc" || key === "leadingComments") {
+        continue;
+      }
+      const child = node[key];
+      if (Array.isArray(child)) {
+        child.forEach(visit);
+      } else if (child && typeof child === "object") {
+        visit(child);
+      }
+    }
+  }
+
+  visit(ast);
+}
+
+function extractJSDoc(node: any): string | null {
+  // leadingComments から JSDoc を探す
+  const comments = node.leadingComments || [];
+  for (const comment of comments) {
+    if (comment.type === "Block" && comment.value.startsWith("*")) {
+      // JSDoc コメントを整形
+      return comment.value
+        .split("\n")
+        .map((line: string) => line.trim().replace(/^\* ?/, ""))
+        .filter((line: string) => line && !line.startsWith("@"))
+        .join(" ")
+        .trim();
+    }
+  }
+  return null;
 }
 
 // Step 3: Storybookストーリー解析
@@ -167,8 +410,11 @@ async function findScreenshots(component: ComponentInfo): Promise<any> {
 
   const screenshots = await glob(`${screenshotBase}/*.png`);
 
+  // basePath から packages/ui/ を除去
+  const basePath = screenshotBase.replace(/^packages\/ui\//, "");
+
   return {
-    basePath: screenshotBase,
+    basePath: basePath,
     variants: screenshots.map((screenshot) => {
       const filename = path.basename(screenshot, ".png");
       return {

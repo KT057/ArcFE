@@ -2,7 +2,13 @@ import type { Size } from "../../../../styles/size";
 import { StyledLoading, StyledLoadingWrapper } from "./styles";
 
 interface LoadingProps {
+  /**
+   * サイズ (small, middle, large)
+   */
   size?: Size;
+  /**
+   * 外観をカスタマイズ
+   */
   appearance?: {
     indicatorColor?: string;
     backgroundColor?: string;

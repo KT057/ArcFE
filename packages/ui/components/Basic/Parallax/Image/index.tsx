@@ -3,7 +3,13 @@ import { em } from "../../../../styles";
 import { StyledWrapper } from "./styles";
 
 interface ParallaxImageProps {
+  /**
+   * layer の設定
+   */
   layer: BannerLayer;
+  /**
+   * 高さ
+   */
   height?: number;
 }
 

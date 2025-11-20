@@ -17,22 +17,46 @@ import type React from "react";
 import { useCallback, useMemo } from "react";
 import { StyledList, StyledListItem, StyledListWrapper } from "./styles";
 
+/**
+ * リストアイテム（表示コンテンツを含む）
+ */
 interface ListItemWithContent {
+  /**
+   * 一意なID
+   */
   id: string;
+  /**
+   * 表示内容
+   */
   content: React.ReactNode;
 }
 
+/**
+ * リストアイテム（IDのみ）
+ */
 interface ListItem {
+  /**
+   * 一意なID
+   */
   id: string;
 }
 
-interface SortableItemProps {
+interface InternalSortableItemProps {
+  /**
+   * id 属性
+   */
   id: string;
+  /**
+   * 表示内容
+   */
   children: React.ReactNode;
+  /**
+   * borderColor の値
+   */
   borderColor?: string;
 }
 
-const SortableItem = ({ id, children }: SortableItemProps) => {
+const SortableItem = ({ id, children }: InternalSortableItemProps) => {
   const {
     attributes,
     listeners,
@@ -58,10 +82,22 @@ const SortableItem = ({ id, children }: SortableItemProps) => {
 };
 
 interface DragAndDropProps {
+  /**
+   * ドラッグ&ドロップ可能なアイテムの配列
+   */
   items: ListItemWithContent[];
+  /**
+   * 外観をカスタマイズ
+   */
   appearance?: {
+    /**
+     * アイテム間の間隔（px）
+     */
     gap?: number;
   };
+  /**
+   * アイテムの順序が変更されたときのコールバック関数
+   */
   onReorder: (items: ListItem[]) => void;
 }
 

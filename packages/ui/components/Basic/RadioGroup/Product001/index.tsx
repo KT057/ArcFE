@@ -7,14 +7,29 @@ import { RadioContext } from "../../Radio/Product001/radio-context";
 import { StyledRadioGroup, StyledRadioGroupLabel } from "./styles";
 
 interface RadioGroupProps extends Omit<AriaRadioGroupProps, "children"> {
+  /**
+   * ラジオボタングループの子要素（Radio コンポーネント）
+   */
   children: React.ReactNode;
+  /**
+   * グループのラベルテキスト
+   */
   label?: string;
+  /**
+   * 外観のカスタマイズ設定
+   */
   appearance?: {
+    /** ラベルのフォントサイズ */
     labelFontSize?: number;
+    /** ラベルの色 */
     labelColor?: string;
+    /** ラベルのフォントウェイト */
     labelFontWeight?: number | string;
+    /** ラベルの下マージン */
     labelMarginBottom?: number;
+    /** 配置方向 (vertical: 縦並び, horizontal: 横並び) */
     orientation?: "vertical" | "horizontal";
+    /** ラジオボタン間の間隔 */
     gap?: number;
   };
 }

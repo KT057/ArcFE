@@ -14,24 +14,69 @@ import {
 } from "./styles";
 
 export type AccordionAnimation = {
+  /**
+   * アニメーションの持続時間（秒）
+   */
   duration?: number;
+  /**
+   * イージング関数
+   */
   easing?: gsap.EaseString;
 };
 
 interface Props {
+  /**
+   * 表示内容
+   */
   headerContent: ReactNode;
+  /**
+   * 表示内容
+   */
   content: ReactNode;
+  /**
+   * アイコン
+   */
   icon: ReactNode;
+  /**
+   * アニメーション効果
+   */
   animation?: AccordionAnimation;
+  /**
+   * 外観をカスタマイズ
+   */
   appearance?: {
+    /**
+     * アイコンの色
+     */
     iconColor?: string;
+    /**
+     * 背景色
+     */
     backgroundColor?: string;
+    /**
+     * ヘッダーの外観設定
+     */
     header?: {
+      /**
+       * ヘッダーの背景色
+       */
       backgroundColor?: string;
+      /**
+       * 左側のバー（装飾線）の色
+       */
       barColor?: string;
+      /**
+       * テキストの色
+       */
       color?: string;
     };
+    /**
+     * コンテンツの外観設定
+     */
     content?: {
+      /**
+       * テキストの色
+       */
       color?: string;
     };
   };

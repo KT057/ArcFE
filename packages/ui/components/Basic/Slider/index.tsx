@@ -11,16 +11,40 @@ import {
 } from "./styles";
 
 interface ArrowStyle {
+  /**
+   * 矢印のサイズ（px）
+   */
   size?: number;
+  /**
+   * 矢印の位置（スライダー端からの距離、px）
+   */
   position?: number;
+  /**
+   * 矢印の色
+   */
   color?: string;
+  /**
+   * ホバー時の矢印の色
+   */
   hoverColor?: string;
+  /**
+   * 無効時の透明度（0-1）
+   */
   disableOpacity?: number;
 }
 
 export interface AutoPlay {
+  /**
+   * 自動再生を有効にするかどうか
+   */
   active: boolean;
+  /**
+   * スライド切り替えの間隔（ミリ秒）
+   */
   interval?: number;
+  /**
+   * 自動再生の進行状況を通知するコールバック関数（0-1の値）
+   */
   onProgress?: (progress: number) => void;
 }
 
@@ -40,13 +64,28 @@ export interface State {
 }
 
 interface SliderProps {
+  /**
+   * options の設定
+   */
   options?: KeenSliderOptions;
+  /**
+   * ローディング状態
+   */
   loading?: boolean;
+  /**
+   * 表示内容
+   */
   items: {
     key: string;
     children: React.ReactNode;
   }[];
+  /**
+   * state の設定
+   */
   state?: State;
+  /**
+   * 表示内容
+   */
   controller?: {
     left?: {
       children: React.ReactNode;
@@ -57,17 +96,53 @@ interface SliderProps {
       appearance?: ArrowStyle;
     };
   };
+  /**
+   * autoPlay の設定
+   */
   autoPlay?: AutoPlay;
+  /**
+   * dots の設定
+   */
   dots?: {
+    /**
+     * ドットを表示するかどうか
+     */
     show: boolean;
+    /**
+     * ドットの外観設定
+     */
     appearance?: {
+      /**
+       * ドットのサイズ（px）
+       */
       size?: number;
+      /**
+       * ドット間の間隔（px）
+       */
       gap?: number;
+      /**
+       * スライダーからの上マージン（px）
+       */
       marginTop?: number;
+      /**
+       * ドットの位置調整
+       */
       position?: number;
+      /**
+       * ドットの背景色
+       */
       backgroundColor?: string;
+      /**
+       * ドットのボーダー色
+       */
       borderColor?: string;
+      /**
+       * アクティブなドットの背景色
+       */
       activeBackgroundColor?: string;
+      /**
+       * アクティブなドットのボーダー色
+       */
       activeBorderColor?: string;
     };
   };

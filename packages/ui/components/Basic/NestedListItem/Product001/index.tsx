@@ -10,10 +10,25 @@ import {
 } from "./styles";
 
 interface NestedListItemProps {
+  /**
+   * アイコン
+   */
   icon: React.ReactNode;
+  /**
+   * 表示内容
+   */
   children: React.ReactNode;
+  /**
+   * クリック時のコールバック関数
+   */
   onClick?: () => void;
+  /**
+   * 開いているかどうか
+   */
   isOpen?: boolean;
+  /**
+   * 外観をカスタマイズ
+   */
   appearance?: {
     fontSize?: number;
     lineHeight?: number;

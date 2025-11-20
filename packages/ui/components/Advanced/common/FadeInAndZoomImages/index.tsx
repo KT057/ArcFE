@@ -7,25 +7,73 @@ import {
   StyledFadeInAndZoomImagesWrapper
 } from "./styles";
 
+/**
+ * フェードイン＆ズーム画像の各画像アイテム
+ */
 export type FadeInAndZoomImagesImageItem = {
+  /**
+   * 画像のURL
+   */
   src: string;
+  /**
+   * 画像の代替テキスト
+   */
   alt?: string;
 };
 
 interface FadeInAndZoomImagesProps {
+  /**
+   * 表示する画像の配列
+   */
   images: FadeInAndZoomImagesImageItem[];
+  /**
+   * アニメーションの持続時間（秒）
+   */
   duration?: number;
+  /**
+   * フェードアニメーションの持続時間（秒）
+   */
   fadeDuration?: number;
+  /**
+   * ズーム開始時のスケール値
+   */
   scaleFrom?: number;
+  /**
+   * ズーム終了時のスケール値
+   */
   scaleTo?: number;
+  /**
+   * コンテナの高さ（px）
+   */
   height?: number;
+  /**
+   * ズームの方向（"in": ズームイン, "out": ズームアウト, "none": ズームなし）
+   */
   zoomDirection?: "in" | "out" | "none";
+  /**
+   * 現在のインデックス状態を外部で管理する場合の設定
+   */
   state?: {
+    /**
+     * 現在表示中の画像インデックス
+     */
     currentIndex: number;
+    /**
+     * インデックスを更新する関数
+     */
     setCurrentIndex: (index: number) => void;
   };
+  /**
+   * 画像が切り替わったときのコールバック関数
+   */
   onImageChange?: (currentIndex: number) => void;
+  /**
+   * アニメーションの進捗が更新されたときのコールバック関数
+   */
   onProgress?: (progress: number) => void;
+  /**
+   * インデックスが変更されたときのコールバック関数
+   */
   onCurrentIndexChange?: () => void;
 }
 
