@@ -167,8 +167,11 @@ async function findScreenshots(component: ComponentInfo): Promise<any> {
 
   const screenshots = await glob(`${screenshotBase}/*.png`);
 
+  // basePath から packages/ui/ を除去
+  const basePath = screenshotBase.replace(/^packages\/ui\//, '');
+
   return {
-    basePath: screenshotBase,
+    basePath: basePath,
     variants: screenshots.map((screenshot) => {
       const filename = path.basename(screenshot, ".png");
       return {
