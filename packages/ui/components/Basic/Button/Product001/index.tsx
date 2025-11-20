@@ -29,14 +29,44 @@ interface ButtonAppearance {
 }
 
 type BaseProps = {
+  /**
+   * ボタンの HTML 要素タイプ。リンクとして使用する場合は "a" を指定し、href も設定してください。
+   */
   as?: "button" | "a" | "span";
+  /**
+   * ボタンのスタイルタイプ
+   * - "001": 完全に丸い角（pill型、border-radius: 30em）
+   * - "002": 角丸（rounded、border-radius: 8em）
+   * - "003": 角が四角（square、border-radius: 0）
+   */
   type?: Type;
+  /**
+   * ボタンのサイズ (small, middle, large)
+   */
   size?: Size;
+  /**
+   * ボタンの表示内容
+   */
   children: ReactNode;
+  /**
+   * ホバー時のアニメーション効果
+   */
   animation?: Animation;
+  /**
+   * ボタンを無効化するかどうか
+   */
   disabled?: boolean;
+  /**
+   * ボタンの外観をカスタマイズ（背景色、ボーダー色、パディング、フォントサイズなど）
+   */
   appearance?: ButtonAppearance;
+  /**
+   * ボタンを親要素の幅いっぱいに広げるかどうか
+   */
   fullWidth?: boolean;
+  /**
+   * クリック時のコールバック関数
+   */
   onClick?: (event: MouseEvent<HTMLButtonElement>) => void;
 };
 

@@ -40,16 +40,58 @@ interface ButtonAppearance {
 }
 
 type BaseProps = {
+  /**
+   * ボタンの HTML 要素タイプ。リンクとして使用する場合は "a" を指定し、href も設定してください。
+   */
   as?: "button" | "a" | "span";
+  /**
+   * ボタンのスタイルタイプ（アイコン付きボタン）
+   * - "001": 中央配置 + pill型（border-radius: 30em）
+   * - "002": 中央配置 + 角丸（border-radius: 8em）
+   * - "003": 中央配置 + 四角（border-radius: 0）
+   * - "004": 両端配置 + pill型（border-radius: 30em）
+   * - "005": 両端配置 + 角丸（border-radius: 8em）
+   * - "006": 両端配置 + 四角（border-radius: 0）
+   * - "007": アイコン絶対配置 + pill型（border-radius: 30em）
+   * - "008": アイコン絶対配置 + 角丸（border-radius: 8em）
+   * - "009": アイコン絶対配置 + 四角（border-radius: 0）
+   */
   type?: Type;
+  /**
+   * ボタンのサイズ (small, middle, large)
+   */
   size?: Size;
+  /**
+   * ボタンの表示内容（テキスト）
+   */
   children: ReactNode;
+  /**
+   * ホバー時のアニメーション効果
+   */
   animation?: Animation;
+  /**
+   * ボタンの外観をカスタマイズ（背景色、ボーダー色、パディング、フォントサイズ、アイコンサイズなど）
+   */
   appearance?: ButtonAppearance;
+  /**
+   * アイコンの表示位置（左側 or 右側）
+   */
   iconDirection?: IconDirection;
+  /**
+   * 表示するアイコン（ReactNode）
+   */
   icon: ReactNode;
+  /**
+   * ボタンを親要素の幅いっぱいに広げるかどうか
+   */
   fullWidth?: boolean;
+  /**
+   * ボタンを無効化するかどうか
+   */
   disabled?: boolean;
+  /**
+   * クリック時のコールバック関数
+   */
   onClick?: (event: MouseEvent<HTMLButtonElement>) => void;
 };
 
