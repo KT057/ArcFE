@@ -19,7 +19,7 @@
     "@packages/hooks": "workspace:*",
     "@packages/ui": "workspace:*",
     "@packages/utils": "workspace:*",
-    "react-router-dom": "^7.9.6",
+    "react-router-dom": "^7.10.0",
     "util": "^0.12.5"
   },
   "devDependencies": {
