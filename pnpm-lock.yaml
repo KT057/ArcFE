@@ -294,8 +294,8 @@ importers:
         specifier: ^10.0.7
         version: 10.0.7(esbuild@0.27.0)(react-dom@19.2.5(react@19.2.5))(react@19.2.5)(rollup@4.53.2)(storybook@10.0.7(@testing-library/dom@10.4.1)(msw@2.12.3(@types/node@24.10.1)(typescript@5.9.3))(prettier@2.8.8)(react-dom@19.2.5(react@19.2.5))(react@19.2.5)(vite@7.2.6(@types/node@24.10.1)(terser@5.44.1)(tsx@4.21.0)))(typescript@5.9.3)(vite@7.2.6(@types/node@24.10.1)(terser@5.44.1)(tsx@4.21.0))(webpack@5.103.0(esbuild@0.27.0))
       '@storycap-testrun/browser':
-        specifier: ^2.0.0
-        version: 2.0.0(@vitest/browser@4.0.15(msw@2.12.3(@types/node@24.10.1)(typescript@5.9.3))(vite@7.2.6(@types/node@24.10.1)(terser@5.44.1)(tsx@4.21.0))(vitest@4.0.15))
+        specifier: ^2.1.0
+        version: 2.1.0(@vitest/browser-playwright@4.0.15)
       '@svgr/webpack':
         specifier: ^8.1.0
         version: 8.1.0(typescript@5.9.3)
@@ -2605,13 +2605,13 @@ packages:
       typescript:
         optional: true
 
-  '@storycap-testrun/browser@2.0.0':
-    resolution: {integrity: sha512-lO5AbCCRHYWofzrcoZK1Jtcz06AP5ay42cSJRXtL/t4d9XxVQZKFNvB20ayUknZMlhSQtfVMt8/56r0xBOC8KQ==}
+  '@storycap-testrun/browser@2.1.0':
+    resolution: {integrity: sha512-O8lwk35j/Gm0lYGLOlYGU7K5Wnc1cJaj9muImvlVbKs9xUEOL+XEO/pBqcjHHE/JQk8+lb1bpcYRXhDLgTctNA==}
     peerDependencies:
-      '@vitest/browser': ^4.0.15
+      '@vitest/browser-playwright': '*'
 
-  '@storycap-testrun/internal@2.0.0':
-    resolution: {integrity: sha512-TOfjR/yiZtgcZGHj9bndquJ0s0LKM50Zz9rx3KCPO2BnlXYd5oGJZLKtLWbgTFPDHo/fCLJYhT40uk6+WED5Qg==}
+  '@storycap-testrun/internal@2.1.0':
+    resolution: {integrity: sha512-/i4Dhi5qsOsbXvSZZ82AIiTJntnEw3SBaLSe1HGJnNjiSpYo6Ly7fP/YIrPk/WVNGfgfuqXmxKoW8gFhM0w1Dw==}
 
   '@svgr/babel-plugin-add-jsx-attribute@8.0.0':
     resolution: {integrity: sha512-b9MIk7yhdS1pMCZM8VeNfUlSKVRhsHZNMl5O9SfaX0l0t5wjdgu4IDzGB8bpnGBBOjGST3rRFVsaaEtI4W6f7g==}
@@ -9119,12 +9119,12 @@ snapshots:
     optionalDependencies:
       typescript: 5.9.3
 
-  '@storycap-testrun/browser@2.0.0(@vitest/browser@4.0.15(msw@2.12.3(@types/node@24.10.1)(typescript@5.9.3))(vite@7.2.6(@types/node@24.10.1)(terser@5.44.1)(tsx@4.21.0))(vitest@4.0.15))':
+  '@storycap-testrun/browser@2.1.0(@vitest/browser-playwright@4.0.15)':
     dependencies:
-      '@storycap-testrun/internal': 2.0.0
-      '@vitest/browser': 4.0.15(msw@2.12.3(@types/node@24.10.1)(typescript@5.9.3))(vite@7.2.6(@types/node@24.10.1)(terser@5.44.1)(tsx@4.21.0))(vitest@4.0.15)
+      '@storycap-testrun/internal': 2.1.0
+      '@vitest/browser-playwright': 4.0.15(msw@2.12.3(@types/node@24.10.1)(typescript@5.9.3))(playwright@1.57.0)(vite@7.2.6(@types/node@24.10.1)(terser@5.44.1)(tsx@4.21.0))(vitest@4.0.15)
 
-  '@storycap-testrun/internal@2.0.0': {}
+  '@storycap-testrun/internal@2.1.0': {}
 
   '@svgr/babel-plugin-add-jsx-attribute@8.0.0(@babel/core@7.28.5)':
     dependencies:
